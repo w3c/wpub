@@ -3,7 +3,7 @@
 
 # Web Publications
 
-This is the repository of the W3C’s specification on Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/).
+This is the repository of the W3C’s specification on Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/). The specification can also be [read properly rendered](https://w3c.github.io/wpub/)
 
 ## Contributing to the Repository
 
