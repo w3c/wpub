@@ -1,38 +1,145 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Spec proposal</title>
-    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
-    <script class='remove'>
-      // See https://github.com/w3c/respec/wiki/ for how to configure ReSpec
-      var respecConfig = {
-        specStatus: "CG-DRAFT",
-        shortName: "wpub",
-        editors: [{
-          name: "Ivan Herman"
-        }]
-      };
-    </script>
-  </head>
-  <body>
-    <section id="abstract">
-      <p>
-        This specification does neat stuff.
-      </p>
-    </section>
-    <section id="sotd">
-      <p>
-        This is an unofficial proposal.
-      </p>
-    </section>
-
-    <section id="introduction">
-      <h2>Introduction</h2>
-      <p>
-        See <a href="https://github.com/w3c/respec/wiki/User's-Guide">ReSpec's user guide</a>
-        for how toget started!
-      </p>
-    </section>
-  </body>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <title>Web Publications</title>
+        <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+        <script src="common/js/biblio.js" class="remove"></script>
+        <link href="common/css/common.css" rel="stylesheet" type="text/css" />
+        <script class="remove">
+          var respecConfig = {
+              wg: "Digital Publishing Working Group",
+              specStatus: "ED",
+              shortName: "wpub",
+              edDraftURI: "https://w3c.github.io/publ-wpub/wpub.html",
+              editors: [
+                  {
+                      name: "Matt Garrish",
+                      company: "DAISY Consortium",
+                      companyURL: "http://daisy.org"
+                  }
+              ],
+              processVersion: 2017,
+              includePermalinks: true,
+              permalinkEdge:     true,
+              permalinkHide:     false,
+              diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+              localBiblio: biblio
+          };
+      </script>
+    </head>
+    <body>
+        <section id="abstract">
+            <p>This specification defines digital publishing based on a fully native representation of documents within the
+                Open Web Platform: <a>Web Publications</a> work both online and offline and can be packaged and made
+                portable.</p>
+        </section>
+        <section id="sotd"></section>
+        <section id="intro" class="informative">
+            <h2>Introduction</h2>
+            
+            <section>
+                <h3>Background</h3>
+                
+                <p>For millenia now, the written word has been the primary means of encoding and sharing ideas and
+                    information. The publication as a bounded edition, made public, has been used to carry intellectual and
+                    artistic works of innumerable form: novels, plays, poetry, journals, magazines, newspapers, articles,
+                    laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos, manuals, and albums of all
+                    sorts.</p>
+                
+                <p>More recently, with the advent of the information age, print has been ceding ground to digital, and the
+                    Web has become a major forum for the public dissemination of ideas. But the Web is unbounded: information
+                    and resources are only loosely connected through hyperlinks. While this model has helped the Web thrive
+                    in many areas, it has proven problematic for traditional information publishing—users often cannot access
+                    works in their entirety, especially when offline, and have not been able to easily access, compile and
+                    download content for curation and personal use. That, in turn, has fed the continuing development of
+                    non-Web document formats to redress these problems, and made it necessary to create both Web-ready
+                    content and alternative offline renditions to ensure publications are fully available.</p>
+                
+                <p>This specification aims to reduce these barriers and reinvigorate publishing by combining the best aspects
+                    of both models—the persistent availability and portability of bounded publications with the pervasive
+                    accessibility, addressability, and interconnectedness of the Open Web Platform.</p>
+            </section>
+            
+            <section id="scope">
+                <h3>Scope</h3>
+                
+                <p>This specification only defines requirements for the production and rendering of valid <a>Web
+                    Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
+                    achieve its goal—that being to allow for a measure of boundedness on the Web without changing the way
+                    that the Web itself operates.</p>
+                
+                <p>Moreover, the specification is designed to adapt automatically to updates to Open Web Platform
+                    technologies in order to ensure that Web Publications continue to interoperate seamlessly as the Web
+                    evolves (e.g., by referencing the latest published versions instead of specific versions).</p>
+                
+                <p>Further, this specification does not attempt to constrain the nature of a Web Publication: any type of
+                    work that can be represented on the Web constitutes a potential Web Publication.</p>
+            </section>
+            
+            <section id="nature">
+                <h3>Web Publications</h3>
+                
+                <div class="ednote">
+                    <p>This section was adapted from the Interest Group document as an initial placeholder. The actual makeup
+                        of Web Publications may change significantly as development progresses. The section will be updated
+                        as features and functionality are formalized.</p>
+                </div>
+                
+                <p>The act of publishing involves obtaining resources, organizing them into a publication and making that
+                    publication available on a Web server. In doing so, the publisher establishes the interconnectedness that
+                    binds the resources into a single work. This process also provides an origin for the Web Publication and
+                    a URL that uniquely identifies it, giving provenance to the work.</p>
+                
+                <p>The establishment of this discoverable and identifiable collection is what enables users to access their
+                    content without concern for whether they are online or offline. The user agent can cache the resources
+                    ensuring that the Web Publication is available and functional while offline, providing the user, as much
+                    as possible, a seamless experience interacting with a Web Publication regardless of their network
+                    connection.</p>
+                
+                <p>The Web Publication introduces the concept of a manifest, which serves to carry information about the
+                    constituent resources of the publication. The manifest includes metadata that describes the publication
+                    as a whole, as it has an identity and nature beyond its constituent resources. The metadata and manifest
+                    also incorporate information about the sequence and presentation of the content.</p>
+                
+                <p>A Web Publication also provides a default ordering of its primary constituent resources, although that
+                    order may be changed by user interaction or scripting. The user is able to access any primary resource
+                    directly via navigation provided by the publication itself or via the user agent.</p>
+            </section>
+        </section>
+        <section id="terminology">
+            <h2>Terminology</h2>
+            
+            <dl>
+                <dt><dfn data-lt="Web Publications">Web Publication</dfn></dt>
+                <dd>A collection of one or more constituent resources, organized together in a uniquely identifiable grouping
+                    that may be presented using standard Open Web Platform technologies.</dd>
+                
+                <dt><dfn data-lt="Packaged Web Publications">Packaged Web Publication</dfn></dt>
+                <dd>A <a>Web Publication</a> whose constituent resources are combined into a single distributable file, using
+                    some standard packaging format.</dd>
+                
+                <dt><dfn data-lt="User Agents">User Agent</dfn></dt>
+                <dd>An application that retrieves and renders Web Publications. Examples of possible User Agents include
+                    browsers and reading applications.</dd>
+                
+                <dt><dfn data-lt="Web Resources">Web Resource</dfn></dt>
+                <dd>An abstract resource that is identified by a URI and can be accessed through standard Web protocols. See
+                    [[WCA-terms]] for further details.</dd>
+            </dl>
+        </section>
+        <section id="conformance">
+            <section id="conformance-content">
+                <h3>Content Conformance</h3>
+            </section>
+            
+            <section id="conformance-ua">
+                <h3>User Agent Conformance</h3>
+            </section>
+        </section>
+        <section>
+            <h2>Manifest</h2>
+        </section>
+        <section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
+    </body>
 </html>
