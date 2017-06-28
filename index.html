@@ -26,6 +26,30 @@
               permalinkEdge:     true,
               permalinkHide:     false,
               diffTool:          "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+              wgURI:             "https://www.w3.org/publishing/groups/publ-wg/",
+              wgPublicList:      "public-publ-wg",
+              wgPatentURI:       "https://www.w3.org/2004/01/pp-impl/100074/status",
+              otherLinks: [
+                  {
+                    key: "Repository",
+                    data: [{
+                        value: "Github Repository",
+                        href: "https://github.com/w3c/wpub"
+                    }]
+                  },
+                  {
+                    key: "Changes",
+                    data: [
+                    // {
+                    //   value: "Diff to previous version",
+                    //   href: "diff.html"
+                    // },
+                    {
+                      value: "Commit history",
+                      href: "https://github.com/w3c/wpub/commits/master"
+                    }]
+                  }
+              ],
               localBiblio: biblio
           };
       </script>
@@ -39,16 +63,16 @@
         <section id="sotd"></section>
         <section id="intro" class="informative">
             <h2>Introduction</h2>
-            
+
             <section>
                 <h3>Background</h3>
-                
+
                 <p>For millenia now, the written word has been the primary means of encoding and sharing ideas and
                     information. The publication as a bounded edition, made public, has been used to carry intellectual and
                     artistic works of innumerable form: novels, plays, poetry, journals, magazines, newspapers, articles,
                     laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos, manuals, and albums of all
                     sorts.</p>
-                
+
                 <p>More recently, with the advent of the information age, print has been ceding ground to digital, and the
                     Web has become a major forum for the public dissemination of ideas. But the Web is unbounded: information
                     and resources are only loosely connected through hyperlinks. While this model has helped the Web thrive
@@ -57,53 +81,53 @@
                     download content for curation and personal use. That, in turn, has fed the continuing development of
                     non-Web document formats to redress these problems, and made it necessary to create both Web-ready
                     content and alternative offline renditions to ensure publications are fully available.</p>
-                
+
                 <p>This specification aims to reduce these barriers and reinvigorate publishing by combining the best aspects
                     of both models—the persistent availability and portability of bounded publications with the pervasive
                     accessibility, addressability, and interconnectedness of the Open Web Platform.</p>
             </section>
-            
+
             <section id="scope">
                 <h3>Scope</h3>
-                
+
                 <p>This specification only defines requirements for the production and rendering of valid <a>Web
                     Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
                     achieve its goal—that being to allow for a measure of boundedness on the Web without changing the way
                     that the Web itself operates.</p>
-                
+
                 <p>Moreover, the specification is designed to adapt automatically to updates to Open Web Platform
                     technologies in order to ensure that Web Publications continue to interoperate seamlessly as the Web
                     evolves (e.g., by referencing the latest published versions instead of specific versions).</p>
-                
+
                 <p>Further, this specification does not attempt to constrain the nature of a Web Publication: any type of
                     work that can be represented on the Web constitutes a potential Web Publication.</p>
             </section>
-            
+
             <section id="nature">
                 <h3>Web Publications</h3>
-                
+
                 <div class="ednote">
                     <p>This section was adapted from the Interest Group document as an initial placeholder. The actual makeup
                         of Web Publications may change significantly as development progresses. The section will be updated
                         as features and functionality are formalized.</p>
                 </div>
-                
+
                 <p>The act of publishing involves obtaining resources, organizing them into a publication and making that
                     publication available on a Web server. In doing so, the publisher establishes the interconnectedness that
                     binds the resources into a single work. This process also provides an origin for the Web Publication and
                     a URL that uniquely identifies it, giving provenance to the work.</p>
-                
+
                 <p>The establishment of this discoverable and identifiable collection is what enables users to access their
                     content without concern for whether they are online or offline. The user agent can cache the resources
                     ensuring that the Web Publication is available and functional while offline, providing the user, as much
                     as possible, a seamless experience interacting with a Web Publication regardless of their network
                     connection.</p>
-                
+
                 <p>The Web Publication introduces the concept of a manifest, which serves to carry information about the
                     constituent resources of the publication. The manifest includes metadata that describes the publication
                     as a whole, as it has an identity and nature beyond its constituent resources. The metadata and manifest
                     also incorporate information about the sequence and presentation of the content.</p>
-                
+
                 <p>A Web Publication also provides a default ordering of its primary constituent resources, although that
                     order may be changed by user interaction or scripting. The user is able to access any primary resource
                     directly via navigation provided by the publication itself or via the user agent.</p>
@@ -111,20 +135,20 @@
         </section>
         <section id="terminology">
             <h2>Terminology</h2>
-            
+
             <dl>
                 <dt><dfn data-lt="Web Publications">Web Publication</dfn></dt>
                 <dd>A collection of one or more constituent resources, organized together in a uniquely identifiable grouping
                     that may be presented using standard Open Web Platform technologies.</dd>
-                
+
                 <dt><dfn data-lt="Packaged Web Publications">Packaged Web Publication</dfn></dt>
                 <dd>A <a>Web Publication</a> whose constituent resources are combined into a single distributable file, using
                     some standard packaging format.</dd>
-                
+
                 <dt><dfn data-lt="User Agents">User Agent</dfn></dt>
                 <dd>An application that retrieves and renders Web Publications. Examples of possible User Agents include
                     browsers and reading applications.</dd>
-                
+
                 <dt><dfn data-lt="Web Resources">Web Resource</dfn></dt>
                 <dd>An abstract resource that is identified by a URI and can be accessed through standard Web protocols. See
                     [[WCA-terms]] for further details.</dd>
@@ -134,7 +158,7 @@
             <section id="conformance-content">
                 <h3>Content Conformance</h3>
             </section>
-            
+
             <section id="conformance-ua">
                 <h3>User Agent Conformance</h3>
             </section>
