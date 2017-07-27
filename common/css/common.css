@@ -10,3 +10,7 @@ ul.ack > li:after {
 ul.ack > li:last-child:after {
     content: ''
 }
+
+dfn {
+	font-weight: bold !important;
+}
