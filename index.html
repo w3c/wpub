@@ -63,9 +63,8 @@
 	</head>
 	<body>
 		<section id="abstract">
-			<p>This specification defines digital publishing based on a fully native representation of documents within the
-				Open Web Platform: <a>Web Publications</a> work both online and offline and can be packaged and made
-				portable.</p>
+			<p>This specification defines digital publishing based on a fully native representation of publications within
+				the Open Web Platform.</p>
 		</section>
 		<section id="sotd"></section>
 		<section id="intro" class="informative">
@@ -143,9 +142,15 @@
 		<section id="terminology">
 			<h2>Terminology</h2>
 
+			<div class="ednote">
+				<p>This section contains working definitions that include some assumptions of what the final specification
+					will include. These assumptions are subject to change, and the definitions will be updated to reflect the
+					work as it evolves.</p>
+			</div>
+
 			<dl>
 				<dt><dfn>Default Reading Order</dfn></dt>
-				<dd><p>The default reading order is the static progression through the <a>primary resources</a> defined in
+				<dd><p>The default reading order is a specific progression through the <a>primary resources</a> defined in
 						the <a>manifest</a> by the creator of a <a>Web Publication</a>.</p>
 					<p>A user might follow alternative pathways through the content, but in the absence of such interaction
 						the default reading order defines the expected progression from one primary resource to the
@@ -153,14 +158,16 @@
 
 				<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 				<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
-						metadata, a list of all <a data-lt="primary resource">primary and secondary resources</a>, and the
-							<a>default reading order</a>.</p></dd>
+						metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>, and
+						the <a>default reading order</a>.</p></dd>
 
 				<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
-				<dd><p>A primary resource is a resource listed in the <a>default reading order</a> of a <a>Web
-							Publication</a>.</p>
-					<p>A primary resource typically references many secondary resources necessary for it to be correctly
-						processed and rendered (e.g., style sheets, scripts, multimedia files).</p></dd>
+				<dd><p>A primary resource is one that is listed in the <a>default reading order</a> of a <a>Web
+							Publication</a>.</p></dd>
+
+				<dt><dfn data-lt="Secondary Resources">Secondary Resources</dfn></dt>
+				<dd><p>A secondary resource is one that is required for the processing or rendering of a <a>primary
+							resource</a>.</p></dd>
 
 				<dt><dfn data-lt="Web Publications">Web Publication</dfn></dt>
 				<dd><p>A Web Publication is a collection of one or more <a>primary resources</a>, organized together through
