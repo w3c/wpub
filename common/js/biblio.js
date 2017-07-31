@@ -17,11 +17,20 @@
 */
 
 var biblio = {
-   "PackagedWebPubs": {
+   "PWPUB": {
       "title": "Packaged Web Publications",
-      "href": "https://w3.org/TR/pkgd-web-pub/",
+      "href": "https://w3.org/TR/pwpub/",
       "authors": [
         "..."
+      ],
+      "date": "..."
+   },
+   "WPUB": {
+      "title": "Web Publications",
+      "href": "https://w3.org/TR/wpub/",
+      "authors": [
+        "Dave Cramer",
+        "Matt Garrish"
       ],
       "date": "..."
    }
