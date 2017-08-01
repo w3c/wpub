@@ -14,13 +14,6 @@
               edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
-      			      name: "Dave Cramer",
-                      url: 'http://www.hbgusa.com',
-                      company: "Hachette Livre",
-                      companyURI: "http://www.hbgusa.com"//,
-                      //w3cid: ?
-                  },
-                  {
       			      name: "Matt Garrish",
                       url: 'http://www.daisy.org',
                       company: "DAISY Consortium",
@@ -66,7 +59,16 @@
 			<p>This specification defines digital publishing based on a fully native representation of publications within
 				the Open Web Platform.</p>
 		</section>
-		<section id="sotd"></section>
+		<section id="sotd">
+			<p>This first public working draft provides a preliminary outline of a Web Publication. Many details are under
+				active consideration within the Publishing Working Group and are subject to change. The most prominent known
+				issues have been identified in this document and links provided to comment on them.</p>
+
+			<p>In particular, the Working Group seeks feedback on the following issues:</p>
+			<ul>
+				<li>...</li>
+			</ul>
+		</section>
 		<section id="intro" class="informative">
 			<h2>Introduction</h2>
 
@@ -109,14 +111,8 @@
 					work that can be represented on the Web constitutes a potential Web Publication.</p>
 			</section>
 
-			<section id="nature">
+			<!-- <section id="nature">
 				<h3>Web Publications</h3>
-
-				<div class="ednote">
-					<p>This section was adapted from the Interest Group document as an initial placeholder. The actual makeup
-						of Web Publications may change significantly as development progresses. The section will be updated
-						as features and functionality are formalized.</p>
-				</div>
 
 				<p>The act of publishing involves obtaining resources, organizing them into a publication and making that
 					publication available on a Web server. In doing so, the publisher establishes the interconnectedness that
@@ -137,43 +133,37 @@
 				<p>A Web Publication also provides a default ordering of its primary constituent resources, although that
 					order may be changed by user interaction or scripting. The user is able to access any primary resource
 					directly via navigation provided by the publication itself or via the user agent.</p>
-			</section>
-		</section>
-		<section id="terminology">
-			<h2>Terminology</h2>
-
-			<div class="ednote">
-				<p>This section contains working definitions that include some assumptions of what the final specification
-					will include. These assumptions are subject to change, and the definitions will be updated to reflect the
-					work as it evolves.</p>
-			</div>
-
-			<dl>
-				<dt><dfn>Default Reading Order</dfn></dt>
-				<dd><p>The default reading order is a specific progression through the <a>primary resources</a> defined in
+			</section> -->
+			<section id="terminology">
+				<h3>Terminology</h3>
+				
+				<dl>
+					<dt><dfn>Default Reading Order</dfn></dt>
+					<dd><p>The default reading order is a specific progression through the <a>primary resources</a> defined in
 						the <a>manifest</a> by the creator of a <a>Web Publication</a>.</p>
-					<p>A user might follow alternative pathways through the content, but in the absence of such interaction
-						the default reading order defines the expected progression from one primary resource to the
-					next.</p></dd>
-
-				<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
-				<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
+						<p>A user might follow alternative pathways through the content, but in the absence of such interaction
+							the default reading order defines the expected progression from one primary resource to the
+							next.</p></dd>
+					
+					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
+					<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
 						metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>, and
 						the <a>default reading order</a>.</p></dd>
-
-				<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
-				<dd><p>A primary resource is one that is listed in the <a>default reading order</a> of a <a>Web
-							Publication</a>.</p></dd>
-
-				<dt><dfn data-lt="Secondary Resources">Secondary Resource</dfn></dt>
-				<dd><p>A secondary resource is one that is required for the processing or rendering of a <a>primary
-							resource</a>.</p></dd>
-
-				<dt><dfn data-lt="Web Publications">Web Publication</dfn></dt>
-				<dd><p>A Web Publication is a collection of one or more <a>primary resources</a>, organized together through
+					
+					<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
+					<dd><p>A primary resource is one that is listed in the <a>default reading order</a> of a <a>Web
+						Publication</a>.</p></dd>
+					
+					<dt><dfn data-lt="Secondary Resources">Secondary Resource</dfn></dt>
+					<dd><p>A secondary resource is one that is required for the processing or rendering of a <a>primary
+						resource</a>.</p></dd>
+					
+					<dt><dfn data-lt="Web Publications">Web Publication</dfn></dt>
+					<dd><p>A Web Publication is a collection of one or more <a>primary resources</a>, organized together through
 						a <a>manifest</a> into a single logical work with a <a>default reading order</a>. The Web Publication
 						is uniquely identifiable and presentable using Open Web Platform technologies.</p></dd>
-			</dl>
+				</dl>
+			</section>
 		</section>
 		<section id="conformance">
 			<section id="conformance-content">
