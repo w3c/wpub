@@ -145,6 +145,15 @@
 						<p>A user might follow alternative pathways through the content, but in the absence of such interaction
 							the default reading order defines the expected progression from one primary resource to the
 							next.</p></dd>
+
+					<dt><dfn data-lt="IRI">IRI</dfn></dt>
+					<dd><p>An IRI, or Internationalized Resource Identifier, is an extension to the URI specification to allow 
+						characters from Unicode. There is a mapping algorithm for translating between IRIs and the equivalent 
+						encoded URI form. IRIs are defined by [[!rfc3987]].</p></dd>
+						
+					<dt><dfn data-lt="Locator">Locator</dfn></dt>
+					<dd><p>A locator is a dereferenceable IRI that can be used to locate and retrieve a Web Publication or a part 
+						of a Web Publication.</p></dd>
 					
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 					<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
@@ -163,6 +172,15 @@
 					<dd><p>A Web Publication is a collection of one or more <a>primary resources</a>, organized together through
 						a <a>manifest</a> into a single logical work with a <a>default reading order</a>. The Web Publication
 						is uniquely identifiable and presentable using Open Web Platform technologies.</p></dd>
+					
+					<dt><dfn data-lt="Web Publication Canonical Identifier">Web Publication Canonical Identifier</dfn></dt>
+					<dd><p>A Web Publication canonical identifier is a singular and unique identifier for a Web Publication 
+						provided at time of publication. It is persistent and immutable across all instantiations of the 
+						Web Publication. It SHOULD be an IRI (and therefore also a locator). If not an IRI, it MUST be 
+						possible to make a 1-to-1 mapping of the canonical identifier to a locator. A cononical identifier
+						that is an IRI, or a locator mapped from a canonical identifier, can be referred to as an Identifying 
+						IRI. While the canonical identifier itself is persistent, its mapping to an IRI MAY be dynamic. </p></dd>
+					
 				</dl>
 			</section>
 		</section>
@@ -201,9 +219,18 @@
 				<div class="ednote"> Placeholder for explanation of metadata requirements for publications. </div>
 
 				<section>
-					<h4>Publication Identifier</h4>
+					<h4>Identifier Metadata</h4>
+					<p>When published, a Web Publication SHOULD be assigned a canonical identifier. This canonical identifier MUST be unique 
+						to the Web Publication and, if assigned, MUST be included in the Web Publication manifest. The Identifying IRI
+						(i.e., the canonical identifier if it is an IRI or the locator mapped from the canonical identifier) MUST enable 
+						the retrieval of a representation of the manifest of the Web Publication. The Identifying IRI does not preclude 
+						the creation and use of other identifiers and / or locators to retrieve a representation of a Web Publication 
+						in whole or part.</p>
+					<div class="note">The Identifying IRI can also be used as value for an identifier link relation 
+						[[https://tools.ietf.org/html/draft-vandesompel-identifier-00#section-3.1]].
 
-					<div class="ednote"> Placeholder for explanation of publication identifier metadata. </div>
+					<div class="ednote"> Placeholder for further explanation of additional publication identifier metadata,
+						e.g., identifier and locator metadata associated with secondary (and primary?) resources. </div>
 				</section>
 			</section>
 
@@ -230,7 +257,8 @@
 		<section id="pub-identification">
 			<h2>Publication Identification</h2>
 
-			<div class="ednote"> Placeholder for how a document identifies it is or belongs to a publication. </div>
+			<div class="ednote"> Placeholder for how a document identifies it is or belongs to a publication. 
+			May need to revise title of this section....</div>
 		</section>
 		<section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
 	</body>
