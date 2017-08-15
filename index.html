@@ -156,10 +156,6 @@
 						characters from Unicode. There is a mapping algorithm for translating between IRIs and the equivalent
 						encoded URI form. IRIs are defined by [[!rfc3987]].</p></dd>
 
-					<dt><dfn data-lt="Locator">Locator</dfn></dt>
-					<dd><p>A locator is a dereferenceable IRI that can be used to locate and retrieve a Web Publication or a part
-						of a Web Publication.</p></dd>
-
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 					<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
 						metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>, and
@@ -179,13 +175,22 @@
 						is uniquely identifiable and presentable using Open Web Platform technologies.</p></dd>
 
 					<dt><dfn data-lt="Web Publication Canonical Identifier">Web Publication Canonical Identifier</dfn></dt>
-					<dd><p>A Web Publication canonical identifier is a singular and unique identifier for a Web Publication
-						provided at time of publication. It is persistent and immutable across all instantiations of the
-						Web Publication. It SHOULD be an IRI (and therefore also a locator). If not an IRI, it MUST be
-						possible to make a 1-to-1 mapping of the canonical identifier to a locator. A cononical identifier
-						that is an IRI, or a locator mapped from a canonical identifier, can be referred to as an Identifying
-						IRI. While the canonical identifier itself is persistent, its mapping to an IRI MAY be dynamic. </p></dd>
+					<dd><p>A Web Publication canonical identifier is assigned to a Web Publication by the publisher. 
+						It SHOULD be a dereferenceable IRI and the Web Publication Address. If not, it MUST be possible to 
+						make a 1-to-1 mapping to the Web Publication Address. If a dereferenceable IRI it MAY be used as the 
+						value of the href attribute of a canonical link element (i.e., a link element with a 
+						rel='canonical' attribute).</p></dd>
+					
+					<dt><dfn data-lt="Web Publication Identifier">Web Publication Identifier</dfn></dt>
+					<dd><p>A Web Publication identifier is metadata that is intended to be used to refer to a Web Publication
+						in a persistent and unambiguous manner. IRIs, URIs, DOIs, ISBNs, PURLs are all examples of 
+						identifiers frequently used in publishing.</p></dd>
 
+					<dt><dfn data-lt="Web Publication Address">Web Publication Address</dfn></dt>
+					<dd><p>A Web Publication Address is a URL or other dereferenceable IRI which refers to the location of a 
+						Web Publication and enables the retrieval of a representation of the manifest of the Web 
+						Publication.</p></dd>
+					
 				</dl>
 			</section>
 		</section>
