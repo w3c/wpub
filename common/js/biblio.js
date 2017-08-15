@@ -17,7 +17,20 @@
 */
 
 var biblio = {
-   "link-relation": {
+    "html": {
+        "title": "HTML 5.1",
+        "authors" : [
+            "Steve Faulkner",
+            "Arron Eicholz",
+            "Travis Leithead",
+            "Alex Danilo"
+        ],
+        "date": "2016-11-01",
+        "status": "W3C Recommendation",
+        "href": "https://www.w3.org/TR/html/",
+        "publisher": "W3C"
+    },
+    "link-relation": {
        "title": "Identifier: A Link Relation to Convey a Preferred URI for Referencing",
        "authors": [
            "H. Van de Sompel",
@@ -29,16 +42,16 @@ var biblio = {
        "rawDate": "2017-08",
        "publisher": "IETF",
        "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00",
-   },
-   "pwpub": {
+    },
+    "pwpub": {
       "title": "Packaged Web Publications",
       "href": "https://w3.org/TR/pwpub/",
       "authors": [
         "..."
       ],
       "date": "..."
-   },
-   "wpub": {
+    },
+    "wpub": {
       "title": "Web Publications",
       "href": "https://w3.org/TR/wpub/",
       "authors": [
@@ -46,5 +59,5 @@ var biblio = {
         "Matt Garrish"
       ],
       "date": "..."
-   }
+    }
 }
