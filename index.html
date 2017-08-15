@@ -325,6 +325,47 @@
 				<p class="issue" data-number="32"></p>
 			</section>
 
+			<section id="fallback">
+				<h3>Fallback mechanisms</h3>
+
+				<p>In some cases, some manifest items, even if required for an <a>abstract manifest</a>, are not necessarily expressed in a <a>concrete manifest</a> explicitly. For some of these cases “fallback mechanisms” are defined, i.e., simple algorithms whereby a <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a> can reconstruct the manifest item. These are:</p>
+
+				<dl>
+					<dt>title</dt>
+					<dd>If the title is not specified in the concrete manifest, a user agent MUST:
+						<ul>
+							<li>
+								if a WP contains a single primary resource with a <code>title</code> element appropriate for its type (e.g., SVG or HTML titles), then that becomes the WP’s title;
+							</li>
+							<li>
+								otherwise, if a WP contains several primary resources with title elements appropriate for their types, the user agent uses the title of the first resource in the <a>default reading order</a>;
+							</li>
+							<li>
+								otherwise, the UA uses its own heuristics.
+								Note that a URL or a filename is not considered to be a valid title.
+							</li>
+						</ul>
+					</dd>
+					<dt>(natural) language</dt>
+					<dd>If the language is not specified in the concrete manifest, a user agent MUST:
+						<ul>
+							<li>
+								if a WP contains a single primary resource with a language element appropriate for its type (e.g., SVG or HTML language tags), then that becomes the WP’s language;
+							</li>
+							<li>
+								otherwise, if a WP contains several primary resources with a language element appropriate for their types, the user agent uses the language of the first resource in the default reading order;
+							</li>
+							<li>
+								otherwise, the language is English.
+							</li>
+						</ul>
+					</dd>
+				</dl>
+			</section>
+
+
+
+
 			<section id="metadata">
 				<h3>Metadata</h3>
 
