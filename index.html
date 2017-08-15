@@ -151,11 +151,6 @@
 							the default reading order defines the expected progression from one primary resource to the
 							next.</p></dd>
 
-					<dt><dfn data-lt="IRI">IRI</dfn></dt>
-					<dd><p>An IRI, or Internationalized Resource Identifier, is an extension to the URI specification to allow
-						characters from Unicode. There is a mapping algorithm for translating between IRIs and the equivalent
-						encoded URI form. IRIs are defined by [[!rfc3987]].</p></dd>
-
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 					<dd><p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
 						metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>, and
@@ -175,22 +170,22 @@
 						is uniquely identifiable and presentable using Open Web Platform technologies.</p></dd>
 
 					<dt><dfn data-lt="Web Publication Canonical Identifier">Web Publication Canonical Identifier</dfn></dt>
-					<dd><p>A Web Publication canonical identifier is assigned to a Web Publication by the publisher. 
-						It SHOULD be a dereferenceable IRI and the Web Publication Address. If not, it MUST be possible to 
-						make a 1-to-1 mapping to the Web Publication Address. If a dereferenceable IRI it MAY be used as the 
-						value of the href attribute of a canonical link element (i.e., a link element with a 
+					<dd><p>A Web Publication canonical identifier is assigned to a Web Publication by the publisher.
+						It SHOULD be the Web Publication Address. If not, it MUST be possible to
+						make a 1-to-1 mapping to the Web Publication Address. If a [[!URL]] it MAY be used as the
+						value of the href attribute of a canonical link element (i.e., a link element with a
 						rel='canonical' attribute).</p></dd>
-					
+
 					<dt><dfn data-lt="Web Publication Identifier">Web Publication Identifier</dfn></dt>
 					<dd><p>A Web Publication identifier is metadata that is intended to be used to refer to a Web Publication
-						in a persistent and unambiguous manner. IRIs, URIs, DOIs, ISBNs, PURLs are all examples of 
+						in a persistent and unambiguous manner. URLs, DOIs, ISBNs, PURLs are all examples of
 						identifiers frequently used in publishing.</p></dd>
 
 					<dt><dfn data-lt="Web Publication Address">Web Publication Address</dfn></dt>
-					<dd><p>A Web Publication Address is a URL or other dereferenceable IRI which refers to the location of a 
-						Web Publication and enables the retrieval of a representation of the manifest of the Web 
+					<dd><p>A Web Publication Address is a [[!URL]] which represents the location of a
+						Web Publication and enables the retrieval of a representation of the manifest of the Web
 						Publication.</p></dd>
-					
+
 				</dl>
 			</section>
 		</section>
@@ -231,12 +226,12 @@
 				<section>
 					<h4>Identifier Metadata</h4>
 					<p>When published, a Web Publication SHOULD be assigned a canonical identifier. This canonical identifier MUST be unique
-						to the Web Publication and, if assigned, MUST be included in the Web Publication manifest. The Identifying IRI
-						(i.e., the canonical identifier if it is an IRI or the locator mapped from the canonical identifier) MUST enable
-						the retrieval of a representation of the manifest of the Web Publication. The Identifying IRI does not preclude
+						to the Web Publication and, if assigned, MUST be included in the Web Publication manifest. The Identifying URL
+						(i.e., the canonical identifier if it is a URL or the locator mapped from the canonical identifier) MUST enable
+						the retrieval of a representation of the manifest of the Web Publication. The Identifying URL does not preclude
 						the creation and use of other identifiers and / or locators to retrieve a representation of a Web Publication
 						in whole or part.</p>
-					<div class="note">The Identifying IRI can also be used as value for an identifier link relation
+					<div class="note">The Identifying URL can also be used as value for an identifier link relation
 						[[https://tools.ietf.org/html/draft-vandesompel-identifier-00#section-3.1]].</div>
 
 					<div class="ednote"> Placeholder for further explanation of additional publication identifier metadata,
