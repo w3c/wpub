@@ -275,21 +275,21 @@
 
 				<ol>
 					<li>It MUST assert WP-ness.</li>
-					<li>It MUST list the <a>Primary Resources</a> of the WP.</li>
-					<li>It SHOULD list <a>Secondary Resources</a>, although that list is not necessarily exhaustive.</li>
 					<li>
-						It MUST include a <a>WP Address</a>.
+						It MUST include a <a>Web Publication Address</a>.
 						Availability of this address does not preclude the creation and use of other identifiers and/or addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.
-					</li>
+					</li>					
+					<li>It MUST list the <a>Primary Resources</a> of the WP in their default reading order.</li>
+					<li>It SHOULD list <a>Secondary Resources</a>, although that list is not necessarily exhaustive.</li>
 					<li>
 						It SHOULD include a <a>Canonical Identifier</a>.
 						If assigned, this <a>Canonical Identifier</a> MUST be unique to the <a>Web Publication</a>.
 					</li>
 					<li>It SHOULD include a title (or “name”).</li>
 					<li>It SHOULD indicate the default (natural) language.</li>
-					<li>It MUST indicate a <a>default reading order</a>.</li>
 				</ol>
 
+				<div class="note">The <a>Web Publication Address</a> is needed for fulfilling <a href="http://w3c.github.io/dpub-pwp-ucr/#r_single">Requirement 7</a> and <a href="http://w3c.github.io/dpub-pwp-ucr/#r_component-change">Requirement 21</a> of the Web Publication UCR.</div>
 				<div class="note">The <a>Web Publication Address</a> can also be used as value for an identifier link relation [[link-relation]].</div>
 
 				<p class="enote">These requirements reflect the current minimum consensus, though a number of issues remain open. The issues may usually lead to a “MUST” instead of a “SHOULD” in the list above.</p>
