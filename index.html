@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Web Publications</title>
-		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer></script>
+		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer="defer"></script>
 		<script src="common/js/biblio.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
@@ -217,7 +217,6 @@
 					criteria:</p>
 
 				<ul>
-					<li>It MUST have at least one <a>primary resource</a>.</li>
 					<li>It MUST have a <a>manifest</a> that conforms to all normative requirements defined in <a
 							href="#manifest-conformance">Manifest</a>.</li>
 				</ul>
@@ -226,8 +225,8 @@
 					criteria:</p>
 
 				<ul>
-					<li>It MUST be capable of processing and interpreting the manifest, as defined in <a href="#manifest"
-							>Manifest</a>.</li>
+					<li>It MUST be capable of generating a conforming <a href="#wp-infoset">infoset</a> for a Web
+						Publication.</li>
 				</ul>
 			</section>
 		</section>
@@ -399,24 +398,24 @@
 				<p>A <a>manifest</a> is a specific serialization of a <a>Web Publication's</a>
 					<a href="#infoset">infoset</a>.</p>
 			</section>
-			
+
 			<section id="manifest-req">
 				<h3>Requirements</h3>
-				
+
 				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
-				
+
 				<ol>
 					<li>It MUST <a href="manifest-declaration">declare</a> that it describes a Web Publication.</li>
 					<li>It MUST be serialized as defined in <a href="manifest-serialization">Serialization</a>.</li>
 				</ol>
 			</section>
-			
+
 			<section id="manifest-declaration">
 				<h3>Declaration</h3>
-				
+
 				<div class="ednote">Placeholder for how a manifest declares it describes a web publication.</div>
 			</section>
-			
+
 			<section id="manifest-serialization">
 				<h3>Serialization</h3>
 
