@@ -143,82 +143,66 @@
 			<section id="terminology">
 				<h3>Terminology</h3>
 
-				<p>Wherever appropriate, this document relies on the terminology defined by the note on “Publishing and Linking on the Web” [[publishing-linking]]. In particular, the terms that are very important for this document include <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, or <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-address">address</a>.</p>
+				<p>Wherever appropriate, this document relies on the terminology defined by the note on “Publishing and
+					Linking on the Web” [[publishing-linking]]. In particular, the terms that are very important for this
+					document include <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user"
+						>user</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent"
+						>user agent</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser"
+						>browser</a>, or <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-address"
+						>address</a>.</p>
 
 				<dl>
-					<dt><dfn>URL</dfn></dt>
-					<dd>
-						<p>
-							In this specification, the general term URL is used as in other W3C specifications like HTML&nbsp;[[html]], and is defined by URL Standard of the WhatWG&nbsp;[[url]].
-							In particular, such a URL allows for the usage of characters from Unicode following&nbsp;[[rfc3987]].
-							See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5 document</a> for further details.
-						</p>
-					</dd>
-
 					<dt><dfn>Default Reading Order</dfn></dt>
 					<dd>
-						<p>
-							The default reading order is a specific progression through the <a>primary resources</a> defined in the <a>manifest</a> by the creator of a <a>Web Publication</a>.
-						</p>
-
-						<p>
-							A user might follow alternative pathways through the content, but in the absence of such interaction the default reading order defines the expected progression from one primary resource to the next.
-						</p>
+						<p>The default reading order is a specific progression through one or more <a>primary resources</a>
+							defined in the <a>manifest</a> by the creator of a <a>Web Publication</a>.</p>
+						<p>A user might follow alternative pathways through the content, but in the absence of such
+							interaction the default reading order defines the expected progression from one primary resource
+							to the next.</p>
 					</dd>
 
-					<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
+					<dt><dfn>Identifier</dfn></dt>
 					<dd>
-						<p>
-							A primary resource is one that is listed in the <a>default reading order</a> of a <a>Web Publication</a>.
-						</p>
-					</dd>
-
-					<dt><dfn data-lt="Secondary Resources">Secondary Resource</dfn></dt>
-					<dd>
-						<p>
-							A secondary resource is one that is required for the processing or rendering of a <a>primary resource</a>.
-						</p>
+						<p>An identifier is metadata that can be used to refer to a <a class="externalDFN"
+								href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
+							persistent and unambiguous manner. URLs, URNs, DOIs, ISBNs, or PURLs are all examples of
+							persistent identifiers frequently used in publishing.</p>
 					</dd>
 
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 					<dd>
-						<p>
-							A manifest represents structured information about a <a>Web Publication</a>, such as informative metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>, and a <a>default reading order</a>.
-						</p>
+						<p>A manifest represents structured information about a <a>Web Publication</a>, such as informative
+							metadata, a list of all <a data-lt="primary resource">primary</a> and <a>secondary resources</a>,
+							and a <a>default reading order</a>.</p>
 					</dd>
 
-					<dt><dfn data-lt="WP|Web Publications">Web Publication</dfn></dt>
+					<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
 					<dd>
-						<p>
-							A Web Publication is a collection of one or more <a>primary resources</a>, organized together through a <a>manifest</a> into a single logical work with a <a>default reading order</a>.
-							The Web Publication	is uniquely identifiable and presentable using Open Web Platform technologies.
-						</p>
+						<p>A primary resource is one that is presented directly by a user agent (i.e., not embedded within
+							another).</p>
 					</dd>
 
-					<dt><dfn data-lt="Identifier|WP Identifier">(Persistent) Identifier</dfn></dt>
+					<dt><dfn data-lt="Secondary Resources">Secondary Resource</dfn></dt>
 					<dd>
-						<p>
-							An identifier is metadata that can be used to refer to a <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a persistent and unambiguous manner.
-							URLs, URNs, DOIs, ISBNs, or PURLs are all examples of identifiers frequently used in publishing.
-						</p>
+						<p>A secondary resource is one that is required for the processing or rendering of a <a>primary
+								resource</a>.</p>
 					</dd>
 
-					<dt><dfn data-lt="WP Address">Web Publication Address</dfn></dt>
+					<dt><dfn>URL</dfn></dt>
 					<dd>
-						<p>
-							A Web Publication Address is a <a>URL</a> that refers to a <a>Web Publication</a> and enables the retrieval of a representation of the <a>manifest</a> of the <a>Web Publication</a>.
-						</p>
+						<p>In this specification, the general term URL is used as in other W3C specifications like
+							HTML&#160;[[html]], and is defined by URL Standard of the WhatWG&#160;[[url]]. In particular,
+							such a URL allows for the usage of characters from Unicode following&#160;[[rfc3987]]. See <a
+								href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
+								document</a> for further details.</p>
 					</dd>
 
-					<dt><dfn data-lt="WP Canonical Identifier|canonical identifier">Web Publication Canonical Identifier</dfn></dt>
+					<dt><dfn data-lt="Web Publications|Web Publication's">Web Publication</dfn></dt>
 					<dd>
-						<p>
-							A Web Publication canonical identifier is an <a>identifier</a> assigned to a <a>Web Publication</a> by the publisher.
-							It SHOULD either be a <a>Web Publication Address</a>, or it MUST be possible to make a 1-to-1 mapping to a <a>Web Publication Address</a>.
-							If it is URL, it MAY be used as the value of the <code>href</code> attribute of a canonical link element (i.e., a <code>link</code> element with a <code>rel='canonical'</code> attribute&nbsp;[[rfc6596]]).
-						</p>
+						<p>A Web Publication is a collection of one or more <a>primary resources</a>, organized together
+							through a <a>manifest</a> into a single logical work with a <a>default reading order</a>. The Web
+							Publication is uniquely identifiable and presentable using Open Web Platform technologies.</p>
 					</dd>
-
 				</dl>
 			</section>
 		</section>
@@ -226,176 +210,231 @@
 			<section>
 				<h2>Conformance Classes</h2>
 
-				<p>This specification defines two conformance classes: one for <a>Web Publications</a> and one for user agents that process them.</p>
+				<p>This specification defines two conformance classes: one for <a>Web Publications</a> and one for user
+					agents that process them.</p>
 
-				<p id="wp-conformance">A Web Publication is conformant to this specification if it meets the following criteria:</p>
+				<p id="wp-conformance">A Web Publication is conformant to this specification if it meets the following
+					criteria:</p>
 
 				<ul>
 					<li>It MUST have at least one <a>primary resource</a>.</li>
-					<li>It MUST have a <a>manifest</a> that conforms to all normative requirements defined in <a href="#manifest">Manifest</a>.</li>
+					<li>It MUST have a <a>manifest</a> that conforms to all normative requirements defined in <a
+							href="#manifest-conformance">Manifest</a>.</li>
 				</ul>
 
-				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following criteria:</p>
+				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following
+					criteria:</p>
 
 				<ul>
-					<li>It MUST be capable of processing and interpreting the manifest, as defined in <a href="#manifest">Manifest</a>.</li>
+					<li>It MUST be capable of processing and interpreting the manifest, as defined in <a href="#manifest"
+							>Manifest</a>.</li>
 				</ul>
+			</section>
+		</section>
+		<section id="infoset">
+			<h2>Web Publication Infoset</h2>
+
+			<p class="ednote">The name "infoset" may change depending on feedback. Although this term has a different meaning
+				for individuals familiar with XML, alternatives such as "properties" and "metadata" do not fully capture the
+				nature or purpose.</p>
+
+			<section id="infoset-overview" class="informative">
+				<h3>Overview</h3>
+
+				<p>A Web Publication is defined by a set of properties and features known as its information set (infoset).
+					The infoset is both abstract and concrete. It is abstract in the sense that it represents a set of
+					information that a user agent has to be able to compile about the Web Publication, but it also becomes
+					concrete when the user agent creates an internal representation of the information.</p>
+
+				<p>The infoset does not require a specific serialization. It is primarily compiled from a Web Publication's
+						<a href="#manifest">manifest</a>, whose serialization requirements are defined in the next section.
+					It is therefore possible to express the same infoset via different manifests, although a Web Publication
+					will only have one manifest.</p>
+
+				<p>Although the manifest is the primary source of the infoset, some information may be obtained independent
+					of it. For example, fallback rules for properties defined in the following subsections allow a user agent
+					to compile information that the author has not provided in the manifest, whether as an intentional
+					optimization or by accidental omission.</p>
+			</section>
+
+			<section id="infoset-req">
+				<h3>Requirements</h3>
+
+				<p>The requirements for a conforming Web Publication infoset are as follows:</p>
+
+				<ol>
+					<li>It MUST list the <a>Primary Resources</a> of the Web Publication.</li>
+					<li>It SHOULD list <a>Secondary Resources</a>, although the list is not required to be exhaustive.</li>
+					<li>It MUST include the <a href="#address">address</a> of the Web Publication. The availability of this
+						address does not preclude the creation and use of other identifiers and/or addresses to retrieve a
+						representation of a <a>Web Publication</a> in whole or part.</li>
+					<li>It SHOULD include a <a href="#canonical-identifier">canonical identifier</a>. If assigned, this
+						canonical identifier MUST be unique to the <a>Web Publication</a>.</li>
+					<li>It MUST include a <a href="#title">title</a> (or “name”).</li>
+					<li>It MUST indicate the default (natural) language.</li>
+					<li>It MUST indicate a <a>default reading order</a>.</li>
+					<li>It SHOULD identify the table of contents.</li>
+				</ol>
+
+				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
+					identifier link relation [[link-relation]].</div>
+
+				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
+					open. The issues may usually lead to a "MUST" instead of a "SHOULD" in the list above.</p>
+
+				<p class="issue" data-number="15">Ignoring issues such as location, serialization, etc. What is the minimum
+					viable manifest?</p>
+
+				<div class="issue" data-number="20">
+					<p>(See also <a href="https://github.com/w3c/wpub/issues/24">issue #24</a>.) The question is whether the
+						WP MUST include a title or not.</p>
+
+					<p>Note that this is the question for the <a>manifest</a>. How that information is acquired may also
+						depend on the <a href="#fallback">fallback mechanism</a>.</p>
+				</div>
+
+				<p class="issue" data-number="21">Whether the minimum manifest must include any metadata, or a specific slot
+					to handle metadata.</p>
+
+				<p class="issue" data-number="22">The discussion led to the question whether the manifest MUST list all
+						<a>Secondary resources</a> or not. In this sense, this became a duplicate of <a
+						href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question.</p>
+
+				<p class="issue" data-number="23">The question is whether the manifest MUST list all <a>Secondary
+						resources</a> or not.</p>
+
+				<p class="issue" data-number="29">Should Natural Language be Required for the Publication for WCAG 2
+					Compliance?</p>
+
+				<!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance?</p> -->
+			</section>
+
+			<section id="title">
+				<h3>Title</h3>
+
+				<p>The Web Publication's infoset requires a title.</p>
+
+				<p>If a title is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one as
+					follows:</p>
+
+				<ol>
+					<li>If the Web Publication contains at least one primary resource whose media type includes a
+							<code>title</code> element (e.g., SVG or HTML), use the title of the first instance listed in the
+						default reading order.</li>
+					<li>If the preceding step results in an empty title, or no primary resources are recognized as having a
+						title, the user agent MUST use its own algorithm to produce a title (e.g., inspect subsequent primary
+						resources or provide a placeholder title).</li>
+				</ol>
+
+				<div class="note">
+					<p>A user agent may not be able to produce a <a
+							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a> [[WCAG20]]
+						for a Web Publication based on the above rules. Authors are encouraged to ensure that their manifest
+						contains such a title, or one is provided in one of the two steps above.</p>
+				</div>
+			</section>
+
+			<section id="language">
+				<h3>Language</h3>
+
+				<p>The Web Publication's infoset requires the language(s) of its content be specified. The language MUST be a
+					tag that conforms to [[!BCP47]] or its successors.</p>
+
+				<p>If the language is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one
+					as follows:</p>
+
+				<ol>
+					<li>If the Web Publication contains at least one primary resource whose media type allows the language to
+						be specified (e.g., SVG or HTML), use the language of the first instance listed in the default
+						reading order.</li>
+					<li>If the preceding steps results in an empty language tag, use the value "<code>und</code>"
+						(undetermined).</li>
+				</ol>
+			</section>
+
+			<section id="canonical-identifier">
+				<h3>Canonical Identifier</h3>
+
+				<p>A <a>Web Publication's</a> canonical identifier is an <a>identifier</a> assigned to it by the publisher.
+					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a 1-to-1
+					mapping to an address.</p>
+
+				<p>If the canonical identifier is a URL, it MAY be used as the value of the <code>href</code> attribute of a
+					canonical <code>link</code> element (i.e., a <code>link</code> element with the attribute
+						<code>rel="canonical"</code> specified on it&#160;[[rfc6596]]).</p>
+			</section>
+
+			<section id="address">
+				<h3>Address</h3>
+
+				<p>A Web Publication's address is a <a>URL</a> that refers to a <a>Web Publication</a> and enables the
+					retrieval of a representation of the <a>manifest</a> of the Web Publication.</p>
+			</section>
+
+			<section id="resources">
+				<h3>Resources</h3>
+
+				<div class="ednote">Placeholder for explanation of enumerating the resources in a publication.</div>
+			</section>
+
+			<section id="reading-order">
+				<h3>Reading Order</h3>
+
+				<div class="ednote">Placeholder for explanation of listing the default reading order of a publication. </div>
+			</section>
+
+			<section id="table-of-contents">
+				<h3>Table of Contents</h3>
+
+				<div class="ednote">Placeholder for explanation of requirements of navigation (table of contents, landmarks,
+					etc.).</div>
 			</section>
 		</section>
 		<section id="manifest">
 			<h2>Manifest</h2>
 
 			<section id="manifest-intro" class="informative">
-				<h3>Introduction</h3>
+				<h3>Overview</h3>
 
-				<div class="ednote"> Placeholder for introduction to manifests. </div>
+				<p>A <a>manifest</a> is a specific serialization of a <a>Web Publication's</a>
+					<a href="#infoset">infoset</a>.</p>
 			</section>
-
-			<section>
-				<h2>Abstract versus Concrete Manifest</h2>
-
-				<p>This specification defines the content of a <a>manifest</a> on two levels.</p>
-
-				<ul>
-					<p>
-						An <dfn>abstract manifest</dfn> is defined to identify what type of information is necessary at the <a>Web Publication</a> level (as opposed to individual resource level) for a user agent to process the publication properly.
-					</p>
-
-					<p>
-						The <dfn>concrete manifest</dfn> defines the file format(s), encodings, etc., used to represent the <a>abstract manifest</a>, and how those file(s) can be accessed. The same <a>abstract manifest</a> MAY be expressable via different concrete manifest formats.
-					</p>
-				</ul>
-
-				<p class="ednote">As discussed on the <a href="https://www.w3.org/publishing/groups/publ-wg/Meetings/Minutes/2017/2017-08-14-minutes">group teleconference on the 2017-08-14</a>, the separation of these two terms may be temporary, and subsequent editorial passes may merge the two notions.</p>
-			</section>
-			<section>
-				<h2 id="abstractmanifest">The abstract manifest</h2>
-
-				<p>An <a>abstract manifest</a> should contain the following information.</p>
-
+			
+			<section id="manifest-req">
+				<h3>Requirements</h3>
+				
+				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
+				
 				<ol>
-					<li>It MUST assert WP-ness.</li>
-					<li>It MUST list the <a>Primary Resources</a> of the WP.</li>
-					<li>It SHOULD list <a>Secondary Resources</a>, although that list is not necessarily exhaustive.</li>
-					<li>
-						It MUST include a <a>WP Address</a>.
-						Availability of this address does not preclude the creation and use of other identifiers and/or addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.
-					</li>
-					<li>
-						It SHOULD include a <a>Canonical Identifier</a>.
-						If assigned, this <a>Canonical Identifier</a> MUST be unique to the <a>Web Publication</a>.
-					</li>
-					<li>It SHOULD include a title (or “name”).</li>
-					<li>It SHOULD indicate the default (natural) language.</li>
-					<li>It MUST indicate a <a>default reading order</a>.</li>
+					<li>It MUST <a href="manifest-declaration">declare</a> that it describes a Web Publication.</li>
+					<li>It MUST be serialized as defined in <a href="manifest-serialization">Serialization</a>.</li>
 				</ol>
-
-				<div class="note">The <a>Web Publication Address</a> can also be used as value for an identifier link relation [[link-relation]].</div>
-
-				<p class="enote">These requirements reflect the current minimum consensus, though a number of issues remain open. The issues may usually lead to a “MUST” instead of a “SHOULD” in the list above.</p>
-
-				<p class="issue" data-number="15">Ignoring issues such as location, serialization, etc. What is the minimum viable manifest?</p>
-
-				<div class="issue" data-number="20">
-					<p></p>(See also <a href="https://github.com/w3c/wpub/issues/24">issue #24</a>.) The question is whether the WP MUST include a title or not.</p>
-
-					<p>Note that this is the question for the <a>abstract manifest</a>. How that information is acquired may also depend on the <a href="#fallback">fallback mechanism</a>. </p>
-				</div>
-
-				<p class="issue" data-number="21">
-					Whether the minimum manifest must include any metadata, or a specific slot to handle metadata
-				</p>
-
-				<p class="issue" data-number="22">The discussion led to the question whether the manifest MUST list all <a>Secondary resources</a> or not. In this sense, this became a duplicate of <a href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question. </p>
-
-				<p class="issue" data-number="23">The question is whether the manifest MUST list all <a>Secondary resources</a> or not.</p>
-
-		        <p class = "issue" data-number="29">Should Natural Language be Required for the Publication for WCAG 2 Compliance?</p>
-
-                <!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance? </p> -->
 			</section>
-
-			<section>
-				<h2>The Concrete Manifest</h2>
+			
+			<section id="manifest-declaration">
+				<h3>Declaration</h3>
+				
+				<div class="ednote">Placeholder for how a manifest declares it describes a web publication.</div>
+			</section>
+			
+			<section id="manifest-serialization">
+				<h3>Serialization</h3>
 
 				<p class="issue" data-number="7">Format of the Manifest (JSON, XML, embedded into HTML, etc.).</p>
-				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole ("manifest") that exists separately from most of the publication's resources, we need to find a way to associate the manifest with the other publication resources.</p>
 				<p class="issue" data-number="25"></p>
-				<p class="issue" data-number="26">Should the TOC be a separate HTML file or is the listing of primary resources in the manifest an implicit TOC?</p>
+				<p class="issue" data-number="26">Should the table of contents be a separate HTML file or is the listing of
+					primary resources in the manifest an implicit table of contents?</p>
 				<p class="issue" data-number="32"></p>
 			</section>
-
-			<section id="fallback">
-				<h3>Fallback mechanisms</h3>
-
-				<p>In some cases, some manifest items, even if required for an <a>abstract manifest</a>, are not necessarily expressed in a <a>concrete manifest</a> explicitly. For some of these cases “fallback mechanisms” are defined, i.e., simple algorithms whereby a <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a> can reconstruct the manifest item. These are:</p>
-
-				<dl>
-					<dt>title</dt>
-					<dd>If the title is not specified in the concrete manifest, a user agent MUST:
-						<ul>
-							<li>
-								if a WP contains a single primary resource with a <code>title</code> element appropriate for its type (e.g., SVG or HTML titles), then that becomes the WP’s title;
-							</li>
-							<li>
-								otherwise, if a WP contains several primary resources with title elements appropriate for their types, the user agent uses the title of the first resource in the <a>default reading order</a>;
-							</li>
-							<li>
-								otherwise, the UA uses its own heuristics.
-								Note that a URL or a filename is not considered to be a valid title.
-							</li>
-						</ul>
-					</dd>
-					<dt>(natural) language</dt>
-					<dd>If the language is not specified in the concrete manifest, a user agent MUST:
-						<ul>
-							<li>
-								if a WP contains a single primary resource with a language element appropriate for its type (e.g., SVG or HTML language tags), then that becomes the WP’s language;
-							</li>
-							<li>
-								otherwise, if a WP contains several primary resources with a language element appropriate for their types, the user agent uses the language of the first resource in the default reading order;
-							</li>
-							<li>
-								otherwise, the language is English.
-							</li>
-						</ul>
-					</dd>
-				</dl>
-			</section>
-
-
-
-
-			<section id="metadata">
-				<h3>Metadata</h3>
-
-				</section>
-
-			<section id="manifest-resources">
-				<h3>Resources</h3>
-
-				<div class="ednote"> Placeholder for explanation of enumerating the resources in a publication. </div>
-			</section>
-
-			<section id="manifest-reading-order">
-				<h3>Reading Order</h3>
-
-				<div class="ednote"> Placeholder for explanation of listing the default reading order of a publication.
-				</div>
-			</section>
-
-			<section id="manifest-nav-doc">
-				<h3>Navigation Document</h3>
-
-				<div class="ednote"> Placeholder for explanation of requirements of navigation (table of contents, landmarks,
-					etc.). </div>
-			</section>
 		</section>
-		<section id="pub-identification">
-			<h2>Publication Identification</h2>
+		<section id="establish">
+			<h2>Establishing a Web Publication</h2>
 
-			<div class="ednote"> Placeholder for how a document identifies it is or belongs to a publication.
-			May need to revise title of this section....</div>
+			<div class="ednote">Placeholder for how primary resources identify they belong to a publication.</div>
+
+			<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
+				("manifest") that exists separately from most of the publication's resources, we need to find a way to
+				associate the manifest with the other publication resources.</p>
 		</section>
 		<section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
 	</body>
