@@ -15,10 +15,34 @@
             //   edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
+                    "name": "Timothy W. Cole",
+                    "url": "http://www.library.illinois.edu/people/bios/t-cole3/",
+                    "company": "University of Illinois at Urbana-Champaign",
+                    "companyURL": "http://illinois.edu",
+                    "extras": [
+                      {
+                        "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
+                        "href": "https://orcid.org/0000-0002-5906-4581",
+                        "class": "orcid"
+                      }]
+                  },
+                  {
       			      "name": "Matt Garrish",
                       "company": "DAISY Consortium",
                       "companyURL": "http://www.daisy.org",
                       "w3cid": 51655
+                  },
+                  {
+                    "name": "Ivan Herman",
+                    "url": "https://www.w3.org/People/Ivan/",
+                    "company": "W3C",
+                    "extras": [
+                    {
+                      "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
+                      "href": "http://orcid.org/0000-0003-0782-2704",
+                      "class": "orcid"
+                    }],
+                    "companyURL": "http://www.w3.org",
                   }
               ],
               processVersion: 2017,
@@ -259,20 +283,24 @@
 			<section id="infoset-req">
 				<h3>Requirements</h3>
 
-				<p>The requirements for a conforming Web Publication infoset are as follows:</p>
+				<p>The Web Publication infoset MUST include the following information:</p>
 
 				<ol>
-					<li>It MUST list the <a>Primary Resources</a> of the Web Publication.</li>
-					<li>It SHOULD list <a>Secondary Resources</a>, although the list is not required to be exhaustive.</li>
-					<li>It MUST include the <a href="#address">address</a> of the Web Publication. The availability of this
-						address does not preclude the creation and use of other identifiers and/or addresses to retrieve a
-						representation of a <a>Web Publication</a> in whole or part.</li>
-					<li>It SHOULD include a <a href="#canonical-identifier">canonical identifier</a>. If assigned, this
-						canonical identifier MUST be unique to the <a>Web Publication</a>.</li>
-					<li>It MUST include a <a href="#title">title</a> (or "name").</li>
-					<li>It MUST indicate the default (natural) language.</li>
-					<li>It MUST indicate a <a>default reading order</a>.</li>
-					<li>It SHOULD identify the table of contents.</li>
+					<li>The <a href="#title">title</a> (or "name") of the Web Publication.</li>
+					<li>The default (natural) language of the Web Publication.</li>
+					<li>The <a href="#address">address</a> of the Web Publication. The availability of this address does not
+						preclude the creation and use of other identifiers and/or addresses to retrieve a representation of a
+							<a>Web Publication</a> in whole or part.</li>
+					<li>The <a href="#resources">Web Publication resources</a>.</li>
+					<li>The <a>default reading order</a> of the Web Publication.</li>
+				</ol>
+
+				<p>In addition, the infoset SHOULD include the following information:</p>
+
+				<ol>
+					<li>A <a href="#canonical-identifier">canonical identifier</a>. If assigned, this canonical identifier
+						MUST be unique to the <a>Web Publication</a>.</li>
+					<li>The table of contents.</li>
 				</ol>
 
 				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
@@ -359,8 +387,8 @@
 					mapping to an address.</p>
 
 				<p>If the canonical identifier is a URL, it MAY be used as the value of the <code>href</code> attribute of a
-					"canonical" <code>link</code> element&#160;[[!rfc6596]] (i.e., a <code>link</code> element with the attribute
-						<code>rel="canonical"</code> specified on it).</p>
+					"canonical" <code>link</code> element&#160;[[!rfc6596]] (i.e., a <code>link</code> element with the
+					attribute <code>rel="canonical"</code> specified on it).</p>
 			</section>
 
 			<section id="address">
@@ -376,10 +404,12 @@
 				<div class="ednote">Placeholder for explanation of enumerating the resources in a publication.</div>
 			</section>
 
-			<section id="reading-order">
-				<h3>Reading Order</h3>
+			<section id="default-reading-order">
+				<h3>Default Reading Order</h3>
 
-				<div class="ednote">Placeholder for explanation of listing the default reading order of a publication. </div>
+				<p>The infoset MUST include a list of the <a>Primary Resources</a> of the Web Publication.</p>
+
+				<p>It SHOULD list <a>Secondary Resources</a>, although the list is not required to be exhaustive.</p>
 			</section>
 
 			<section id="table-of-contents">
