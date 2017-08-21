@@ -287,20 +287,17 @@
 
 				<ol>
 					<li>The <a href="#title">title</a> (or "name") of the Web Publication.</li>
-					<li>The default (natural) language of the Web Publication.</li>
-					<li>The <a href="#address">address</a> of the Web Publication. The availability of this address does not
-						preclude the creation and use of other identifiers and/or addresses to retrieve a representation of a
-							<a>Web Publication</a> in whole or part.</li>
+					<li>The <a href="#language">default (natural) language</a> of the Web Publication.</li>
+					<li>The <a href="#address">address</a> of the Web Publication.</li>
 					<li>The <a href="#resources">Web Publication resources</a>.</li>
-					<li>The <a>default reading order</a> of the Web Publication.</li>
+					<li>The <a href="#default-reading-order">default reading order</a> of the Web Publication.</li>
 				</ol>
 
 				<p>In addition, the infoset SHOULD include the following information:</p>
 
 				<ol>
-					<li>A <a href="#canonical-identifier">canonical identifier</a>. If assigned, this canonical identifier
-						MUST be unique to the <a>Web Publication</a>.</li>
-					<li>The table of contents.</li>
+					<li>A <a href="#canonical-identifier">canonical identifier</a>.</li>
+					<li>The <a href="#table-of-contents">table of contents</a>.</li>
 				</ol>
 
 				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
@@ -389,6 +386,8 @@
 				<p>If the canonical identifier is a URL, it MAY be used as the value of the <code>href</code> attribute of a
 					"canonical" <code>link</code> element&#160;[[!rfc6596]] (i.e., a <code>link</code> element with the
 					attribute <code>rel="canonical"</code> specified on it).</p>
+
+				<p>If assigned, this canonical identifier MUST be unique to the <a>Web Publication</a>.</p>
 			</section>
 
 			<section id="address">
@@ -396,20 +395,23 @@
 
 				<p>A Web Publication's address is a <a>URL</a> that refers to a <a>Web Publication</a> and enables the
 					retrieval of a representation of the <a>manifest</a> of the Web Publication.</p>
+
+				<p>The availability of this address does not preclude the creation and use of other identifiers and/or
+					addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
 			</section>
 
 			<section id="resources">
 				<h3>Resources</h3>
 
-				<div class="ednote">Placeholder for explanation of enumerating the resources in a publication.</div>
+				<p>The infoset MUST include a list of the <a>Primary Resources</a> of the Web Publication.</p>
+
+				<p>It SHOULD list <a>Secondary Resources</a>, although the list is not required to be exhaustive.</p>
 			</section>
 
 			<section id="default-reading-order">
 				<h3>Default Reading Order</h3>
 
-				<p>The infoset MUST include a list of the <a>Primary Resources</a> of the Web Publication.</p>
-
-				<p>It SHOULD list <a>Secondary Resources</a>, although the list is not required to be exhaustive.</p>
+				<p>The default reading order MUST include at least one <a>primary resource</a>.</p>
 			</section>
 
 			<section id="table-of-contents">
