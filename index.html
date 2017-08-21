@@ -7,6 +7,7 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
+		  // <![CDATA[
           var respecConfig = {
               wg: "Publishing Working Group",
               specStatus: "ED",
@@ -14,11 +15,10 @@
             //   edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
-      			      name: "Matt Garrish",
-                      url: 'http://www.daisy.org',
-                      company: "DAISY Consortium",
-                      companyURI: "http://www.daisy.org",
-                      w3cid: 51655
+      			      "name": "Matt Garrish",
+                      "company": "DAISY Consortium",
+                      "companyURL": "http://www.daisy.org",
+                      "w3cid": 51655
                   }
               ],
               processVersion: 2017,
@@ -57,6 +57,7 @@
             //   ],
               localBiblio: biblio
           };
+          // ]]>
       </script>
 	</head>
 	<body>
@@ -74,10 +75,10 @@
 				<li>...</li>
 			</ul>
 		</section>
-		<section id="intro" class="informative">
+		<section id="intro">
 			<h2>Introduction</h2>
 
-			<section>
+			<section id="background" class="informative">
 				<h3>Background</h3>
 
 				<p>For millenia now, the written word has been the primary means of encoding and sharing ideas and
@@ -100,7 +101,7 @@
 					accessibility, addressability, and interconnectedness of the Open Web Platform.</p>
 			</section>
 
-			<section id="scope">
+			<section id="scope" class="informative">
 				<h3>Scope</h3>
 
 				<p>This specification only defines requirements for the production and rendering of valid <a>Web
