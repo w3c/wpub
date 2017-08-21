@@ -300,35 +300,15 @@
 					<li>The <a href="#table-of-contents">table of contents</a>.</li>
 				</ul>
 
-				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
-					identifier link relation [[link-relation]].</div>
-
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
-					open. The issues may usually lead to a "MUST" instead of a "SHOULD" in the list above.</p>
+					open that could change whether an item is required or recommended. See the following sections for more
+					information.</p>
 
 				<p class="issue" data-number="15">Ignoring issues such as location, serialization, etc. What is the minimum
-					viable manifest?</p>
-
-				<div class="issue" data-number="20">
-					<p>(See also <a href="https://github.com/w3c/wpub/issues/24">issue #24</a>.) The question is whether the
-						WP MUST include a title or not.</p>
-
-					<p>Note that this is the question for the <a>manifest</a>. How that information is acquired may also
-						depend on the <a href="#fallback">fallback mechanism</a>.</p>
-				</div>
+					viable manifest? (Note: this is now specifically related to the infoset.)</p>
 
 				<p class="issue" data-number="21">Whether the minimum manifest must include any metadata, or a specific slot
-					to handle metadata.</p>
-
-				<p class="issue" data-number="22">The discussion led to the question whether the manifest MUST list all
-						<a>Secondary resources</a> or not. In this sense, this became a duplicate of <a
-						href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question.</p>
-
-				<p class="issue" data-number="23">The question is whether the manifest MUST list all <a>Secondary
-						resources</a> or not.</p>
-
-				<p class="issue" data-number="29">Should Natural Language be Required for the Publication for WCAG 2
-					Compliance?</p>
+					to handle metadata. (Note: this is now more specifically related to the infoset.)</p>
 
 				<!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance?</p> -->
 			</section>
@@ -356,6 +336,14 @@
 						for a Web Publication based on the above rules. Authors are encouraged to ensure that their manifest
 						contains such a title, or one is provided in one of the two steps above.</p>
 				</div>
+
+				<div class="issue" data-number="20">
+					<p>(See also <a href="https://github.com/w3c/wpub/issues/24">issue #24</a>.) The question is whether the
+						manifest MUST include a title or not.</p>
+
+					<p>In the current proposal, a title is required in the infoset because the user agent must create one
+						using the fallback mechanism when not present in the manifest.</p>
+				</div>
 			</section>
 
 			<section id="language">
@@ -374,6 +362,12 @@
 					<li>If the preceding steps results in an empty language tag, use the value "<code>und</code>"
 						(undetermined).</li>
 				</ol>
+
+				<div class="issue" data-number="29">
+					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
+					<p>In the current proposal, language is required in the infoset because the user agent must create one
+						using the fallback mechanism when not present in the manifest.</p>
+				</div>
 			</section>
 
 			<section id="canonical-identifier">
@@ -398,17 +392,27 @@
 
 				<p>The availability of this address does not preclude the creation and use of other identifiers and/or
 					addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
+
+				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
+					identifier link relation [[link-relation]].</div>
 			</section>
 
 			<section id="resources">
 				<h3>Resources</h3>
 
 				<p>The infoset MUST include a list of the <a>primary resources</a> of the Web Publication, regardless of
-					whether a primary resource is also used as a <a>secondary resource</a> in another context (e.g., an
-					image might be embedded in an HTML document and also be rendered directly in a user agent via a link to
-					view the raw image).</p>
+					whether a primary resource is also used as a <a>secondary resource</a> in another context (e.g., an image
+					might be embedded in an HTML document and also be rendered directly in a user agent via a link to view
+					the raw image).</p>
 
 				<p>The infoset also SHOULD list secondary resources, although the list is not required to be exhaustive.</p>
+
+				<p class="issue" data-number="22">The discussion led to the question whether the manifest/infoset MUST list
+					all <a>Secondary resources</a> or not. In this sense, this became a duplicate of <a
+						href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question.</p>
+
+				<p class="issue" data-number="23">The question is whether the manifest/infoset MUST list all <a>Secondary
+						resources</a> or not.</p>
 			</section>
 
 			<section id="default-reading-order">
@@ -471,12 +475,12 @@
 		</section>
 		<section id="security">
 			<h2>Security</h2>
-			
+
 			<div class="ednote">Placeholder for security issues.</div>
 		</section>
 		<section id="privacy">
 			<h2>Privacy</h2>
-			
+
 			<div class="ednote">Placeholder for privacy issues.</div>
 		</section>
 		<section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
