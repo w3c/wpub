@@ -425,11 +425,11 @@
 				</p>
 
 				<p>
-					If the default reading order is not specified in the <a href="#manifest">manifest</a>, but the <a href="#table-of-contents">table of content</a> is available (either as part of the <a href="#manifest">manifest</a> or retrived from among the <a>primary resources</a>), the <a>primary resources</a> listed in the table of content also provide the default reading order (multiple references to the same <a>primary resource</a> in the table of content should be disregared in favour of the first occurence of that resource).
+					If the default reading order is not specified in the <a href="#manifest">manifest</a>, but the <a href="#table-of-contents">table of contents</a> is available (either as part of the <a href="#manifest">manifest</a> or retrived from among the <a>primary resources</a>), the <a>primary resources</a> listed in that table of contents also provide the default reading order (multiple references to the same <a>primary resource</a> in the table of contents should be disregared in favor of the first occurence of that resource).
 				</p>
 
 				<p class=ednote>
-					The relationship between the default reading order and the table of content is the subject of several issues; see the list in the <a href="#table-of-contents">section on table of contents</a>. 
+					The relationship between the default reading order and the table of contents is the subject of several issues; see the list in the <a href="#table-of-contents">section on table of contents</a>. 
 				</p>
 
 			</section>
@@ -437,25 +437,25 @@
 			<section id="table-of-contents">
 				<h3>Table of Contents</h3>
 
-				<p>If the table of content is not specified in the <a href="#manifest">manifest</a>, the user agent MUST make an attempt to retrive one as follows:</p>
+				<p>If the table of contents is not specified in the <a href="#manifest">manifest</a>, the user agent MUST make an attempt to retrive one as follows:</p>
 
 				<ol>
 					<li>
-						Check, among the <a>primary resources</a> of the publication, a resource with basename <code>index.html</code> if it exists, and try to extract a <a>TOC navigation element</a>;
+						Check, among the <a>primary resources</a> of the publication, an HTML resource with basename <code>index.html</code> if it exists, and extract a <a>TOC navigation element</a> from the resource if present;
 					</li>
 					<li>
-						otherwise, locate the first HTML resource among the <a>primary resources</a> in the order provided by the <a>default reading order</a> that includes a <a>TOC navigation element</a>.
+						otherwise, locate the first HTML resource among the <a>primary resources</a> in the order provided by the <a>default reading order</a> that also includes a <a>TOC navigation element</a>, and extract it.
 					</li>
 				</ol>
 
-				<p>If such <a>TOC navigation element</a> is found, its content provides the table of content information for the Web Publication infoset. If several of those are found, only the first one is considered.</p>
+				<p>If such <a>TOC navigation element</a> is found, its content provides the table of contents information for the Web Publication infoset. If several of those are found, only the first one is considered.</p>
 
 				<p>
 					A <dfn>TOC navigation element</dfn> is an HTML <code>nav</code> element with the <code>role</code> attribute set to <code>doc-toc</code>&nbsp;[[!dpub-aria-1.0]]</p>.
 				</p>
 
 				<p class=note>
-					This process may not yield a table of content, which is in line with the fact that a table of content is not a required information in the <a href="#infoset-req">WP infoset</a>.
+					This process may not yield a table of contents, which is in line with the fact that a table of contents is not a required information in the <a href="#infoset-req">WP infoset</a>.
 				</p>
 
 				<p class="issue">
@@ -463,7 +463,7 @@
 				</p>
 
 				<p class=ednote>
-					The issue of using the HTML <code>nav</code> element as a possible encoding of the table of content is mentioned or explicitly addressed in a number of issues listed below.
+					The issue of using the HTML <code>nav</code> element as a possible encoding of the table of contents is mentioned or explicitly addressed in a number of issues listed below.
 				</p>
 
 				<p class="issue" data-number=26></p>
