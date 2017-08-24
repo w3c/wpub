@@ -202,6 +202,13 @@
 							and a <a>default reading order</a>.</p>
 					</dd>
 
+					<dt><dfn>Non-empty</dfn></dt>
+					<dd>
+						<p>For the purposes of this specification, non-empty is used to refer to an element or attribute
+							whose text content or value consists of one or more characters after whitespace normalization,
+							where whitespace normalization rules are defined per the host format.</p>
+					</dd>
+
 					<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
 					<dd>
 						<p>A primary resource is one that is presented directly by a user agent (i.e., not embedded within
@@ -288,18 +295,18 @@
 				<p>The Web Publication infoset MUST include the following information:</p>
 
 				<ul>
-					<li>The <a href="#title">title</a> (or "name") of the Web Publication.</li>
-					<li>The <a href="#language">default (natural) language</a> of the Web Publication.</li>
-					<li>The <a href="#address">address</a> of the Web Publication.</li>
-					<li>The <a href="#resources">Web Publication resources</a>.</li>
-					<li>The <a href="#default-reading-order">default reading order</a> of the Web Publication.</li>
+					<li>The <a href="#wp-address">address</a> of the Web Publication.</li>
+					<li>The <a href="#wp-resources">Web Publication resources</a>.</li>
+					<li>The <a href="#wp-default-reading-order">default reading order</a> of the Web Publication.</li>
 				</ul>
 
 				<p>In addition, the infoset SHOULD include the following information:</p>
 
 				<ul>
-					<li>A <a href="#canonical-identifier">canonical identifier</a>.</li>
-					<li>The <a href="#table-of-contents">table of contents</a>.</li>
+					<li>The <a href="#wp-title">title</a> (or "name") of the Web Publication.</li>
+					<li>The <a href="#wp-language">default (natural) language</a> of the Web Publication.</li>
+					<li>A <a href="#wp-canonical-identifier">canonical identifier</a>.</li>
+					<li>The <a href="#wp-table-of-contents">table of contents</a>.</li>
 				</ul>
 
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
@@ -315,28 +322,32 @@
 				<!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance?</p> -->
 			</section>
 
-			<section id="title">
+			<section id="wp-title">
 				<h3>Title</h3>
 
-				<p>The Web Publication's infoset requires a title.</p>
+				<p>The title provides the human-readable name of the Web Publication.</p>
 
-				<p>If a title is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one as
-					follows:</p>
+				<p>The title specified in the manifest MUST be <a>non-empty</a>.</p>
 
-				<ol>
-					<li>If the Web Publication contains at least one primary resource whose media type includes a
-							<code>title</code> element (e.g., SVG or HTML), use the title of the first instance listed in the
-						default reading order.</li>
-					<li>If the preceding step results in an empty title, or no primary resources are recognized as having a
-						title, the user agent MUST use its own algorithm to produce a title (e.g., inspect subsequent primary
-						resources or provide a placeholder title).</li>
-				</ol>
+				<p>The title MAY be omitted from the manifest when the first resource in the default reading order contains a
+						<a>non-empty</a>
+					<code>title</code> (e.g., an HTML or SVG document). In this case, a user agent MUST add this title to the
+					infoset.</p>
+
+				<p>If a user agent requires a title and one is not available in the compiled infoset, it MAY define one. This
+					specification does not mandate how such a title is created. The user agent might:</p>
+
+				<ul>
+					<li>use the non-empty title of a subsequent primary resource in the default reading order;</li>
+					<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
+					<li>use the URL of the manifest;</li>
+					<li>calculate a title using its own algorithm.</li>
+				</ul>
 
 				<div class="note">
-					<p>A user agent may not be able to produce a <a
+					<p>A user agent is not expected to produce a <a
 							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a> [[WCAG20]]
-						for a Web Publication based on the above rules. Authors are encouraged to ensure that their manifest
-						contains such a title, or one is provided in one of the two steps above.</p>
+						for a Web Publication when one is not specified.</p>
 				</div>
 
 				<div class="issue" data-number="20">
@@ -348,22 +359,34 @@
 				</div>
 			</section>
 
-			<section id="language">
+			<section id="wp-language">
 				<h3>Language</h3>
 
-				<p>The Web Publication's infoset requires the language(s) of its content be specified. The language MUST be a
-					tag that conforms to [[!BCP47]] or its successors.</p>
+				<p>The language specified in the Web Publication's infoset identifies the natural language of its
+					content.</p>
 
-				<p>If the language is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one
-					as follows:</p>
+				<p>The language MUST be a tag that conforms to [[!BCP47]] or its successors.</p>
 
-				<ol>
-					<li>If the Web Publication contains at least one primary resource whose media type allows the language to
-						be specified (e.g., SVG or HTML), use the language of the first instance listed in the default
-						reading order.</li>
-					<li>If the preceding step results in an empty language tag, use the value "<code>und</code>"
-						(undetermined).</li>
-				</ol>
+				<p>In the case of a multilingual Web Publication, the language declaration can be repeated.</p>
+
+				<p>The language MAY be omitted from the manifest when the first resource in the default reading order
+					contains a <a>non-empty</a>
+					<code>language</code> declaration (e.g., in a <code>lang</code> or <code>xml:lang</code> attribute). In
+					this case, a user agent MUST add this language to the infoset.</p>
+
+				<p>If a user agent requires the language and one is not available in the compiled infoset, it MAY define one.
+					This specification does not mandate how such a language tag is created. The user agent might:</p>
+
+				<ul>
+					<li>use the non-empty language declaration of a subsequent primary resource in the default reading
+						order;</li>
+					<li>use the value "<code>und</code>" (undetermined);</li>
+					<li>calculate the language using its own algorithm.</li>
+				</ul>
+
+				<p class="note">The language of the Web Publication does not affect the rendering of the resources it
+					contains. It is not a replacement for identifying the language of each resource as defined by its
+					format.</p>
 
 				<div class="issue" data-number="29">
 					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
@@ -372,7 +395,7 @@
 				</div>
 			</section>
 
-			<section id="canonical-identifier">
+			<section id="wp-canonical-identifier">
 				<h3>Canonical Identifier</h3>
 
 				<p>A <a>Web Publication's</a> canonical identifier is an <a>identifier</a> assigned to it by the publisher.
@@ -386,7 +409,7 @@
 				<p>If assigned, this canonical identifier MUST be unique to the <a>Web Publication</a>.</p>
 			</section>
 
-			<section id="address">
+			<section id="wp-address">
 				<h3>Address</h3>
 
 				<p>A Web Publication's address is a <a>URL</a> that refers to a <a>Web Publication</a> and enables the
@@ -399,7 +422,7 @@
 					identifier link relation [[link-relation]].</div>
 			</section>
 
-			<section id="resources">
+			<section id="wp-resources">
 				<h3>Resources</h3>
 
 				<p>The infoset MUST include a list of the <a>primary resources</a> of the Web Publication, regardless of
@@ -417,13 +440,13 @@
 						resources</a> or not.</p>
 			</section>
 
-			<section id="default-reading-order">
+			<section id="wp-default-reading-order">
 				<h3>Default Reading Order</h3>
 
 				<p>The default reading order MUST include at least one <a>primary resource</a>.</p>
 			</section>
 
-			<section id="table-of-contents">
+			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
 				<div class="ednote">Placeholder for identifying table of contents - whether embedded or by reference.</div>
