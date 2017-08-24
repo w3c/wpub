@@ -427,23 +427,24 @@
 			<section id="table-of-contents">
 				<h3>Table of Contents</h3>
 
-				<p>If the table of contents is not specified in the <a href="#manifest">manifest</a>, the user agent MUST make an attempt to retrive one as follows:</p>
 
-				<ol>
-					<li>
-						Check, among the <a>primary resources</a> of the publication, an HTML resource with basename <code>index.html</code> if it exists, and extract a <a>TOC navigation element</a> from the resource if present;
-					</li>
-					<li>
-						otherwise, locate the first HTML resource among the <a>primary resources</a> in the order provided by the <a>default reading order</a> that also includes a <a>TOC navigation element</a>, and extract it.
-					</li>
-				</ol>
-
-				<p>If such <a>TOC navigation element</a> is found, its content provides the table of contents information for the Web Publication infoset. If several of those are found, only the first one is considered.</p>
-
+				<p>The table of contents is recommended in the infoset.</p>
+				
 				<p>
-					A <dfn>TOC navigation element</dfn> is an HTML <code>nav</code> element with the <code>role</code> attribute set to <code>doc-toc</code>&nbsp;[[!dpub-aria-1.0]].</p>
+					An author MAY omit the table of contents from the <a href="#manifest">manifest</a> if it is included in an HTML <code>nav</code> element identified by the role <code>doc-toc</code>&nbsp;[[!dpub-aria-1.0]]. 
+					This <code>nav</code> element MUST be in a file named <code>index.html</code> or in the first HTML resource in the <a>default reading order</a> (if applicable). In this case, the user agent MUST use this navigation element as the table of contents for the Web Publication.
+				</p>
+				
+				<p>
+					If a user agent requires a table of contents and one is not specified, it MAY provide one of its own making. This specification does not mandate how such a table of contents is created. The user agent might:
 				</p>
 
+				<ol>
+					<li>attempt to locate table of contents nav element in a subsequent primary resource in the default reading order;</li>
+					<li>use the titles of the primary resources in the default reading order;</li>
+					<li>calculate a table of contents using its own algorithms.</li>
+				</ol>
+				
 				<p class=note>
 					This process may not yield a table of contents, which is in line with the fact that a table of contents is not a required information in the <a href="#infoset-req">WP infoset</a>.
 				</p>
