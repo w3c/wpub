@@ -420,13 +420,30 @@
 			<section id="default-reading-order">
 				<h3>Default Reading Order</h3>
 
-				<p>The default reading order MUST include at least one <a>primary resource</a>.</p>
+				<p>
+					The default reading order MUST include at least one <a>primary resource</a>.
+				</p>
+
+				<p>
+					If the default reading order is not specified in the <a href="#manifest">manifest</a>, but the <a href="#table-of-contents">table of contents</a> is available (either as part of the <a href="#manifest">manifest</a> or retrived from among the <a>primary resources</a>), the <a>primary resources</a> listed in that table of contents also provide the default reading order (multiple references to the same <a>primary resource</a> in the table of contents should be disregared in favor of the first occurence of that resource).
+				</p>
+
+				<p class=ednote>
+					The relationship between the default reading order and the table of contents is the subject of several issues; see the list in the <a href="#table-of-contents">section on table of contents</a>. 
+				</p>
+				<p class="issue" data-number=26></p>
+				<p class="issue" data-number=35>Define the primary resources of a WP to be the files referenced in the first</p>
+				<p class="issue" data-number=36></p>
+				<p class="issue" data-number=39>There is a consensus that a Web publication must have a reading order (a list of primary resources) and must/should have a table of contents (ToC) (the main navigation entry point).</p>
+
 			</section>
 
 			<section id="table-of-contents">
 				<h3>Table of Contents</h3>
 
 				<div class="ednote">Placeholder for identifying table of contents - whether embedded or by reference.</div>
+				
+
 			</section>
 		</section>
 		<section id="manifest">
