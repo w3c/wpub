@@ -365,28 +365,25 @@
 				<p>The language specified in the Web Publication's infoset identifies the natural language of its
 					content.</p>
 
+				<p>This language is not used in the processing or rendering of the Web Publication, and is
+						<strong>not</strong> a replacement for identifying the language of each resource as defined by its
+					format. It instead allows a user agent to ability to provide supplementary enhancements, such as the
+					ability to download a custom dictionary or the preload a language-specific text-to-speech module.</p>
+
 				<p>When specified, the language MUST be a tag that conforms to [[!BCP47]] or its successors.</p>
 
 				<p>In the case of a multilingual Web Publication, the language declaration can be repeated.</p>
 
-				<p>The language MAY be omitted from the manifest when the first resource in the default reading order
-					contains a <a>non-empty</a>
-					<code>language</code> declaration (e.g., in a <code>lang</code> or <code>xml:lang</code> attribute). In
-					this case, a user agent MUST add this language to the infoset.</p>
-
-				<p>If a user agent requires the language and one is not available in the compiled infoset, it MAY define one.
-					This specification does not mandate how such a language tag is created. The user agent might:</p>
+				<p>If a user agent requires the language and one is not available in the compiled infoset, it MAY attempt to
+					determine the language. This specification does not mandate how such a language tag is created. The user
+					agent might:</p>
 
 				<ul>
-					<li>use the non-empty language declaration of a subsequent primary resource in the default reading
-						order;</li>
+					<li>use the <a>non-empty</a> language declaration of the first primary resource in the default reading
+						order that provides one;</li>
 					<li>use the value "<code>und</code>" (undetermined);</li>
 					<li>calculate the language using its own algorithm.</li>
 				</ul>
-
-				<p class="note">The language of the Web Publication does not affect the rendering of the resources it
-					contains. It is not a replacement for identifying the language of each resource as defined by its
-					format.</p>
 
 				<div class="issue" data-number="29">
 					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
@@ -418,8 +415,8 @@
 				<p>The availability of this address does not preclude the creation and use of other identifiers and/or
 					addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
 
-				<div class="note">The Web Publication's address can also be used as value for an identifier link 
-					relation [[link-relation]].</div>
+				<div class="note">The Web Publication's address can also be used as value for an identifier link relation
+					[[link-relation]].</div>
 			</section>
 
 			<section id="wp-resources">
