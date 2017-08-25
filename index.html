@@ -329,16 +329,16 @@
 
 				<p>When specified in the manifest, the title MUST be <a>non-empty</a>.</p>
 
-				<p>The title MAY be omitted from the manifest when the first resource in the default reading order contains a
+				<!-- <p>The title MAY be omitted from the manifest when the first resource in the default reading order contains a
 						<a>non-empty</a>
 					<code>title</code> (e.g., an HTML or SVG document). In this case, a user agent MUST add this title to the
-					infoset.</p>
+					infoset.</p> -->
 
 				<p>If a user agent requires a title and one is not available in the compiled infoset, it MAY define one. This
 					specification does not mandate how such a title is created. The user agent might:</p>
 
 				<ul>
-					<li>use the non-empty title of a subsequent primary resource in the default reading order;</li>
+					<li>use the first <a>non-empty</a> <code>title</code> element found in a primary resource in the default reading order;</li>
 					<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
 					<li>use the URL of the manifest;</li>
 					<li>calculate a title using its own algorithm.</li>
