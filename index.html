@@ -171,7 +171,7 @@
 				<h3>Terminology</h3>
 
 				<p>Wherever appropriate, this document relies on terminology defined by the note on "Publishing and Linking
-					on the Web" [[!publishing-linking]]. In particular, for the following terms: <a class="externalDFN"
+					on the Web" [[!publishing-linking]], including, in particular, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a
 						class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, and <a
@@ -241,7 +241,7 @@
 
 				<ul>
 					<li>It MUST have a <a>manifest</a> that conforms to all normative requirements defined in <a
-							href="#manifest-conformance">Manifest</a>.</li>
+							href="#manifest-conformance"></a>.</li>
 				</ul>
 
 				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following
@@ -269,9 +269,9 @@
 					concrete when the user agent creates an internal representation of the information.</p>
 
 				<p>The infoset does not require a specific serialization. It is primarily compiled from a Web Publication's
-						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest">Manifest</a>. It
-					is therefore possible to express the same infoset via different manifests, although a Web Publication
-					will only have one manifest.</p>
+						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest-serialization"
+					></a>. It is therefore possible to express the same infoset via different manifests, although a Web
+					Publication will only have one manifest.</p>
 
 				<p>Although the manifest is the primary source of the infoset, some information may be obtained independent
 					of it. For example, fallback rules for properties defined in the following subsections allow a user agent
@@ -367,9 +367,10 @@
 				<ul>
 					<li>use the <a>non-empty</a> language declaration of the first primary resource in the default reading
 						order that provides one;</li>
-					<li>use the value "<code>und</code>" (undetermined);</li>
 					<li>calculate the language using its own algorithm.</li>
 				</ul>
+
+				<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
 
 				<div class="issue" data-number="29">
 					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
@@ -382,12 +383,11 @@
 				<h3>Canonical Identifier</h3>
 
 				<p>A <a>Web Publication's</a> canonical identifier is an <a>identifier</a> assigned to it by the publisher.
-					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a 1-to-1
+					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a one-to-one
 					mapping to an address.</p>
 
-				<p>If the canonical identifier is a URL, it MAY be used as the value of the <code>href</code> attribute of a
-					"canonical" <code>link</code> element&#160;[[!rfc6596]] (i.e., a <code>link</code> element with the
-					attribute <code>rel="canonical"</code> specified on it).</p>
+				<p>If the canonical identifier is a URL, it MAY be used as the <code>href</code> value of a "canonical"
+					link&#160;[[!rfc6596]] for the Web Publication in its <a>manifest</a> or in the HTTP response header.</p>
 
 				<p>If assigned, this canonical identifier MUST be unique to the <a>Web Publication</a>.</p>
 			</section>
