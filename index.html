@@ -348,25 +348,23 @@
 			<section id="wp-language">
 				<h3>Language</h3>
 
-				<p>The language specified in the Web Publication's infoset identifies the natural language of its
+				<p>The language specified in the Web Publication's infoset identifies the natural language(s) of its
 					content.</p>
 
-				<p>This language is not used in the processing or rendering of the Web Publication, and is
-						<strong>not</strong> a replacement for identifying the language of each resource as defined by its
+				<p>This language is not used in the processing or rendering of the Web Publication (including the manifest),
+					and is <strong>not</strong> a replacement for identifying the language of each resource as defined by its
 					format. It instead allows a user agent to ability to provide supplementary enhancements, such as the
 					ability to download a custom dictionary or the preload a language-specific text-to-speech module.</p>
 
 				<p>When specified, the language MUST be a tag that conforms to [[!BCP47]] or its successors.</p>
-
-				<p>In the case of a multilingual Web Publication, the language declaration can be repeated.</p>
 
 				<p>If a user agent requires the language and one is not available in the infoset, it MAY attempt to determine
 					the language. This specification does not mandate how such a language tag is created. The user agent
 					might:</p>
 
 				<ul>
-					<li>use the <a>non-empty</a> language declaration of the first primary resource in the default reading
-						order that provides one;</li>
+					<li>use the <a>non-empty</a> language declaration of the manifest;</li>
+					<li>use the first non-empty language declaration for a <a>primary resource</a>;</li>
 					<li>calculate the language using its own algorithm.</li>
 				</ul>
 
@@ -386,10 +384,12 @@
 					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a one-to-one
 					mapping to an address.</p>
 
-				<p>If the canonical identifier is a URL, it MAY be used as the <code>href</code> value of a "canonical"
-					link&#160;[[!rfc6596]] for the Web Publication in its <a>manifest</a> or in the HTTP response header.</p>
-
 				<p>If assigned, this canonical identifier MUST be unique to the <a>Web Publication</a>.</p>
+
+				<p class="note">If the canonical identifier is a URL, it can be used as the target of a "canonical"
+					link&#160;[[!rfc6596]] (e.g., a [[html]] <code>link</code> element whose <code>rel</code> attribute has
+					the value <code>canonical</code> or a Link HTTP header field [[rfc5988]] similarly identified).</p>
+
 			</section>
 
 			<section id="wp-address">
