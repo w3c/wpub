@@ -171,22 +171,13 @@
 				<h3>Terminology</h3>
 
 				<p>Wherever appropriate, this document relies on terminology defined by the note on "Publishing and Linking
-					on the Web" [[!publishing-linking]]. In particular, for the following terms: <a class="externalDFN"
+					on the Web" [[!publishing-linking]], including, in particular, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a
 						class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, and <a
 						class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-address">address</a>.</p>
 
 				<dl>
-					<dt><dfn>Default Reading Order</dfn></dt>
-					<dd>
-						<p>The default reading order is a specific progression through one or more <a>primary resources</a>
-							defined in the <a>manifest</a> by the author of a <a>Web Publication</a>.</p>
-						<p>A user might follow alternative pathways through the content, but in the absence of such
-							interaction the default reading order defines the expected progression from one primary resource
-							to the next.</p>
-					</dd>
-
 					<dt><dfn>Identifier</dfn></dt>
 					<dd>
 						<p>An identifier is metadata that can be used to refer to a <a class="externalDFN"
@@ -202,16 +193,22 @@
 							and a <a>default reading order</a>.</p>
 					</dd>
 
+					<dt><dfn>Non-empty</dfn></dt>
+					<dd>
+						<p>For the purposes of this specification, non-empty is used to refer to an element, attribute or
+							property whose text content or value consists of one or more characters after whitespace
+							normalization, where whitespace normalization rules are defined per the host format.</p>
+					</dd>
+
 					<dt><dfn data-lt="Primary Resources">Primary Resource</dfn></dt>
 					<dd>
-						<p>A primary resource is one that is presented directly by a user agent (i.e., not embedded within
-							another).</p>
+						<p>A primary resource is one that is listed in the <a>default reading order</a>.</p>
 					</dd>
 
 					<dt><dfn data-lt="Secondary Resources">Secondary Resource</dfn></dt>
 					<dd>
-						<p>A secondary resource is one that is required for the processing or rendering of a <a>primary
-								resource</a>.</p>
+						<p>A secondary resource is one that is required for the processing or rendering of a <a>Web
+								Publication</a>.</p>
 					</dd>
 
 					<dt><dfn>URL</dfn></dt>
@@ -244,7 +241,7 @@
 
 				<ul>
 					<li>It MUST have a <a>manifest</a> that conforms to all normative requirements defined in <a
-							href="#manifest-conformance">Manifest</a>.</li>
+							href="#manifest-conformance"></a>.</li>
 				</ul>
 
 				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following
@@ -272,9 +269,9 @@
 					concrete when the user agent creates an internal representation of the information.</p>
 
 				<p>The infoset does not require a specific serialization. It is primarily compiled from a Web Publication's
-						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest">Manifest</a>. It
-					is therefore possible to express the same infoset via different manifests, although a Web Publication
-					will only have one manifest.</p>
+						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest-serialization"
+					></a>. It is therefore possible to express the same infoset via different manifests, although a Web
+					Publication will only have one manifest.</p>
 
 				<p>Although the manifest is the primary source of the infoset, some information may be obtained independent
 					of it. For example, fallback rules for properties defined in the following subsections allow a user agent
@@ -288,18 +285,18 @@
 				<p>The Web Publication infoset MUST include the following information:</p>
 
 				<ul>
-					<li>The <a href="#title">title</a> (or "name") of the Web Publication.</li>
-					<li>The <a href="#language">default (natural) language</a> of the Web Publication.</li>
-					<li>The <a href="#address">address</a> of the Web Publication.</li>
-					<li>The <a href="#resources">Web Publication resources</a>.</li>
-					<li>The <a href="#default-reading-order">default reading order</a> of the Web Publication.</li>
+					<li>The <a href="#wp-address">address</a> of the Web Publication.</li>
+					<li>The <a href="#wp-resources">Web Publication resources</a>.</li>
+					<li>The <a href="#wp-default-reading-order">default reading order</a> of the Web Publication.</li>
 				</ul>
 
 				<p>In addition, the infoset SHOULD include the following information:</p>
 
 				<ul>
-					<li>A <a href="#canonical-identifier">canonical identifier</a>.</li>
-					<li>The <a href="#table-of-contents">table of contents</a>.</li>
+					<li>The <a href="#wp-title">title</a> (or "name") of the Web Publication.</li>
+					<li>The <a href="#wp-language">default (natural) language</a> of the Web Publication.</li>
+					<li>A <a href="#wp-canonical-identifier">canonical identifier</a>.</li>
+					<li>The <a href="#wp-table-of-contents">table of contents</a>.</li>
 				</ul>
 
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
@@ -315,28 +312,28 @@
 				<!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance?</p> -->
 			</section>
 
-			<section id="title">
+			<section id="wp-title">
 				<h3>Title</h3>
 
-				<p>The Web Publication's infoset requires a title.</p>
+				<p>The title provides the human-readable name of the Web Publication.</p>
 
-				<p>If a title is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one as
-					follows:</p>
+				<p>When specified in the manifest, the title MUST be <a>non-empty</a>.</p>
 
-				<ol>
-					<li>If the Web Publication contains at least one primary resource whose media type includes a
-							<code>title</code> element (e.g., SVG or HTML), use the title of the first instance listed in the
-						default reading order.</li>
-					<li>If the preceding step results in an empty title, or no primary resources are recognized as having a
-						title, the user agent MUST use its own algorithm to produce a title (e.g., inspect subsequent primary
-						resources or provide a placeholder title).</li>
-				</ol>
+				<p>If a user agent requires a title and one is not available in the infoset, it MAY create one. This
+					specification does not mandate how such a title is created. The user agent might:</p>
+
+				<ul>
+					<li>use the first <a>non-empty</a>
+						<code>title</code> element found in a primary resource in the default reading order;</li>
+					<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
+					<li>use the URL of the manifest;</li>
+					<li>calculate a title using its own algorithm.</li>
+				</ul>
 
 				<div class="note">
-					<p>A user agent may not be able to produce a <a
+					<p>A user agent is not expected to produce a <a
 							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a> [[WCAG20]]
-						for a Web Publication based on the above rules. Authors are encouraged to ensure that their manifest
-						contains such a title, or one is provided in one of the two steps above.</p>
+						for a Web Publication when one is not specified.</p>
 				</div>
 
 				<div class="issue" data-number="20">
@@ -348,22 +345,30 @@
 				</div>
 			</section>
 
-			<section id="language">
+			<section id="wp-language">
 				<h3>Language</h3>
 
-				<p>The Web Publication's infoset requires the language(s) of its content be specified. The language MUST be a
-					tag that conforms to [[!BCP47]] or its successors.</p>
+				<p>The language specified in the Web Publication's infoset identifies the natural language(s) of its
+					content.</p>
 
-				<p>If the language is not specified in the <a href="#manifest">manifest</a>, the user agent MUST provide one
-					as follows:</p>
+				<p>This language is not used in the processing or rendering of the Web Publication (including the manifest),
+					and is <strong>not</strong> a replacement for identifying the language of each resource as defined by its
+					format. It instead allows a user agent to ability to provide supplementary enhancements, such as the
+					ability to download a custom dictionary or the preload a language-specific text-to-speech module.</p>
 
-				<ol>
-					<li>If the Web Publication contains at least one primary resource whose media type allows the language to
-						be specified (e.g., SVG or HTML), use the language of the first instance listed in the default
-						reading order.</li>
-					<li>If the preceding step results in an empty language tag, use the value "<code>und</code>"
-						(undetermined).</li>
-				</ol>
+				<p>When specified, the language MUST be a tag that conforms to [[!BCP47]] or its successors.</p>
+
+				<p>If a user agent requires the language and one is not available in the infoset, it MAY attempt to determine
+					the language. This specification does not mandate how such a language tag is created. The user agent
+					might:</p>
+
+				<ul>
+					<li>use the <a>non-empty</a> language declaration of the manifest;</li>
+					<li>use the first non-empty language declaration for a <a>primary resource</a>;</li>
+					<li>calculate the language using its own algorithm.</li>
+				</ul>
+
+				<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
 
 				<div class="issue" data-number="29">
 					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
@@ -372,21 +377,22 @@
 				</div>
 			</section>
 
-			<section id="canonical-identifier">
+			<section id="wp-canonical-identifier">
 				<h3>Canonical Identifier</h3>
 
 				<p>A <a>Web Publication's</a> canonical identifier is an <a>identifier</a> assigned to it by the publisher.
-					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a 1-to-1
+					It SHOULD be an <a href="#pub-address">address</a>, but, if not, it MUST be possible to make a one-to-one
 					mapping to an address.</p>
 
-				<p>If the canonical identifier is a URL, it MAY be used as the value of the <code>href</code> attribute of a
-					"canonical" <code>link</code> element&#160;[[!rfc6596]] (i.e., a <code>link</code> element with the
-					attribute <code>rel="canonical"</code> specified on it).</p>
-
 				<p>If assigned, this canonical identifier MUST be unique to the <a>Web Publication</a>.</p>
+
+				<p class="note">If the canonical identifier is a URL, it can be used as the target of a "canonical"
+					link&#160;[[!rfc6596]] (e.g., a [[html]] <code>link</code> element whose <code>rel</code> attribute has
+					the value <code>canonical</code> or a Link HTTP header field [[rfc5988]] similarly identified).</p>
+
 			</section>
 
-			<section id="address">
+			<section id="wp-address">
 				<h3>Address</h3>
 
 				<p>A Web Publication's address is a <a>URL</a> that refers to a <a>Web Publication</a> and enables the
@@ -395,11 +401,11 @@
 				<p>The availability of this address does not preclude the creation and use of other identifiers and/or
 					addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
 
-				<div class="note">The Web Publication's <a href="#pub-address">address</a> can also be used as value for an
-					identifier link relation [[link-relation]].</div>
+				<div class="note">The Web Publication's address can also be used as value for an identifier link relation
+					[[link-relation]].</div>
 			</section>
 
-			<section id="resources">
+			<section id="wp-resources">
 				<h3>Resources</h3>
 
 				<p>The infoset MUST include a list of the <a>primary resources</a> of the Web Publication, regardless of
@@ -417,16 +423,82 @@
 						resources</a> or not.</p>
 			</section>
 
-			<section id="default-reading-order">
+			<section id="wp-default-reading-order">
 				<h3>Default Reading Order</h3>
 
+				<p>The <dfn>default reading order</dfn> is a specific progression through the <a>primary resources</a>.</p>
+
+				<p>A user might follow alternative pathways through the content, but in the absence of such interaction the
+					default reading order defines the expected progression from one primary resource to the next.</p>
+
 				<p>The default reading order MUST include at least one <a>primary resource</a>.</p>
+
+				<p>The default reading order is either specified directly in the manifest or a link is provided to an
+					[[!html]] <code>nav</code> element whose list of links are processed to create one.</p>
+
+				<p>The process for extracting a default reading order from a <code>nav</code> element are as follows:</p>
+
+				<ol>
+					<li>extract a list of resource paths referenced from the <code>href</code> attribute of all
+							<code>a</code> elements;</li>
+					<li>strip any fragment identifiers from the references;</li>
+					<li>resolve all relative paths to full URLs;</li>
+					<li>remove all consecutive references to the same resource, leaving only the first.</li>
+				</ol>
+
+				<p>If a user agent requires a default reading order and one is not provided in the infoset, it MAY attempt to
+					construct one. This specification does not mandate how such a default reading order is created. The user
+					agent might:</p>
+
+				<ul>
+					<li>use only the resource the user accessed to reach the manifest;</li>
+					<li>search the list of resources for a <code>nav</code> element to use;</li>
+					<li>calculate the default reading order using its own algorithm.</li>
+				</ul>
+
+				<p class="issue" data-number="26"></p>
+				<p class="issue" data-number="35">Define the primary resources of a Web Publication to be the files
+					referenced in the first</p>
+				<p class="issue" data-number="36"></p>
+				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order (a
+					list of primary resources) and must/should have a table of contents (the main navigation entry
+					point).</p>
 			</section>
 
-			<section id="table-of-contents">
+			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
-				<div class="ednote">Placeholder for identifying table of contents - whether embedded or by reference.</div>
+				<p>The table of contents provides access to major sections of the Web Publication. There are no requirements
+					on the completeness of the table of contents, except that, when specified, it MUST link to at least one
+					primary resource.</p>
+
+				<p>The table of contents is either specified directly in the manifest or a link is provided to an [[!html]]
+						<code>nav</code> element containing one.</p>
+
+				<p> If a user agent requires a table of contents and one is not specified, it MAY construct one. This
+					specification does not mandate how such a table of contents is created. The user agent might: </p>
+
+				<ol>
+					<li>attempt to locate a table of contents in a primary resource (e.g., that has the <code>role</code>
+						attribute value <code>doc-toc</code>);</li>
+					<li>use the titles of the primary resources in the default reading order;</li>
+					<li>calculate a table of contents using its own algorithms.</li>
+				</ol>
+
+				<p class="issue">This question arises only if this mechanism is accepted: the question is whether a table of
+					contents navigation element can refer, via links, to any resource that is <em>not</em> listed as a
+						<a>primary resource</a>.</p>
+
+				<p class="ednote">The issue of using the HTML <code>nav</code> element as a possible encoding of the table of
+					contents is mentioned or explicitly addressed in a number of issues listed below.</p>
+
+				<p class="issue" data-number="26"></p>
+				<p class="issue" data-number="35">Define the primary resources of a Web Publication to be the files
+					referenced in the first</p>
+				<p class="issue" data-number="36"></p>
+				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order (a
+					list of primary resources) and must/should have a table of contents (the main navigation entry
+					point).</p>
 			</section>
 		</section>
 		<section id="manifest">
