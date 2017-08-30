@@ -379,6 +379,10 @@
 					if not, it MUST be possible to make a one-to-one mapping to an address (e.g., a DOI can be resolved to a
 					URL via a DOI resolver).</p>
 
+				<p>The canonical identifier differs from the mandatory address in its permanence. A Web Publication's address
+					could change, for example, but the canonical identifier is expected to still provide a way of locating
+					the new location (e.g., a DOI registry could be updated with the new URL).</p>
+
 				<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication. Ensuring
 					uniqueness is outside the scope of this specification, however. The actual uniqueness achievable depends
 					on such factors as the conventions of the identifier scheme used and the degree of control over
@@ -388,6 +392,8 @@
 					link&#160;[[!rfc6596]] (e.g., a [[html]] <code>link</code> element whose <code>rel</code> attribute has
 					the value <code>canonical</code> or a Link HTTP header field [[rfc5988]] similarly identified).</p>
 
+				<p class="issue" data-number="56">The question is whether a canonical identifier is necessary to call out
+					explicitly in the infoset, or whether it is/can be handled by other metadata.</p>
 			</section>
 
 			<section id="wp-address">
@@ -406,10 +412,7 @@
 			<section id="wp-resources">
 				<h3>Resources</h3>
 
-				<p>The infoset MUST include a list of the <a>primary resources</a> of the Web Publication, regardless of
-					whether a primary resource is also used as a <a>secondary resource</a> in another context (e.g., an image
-					might be embedded in an HTML document and also be rendered directly in a user agent via a link to view
-					the raw image).</p>
+				<p>The infoset MUST include a list of the <a>primary resources</a> of the Web Publication.</p>
 
 				<p>The infoset also SHOULD list secondary resources, although the list is not required to be exhaustive.</p>
 
