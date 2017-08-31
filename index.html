@@ -374,19 +374,24 @@
 			<section id="wp-canonical-identifier">
 				<h3>Canonical Identifier</h3>
 
-				<p>A <a>Web Publication's</a> canonical identifier is an <a>identifier</a> that designates and resolves to
-					the preferred version of the Web Publication. The canonical identifier SHOULD be an <a>address</a>, but,
-					if not, it MUST be possible to make a one-to-one mapping to an address (e.g., a DOI can be resolved to a
-					URL via a DOI resolver).</p>
+				<p>A <a>Web Publication's</a>
+					<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of the Web
+					Publication. The canonical identifier SHOULD be an <a>address</a>, but, if not, it MUST be possible to
+					make a one-to-one mapping to an address (e.g., a DOI can be resolved to a URL via a DOI resolver).</p>
 
-				<p>The canonical identifier differs from the mandatory address in its permanence. A Web Publication's address
-					could change, for example, but the canonical identifier is expected to still provide a way of locating
-					the new location (e.g., a DOI registry could be updated with the new URL).</p>
+				<p>If a Web Publication is hosted at more than one address, this identifier allows a user agent to identify
+					the shared relationship between the versions and to determine which of the available addresses is
+					primary.</p>
 
-				<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication. Ensuring
-					uniqueness is outside the scope of this specification, however. The actual uniqueness achievable depends
-					on such factors as the conventions of the identifier scheme used and the degree of control over
-					assignment of identifiers.</p>
+				<p>The canonical identifier is also intended to provide a measure of permanence above and beyond the Web
+					Publication's address. Even if a Web Publication is permanently relocated to a new address, for example,
+					the canonical identifier will provide a way of locating the new location (e.g., a DOI registry could be
+					updated with the new URL, or a redirect could be added to the URL of the canonical identifier).</p>
+
+				<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication,
+					independent of its address(es). Ensuring uniqueness is outside the scope of this specification, however.
+					The actual uniqueness achievable depends on such factors as the conventions of the identifier scheme used
+					and the degree of control over assignment of identifiers.</p>
 
 				<p class="note">If the canonical identifier is a URL, it can be used as the target of a "canonical"
 					link&#160;[[!rfc6596]] (e.g., a [[html]] <code>link</code> element whose <code>rel</code> attribute has
