@@ -302,13 +302,8 @@
 					open that could change whether an item is required or recommended. See the following sections for more
 					information.</p>
 
-				<p class="issue" data-number="15">Ignoring issues such as location, serialization, etc. What is the minimum
-					viable manifest? (Note: this is now specifically related to the infoset.)</p>
-
 				<p class="issue" data-number="21">Whether the minimum manifest must include any metadata, or a specific slot
 					to handle metadata. (Note: this is now more specifically related to the infoset.)</p>
-
-				<!-- <p class = "issue" data-number="30">Should Title be Required for the Publication for WCAG 2 Compliance?</p> -->
 			</section>
 
 			<section id="wp-title">
@@ -333,11 +328,6 @@
 					<p>A user agent is not expected to produce a <a
 							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a> [[WCAG20]]
 						for a Web Publication when one is not specified.</p>
-				</div>
-
-				<div class="issue" data-number="20">
-					<p>(See also <a href="https://github.com/w3c/wpub/issues/24">issue #24</a>.) The question is whether the
-						manifest MUST include a title or not.</p>
 				</div>
 			</section>
 
@@ -366,8 +356,9 @@
 
 				<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
 
-				<div class="issue" data-number="29">
-					<p>The question is whether the manifest MUST include the language(s) of the content or not.</p>
+				<div class="issue" data-number="53">
+					<p>The question is whether the language declared for the manifest content is the same as the
+						language of the publication, and how to deal with multilingual publications.</p>
 				</div>
 			</section>
 
@@ -462,10 +453,8 @@
 					<li>calculate the default reading order using its own algorithm.</li>
 				</ul>
 
-				<p class="issue" data-number="26"></p>
 				<p class="issue" data-number="35">Define the primary resources of a Web Publication to be the files
 					referenced in the first</p>
-				<p class="issue" data-number="36"></p>
 				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order (a
 					list of primary resources) and must/should have a table of contents (the main navigation entry
 					point).</p>
@@ -498,10 +487,8 @@
 				<p class="ednote">The issue of using the HTML <code>nav</code> element as a possible encoding of the table of
 					contents is mentioned or explicitly addressed in a number of issues listed below.</p>
 
-				<p class="issue" data-number="26"></p>
 				<p class="issue" data-number="35">Define the primary resources of a Web Publication to be the files
 					referenced in the first</p>
-				<p class="issue" data-number="36"></p>
 				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order (a
 					list of primary resources) and must/should have a table of contents (the main navigation entry
 					point).</p>
@@ -537,12 +524,10 @@
 			<section id="manifest-serialization">
 				<h3>Serialization</h3>
 
-				<p class="issue" data-number="7">Format of the Manifest (JSON, XML, embedded into HTML, etc.).</p>
 				<p class="issue" data-number="25"></p>
-				<p class="issue" data-number="26">Should the table of contents be a separate HTML file or is the listing of
-					primary resources in the manifest an implicit table of contents?</p>
 				<p class="issue" data-number="32"></p>
 			</section>
+			
 			<section id="manifest-linking">
 				<h2>Linking to a Manifest</h2>
 
@@ -554,7 +539,7 @@
 			</section>
 		</section>
 		<section id="lifecycle">
-			<h2>Web Publication Lifecycle</h2>
+			<h2>Establishing a Web Publication</h2>
 
 			<section id="lifecyle-obtain-manifest">
 				<h3>Obtaining the manifest</h3>
