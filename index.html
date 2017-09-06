@@ -88,8 +88,15 @@
 	</head>
 	<body>
 		<section id="abstract">
-			<p>This specification defines digital publishing based on a fully native representation of publications within
-				the Open Web Platform.</p>
+			<p>This specification defines an infoset that describes the structure and metadata of web publications, 
+			so that user agents or developers may create user experiences well-suited to reading publications. 
+			This infoset includes the default reading order of the primary resources, a list of secondary resources, 
+			and metadata. This information is necessary to enable such behaviors as 
+			sequential navigation and offline reading.</p>
+
+			This specification also defines a serialization of this infoset in the form of a manifest, 
+			and defines rules for user agents to infer missing manifest information 
+			based on other publication resources.</p>
 		</section>
 		<section id="sotd">
 			<p>This first public working draft provides a preliminary outline of a Web Publication. Many details are under
