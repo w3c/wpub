@@ -246,15 +246,16 @@
 
 			<p class="ednote">The name "infoset" may change depending on feedback. Although this term has a different meaning
 				for individuals familiar with XML, alternatives such as "properties" and "metadata" do not fully capture the
-				nature or purpose.</p>
+				nature or purpose. See <a href="https://github.com/w3c/wpub/issues/63">issue #63</a> for discussion.</p>
 
-			<section id="infoset-overview" class="informative">
-				<h3>Overview</h3>
+			<section id="infoset-expl">
+				<h3>Explanation</h3>
 
-				<p>A Web Publication is defined by a set of properties and features known as its information set (infoset).
-					The infoset is both abstract and concrete. It is abstract in the sense that it represents a set of
-					information that a user agent has to be able to compile about the Web Publication, but it also becomes
-					concrete when the user agent creates an internal representation of the information.</p>
+				<p>A Web Publication is defined by a set of properties known as its <dfn data-lt="infoset">information
+						set</dfn> (infoset). The infoset is both abstract and concrete. It is abstract in the sense that it
+					represents a set of information that a user agent has to be able to compile about the Web Publication,
+					but it also becomes concrete when the user agent creates an internal representation of the
+					information.</p>
 
 				<p>The infoset does not require a specific serialization. It is primarily compiled from a Web Publication's
 						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest-serialization"
@@ -270,7 +271,7 @@
 			<section id="infoset-req">
 				<h3>Requirements</h3>
 
-				<p>The Web Publication infoset MUST include the following information:</p>
+				<p>The Web Publication <a>infoset</a> MUST include the following information:</p>
 
 				<ul>
 					<li>The <a href="#wp-address">address</a> of the Web Publication.</li>
@@ -302,7 +303,7 @@
 
 				<p>When specified in the manifest, the title MUST be <a>non-empty</a>.</p>
 
-				<p>If a user agent requires a title and one is not available in the infoset, it MAY create one. This
+				<p>If a user agent requires a title and one is not available in the <a>infoset</a>, it MAY create one. This
 					specification does not mandate how such a title is created. The user agent might:</p>
 
 				<ul>
@@ -323,7 +324,7 @@
 			<section id="wp-language">
 				<h3>Language</h3>
 
-				<p>The language specified in the Web Publication's infoset identifies the natural language(s) of its
+				<p>The language specified in the Web Publication's <a>infoset</a> identifies the natural language(s) of its
 					content.</p>
 
 				<p>This language is not used in the processing or rendering of the Web Publication (including the manifest),
@@ -397,8 +398,9 @@
 			<section id="wp-resources">
 				<h3>Resources</h3>
 
-				<p>The infoset MUST include a list of the Web Publication's resources, although the list is not required to
-					be exhaustive. Resources in the <a>default reading order</a> MUST be included in this list.</p>
+				<p>The <a>infoset</a> MUST include a list of the Web Publication's resources, although the list is not
+					required to be exhaustive. Resources in the <a>default reading order</a> MUST be included in this
+					list.</p>
 
 				<p class="issue" data-number="22">The discussion led to the question whether the manifest/infoset MUST list
 					all resources or not. In this sense, this became a duplicate of <a
@@ -435,9 +437,9 @@
 					<li>remove all consecutive references to the same resource, leaving only the first.</li>
 				</ol>
 
-				<p>If a user agent requires a default reading order and one is not provided in the infoset, it MAY attempt to
-					construct one. This specification does not mandate how such a default reading order is created. The user
-					agent might:</p>
+				<p>If a user agent requires a default reading order and one is not provided in the <a>infoset</a>, it MAY
+					attempt to construct one. This specification does not mandate how such a default reading order is
+					created. The user agent might:</p>
 
 				<ul>
 					<li>use only the resource the user accessed to reach the manifest;</li>
@@ -492,7 +494,7 @@
 				<h3>Overview</h3>
 
 				<p>A <a>manifest</a> is a specific serialization of a <a>Web Publication's</a>
-					<a href="#infoset">infoset</a>.</p>
+					<a>infoset</a>.</p>
 			</section>
 
 			<section id="manifest-req">
