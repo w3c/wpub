@@ -486,6 +486,29 @@
 				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order and
 					must/should have a table of contents (the main navigation entry point).</p>
 			</section>
+			<section id="wp-metadata">
+				<h3>Additional Metadata</h3>
+				<p>In addition the stated requirements the Web Publication Infoset SHOULD also provide the following publication metadata:</p>
+				<ul>
+					<li>A list of creators and, optionally, their specific roles. E.g. 'author', 'publisher', 'editor', or 'translator'.</li>
+					<li>Publication date</li>
+					<li>Modification date</li>
+					<li>Accessibility metadata</li>
+				</ul>
+				<p>Identifiers and modification dates are an important aid in the distribution and storage of portable formats (past, current, and present) so authors are urged to include this information whenever they can.</p>
+				<p>The infoset MAY also provide:</p>
+				<ul>
+					<li>A subtitle</li>
+					<li>Licensing information</li>
+					<li>Intended audience</li>
+					<li>General subject</li>
+				</ul>
+
+				<p>These items apply to the web publication in its entirety. Metadata for individual content documents should be embedded in or linked from the content documents themselves.</p>
+				<p>The Web Publication Infoset SHOULD NOT include complex, specialised, and industry-specific metadata and authors should limit the metadata included in the manifest to the items above.</p>
+				<p>If the information set does not cover the publication's needs, authors should link to external metadata files in whichever formats and schema are most commonly accepted as the authoritative metadata format for their intended audiences. They can include multiple metadata links in multiple formats, one for each intended audience, if needed.</p>
+				<p>User Agents MAY decide to support metadata extensions, other metadata schemes, or additional metadata properties if they so choose. User Agents must ignore metadata properties that they do not recognise.</p>
+			</section>
 		</section>
 		<section id="manifest">
 			<h2>Manifest</h2>
@@ -531,6 +554,23 @@
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
 					associate the manifest with the other publication resources.</p>
+			</section>
+
+			<section id="manifest-linking-from">
+				<h3>Linking <em>from</em> a Manifest</h3>
+				<p>The manifest serialization MUST provide a general linking mechanism for defining a relationship between the web publication and other resources on the web as well as the type of those relationships.</p>
+				<p>This mechanism is used in to express many parts of the web publication's infoset, including but not limited to:</p>
+				<ul>
+					<li><a href="#wp-canonical-identifier">Canonical identifier</a></li>
+					<li><a href="#wp-table-of-contents">External Table of Contents</a></li>
+					<li><a href="#wp-metadata">External metadata</a></li>
+				</ul>
+				<p>This linking mechanism may also be used to express other common link structures on the open web. For example:</p>
+				<ul>
+					<li>Distribution feeds such as <a href="http://opds-spec.org/specs/opds-catalog-1-1">OPDS</a> or <a href="https://tools.ietf.org/html/rfc4287">Atom</a></li>
+					<li>Alternate versions of the publication</li>
+					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a></li>
+				</ul>
 			</section>
 		</section>
 		<section id="lifecycle">
