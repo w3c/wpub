@@ -601,8 +601,8 @@
 				<p class="ednote">Placeholder for inter-publication search.</p>
 			</section>
 
-			<section id="enh-pagination">
-				<h3>Layout and Pagination</h3>
+			<section id="Layout">
+				<h3>Layout</h3>
 				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web content.
 				[[!HTML]] (including XHTML) documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>,
 				[[!SVG]] files are rendered as normally expected of that format, and so on.
@@ -713,6 +713,93 @@
 					or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see [[CSS-DEVICE-ADAPT]]),
 					or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See [[CSS-PAGE-3]]).
 					This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).
+					</div>
+				</section>
+				<section id="enh-pagination">
+					<h4>Paginated Layout</h4>
+
+					<p>When a User Agent renders a <a>Web Publication</a> in a paginated layout,
+					it must lay out each document in the <a>default reading order</a> sequentially,
+					with the last page of a resource being followed by the first page of the subsequent one.</p>
+
+					<div class=issue>
+						<p>To avoid having unstyleable blank pages in the middle of the document,
+						if the preceding resource ended on a left page (resp. right page),
+						the subsequent one should start on a right page (resp. left page)
+						even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]])
+						would otherwise lead to starting on the opposite page;
+						It should also be possible to use the <a href="">break-before</a> property (See [[!CSS-BREAK-3]])
+						to force the content to resume on the opposite side if that was desired by the author.</p>
+
+						<p>[[CSS-PAGE-3] needs to be amended to describe this exception to the general behavior
+						when dealing with collections of documents instead of individual documents.</p>
+					</div>
+
+					<div class=issue>
+						<p>How is that supposed to work when subsequent resources have opposite
+						<a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]]) direction,
+						for instance due to different a different writing mode?
+						This is not necessarily a problem from a layout point of view,
+						as each page is independent,
+						but from an UI point of view, if swiping left means next page until the end of
+						one chapter, and starts meaning previous page in the next chapter because
+						we've switched from English to Hebrew, this is going to be horribly confusing.
+					</div>
+
+					<div class=issue>
+						<p>Should any of the above be normative,
+						or should we leave this up to User Agents to explore,
+						and only standardize if and when a clear winning approach emerges?
+					</div>
+
+					<div class=issue>
+						<p>[[CSS-PAGE-3]] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a>
+						are not automatically reset to at the beginning of each new resource belonging to the same
+						<a>Web Publication</a>.</p>
+					</div>
+
+					<div class="note">
+						<p>Pagination, like any other aspect of layout, is governed by the various CSS specifications,
+						and is an integrated part of supporting CSS, rather than an isolated standalone feature.
+						Nonetheless, a few specification are especially relevant for User Agents
+						that wish to provide high quality support for paginated media:
+						<dl>
+							<dt><a href="https://www.w3.org/TR/CSS2/page.html">Section in 13</a> in [[CSS2]]
+							<dd>This defines the fundamentals of pagination in CSS.
+							<dt>[[CSS-PAGE-3]]
+							<dd>This CSS module specifies how pages are generated and laid out
+							to hold fragmented content in a paged presentation.
+							It adds functionality for controlling page margins,
+							page size and orientation,
+							and headers and footers,
+							bleed and printer marks,
+							and extends generated content to enable page numbering and running headers / footers.
+							<dt>[[CSS-BREAK-3]]
+							<dd>This module describes the fragmentation model that partitions a flow into pages, columns, or regions.
+							It builds on the Page model module and introduces and defines the fragmentation model.
+							It adds functionality for pagination, breaking variable fragment size and orientation,
+							and controling (forcing or forbidding) where breaks happen, including widows and orphans.
+							<dt>[[MEDIAQ]] and [[MEDIAQUERIES-4]]
+							<dd>These modules provides authors with features to detect various aspect of the media
+							the document is being rendered in, including whether (and how) it is paginated,
+							or more nuanced questions to tell apart environments like a ebook reader from a print rendition.
+							<dt>[[CSS-GCPM-3]]
+							<dd>This module defines a few features that are useful in paged media,
+							such as <a href="https://drafts.csswg.org/css-gcpm/#footnotes">footnotes</a>,
+							<a href="https://drafts.csswg.org/css-gcpm/#running-headers-and-footers">running headers and footers</a>,
+							and <a href="https://drafts.csswg.org/css-gcpm/#the-first-page-pseudo-element">page selectors</a>.
+							<dt>[[CSS-CONTENT-3]]
+							<dd>This module, while overall unstable at the time of writing,
+							contains a few features that while not exclusive to paged media,
+							are particularly useful in paged media,
+							such as <a href="https://drafts.csswg.org/css-content/#leaders">leaders</a> or
+							<a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>.
+							<dt>[[CSS-PAGE-FLOATS-3]]
+							<dd>This module extends the ability of floats to not only go to the beginning or end of the line,
+							but also to float to the top or bottom of pages, columns…
+							<dt>[[CSS-GRID-1]]
+							<dd>This module is not specific to paginated media, but is nonetheless noteworthy
+							as it enables advanced layouts often found in print publications.
 					</div>
 				</section>
 			</section>
