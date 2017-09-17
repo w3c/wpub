@@ -603,6 +603,12 @@
 
 			<section id="Layout">
 				<h3>Layout</h3>
+
+				<p class="issue advisement">This section needs thorough review not only from the publishing community
+					to ensure that the proposed behavior is desirable,
+					but also from Web Browser vendors and other implementors of layout engines
+					to ensure that is it implementable.</p>
+
 				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web content.
 				[[!HTML]] (including XHTML) documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>,
 				[[!SVG]] files are rendered as normally expected of that format, and so on.
@@ -638,7 +644,19 @@
 				<p>This does not imply that User Agents are forbidden from juxtaposing the rendering of the various resources.
 				Scrolling User Agents may for instance place renderings of the resources beneath each other in the <a>default reading order</a>,
 				so that users may seamlessly scroll past the end of one and into the next one,
-				as long as the layout of resources is processed independent.</p>
+				as long as the layout of resources is processed independent.
+				Similarly, paginating Users Agents can let users flip pages from one resource to the next,
+				but must not display content from two or more separate resources on the same page.</p>
+
+				<div class=issue>
+					<p>Should this "UAs may juxtapose" phrasing be replaced with normative prose defining precisely
+					how such juxtaposition work?
+					On the one hand, interoperability is always good,
+					on the other hand, this is an area with lots of subtleties and room for UI innovation.
+					It may be wiser to let a first generation of UAs experiment freely,
+					and standardize on the winning behavior in a future revision of this specification
+					</p>
+				</div>
 
 				<div class=note>
 					<p>This requirement of laying out each resource separately puts some constrains
@@ -665,6 +683,18 @@
 
 				</div>
 
+					<div class=issue>
+						<p>Despite this general requirement that each resource should be treated as a separate document
+						for the purpose of layout,
+						there are probably a handful of places where CSS specifications should be amended to
+						be able to deal more intelligently with collections of resources like <a>Web Publications</a>.
+
+						<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>
+						which are currently restricted to work only within a single document.
+						This restriction should be relaxed to allow for cross references between
+						separate resources of a single <a>Web Publication</a>.
+
+					</div>
 
 				<section id="scrolling-or-paginating" class=informative>
 					<h4>Scrolling or Paginating</h4>
