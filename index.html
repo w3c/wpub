@@ -603,6 +603,69 @@
 
 			<section id="enh-pagination">
 				<h3>Layout and Pagination</h3>
+				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web content.
+				[[!HTML]] (including XHTML) documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>,
+				[[!SVG]] files are rendered as normally expected of that format, and so on.
+				This specification requires no particular profile or subset of CSS, HTML, or SVG to be supported,
+				other than the expectations set for these technologies by their respective specifications.</p>
+
+				<div class=note>
+					<p>This specification intentially refrains from introducing any new layout feature.
+					Any shortcoming of the web platform in terms of layout needs to be addressed for the whole web platform,
+					which means via CSS.</p>
+
+					<p>This working group recognizes that the features offered by CSS specifications have limitations,
+					and that in some cases implementations may be incomplete.
+					However, attempts to address these shortcomings for the exclusive purpose of <a>Web Publications</a>
+					would at best have no effect,
+					and at worst lead to a divergence between “ordinary” web content and <a>Web Publications</a>,
+					instead of the convergence this specification aims to achieve.</p>
+
+					<p>This working group will work with other relevant groups of the W3C to address
+					plaform wide limitations that negatively impacts <a>Web Publications</a>,
+					and invites readers to do the same.</p>
+				</div>
+
+				<p>For the purposes of layout, each resource of a <a>Web Publication</a> is treated as a separate document.
+				User Agents must not mix content from multiple resources in the same rendering:
+				For instance, <a href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">Absolutely positioned elements</a>
+				from one resource may not intrude or overlap with content from an other resource.</p>
+
+				<p>Users must therefore rely on the UI features of the User Agent
+				to navigate from one resource to another,
+				rather than expect a collection of resources to be readable as if it were a single one.</p>
+
+				<p>This does not imply that User Agents are forbidden from juxtaposing the rendering of the various resources.
+				Scrolling User Agents may for instance place renderings of the resources beneath each other in the <a>default reading order</a>,
+				so that users may seamlessly scroll past the end of one and into the next one,
+				as long as the layout of resources is processed independent.</p>
+
+				<div class=note>
+					<p>This requirement of laying out each resource separately puts some constrains
+					on authors’ abilities to arbitrarily style a <a>Web Publication</a>,
+					and may appear to go against the principle of the separation of concerns.
+					However, the alternative is not practical:
+					CSS is not defined to work over a collection of documents,
+					and numerous sections of the specifications would need rewriting
+					to define the behavior of selectors, counters, floats, positioned elements…</p>
+
+					<p>An alternative approach would be to leave CSS work on a single document,
+					but have that document be the <a>Web Publication</a> as a whole rather than its individual HTML constituents.
+					This is however merely moving the problem around rather than solving it,
+					as this specification would then need to define semantics for this unified document
+					including a DOM and assorted APIs, what to do with redundant or conflicting meta data
+					from each each of the constituent part,
+					not to mention a sensible way to merge resources of unrelated types,
+					such as an HTML resource followed in the default reading order by an SVG resource, itself followed by a PNG image…</p>
+
+					<p>However, nothing forces authors to use separate resources for separate chapters of a book,
+					or similar semantic subdivisions of their publications,
+					so this constraint on styling is easily worked around
+					when subdivisions of a publication need to be blended together.</p>
+
+				</div>
+
+
 				<section id="scrolling-or-paginating" class=informative>
 					<h4>Scrolling or Paginating</h4>
 					<p>Web content, and a fortiori <a>Web Publications</a>, may be rendered on various media,
