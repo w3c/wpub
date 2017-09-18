@@ -561,16 +561,17 @@
 				<p>The manifest serialization MUST provide a general linking mechanism for defining a relationship between the web publication and other resources on the web as well as the type of those relationships.</p>
 				<p>This mechanism is used in to express many parts of the web publication's infoset, including but not limited to:</p>
 				<ul>
-					<li><a href="#wp-canonical-identifier">Canonical identifier</a></li>
-					<li><a href="#wp-table-of-contents">External Table of Contents</a></li>
-					<li><a href="#wp-metadata">External metadata</a></li>
+					<li><a href="#wp-canonical-identifier">Canonical identifier</a> using the <code>rel='canonical'</code> link relation. [[rfc6596]]</li>
+					<li><a href="#wp-table-of-contents">Table of Contents</a> in the cases where the ToC is specified as a link to an HTML nav element.</li>
+					<li><a href="#wp-metadata">External metadata</a> that may be expressed in established vocabularies such as ONIX, MARC, schema.org, or Dublin Core.</li>
 				</ul>
 				<p>This linking mechanism may also be used to express other common link structures on the open web. For example:</p>
 				<ul>
-					<li>Distribution feeds such as <a href="http://opds-spec.org/specs/opds-catalog-1-1">OPDS</a> or <a href="https://tools.ietf.org/html/rfc4287">Atom</a></li>
+					<li>Distribution feeds such as <a href="http://opds-spec.org/specs/opds-catalog-1-1">OPDS</a> or <a href="https://tools.ietf.org/html/rfc4287">Atom</a> [[rfc4287]]</li>
 					<li>Alternate versions of the publication</li>
-					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a></li>
+					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a> [[webmention]]</li>
 				</ul>
+				<p>Some of these link structures, such as dynamic search links, may require support for <a href="https://tools.ietf.org/html/rfc6570">URI templates</a> [[rfc6570]] to be meaningfully useful in the context of a web publications. User agents should(?) support URI templates in order to make it easier for publishers to integrate dynamic server-side features into their publications with minimal coding and effort.</p>
 			</section>
 		</section>
 		<section id="lifecycle">
