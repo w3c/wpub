@@ -16,19 +16,6 @@
             //   edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
-                    "name": "Timothy W. Cole",
-                    "url": "http://www.library.illinois.edu/people/bios/t-cole3/",
-                    "company": "University of Illinois at Urbana-Champaign",
-                    "companyURL": "http://illinois.edu",
-					"w3cid": 53965,
-                    "extras": [
-                      {
-                        "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
-                        "href": "https://orcid.org/0000-0002-5906-4581",
-                        "class": "orcid"
-                      }]
-                  },
-                  {
       			      "name": "Matt Garrish",
                       "company": "DAISY Consortium",
                       "companyURL": "http://www.daisy.org",
@@ -48,6 +35,27 @@
                     "companyURL": "http://www.w3.org",
                   }
               ],
+			  authors: [
+			      {
+                    "name": "Baldur Bjarnason",
+                    "company": "The Rebus Foundation",
+                    "companyURL": "http://reb.us/",
+					"w3cid": 92101
+                  },
+			  	  {
+                    "name": "Timothy W. Cole",
+                    "url": "http://www.library.illinois.edu/people/bios/t-cole3/",
+                    "company": "University of Illinois at Urbana-Champaign",
+                    "companyURL": "http://illinois.edu",
+					"w3cid": 53965,
+                    "extras": [
+                      {
+                        "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
+                        "href": "https://orcid.org/0000-0002-5906-4581",
+                        "class": "orcid"
+                      }]
+                  },
+			  ],
               processVersion: 2017,
               includePermalinks: true,
               permalinkEdge:     true,
@@ -89,7 +97,7 @@
 	</head>
 	<body>
 		<section id="abstract">
-			<p>This specification defines a collection of information that describes the structure of web publications, 
+			<p>This specification defines a collection of information that describes the structure of Web Publications, 
 			so that user agents or developers may create user experiences well-suited to reading publications, 
 			such as sequential navigation and offline reading.
 			This information includes the default reading order, a list of resources, 
@@ -499,8 +507,13 @@
 					<li>Modification date</li>
 					<li>Accessibility metadata</li>
 				</ul>
+
+				<p class="issue" data-number="66"></p>
+				
 				<p>Identifiers and modification dates are an important aid in the distribution and storage of portable formats (past, current, and present) so authors are urged to include this information whenever they can.</p>
+
 				<p>The infoset MAY also provide:</p>
+
 				<ul>
 					<li>A subtitle</li>
 					<li>Licensing information</li>
@@ -508,10 +521,14 @@
 					<li>General subject</li>
 				</ul>
 
-				<p>These items apply to the web publication in its entirety. Metadata for individual content documents should be embedded in or linked from the content documents themselves.</p>
+				<p>These items apply to the Web publication in its entirety. Metadata for individual content documents should be embedded in or linked from the content documents themselves.</p>
+
 				<p>The Web Publication Infoset SHOULD NOT include complex, specialised, and industry-specific metadata and authors should limit the metadata included in the manifest to the items above.</p>
+
 				<p>If the information set does not cover the publication's needs, authors should link to external metadata files in whichever formats and schema are most commonly accepted as the authoritative metadata format for their intended audiences. They can include multiple metadata links in multiple formats, one for each intended audience, if needed.</p>
+
 				<p>User Agents MAY decide to support metadata extensions, other metadata schemes, or additional metadata properties if they so choose. User Agents must ignore metadata properties that they do not recognise.</p>
+
 			</section>
 		</section>
 		<section id="manifest">
@@ -562,20 +579,31 @@
 
 			<section id="manifest-linking-from">
 				<h3>Linking <em>from</em> a Manifest</h3>
-				<p>The manifest serialization MUST provide a general linking mechanism for defining a relationship between the web publication and other resources on the web as well as the type of those relationships.</p>
-				<p>This mechanism is used in to express many parts of the web publication's infoset, including but not limited to:</p>
+
+				<p>The manifest serialization MUST provide a general linking mechanism for defining a relationship between the Web Publication and other resources on the Web as well as the type of those relationships.</p>
+
+				<p>This mechanism is used in to express many parts of the Web Publication's infoset, including but not limited to:</p>
+
 				<ul>
-					<li><a href="#wp-canonical-identifier">Canonical identifier</a> using the <code>rel='canonical'</code> link relation. [[rfc6596]]</li>
+					<li><a href="#wp-canonical-identifier">Canonical identifier</a> using the <code>rel='canonical'</code> link relation.&nbsp;[[rfc6596]]</li>
 					<li><a href="#wp-table-of-contents">Table of Contents</a> in the cases where the ToC is specified as a link to an HTML nav element.</li>
 					<li><a href="#wp-metadata">External metadata</a> that may be expressed in established vocabularies such as ONIX, MARC, schema.org, or Dublin Core.</li>
 				</ul>
-				<p>This linking mechanism may also be used to express other common link structures on the open web. For example:</p>
+
+				<p class="ednote">There are some overlaps between this list and, e.g., the separate section on canonical identifiers.</p>
+
+				<p>This linking mechanism may also be used to express other common link structures on the open Web. For example:</p>
+
 				<ul>
-					<li>Distribution feeds such as <a href="http://opds-spec.org/specs/opds-catalog-1-1">OPDS</a> or <a href="https://tools.ietf.org/html/rfc4287">Atom</a> [[rfc4287]]</li>
+					<li>Distribution feeds such as <a href="http://opds-spec.org/specs/opds-catalog-1-1">OPDS</a> or <a href="https://tools.ietf.org/html/rfc4287">Atom</a>&nbsp;[[rfc4287]]</li>
+
 					<li>Alternate versions of the publication</li>
-					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a> [[webmention]]</li>
+					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a>&nbsp;[[webmention]]</li>
 				</ul>
-				<p>Some of these link structures, such as dynamic search links, may require support for <a href="https://tools.ietf.org/html/rfc6570">URI templates</a> [[rfc6570]] to be meaningfully useful in the context of a web publications. User agents should(?) support URI templates in order to make it easier for publishers to integrate dynamic server-side features into their publications with minimal coding and effort.</p>
+
+				<p class="note">Some of these link structures, such as dynamic search links, may require support for <a href="https://tools.ietf.org/html/rfc6570">URI templates</a>&nbsp;[[rfc6570]] to be meaningfully useful in the context of a Web Publications. User agents should(?) support URI templates in order to make it easier for publishers to integrate dynamic server-side features into their publications with minimal coding and effort.</p>
+
+				<p class="issue" data-number="67"></p>
 			</section>
 		</section>
 		<section id="lifecycle">
