@@ -56,6 +56,7 @@
                       }]
                   },
 			  ],
+			  
               processVersion: 2017,
               includePermalinks: true,
               permalinkEdge:     true,
@@ -571,6 +572,29 @@
 				<h2>Linking to a Manifest</h2>
 
 				<div class="ednote">Placeholder for how resources identify they belong to a publication.</div>
+				
+				<p class="note">This is adapted from the [[Web Application Manifest]] spec.</p>
+
+				
+				<p>A resource is said to be associated with a manifest if the resource 
+				representation, an HTML document, has a manifest link relationship.</p>
+				
+				<p>To link to a manifest, use the [[HTML]] <code>link</code> element 
+				using the keyword <code>manifest</code> as the value of the 
+				<code>rel</code> attribute. This creates an external resource link:</p>
+				
+<div class="example">
+<pre>
+&lt;link rel="manifest" href="manifest.json"&gt;
+</pre>
+</div>
+				
+				<p class="note">In cases where more than one <code>link</code> element 
+				with a manifest link type appears in a Document, the user agent 
+				uses the first <code>link</code> element in tree order 
+				and ignores all subsequent <code>link</code> element with a manifest 
+				link type (even if the first element was erroneous). 
+				See the steps for obtaining a manifest.</p>
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
@@ -650,12 +674,18 @@
 					<h4>Reading Order</h4>
 
 					<p class="ednote">Placeholder for automatic progression through the default reading order.</p>
+					<p>As mentioned above, A <a>web publication</a> must have a <a href="#wp-default-reading-order">default reading order</a> of primary resources. A user agent must be able to render these resources in that order, and must provide users with means to access the next and previous resources in that ordering.</p>
+					
+					
+					
 				</section>
 
 				<section id="enh-toc">
 					<h4>Table of Contents</h4>
 
 					<p class="ednote">Placeholder for accessing a table of contents.</p>
+					<p>A  <a href="#wp-table-of-contents">table of contents</a> helps users find the content they need. A <a>web publication</a> should have a navigation document, and if it does a conforming user agent must provide access to the links and labels of its nav elements in a way that allows to the user to activate the links.</p>
+					
 				</section>
 			</section>
 
