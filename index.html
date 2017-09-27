@@ -55,6 +55,7 @@
                       }]
                   },
 			  ],
+			  
               processVersion: 2017,
               includePermalinks: true,
               permalinkEdge:     true,
@@ -579,6 +580,29 @@
 				<h2>Linking to a Manifest</h2>
 
 				<div class="ednote">Placeholder for how resources identify they belong to a publication.</div>
+				
+				<p class="note">This is adapted from the [[Web Application Manifest]] spec.</p>
+
+				
+				<p>A resource is said to be associated with a manifest if the resource 
+				representation, an HTML document, has a manifest link relationship.</p>
+				
+				<p>To link to a manifest, use the [[HTML]] <code>link</code> element 
+				using the keyword <code>manifest</code> as the value of the 
+				<code>rel</code> attribute. This creates an external resource link:</p>
+				
+<div class="example">
+<pre>
+&lt;link rel="manifest" href="manifest.json"&gt;
+</pre>
+</div>
+				
+				<p class="note">In cases where more than one <code>link</code> element 
+				with a manifest link type appears in a Document, the user agent 
+				uses the first <code>link</code> element in tree order 
+				and ignores all subsequent <code>link</code> element with a manifest 
+				link type (even if the first element was erroneous). 
+				See the <a>steps for obtaining a manifest</a>.</p>
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
@@ -634,8 +658,70 @@
 
 			<section id="lifecyle-obtain-manifest">
 				<h3>Obtaining the manifest</h3>
+				
+				<p class="note">This text is taken from the Web App Manifest spec</p>
 
-				<p class="ednote">Placeholder for UA discovering and obtaining a manifest.</p>
+				<p>To obtain a manifest, the user agent must run the <a>steps for 
+				obtaining a manifest</a>. The appropriate time to obtain the manifest is 
+				left up to implementations. A user agent may opt to delay fetching a manifest 
+				until after the document and its other resources have been fully loaded
+				 (i.e., to not delay the availability of content and scripts 
+				 required by the document).</p>
+				
+				<p>A manifest is obtained and applied regardless of 
+				the media attribute of the link element matches the environment or not.</p>
+				
+<p>
+          The <dfn data-lt="obtaining the manifest|obtaining a manifest">steps
+          for obtaining a manifest</dfn> are given by the following algorithm.
+          The algorithm, if successful, returns a <a>processed manifest</a> and
+          the <var>manifest URL</var>; otherwise, it terminates prematurely and
+          returns nothing. In the case of nothing being returned, the user
+          agent MUST ignore the manifest declaration. In running these steps, a
+          user agent MUST NOT <a>delay the load event</a>.
+        </p>
+        <ol>
+          <li>From the <code>Document</code> of the <a>top-level browsing
+          context</a>, let <var>manifest link</var> be the first
+          <a><code>link</code> element</a> in <a>tree order</a> whose <a><code>
+            rel</code> attribute</a> contains the token <code>manifest</code>.
+          </li>
+          <li>If <var>manifest link</var> is <code>null</code>, terminate this
+          algorithm.
+          </li>
+          <li>If <var>manifest link</var>'s <code>href</code> attribute's value
+          is the empty string, then abort these steps.
+          </li>
+          <li>Let <var>manifest URL</var> be the result of <a>parsing</a> the
+          value of the <code>href</code> attribute, relative to <a>the
+          element's base URL</a>. If parsing fails, then abort these steps.
+          </li>
+          <li>Let <var>request</var> be a new [[!FETCH]] <a>request</a>, whose
+          URL is <var>manifest URL</var>, and whose <a>context</a> is
+          "<code>manifest</code>".
+          </li>
+          <li>If the <var>manifest link</var>'s <code>crossOrigin</code>
+          attribute's value is '<code>use-credentials</code>', then set
+          <var>request</var>'s credentials to '<code>include</code>'.
+          </li>
+          <li>Await the result of performing a <a>fetch</a> with
+          <var>request</var>, letting <var>response</var> be the result.
+          </li>
+          <li>If <var>response</var> is a <a>network error</a>, terminate this
+          algorithm.
+          </li>
+          <li>Let <var>text</var> be the result of <a>UTF-8 decoding</a> <var>
+            response</var>'s <a data-cite=
+            "!FETCH#concept-request-body">body</a>.
+          </li>
+          <li>Let <var>manifest</var> be the result of running the <a>steps for
+          processing a manifest</a> with <var>text</var>, <var>manifest
+          URL</var>, and the URL that represents the address of the
+          <a>top-level browsing context</a>.
+          </li>
+          <li>Return <var>manifest</var> and <var>manifest URL</var>.
+          </li>
+        </ol>
 			</section>
 
 			<section id="lifecycle-process-manifest">
@@ -648,6 +734,21 @@
 				<h3>Intiating the Web Publication</h3>
 
 				<p class="ednote">Placeholder for UA initiating an enhanced reading experience.</p>
+				<p>A manifest is applied to a top-level browsing context, 
+				meaning that the members of the manifest are affecting the 
+				presentation or behavior of a browsing context.</p>
+
+				<p>A top-level browsing context that has a manifest applied to it 
+				is referred to as an publication context.</p>
+
+				<p>If an publication context is created as a result of the user agent 
+				being asked to navigate to a deep link, the user agent must immediately 
+				navigate to the deep link with replacement enabled. 
+				Otherwise, when the publication context is created, 
+				the user agent must immediately navigate to 
+				the start_URL with replacement enabled.</p>
+				
+				<p class="issue">What is our analog to start url?</p>
 			</section>
 
 			<section id="lifecycle-update-wp">
@@ -665,17 +766,34 @@
 
 			<section id="enh-nav">
 				<h3>Navigation</h3>
+				
+				<p>Users need to find their way around all the content in a web publication.
+				 This involves everything from “turning the page” to finding 
+				 a table of contents.</p>
 
 				<section id="enh-reading-order">
 					<h4>Reading Order</h4>
 
-					<p class="ednote">Placeholder for automatic progression through the default reading order.</p>
+					<p>As mentioned above, A <a>web publication</a> must have a 
+					<a href="#wp-default-reading-order">default reading order</a> 
+					of primary resources. 
+					A user agent must be able to render these resources in that order, 
+					and must provide users with means to access the next and previous 
+					document in that 
+					<a href="#wp-default-reading-order">default reading order.</a></p>
+					
+					<p class="note">Fancier version: A user agent MUST provide a way 
+					for the user to explicitly cause the <a>publication context</a> 
+					to navigate to the next or previous document in the 
+					<a>default reading order.</a> </p>
+					
 				</section>
 
 				<section id="enh-toc">
 					<h4>Table of Contents</h4>
 
-					<p class="ednote">Placeholder for accessing a table of contents.</p>
+					<p>A  <a href="#wp-table-of-contents">table of contents</a> helps users find the content they need. A <a>web publication</a> should have a navigation document, and if it does a conforming user agent must provide access to the links and labels of its nav elements in a way that allows to the user to activate the links.</p>
+					
 				</section>
 			</section>
 
