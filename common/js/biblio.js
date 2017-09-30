@@ -43,6 +43,23 @@ var biblio = {
        "publisher": "IETF",
        "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00",
     },
+    "cfi": {
+        "authors" : [
+            "Peter Sorotokin",
+            "Garth Conboy",
+            "Brady Duga",
+            "John Rivlin",
+            "Don Beaver",
+            "Kevin Ballard",
+            "Alastair Fettes",
+            "Daniel Weck"
+        ],
+        title: "EPUB Canonical Fragment Identifiers 1.1",
+        href: "http://www.idpf.org/epub/linking/cfi/epub-cfi.html",
+        publisher: "IDPF",
+        rawDate: "2017-01-05",
+        status: "Recommended Specification"
+    },   
     "pwpub": {
       "title": "Packaged Web Publications",
       "href": "https://w3.org/TR/pwpub/",
