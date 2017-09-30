@@ -747,7 +747,7 @@
 
         <div class="ednote">
             <p>Could reference or duplicate here with modifications the second table from 4.2.1 of
-                Web Anno Data Model Rec. [[annotation-model]].</p>
+                Web Anno Data Model Rec. [[!annotation-model]].</p>
         </div>
 
         <p>User agents minting fragment identifiers may take advantage of publisher-provided anchors
@@ -767,7 +767,7 @@
 
         <p>Using other formats, user agents may still mint fragment identifiers to serve as Web
             Publication internal locators even in the absence of any explicit publisher-provided
-            anchor or structure. For example, a media fragment identifier [[media-frags]] for a
+            anchor or structure. For example, a media fragment identifier [[!media-frags]] for a
             still image may be minted without reference to a pre-coordinated anchor or structure, as
             shown in Example 2. In this example, the fragment is a rectangular image segment that is
             200x150 pixels with its upper left corner at 100 pixels in from the left edge and 500
@@ -803,7 +803,7 @@
             fragment in the context and scope of that Web Publication. The canonical identifier of
             the Web Publication must not already include another fragment identifier. The LFI must
             conform to the semantics described here, which are a mapping and extension of the Web
-            Annotation Data Model [[annotation-model]] and Vocabulary [[annotation-vocab]] for
+            Annotation Data Model [[!annotation-model]] and Vocabulary [[!annotation-vocab]] for
             describing a <code>SpecificResource</code>. The mapping of these semantics into a syntax
             conformant to that required by RFC 3986 for fragment identifiers was inspired by the
             Selectors and States Working Group Note [[selectors-states]]. Additional semantics and
@@ -828,7 +828,7 @@
                 the methods used to describe fragment locations vary by Selector type and by
                 media-type of the resource involved, the other parameters required or allowed for a
                 Selector, will vary accordingly. LFI Selector semantics are as described in the Web
-                Annotation Data Model [[annotation-model]] and Vocabulary [[annotation-vocab]]
+                Annotation Data Model [[!annotation-model]] and Vocabulary [[!annotation-vocab]]
                 unless otherwise noted below. In some case more than one type of Selector can be
                 used to identify the same content fragment, albeit in different ways and using
                 different parameters; however, the <code>selector</code> parameter is not
@@ -852,7 +852,7 @@
             </div>
 
             <p><code>CSSSelector</code>: One of the most common ways to identify elements in an HTML
-                or XML resource is to use CSS Selectors [[CSS3-selectors]]. Selectors of type
+                or XML resource is to use CSS Selectors [[!CSS3-selectors]]. Selectors of type
                     <code>CSSSelector</code> rely on publisher-furnished intrinsic locators within a
                 resource, e.g., class and id attributes associated with elements in the Document
                 Object Model (DOM). A <code>CSSSelector</code> may only be applied to a resource
@@ -874,7 +874,7 @@
 
             <p><code>XPathSelector</code>: Another common method of selecting elements and content
                 within an XML or HTML resource that supports the Document Object Model is to use an
-                XPath selection [[DOM-Level-3-XPath]].</p>
+                XPath selection [[!DOM-Level-3-XPath]].</p>
             <div class="example">
                 <div class="example-title marker">
                     <span>Example 5 </span>
@@ -966,7 +966,7 @@
             </div>
 
             <p><code>SVGSelector</code>: An <code>SvgSelector</code> defines an area through the use
-                of the Scalable Vector Graphics standard [[SVG11]]. This allows the user agent to
+                of the Scalable Vector Graphics standard [[!SVG11]]. This allows the user agent to
                 select a fragment of an image or other visual media resource, such as a circle or
                 polygon, by describing the region of interest using SVG. The SVG (i.e., as provided
                 using the <code>value</code>  parameter) may be either included (as a fragment of
@@ -1004,7 +1004,7 @@
 
         <section id="enh-lfiSource">
             <h5>The <code>source</code> parameter</h5>
-            <p>The Web Annotation Data Model [[annotation-model]] anticipates the need in certain
+            <p>The Web Annotation Data Model [[!annotation-model]] anticipates the need in certain
                 use cases to identify a content fragment from one resource in the context or scope
                 of an encompassing resource, e.g., identifying  a region of a still image resource in
                 the context of a web page in which the image has been embedded. Two properties,
