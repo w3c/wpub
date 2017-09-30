@@ -696,6 +696,593 @@
 
 				<p class="ednote">Placeholder for paginated reading experience.</p>
 			</section>
+<section id="enh-locators">
+    <h3>Internal Locators</h3>
+
+    <p>In addition to the URL(s) that is a Web Publication's address(es), bookmarking, annotation,
+        and several other common use cases require internal locators, i.e., additional URLs, which
+        can be used to identify, locate/retrieve, and/or reference content fragments and locations
+        within a Web Publication (cf. Web Publications Use Cases and Requirements [[pwp-ucr]] and
+        Digital Publishing Annotation Use Cases [[dpub-annotation-uc]]). The creator(s) of a Web
+        Publication may provide internal locators and/or include structures that facilitate the
+        minting of internal locators. In addition, as described in this section, user agents may
+        mint other internal locators as needed, post-publication.</p>
+
+    <section id="enh-intrinsicLocators">
+        <h4>Publisher-Provided Locators</h4>
+        <p>In choosing to organize a Web Publication into multiple, individually addressable
+            resources, each with its own URL, the creator(s) of a Web Publication provides locators
+            for individual objects encompassed by the publication. Thus Web Publication Resource
+            URLs serve as Web Publication internal locators for directly identifying, retrieving,
+            and/or referencing these constituent resources. </p>
+
+        <p>Within a single Web Publication Resource, the creator of that resource may further
+            provide anchors or other structures (e.g., the value of an <code>id</code> attribute of
+            a <code>&lt;p&gt;</code> element in an HTML constituent resource, the Document Object
+            Model (DOM) of an XML constituent resource) as a way to facilitate identifying,
+            locating/retrieving, and/or referencing locations and more granular content fragments
+            within that resource and thereby within the Web Publication. In particular, some
+            intra-resource, publisher-provided anchors and structures of this sort may be used to
+            mint fragment identifiers, as described below. </p>
+    </section>
+
+    <section id="enh-otherFragIds">
+        <h4>Fragment Identifiers</h4>
+
+        <p>The generic syntax for fragment identifiers is defined in RFC 3986 [[!rfc3986]]. The
+            fragment identifier component of a URL comes at the end of the URL and is preceded by a
+                <code>#</code> character. The fragment identifier component of a URL is separated
+            prior to dereferencing and is not sent to the server. The identifying information within
+            the fragment identifier component itself is dereferenced solely by the user agent.
+            Interpretation and resolution of the fragment identifier may be dependent on the
+            media-type of the resource retrieved when the preceding  part of the URL is
+            dereferenced. </p>
+
+        <p>A broad range of fragment identifier formats, each specific to resources of one or more
+            media-types, have been defined in various IETF RFCs, W3C Recommendations, etc. These are
+            typically included by reference in IANA-registered media-type specifications
+            [[iana-media-types]]. A fragment identifier of a format appropriate for a Web
+            Publication Resource's media type may be used to identify, retrieve, and/or reference
+            content fragments within that resource.</p>
+
+        <div class="ednote">
+            <p>Could reference or duplicate here with modifications the second table from 4.2.1 of
+                Web Anno Data Model Rec. [[annotation-model]].</p>
+        </div>
+
+        <p>User agents minting fragment identifiers may take advantage of publisher-provided anchors
+            and structures. For example, the value of the <code>id</code> attribute of a
+                <code>&lt;p&gt;</code> element in an HTML Web Publication Resource can be used to
+            mint a fragment identifier linking to that <code>&lt;p&gt;</code> element (i.e., a
+            paragraph). This type of fragment identifier is illustrated in Example 1 which assumes
+            the existence within the HTML resource of an element with id p33, e.g., <code>&lt;p
+                id="p33"&gt;</code>.</p>
+        <div class="example">
+            <div class="example-title marker">
+                <span>Example 1</span>
+                <span style="text-transform: none">: A simple fragment identifier</span>
+            </div>
+            <pre class="nohighlight" id="example1">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#p33</pre>
+        </div>
+
+        <p>Using other formats, user agents may still mint fragment identifiers to serve as Web
+            Publication internal locators even in the absence of any explicit publisher-provided
+            anchor or structure. For example, a media fragment identifier [[media-frags]] for a
+            still image may be minted without reference to a pre-coordinated anchor or structure, as
+            shown in Example 2. In this example, the fragment is a rectangular image segment that is
+            200x150 pixels with its upper left corner at 100 pixels in from the left edge and 500
+            pixels down from the top edge of the full image.</p>
+        <div class="example">
+            <div class="example-title marker">
+                <span>Example 2</span>
+                <span style="text-transform: none">: A media fragment identifier</span>
+            </div>
+            <pre class="nohighlight" id="example2">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#xywh=100,500,200,150</pre>
+        </div>
+    </section>
+
+    <section id="enh-locateFragIds">
+        <h4>The <code>locate</code> Fragment Identifier</h4>
+
+        <p>For some use cases it is essential to identify and reference a location in or a fragment
+            of a resource in the scope of a larger construct, such as a Web Publication, which
+            includes this resource in some fashion. The fragment identifier approaches described
+            above do not satisfy this requirement since only the URL of the constituent resource
+            containing the location or content fragment of interest is expressed. Additionally,
+            existing fragment identifier formats have limitations with respect to known
+            publishing-related use cases (e.g., Media Fragments 1.0 only supports rectangular
+            spatial selections), and a creator cannot anticipate all the content fragments and
+            locations within a Web Publication that will need to be identified and made
+            referenceable. An alternative approach that largely mitigates these concerns and is
+            useful for many use cases of interest, is the <code>locate</code>  Fragment Identifier
+            (LFI) format which is defined here. </p>
+
+        <p>A LFI may be constructed and appended to the URL of a web resource, including resources
+            containing or logically comprised of other resources. For example, a LFI may be appended
+            to a Web Publication canonical identifier as a means to identify a location or content
+            fragment in the context and scope of that Web Publication. The canonical identifier of
+            the Web Publication must not already include another fragment identifier. The LFI must
+            conform to the semantics described here, which are a mapping and extension of the Web
+            Annotation Data Model [[annotation-model]] and Vocabulary [[annotation-vocab]] for
+            describing a <code>SpecificResource</code>. The mapping of these semantics into a syntax
+            conformant to that required by RFC 3986 for fragment identifiers was inspired by the
+            Selectors and States Working Group Note [[selectors-states]]. Additional semantics and
+            extensions inspired in part by the EPUB 3.1 Canonical Fragment Identifier [[cfi]],
+            a Recommended Specification of the IDPF.</p>
+
+        <p>The syntax of a LFI follows a "functional" paradigm, <code>#locate(...)</code>, similar
+            to the syntax used, for example, by the XPointer Framework. The allowable "parameters"
+            and their usage are described below. Note that the URL encoding for some of the examples
+            below is incomplete and for some examples below line breaks have been introduced. This
+            has been done for greater readability; in real usage URL encoding should be complete and
+            new line characters are not allowed in a URL.</p>
+
+        <section id="enh-lfiSelector">
+            <h5>The <code>selector</code> parameter</h5>
+            <p>A <code>selector</code> parameter describes a Selector which expresses the property
+                values necessary to locate a fragment of interest within a resource.
+                    <code>selector</code> parameter syntax is also functional, i.e.,
+                    <code>selector(...)</code>. There are 8 types of Selectors, each illustrated
+                below, and each Selector must include a <code>type</code> parameter with a single
+                value matching the name of one of these 8 <code>types</code> as enumerated below. As
+                the methods used to describe fragment locations vary by Selector type and by
+                media-type of the resource involved, the other parameters required or allowed for a
+                Selector, will vary accordingly. LFI Selector semantics are as described in the Web
+                Annotation Data Model [[annotation-model]] and Vocabulary [[annotation-vocab]]
+                unless otherwise noted below. In some case more than one type of Selector can be
+                used to identify the same content fragment, albeit in different ways and using
+                different parameters; however, the <code>selector</code> parameter is not
+                repeatable, i.e., must not appear more than once within a single LFI. When more than
+                one Selector is available to identify the fragment of interest, the user agent must
+                choose only one. (This is a restriction of the Web Annotation Data Model definition
+                for a <code>selector</code>.)</p>
+
+            <p><code>FragmentSelector</code>: Other formats of fragment identifiers can be expressed
+                using the <code>selector</code> parameter. In Example 3, the media fragment
+                identifier from Example 2 is described by the <code>selector</code> shown. Note the
+                required URL character encoding of the '=' and ',' characters in the
+                    <code>value</code> parameter of the <code>selector</code></p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 3</span>
+                    <span style="text-transform: none">: A <code>FragmentSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example3">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#locate(selector(type=FragmentSelector,conformsTo=http://www.w3.org/TR/media-frags,
+              value=xywh%3D100%2C500%2C200%2C150))</pre>
+            </div>
+
+            <p><code>CSSSelector</code>: One of the most common ways to identify elements in an HTML
+                or XML resource is to use CSS Selectors [[CSS3-selectors]]. Selectors of type
+                    <code>CSSSelector</code> rely on publisher-furnished intrinsic locators within a
+                resource, e.g., class and id attributes associated with elements in the Document
+                Object Model (DOM). A <code>CSSSelector</code> may only be applied to a resource
+                representation that is DOM conformant. Example 4 uses a <code>CSSSelector</code> to
+                locate the same <code>&lt;p&gt;</code> element identified in Example 1</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 4</span>
+                    <span style="text-transform: none">: A <code>CSSSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example4">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#locate(selector(type=CSSSelector,
+              value=%23p33))</pre>
+            </div>
+            <div class="note">
+                <p>Implementers should use only commonly supported features of CSS that directly
+                    contribute to selection of an element or content, rather than styling or
+                    transformation, in order to maximize interoperability between systems.</p>
+            </div>
+
+            <p><code>XPathSelector</code>: Another common method of selecting elements and content
+                within an XML or HTML resource that supports the Document Object Model is to use an
+                XPath selection [[DOM-Level-3-XPath]].</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 5 </span>
+                    <span style="text-transform: none">: A <code>XPathSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example5">https://dauwhe.github.io/html-first/MobyDickNav/html/introduction.html#locate(selector(type=XPathSelector,
+              value=/html/body/main/div/div/p[1]))</pre>
+            </div>
+            <div class="note">
+                <p>Implementers should note that the <a
+                        href="https://www.w3.org/TR/html5/syntax.html#optional-tags">HTML5
+                        specification</a> allows parsers to add elements into the DOM that are
+                    considered to be missing. XPaths should be constructed to include these
+                    elements, rather than from the element structure in the document.</p>
+            </div>
+
+            <p><code>TextQuoteSelector</code>: This Selector describes a range of text within a
+                resource by copying the full sequence of characters in the range, and additionally
+                including a bit of the text immediately before (a prefix) and after (a suffix) the
+                range (to help distinguish from occurrences of the same sequence of characters
+                elsewhere in the resource).</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 6</span>
+                    <span style="text-transform: none">: A <code>TextQuoteSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example6">https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html#locate(selector(type=TextQuoteSelector,exact=higgledy-piggledy,prefix=at%20least%2C%20take%20the%20,suffix=%20whale%20statements%2C%20however))</pre>
+            </div>
+            <p>The selection of the range of text of interest must be in terms of Unicode code
+                points (the "character number"), not in terms of code units (that number expressed
+                using a selected data type). Selections should not start or end in the middle of a
+                grapheme cluster. The selection must be based on the <a
+                    href="https://www.w3.org/International/questions/qa-visual-vs-logical">logical
+                    order</a> of the text, rather than the visual order (critical for bidirectional
+                text). For more information about the general character model of text used on the
+                web, see the Character Model for the World Wide Web [[charmod]].</p>
+            <p>The text must be normalized before creating a Selector of this kind. Thus HTML/XML
+                tags should be removed, and character entities should be replaced with the character
+                that they encode. Note that this does not affect the state of the content of the
+                document containing the fragment of interest, only the way that the fragment is
+                described.</p>
+            <p>If, after processing the prefix, exact, and suffix, the user agent discovers multiple
+                matching text sequences, then the selection should be treated as matching all of the
+                matches.</p>
+            <div class="note">
+                <p>If the content is under copyright or has other rights asserted on its use, then
+                    this method of selecting text is potentially dangerous. A user might select the
+                    entire text of the document, which would not be desirable to copy into the LFI
+                    and share. For static texts with access and/or distribution restrictions, the
+                    use of the <code>TextPositionSelector</code> is perhaps more appropriate.</p>
+            </div>
+            <div class="note">
+                <p>This Selector is also constrained by limits on URL length (which currently vary
+                    by user agent and server). For long fragments the use of the
+                        <code>TextPositionSelector</code> is more appropriate.</p>
+            </div>
+
+            <p><code>TextPositionSelector</code>: This Selector describes the location of a range of
+                text in a resource by recording the start and end positions of the range in the
+                resource. Position 0 would be immediately before the first character of the
+                resource, position 1 would be immediately before the second character, and so on.
+                Position n (where n is the total count of characters in the resource) would be
+                immediately after the last character. Required parameters for this Selector are
+                    <code>start</code> and <code>end</code>. The <code>start</code> character is
+                thus included in the fragment, but the <code>end</code> character is not. For
+                example, if the text of the resource was "abcdefghijklmnopqrstuvwxyz", the start was
+                4, and the end was 7, then the selected range of text would be "efg".</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 7</span>
+                    <span style="text-transform: none">: A <code>TextPositionSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example7">https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html#locate(selector(type=TextPositionSelector,start=387,end=404))</pre>
+            </div>
+            <p>The text must be normalized in the same way as for the <code>TextQuoteSelector</code>
+                before counting the number of characters to determine the <code>start</code> and
+                    <code>end</code> positions.</p>
+
+            <p><code>DataPositionSelector</code>: Similar to the <code>TextPositionSelector</code>
+                but working at the level of bytes in the stream rather than characters in the
+                normalized text. Since references are to positions in the resource representation as
+                a stream of bytes, normalization is not required.</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 8</span>
+                    <span style="text-transform: none">: A <code>DataPositionSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example8">https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html#locate(selector(type=DataPositionSelector,start=974,end=991))</pre>
+            </div>
+
+            <p><code>SVGSelector</code>: An <code>SvgSelector</code> defines an area through the use
+                of the Scalable Vector Graphics standard [[SVG11]]. This allows the user agent to
+                select a fragment of an image or other visual media resource, such as a circle or
+                polygon, by describing the region of interest using SVG. The SVG (i.e., as provided
+                using the <code>value</code>  parameter) may be either included (as a fragment of
+                well-formed XML) or referenced as an external web resource (in which case an
+                    <code>id</code> parameter with a URL value is provided instead of a
+                    <code>value</code> parameter).</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 9</span>
+                    <span style="text-transform: none">: A <code>SVGSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example9">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#locate(selector(type=SVGSelector,
+              value=&lt;svg%20xmlns%3D"%http://www.w3.org/2000/svg22&gt;&lt;circle%20cx%3D"200"%20cy%3D"575"%20r%3D"100"%20%2F&gt;&lt;%2Fsvg&gt;))</pre>
+            </div>
+
+            <p>
+                <code>RangeSelector</code>: This selector is used to identify the beginning and the
+                end of the content fragment of interest using other Selectors. In this way, the
+                beginning and end points of a fragment can each be accurately identified using the
+                most appropriate type of Selector, and then linked together to form the fragment.
+                The fragment consists of everything from the beginning of the starting Selector
+                through to the beginning of the ending Selector, but not including the latter. In
+                Example 10, the fragment would include paragraphs <code>p33</code>,
+                <code>p34</code>, and <code>p35</code>, but not <code>p36</code>.</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 10</span>
+                    <span style="text-transform: none">: A <code>RangeSelector</code></span>
+                </div>
+                <pre class="nohighlight" id="example10">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#locate(selector(type=RangeSelector,
+                    selector(type=CSSSelector,value=%23p33),
+                    selector(type=CSSSelector,value=%23p36)))</pre>
+            </div>
+        </section>
+
+        <section id="enh-lfiSource">
+            <h5>The <code>source</code> parameter</h5>
+            <p>The Web Annotation Data Model [[annotation-model]] anticipates the need in certain
+                use cases to identify a content fragment from one resource in the context or scope
+                of an encompassing resource, e.g., identifying  a region of a still image resource in
+                the context of a web page in which the image has been embedded. Two properties,
+                    <code>source</code> and <code>scope</code>, both taking URLs as values, are used
+                to differentiate between the address of the resource containing the location or
+                content fragment of interest (the <code>source</code> URL) and the address of an
+                encompassing (or otherwise context-providing) resource (the <code>scope</code> URL). </p>
+            <p>In a LFI (and a restriction on the semantics defined for these properties in the Web
+                Annotation Data Model and Vocabulary), the use of these two properties is
+                constrained as follows:</p>
+            <ul>
+                <li><code>scope</code> is always implicit and so must not appear as a parameter in
+                    any LFI</li>
+                <li><code>source</code> may be implicit or may be explicit and so may appear as a
+                    parameter in a LFI</li>
+                <li>If <code>source</code> appears as a parameter its value must be a single, valid
+                    URL, e.g., <code>source=https://example.com/MyWebPub.wpub</code></li>
+                <li>Neither property is repeatable, and so the <code>source</code> parameter must
+                    not appear more than once in a single LFI</li>
+                <li>User agents should recognize the URL to which the LFI is appended as the value
+                    of <code>scope</code></li>
+                <li>In the absence of a <code>source</code> parameter in an LFI, a user agent should
+                    also recognize the URL to which the LFI is appended as the value of
+                        <code>source</code></li>
+            </ul>
+            <p>In Example 11, the <code>scope</code> of the LFI is the canonical identifier of Web
+                Publication, i.e., represented here as
+                https://dauwhe.github.io/html-first/MobyDick.wpub. The text fragment of interest,
+                however, is obtained by dereferencing the <code>source</code> URL, which is provided
+                explicitly as https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html,
+                and then selecting characters 387 to 404 of the normalized text of the
+                representation returned. In other words, the text fragment of interest is contained
+                within the scope of the Web Publication, but more specifically it is found within
+                the representation of the Web Publication Resource, epigraph.html, as retrieved. </p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 11</span>
+                    <span style="text-transform: none">: A <code>TextPositionSelector</code> with a
+                            <code>source</code> parameter</span>
+                </div>
+                <pre class="nohighlight" id="example11">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(source=https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html,selector(type=TextPositionSelector,start=387,end=404))</pre>
+            </div>
+            <p>This ability to include the address of the Web Publication can be useful for example
+                when referencing a fragment from a Web Publication Resource that is used in more
+                than one Web Publication. Thus the same HTML instance of a poem (a Web Publication
+                Resource) might appear both as part of a collection of poetry Web Publication and as
+                the epigraph of a novel disseminated as a Web Publication. Having the ability to
+                express both <code>source</code> and <code>scope</code> makes it possible to mint a
+                URL for a line from the poem referenced as part of the collection of poetry that is
+                distinguishable  from the URL for the same line from the poem referenced as a part of
+                the novel.</p>
+            <p>The <code>source</code> parameter may be used on its own (e.g., without a
+                    <code>select</code> parameter) as a way to identify or reference an entire Web
+                Publication Resource in the context of a Web Publication of which the resource is a
+                constituent. In Example 12, the whole of Moby Dick's epigraph is being referenced as
+                a constituent part of the Moby Dick Web Publication.</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 12</span>
+                    <span style="text-transform: none">: A <code>source</code> parameter on its
+                        own</span>
+                </div>
+                <pre class="nohighlight" id="example12">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(source=https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html)</pre>
+            </div>
+            <div class="note">
+                <p>This approach using <code>source</code> and <code>scope</code> will require user
+                    agents to dereference the <code>source</code> URL in addition to (or optimally,
+                    instead of) dereferencing the URL to which the LFI is appended. This is a
+                    different expectation than for other formats of Fragment Identifiers (and may
+                    have performance and/or security implications?).</p>
+            </div>
+        </section>
+
+        <section id="enh-lfiState">
+            <h5>The <code>state</code> parameter</h5>
+            <p>The <code>state</code> parameter provides information useful for retrieving a
+                specific representation of a resource. As with <code>select</code>, the syntax is
+                functional, i.e., <code>state(...)</code>. There are two types of States, and each
+                description of a State must include a <code>type</code> parameter with a single
+                value matching the name of one of these <code>types</code> as enumerated below. The
+                parameters required or allowed for a State, vary according to type. LFI State
+                semantics are described in the Web Annotation Data Model [[annotation-model]] and
+                Vocabulary [[annotation-vocab]]. The <code>state</code> parameter is not repeatable
+                and is exclusive with respect to the <code>select</code> parameter, meaning the two
+                must not appear in the same LFI. Note, as with a Selector, State and Selector
+                descriptions can be used in refining other Selectors/States through nesting and
+                assuming the proper use of the <code>refinedBy</code> parameter as described
+                below.</p>
+
+            <p><code>TimeState</code>: This State type describes how to retrieve a temporally
+                appropriate representation when dereferencing the <code>source</code> URL of the
+                LFI. The temporal constraint can be a single timestamp, or it can be a date-time
+                range. If an appropriate representation was cached, the <code>TimeState</code>
+                description may include the URL of the cached copy. The use of
+                    <code>TimeState</code> helps avoid retrieval of a resource representation that
+                is temporally inappoopiate. For example in a note-taking scenario, a note pertaining
+                to a fragment of an article or book chapter (i.e., a Web Publication Resource) may
+                only be valid for the version of the article as it was retrievable on a particular
+                day and time. Example 13 illustrates the use of a <code>TimeState</code> State.</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 13</span>
+                    <span style="text-transform: none">: A <code>TimeState</code></span>
+                </div>
+                <pre class="nohighlight" id="example13">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(source=https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html,state(type=TimeState,cached=http://example.org/myCopy.html,sourceDate=2015-07-20T13:30:00Z))</pre>
+            </div>
+
+            <p><code>HttpRequestState</code>: This State provides the ability to record the HTTP
+                Request headers needed to retrieve an appropriate Web Publication Resource
+                representation when dereferencing the <code>source</code> URL. Example 14
+                illustrates the use of a <code>HttpRequestState</code> State.</p>
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 14</span>
+                    <span style="text-transform: none">: A <code>HttpRequestState</code></span>
+                </div>
+                <pre class="nohighlight" id="example14">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(source=https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html,state(type=HttpRequestState,value=Accept:%20application/ld+json))</pre>
+            </div>
+            <div class="note">The representation retrieved from the server by the original client
+                might not be completely determined by request headers alone. For example, the IP
+                address of the client might also determine the language of the representation, based
+                on the language of the country the user was present in at the time. This State
+                should only be used when there is reasonable confidence that the request headers
+                provided are sufficient to ensure retrieval of an appropriate representation.</div>
+        </section>
+
+        <section id="enh-lfiRefinement">
+            <h4>The <code>refinedBy</code> parameter</h4>
+            <p>This parameter is optional for both <code>selector</code> and <code>state</code> and
+                may be used recursively. The <code>refinedBy</code> parameter allows descriptions of
+                Selectors and States to be combined hierarchically and recursively as necessary to
+                facilitate identification, location/retrieval, or reference within a Web Publication
+                or Web Publication Resource. This method is also appropriate if deemed more reliable
+                or accurate. The syntax of <code>refinedBy</code> is functional, i.e.,
+                    <code>refinedBy(...)</code> and the parameters allowed are the union of those
+                allowed for <code>state</code> and <code>selector</code> parameters, with the value
+                of the <code>type</code> parameter distinguishing a refinement that is a State from
+                one that is a Selector, as well as identifying which type of Selector or State is
+                being used as a refinement. Refinement is done top down, i.e., the top-level
+                Selector or State is applied to the representation retrieved first. Then the first
+                    <code>refinedBy</code>  Selector or State is applied to this result. Then the next
+                    <code>refinedBy</code>  in order is applied to the result of the previous
+                    <code>refinedBy</code>, and so on. Example 15 illustrates a
+                    <code>TextPositionSelector</code> used to refine an <code>XPathSelector</code>. </p>
+
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 15</span>
+                    <span style="text-transform: none">: </span>
+                </div>
+                <pre class="nohighlight" id="example15">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(source=https://dauwhe.github.io/html-first/MobyDickNav/html/epigraph.html,selector(type=XPathSelector,
+              value=/html/body/main/div/div/p[1],refinedBy(type=TextPositionSelector,start=344,end=361)))</pre>
+            </div>
+
+        </section>
+
+        <section id="enh-lfiLocate">
+            <h5>Identifying a location</h5>
+            <p>For some use cases it is desirable to identify a location within a resource rather
+                than a content fragment, e.g., the position immediately preceding character 387 of
+                the normalized text of the epigraph of the Moby Dick Web Publication. In the context
+                of a LFI the semantics of the <code>start</code> and <code>end</code> parameters
+                used with <code>TextPositionSelector</code> and <code>DataPositionSelector</code>
+                are extended (relative to their definitions in the Web Annotation Data Model) to
+                facilitate the identification of a location in a resource text or bytestream rather
+                than a content fragment. Specifically: </p>
+            <ul>
+                <li>the value of <code>start</code> must be =&lt; the value of <code>end</code></li>
+                <li>given a text/bytestream that is n characters/bytes in total length, the values
+                    of <code>start</code> and <code>end</code> must be =&lt; n</li>
+                <li>if the value of the <code>start</code> parameter and the <code>end</code>
+                    parameter are the same, the <code>TextPositionSelector</code> /
+                        <code>DataPositionSelector</code> identifies the position (i.e., location)
+                    in the text/bytestream indicated by the common value</li>
+            </ul>
+            <p>Thus if the text of a resource was "abcdefghijklmnopqrstuvwxyz", the
+                    <code>start</code> was 4, and the <code>end</code> was also 4, then the LFI
+                would be identifying the position immediately preceding  the character "e", i.e.,
+                the location between "d" and "e". (To identify the content fragment "e", the
+                    <code>start</code> would be 4, but the <code>end</code> would be 5.)</p>
+            <div class="ednote">Again, this is a novel interpretation of a fragment identifier. We
+                need to be confident that there are no modeling inconsistencies or unexpected
+                consequences.</div>
+        </section>
+
+        <section id="enh-lfiComposite">
+            <h4>Multi-resource spans</h4>
+            <p>For some use cases it is required to identify a fragment that spans multiple
+                contiguous members of a group of resources (e.g., a subset in order of the resources
+                which comprise a Web Publication). This is described in an LFI by creating an
+                ordered, comma separated list of fragment descriptions, i.e., effectively an ordered
+                list of LFIs. The fragments should be logically consecutive (in some reading order),
+                all fragment descriptions must include a <code>source</code> parameter, and only the
+                first and last fragment descriptions in the list may contain a <code>selector</code>
+                or <code>state</code>  parameter. The content described by the first description in
+                the list is included as part of the span-fragment, but the content described by the
+                last description in the list is not. Example 16 illustrates an LFI identifying a
+                fragment of the Moby Dick Web Publication that begins with the 10th paragraph of
+                chapter 2, encompasses all of chapter 3, and ends at with the start of the 2nd
+                paragraph of chapter 4 (but does not include that paragraph). </p>
+
+            <div class="example">
+                <div class="example-title marker">
+                    <span>Example 16</span>
+                    <span style="text-transform: none">: </span>
+                </div>
+                <pre class="nohighlight" id="example16">https://dauwhe.github.io/html-first/MobyDick.wpub#locate(
+    (source=https://dauwhe.github.io/html-first/MobyDickNav/html/c002.html,selector(type=XPathSelector,
+    value=/html/body/main/div/div/p[10]))
+	(source=https://dauwhe.github.io/html-first/MobyDickNav/html/c003.html),
+	(source=https://dauwhe.github.io/html-first/MobyDickNav/html/c004.html,selector(type=XPathSelector,
+    value=/html/body/main/div/div/p[2]))	
+	)</pre>
+            </div>
+            <p>This approach is in general an extension of the <code>RangeSelector</code> except
+                that intermediate resources between the beginning of the span and the end of the
+                span must be explicitly included to avoid ambiguity (e.g., in case a non-default
+                reading order is involved). </p>
+        </section>
+
+        <section id="enh-lfiEncoding">
+            <h5>URL encoding of LFI</h5>
+            <p>All parameter <code>values</code> included in a LFI should be percent encoded
+                [[!rfc3986]]; the encoding is a must for characters that may make the fragment
+                ambiguous, namely:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <strong>character</strong>
+                        </td>
+                        <td>
+                            <strong>code</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>space</td>
+                        <td>%20</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>=</code>
+                        </td>
+                        <td>%3D</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>,</code>
+                        </td>
+                        <td>%2C</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>#</code>
+                        </td>
+                        <td>%23</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="enh-preferredUrls">
+            <h4>Preferred URLs and URL length</h4>
+            <p>For Web Publications, resource addresses (URLs) that appear as the value of a
+                    <code>source</code> parameter should appear in the list of Web Publication
+                Resources provided in the publication's Infoset. For listed Web Publication
+                Resources retrievable from multiple URLs, the listed URL should be used in
+                preference to any other. </p>
+            <p>User agents typically limit the length of URLs that they will process. When minting a
+                LFI, user agents must respect this limit and not create an LFI that results in a URL
+                too long to be used.</p>
+        </section>
+    </section>
+</section>			
+			
 		</section>
 		<section id="security">
 			<h2>Security</h2>
