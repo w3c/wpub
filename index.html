@@ -588,11 +588,11 @@
 
 				<ul>
 					<li><p>An HTTP Link header field&#160;[[!RFC5988]] with its <code>rel</code> parameter set to the value
-						"<code>publication</code>".</p>
+								"<code>publication</code>".</p>
 						<pre class="example">Link: &lt;https://example.com/webpub/>; rel=publication</pre>
 					</li>
 					<li><p>An [[!HTML]] <code>link</code> element with its <code>rel</code> attribute set to the value
-						"<code>publication</code>".</p>
+								"<code>publication</code>".</p>
 						<pre class="example">&lt;link href="https://example.com/webpub/" rel="publication"/></pre>
 					</li>
 				</ul>
@@ -603,6 +603,11 @@
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
 					associate the manifest with the other publication resources.</p>
+
+				<p class="issue" data-number="32">How linking to a manifest is done may change depending on whether
+					integration with [[AppManifest]] is feasible and beneficial. For a list of differences in linking
+					approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest"
+						>wiki analysis</a>.</p>
 
 				<p class="issue" data-number="76"></p>
 			</section>
