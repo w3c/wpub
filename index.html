@@ -578,15 +578,47 @@
 			<section id="manifest-linking">
 				<h2>Linking to a Manifest</h2>
 
-				<div class="ednote">Placeholder for how resources identify they belong to a publication.</div>
+				<p>Providing a link from a resource to its manifest allows a user agent to discover that a Web Publication is
+					available. The inclusion of links is not always possible, however. For example, when the resource is
+					hosted by a third party, or when access to modify HTTP headers is restricted.</p>
+
+				<p>The inclusion of links from resources to their manifests is therefore RECOMMENDED.</p>
+
+				<p>Links MUST take one or both of the following forms:</p>
+
+				<ul>
+					<li><p>An HTTP Link header field with its <code>rel</code> parameter set to the value
+						"<code>publication</code>".</p>
+						<pre class="example">Link: &lt;https://example.com/webpub/>; rel=publication</pre>
+					</li>
+					<li><p>An [[!HTML]] <code>link</code> element with its <code>rel</code> attribute set to the value
+						"<code>publication</code>".</p>
+						<pre class="example">&lt;link href="https://example.com/webpub/" rel="publication"/></pre>
+					</li>
+				</ul>
+
+				<p>A user agent is only required to process the first <code>publication</code> link encountered, so a
+					resource SHOULD NOT link to more than one Web Publication.</p>
+
+				<!--
+					<p>Each link SHOULD include a <code>title</code> field or attribute with a human-readable label, typically
+						the <a href="#wp-title">title</a> of the Web Publication.</p>
+					
+					<p>A resource MAY provide links to more than one manifest if it belongs to multiple Web Publications.</p>
+
+					<p class="note">The order of the links is not meaningful, but might be used by user agents to order a default
+						list of selections. Refer to <a href="#lifecycle-obtain-manifest"></a> for more information.</p>
+				-->
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
 					associate the manifest with the other publication resources.</p>
+
+				<p class="issue" data-number="76"></p>
 			</section>
 
 			<section id="manifest-linking-from">
-				<h3>Linking <em>from</em> a Manifest</h3>
+				<h3>Linking from a Manifest</h3>
 
 				<p>The manifest serialization MUST provide a general linking mechanism for defining a relationship between
 					the Web Publication and other resources on the Web as well as the type of those relationships.</p>
@@ -624,36 +656,6 @@
 					coding and effort.</p>
 
 				<p class="issue" data-number="67"></p>
-			</section>
-		</section>
-		<section id="lifecycle">
-			<h2>Establishing a Web Publication</h2>
-
-			<p class="issue" data-number="32">Need to determine intersection between web pubs and the lifecycle of a web
-				app.</p>
-
-			<section id="lifecyle-obtain-manifest">
-				<h3>Obtaining the manifest</h3>
-
-				<p class="ednote">Placeholder for UA discovering and obtaining a manifest.</p>
-			</section>
-
-			<section id="lifecycle-process-manifest">
-				<h3>Processing the manifest</h3>
-
-				<p class="ednote">Placeholder for UA processing of manifest and creation of infoset.</p>
-			</section>
-
-			<section id="lifecycle-intiate-wp">
-				<h3>Intiating the Web Publication</h3>
-
-				<p class="ednote">Placeholder for UA initiating an enhanced reading experience.</p>
-			</section>
-
-			<section id="lifecycle-update-wp">
-				<h3>Updating the Web Publication</h3>
-
-				<p class="ednote">Placeholder for UA updating manifest and/or WP content.</p>
 			</section>
 		</section>
 		<section id="wp-enhancements">
