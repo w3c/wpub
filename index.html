@@ -114,29 +114,69 @@
 		<section id="intro">
 			<h2>Introduction</h2>
 
-			<section id="background" class="informative">
-				<h3>Background</h3>
-
-				<p>For millenia now, the written word has been the primary means of encoding and sharing ideas and
-					information. The publication as a bounded edition, made public, has been used to carry intellectual and
-					artistic works of innumerable form: novels, plays, poetry, journals, magazines, newspapers, articles,
-					laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos, manuals, and albums of all
-					sorts.</p>
-
-				<p>More recently, with the advent of the information age, print has been ceding ground to digital, and the
-					Web has become a major forum for the public dissemination of ideas. But the Web is unbounded: information
-					and resources are only loosely connected through hyperlinks. While this model has helped the Web thrive
-					in many areas, it has proven problematic for traditional information publishing—users often cannot access
-					works in their entirety, especially when offline, and have not been able to easily access, compile and
-					download content for curation and personal use. That, in turn, has fed the continuing development of
-					non-Web document formats to redress these problems, and made it necessary to create both Web-ready
-					content and alternative offline renditions to ensure publications are fully available.</p>
-
+			<section id="why-wp" class="informative">
+				<h3>Why Web Publications</h3>
+				
+				<p>The Web is a lonely place. It is unbounded: resources live out their lives on remote servers scatterd
+					across the globe, only reachable by addresses sometimes known to only a few people. But life on the Web
+					is not all doom and gloom. Through the power of Web pages, these resources can be brought together to
+					create amazing experiences.</p>
+				
+				<p>Web sites add another layer of relationship — this time between pages — but the relationship is a tenuous
+					one that typically depends on hyperlinks to add cohesion. Without a user that understands how to follow
+					the connections, a Web site is still no more than a loose coupling of information.</p>
+				
+				<p>The preceding is not a critique of the Web, but meant to highlight that the modern Web is very much an
+					active, event-driven experience. Users follow the necessary paths to obtain the information they
+					need.</p>
+				
+				<p>The traditional publishing model, sometimes called the print model, differs from the Web model in that the
+					publisher packages all the information together and thereby establishes the common pathway through it.
+					The user can passively follow the content page-by-page, or actively find other pathways via a table of
+					contents or index. It is a model that has worked to bind information in a cohesive way for millenia, and
+					continues to be an important model alongside the Web. The publication as a bounded edition, made public,
+					is used to carry intellectual and artistic works of innumerable form: novels, plays, poetry, journals,
+					magazines, newspapers, articles, laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos,
+					manuals, and albums of all sorts.</p>
+				
+				<p>Attempts to reproduce this model on the Web, however, have had to work around its loose coupling of
+					information: sometimes publications are compressed into a single page; sometimes they are broken across
+					multiple pages and hyperlinked together. These models both have flaws, however: single-page publications
+					are often so large they render slowly, especially on low-power devices; mutli-page publications cannot be
+					easily taken offline because their common thread cannot be established.</p>
+				
+				<p>As a result, users have had trouble accessing, compiling and downloading Web content for curation and
+					personal use. That, in turn, has fed the continuing development of non-Web digital formats to redress
+					these problems, and made it necessary to create both Web-ready content and alternative renditions for
+					offline use.</p>
+				
 				<p>This specification aims to reduce these barriers and reinvigorate publishing by combining the best aspects
-					of both models—the persistent availability and portability of bounded publications with the pervasive
-					accessibility, addressability, and interconnectedness of the Open Web Platform.</p>
+					of both models — the persistent availability and portability of bounded publications with the pervasive
+					accessibility, addressability, and interconnectedness of the Open Web Platform. To do so, it adds an
+					unobtrusive definition of interrelation to the Web model: the <a>Web Publication</a>.</p>
 			</section>
-
+			
+			<section id="what-is-wp" class="informative">
+				<h3>What is a Web Publication</h3>
+				
+				<p>A Web Publication is a discoverable and identifiable collection of information about a publication and its
+					resources. This information is expressed in a machine-readable document called a <a>manifest</a>, which
+					is what enables user agents to understand the bounds of the Web Publication and connection between its
+					resources.</p>
+				
+				<p>The manifest includes metadata that describes the Web Publication, as it has an identity and nature beyond
+					its constituent resources. The manifest also provides a list of all the resources that belong to the Web
+					Publication and the default reading order, which is how it connects resources into a single contiguous
+					work.</p>
+				
+				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest (via
+					an HTTP Link header or an [[!HTML]] <code>link</code> element), or the manifest can be loaded directly by
+					a compatible user agent.</p>
+				
+				<p>With the establishment of Web Publications, user agents can build new experiences tailored specifically
+					for their unique reading needs.</p>
+			</section>
+			
 			<section id="scope" class="informative">
 				<h3>Scope</h3>
 
