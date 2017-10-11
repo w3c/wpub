@@ -116,20 +116,20 @@
 
 			<section id="why-wp" class="informative">
 				<h3>Why Web Publications</h3>
-				
+
 				<p>The Web is a lonely place. It is unbounded: resources live out their lives on remote servers scatterd
 					across the globe, only reachable by addresses sometimes known to only a few people. But life on the Web
 					is not all doom and gloom. Through the power of Web pages, these resources can be brought together to
 					create amazing experiences.</p>
-				
+
 				<p>Web sites add another layer of relationship — this time between pages — but the relationship is a tenuous
 					one that typically depends on hyperlinks to add cohesion. Without a user that understands how to follow
 					the connections, a Web site is still no more than a loose coupling of information.</p>
-				
+
 				<p>The preceding is not a critique of the Web, but meant to highlight that the modern Web is very much an
 					active, event-driven experience. Users follow the necessary paths to obtain the information they
 					need.</p>
-				
+
 				<p>The traditional publishing model, sometimes called the print model, differs from the Web model in that the
 					publisher packages all the information together and thereby establishes the common pathway through it.
 					The user can passively follow the content page-by-page, or actively find other pathways via a table of
@@ -138,45 +138,45 @@
 					is used to carry intellectual and artistic works of innumerable form: novels, plays, poetry, journals,
 					magazines, newspapers, articles, laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos,
 					manuals, and albums of all sorts.</p>
-				
+
 				<p>Attempts to reproduce this model on the Web, however, have had to work around its loose coupling of
 					information: sometimes publications are compressed into a single page; sometimes they are broken across
 					multiple pages and hyperlinked together. These models both have flaws, however: single-page publications
 					are often so large they render slowly, especially on low-power devices; mutli-page publications cannot be
 					easily taken offline because their common thread cannot be established.</p>
-				
+
 				<p>As a result, users have had trouble accessing, compiling and downloading Web content for curation and
 					personal use. That, in turn, has fed the continuing development of non-Web digital formats to redress
 					these problems, and made it necessary to create both Web-ready content and alternative renditions for
 					offline use.</p>
-				
+
 				<p>This specification aims to reduce these barriers and reinvigorate publishing by combining the best aspects
 					of both models — the persistent availability and portability of bounded publications with the pervasive
 					accessibility, addressability, and interconnectedness of the Open Web Platform. To do so, it adds an
 					unobtrusive definition of interrelation to the Web model: the <a>Web Publication</a>.</p>
 			</section>
-			
+
 			<section id="what-is-wp" class="informative">
 				<h3>What is a Web Publication</h3>
-				
+
 				<p>A Web Publication is a discoverable and identifiable collection of information about a publication and its
 					resources. This information is expressed in a machine-readable document called a <a>manifest</a>, which
 					is what enables user agents to understand the bounds of the Web Publication and connection between its
 					resources.</p>
-				
+
 				<p>The manifest includes metadata that describes the Web Publication, as it has an identity and nature beyond
 					its constituent resources. The manifest also provides a list of all the resources that belong to the Web
 					Publication and the default reading order, which is how it connects resources into a single contiguous
 					work.</p>
-				
+
 				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest (via
 					an HTTP Link header or an [[!HTML]] <code>link</code> element), or the manifest can be loaded directly by
 					a compatible user agent.</p>
-				
+
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored specifically
 					for their unique reading needs.</p>
 			</section>
-			
+
 			<section id="scope" class="informative">
 				<h3>Scope</h3>
 
@@ -274,6 +274,11 @@
 				for individuals familiar with XML, alternatives such as "properties" and "metadata" do not fully capture the
 				nature or purpose. See <a href="https://github.com/w3c/wpub/issues/63">issue #63</a> for discussion.</p>
 
+			<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how properties are
+				compiled into the infoset remain unspecified. This includes, but is not limited to, what specific names the
+				properties will have in the infoset, whether the names in the manifest will be the same as those in the
+				infoset and/or whether mappings to properties from known vocabularies will be used.</p>
+
 			<section id="infoset-expl">
 				<h3>Explanation</h3>
 
@@ -309,9 +314,13 @@
 
 				<ul>
 					<li>The <a href="#wp-title">title</a> (or "name") of the Web Publication.</li>
+					<li>The <a href="#wp-creators">creator(s)</a> of the Web Publication.</li>
 					<li>The <a href="#wp-language">default (natural) language</a> of the Web Publication.</li>
 					<li>A <a href="#wp-canonical-identifier">canonical identifier</a>.</li>
 					<li>The <a href="#wp-table-of-contents">table of contents</a>.</li>
+					<li>The <a href="#wp-pub-date">publication date</a>.</li>
+					<li>The <a href="#wp-mod-date">modification date</a>.</li>
+					<li><a href="#wp-a11y-meta">Accessibility metadata</a>.</li>
 				</ul>
 
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
@@ -345,6 +354,15 @@
 							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a> [[WCAG20]]
 						for a Web Publication when one is not specified.</p>
 				</div>
+			</section>
+
+			<section id="wp-creators">
+				<h3>Creators</h3>
+
+				<p>Creators are the individuals or entities responsible for the creation of the Web Publication.</p>
+
+				<p>The role the creator played in the creation of the Web Publication SHOULD also be specified (e.g.,
+					'author', 'illustrator', 'translator').</p>
 			</section>
 
 			<section id="wp-language">
@@ -512,47 +530,50 @@
 				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order and
 					must/should have a table of contents (the main navigation entry point).</p>
 			</section>
-			<section id="wp-metadata">
-				<h3>Additional Metadata</h3>
-				<p>In addition the stated requirements the Web Publication Infoset SHOULD also provide the following
-					publication metadata:</p>
-				<ul>
-					<li>A list of creators and, optionally, their specific roles. E.g. 'author', 'publisher', 'editor', or
-						'translator'.</li>
-					<li>Publication date</li>
-					<li>Modification date</li>
-					<li>Accessibility metadata</li>
-				</ul>
 
-				<p>Identifiers and modification dates are an important aid in the distribution and storage of portable
-					formats (past, current, and present) so authors are urged to include this information whenever they
-					can.</p>
+			<section id="wp-pub-date">
+				<h3>Publication Date</h3>
 
-				<p class="issue" data-number="73"></p>
+				<p>The <dfn>publication date</dfn> is the date on which the Web Publication was originally published. It
+					represents a static event in the lifecycle of a Web Publication and allows subsequent revisions to be
+					identified and compared.</p>
 
-				<p>The infoset MAY also provide:</p>
+				<p>The exact moment of publication is intentionally left open to interpretation: it could be when the Web
+					Publication is first made available online, or could be a point in time before publication when the Web
+					Publication is considered final.</p>
+			</section>
 
-				<ul>
-					<li>A subtitle</li>
-					<li>Licensing information</li>
-					<li>Intended audience</li>
-					<li>General subject</li>
-				</ul>
+			<section id="wp-mod-date">
+				<h3>Last Modification Date</h3>
 
-				<p>These items apply to the Web publication in its entirety. Metadata for individual content documents should
-					be embedded in or linked from the content documents themselves.</p>
+				<p>The <dfn>last modification date</dfn> is the date when the Web Publication was last updated.</p>
 
-				<p>The Web Publication Infoset SHOULD NOT include complex, specialised, and industry-specific metadata and
-					authors should limit the metadata included in the manifest to the items above.</p>
+				<p>The last modification date SHOULD be updated whenever changes are made to the resources of the Web
+					Publication, including the manifest. It does not necessarily reflect all changes to the Web Publication,
+					however, as, for example, it might not reflect changes to third-party content.</p>
+			</section>
 
-				<p>If the information set does not cover the publication's needs, authors should link to external metadata
-					files in whichever formats and schema are most commonly accepted as the authoritative metadata format for
-					their intended audiences. They can include multiple metadata links in multiple formats, one for each
-					intended audience, if needed.</p>
+			<section id="wp-a11y-metadata">
+				<h3>Accessibility Metadata</h3>
 
-				<p>User Agents MAY decide to support metadata extensions, other metadata schemes, or additional metadata
-					properties if they so choose. User Agents must ignore metadata properties that they do not recognise.</p>
+				<p>Accessibility metadata allows discovery of features and affordances of the Web Publication that enable its
+					usability by users with specific reading requirements and needs.</p>
+			</section>
 
+			<section id="wp-extensibility">
+				<h3>Extensibility</h3>
+
+				<p>The infoset is designed to provide a basic set of properties for use by user agents in presenting and
+					rendering a Web Publication. It MAY be extended in the following ways:</p>
+
+				<ol>
+					<li>through the inclusion of additional properties in the manifest;</li>
+					<li>by the provision of <a href="#manifest-linking-from">linked</a> metadata records.</li>
+				</ol>
+
+				<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the infoset.
+					The use of linked records is RECOMMENDED whenever possible, as the use of native formats standardizes and
+					simplifies processing by user agents.</p>
 			</section>
 		</section>
 		<section id="manifest">
