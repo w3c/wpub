@@ -690,6 +690,69 @@
 				<p class="issue" data-number="67"></p>
 			</section>
 		</section>
+		<section id="wp-lifecycle">
+			<h2>Web Publication Lifecycle</h2>
+
+			<div class="ednote">
+				<p>The publishing working group is currently evaluating the best approach for implementing web publications
+					in user agents. This note is intnded to provide an overview of where current thinking is and what issues
+					are under consideration.</p>
+
+				<p>The development of web publications is not viewed as a separate forking of the web, but an enhancement
+					layer that can be supported by user agents. To that end, the primary constraints on any solution for web
+					publications are that:</p>
+
+				<ul>
+					<li>the rendering of web publications must not interfere with the underlying web model and APIs. All
+						functionality and enhancements must be layered on top.</li>
+					<li>a web publication should not have to carry its own implementation code. Functionality is ideally
+						provided by the user agent and/or polyfill.</li>
+				</ul>
+
+				<p>While this specification will provide implementation flexibility for user agents, there are still a number
+					of areas that have been identified as potentially needing to be detailed. These include:</p>
+
+				<ul>
+					<li>
+						<p>initialization expectations for a web publication:</p>
+						<ul>
+							<li>use agent initiation v. user prompts;</li>
+							<li>linked v. directly loaded manifests;</li>
+							<li>resources that belong to more than one web publication.</li>
+						</ul>
+					</li>
+					<li>
+						<p>the creation of a "publication state":</p>
+						<ul>
+							<li>persistence of publication information across page loads</li>
+							<li>location and persistence of UI;</li>
+							<li>indications of supported features;</li>
+							<li>DOM issues such as persistence of numbering schemes.</li>
+						</ul>
+					</li>
+					<li>
+						<p>tracking the extent of a publication:</p>
+						<ul>
+							<li>taking an entire publication offline;</li>
+							<li>enabling search across documents.</li>
+						</ul>
+					</li>
+					<li>
+						<p>establishing the bounds of a publication:</p>
+						<ul>
+							<li>when to end the publication state;</li>
+							<li>document history traversal;</li>
+							<li>how to handle links outside the publication.</li>
+						</ul>
+					</li>
+					<li>updating of the manifest.</li>
+				</ul>
+
+				<p>The working group intends to flesh out the lifecycle in later revisions once it is clearer what models are
+					viable and what solutions can be standardized. Input on the feasibility and challenges of these
+					approaches is welcome at any time.</p>
+			</div>
+		</section>
 		<section id="wp-enhancements">
 			<h2>Reading Enhancements</h2>
 
