@@ -799,10 +799,241 @@
 				<p class="ednote">Placeholder for inter-publication search.</p>
 			</section>
 
-			<section id="enh-pagination">
-				<h3>Pagination</h3>
+			<section id="Layout">
+				<h3>Layout</h3>
 
-				<p class="ednote">Placeholder for paginated reading experience.</p>
+				<p class="issue advisement">This section needs thorough review not only from the publishing community
+					to ensure that the proposed behavior is desirable,
+					but also from Web Browser vendors and other implementors of layout engines
+					to ensure that is it implementable.</p>
+
+				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web content.
+				[[!HTML]] (including XHTML) documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>,
+				[[!SVG]] files are rendered as normally expected of that format, and so on.
+				This specification requires no particular profile or subset of CSS, HTML, or SVG to be supported,
+				other than the expectations set for these technologies by their respective specifications.</p>
+
+				<div class=note>
+					<p>This specification intentionally refrains from introducing any new layout feature.
+					Any shortcoming of the web platform in terms of layout needs to be addressed for the whole web platform,
+					which means via CSS.</p>
+
+					<p>This working group recognizes that the features offered by CSS specifications have limitations,
+					and that in some cases implementations may be incomplete.
+					However, attempts to address these shortcomings for the exclusive purpose of <a>Web Publications</a>
+					would at best have no effect,
+					and at worst lead to a divergence between “ordinary” web content and <a>Web Publications</a>,
+					instead of the convergence this specification aims to achieve.</p>
+
+					<p>This working group will work with other relevant groups of the W3C to address
+					platform wide limitations that negatively impacts <a>Web Publications</a>,
+					and invites readers to do the same.</p>
+				</div>
+
+				<p>For the purposes of layout, each resource of a <a>Web Publication</a> is treated as a separate document.
+				User Agents must not mix content from multiple resources in the same rendering:
+				For instance, <a href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">Absolutely positioned elements</a>
+				from one resource may not intrude or overlap with content from an other resource.</p>
+
+				<p>Users must therefore rely on the UI features of the User Agent
+				to navigate from one resource to another,
+				rather than expect a collection of resources to be readable as if it were a single one.</p>
+
+				<p>This does not imply that User Agents are forbidden from juxtaposing the rendering of the various resources.
+				Scrolling User Agents may for instance place renderings of the resources beneath each other in the <a>default reading order</a>,
+				so that users may seamlessly scroll past the end of one and into the next one,
+				as long as the layout of resources is processed independent.
+				Similarly, paginating Users Agents can let users flip pages from one resource to the next,
+				but must not display content from two or more separate resources on the same page.</p>
+
+				<div class=issue>
+					<p>Should this "UAs may juxtapose" phrasing be replaced with normative prose defining precisely
+					how such juxtaposition work?
+					On the one hand, interoperability is always good,
+					on the other hand, this is an area with lots of subtleties and room for UI innovation.
+					It may be wiser to let a first generation of UAs experiment freely,
+					and standardize on the winning behavior in a future revision of this specification
+					</p>
+				</div>
+
+				<div class=note>
+					<p>This requirement of laying out each resource separately puts some constrains
+					on authors’ abilities to arbitrarily style a <a>Web Publication</a>,
+					and may appear to go against the principle of the separation of concerns.
+					However, the alternative is not practical:
+					CSS is not defined to work over a collection of documents,
+					and numerous sections of the specifications would need rewriting
+					to define the behavior of selectors, counters, floats, positioned elements…</p>
+
+					<p>An alternative approach would be to leave CSS work on a single document,
+					but have that document be the <a>Web Publication</a> as a whole rather than its individual HTML constituents.
+					This is however merely moving the problem around rather than solving it,
+					as this specification would then need to define semantics for this unified document format separately from [[HTML]]
+					including a DOM and assorted APIs, what to do with redundant or conflicting meta data
+					from each each of the constituent part,
+					not to mention a sensible way to merge resources of unrelated types,
+					such as an HTML resource followed in the default reading order by an SVG resource, itself followed by a PNG image…</p>
+
+					<p>However, nothing forces authors to use separate resources for separate chapters of a book
+					or similar semantic subdivisions of their publications,
+					so this constraint on styling is easily worked around
+					when subdivisions of a publication need to be blended together.</p>
+
+				</div>
+
+					<div class=issue>
+						<p>Despite this general requirement that each resource should be treated as a separate document
+						for the purpose of layout,
+						there are probably a handful of places where CSS specifications should be amended to
+						be able to deal more intelligently with collections of resources like <a>Web Publications</a>.
+
+						<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>
+						which are currently restricted to work only within a single document.
+						This restriction should be relaxed to allow for cross references between
+						separate resources of a single <a>Web Publication</a>.
+
+						<p>Another related one would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a>
+						to accumulate across multiple resources of a single <a>Web Publication</a>,
+						for instance so that figures in multiple sections may be numbered in a single sequance.
+
+					</div>
+
+				<section id="scrolling-or-paginating" class=informative>
+					<h4>Scrolling or Paginating</h4>
+					<p>Web content, and a fortiori <a>Web Publications</a>, may be rendered on various media,
+					each with differing characteristics,
+					either due to the physical media itself or to the design of the User Agent.
+					Web Publications are not constrained to any specific medium;
+					User Agents are expected to render them as they would render other web content on the same medium.
+					Authors can adjust the way they style their documents using the features specified in [[MEDIAQ]] or its successor [[MEDIAQUERIES-4]],
+					as supported by the User Agent.</p>
+					<p>It is however worth calling out a major subdivision within media types: scrolling and paginating.</p>
+					<p>In scrolling media, when content overflows the <a href="https://www.w3.org/TR/css-display-3/#initial-containing-block">initial containing block</a> (See [[CSS-DISPLAY-3]])
+					it is exposed by allowing users to scroll to it.
+					This behavior is typical of most desktop or mobile web browsers.</p>
+					<p>In paginating media, content is broken up into discrete pages,
+					and content that overflows one page is displayed on subsequent pages.
+					This behavior is typical of web content printed on paper,
+					of the output of web-to-PDF renderers,
+					and of many e-book reading systems.</p>
+					<p>Some User Agents may support both scrolling and pagination.
+					As the preferences of individual readers vary,
+					and as different types of publications may be better suited for one or the other,
+					this specification encourages User Agents to support both,
+					and to offer a choice to their users.</p>
+
+					<div class="note">
+					<p>Authors or Publishers occasionally have strong preferences between scrolling and paginating for particular types of content,
+					and may wish to require a publication to always be rendered in one or the other mode.
+					This wish is not, however, something that <a>Web Publication</a> User Agents can effectively enforce.
+					Since <a>Web Publications</a> are composed of backwards-compatible ordinary web content,
+					legacy User Agents unaware of this specification will be able to open them,
+					and will render them as they render any other content.
+					Even <a>Web Publication</a> aware User Agents may only support for one of the two layout modes,
+					and cannot be expected to honor requests to use the other one.
+
+					<p>However, within the limits of the layout features supported by the user Agent used to render a publication,
+					it is possible for authors to provide a page-like experience on scrolling media,
+					using css features such as those defined in [[CSS-MULTICOL-1]] or [[CSS-SCROLL-SNAP-1]],
+					or the <a href="https://www.w3.org/TR/css-values-3/#viewport-relative-lengths">viewport units</a> defined in [[CSS-VALUES-3]].
+					</div>
+
+					<div class=issue>
+					<p>It may nonetheless be useful for authors to be able to specify a preference between scrolling and pagination,
+					even if a strict requirement is not possible. This should most likely be addressed through an extension of
+					<a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"><code>@viewport</code></a>
+					or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see [[CSS-DEVICE-ADAPT]]),
+					or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See [[CSS-PAGE-3]]).
+					This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).
+					</div>
+				</section>
+				<section id="enh-pagination">
+					<h4>Paginated Layout</h4>
+
+					<p>When a User Agent renders a <a>Web Publication</a> in a paginated layout,
+					it must lay out each document in the <a>default reading order</a> sequentially,
+					with the last page of a resource being followed by the first page of the subsequent one.</p>
+
+					<div class=issue>
+						<p>To avoid having unstyleable blank pages in the middle of the document,
+						if the preceding resource ended on a left page (resp. right page),
+						the subsequent one should start on a right page (resp. left page)
+						even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]])
+						would otherwise lead to starting on the opposite page;
+						It should also be possible to use the <a href="">break-before</a> property (See [[!CSS-BREAK-3]])
+						to force the content to resume on the opposite side if that was desired by the author.</p>
+
+						<p>[[CSS-PAGE-3] needs to be amended to describe this exception to the general behavior
+						when dealing with collections of documents instead of individual documents.</p>
+					</div>
+
+					<div class=issue>
+						<p>How is that supposed to work when subsequent resources have opposite
+						<a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]]) direction,
+						for instance due to different a different writing mode?
+						This is not necessarily a problem from a layout point of view,
+						as each page is independent,
+						but from an UI point of view, if swiping left means next page until the end of
+						one chapter, and starts meaning previous page in the next chapter because
+						we've switched from English to Hebrew, this is going to be horribly confusing.
+					</div>
+
+					<div class=issue>
+						<p>Should any of the above be normative,
+						or should we leave this up to User Agents to explore,
+						and only standardize if and when a clear winning approach emerges?
+					</div>
+
+					<div class=issue>
+						<p>[[CSS-PAGE-3]] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a>
+						are not automatically reset to at the beginning of each new resource belonging to the same
+						<a>Web Publication</a>.</p>
+					</div>
+
+					<div class="note">
+						<p>Pagination, like any other aspect of layout, is governed by the various CSS specifications,
+						and is an integrated part of supporting CSS, rather than an isolated standalone feature.
+						Nonetheless, a few specification are especially relevant for User Agents
+						that wish to provide high quality support for paginated media:
+						<dl>
+							<dt><a href="https://www.w3.org/TR/CSS2/page.html">Section in 13</a> in [[CSS2]]
+							<dd>This defines the fundamentals of pagination in CSS.
+							<dt>[[CSS-PAGE-3]]
+							<dd>This CSS module specifies how pages are generated and laid out
+							to hold fragmented content in a paged presentation.
+							It adds functionality for controlling page margins,
+							page size and orientation,
+							and headers and footers,
+							bleed and printer marks,
+							and extends generated content to enable page numbering and running headers / footers.
+							<dt>[[CSS-BREAK-3]]
+							<dd>This module describes the fragmentation model that partitions a flow into pages, columns, or regions.
+							It builds on the Page model module and introduces and defines the fragmentation model.
+							It adds functionality for pagination, breaking variable fragment size and orientation,
+							and controling (forcing or forbidding) where breaks happen, including widows and orphans.
+							<dt>[[MEDIAQ]] and [[MEDIAQUERIES-4]]
+							<dd>These modules provides authors with features to detect various aspect of the media
+							the document is being rendered in, including whether (and how) it is paginated,
+							or more nuanced questions to tell apart environments like a ebook reader from a print rendition.
+							<dt>[[CSS-GCPM-3]]
+							<dd>This module defines a few features that are useful in paged media,
+							such as <a href="https://drafts.csswg.org/css-gcpm/#footnotes">footnotes</a>,
+							<a href="https://drafts.csswg.org/css-gcpm/#running-headers-and-footers">running headers and footers</a>,
+							and <a href="https://drafts.csswg.org/css-gcpm/#the-first-page-pseudo-element">page selectors</a>.
+							<dt>[[CSS-CONTENT-3]]
+							<dd>This module, while overall unstable at the time of writing,
+							contains a few features that while not exclusive to paged media,
+							are particularly useful in paged media,
+							such as <a href="https://drafts.csswg.org/css-content/#leaders">leaders</a> or
+							<a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>.
+							<dt>[[CSS-PAGE-FLOATS-3]]
+							<dd>This module extends the ability of floats to not only go to the beginning or end of the line,
+							but also to float to the top or bottom of pages, columns…
+							<dt>[[CSS-GRID-1]]
+							<dd>This module is not specific to paginated media, but is nonetheless noteworthy
+							as it enables advanced layouts often found in print publications.
+					</div>
+				</section>
 			</section>
 
 			<section id="enh-locators" class="informative">
