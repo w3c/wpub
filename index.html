@@ -197,7 +197,7 @@
 				<h3>Terminology</h3>
 
 				<p>Wherever appropriate, this document relies on terminology defined by the note on "Publishing and Linking
-					on the Web" [[!publishing-linking]], including, in particular, <a class="externalDFN"
+					on the Web" [[!PUBLISHING-LINKING]], including, in particular, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a
 						class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, and <a
@@ -229,7 +229,7 @@
 					<dt><dfn>URL</dfn></dt>
 					<dd>
 						<p>In this specification, the general term URL is used as in other W3C specifications like
-							HTML&#160;[[!html]], and is defined by URL Standard of the WhatWG&#160;[[!url]]. In particular,
+							HTML&#160;[[!HTML]], and is defined by URL Standard of the WhatWG&#160;[[!URL]]. In particular,
 							such a URL allows for the usage of characters from Unicode following&#160;[[!RFC3987]]. See <a
 								href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
 								document</a> for further details.</p>
@@ -419,7 +419,7 @@
 					and the degree of control over assignment of identifiers.</p>
 
 				<p class="note">If the canonical identifier is a URL, it can be used as the target of a "canonical"
-					link&#160;[[!RFC6596]] (e.g., a [[html]] <code>link</code> element whose <code>rel</code> attribute has
+					link&#160;[[RFC6596]] (e.g., an [[HTML]] <code>link</code> element whose <code>rel</code> attribute has
 					the value <code>canonical</code> or a Link HTTP header field [[RFC5988]] similarly identified).</p>
 
 				<p class="issue" data-number="58">The question is whether a canonical identifier is necessary to call out
@@ -436,7 +436,7 @@
 					addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
 
 				<div class="note">The Web Publication's address can also be used as value for an identifier link relation
-					[[link-relation]].</div>
+					[[LINK-RELATION]].</div>
 			</section>
 
 			<section id="wp-resources">
@@ -469,7 +469,7 @@
 				<p>The default reading order MUST include at least one resource.</p>
 
 				<p>The default reading order is either specified directly in the manifest or a link is provided to an
-					[[!html]] <code>nav</code> element whose list of links are processed to create one.</p>
+					[[!HTML]] <code>nav</code> element whose list of links are processed to create one.</p>
 
 				<p>The process for extracting a default reading order from a <code>nav</code> element are as follows:</p>
 
@@ -504,7 +504,7 @@
 					on the completeness of the table of contents, except that, when specified, it MUST link to at least one
 					resource in the <a>default reading order</a>.</p>
 
-				<p>The table of contents is either specified directly in the manifest or a link is provided to an [[!html]]
+				<p>The table of contents is either specified directly in the manifest or a link is provided to an [[!HTML]]
 						<code>nav</code> element containing one.</p>
 
 				<p>If a user agent requires a table of contents and one is not specified, it MAY construct one. This
@@ -650,7 +650,7 @@
 					associate the manifest with the other publication resources.</p>
 
 				<p class="issue" data-number="32">How linking to a manifest is done may change depending on whether
-					integration with [[AppManifest]] is feasible and beneficial. For a list of differences in linking
+					integration with [[APPMANIFEST]] is feasible and beneficial. For a list of differences in linking
 					approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest"
 						>wiki analysis</a>.</p>
 
@@ -686,7 +686,7 @@
 							href="https://tools.ietf.org/html/rfc4287">Atom</a>&#160;[[RFC4287]]</li>
 
 					<li>Alternate versions of the publication</li>
-					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a>&#160;[[webmention]]</li>
+					<li><a href="https://www.w3.org/TR/webmention/">Web Mentions</a>&#160;[[WEBMENTION]]</li>
 				</ul>
 
 				<p class="note">Some of these link structures, such as dynamic search links, may require support for <a
@@ -810,8 +810,8 @@
 
 				<p>In addition to a Web Publication's address(es), bookmarking, annotation, and other use cases require
 					internal locators which can be used to identify, locate, retrieve, and/or reference locations and content
-					fragments within a Web Publication (cf. Web Publications Use Cases and Requirements [[pwp-ucr]] and
-					Digital Publishing Annotation Use Cases [[dpub-annotation-uc]]). </p>
+					fragments within a Web Publication (cf. Web Publications Use Cases and Requirements [[PWP-UCR]] and
+					Digital Publishing Annotation Use Cases [[DPUB-ANNOTATION-UC]]). </p>
 
 				<section id="enh-intrinsicLocators">
 					<h4>Publisher-Provided Locators</h4>
@@ -843,13 +843,13 @@
 
 					<p>A broad range of fragment identifier formats, each specific to resources of one or more media-types,
 						have been defined in various IETF RFCs, W3C Recommendations, etc. These are typically included by
-						reference in IANA-registered media-type specifications [[iana-media-types]]. A fragment identifier of
+						reference in IANA-registered media-type specifications [[IANA-MEDIA-TYPES]]. A fragment identifier of
 						a format appropriate for a Web Publication Resource's media type may be used to identify, retrieve,
 						and/or reference content fragments within that resource.</p>
 
 					<div class="ednote">
 						<p>Could reference or duplicate here with modifications the second table from 4.2.1 of Web Anno Data
-							Model Rec. [[!annotation-model]].</p>
+							Model Rec. [[!ANNOTATION-MODEL]].</p>
 					</div>
 
 					<p>User agents minting fragment identifiers often take advantage of publisher-provided anchors and
@@ -868,7 +868,7 @@
 
 					<p>Using other fragment identifier formats, user agents may mint fragment identifiers to serve as Web
 						Publication internal locators even in the absence of any explicit publisher-provided anchor or
-						structure. For example, a media fragment identifier [[!media-frags]] for a still image embedded in a
+						structure. For example, a media fragment identifier [[!MEDIA-FRAGS]] for a still image embedded in a
 						Web Publication may be minted without reference to any publisher-provided anchor or structure, as
 						shown in Example 2. In this example, the fragment is a rectangular image segment that is 200x150
 						pixels with its upper left corner at 100 pixels in from the left edge and 500 pixels down from the
@@ -905,7 +905,7 @@
 					</div>
 
 					<p>The semantics of Web Publication Locators are a mapping and extension of the Web Annotation Data Model
-						[[!annotation-model]] and Vocabulary [[!annotation-vocab]] for describing and referencing a segment
+						[[!ANNOTATION-MODEL]] and Vocabulary [[!ANNOTATION-VOCAB]] for describing and referencing a segment
 						of a web resource. As a result Web Publication Locators provide the expressiveness needed for a broad
 						range of annotation and bookmarking use cases. Additionally Web Publication Locators provide a way to
 						identify and reference a location within a Web Publication, i.e., as distinct from identifying and
