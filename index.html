@@ -518,17 +518,25 @@
 					<li>calculate a table of contents using its own algorithms.</li>
 				</ol>
 
+				<p class="issue" data-number="9">The question is whether the manifest/infoset needs to provide navigation, or
+					whether such mechanisms belong in the content.</p>
+
 				<p class="issue">This question arises only if this mechanism is accepted: the question is whether a table of
 					contents navigation element can refer, via links, to any resource that is <em>not</em> listed in the
 					default reading order.</p>
 
-				<p class="ednote">The issue of using the HTML <code>nav</code> element as a possible encoding of the table of
-					contents is mentioned or explicitly addressed in a number of issues listed below.</p>
+				<div class="issue">
+					<p>The issue of using the HTML <code>nav</code> element as a possible encoding of the table of contents
+						is mentioned or explicitly addressed in the following issues:</p>
 
-				<p class="issue" data-number="35">Define the resources in the default reading order of a Web Publication to
-					be the files referenced in the first</p>
-				<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order and
-					must/should have a table of contents (the main navigation entry point).</p>
+					<ul>
+						<li><a href="https://github.com/w3c/wpub/issues/35">Issue #35</a>: Define the resources in the
+							default reading order of a Web Publication to be the files referenced in the first</li>
+						<li><a href="https://github.com/w3c/wpub/issues/39">Issue #39</a>: There is a consensus that a Web
+							Publication must have a reading order and must/should have a table of contents (the main
+							navigation entry point).</li>
+					</ul>
+				</div>
 			</section>
 
 			<section id="wp-pub-date">
@@ -763,16 +771,19 @@
 			<section id="enh-nav">
 				<h3>Navigation</h3>
 
+				<p class="issue" data-number="86"></p>
+				
 				<section id="enh-reading-order">
 					<h4>Reading Order</h4>
 
-					<p class="ednote">Placeholder for automatic progression through the default reading order.</p>
+					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
 				</section>
 
 				<section id="enh-toc">
 					<h4>Table of Contents</h4>
 
-					<p class="ednote">Placeholder for accessing a table of contents.</p>
+					<p class="issue" data-number="9">Does the user agent need to provide access to the table of contents, or do
+						such mechanisms belong in the content.</p>
 				</section>
 			</section>
 
@@ -793,143 +804,133 @@
 
 				<p class="ednote">Placeholder for paginated reading experience.</p>
 			</section>
-			
-<section id="enh-locators" class="informative">
-    <h3>Internal Locators</h3>
 
-    <p>In addition to a Web Publication's address(es), bookmarking, annotation,
-        and other use cases require internal locators which
-        can be used to identify, locate, retrieve, and/or reference locations and content fragments
-        within a Web Publication (cf. Web Publications Use Cases and Requirements [[pwp-ucr]] and
-        Digital Publishing Annotation Use Cases [[dpub-annotation-uc]]). </p>
+			<section id="enh-locators" class="informative">
+				<h3>Internal Locators</h3>
 
-    <section id="enh-intrinsicLocators">
-        <h4>Publisher-Provided Locators</h4>
-        <p>In choosing to organize a publication into multiple, individually addressable
-            resources, each with its own URL, the creator(s) of the publication provide locators
-            for individual objects within the publication. Thus Web Publication Resource
-            URLs serve as Web Publication internal locators for directly identifying, retrieving,
-            and/or referencing each constituent resource of a Web Publication in its entirety. </p>
+				<p>In addition to a Web Publication's address(es), bookmarking, annotation, and other use cases require
+					internal locators which can be used to identify, locate, retrieve, and/or reference locations and content
+					fragments within a Web Publication (cf. Web Publications Use Cases and Requirements [[pwp-ucr]] and
+					Digital Publishing Annotation Use Cases [[dpub-annotation-uc]]). </p>
 
-        <p>Within an individual Web Publication Resource, the creator of the resource may further
-            provide anchors or other structures (e.g., the value of an <code>id</code> attribute of
-            a <code>&lt;p&gt;</code> element in an HTML constituent resource, the Document Object
-            Model (DOM) of an XML constituent resource) as a way to facilitate identifying,
-            locating, retrieving, and/or referencing locations and more granular content fragments
-            within that individual constituent resource and thereby within the Web Publication. 
-            Intra-resource, publisher-provided anchors and structures of this sort are often used to
-            mint fragment identifiers and Web Publication Locators, as described below. </p>
-    </section>
+				<section id="enh-intrinsicLocators">
+					<h4>Publisher-Provided Locators</h4>
+					<p>In choosing to organize a publication into multiple, individually addressable resources, each with its
+						own URL, the creator(s) of the publication provide locators for individual objects within the
+						publication. Thus Web Publication Resource URLs serve as Web Publication internal locators for
+						directly identifying, retrieving, and/or referencing each constituent resource of a Web Publication
+						in its entirety. </p>
 
-    <section id="enh-FragmentIds">
-        <h4>Fragment Identifiers</h4>
+					<p>Within an individual Web Publication Resource, the creator of the resource may further provide anchors
+						or other structures (e.g., the value of an <code>id</code> attribute of a <code>&lt;p&gt;</code>
+						element in an HTML constituent resource, the Document Object Model (DOM) of an XML constituent
+						resource) as a way to facilitate identifying, locating, retrieving, and/or referencing locations and
+						more granular content fragments within that individual constituent resource and thereby within the
+						Web Publication. Intra-resource, publisher-provided anchors and structures of this sort are often
+						used to mint fragment identifiers and Web Publication Locators, as described below. </p>
+				</section>
 
-        <p>The generic syntax for fragment identifiers is defined in RFC 3986 [[!rfc3986]]. The
-            fragment identifier component of a URL comes at the end of the URL and is preceded by a
-                <code>#</code> character. The fragment identifier component of a URL is separated
-            prior to dereferencing and is not sent to the server. The identifying information within
-            the fragment identifier component itself is dereferenced solely by the user agent.
-            Interpretation and resolution of a fragment identifier may be dependent on the
-            media-type of the resource retrieved when the preceding part of the URL is
-            dereferenced. </p>
+				<section id="enh-FragmentIds">
+					<h4>Fragment Identifiers</h4>
 
-        <p>A broad range of fragment identifier formats, each specific to resources of one or more
-            media-types, have been defined in various IETF RFCs, W3C Recommendations, etc. These are
-            typically included by reference in IANA-registered media-type specifications
-            [[iana-media-types]]. A fragment identifier of a format appropriate for a Web
-            Publication Resource's media type may be used to identify, retrieve, and/or reference
-            content fragments within that resource.</p>
+					<p>The generic syntax for fragment identifiers is defined in RFC 3986 [[!RFC3986]]. The fragment
+						identifier component of a URL comes at the end of the URL and is preceded by a <code>#</code>
+						character. The fragment identifier component of a URL is separated prior to dereferencing and is not
+						sent to the server. The identifying information within the fragment identifier component itself is
+						dereferenced solely by the user agent. Interpretation and resolution of a fragment identifier may be
+						dependent on the media-type of the resource retrieved when the preceding part of the URL is
+						dereferenced. </p>
 
-        <div class="ednote">
-            <p>Could reference or duplicate here with modifications the second table from 4.2.1 of
-                Web Anno Data Model Rec. [[!annotation-model]].</p>
-        </div>
+					<p>A broad range of fragment identifier formats, each specific to resources of one or more media-types,
+						have been defined in various IETF RFCs, W3C Recommendations, etc. These are typically included by
+						reference in IANA-registered media-type specifications [[iana-media-types]]. A fragment identifier of
+						a format appropriate for a Web Publication Resource's media type may be used to identify, retrieve,
+						and/or reference content fragments within that resource.</p>
 
-        <p>User agents minting fragment identifiers often take advantage of publisher-provided anchors
-            and structures. For example, the value of the <code>id</code> attribute of a
-                <code>&lt;p&gt;</code> element in an HTML Web Publication Resource can be used to
-            mint a fragment identifier linking to that <code>&lt;p&gt;</code> element (i.e., a
-            paragraph). This type of fragment identifier is illustrated in Example 1 which assumes
-            the existence within the HTML resource of an element with id p33, e.g., <code>&lt;p
-                id="p33"&gt;</code>.</p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 1</span>
-                <span style="text-transform: none">: A simple fragment identifier</span>
-            </div>
-            <pre class="nohighlight" id="example1">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#p33</pre>
-        </div>
+					<div class="ednote">
+						<p>Could reference or duplicate here with modifications the second table from 4.2.1 of Web Anno Data
+							Model Rec. [[!annotation-model]].</p>
+					</div>
 
-        <p>Using other fragment identifier formats, user agents may mint fragment identifiers to serve as Web
-            Publication internal locators even in the absence of any explicit publisher-provided
-            anchor or structure. For example, a media fragment identifier [[!media-frags]] for a
-            still image embedded in a Web Publication may be minted without reference to any 
-		publisher-provided anchor or structure, as
-            shown in Example 2. In this example, the fragment is a rectangular image segment that is
-            200x150 pixels with its upper left corner at 100 pixels in from the left edge and 500
-            pixels down from the top edge of the full image.</p>
-        <div class="example">
-            <div class="example-title marker">
-                <span>Example 2</span>
-                <span style="text-transform: none">: A media fragment identifier</span>
-            </div>
-            <pre class="nohighlight" id="example2">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#xywh=100,500,200,150</pre>
-        </div>
-    </section>
+					<p>User agents minting fragment identifiers often take advantage of publisher-provided anchors and
+						structures. For example, the value of the <code>id</code> attribute of a <code>&lt;p&gt;</code>
+						element in an HTML Web Publication Resource can be used to mint a fragment identifier linking to that
+							<code>&lt;p&gt;</code> element (i.e., a paragraph). This type of fragment identifier is
+						illustrated in Example 1 which assumes the existence within the HTML resource of an element with id
+						p33, e.g., <code>&lt;p id="p33"&gt;</code>.</p>
+					<div class="example">
+						<div class="example-title marker">
+							<span>Example 1</span>
+							<span style="text-transform: none">: A simple fragment identifier</span>
+						</div>
+						<pre class="nohighlight" id="example1">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#p33</pre>
+					</div>
 
-    <section id="enh-wpLocators">
-        <h4>Web Publication Locators</h4>
+					<p>Using other fragment identifier formats, user agents may mint fragment identifiers to serve as Web
+						Publication internal locators even in the absence of any explicit publisher-provided anchor or
+						structure. For example, a media fragment identifier [[!media-frags]] for a still image embedded in a
+						Web Publication may be minted without reference to any publisher-provided anchor or structure, as
+						shown in Example 2. In this example, the fragment is a rectangular image segment that is 200x150
+						pixels with its upper left corner at 100 pixels in from the left edge and 500 pixels down from the
+						top edge of the full image.</p>
+					<div class="example">
+						<div class="example-title marker">
+							<span>Example 2</span>
+							<span style="text-transform: none">: A media fragment identifier</span>
+						</div>
+						<pre class="nohighlight" id="example2">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#xywh=100,500,200,150</pre>
+					</div>
+				</section>
 
-        <p>For some use cases it is essential to identify and reference a Web Publication Resource
-		or a location in or a segment
-            of a Web Publication Resource in the scope or context of a Web Publication which includes
-		this resource. The fragment identifier approaches described
-            above do not satisfy this requirement since only the URL of the constituent Web Publication Resource
-            containing the location or content fragment of interest is expressed.  
-		Web Publication Locators address this issue by providing the means to express both the URL of the 
-		Web Publication Resource and the URL of the Web Publication.</p>
-	    
-        <div class="ednote">
-            <p>TO DO: Need to update title and insert here reference to this now separate document.
-		Do we also need an informative reference here to EBPU CFI document?</p>
-        </div>	    
+				<section id="enh-wpLocators">
+					<h4>Web Publication Locators</h4>
 
-         <div class="ednote">
-            <p>TO DO: illustrate with example of simple, easy to understand Web Publication Locator
-		 such as might be used in annotating a simple Web Publication. More complicated 
-		 examples can be left to the external "Locators for Web Publications" document.</p>
-        </div>	    
-	    
-	    <p>The semantics of 
-	        Web Publication Locators are a mapping and extension of the Web
-            Annotation Data Model [[!annotation-model]] and Vocabulary [[!annotation-vocab]] for
-            describing and referencing a segment of a web resource. As a result Web Publication 
-		    Locators provide the expressiveness needed for a broad range of annotation and 
-		    bookmarking use cases. Additionally Web Publication Locators provide a way to 
-	    identify and reference a location within a Web Publication, i.e., as distinct from
-		    identifying and referencing
-	    a content fragment consisting of a span of characters or bytes. A Web Publication Locator
-	    can be used to identify, retrieve and/or reference a fragment of a Web Publication that
-	    spans multiple Web Publication Resources. </p>
-        
-        <div class="ednote">
-            <p>The separate document will need to illustrate these use cases - i.e., identifying a
-            location as disticnt from a fragment and identifying a fragment that spans multiple
-		    Web Publication Resources. If not, we'll need to illustrate here.</p>
-	    </div>	    
-        </section>
-	
-	<div class="note">
-		<p>In composing a Web Publication Locator, the canonical identifier of the Web Publication 
-		should be used in preference to any alternative addresses. This facilitates the collation of
-		Web Publication Locators associated with a particular Web Publication. URLs of Web Publication
-		Resources appearing in a Web Publication Locator should match the URL for of the Web Publication
-			Resource provided in the Web Publication Infoset.</p>
-	</div>
+					<p>For some use cases it is essential to identify and reference a Web Publication Resource or a location
+						in or a segment of a Web Publication Resource in the scope or context of a Web Publication which
+						includes this resource. The fragment identifier approaches described above do not satisfy this
+						requirement since only the URL of the constituent Web Publication Resource containing the location or
+						content fragment of interest is expressed. Web Publication Locators address this issue by providing
+						the means to express both the URL of the Web Publication Resource and the URL of the Web
+						Publication.</p>
 
-    </section>
-			
-			
+					<div class="ednote">
+						<p>TO DO: Need to update title and insert here reference to this now separate document. Do we also
+							need an informative reference here to EBPU CFI document?</p>
+					</div>
+
+					<div class="ednote">
+						<p>TO DO: illustrate with example of simple, easy to understand Web Publication Locator such as might
+							be used in annotating a simple Web Publication. More complicated examples can be left to the
+							external "Locators for Web Publications" document.</p>
+					</div>
+
+					<p>The semantics of Web Publication Locators are a mapping and extension of the Web Annotation Data Model
+						[[!annotation-model]] and Vocabulary [[!annotation-vocab]] for describing and referencing a segment
+						of a web resource. As a result Web Publication Locators provide the expressiveness needed for a broad
+						range of annotation and bookmarking use cases. Additionally Web Publication Locators provide a way to
+						identify and reference a location within a Web Publication, i.e., as distinct from identifying and
+						referencing a content fragment consisting of a span of characters or bytes. A Web Publication Locator
+						can be used to identify, retrieve and/or reference a fragment of a Web Publication that spans
+						multiple Web Publication Resources. </p>
+
+					<div class="ednote">
+						<p>The separate document will need to illustrate these use cases - i.e., identifying a location as
+							disticnt from a fragment and identifying a fragment that spans multiple Web Publication
+							Resources. If not, we'll need to illustrate here.</p>
+					</div>
+				</section>
+
+				<div class="note">
+					<p>In composing a Web Publication Locator, the canonical identifier of the Web Publication should be used
+						in preference to any alternative addresses. This facilitates the collation of Web Publication
+						Locators associated with a particular Web Publication. URLs of Web Publication Resources appearing in
+						a Web Publication Locator should match the URL for of the Web Publication Resource provided in the
+						Web Publication Infoset.</p>
+				</div>
+
+			</section>
+
+
 		</section>
 		<section id="security">
 			<h2>Security</h2>
