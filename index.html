@@ -799,10 +799,113 @@
 				<p class="ednote">Placeholder for inter-publication search.</p>
 			</section>
 
-			<section id="enh-pagination">
-				<h3>Pagination</h3>
+			<section id="Layout">
+				<h3>Layout</h3>
+				
+				<p>Since <a>web publications</a> may consist of many HTML documents considered as a logical whole, this does have implications for layout, as discussed below.</p>
 
-				<p class="ednote">Placeholder for paginated reading experience.</p>
+
+				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web content.
+				[[!HTML]] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>,
+				[[!SVG]] files are rendered as normally expected of that format, and so on.
+				This specification requires no particular profile or subset of CSS, HTML, or SVG to be supported,
+				other than the expectations set for these technologies by their respective specifications.</p>
+				
+
+				<div class=note>
+					<p>This specification intentionally refrains from introducing any new layout feature.
+					Any shortcoming of the web platform in terms of layout needs to be addressed for the whole web platform,
+					which means via CSS.</p>
+
+					<p>This working group will work with other relevant groups of the W3C to address
+					platform-wide limitations that negatively impacts <a>Web Publications</a>,
+					and invites readers to do the same.</p>
+				</div>
+
+				<p>For the purposes of layout, each resource of a <a>Web Publication</a> is treated as a separate document.
+				User Agents must not mix content from multiple resources in the same rendering:
+				For instance, <a href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">Absolutely positioned elements</a>
+				from one resource may not intrude or overlap with content from an other resource.</p>
+
+					<div class=issue>
+						<p>Despite this general requirement that each resource should be treated as a separate document
+						for the purpose of layout,
+						there are some places where CSS specifications should be amended to
+						be able to deal more intelligently with collections of resources like <a>Web Publications</a>.
+
+						<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>
+						which are currently restricted to work only within a single document.
+						This restriction should be relaxed to allow for cross references between
+						separate resources of a single <a>Web Publication</a>.
+
+						<p>Another related one would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a>
+						to accumulate across multiple resources of a single <a>Web Publication</a>,
+						for instance so that figures in multiple sections may be numbered in a single sequance.
+
+					</div>
+
+				<section id="scrolling-or-paginating" class=informative>
+					<h4>Scrolling or Paginating</h4>
+					<p>Publications have historically been presented via paged media.
+					Web pages almost always scroll. 
+					As the preferences of individual readers vary,
+					and as different types of publications may be better suited for one or the other,
+					this specification encourages User Agents to support both,
+					and to offer a choice to their users.</p>
+
+					<div class=issue>
+					<p>It may nonetheless be useful for authors to be able to specify a preference between scrolling and pagination,
+					even if a strict requirement is not possible. This should most likely be addressed through an extension of
+					<a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"><code>@viewport</code></a>
+					or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see [[CSS-DEVICE-ADAPT]]),
+					or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See [[CSS-PAGE-3]]).
+					This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).
+					</div>
+				</section>
+				<section id="enh-pagination">
+					<h4>Paginated Layout</h4>
+
+					<p>When a User Agent renders a <a>Web Publication</a> in a paginated layout,
+					it must lay out each document in the <a>default reading order</a> sequentially,
+					with the last page of a resource being followed by the first page of the subsequent one.</p>
+
+					<div class=issue>
+						<p>To avoid having unstyleable blank pages in the middle of the document,
+						if the preceding resource ended on a left page (resp. right page),
+						the subsequent one should start on a right page (resp. left page)
+						even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]])
+						would otherwise lead to starting on the opposite page;
+						It should also be possible to use the <a href="">break-before</a> property (See [[!CSS-BREAK-3]])
+						to force the content to resume on the opposite side if that was desired by the author.</p>
+
+						<p>[[CSS-PAGE-3] needs to be amended to describe this exception to the general behavior
+						when dealing with collections of documents instead of individual documents.</p>
+					</div>
+
+					<div class=issue>
+						<p>How is that supposed to work when subsequent resources have opposite
+						<a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See [[!CSS-PAGE-3]]) direction,
+						for instance due to different a different writing mode?
+						This is not necessarily a problem from a layout point of view,
+						as each page is independent,
+						but from an UI point of view, if swiping left means next page until the end of
+						one chapter, and starts meaning previous page in the next chapter because
+						we've switched from English to Hebrew, this is going to be horribly confusing.
+					</div>
+
+					<div class=issue>
+						<p>Should any of the above be normative,
+						or should we leave this up to User Agents to explore,
+						and only standardize if and when a clear winning approach emerges?
+					</div>
+
+					<div class=issue>
+						<p>[[CSS-PAGE-3]] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a>
+						are not automatically reset to at the beginning of each new resource belonging to the same
+						<a>Web Publication</a>.</p>
+					</div>
+
+				</section>
 			</section>
 
 			<section id="enh-locators" class="informative">
