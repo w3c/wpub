@@ -795,7 +795,7 @@
 
 					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user
 						agent to automatically move the user to the next resource when a more natural action occurs, like a
-						general swipe across the screen. It is similar conceptually and functionally to the [[!HTML]]
+						general swipe across the screen. It is similar conceptually and functionally to the [[!html]]
 							<code>link</code> element's <code>next</code> and <code>prev</code> relationships.</p>
 
 					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
@@ -838,8 +838,8 @@
 
 
 				<p>The layout and rendering of <a>Web Publications</a> is governed by the usual rules that apply to all web
-					content. [[!HTML]] documents are styled and laid out according to the rules of <a
-						href="https://www.w3.org/TR/CSS/">CSS</a>, [[!SVG]] files are rendered as normally expected of that
+					content. [[!html]] documents are styled and laid out according to the rules of <a
+						href="https://www.w3.org/TR/CSS/">CSS</a>, [[!svg]] files are rendered as normally expected of that
 					format, and so on. This specification requires no particular profile or subset of CSS, HTML, or SVG to be
 					supported, other than the expectations set for these technologies by their respective specifications.</p>
 
@@ -889,9 +889,9 @@
 							through an extension of <a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"
 									><code>@viewport</code></a> or of <a
 								href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see
-							[[CSS-DEVICE-ADAPT]]), or possibly through an extension of <a
+							[[css-device-adapt]]), or possibly through an extension of <a
 								href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See
-							[[CSS-PAGE-3]]). This should be discussed with the relevant working groups (<a
+							[[css-page-3]]). This should be discussed with the relevant working groups (<a
 								href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/"
 								>WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
 					</div>
@@ -907,18 +907,18 @@
 						<p>To avoid having unstyleable blank pages in the middle of the document, if the preceding resource
 							ended on a left page (resp. right page), the subsequent one should start on a right page (resp.
 							left page) even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page
-								progression</a> (See [[!CSS-PAGE-3]]) would otherwise lead to starting on the opposite page;
-							It should also be possible to use the <a href="">break-before</a> property (See [[!CSS-BREAK-3]])
+								progression</a> (See [[!css-page-3]]) would otherwise lead to starting on the opposite page;
+							It should also be possible to use the <a href="">break-before</a> property (See [[!css-break-3]])
 							to force the content to resume on the opposite side if that was desired by the author.</p>
 
-						<p>[[CSS-PAGE-3] needs to be amended to describe this exception to the general behavior when dealing
+						<p>[[css-page-3] needs to be amended to describe this exception to the general behavior when dealing
 							with collections of documents instead of individual documents.</p>
 					</div>
 
 					<div class="issue">
 						<p>How is that supposed to work when subsequent resources have opposite <a
 								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (See
-							[[!CSS-PAGE-3]]) direction, for instance due to different a different writing mode? This is not
+							[[!css-page-3]]) direction, for instance due to different a different writing mode? This is not
 							necessarily a problem from a layout point of view, as each page is independent, but from an UI
 							point of view, if swiping left means next page until the end of one chapter, and starts meaning
 							previous page in the next chapter because we've switched from English to Hebrew, this is going to
@@ -931,7 +931,7 @@
 					</div>
 
 					<div class="issue">
-						<p>[[CSS-PAGE-3]] needs to be amended so that <a
+						<p>[[css-page-3]] needs to be amended so that <a
 								href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are not
 							automatically reset to at the beginning of each new resource belonging to the same <a>Web
 								Publication</a>.</p>
