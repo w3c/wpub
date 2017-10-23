@@ -510,9 +510,10 @@
 			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
-				<p>The table of contents provides access to major sections of the Web Publication. There are no requirements
-					on the completeness of the table of contents, except that, when specified, it MUST link to at least one
-					resource in the <a>default reading order</a>.</p>
+				<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural outline of
+					the major sections of the Web Publication. There are no requirements on the completeness of the table of
+					contents, except that, when specified, it MUST link to at least one <a href="#wp-resources"
+					>resource</a>.</p>
 
 				<p>The table of contents is either specified directly in the manifest or a link is provided to an [[!html]]
 						<code>nav</code> element containing one.</p>
@@ -786,11 +787,31 @@
 				<section id="enh-reading-order">
 					<h4>Reading Order</h4>
 
+					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach
+						the end of one resource, they have to activate a hyperlink to move to the next resource in the
+						sequence. While this model of navigation is effective, it is also disruptive for immersive reading
+						&#8212; it forces users to disengage from the content and perform the actions necessary to activate
+						the links. It is also limited to media types that support hyperlinks.</p>
+
+					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user
+						agent to automatically move the user to the next resource when a more natural action occurs, like a
+						general swipe across the screen. It is similar conceptually and functionally to the [[!HTML]]
+							<code>link</code> element's <code>next</code> and <code>prev</code> relationships.</p>
+
 					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
 				</section>
 
 				<section id="enh-toc">
 					<h4>Table of Contents</h4>
+
+					<p>The table of contents is one of the key aids to navigating a publication, as it enables users to
+						quickly move to the start of major sections. It is also a useful aid in understanding the overall
+						structure and purpose of a publication (e.g., what topics are covered, where the user currently is in
+						relation to the overall structure). Users often want quick access the table contents for these
+						reasons.</p>
+
+					<p>User agents can use table of contents defined in the infoset to present an interface that allows users
+						to review and activate the links without leaving the resource they are currently viewing.</p>
 
 					<p class="issue" data-number="9">Does the user agent need to provide access to the table of contents, or
 						do such mechanisms belong in the content.</p>
