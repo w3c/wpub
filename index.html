@@ -635,12 +635,7 @@
 				<h2>Linking to a Manifest</h2>
 
 				<p>Providing a link from a resource to its manifest allows a user agent to discover that a Web Publication is
-					available. The inclusion of links is not always possible, however. For example, when the resource is
-					hosted by a third party, or when access to modify HTTP headers is restricted.</p>
-
-				<p>The inclusion of links from resources to their manifests is therefore RECOMMENDED.</p>
-
-				<p>Links MUST take one or both of the following forms:</p>
+					available. Links MUST take one or both of the following forms:</p>
 
 				<ul>
 					<li><p>An HTTP Link header field&#160;[[!rfc5988]] with its <code>rel</code> parameter set to the value
@@ -653,8 +648,7 @@
 					</li>
 				</ul>
 
-				<p>A user agent is only required to process the first <code>publication</code> link encountered, so a
-					resource SHOULD NOT link to more than one Web Publication.</p>
+				<p>A resource MAY link to one or more Web Publications to which it belongs.</p>
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
@@ -664,8 +658,6 @@
 					integration with [[appmanifest]] is feasible and beneficial. For a list of differences in linking
 					approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest"
 						>wiki analysis</a>.</p>
-
-				<p class="issue" data-number="76"></p>
 			</section>
 
 			<section id="manifest-linking-from">
