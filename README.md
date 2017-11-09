@@ -13,6 +13,6 @@ Editorial changes that improve the readability of the spec or correct spelling o
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md), about licensing contributions.
 
-## Code of Conduce
+## Code of Conduct
 
-W3C functions under a [code of conduct]((https://www.w3.org/Consortium/cepc/).
+W3C functions under a [code of conduct](https://www.w3.org/Consortium/cepc/).
