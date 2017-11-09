@@ -212,6 +212,50 @@
 					much of a Web Publication to cache for offline use).</p>
 			</section>
 
+			<section id="relationships">
+				<h3>Relationship to Other Specifications</h3>
+
+				<section id="rel-wam">
+					<h4>Web App Manifest</h4>
+
+					<div class="ednote">
+						<p>The working group is investigating integration with the work done on [[appmanifest]] to avoid
+							duplication of concerns both in the expression and serialization of a manifest and in the
+							processing and compilation of the infoset. It is expected, however, that there will be
+							differences in the processing models of each (e.g., the initiation of the reading experience for
+							web publications versus installation for applications).</p>
+
+						<p>The working assumption is that both applications and publications can use the same manifest and
+							serialization to express the information necessary to initiate both.</p>
+
+						<p>The initial stage of evaluating this assumption involves:</p>
+
+						<ul>
+							<li>the continuing analysis of necessary metadata and publication structure requirements;</li>
+							<li>the comparison and harmonization of web publication requirements with those already defined
+								in [[appmanifest]].</li>
+						</ul>
+
+						<p>The next stage will involve the serialization of the infoset in JSON, and see how this expression
+							of the manifest can be aligned with the expression of the [[appmanifest]]. Wherever semantically
+							possible, the terms used and defined for [[appmanifest]] should be reused, and, conversely, some
+							of the members defined for Web Publications may be generally useful for applications and may be
+							added to the [[appmanifest]] as a common pool of information. To avoid possible future conflicts,
+							care should be taken to use a naming schemes that clearly separates terms to be used for Web
+							Publications only.</p>
+
+						<p>This specification consequently should be read and understood in this context of an ongoing
+							investigation, and that significant changes may occur in the future.</p>
+
+						<p>This section will be updated with each release to reflect the current status of this work, and
+							describe the evolving relationship.</p>
+
+						<p>See also <a href="https://github.com/w3c/wpub/issues/32">issue #32 in the GitHub tracker</a> for
+							more discussion about integration.</p>
+					</div>
+				</section>
+			</section>
+
 			<section id="terminology">
 				<h3>Terminology</h3>
 
