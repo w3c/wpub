@@ -776,9 +776,13 @@
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
 
+			<p>As described in <a href="#wp-address"></a>, a Web Publication has an <a>address</a> that can be dereferenced. That URL MUST resolve to an HTML file (referred to as a <dfn>landing page</dfn>), and this HTML file MUST include a link to the <a>manifest</a> as described in <a href="#manifest-linking"></a>. The <a>landing page</a> SHOULD also include an HTML serialization of the <a href="#enh-toc">Table of Content</a>.</p>
+
+			<p class=ednote>The exact definition of how the TOC should be added to the landing page is still missing; most probably it would be a <code>nav</code> element with some predefined identifier and/or class.</p>
+
 			<div class="ednote">
 				<p>The publishing working group is currently evaluating the best approach for implementing web publications
-					in user agents. This note is intnded to provide an overview of where current thinking is and what issues
+					in user agents. This note is intended to provide an overview of where current thinking is and what issues
 					are under consideration.</p>
 
 				<p>The development of web publications is not viewed as a separate forking of the web, but an enhancement
