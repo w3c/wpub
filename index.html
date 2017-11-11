@@ -720,7 +720,15 @@
 					</li>
 				</ul>
 
-				<p>A resource MAY link to one or more Web Publications to which it belongs.</p>
+				<p>A resource SHOULD link to one or more Web Publications to which it belongs.</p>
+				
+				<p class="ednote">A resource may link to multiple parent manifests. User agents may
+                                   choose to present one or more alternatives to an end user, or choose a single
+                                   alternative on its own. A user agent may choose to present whichever manifest it
+                                   wishes based upon information that it possesses, even one that is not explicitly
+                                   listed as a parent, e.g. based upon information it calculates or acquires out of
+                                   band. In the absence of a preference by user agent implementors, selection of the
+                                   first manifest listed is suggested as a default.</p>
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, we need to find a way to
