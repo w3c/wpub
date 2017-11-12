@@ -143,7 +143,7 @@
 				<p>The traditional publishing model, sometimes called the print model, differs from the Web model in that the
 					publisher packages all the information together and thereby establishes the common pathway through it.
 					The user can passively follow the content page-by-page, or actively find other pathways via a table of
-					contents or index. It is a model that has worked to bind information in a cohesive way for millenia, and
+					contents or index. It is a model that has worked to bind information in a cohesive way for millennia, and
 					continues to be an important model alongside the Web. The publication as a bounded edition, made public,
 					is used to carry intellectual and artistic works of innumerable form: novels, plays, poetry, journals,
 					magazines, newspapers, articles, laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos,
@@ -152,7 +152,7 @@
 				<p>Attempts to reproduce this model on the Web, however, have had to work around its loose coupling of
 					information: sometimes publications are compressed into a single page; sometimes they are broken across
 					multiple pages and hyperlinked together. These models both have flaws, however: single-page publications
-					are often so large they render slowly, especially on low-power devices; mutli-page publications cannot be
+					are often so large they render slowly, especially on low-power devices; multi-page publications cannot be
 					easily taken offline because their common thread cannot be established.</p>
 
 				<p>As a result, users have had trouble accessing, compiling and downloading Web content for curation and
@@ -758,7 +758,8 @@
 				<div class="note">
 					<p>When adding resources to a Web Publication, consideration needs to be paid to support in user agents.
 						The use of progressive enhancement techniques and the provision of fallback content, as appropriate,
-						will ensure a more consistent reading experience for users regardless of their preferred user agent.</p>
+						will ensure a more consistent reading experience for users regardless of their preferred user
+						agent.</p>
 				</div>
 			</section>
 
@@ -785,7 +786,7 @@
 					more alternatives to an end user, or choose a single alternative on its own. A user agent may choose to
 					present whichever manifest it wishes based upon information that it possesses, even one that is not
 					explicitly listed as a parent, e.g. based upon information it calculates or acquires out of band. In the
-					absence of a preference by user agent implementors, selection of the first manifest listed is suggested
+					absence of a preference by user agent implementers, selection of the first manifest listed is suggested
 					as a default.</p>
 
 				<p class="issue" data-number="13">If we have a collection of information about a web publication as a whole
@@ -880,7 +881,7 @@
 		<section id="wp-enhancements">
 			<h2>Reading Enhancements</h2>
 
-			<p class="ednote">This section contains placholders for possible reading enhancements the UA may/should/must
+			<p class="ednote">This section contains placeholders for possible reading enhancements the UA may/should/must
 				provide. The list is subject to addition, modification and removal as the enhancements get discussed in more
 				detail.</p>
 
@@ -978,7 +979,7 @@
 					<p>Another related one would be to allow <a
 							href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a> to accumulate across
 						multiple resources of a single <a>Web Publication</a>, for instance so that figures in multiple
-						sections may be numbered in a single sequance.</p>
+						sections may be numbered in a single sequence.</p>
 
 				</div>
 
@@ -1097,30 +1098,24 @@
 						structures. For example, the value of the <code>id</code> attribute of a <code>&lt;p&gt;</code>
 						element in an HTML Web Publication Resource can be used to mint a fragment identifier linking to that
 							<code>&lt;p&gt;</code> element (i.e., a paragraph). This type of fragment identifier is
-						illustrated in Example 1 which assumes the existence within the HTML resource of an element with id
-						p33, e.g., <code>&lt;p id="p33"&gt;</code>.</p>
-					<div class="example">
-						<div class="example-title marker">
-							<span>Example 1</span>
-							<span style="text-transform: none">: A simple fragment identifier</span>
-						</div>
-						<pre class="nohighlight" id="example1">https://dauwhe.github.io/html-first/HeatRadiation/OPS/s009-Chapter-001.html#p33</pre>
-					</div>
+						illustrated in the following example, which assumes the existence within the HTML resource of an
+						element with id p33, e.g., <code>&lt;p id="p33"&gt;</code>.</p>
+
+					<aside class="example" title="A simple fragment identifier">
+						<pre class="nohighlight" id="example1">https://example.com/html-first/HeatRadiation/OPS/s009-Chapter-001.html#p33</pre>
+					</aside>
 
 					<p>Using other fragment identifier formats, user agents may mint fragment identifiers to serve as Web
 						Publication internal locators even in the absence of any explicit publisher-provided anchor or
 						structure. For example, a media fragment identifier [[!media-frags]] for a still image embedded in a
 						Web Publication may be minted without reference to any publisher-provided anchor or structure, as
-						shown in Example 2. In this example, the fragment is a rectangular image segment that is 200x150
-						pixels with its upper left corner at 100 pixels in from the left edge and 500 pixels down from the
-						top edge of the full image.</p>
-					<div class="example">
-						<div class="example-title marker">
-							<span>Example 2</span>
-							<span style="text-transform: none">: A media fragment identifier</span>
-						</div>
-						<pre class="nohighlight" id="example2">http://zebu.uoregon.edu/hudf/hudf_300dpi.jpg#xywh=100,500,200,150</pre>
-					</div>
+						shown in the following example. In this example, the fragment is a rectangular image segment that is
+						200x150 pixels with its upper left corner at 100 pixels in from the left edge and 500 pixels down
+						from the top edge of the full image.</p>
+
+					<aside class="example" title="A media fragment identifier">
+						<pre class="nohighlight" id="example2">http://example.com/hudf/hudf_300dpi.jpg#xywh=100,500,200,150</pre>
+					</aside>
 				</section>
 
 				<section id="enh-wpLocators">
@@ -1147,17 +1142,17 @@
 
 					<p>The semantics of Web Publication Locators are a mapping and extension of the Web Annotation Data Model
 						[[!annotation-model]] and Vocabulary [[!annotation-vocab]] for describing and referencing a segment
-						of a web resource. As a result Web Publication Locators provide the expressiveness needed for a broad
-						range of annotation and bookmarking use cases. Additionally Web Publication Locators provide a way to
-						identify and reference a location within a Web Publication, i.e., as distinct from identifying and
-						referencing a content fragment consisting of a span of characters or bytes. A Web Publication Locator
-						can be used to identify, retrieve and/or reference a fragment of a Web Publication that spans
+						of a web resource. As a result, Web Publication Locators provide the expressiveness needed for a
+						broad range of annotation and bookmarking use cases. Additionally, Web Publication Locators provide a
+						way to identify and reference a location within a Web Publication (i.e., as distinct from identifying
+						and referencing a content fragment consisting of a span of characters or bytes). A Web Publication
+						Locator can be used to identify, retrieve and/or reference a fragment of a Web Publication that spans
 						multiple Web Publication Resources. </p>
 
 					<div class="ednote">
 						<p>The separate document will need to illustrate these use cases - i.e., identifying a location as
-							disticnt from a fragment and identifying a fragment that spans multiple Web Publication
-							Resources. If not, we'll need to illustrate here.</p>
+							distinct from a fragment and identifying a fragment that spans multiple Web Publication
+							Resources. If not, illustrations are needed here.</p>
 					</div>
 				</section>
 
