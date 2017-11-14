@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+la<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
 	<head>
 		<meta charset="utf-8" />
@@ -421,7 +421,7 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <a>URL</a> that refers to the Web Publication. It dereferences to the <a
-							href="#wp-landing-page">landing page</a>, which enables the retrieval of a representation of the
+							href="#wp-entry-page">entry page</a>, which enables the retrieval of a representation of the
 							<a>manifest</a>.</p>
 
 					<p>The availability of this address does not preclude the creation and use of other identifiers and/or
@@ -676,8 +676,6 @@
 						<li>calculate a table of contents using its own algorithms.</li>
 					</ol>
 
-					<p class="ednote">This section should be brought in sync with the section on <a>landing page</a>.</p>
-
 					<p class="issue" data-number="9">The question is whether the manifest/infoset needs to provide
 						navigation, or whether such mechanisms belong in the content.</p>
 
@@ -811,21 +809,22 @@
 						>wiki analysis</a>.</p>
 			</section>
 
-			<section id="wp-landing-page">
-				<h3>Landing Page</h3>
+			<section id="wp-entry-page">
+				<h3>Entry Page</h3>
 
 				<p>As described in <a href="#wp-address"></a>, a <a>Web Publication</a> has an <a>address</a> that can be
-					dereferenced. This URL MUST resolve to the <dfn>landing page</dfn>, which is an [[!html]] document that
-					represents the primary entry point for the Web Publication.</p>
+					dereferenced. This URL MUST resolve to the <dfn>entry page</dfn>, which MUST be an [[!html]] document
+					that represents the primary entry point for the Web Publication.</p>
 
-				<p>The landing page MUST be a resource of the Web Publication, but its inclusion in the <a>default reading
-						order</a> is OPTIONAL. Unlike other resources, the landing page MUST <a href="#wp-linking">link to
-						the manifest</a> to ensure that user agents can discover the Web Publication.</p>
+				<p>The entry page MUST be a resource of the Web Publication, but it can be any resource, including one that
+					is not listed in the <a>default reading order</a>. Unlike other resources, the entry page MUST <a
+						href="#wp-linking">link to the manifest</a> to ensure that user agents can discover the Web
+					Publication.</p>
 
 				<p class="note">To improve the usability of the Web Publication, particularly in user agents that do not
-					support Web Publications, provide access on the landing page to navigation aids that facilitate
-					consumption of the content (e.g., include a <a href="#enh-toc">table of contents</a> on the page, or
-					provide a link to one).</p>
+					support Web Publications, provide access on the entry page to navigation aids that facilitate consumption
+					of the content (e.g., include a <a href="#enh-toc">table of contents</a> on the page, or provide a link
+					to one).</p>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
