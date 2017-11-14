@@ -41,7 +41,7 @@ var biblio = {
        ],
        "rawDate": "2017-08",
        "publisher": "IETF",
-       "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00",
+       "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00"
     },
     "cfi": {
         "authors" : [
@@ -60,6 +60,15 @@ var biblio = {
         rawDate: "2017-01-05",
         status: "Recommended Specification"
     },   
+    "pub-loc": {
+      "title": "Locators for Web Publications",
+      "href": "https://w3.org/TR/pub-loc/",
+      "authors": [
+        "Timothy W. Cole",
+        "Ivan Herman"
+      ],
+      "date": "..."
+    },
     "pwpub": {
       "title": "Packaged Web Publications",
       "href": "https://w3.org/TR/pwpub/",
@@ -72,8 +81,8 @@ var biblio = {
       "title": "Web Publications",
       "href": "https://w3.org/TR/wpub/",
       "authors": [
-        "Dave Cramer",
-        "Matt Garrish"
+        "Matt Garrish",
+        "Ivan Herman"
       ],
       "date": "..."
     }
