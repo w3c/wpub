@@ -815,20 +815,17 @@
 				<h3>Landing Page</h3>
 
 				<p>As described in <a href="#wp-address"></a>, a <a>Web Publication</a> has an <a>address</a> that can be
-					dereferenced. The address URL MUST resolve to the <dfn>landing page</dfn>, an [[!html]] document that
+					dereferenced. This URL MUST resolve to the <dfn>landing page</dfn>, which is an [[!html]] document that
 					represents the primary entry point for the Web Publication.</p>
 
-				<p>Unlike other resources, the landing page MUST <a href="#wp-linking">link to the manifest</a> to ensure
-					that user agents can discover the Web Publication.</p>
+				<p>The landing page MUST be a resource of the Web Publication, but its inclusion in the <a>default reading
+						order</a> is OPTIONAL. Unlike other resources, the landing page MUST <a href="#wp-linking">link to
+						the manifest</a> to ensure that user agents can discover the Web Publication.</p>
 
-				<p>To ensure that the Web Publication is consumable in different types of user agents, including those that
-					do not support Web Publications, the landing page SHOULD include an [[!html]] serialization of the <a
-						href="#enh-toc">table of contents</a> (see <a href="#wp-table-of-contents"></a> for more
-					information).</p>
-
-				<p class="issue" data-number="94">Additional questions about whether specifying HTML is necessary, whether
-					the resource has to be part of the web publication or not, and whether the table of contents is necessary
-					to specify at this location if provided in the content.</p>
+				<p class="note">To improve the usability of the Web Publication, particularly in user agents that do not
+					support Web Publications, provide access on the landing page to navigation aids that facilitate
+					consumption of the content (e.g., include a <a href="#enh-toc">table of contents</a> on the page, or
+					provide a link to one).</p>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
