@@ -607,8 +607,10 @@
 
 					<p>The default reading order MUST include at least one resource.</p>
 
-					<p>The default reading order is either specified directly in the manifest or a link is provided to an
-						[[!html]] <code>nav</code> element whose list of links are processed to create one.</p>
+					<p>The default reading order is either specified directly in the manifest or in an [[!html]]
+							<code>nav</code> element. In the latter case, the manifest MUST provide a link to the Web
+						Publication resource that contains the <code>nav</code> element, with a fragment identifier that
+						specifically identifies it.</p>
 
 					<p>The process for extracting a default reading order from a <code>nav</code> element are as follows:</p>
 
@@ -662,8 +664,10 @@
 						table of contents, except that, when specified, it MUST link to at least one <a href="#wp-resources"
 							>resource</a>.</p>
 
-					<p>The table of contents is either specified directly in the manifest or a link is provided to an
-						[[!html]] <code>nav</code> element containing one.</p>
+					<p>The table of contents is either specified directly in the manifest or in an [[!html]] <code>nav</code>
+						element. In the latter case, the manifest MUST provide a link to the Web Publication resource that
+						contains the <code>nav </code>element, with a fragment identifier that specifically identifies
+						it.</p>
 
 					<p>If a user agent requires a table of contents and one is not specified, it MAY construct one. This
 						specification does not mandate how such a table of contents is created. The user agent might: </p>
@@ -779,11 +783,11 @@
 				<ul>
 					<li><p>An HTTP Link header field&#160;[[!rfc5988]] with its <code>rel</code> parameter set to the value
 								"<code>publication</code>".</p>
-						<pre class="example">Link: &lt;https://example.com/webpub/>; rel=publication</pre>
+						<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
 					</li>
 					<li><p>An [[!html]] <code>link</code> element with its <code>rel</code> attribute set to the value
 								"<code>publication</code>".</p>
-						<pre class="example">&lt;link href="https://example.com/webpub/" rel="publication"/></pre>
+						<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
 					</li>
 				</ul>
 
@@ -814,16 +818,24 @@
 					dereferenced. This URL MUST resolve to the <dfn>entry page</dfn>, which MUST be an [[!html]] document
 					that represents the primary entry point for the Web Publication.</p>
 
-				<p>The entry page MUST be a resource of the Web Publication, but it can be any resource, including one that
-					is not listed in the <a>default reading order</a>. Unlike other resources, the entry page MUST <a
+				<p>The entry page SHOULD be a resource of the Web Publication. It can be any resource, including one that is
+					not listed in the <a>default reading order</a>. Unlike other resources, the entry page MUST <a
 						href="#wp-linking">link to the manifest</a> to ensure that user agents can locate that document.</p>
+
+				<p>If the entry page is not a Web Publication resource, user agents SHOULD load the first document in the
+						<a>default reading order</a> when initiating the Web Publication.</p>
 
 				<p class="note">Providing access on the entry page to navigation aids that facilitate consumption of the
 					content (e.g., include a table of contents on the page, or provide a link to one) improves the usability
 					of the Web Publication, particularly in user agents that do not support Web Publications.</p>
 
-				<p class="issue" data-number="103">The question is whether the entry page must be a web publication resource
-					and what purpose it serves.</p>
+				<div class="issue" data-number="103">This issue raises a number of questions:
+					<ul>
+						<li>whether the entry page must be a web publication resource</li>
+						<li>what specific purpose it serves</li>
+						<li>whether any information the page contains can be trusted for the infoset if it is not part of the publication</li>
+					</ul>
+				</div>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
