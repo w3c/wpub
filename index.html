@@ -641,9 +641,25 @@
 				<section id="wp-resource-list">
 					<h4>Resource List</h4>
 
-					<p>The <a>infoset</a> MUST include a list of the Web Publication's resources, although the list is not
-						required to be exhaustive. Resources in the <a>default reading order</a> MUST be included in this
-						list.</p>
+					<p>The <dfn>resource list</dfn> enumerates all resources that are used in the processing and rendering of
+						a <a>Web Publication</a> (i.e., that are within its bounds). This list is the definitive source that
+						user agents have in determining which referenced resources belong to the Web Publication and which
+						are external to it.</p>
+
+					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
+						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it is
+						strongly RECOMMENDED to always provide a comprehensive list of all a Web Publication's constituent
+						resources. At a minimum, the resource list MUST include a list of all resources in the <a>default
+							reading order</a>.</p>
+
+					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g., third-party
+						scripts that reference resources from deep within their source), but a Web Publication SHOULD remain
+						consumable even if some of these resources are not identified as belonging to the Web Publication
+						(e.g., when it is taken offline without them).</p>
+
+					<p>If a user agent encounters a resource that it cannot locate in the resource list, it MUST treat the
+						resource as external to the Web Publication (e.g., it might alert the user before loading, open the
+						resource in a new window, or unload the current Web Publication and resume normal Web browsing).</p>
 
 					<p class="issue" data-number="22">The discussion led to the question whether the manifest/infoset MUST
 						list all resources or not. In this sense, this became a duplicate of <a
