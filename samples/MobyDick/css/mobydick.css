@@ -1,0 +1,343 @@
+
+@supports (overflow: -webkit-paged-x) or (overflow: paged-x) {
+   body {
+overflow: paged-x;
+overflow: -webkit-paged-x;
+overflow: -o-paged-x;
+-webkit-scroll-snap-type: mandatory;
+-webkit-scroll-snap-points-x: repeat(100%);
+-webkit-box-decoration-break: clone;
+
+scroll-snap-type: mandatory;
+scroll-snap-points-x: repeat(100%);
+box-decoration-break: clone;
+}
+}
+
+
+
+
+/*
+div.galley-rw {
+width: 30em;
+background-color: white;
+padding: 2em;
+margin: 0 auto 0 auto;
+}
+
+div.controls {
+position: fixed;
+display: flex;
+height: 30px;
+top: 0;
+right: 0;
+left: 0;
+background-color: #ddd;
+}
+
+div.controls p {
+flex: 1;
+border: 2px solid #ddd;
+text-align: center;
+margin: 0;
+padding: 0;
+}
+
+iframe {
+position: fixed;
+			top: 30px; bottom: 0;
+			left: 0;
+			width: 10em;
+			overflow: none;
+			margin: 0;
+			padding: 0em;
+			padding-left: 42px;
+			padding-left: calc(1em + 26px);
+			background: inherit;
+			background-color: #F8F8F8;
+			z-index: 1;
+border: 0;
+height: 100vh;
+}
+
+body {
+overflow: -o-paged-x;
+background-color: #F8F8F8;
+}
+*/
+
+
+
+@page {
+size: 100vh 100vh;
+margin: 3em;
+@top-center { content: 'Moby Dick';}
+}
+
+p {
+font-family: 'STIXGeneral', 'Adobe Caslon Pro', serif;
+margin: 0;
+text-indent: 0;
+line-height: 1.4em;
+text-align: justify;
+hyphens: auto;
+}
+
+p + p { text-indent: 1em; }
+
+a {
+text-decoration: none;
+color: black;
+}
+
+
+
+
+@supports (-webkit-initial-letter: 3) {
+    div.title-block-rw + p::first-letter {
+-webkit-initial-letter: 3 3;
+color: red;
+}
+}
+
+
+
+.title-num-rw {
+text-align: center;
+text-indent: 0;
+font-style: italic;
+
+}
+
+h1 {
+font-family: 'STIXGeneral', 'Adobe Caslon Pro', serif;
+text-align: center;
+font-weight: normal;
+font-size: 1.4em;
+text-transform: uppercase;
+letter-spacing: 4px;
+}
+
+.title-block-rw {
+height: auto;
+min-height: 8em;
+}
+
+
+
+.decoration-rw {
+text-align: center;
+padding-top: 1em;
+padding-bottom: 1em;
+padding-left: 0em;
+padding-right: 0em;
+}
+
+.copyright-rw {
+font-size: .8em;
+line-height: 1em;
+text-align: left;
+padding-top: 2em;
+}
+
+.copyright-rw p {
+margin-bottom: 1em;
+text-indent: 0;
+}
+
+.dedication-rw p {
+text-align: center;
+text-indent: 0;
+}
+
+.Dedication-rw {
+margin-top: 3em;
+}
+
+.leading-line-rw {
+height: 1.33em;
+}
+
+.fp-rw {
+text-indent: 0;
+}
+
+
+h2 {
+text-align: center;
+font-size: 1.33em;
+line-height: 1.2em;
+text-align: center;
+padding-bottom: 0em;
+text-align: center;
+text-transform: uppercase;
+font-weight: normal;
+letter-spacing: 3px;
+}
+
+.title-author-rw {
+text-align: center;
+font-size: 1.5em;
+margin-bottom: 1em;
+margin-top: 2em;
+text-indent: 0;
+}
+
+.title-num-rw {
+text-align: center;
+font-size: 1.5em;
+text-indent: 0;
+margin-top: 1em;
+margin-bottom: 1em;
+-webkit-font-feature-settings: "onum";
+font-variant-numeric: oldstyle-nums;
+-webkit-font-feature-settings:"ss01", "onum";
+
+
+}
+
+.title-sub-rw {
+text-align: center;
+font-size: 1.2em;
+text-indent: 0;
+margin-bottom: 1em;
+margin-top: 1em;
+}
+
+.title-other-rw {
+text-align: center;
+text-indent: 0;
+font-style: italic;
+}
+
+
+.imprint-rw {
+text-align: center;
+}
+
+.extract-verse-rw {
+margin-top: 1.33em;
+margin-bottom: 1.33em;
+padding-left: 20pt;
+}
+
+.extract-rw {
+margin-top: 1.33em;
+margin-bottom: 1.33em;
+padding-left: 20pt;
+}
+
+.extract-verse-rw p {
+text-align: left;
+text-indent: -20pt;
+margin-left: 20pt;
+}
+
+.dialog-rw p {
+text-align: left;
+text-indent: -20pt;
+margin-left: 20pt;
+}
+
+span.speaker-rw {
+font-variant: small-caps;
+text-transform: lowercase;
+}
+
+p.stage-direction-rw { 
+font-style: italic; 
+text-indent: 0 !important;
+margin-left: 0 !important;
+}
+
+span.stage-direction-rw {
+font-style: italic;
+text-transform: lowercase;
+}
+
+.epigraph-rw {
+margin-top: 1.33em;
+margin-bottom: 1.33em;
+padding-left: 20pt;
+padding-right: 20pt;
+}
+
+   .source-rw {
+margin-bottom: 0em;
+text-align: right !important;
+font-style: italic;
+page-break-before: avoid;
+}
+
+.sc-rw {
+font-size: 75%;
+}
+.block-rw {
+margin-top: 1em;
+margin-bottom: 1em;
+margin-left: 20pt;
+margin-right: 20pt;
+}
+
+span.dropcap-rw {
+float: left;
+font-size: 2.7em;
+line-height: .87em;
+}
+
+
+.signature-rw {
+margin-left: 50%;
+text-align: left;
+text-indent: 0;
+}
+
+.cover-rw {
+margin: 0 auto;
+}
+
+.cover-rw img {
+width: 100%;
+}
+
+
+div.galley-rw {
+margin-bottom: 20vh;
+}
+
+figure img {
+object-fit: contain;
+max-width: 100%;
+}
+
+
+ nav, header {
+      text-align: center;
+    }
+    nav ol {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0;
+      font-size: .8em;
+    }
+
+    nav ol li {
+      margin-bottom: .2em;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #777;
+    }
+
+    nav h2 {
+      font-size: 1em;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-top: 3em;
+    }
+
+
+
+

@@ -1,0 +1,14 @@
+{
+	"name": "Moby-Dick",
+	"address": "https://dauwhe.github.io/wpub-sample/Moby-Dick",
+	"spine": [
+		"index.html",
+		"html/c001.html",
+		"html/c002.html",
+		"html/c003.html"
+	],
+	"resources": [
+		"css/mobydick.css",
+		"images/Queequeg.jpg"
+	]
+}
