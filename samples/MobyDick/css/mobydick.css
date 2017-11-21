@@ -314,6 +314,25 @@ max-width: 100%;
  nav, header {
       text-align: center;
     }
+    
+    header p {
+    text-align: center;
+    margin-top: .5em;
+    font-style: italic;
+    }
+    
+
+     span[property=author], span[property=alternateName] { 
+    font-size: 1.2em; 
+    text-transform: uppercase;
+     font-style: normal;
+     letter-spacing: .2em;
+    }
+    
+     p[property=publisher] { 
+    font-size: 1em; 
+     font-style: normal;
+    }
     nav ol {
       list-style-type: none;
       margin-left: 0;
