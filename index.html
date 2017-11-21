@@ -420,15 +420,37 @@
 					<h4>Address</h4>
 
 					<p>A <a>Web Publication's</a>
-						<dfn>address</dfn> is a <a>URL</a> that refers to the Web Publication. It dereferences to the <a
-							href="#wp-entry-page">entry page</a>, which enables the retrieval of a representation of the
-							<a>manifest</a>.</p>
+						<dfn>address</dfn> is a <a>URL</a> that represents the primary entry point for the Web Publication.
+						This URL MUST resolve to an [[!html]] document.</p>
+
+					<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource, including
+						one that is not listed in the <a>default reading order</a>. The document MUST <a href="#wp-linking"
+							>link to the manifest</a> to ensure that user agents can locate that document.</p>
+
+					<p>If the document is not a Web Publication resource, user agents SHOULD load the first document in the
+							<a>default reading order</a> when initiating the Web Publication.</p>
+
+					<p class="note">Providing access on the referenced document to navigation aids that facilitate
+						consumption of the content improves the usability of the Web Publication, particularly in user agents
+						that do not support Web Publications (e.g., include a table of contents on the page, or provide a
+						link to one).</p>
 
 					<p>The availability of this address does not preclude the creation and use of other identifiers and/or
 						addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
 
 					<div class="note">The Web Publication's address can also be used as value for an identifier link relation
 						[[link-relation]].</div>
+
+					<div class="issue" data-number="103">
+						<p>This issue raises a number of questions:</p>
+						<ul>
+							<li>whether the entry page must be a web publication resource</li>
+							<li>what specific purpose it serves</li>
+							<li>whether any information the page contains can be trusted for the infoset if it is not part of
+								the publication</li>
+						</ul>
+						<p>There is not yet consensus in the group on these issues, or on the name "entry page".</p>
+					</div>
 				</section>
 
 				<section id="wp-dir">
@@ -641,16 +663,16 @@
 				<section id="wp-resource-list">
 					<h4>Resource List</h4>
 
-					<p>The <dfn>resource list</dfn> enumerates all resources that are used in the processing and rendering of
-						a <a>Web Publication</a> (i.e., that are within its bounds). This list is the definitive source that
-						user agents have in determining which referenced resources belong to the Web Publication and which
-						are external to it.</p>
+					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used in the
+						processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds). This list is
+						the definitive source that user agents have in determining which referenced resources belong to the
+						Web Publication and which are external to it.</p>
 
 					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
 						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it is
-						strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's constituent
-						resources. At a minimum, the resource list MUST include a list of all resources in the <a>default
-							reading order</a>.</p>
+						strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's
+						constituent resources. At a minimum, the resource list MUST include a list of all resources in the
+							<a>default reading order</a>.</p>
 
 					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g., third-party
 						scripts that reference resources from deep within their source), but a Web Publication SHOULD remain
@@ -779,8 +801,11 @@
 			<section id="wp-resources">
 				<h2>Resources</h2>
 
-				<p><a>Web Publications</a> MAY reference resources of any media type, both in the <a>default reading
-						order</a> and as dependencies of other resources.</p>
+				<p>A <a>Web Publication</a> MUST include at least one [[!html]] document that <a href="#wp-linking">links to
+						the manifest</a>.</p>
+
+				<p>There are no restrictions on a Web Publication beyond this requirement. It MAY reference resources of any
+					media type, both in the <a>default reading order</a> and as dependencies of other resources.</p>
 
 				<div class="note">
 					<p>When adding resources to a Web Publication, consider support in user agents. The use of progressive
@@ -825,35 +850,6 @@
 				<p class="issue" data-number="13">If there is a collection of information about a web publication as a whole
 					("manifest") that exists separately from most of the publication's resources, there needs to be a way to
 					associate the manifest with the other publication resources.</p>
-			</section>
-
-			<section id="wp-entry-page">
-				<h3>Entry Page</h3>
-
-				<p>As described in <a href="#wp-address"></a>, a <a>Web Publication</a> has an <a>address</a> that can be
-					dereferenced. This URL MUST resolve to the <dfn>entry page</dfn>, which MUST be an [[!html]] document
-					that represents the primary entry point for the Web Publication.</p>
-
-				<p>The entry page SHOULD be a resource of the Web Publication. It can be any resource, including one that is
-					not listed in the <a>default reading order</a>. Unlike other resources, the entry page MUST <a
-						href="#wp-linking">link to the manifest</a> to ensure that user agents can locate that document.</p>
-
-				<p>If the entry page is not a Web Publication resource, user agents SHOULD load the first document in the
-						<a>default reading order</a> when initiating the Web Publication.</p>
-
-				<p class="note">Providing access on the entry page to navigation aids that facilitate consumption of the
-					content (e.g., include a table of contents on the page, or provide a link to one) improves the usability
-					of the Web Publication, particularly in user agents that do not support Web Publications.</p>
-
-				<div class="issue" data-number="103">
-					<p>This issue raises a number of questions:</p>
-					<ul>
-						<li>whether the entry page must be a web publication resource</li>
-						<li>what specific purpose it serves</li>
-						<li>whether any information the page contains can be trusted for the infoset if it is not part of the publication</li>
-					</ul>
-					<p>There is not yet consensus in the group on these issues, or on the name "entry page".</p>
-				</div>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
@@ -1102,8 +1098,8 @@
 
 			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
 				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
-				locations with explicit anchor points. Web Publication locators include a variety of selectors that work
-				with the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
+				locations with explicit anchor points. Web Publication locators include a variety of selectors that work with
+				the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
 
 			<p class="ednote">As Web Publication Locators currently rely on a JSON-based expression syntax, it is not yet
 				clear how much of this syntax can be translated to a fragment identifier. This may limit the usefulness
