@@ -1,0 +1,28 @@
+
+ul.ack > li,
+ul.flat > li {
+    display: inline;
+}
+
+ul.ack > li:after,
+ul.flat > li:after {
+    content: ', '
+}
+
+ul.ack > li:last-child:after,
+ul.flat > li:last-child:after {
+    content: ''
+}
+
+ul.flat {
+	display: inline;
+	padding-left: 0;
+}
+
+dt, dd {
+	padding-top: 0.5em;
+}
+
+dfn {
+	font-weight: bold !important;
+}

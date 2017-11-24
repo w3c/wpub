@@ -1,0 +1,1779 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 18.3.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+div.example-title {
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.example-title span {
+    text-transform: uppercase;
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example div.example-title {
+    color: #999;
+}
+</style><style>/* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title , div.ednote-title, div.warning-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title, div.ednote-title { color: #2b2; }
+div.warning-title { color: #f22; }
+div.issue-title span, div.note-title span, div.ednote-title span, div.warning-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue, div.ednote, div.warning {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .ednote > p:first-child, .issue > p:first-child, .warning > p:first-child { margin-top: 0 }
+.issue, .note, .ednote, .warning {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note , div.ednote,  div.warning {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.ednote, span.issue, span.warning { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note, .ednote {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+.warning {
+    border-color: #f11;
+    border-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
+
+.warning-title:before{
+    content: "⚠"; /*U+26A0 WARNING SIGN*/
+    font-size: 3em;
+    float: left;
+    height: 100%;
+    padding-right: .3em;
+    vertical-align: top;
+    margin-top: -0.5em;
+}
+
+li.task-list-item {
+    list-style: none;
+}
+
+input.task-list-item-checkbox {
+    margin: 0 0.35em 0.25em -1.6em;
+    vertical-align: middle;
+}
+</style><style>/* --- PERMALINKS --- */
+
+.permalink {
+  width: 1px;
+  height: 1px;
+  overflow: visible;
+  font-size: 10pt;
+  font-style: normal;
+  vertical-align: middle;
+  margin-left: 4px;
+  float: right;
+}
+
+.permalink a, .permalink a:link, .permalink a:visited, .permalink a:hover, .permalink a:focus, .permalink a:active {
+  background:transparent !important;
+  text-decoration:none;
+  font-weight: bold;
+  color:#666 !important;
+}
+
+.permalink abbr {
+  border:0;
+}
+</style>
+		
+		<title>Web Publications</title>
+		
+		
+		<link href="common/css/common.css" rel="stylesheet" type="text/css">
+		
+	<style id="respec-mainstyle">/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* Override code highlighter background */
+.hljs {
+  background: transparent !important;
+}
+
+/* --- INLINES --- */
+h1 abbr,
+h2 abbr,
+h3 abbr,
+h4 abbr,
+h5 abbr,
+h6 abbr,
+a abbr {
+  border: none;
+}
+
+dfn {
+  font-weight: bold;
+}
+
+a.internalDFN {
+  color: inherit;
+  border-bottom: 1px solid #99c;
+  text-decoration: none;
+}
+
+a.externalDFN {
+  color: inherit;
+  border-bottom: 1px dotted #ccc;
+  text-decoration: none;
+}
+
+a.bibref {
+  text-decoration: none;
+}
+
+cite .bibref {
+  font-style: normal;
+}
+
+code {
+  color: #c83500;
+}
+
+th code {
+  color: inherit;
+}
+
+/* --- TOC --- */
+
+.toc a,
+.tof a {
+  text-decoration: none;
+}
+
+a .secno,
+a .figno {
+  color: #000;
+}
+
+ul.tof,
+ol.tof {
+  list-style: none outside none;
+}
+
+.caption {
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* --- TABLE --- */
+
+table.simple {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-bottom: 3px solid #005a9c;
+}
+
+.simple th {
+  background: #005a9c;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+}
+
+.simple th[scope="row"] {
+  background: inherit;
+  color: inherit;
+  border-top: 1px solid #ddd;
+}
+
+.simple td {
+  padding: 3px 10px;
+  border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+  background: #f0f6ff;
+}
+
+/* --- DL --- */
+
+.section dd > p:first-child {
+  margin-top: 0;
+}
+
+.section dd > p:last-child {
+  margin-bottom: 0;
+}
+
+.section dd {
+  margin-bottom: 1em;
+}
+
+.section dl.attrs dd,
+.section dl.eldef dd {
+  margin-bottom: 0;
+}
+
+#issue-summary > ul,
+.respec-dfn-list {
+  column-count: 2;
+}
+
+#issue-summary li,
+.respec-dfn-list li {
+  list-style: none;
+}
+
+details.respec-tests-details {
+  margin-left: 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+details.respec-tests-details > * {
+  padding-right: 2em;
+}
+
+details.respec-tests-details[open] {
+  z-index: 999999;
+  position: absolute;
+  border: thin solid #cad3e2;
+  border-radius: .3em;
+  background-color: white;
+  padding-bottom: .5em;
+}
+
+details.respec-tests-details[open] > summary {
+  border-bottom: thin solid #cad3e2;
+  padding-left: 1em;
+  margin-bottom: 1em;
+  line-height: 2em;
+}
+
+details.respec-tests-details > ul {
+  width: 100%;
+  margin-top: -0.3em;
+}
+
+details.respec-tests-details > li {
+  padding-left: 1em;
+}
+
+@media print {
+  .removeOnSave {
+    display: none;
+  }
+}
+</style><style>/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED"><link rel="canonical" href="https://www.w3.org/TR/wpub/"><script id="initialUserConfig" type="application/json">{
+  "wg": "Publishing Working Group",
+  "specStatus": "ED",
+  "shortName": "wpub",
+  "editors": [
+    {
+      "name": "Matt Garrish",
+      "company": "DAISY Consortium",
+      "companyURL": "http://www.daisy.org",
+      "w3cid": 51655
+    },
+    {
+      "name": "Ivan Herman",
+      "url": "https://www.w3.org/People/Ivan/",
+      "company": "W3C",
+      "w3cid": 7382,
+      "extras": [
+        {
+          "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
+          "href": "http://orcid.org/0000-0003-0782-2704",
+          "class": "orcid"
+        }
+      ],
+      "companyURL": "https://www.w3.org"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Baldur Bjarnason",
+      "company": "The Rebus Foundation",
+      "companyURL": "https://reb.us/",
+      "w3cid": 92101
+    },
+    {
+      "name": "Timothy W. Cole",
+      "url": "https://www.library.illinois.edu/people/bios/t-cole3/",
+      "company": "University of Illinois at Urbana-Champaign",
+      "companyURL": "https://illinois.edu",
+      "w3cid": 53965,
+      "extras": [
+        {
+          "name": "<img src='common/images/orcid_logo.png' alt='orcid logo'/>",
+          "href": "https://orcid.org/0000-0002-5906-4581",
+          "class": "orcid"
+        }
+      ]
+    },
+    {
+      "name": "Dave Cramer",
+      "company": "Hachette Livre",
+      "companyURL": "https://hachette.com/"
+    },
+    {
+      "name": "Florian Rivoal",
+      "company": "Vivliostyle Inc.",
+      "companyURL": "http://vivliostyle.com/"
+    }
+  ],
+  "processVersion": 2017,
+  "includePermalinks": true,
+  "permalinkEdge": true,
+  "permalinkHide": false,
+  "diffTool": "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
+  "wgURI": "https://www.w3.org/publishing/groups/publ-wg/",
+  "wgPublicList": "public-publ-wg",
+  "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/100074/status",
+  "github": {
+    "repoURL": "https://github.com/w3c/wpub",
+    "branch": "master"
+  },
+  "localBiblio": {
+    "html": {
+      "title": "HTML 5.1",
+      "authors": [
+        "Steve Faulkner",
+        "Arron Eicholz",
+        "Travis Leithead",
+        "Alex Danilo"
+      ],
+      "date": "2016-11-01",
+      "status": "W3C Recommendation",
+      "href": "https://www.w3.org/TR/html/",
+      "publisher": "W3C"
+    },
+    "link-relation": {
+      "title": "Identifier: A Link Relation to Convey a Preferred URI for Referencing",
+      "authors": [
+        "H. Van de Sompel",
+        "M. Nelson",
+        "G. Bilder",
+        "J. Kunze",
+        "S. Warner"
+      ],
+      "rawDate": "2017-08",
+      "publisher": "IETF",
+      "href": "https://tools.ietf.org/html/draft-vandesompel-identifier-00"
+    },
+    "cfi": {
+      "authors": [
+        "Peter Sorotokin",
+        "Garth Conboy",
+        "Brady Duga",
+        "John Rivlin",
+        "Don Beaver",
+        "Kevin Ballard",
+        "Alastair Fettes",
+        "Daniel Weck"
+      ],
+      "title": "EPUB Canonical Fragment Identifiers 1.1",
+      "href": "http://www.idpf.org/epub/linking/cfi/epub-cfi.html",
+      "publisher": "IDPF",
+      "rawDate": "2017-01-05",
+      "status": "Recommended Specification"
+    },
+    "pub-loc": {
+      "title": "Locators for Web Publications",
+      "href": "https://w3.org/TR/pub-loc/",
+      "authors": [
+        "Timothy W. Cole",
+        "Ivan Herman"
+      ],
+      "date": "..."
+    },
+    "pwpub": {
+      "title": "Packaged Web Publications",
+      "href": "https://w3.org/TR/pwpub/",
+      "authors": [
+        "..."
+      ],
+      "date": "..."
+    },
+    "wpub": {
+      "title": "Web Publications",
+      "href": "https://w3.org/TR/wpub/",
+      "authors": [
+        "Matt Garrish",
+        "Ivan Herman"
+      ],
+      "date": "..."
+    }
+  },
+  "publishISODate": "2017-11-24T00:00:00.000Z",
+  "generatedSubtitle": "Editor's Draft 24 November 2017"
+}</script><meta name="description" content="This specification defines a collection of information that describes the structure of Web Publications so
+				that user agents can provide user experiences well-suited to reading publications, such as sequential
+				navigation and offline reading. This information includes the default reading order, a list of resources, and
+				publication-wide metadata."></head>
+	<body aria-busy="false" class="h-entry"><div class="head">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+    </p>
+  <p><!--_hyper: 1239906776;--></p>
+  <h1 class="title p-name" id="title">Web Publications</h1>
+  <h2 id="w3c-editor-s-draft-24-november-2017"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2017-11-24">24 November 2017</time><span class="permalink"><a href="#undefined" aria-label="Permalink for W3C Editor's Draft 24 November 2017" title="Permalink for W3C Editor's Draft 24 November 2017"><span>§</span></a></span></h2>
+  <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://w3c.github.io/wpub/">https://w3c.github.io/wpub/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/TR/wpub/">https://www.w3.org/TR/wpub/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="https://w3c.github.io/wpub/">https://w3c.github.io/wpub/</a></dd>
+    <dt>Editors:</dt>
+    <dd class="p-author h-card vcard" data-editor-id="51655"><span class="p-name fn">Matt Garrish</span>, <a class="p-org org h-org h-card" href="http://www.daisy.org">DAISY Consortium</a></dd>
+<dd class="p-author h-card vcard" data-editor-id="7382"><a class="u-url url p-name fn" href="https://www.w3.org/People/Ivan/">Ivan Herman</a>, <a class="p-org org h-org h-card" href="https://www.w3.org"><abbr title="World Wide Web Consortium">W3C</abbr></a>, <span class="orcid"><a href="http://orcid.org/0000-0003-0782-2704"><img src="common/images/orcid_logo.png" alt="orcid logo"></a></span></dd>
+
+      <dt>Authors:</dt>
+      <dd class="p-author h-card vcard" data-editor-id="92101"><span class="p-name fn">Baldur Bjarnason</span>, <a class="p-org org h-org h-card" href="https://reb.us/">The Rebus Foundation</a></dd>
+<dd class="p-author h-card vcard" data-editor-id="53965"><a class="u-url url p-name fn" href="https://www.library.illinois.edu/people/bios/t-cole3/">Timothy W. Cole</a>, <a class="p-org org h-org h-card" href="https://illinois.edu">University of Illinois at Urbana-Champaign</a>, <span class="orcid"><a href="https://orcid.org/0000-0002-5906-4581"><img src="common/images/orcid_logo.png" alt="orcid logo"></a></span></dd>
+<dd class="p-author h-card vcard" data-editor-id="53965"><span class="p-name fn">Dave Cramer</span>, <a class="p-org org h-org h-card" href="https://hachette.com/">Hachette Livre</a></dd>
+<dd class="p-author h-card vcard" data-editor-id="53965"><span class="p-name fn">Florian Rivoal</span>, <a class="p-org org h-org h-card" href="http://vivliostyle.com/">Vivliostyle Inc.</a></dd>
+
+          <dt>Participate:</dt>
+                  <dd>
+                    <a href="https://github.com/w3c/wpub">
+                      GitHub w3c/wpub
+                    </a>
+                  </dd>
+                  <dd>
+                    <a href="https://github.com/w3c/wpub/issues/">
+                      File a bug
+                    </a>
+                  </dd>
+                  <dd>
+                    <a href="https://github.com/w3c/wpub/commits/master">
+                      Commit history
+                    </a>
+                  </dd>
+  </dl>
+      <p class="copyright">
+        <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
+        2017
+        
+        <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
+        (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+        <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+        <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+        <abbr title="World Wide Web Consortium">W3C</abbr> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+        <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+            <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a>
+        rules apply.
+      </p>
+  <hr title="Separator for header">
+</div>
+		<section id="abstract" class="introductory"><h2 id="abstract-0">Abstract</h2>
+			<p>This specification defines a collection of information that describes the structure of Web Publications so
+				that user agents can provide user experiences well-suited to reading publications, such as sequential
+				navigation and offline reading. This information includes the default reading order, a list of resources, and
+				publication-wide metadata.</p>
+		</section>
+		<section id="sotd" class="introductory"><h2 id="status-of-this-document">Status of This Document</h2>
+      <p>
+        <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+      </p>
+        
+			<p>This first public working draft provides a preliminary outline of a Web Publication. Many details are under
+				active consideration within the Publishing Working Group and are subject to change. The most prominent known
+				issues have been identified in this document and links provided to comment on them.</p>
+
+			<p>In particular, the Working Group seeks feedback on the following issues:</p>
+			<ul>
+				<li><a href="#rel-wam">Integration with Web App Manifest</a></li>
+				<li><a href="#wp-lifecycle">Supporting Web Publications in browsers</a></li>
+				<li><a href="#wp-address">The nature of the Web Publication address</a></li>
+			</ul>
+		
+        <p>
+          This document was published by the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing Working Group</a> as an Editor's Draft.
+            Comments regarding this document are welcome. Please send them to
+            <a href="mailto:public-publ-wg@w3.org">public-publ-wg@w3.org</a>
+            (<a href="mailto:public-publ-wg-request@w3.org?subject=subscribe">subscribe</a>,
+            <a href="https://lists.w3.org/Archives/Public/public-publ-wg/">archives</a>).
+        </p>
+          <p>
+            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+            Membership. This is a draft document and may be updated, replaced or obsoleted by other
+            documents at any time. It is inappropriate to cite this document as other than work in
+            progress.
+          </p>
+        <p>
+            This document was produced by
+            a group
+             operating under the
+            <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+              <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/100074/status" rel="disclosure">public list of any patent
+              disclosures</a>
+            made in connection with the deliverables of
+            the group; that page also includes
+            instructions for disclosing a patent. An individual who has actual knowledge of a patent
+            which the individual believes contains
+            <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential
+            Claim(s)</a> must disclose the information in accordance with
+            <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section
+            6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+        </p>
+          <p>This document is governed by the <a id="w3c_process_revision" href="https://www.w3.org/2017/Process-20170301/">1 March 2017 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+          </p>
+        
+
+</section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents<span class="permalink"><a href="#undefined" aria-label="Permalink for Table of Contents" title="Permalink for Table of Contents"><span>§</span></a></span></h2><ol class="toc"><li class="tocline"><a href="#intro" class="tocxref"><span class="secno">1. </span>Introduction</a><ol class="toc"><li class="tocline"><a href="#why-wp" class="tocxref"><span class="secno">1.1 </span>Why Web Publications</a></li><li class="tocline"><a href="#what-is-wp" class="tocxref"><span class="secno">1.2 </span>What is a Web Publication</a></li><li class="tocline"><a href="#scope" class="tocxref"><span class="secno">1.3 </span>Scope</a></li><li class="tocline"><a href="#relationships" class="tocxref"><span class="secno">1.4 </span>Relationship to Other Specifications</a><ol class="toc"><li class="tocline"><a href="#rel-wam" class="tocxref"><span class="secno">1.4.1 </span>Web App Manifest</a></li></ol></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">1.5 </span>Terminology</a></li></ol></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a><ol class="toc"><li class="tocline"><a href="#conformance-classes" class="tocxref"><span class="secno">2.1 </span>Conformance Classes</a></li></ol></li><li class="tocline"><a href="#infoset" class="tocxref"><span class="secno">3. </span>Information Set</a><ol class="toc"><li class="tocline"><a href="#infoset-expl" class="tocxref"><span class="secno">3.1 </span>Explanation</a></li><li class="tocline"><a href="#infoset-req" class="tocxref"><span class="secno">3.2 </span>Requirements</a></li><li class="tocline"><a href="#infoset-meta" class="tocxref"><span class="secno">3.3 </span>Descriptive Properties</a><ol class="toc"><li class="tocline"><a href="#wp-a11y" class="tocxref"><span class="secno">3.3.1 </span>Accessibility</a></li><li class="tocline"><a href="#wp-address" class="tocxref"><span class="secno">3.3.2 </span>Address</a></li><li class="tocline"><a href="#wp-dir" class="tocxref"><span class="secno">3.3.3 </span>Base Direction</a></li><li class="tocline"><a href="#wp-canonical-identifier" class="tocxref"><span class="secno">3.3.4 </span>Canonical Identifier</a></li><li class="tocline"><a href="#wp-creators" class="tocxref"><span class="secno">3.3.5 </span>Creators</a></li><li class="tocline"><a href="#wp-language" class="tocxref"><span class="secno">3.3.6 </span>Language</a></li><li class="tocline"><a href="#wp-mod-date" class="tocxref"><span class="secno">3.3.7 </span>Last Modification Date</a></li><li class="tocline"><a href="#wp-pub-date" class="tocxref"><span class="secno">3.3.8 </span>Publication Date</a></li><li class="tocline"><a href="#wp-privacy" class="tocxref"><span class="secno">3.3.9 </span>Privacy Policy</a></li><li class="tocline"><a href="#wp-title" class="tocxref"><span class="secno">3.3.10 </span>Title</a></li></ol></li><li class="tocline"><a href="#infoset-structure" class="tocxref"><span class="secno">3.4 </span>Structural Properties</a><ol class="toc"><li class="tocline"><a href="#wp-default-reading-order" class="tocxref"><span class="secno">3.4.1 </span>Default Reading Order</a></li><li class="tocline"><a href="#wp-resource-list" class="tocxref"><span class="secno">3.4.2 </span>Resource List</a></li><li class="tocline"><a href="#wp-table-of-contents" class="tocxref"><span class="secno">3.4.3 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#wp-extensibility" class="tocxref"><span class="secno">3.5 </span>Extensibility</a></li></ol></li><li class="tocline"><a href="#manifest" class="tocxref"><span class="secno">4. </span>Manifest</a><ol class="toc"><li class="tocline"><a href="#manifest-intro" class="tocxref"><span class="secno">4.1 </span>Overview</a></li><li class="tocline"><a href="#manifest-req" class="tocxref"><span class="secno">4.2 </span>Requirements</a></li><li class="tocline"><a href="#manifest-declaration" class="tocxref"><span class="secno">4.3 </span>Declaration</a></li><li class="tocline"><a href="#manifest-serialization" class="tocxref"><span class="secno">4.4 </span>Serialization</a></li></ol></li><li class="tocline"><a href="#wp-construction" class="tocxref"><span class="secno">5. </span>Web Publication Construction</a><ol class="toc"><li class="tocline"><a href="#wp-resources" class="tocxref"><span class="secno">5.1 </span>Resources</a></li><li class="tocline"><a href="#wp-linking" class="tocxref"><span class="secno">5.2 </span>Linking to a Manifest</a></li><li class="tocline"><a href="#wp-entry-page" class="tocxref"><span class="secno">5.3 </span>Entry Page</a></li></ol></li><li class="tocline"><a href="#wp-lifecycle" class="tocxref"><span class="secno">6. </span>Web Publication Lifecycle</a></li><li class="tocline"><a href="#wp-enhancements" class="tocxref"><span class="secno">7. </span>Reading Enhancements</a><ol class="toc"><li class="tocline"><a href="#layout" class="tocxref"><span class="secno">7.1 </span>Layout</a><ol class="toc"><li class="tocline"><a href="#scrolling-or-paginating" class="tocxref"><span class="secno">7.1.1 </span>Scrolling or Paginating</a></li><li class="tocline"><a href="#enh-pagination" class="tocxref"><span class="secno">7.1.2 </span>Paginated Layout</a></li></ol></li><li class="tocline"><a href="#enh-nav" class="tocxref"><span class="secno">7.2 </span>Navigation</a><ol class="toc"><li class="tocline"><a href="#enh-reading-order" class="tocxref"><span class="secno">7.2.1 </span>Reading Order</a></li><li class="tocline"><a href="#enh-toc" class="tocxref"><span class="secno">7.2.2 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#enh-offline-reading" class="tocxref"><span class="secno">7.3 </span>Offline Reading</a></li><li class="tocline"><a href="#enh-search" class="tocxref"><span class="secno">7.4 </span>Search</a></li></ol></li><li class="tocline"><a href="#locators" class="tocxref"><span class="secno">8. </span>Web Publication Locators</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">9. </span>Security</a></li><li class="tocline"><a href="#privacy" class="tocxref"><span class="secno">10. </span>Privacy</a></li><li class="tocline"><a href="#ack" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ol class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ol></li></ol></nav>
+		<section id="intro">
+			<!--OddPage--><h2 id="x1-introduction"><span class="secno">1. </span>Introduction<span class="permalink"><a href="#intro" aria-label="Permalink for 1. Introduction" title="Permalink for 1. Introduction"><span>§</span></a></span></h2>
+
+			<section id="why-wp" class="informative">
+				<h3 id="x1-1-why-web-publications"><span class="secno">1.1 </span>Why Web Publications<span class="permalink"><a href="#why-wp" aria-label="Permalink for 1.1 Why Web Publications" title="Permalink for 1.1 Why Web Publications"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+
+				<p>The Web is a lonely place. It is unbounded: resources live out their lives on remote servers scattered
+					across the globe, only reachable by addresses sometimes known to only a few people. But life on the Web
+					is not all doom and gloom. Through the power of Web pages, these resources can be brought together to
+					create amazing experiences.</p>
+
+				<p>Web sites add another layer of relationship—this time between pages—but the relationship is a tenuous one
+					that typically depends on hyperlinks to add cohesion. Without a user that understands how to follow the
+					connections, a Web site is still no more than a loose coupling of information.</p>
+
+				<p>The preceding is not a critique of the Web, but meant to highlight that the modern Web is very much an
+					active, event-driven experience. Users follow the necessary paths to obtain the information they
+					need.</p>
+
+				<p>The traditional publishing model, sometimes called the print model, differs from the Web model in that the
+					publisher packages all the information together and thereby establishes the common pathway through it.
+					The user can passively follow the content page-by-page, or actively find other pathways via a table of
+					contents or index. It is a model that has worked to bind information in a cohesive way for millennia, and
+					continues to be an important model alongside the Web. The publication as a bounded edition, made public,
+					is used to carry intellectual and artistic works of innumerable form: novels, plays, poetry, journals,
+					magazines, newspapers, articles, laws, treatises, pamphlets, atlases, comics, manga, notebooks, memos,
+					manuals, and albums of all sorts.</p>
+
+				<p>Attempts to reproduce this model on the Web, however, have had to work around its loose coupling of
+					information: sometimes publications are compressed into a single page; sometimes they are broken across
+					multiple pages and hyperlinked together. These models both have flaws, however: single-page publications
+					are often so large they render slowly, especially on low-power devices; multi-page publications cannot be
+					easily taken offline because their common thread cannot be established.</p>
+
+				<p>As a result, users have had trouble accessing, compiling and downloading Web content for curation and
+					personal use. That, in turn, has fed the continuing development of non-Web digital formats to redress
+					these problems, and made it necessary to create both Web-ready content and alternative renditions for
+					offline use.</p>
+
+				<p>This specification aims to reduce these barriers and reinvigorate publishing by combining the best aspects
+					of both models — the persistent availability and portability of bounded publications with the pervasive
+					accessibility, addressability, and interconnectedness of the Open Web Platform. To do so, it adds an
+					unobtrusive definition of interrelation to the Web model: the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>.</p>
+			</section>
+
+			<section id="what-is-wp" class="informative">
+				<h3 id="x1-2-what-is-a-web-publication"><span class="secno">1.2 </span>What is a Web Publication<span class="permalink"><a href="#what-is-wp" aria-label="Permalink for 1.2 What is a Web Publication" title="Permalink for 1.2 What is a Web Publication"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+
+				<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> is a discoverable and identifiable collection of information about a publication
+					and its resources. This information is expressed in a machine-readable document called a <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>,
+					which is what enables user agents to understand the bounds of the Web Publication and the connection
+					between its resources.</p>
+
+				<p>The manifest includes metadata that describes the Web Publication, as a publication has an identity and
+					nature beyond its constituent resources. The manifest also provides a list of all the resources that
+					belong to the Web Publication and the default reading order, which is how it connects resources into a
+					single contiguous work.</p>
+
+				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest (via
+					an HTTP Link header or an [<cite><a class="bibref" href="#bib-html">html</a></cite>] <code>link</code> element), or the manifest can be loaded directly by
+					a compatible user agent.</p>
+
+				<p>With the establishment of Web Publications, user agents can build new experiences tailored specifically
+					for their unique reading needs.</p>
+			</section>
+
+			<section id="scope" class="informative">
+				<h3 id="x1-3-scope"><span class="secno">1.3 </span>Scope<span class="permalink"><a href="#scope" aria-label="Permalink for 1.3 Scope" title="Permalink for 1.3 Scope"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+
+				<p>This specification only defines requirements for the production and rendering of valid <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web
+						Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
+					achieve its goal—that being to allow for a measure of boundedness on the Web without changing the way
+					that the Web itself operates.</p>
+
+				<p>Moreover, the specification is designed to adapt automatically to updates to Open Web Platform
+					technologies in order to ensure that Web Publications continue to interoperate seamlessly as the Web
+					evolves (e.g., by referencing the latest published versions instead of specific dated versions).</p>
+
+				<p>Further, this specification does not attempt to constrain the nature of a Web Publication: any type of
+					work that can be represented on the Web constitutes a potential Web Publication.</p>
+
+				<p>The specification is also intended to facilitate different user agent architectures for the consumption of
+					Web Publications. While a primary goal is that traditional Web user agents (browsers) will be able to
+					consume Web Publications, this should not limit the capabilities of any other possible type of user agent
+					(e.g., applications, whether standalone or running within a user agent, or even Web Publications that
+					include their own user interface). As a result, the specification does not attempt to architect required
+					solutions for situations whose expected outcome will vary depending on the nature of the user agent and
+					the expectations of the user (e.g., how to prompt to initiate a Web Publication, or at what point or how
+					much of a Web Publication to cache for offline use).</p>
+			</section>
+
+			<section id="relationships">
+				<h3 id="x1-4-relationship-to-other-specifications"><span class="secno">1.4 </span>Relationship to Other Specifications<span class="permalink"><a href="#relationships" aria-label="Permalink for 1.4 Relationship to Other Specifications" title="Permalink for 1.4 Relationship to Other Specifications"><span>§</span></a></span></h3>
+
+				<section id="rel-wam">
+					<h4 id="x1-4-1-web-app-manifest"><span class="secno">1.4.1 </span>Web App Manifest<span class="permalink"><a href="#rel-wam" aria-label="Permalink for 1.4.1 Web App Manifest" title="Permalink for 1.4.1 Web App Manifest"><span>§</span></a></span></h4>
+
+					<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote" aria-level="5"><span>Editor's note</span></div><div class="">
+						<p>The working group is investigating integration with the work done on [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>] to avoid
+							duplication of concerns both in the expression and serialization of a manifest and in the
+							processing and compilation of the infoset. It is expected, however, that there will be
+							differences in the processing models of each (e.g., the initiation of the reading experience for
+							web publications versus installation for applications).</p>
+
+						<p>The working assumption is that both applications and publications can use the same manifest and
+							serialization to express the information necessary to initiate themselves.</p>
+
+						<p>The initial stage of evaluating this assumption involves:</p>
+
+						<ul>
+							<li>the continuing analysis of necessary metadata and publication structure requirements;</li>
+							<li>the comparison and harmonization of web publication requirements with those already defined
+								in [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>].</li>
+						</ul>
+
+						<p>The next stage will involve the serialization of the <a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a> in JSON to see how this
+							expression of the manifest can be aligned with the expression of the [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>]. Wherever
+							semantically possible, the terms used and defined for [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>] will be reused, and,
+							conversely, some of the members defined for Web Publications may be generally useful for
+							applications and may be added to the [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>] as a common pool of information. To avoid
+							possible future conflicts, care will be taken to use a naming scheme that clearly separates terms
+							to be used for Web Publications only.</p>
+
+						<p>This specification consequently should be read and understood in this context of an ongoing
+							investigation, and that significant changes may occur in the future.</p>
+
+						<p>This section will be updated with each release to reflect the current status of this work, and
+							describe the evolving relationship.</p>
+
+						<p>See also <a href="https://github.com/w3c/wpub/issues/32">issue #32 in the GitHub tracker</a> for
+							more discussion about integration.</p>
+					</div></div>
+				</section>
+			</section>
+
+			<section id="terminology">
+				<h3 id="x1-5-terminology"><span class="secno">1.5 </span>Terminology<span class="permalink"><a href="#terminology" aria-label="Permalink for 1.5 Terminology" title="Permalink for 1.5 Terminology"><span>§</span></a></span></h3>
+
+				<p>Wherever appropriate, this document relies on terminology defined by the note on "Publishing and Linking
+					on the Web" [<cite><a class="bibref" href="#bib-publishing-linking">publishing-linking</a></cite>], including, in particular, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, and <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-address">address</a>.</p>
+
+				<dl>
+					<dt><dfn data-lt="identifiers|identifier" data-dfn-type="dfn" id="dfn-identifiers">Identifier</dfn></dt>
+					<dd>
+						<p>An identifier is metadata that can be used to refer to <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
+							persistent and unambiguous manner. URLs, URNs, DOIs, ISBNs, or PURLs are all examples of
+							persistent identifiers frequently used in publishing.</p>
+					</dd>
+
+					<dt><dfn data-lt="manifests|manifest" data-dfn-type="dfn" id="dfn-manifests">Manifest</dfn></dt>
+					<dd>
+						<p>A manifest represents structured information about a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>, such as informative
+							metadata, a <a href="#wp-resource-list">list of all resources</a>, and a <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading
+								order</a>.</p>
+					</dd>
+
+					<dt><dfn data-dfn-type="dfn" id="dfn-non-empty">Non-empty</dfn></dt>
+					<dd>
+						<p>For the purposes of this specification, non-empty is used to refer to an element, attribute or
+							property whose text content or value consists of one or more characters after whitespace
+							normalization, where whitespace normalization rules are defined per the host format.</p>
+					</dd>
+
+					<dt><dfn data-lt="urls|url" data-dfn-type="dfn" id="dfn-urls">URL</dfn></dt>
+					<dd>
+						<p>The general term URL is defined by the URL Standard&nbsp;[<cite><a class="bibref" href="#bib-url">url</a></cite>]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
+							specifications, like HTML&nbsp;[<cite><a class="bibref" href="#bib-html">html</a></cite>]. In particular, a URL allows for the usage of characters
+							from Unicode following&nbsp;[<cite><a class="bibref" href="#bib-rfc3987">rfc3987</a></cite>]. See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
+								document</a> for further details.</p>
+					</dd>
+
+					<dt><dfn data-lt="web publications|web publication's|web publication" data-dfn-type="dfn" id="dfn-web-publications">Web Publication</dfn></dt>
+					<dd>
+						<p>A Web Publication is a collection of one or more resources, organized together through a
+								<a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> into a single logical work with a <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a>. The Web
+							Publication is uniquely identifiable and presentable using Open Web Platform technologies.</p>
+					</dd>
+				</dl>
+			</section>
+		</section>
+		<section id="conformance"><!--OddPage--><h2 id="x2-conformance"><span class="secno">2. </span>Conformance<span class="permalink"><a href="#conformance" aria-label="Permalink for 2. Conformance" title="Permalink for 2. Conformance"><span>§</span></a></span></h2>
+<p>
+  As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
+  and notes in this specification are non-normative. Everything else in this specification is
+  normative.
+</p>
+<p id="respecRFC2119">The key words  <em class="rfc2119">MAY</em>, <em class="rfc2119">MUST</em>, <em class="rfc2119">MUST NOT</em>, <em class="rfc2119">RECOMMENDED</em>, <em class="rfc2119">REQUIRED</em>, and <em class="rfc2119">SHOULD</em> are 
+  to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+</p>
+
+			<section id="conformance-classes">
+				<h3 id="x2-1-conformance-classes"><span class="secno">2.1 </span>Conformance Classes<span class="permalink"><a href="#conformance-classes" aria-label="Permalink for 2.1 Conformance Classes" title="Permalink for 2.1 Conformance Classes"><span>§</span></a></span></h3>
+
+				<p>This specification defines two conformance classes: one for <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> and one for user
+					agents that process them.</p>
+
+				<p id="wp-conformance">A Web Publication is conformant to this specification if it meets the following
+					criteria:</p>
+
+				<ul>
+					<li>it has a <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> that conforms to <a href="#manifest-req" class="sec-ref"><span class="secno">4.2</span> <span class="sec-title">Requirements</span></a>;</li>
+					<li>ot adheres to the construction requirements defined in <a href="#wp-construction" class="sec-ref"><span class="secno">5.</span> <span class="sec-title">Web Publication Construction</span></a>.</li>
+				</ul>
+
+				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following
+					criteria:</p>
+
+				<ul>
+					<li>it is capable of generating a conforming <a href="#infoset">infoset</a> for a Web Publication.</li>
+				</ul>
+			</section>
+		</section>
+		<section id="infoset">
+			<!--OddPage--><h2 id="x3-information-set"><span class="secno">3. </span>Information Set<span class="permalink"><a href="#infoset" aria-label="Permalink for 3. Information Set" title="Permalink for 3. Information Set"><span>§</span></a></span></h2>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-0" aria-level="3"><span>Editor's note</span></div><p class="">The name "infoset" may change depending on feedback. Although this term has a different meaning
+				for individuals familiar with XML, alternatives such as "properties" and "metadata" do not fully capture the
+				nature or purpose of the collected information. See <a href="https://github.com/w3c/wpub/issues/63">issue
+					#63</a> for discussion.</p></div>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-1" aria-level="3"><span>Editor's note</span></div><p class="">As the serialization of the manifest remains an open issue, specifics about how properties are
+				compiled into the infoset remain unspecified. This includes, but is not limited to, what specific names the
+				properties will have in the infoset, whether the names in the manifest will be the same as those in the
+				infoset and/or whether mappings to properties from known vocabularies will be used.</p></div>
+
+			<section id="infoset-expl" class="informative">
+				<h3 id="x3-1-explanation"><span class="secno">3.1 </span>Explanation<span class="permalink"><a href="#infoset-expl" aria-label="Permalink for 3.1 Explanation" title="Permalink for 3.1 Explanation"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+
+				<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset|information set" data-dfn-type="dfn" id="dfn-infoset">information
+						set</dfn> (infoset). The infoset is logically divided into two sets of properties: those that
+					describe the publication and those that express key structures. These classifications only exist for the
+					purposes of understanding the function of the properties, however.</p>
+
+				<p>The infoset is both abstract and concrete. It is abstract in the sense that it represents a set of
+					information that a user agent has to compile about the Web Publication, but it also becomes concrete when
+					the user agent creates an internal representation of that information.</p>
+
+				<p>The infoset is primarily compiled from a Web Publication's <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>, whose serialization
+					requirements are defined in <a href="#manifest-serialization" class="sec-ref"><span class="secno">4.4</span> <span class="sec-title">Serialization</span></a>. Some information can be obtained in
+					outside the manifest, however. For example, fallback rules for properties defined in the following
+					subsections allow a user agent to compile information that the author has not provided in the manifest,
+					whether as an intentional optimization or by accidental omission.</p>
+			</section>
+
+			<section id="infoset-req">
+				<h3 id="x3-2-requirements"><span class="secno">3.2 </span>Requirements<span class="permalink"><a href="#infoset-req" aria-label="Permalink for 3.2 Requirements" title="Permalink for 3.2 Requirements"><span>§</span></a></span></h3>
+
+				<p>The requirements for the expression of infoset properties are as follows:</p>
+
+				<dl>
+					<dt>Descriptive Properties</dt>
+					<dd>
+						<p><em class="rfc2119" title="REQUIRED">REQUIRED</em>: <a href="#wp-address">address</a></p>
+						<div>
+							<span><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>:</span>
+							<ul class="flat">
+								<li><a href="#wp-a11y">accessibility</a></li>
+								<li><a href="#wp-dir">base direction</a></li>
+								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
+								<li><a href="#wp-creators">creator</a></li>
+								<li><a href="#wp-language">language</a></li>
+								<li><a href="#wp-mod-date">modification date</a></li>
+								<li><a href="#wp-privacy">privacy policy</a></li>
+								<li><a href="#wp-pub-date">publication date</a></li>
+								<li><a href="#wp-title">title</a></li>
+							</ul>
+						</div>
+					</dd>
+					<dt>Structural Properties</dt>
+					<dd>
+						<p><em class="rfc2119" title="REQUIRED">REQUIRED</em>: <a href="#wp-default-reading-order">default reading order</a> and <a href="#wp-resource-list">resource list</a></p>
+						<p><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>: <a href="#wp-table-of-contents">table of contents</a></p>
+					</dd>
+				</dl>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-2" aria-level="4"><span>Editor's note</span></div><p class="">These requirements reflect the current minimum consensus, though a number of issues remain
+					open that could change whether an item is required or recommended. See the following sections for more
+					information.</p></div>
+
+				<div class="issue" id="issue-21"><div role="heading" class="issue-title marker" id="h-issue" aria-level="4"><a href="https://github.com/w3c/wpub/issues/21"><span>Issue 21</span></a><span style="text-transform: none">: manifest: metadata</span></div><p class="">Whether the minimum manifest must include any metadata, or a specific slot
+					to handle metadata. (Note: this is now more specifically related to the infoset.)</p></div>
+			</section>
+
+			<section id="infoset-meta">
+				<h3 id="x3-3-descriptive-properties"><span class="secno">3.3 </span>Descriptive Properties<span class="permalink"><a href="#infoset-meta" aria-label="Permalink for 3.3 Descriptive Properties" title="Permalink for 3.3 Descriptive Properties"><span>§</span></a></span></h3>
+
+				<section id="wp-a11y">
+					<h4 id="x3-3-1-accessibility"><span class="secno">3.3.1 </span>Accessibility<span class="permalink"><a href="#wp-a11y" aria-label="Permalink for 3.3.1 Accessibility" title="Permalink for 3.3.1 Accessibility"><span>§</span></a></span></h4>
+
+					<p>Accessibility metadata allows the discovery of features and affordances of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
+						that enable its use by users with different reading requirements and needs.</p>
+
+					<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-3" aria-level="5"><span>Editor's note</span></div><p class="">How to express accessibility metadata remains to be determined. This could be a
+						grouping of properties from schema.org, for example, or could be split out into a list of individual
+						properties.</p></div>
+				</section>
+
+				<section id="wp-address">
+					<h4 id="x3-3-2-address"><span class="secno">3.3.2 </span>Address<span class="permalink"><a href="#wp-address" aria-label="Permalink for 3.3.2 Address" title="Permalink for 3.3.2 Address"><span>§</span></a></span></h4>
+
+					<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
+						<dfn data-dfn-type="dfn" id="dfn-address">address</dfn> is a <a href="#dfn-urls" class="internalDFN" data-link-type="dfn">URL</a> that refers to the Web Publication. It dereferences to the <a href="#wp-entry-page">entry page</a>, which enables the retrieval of a representation of the
+							<a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>.</p>
+
+					<p>The availability of this address does not preclude the creation and use of other identifiers and/or
+						addresses to retrieve a representation of a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> in whole or part.</p>
+
+					<div class="note"><div role="heading" class="note-title marker" id="h-note" aria-level="5"><span>Note</span></div><div class="">The Web Publication's address can also be used as value for an identifier link relation
+						[<cite><a class="bibref" href="#bib-link-relation">link-relation</a></cite>].</div></div>
+				</section>
+
+				<section id="wp-dir">
+					<h4 id="x3-3-3-base-direction"><span class="secno">3.3.3 </span>Base Direction<span class="permalink"><a href="#wp-dir" aria-label="Permalink for 3.3.3 Base Direction" title="Permalink for 3.3.3 Base Direction"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-base-direction">base direction</dfn> identifies the display direction for <a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a> properties.</p>
+
+					<p>The value of this property <em class="rfc2119" title="MUST">MUST</em> be one of:</p>
+
+					<dl>
+						<dt><code>ltr</code></dt>
+						<dd>left-to-right</dd>
+						<dt><code>rtl</code></dt>
+						<dd>right-to-left</dd>
+						<dt><code>auto</code></dt>
+						<dd>direction is determined from the value of the property</dd>
+					</dl>
+
+					<p>If not specified, the value <code>ltr</code> <em class="rfc2119" title="SHOULD">SHOULD</em> be assumed.</p>
+
+					<p>If property values are harvested from another resource, such as the <a href="#dfn-table-of-contents" class="internalDFN" data-link-type="dfn">table of contents</a>,
+						precedence <em class="rfc2119" title="SHOULD">SHOULD</em> be given to the base direction specified in the resource, when provided.</p>
+				</section>
+
+				<section id="wp-canonical-identifier">
+					<h4 id="x3-3-4-canonical-identifier"><span class="secno">3.3.4 </span>Canonical Identifier<span class="permalink"><a href="#wp-canonical-identifier" aria-label="Permalink for 3.3.4 Canonical Identifier" title="Permalink for 3.3.4 Canonical Identifier"><span>§</span></a></span></h4>
+
+					<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
+						<dfn data-dfn-type="dfn" id="dfn-canonical-identifier">canonical identifier</dfn> is a unique identifier that resolves to the preferred version of the
+						Web Publication. The canonical identifier <em class="rfc2119" title="SHOULD">SHOULD</em> be an <a href="#dfn-address" class="internalDFN" data-link-type="dfn">address</a>, but, if not, it <em class="rfc2119" title="MUST">MUST</em> be
+						possible to make a one-to-one mapping to an address (e.g., a DOI can be resolved to a URL via a DOI
+						resolver).</p>
+
+					<p>If a Web Publication is hosted at more than one address, this identifier allows a user agent to
+						identify the shared relationship between the versions and to determine which of the available
+						addresses is primary.</p>
+
+					<p>The canonical identifier is also intended to provide a measure of permanence above and beyond the Web
+						Publication's address. Even if a Web Publication is permanently relocated to a new address, for
+						example, the canonical identifier will provide a way of locating the new location (e.g., a DOI
+						registry could be updated with the new URL, or a redirect could be added to the URL of the canonical
+						identifier).</p>
+
+					<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication,
+						independent of its address(es). Ensuring uniqueness is outside the scope of this specification,
+						however. The actual uniqueness achievable depends on such factors as the conventions of the
+						identifier scheme used and the degree of control over assignment of identifiers.</p>
+
+					<div class="note"><div role="heading" class="note-title marker" id="h-note-0" aria-level="5"><span>Note</span></div><p class="">If the canonical identifier is a URL, it can be used as the target of a "canonical"
+						link&nbsp;[<cite><a class="bibref" href="#bib-rfc6596">rfc6596</a></cite>] (e.g., an [<cite><a class="bibref" href="#bib-html">html</a></cite>] <code>link</code> element whose <code>rel</code> attribute
+						has the value <code>canonical</code> or a Link HTTP header field [<cite><a class="bibref" href="#bib-rfc5988">rfc5988</a></cite>] similarly
+						identified).</p></div>
+
+					<div class="issue" id="issue-58"><div role="heading" class="issue-title marker" id="h-issue-0" aria-level="5"><a href="https://github.com/w3c/wpub/issues/58"><span>Issue 58</span></a><span style="text-transform: none">: is a canonical identifier necessary</span></div><p class="">The question is whether a canonical identifier is necessary to call out
+						explicitly in the infoset, or whether it is/can be handled by other metadata.</p></div>
+				</section>
+
+				<section id="wp-creators">
+					<h4 id="x3-3-5-creators"><span class="secno">3.3.5 </span>Creators<span class="permalink"><a href="#wp-creators" aria-label="Permalink for 3.3.5 Creators" title="Permalink for 3.3.5 Creators"><span>§</span></a></span></h4>
+
+					<p>Creators are the individuals or entities responsible for the creation of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web
+						Publication</a>.</p>
+
+					<p>The role the creator played in the creation of the Web Publication <em class="rfc2119" title="SHOULD">SHOULD</em> also be specified (e.g.,
+						'author', 'illustrator', 'translator').</p>
+				</section>
+
+				<section id="wp-language">
+					<h4 id="x3-3-6-language"><span class="secno">3.3.6 </span>Language<span class="permalink"><a href="#wp-language" aria-label="Permalink for 3.3.6 Language" title="Permalink for 3.3.6 Language"><span>§</span></a></span></h4>
+
+					<p>The language specified in the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
+						<a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a> identifies the natural language of its properties.</p>
+
+					<p>When specified, the language <em class="rfc2119" title="MUST">MUST</em> be a tag that conforms to [<cite><a class="bibref" href="#bib-bcp47">bcp47</a></cite>].</p>
+
+					<div class="note"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span></div><p class="">This language is not used in the processing or rendering of the Web Publication, and is
+							<strong>not</strong> a replacement for identifying the language of each resource as defined by
+						its format.</p></div>
+
+					<p>If a user agent requires the language and one is not available in the infoset, it <em class="rfc2119" title="MAY">MAY</em> attempt to
+						determine the language. This specification does not mandate how such a language tag is created. The
+						user agent might:</p>
+
+					<ul>
+						<li>use the <a href="#dfn-non-empty" class="internalDFN" data-link-type="dfn">non-empty</a> language declaration of the manifest;</li>
+						<li>use the first non-empty language declaration found in a resource in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading
+								order</a>;</li>
+						<li>calculate the language using its own algorithm.</li>
+					</ul>
+
+					<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) <em class="rfc2119" title="MUST">MUST</em> be used.</p>
+
+					<div class="issue" id="issue-53"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="5"><a href="https://github.com/w3c/wpub/issues/53"><span>Issue 53</span></a><span style="text-transform: none">: Language of web publication v. language of manifest/resources</span></div><div class="">
+						<p>The question is whether the language declared for the manifest content is the same as the language
+							of the publication, and how to deal with multilingual publications.</p>
+					</div></div>
+				</section>
+
+				<section id="wp-mod-date">
+					<h4 id="x3-3-7-last-modification-date"><span class="secno">3.3.7 </span>Last Modification Date<span class="permalink"><a href="#wp-mod-date" aria-label="Permalink for 3.3.7 Last Modification Date" title="Permalink for 3.3.7 Last Modification Date"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-last-modification-date">last modification date</dfn> is the date when the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> was last
+						updated.</p>
+
+					<p>The last modification date <em class="rfc2119" title="SHOULD">SHOULD</em> be updated whenever changes are made to the resources of the Web
+						Publication, including the <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>. It does not necessarily reflect all changes to the Web
+						Publication, however, as, for example, it might not reflect changes to third-party content.</p>
+				</section>
+
+				<section id="wp-pub-date">
+					<h4 id="x3-3-8-publication-date"><span class="secno">3.3.8 </span>Publication Date<span class="permalink"><a href="#wp-pub-date" aria-label="Permalink for 3.3.8 Publication Date" title="Permalink for 3.3.8 Publication Date"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-publication-date">publication date</dfn> is the date on which the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> was originally
+						published. It represents a static event in the lifecycle of a Web Publication and allows subsequent
+						revisions to be identified and compared.</p>
+
+					<p>The exact moment of publication is intentionally left open to interpretation: it could be when the Web
+						Publication is first made available online or could be a point in time before publication when the
+						Web Publication is considered final.</p>
+				</section>
+
+				<section id="wp-privacy">
+					<h4 id="x3-3-9-privacy-policy"><span class="secno">3.3.9 </span>Privacy Policy<span class="permalink"><a href="#wp-privacy" aria-label="Permalink for 3.3.9 Privacy Policy" title="Permalink for 3.3.9 Privacy Policy"><span>§</span></a></span></h4>
+
+					<p>Users often have the legal right to know and control what information is collected about them, how
+						such information is stored and for how long, whether it is personally identifiable, and how it can be
+						expunged. Including a statement that addresses all such privacy concerns is consequently an important
+						part of publishing <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a>. Even if no information is collected, such a declaration
+						increases the trust users have with the content.</p>
+
+					<p>To address this concern, the infoset allows a link to be provided to a privacy policy. The privacy
+						policy does not have to be a resource of the Web Publication, although including it as a resource is
+						<em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>.</p>
+
+					<p>Refer to <a href="#privacy" class="sec-ref"><span class="secno">10.</span> <span class="sec-title">Privacy</span></a> for more information about privacy considerations in Web
+						Publications.</p>
+				</section>
+
+				<section id="wp-title">
+					<h4 id="x3-3-10-title"><span class="secno">3.3.10 </span>Title<span class="permalink"><a href="#wp-title" aria-label="Permalink for 3.3.10 Title" title="Permalink for 3.3.10 Title"><span>§</span></a></span></h4>
+
+					<p>The title provides the human-readable name of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>.</p>
+
+					<p>When specified in the <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>, the title <em class="rfc2119" title="MUST">MUST</em> be <a href="#dfn-non-empty" class="internalDFN" data-link-type="dfn">non-empty</a>.</p>
+
+					<p>If a user agent requires a title and one is not available in the <a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a>, it <em class="rfc2119" title="MAY">MAY</em> create one.
+						This specification does not mandate how such a title is created. The user agent might:</p>
+
+					<ul>
+						<li>use the first <a href="#dfn-non-empty" class="internalDFN" data-link-type="dfn">non-empty</a>
+							<code>title</code> element found in a resource in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a>;</li>
+						<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
+						<li>use the URL of the manifest;</li>
+						<li>calculate a title using its own algorithm.</li>
+					</ul>
+
+					<div class="note"><div role="heading" class="note-title marker" id="h-note-2" aria-level="5"><span>Note</span></div><div class="">
+						<p>A user agent is not expected to produce a <a href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful title</a>
+							[<cite><a class="bibref" href="#bib-wcag20">wcag20</a></cite>] for a Web Publication when one is not specified.</p>
+					</div></div>
+				</section>
+			</section>
+
+			<section id="infoset-structure">
+				<h3 id="x3-4-structural-properties"><span class="secno">3.4 </span>Structural Properties<span class="permalink"><a href="#infoset-structure" aria-label="Permalink for 3.4 Structural Properties" title="Permalink for 3.4 Structural Properties"><span>§</span></a></span></h3>
+
+				<section id="wp-default-reading-order">
+					<h4 id="x3-4-1-default-reading-order"><span class="secno">3.4.1 </span>Default Reading Order<span class="permalink"><a href="#wp-default-reading-order" aria-label="Permalink for 3.4.1 Default Reading Order" title="Permalink for 3.4.1 Default Reading Order"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-default-reading-order">default reading order</dfn> is a specific progression through a set of <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
+						resources.</p>
+
+					<p>A user might follow alternative pathways through the content, but in the absence of such interaction
+						the default reading order defines the expected progression from one resource to the next.</p>
+
+					<p>The default reading order <em class="rfc2119" title="MUST">MUST</em> include at least one resource.</p>
+
+					<p>The default reading order is either specified directly in the manifest or in an [<cite><a class="bibref" href="#bib-html">html</a></cite>]
+							<code>nav</code> element. In the latter case, the manifest <em class="rfc2119" title="MUST">MUST</em> provide a link to the Web
+						Publication resource that contains the <code>nav</code> element, with a fragment identifier that
+						specifically identifies it.</p>
+
+					<p>The process for extracting a default reading order from a <code>nav</code> element are as follows:</p>
+
+					<ol>
+						<li>extract a list of resource paths referenced from the <code>href</code> attribute of all
+								<code>a</code> elements;</li>
+						<li>strip any fragment identifiers from the references;</li>
+						<li>resolve all relative paths to full URLs;</li>
+						<li>remove all consecutive references to the same resource, leaving only the first.</li>
+					</ol>
+
+					<p>If a user agent requires a default reading order and one is not provided in the <a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a>, it <em class="rfc2119" title="MAY">MAY</em>
+						attempt to construct one. This specification does not mandate how such a default reading order is
+						created. The user agent might:</p>
+
+					<ul>
+						<li>use only the resource the user accessed to reach the manifest;</li>
+						<li>search the list of resources for a <code>nav</code> element to use;</li>
+						<li>calculate the default reading order using its own algorithm.</li>
+					</ul>
+
+					<div class="issue" id="issue-35"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="5"><a href="https://github.com/w3c/wpub/issues/35"><span>Issue 35</span></a><span style="text-transform: none">: Proposal: an HTML-first Table of Contents approach to Web Publication</span></div><p class="">Define the default reading order of a Web Publication to be the files
+						referenced in the first</p></div>
+					<div class="issue" id="issue-39"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="5"><a href="https://github.com/w3c/wpub/issues/39"><span>Issue 39</span></a><span style="text-transform: none">: Do all documents in the reading order have to be reachable from the ToC</span></div><p class="">There is a consensus that a Web Publication must have a reading order
+						and must/should have a table of contents (the main navigation entry point).</p></div>
+				</section>
+
+				<section id="wp-resource-list">
+					<h4 id="x3-4-2-resource-list"><span class="secno">3.4.2 </span>Resource List<span class="permalink"><a href="#wp-resource-list" aria-label="Permalink for 3.4.2 Resource List" title="Permalink for 3.4.2 Resource List"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-resource-list">resource list</dfn> enumerates all resources that are used in the processing and rendering of
+						a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> (i.e., that are within its bounds). This list is the definitive source that
+						user agents have in determining which referenced resources belong to the Web Publication and which
+						are external to it.</p>
+
+					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
+						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it is
+						strongly <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em> to always provide a comprehensive list of all of the Web Publication's constituent
+						resources. At a minimum, the resource list <em class="rfc2119" title="MUST">MUST</em> include a list of all resources in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default
+							reading order</a>.</p>
+
+					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g., third-party
+						scripts that reference resources from deep within their source), but a Web Publication <em class="rfc2119" title="SHOULD">SHOULD</em> remain
+						consumable even if some of these resources are not identified as belonging to the Web Publication
+						(e.g., when it is taken offline without them).</p>
+
+					<p>If a user agent encounters a resource that it cannot locate in the resource list, it <em class="rfc2119" title="MUST">MUST</em> treat the
+						resource as external to the Web Publication (e.g., it might alert the user before loading, open the
+						resource in a new window, or unload the current Web Publication and resume normal Web browsing).</p>
+
+					<div class="issue" id="issue-22"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="5"><a href="https://github.com/w3c/wpub/issues/22"><span>Issue 22</span></a><span style="text-transform: none">: manifest: requirements for offline</span></div><p class="">The discussion led to the question whether the manifest/infoset <em class="rfc2119" title="MUST">MUST</em>
+						list all resources or not. In this sense, this became a duplicate of <a href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question.</p></div>
+
+					<div class="issue" id="issue-23"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="5"><a href="https://github.com/w3c/wpub/issues/23"><span>Issue 23</span></a><span style="text-transform: none">: MUST the manifest include information about secondary resources or not?</span></div><p class="">The question is whether the manifest/infoset <em class="rfc2119" title="MUST">MUST</em> list all resources or
+						not.</p></div>
+
+					<div class="issue" id="issue-59"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="5"><a href="https://github.com/w3c/wpub/issues/59"><span>Issue 59</span></a><span style="text-transform: none">: avoiding resource declaration duplication</span></div><p class="">The question is whether the manifest <em class="rfc2119" title="MUST">MUST</em> list resources in the default
+						reading order or whether this can be inferred.</p></div>
+				</section>
+
+				<section id="wp-table-of-contents">
+					<h4 id="x3-4-3-table-of-contents"><span class="secno">3.4.3 </span>Table of Contents<span class="permalink"><a href="#wp-table-of-contents" aria-label="Permalink for 3.4.3 Table of Contents" title="Permalink for 3.4.3 Table of Contents"><span>§</span></a></span></h4>
+
+					<p>The <dfn data-dfn-type="dfn" id="dfn-table-of-contents">table of contents</dfn> is a hierarchical list of links that reflects the structural outline
+						of the major sections of the Web Publication. There are no requirements on the completeness of the
+						table of contents, except that, when specified, it <em class="rfc2119" title="MUST">MUST</em> link to at least one <a href="#wp-resources">resource</a>.</p>
+
+					<p>The table of contents is either specified directly in the manifest or in an [<cite><a class="bibref" href="#bib-html">html</a></cite>] <code>nav</code>
+						element. In the latter case, the manifest <em class="rfc2119" title="MUST">MUST</em> provide a link to the Web Publication resource that
+						contains the <code>nav </code>element, with a fragment identifier that specifically identifies
+						it.</p>
+
+					<p>If a user agent requires a table of contents and one is not specified, it <em class="rfc2119" title="MAY">MAY</em> construct one. This
+						specification does not mandate how such a table of contents is created. The user agent might: </p>
+
+					<ol>
+						<li>attempt to locate a table of contents in the default reading order (e.g., an HTML document with a
+								<code>nav</code> element that has the <code>role</code> attribute value
+							<code>doc-toc</code>);</li>
+						<li>use the titles of resources in the default reading order;</li>
+						<li>calculate a table of contents using its own algorithms.</li>
+					</ol>
+
+					<div class="issue" id="issue-9"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="5"><a href="https://github.com/w3c/wpub/issues/9"><span>Issue 9</span></a><span style="text-transform: none">: Machine-Readable navigation</span></div><p class="">The question is whether the manifest/infoset needs to provide
+						navigation, or whether such mechanisms belong in the content.</p></div>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="5"><span>Issue</span></div><p class="">This question arises only if this mechanism is accepted: the question is whether a table
+						of contents navigation element can refer, via links, to any resource that is <em>not</em> listed in
+						the default reading order.</p></div>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="5"><span>Issue</span></div><div class="">
+						<p>The issue of using the HTML <code>nav</code> element as a possible encoding of the table of
+							contents is mentioned or explicitly addressed in the following issues:</p>
+						<ul>
+							<li><a href="https://github.com/w3c/wpub/issues/35">Issue #35</a>: Define the resources in the
+								default reading order of a Web Publication to be the files referenced in the first.</li>
+							<li><a href="https://github.com/w3c/wpub/issues/39">Issue #39</a>: There is a consensus that a
+								Web Publication must have a reading order and must/should have a table of contents (the main
+								navigation entry point).</li>
+						</ul>
+					</div></div>
+				</section>
+			</section>
+
+			<section id="wp-extensibility">
+				<h3 id="x3-5-extensibility"><span class="secno">3.5 </span>Extensibility<span class="permalink"><a href="#wp-extensibility" aria-label="Permalink for 3.5 Extensibility" title="Permalink for 3.5 Extensibility"><span>§</span></a></span></h3>
+
+				<p>The infoset is designed to provide a basic set of properties for use by user agents in presenting and
+					rendering a Web Publication. It <em class="rfc2119" title="MAY">MAY</em> be extended in the following ways:</p>
+
+				<ol>
+					<li>through the inclusion of additional properties in the manifest;</li>
+					<li>by the provision of linked metadata records.</li>
+				</ol>
+
+				<p>User Agents <em class="rfc2119" title="MAY">MAY</em> support additional properties but <em class="rfc2119" title="MUST NOT">MUST NOT</em> include unrecognized properties in the infoset.
+					The use of linked records is <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em> whenever possible, as the use of native formats standardizes and
+					simplifies processing by user agents.</p>
+			</section>
+		</section>
+		<section id="manifest">
+			<!--OddPage--><h2 id="x4-manifest"><span class="secno">4. </span>Manifest<span class="permalink"><a href="#manifest" aria-label="Permalink for 4. Manifest" title="Permalink for 4. Manifest"><span>§</span></a></span></h2>
+
+			<section id="manifest-intro" class="informative">
+				<h3 id="x4-1-overview"><span class="secno">4.1 </span>Overview<span class="permalink"><a href="#manifest-intro" aria-label="Permalink for 4.1 Overview" title="Permalink for 4.1 Overview"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+
+				<p>A <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> is a specific serialization of a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
+					<a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a>.</p>
+			</section>
+
+			<section id="manifest-req">
+				<h3 id="x4-2-requirements"><span class="secno">4.2 </span>Requirements<span class="permalink"><a href="#manifest-req" aria-label="Permalink for 4.2 Requirements" title="Permalink for 4.2 Requirements"><span>§</span></a></span></h3>
+
+				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
+
+				<ol>
+					<li>It <em class="rfc2119" title="MUST">MUST</em> <a href="#manifest-declaration">declare</a> that it describes a Web Publication.</li>
+					<li>It <em class="rfc2119" title="MUST">MUST</em> be serialized as defined in <a href="#manifest-serialization" class="sec-ref"><span class="secno">4.4</span> <span class="sec-title">Serialization</span></a>.</li>
+				</ol>
+			</section>
+
+			<section id="manifest-declaration">
+				<h3 id="x4-3-declaration"><span class="secno">4.3 </span>Declaration<span class="permalink"><a href="#manifest-declaration" aria-label="Permalink for 4.3 Declaration" title="Permalink for 4.3 Declaration"><span>§</span></a></span></h3>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-4" aria-level="4"><span>Editor's note</span></div><div class="">A description of how a manifest declares it describes a web publication will be included
+					in a future draft, as such a mechanism will depend on integration with [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>].</div></div>
+			</section>
+
+			<section id="manifest-serialization">
+				<h3 id="x4-4-serialization"><span class="secno">4.4 </span>Serialization<span class="permalink"><a href="#manifest-serialization" aria-label="Permalink for 4.4 Serialization" title="Permalink for 4.4 Serialization"><span>§</span></a></span></h3>
+
+				<p>The manifest is serialized as a JSON document [<cite><a class="bibref" href="#bib-ecma-404">ecma-404</a></cite>].</p>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-5" aria-level="4"><span>Editor's note</span></div><div class="">Additional serialization details will be included in a future draft, as these will depend
+					on integration with [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>].</div></div>
+
+				<div class="issue" id="issue-25"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="4"><a href="https://github.com/w3c/wpub/issues/25"><span>Issue 25</span></a><span style="text-transform: none">: manifest embedded, linked, both?</span></div><p>Should the manifest be in an external file, embedded in a specified manner, or should either option be allowed?</p></div>
+				<div class="issue" id="issue-32"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><a href="https://github.com/w3c/wpub/issues/32"><span>Issue 32</span></a><span style="text-transform: none">: Relationships to the Web App Manifest specification.</span></div><p>In case the (concrete) manifest is expressed in JSON (see issue <a href="https://github.com/w3c/wpub/issues/7" class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="240719854" data-permission-text="Issue title is private" data-url="https://github.com/w3c/wpub/issues/7">#7</a>), should it be defined “on top” (i.e., as some form of an extension) of the <a href="https://w3c.github.io/manifest/">Web Application Manifest</a> specification, or should it be a fully separate specification?</p></div>
+			</section>
+		</section>
+		<section id="wp-construction">
+			<!--OddPage--><h2 id="x5-web-publication-construction"><span class="secno">5. </span>Web Publication Construction<span class="permalink"><a href="#wp-construction" aria-label="Permalink for 5. Web Publication Construction" title="Permalink for 5. Web Publication Construction"><span>§</span></a></span></h2>
+
+			<section id="wp-resources">
+				<h3 id="x5-1-resources"><span class="secno">5.1 </span>Resources<span class="permalink"><a href="#wp-resources" aria-label="Permalink for 5.1 Resources" title="Permalink for 5.1 Resources"><span>§</span></a></span></h3>
+
+				<p><a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> <em class="rfc2119" title="MAY">MAY</em> reference resources of any media type, both in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading
+						order</a> and as dependencies of other resources.</p>
+
+				<div class="note"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span></div><div class="">
+					<p>When adding resources to a Web Publication, consider support in user agents. The use of progressive
+						enhancement techniques and the provision of fallback content, as appropriate, will ensure a more
+						consistent reading experience for users regardless of their preferred user agent.</p>
+				</div></div>
+			</section>
+
+			<section id="wp-linking">
+				<h3 id="x5-2-linking-to-a-manifest"><span class="secno">5.2 </span>Linking to a Manifest<span class="permalink"><a href="#wp-linking" aria-label="Permalink for 5.2 Linking to a Manifest" title="Permalink for 5.2 Linking to a Manifest"><span>§</span></a></span></h3>
+
+				<p>Providing a link from a resource to the <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> it belongs to allows
+					a user agent to discover that a Web Publication is available. Links <em class="rfc2119" title="MUST">MUST</em> take one or both of the
+					following forms:</p>
+
+				<ul>
+					<li><p>An HTTP Link header field&nbsp;[<cite><a class="bibref" href="#bib-rfc5988">rfc5988</a></cite>] with its <code>rel</code> parameter set to the value
+								"<code>publication</code>".</p>
+						<div class="example"><div class="example-title marker"><span>Example 1</span></div><pre class="hljs javascript" aria-busy="false" aria-live="polite">Link: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">https:</span>//<span class="hljs-attr">example.com</span>/<span class="hljs-attr">webpub</span>/<span class="hljs-attr">manifest</span>&gt;</span></span>; rel=publication</pre></div>
+					</li>
+					<li><p>An [<cite><a class="bibref" href="#bib-html">html</a></cite>] <code>link</code> element with its <code>rel</code> attribute set to the value
+								"<code>publication</code>".</p>
+						<div class="example"><div class="example-title marker"><span>Example 2</span></div><pre class="hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com/webpub/manifest"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"publication"</span>/&gt;</span></pre></div>
+					</li>
+				</ul>
+
+				<div class="issue" id="issue-32"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><a href="https://github.com/w3c/wpub/issues/32"><span>Issue 32</span></a><span style="text-transform: none">: Relationships to the Web App Manifest specification.</span></div><p class="">How linking to a manifest is done (relationship, media type) may change
+					depending on <a href="#rel-wam">future integration with Web App Manifest</a>. For a list of differences
+					in linking approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest">wiki analysis</a>.</p></div>
+
+				<p>A resource <em class="rfc2119" title="SHOULD">SHOULD</em> link to the Web Publication(s) to which it belongs.</p>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-6" aria-level="4"><span>Editor's note</span></div><p class="">The following details might be moved to the lifecycle section in a future draft.</p></div>
+
+				<p>When a resource links to multiple manifests, a user agent <em class="rfc2119" title="MAY">MAY</em> choose to present one or more alternatives
+					to the end user, or choose a single alternative on its own. The user agent <em class="rfc2119" title="MAY">MAY</em> choose to present any
+					manifest based upon information that it possesses, even one that is not explicitly listed as a parent
+					(e.g., based upon information it calculates or acquires out of band). In the absence of a preference by
+					user agent implementers, selection of the first manifest listed is suggested as a default.</p>
+
+				<div class="issue" id="issue-13"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="4"><a href="https://github.com/w3c/wpub/issues/13"><span>Issue 13</span></a><span style="text-transform: none">: Associating a manifest with publication resources</span></div><p class="">If there is a collection of information about a web publication as a whole
+					("manifest") that exists separately from most of the publication's resources, there needs to be a way to
+					associate the manifest with the other publication resources.</p></div>
+			</section>
+
+			<section id="wp-entry-page">
+				<h3 id="x5-3-entry-page"><span class="secno">5.3 </span>Entry Page<span class="permalink"><a href="#wp-entry-page" aria-label="Permalink for 5.3 Entry Page" title="Permalink for 5.3 Entry Page"><span>§</span></a></span></h3>
+
+				<p>As described in <a href="#wp-address" class="sec-ref"><span class="secno">3.3.2</span> <span class="sec-title">Address</span></a>, a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> has an <a href="#dfn-address" class="internalDFN" data-link-type="dfn">address</a> that can be
+					dereferenced. This URL <em class="rfc2119" title="MUST">MUST</em> resolve to the <dfn data-dfn-type="dfn" id="dfn-entry-page">entry page</dfn>, which <em class="rfc2119" title="MUST">MUST</em> be an [<cite><a class="bibref" href="#bib-html">html</a></cite>] document
+					that represents the primary entry point for the Web Publication.</p>
+
+				<p>The entry page <em class="rfc2119" title="SHOULD">SHOULD</em> be a resource of the Web Publication. It can be any resource, including one that is
+					not listed in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a>. Unlike other resources, the entry page <em class="rfc2119" title="MUST">MUST</em> <a href="#wp-linking">link to the manifest</a> to ensure that user agents can locate that document.</p>
+
+				<p>If the entry page is not a Web Publication resource, user agents <em class="rfc2119" title="SHOULD">SHOULD</em> load the first document in the
+						<a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a> when initiating the Web Publication.</p>
+
+				<div class="note"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span></div><p class="">Providing access on the entry page to navigation aids that facilitate consumption of the
+					content (e.g., include a table of contents on the page, or provide a link to one) improves the usability
+					of the Web Publication, particularly in user agents that do not support Web Publications.</p></div>
+
+				<div class="issue" id="issue-103"><div role="heading" class="issue-title marker" id="h-issue-14" aria-level="4"><a href="https://github.com/w3c/wpub/issues/103"><span>Issue 103</span></a><span style="text-transform: none">: Role of the HTML document returned by the WPUB URL</span></div><div class="">
+					<p>This issue raises a number of questions:</p>
+					<ul>
+						<li>whether the entry page must be a web publication resource</li>
+						<li>what specific purpose it serves</li>
+						<li>whether any information the page contains can be trusted for the infoset if it is not part of the publication</li>
+					</ul>
+					<p>There is not yet consensus in the group on these issues, or on the name "entry page".</p>
+				</div></div>
+			</section>
+		</section>
+		<section id="wp-lifecycle">
+			<!--OddPage--><h2 id="x6-web-publication-lifecycle"><span class="secno">6. </span>Web Publication Lifecycle<span class="permalink"><a href="#wp-lifecycle" aria-label="Permalink for 6. Web Publication Lifecycle" title="Permalink for 6. Web Publication Lifecycle"><span>§</span></a></span></h2>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-7" aria-level="3"><span>Editor's note</span></div><div class="">
+				<p>The publishing working group is currently evaluating the best approach for implementing Web Publications
+					in user agents. This note is intended to provide an overview of where current thinking is and what issues
+					are under consideration.</p>
+
+				<p>The development of web publications is not viewed as a separate forking of the web, but an enhancement
+					layer that can be supported by user agents. To that end, the primary constraints on any solution for web
+					publications are that:</p>
+
+				<ul>
+					<li>the rendering of web publications must not interfere with the underlying web model and APIs. All
+						functionality and enhancements must be layered on top.</li>
+					<li>a web publication should not have to carry its own implementation code. Functionality is ideally
+						provided by the user agent and/or polyfill.</li>
+				</ul>
+
+				<p>While this specification will provide implementation flexibility for user agents, there are still a number
+					of areas that have been identified as potentially needing to be detailed. These include:</p>
+
+				<ul>
+					<li>
+						<p>initialization expectations for a web publication:</p>
+						<ul>
+							<li>use agent initiation v. user prompts;</li>
+							<li>linked v. directly loaded manifests;</li>
+							<li>resources that belong to more than one web publication.</li>
+						</ul>
+					</li>
+					<li>
+						<p>the creation of a "publication state":</p>
+						<ul>
+							<li>persistence of publication information across page loads</li>
+							<li>location and persistence of UI;</li>
+							<li>indications of supported features;</li>
+							<li>DOM issues such as persistence of numbering schemes.</li>
+						</ul>
+					</li>
+					<li>
+						<p>tracking the extent of a publication:</p>
+						<ul>
+							<li>taking an entire publication offline;</li>
+							<li>enabling search across documents.</li>
+						</ul>
+					</li>
+					<li>
+						<p>establishing the bounds of a publication:</p>
+						<ul>
+							<li>when to end the publication state;</li>
+							<li>document history traversal;</li>
+							<li>how to handle links outside the publication.</li>
+						</ul>
+					</li>
+					<li>updating of the manifest.</li>
+				</ul>
+
+				<p>The working group intends to flesh out the lifecycle in later revisions once it is clearer what models are
+					viable and what solutions can be standardized. Input on the feasibility and challenges of these
+					approaches is welcome at any time.</p>
+			</div></div>
+		</section>
+		<section id="wp-enhancements">
+			<!--OddPage--><h2 id="x7-reading-enhancements"><span class="secno">7. </span>Reading Enhancements<span class="permalink"><a href="#wp-enhancements" aria-label="Permalink for 7. Reading Enhancements" title="Permalink for 7. Reading Enhancements"><span>§</span></a></span></h2>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-8" aria-level="3"><span>Editor's note</span></div><p class="">This section contains placeholders for possible reading enhancements/affordances the user agent
+				may/should/must provide. The list is subject to addition, modification and removal as the enhancements get
+				discussed in more detail.</p></div>
+
+			<section id="layout">
+				<h3 id="x7-1-layout"><span class="secno">7.1 </span>Layout<span class="permalink"><a href="#layout" aria-label="Permalink for 7.1 Layout" title="Permalink for 7.1 Layout"><span>§</span></a></span></h3>
+
+				<p>The layout and rendering of <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> is governed by the same rules that apply to all Web
+					content: [<cite><a class="bibref" href="#bib-html">html</a></cite>] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/">CSS</a>, [<cite><a class="bibref" href="#bib-svg">svg</a></cite>] files are rendered as expected of that format,
+					and so on. This specification requires no particular profile or subset of CSS, HTML, or SVG to be
+					supported, other than the expectations set for these technologies by their respective specifications.</p>
+
+
+				<div class="note"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span></div><div class="">
+					<p>This specification intentionally refrains from introducing any new layout features. Any shortcoming of
+						the Web platform in terms of layout needs to be addressed for the whole Web platform, which means via
+						CSS.</p>
+
+					<p>This working group will work with other relevant groups of the <abbr title="World Wide Web Consortium">W3C</abbr> to address platform-wide
+						limitations that negatively impact <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a>.</p>
+				</div></div>
+
+				<p>For the purposes of layout, each resource of a Web Publication is treated as a separate document. User
+					agents <em class="rfc2119" title="MUST NOT">MUST NOT</em> mix content from multiple resources in the same rendering (e.g., <a href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">absolutely positioned
+						elements</a> from one resource cannot intrude or overlap with content from an other resource).</p>
+
+				<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-15" aria-level="4"><span>Issue</span></div><div class="">
+					<p>Despite this general requirement that each resource should be treated as a separate document for the
+						purpose of layout, there are some places where CSS specifications should be amended to be able to
+						deal more intelligently with collections of resources like Web Publications.</p>
+
+					<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references">cross references</a>, which are currently restricted to work only within a single document. This
+						restriction should be relaxed to allow for cross references between separate resources of a single
+						Web Publication.</p>
+
+					<p>Another related one would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a> to accumulate across
+						multiple resources of a single <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> (e.g., so that figures in multiple sections may
+						be numbered in a single sequence).</p>
+
+				</div></div>
+
+				<section id="scrolling-or-paginating" class="informative">
+					<h4 id="x7-1-1-scrolling-or-paginating"><span class="secno">7.1.1 </span>Scrolling or Paginating<span class="permalink"><a href="#scrolling-or-paginating" aria-label="Permalink for 7.1.1 Scrolling or Paginating" title="Permalink for 7.1.1 Scrolling or Paginating"><span>§</span></a></span></h4><p><em>This section is non-normative.</em></p>
+
+					<p>Publications have historically been presented via paged media, whereas Web pages almost always scroll.
+						As the preferences of individual readers vary, and as different types of publications are better
+						suited for one or the other, this specification encourages user agents to support both, and to offer
+						a choice to their users.</p>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-16" aria-level="5"><span>Issue</span></div><div class="">
+						<p>It may be useful for authors to be able to specify a preference between scrolling and pagination,
+							even if a strict requirement is not possible. This should most likely be addressed through an
+							extension of <a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"><code>@viewport</code></a> or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see
+							[<cite><a class="bibref" href="#bib-css-device-adapt">css-device-adapt</a></cite>]), or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See
+							[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>]). This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
+					</div></div>
+				</section>
+				<section id="enh-pagination">
+					<h4 id="x7-1-2-paginated-layout"><span class="secno">7.1.2 </span>Paginated Layout<span class="permalink"><a href="#enh-pagination" aria-label="Permalink for 7.1.2 Paginated Layout" title="Permalink for 7.1.2 Paginated Layout"><span>§</span></a></span></h4>
+
+					<p>When a User Agent renders a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> in a paginated layout, it <em class="rfc2119" title="MUST">MUST</em> lay out each
+						document in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a> sequentially, with the last page of a resource being
+						followed by the first page of the subsequent one.</p>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-17" aria-level="5"><span>Issue</span></div><div class="">
+						<p>To avoid blank pages, if a resource ends on a left page (resp. right page), the subsequent one
+							should start on a right page (resp. left page) even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (see
+							[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>]) would otherwise lead to it starting on the opposite page. It should also be
+							possible to use the <a href="">break-before</a> property (See [<cite><a class="bibref" href="#bib-css-break-3">css-break-3</a></cite>]) to force the
+							content to resume on the opposite side if that was desired by the author.</p>
+
+						<p>[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>] needs to be amended to describe this exception to the general behavior when dealing
+							with collections of documents instead of individual documents.</p>
+					</div></div>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-18" aria-level="5"><span>Issue</span></div><div class="">
+						<p>How is pagination supposed to work when subsequent resources have opposite <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> directions (see
+							[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>]). For example, due to different a different writing mode? This is not necessarily
+							a problem from a layout point of view, as each page is independent, but from an UI point of view.
+							If swiping left means next page until the end of one chapter, and starts meaning previous page in
+							the next chapter because the language is switched from English to Hebrew, this is going to be
+							confusing.</p>
+					</div></div>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-19" aria-level="5"><span>Issue</span></div><div class="">
+						<p>Should any of the above be normative, or should this be up to User Agents to explore, and only
+							standardize if and when a clear winning approach emerges?</p>
+					</div></div>
+
+					<div class="issue"><div role="heading" class="issue-title marker" id="h-issue-20" aria-level="5"><span>Issue</span></div><div class="">
+						<p>[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are not
+							automatically reset to at the beginning of each new resource belonging to the same Web
+							Publication.</p>
+					</div></div>
+
+				</section>
+			</section>
+
+			<section id="enh-nav">
+				<h3 id="x7-2-navigation"><span class="secno">7.2 </span>Navigation<span class="permalink"><a href="#enh-nav" aria-label="Permalink for 7.2 Navigation" title="Permalink for 7.2 Navigation"><span>§</span></a></span></h3>
+
+				<div class="issue" id="issue-86"><div role="heading" class="issue-title marker" id="h-issue-21" aria-level="4"><a href="https://github.com/w3c/wpub/issues/86"><span>Issue 86</span></a><span style="text-transform: none">: Accessibility requirements for navigation</span></div><p>The following wiki describes accessibility requirements for navigation from user perspective, and provides clarifications for some related concepts discussed in the group.<br>
+<a href="https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP">https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP</a></p></div>
+
+				<section id="enh-reading-order">
+					<h4 id="x7-2-1-reading-order"><span class="secno">7.2.1 </span>Reading Order<span class="permalink"><a href="#enh-reading-order" aria-label="Permalink for 7.2.1 Reading Order" title="Permalink for 7.2.1 Reading Order"><span>§</span></a></span></h4>
+
+					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach
+						the end of one resource, they have to activate a hyperlink to move to the next resource in the
+						sequence. While this model of navigation is effective, it is also disruptive for immersive reading
+						— it forces users to disengage from the content and perform the actions necessary to activate
+						the links. It is also limited to media types that support hyperlinks.</p>
+
+					<p>The <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a> provides an enhancement to the hyperlink model, allowing the user
+						agent to automatically move the user to the next resource when a more natural action occurs, like a
+						general swipe across the screen. It is similar conceptually and functionally to the [<cite><a class="bibref" href="#bib-html">html</a></cite>]
+							<code>link</code> element's <code>next</code> and <code>prev</code> relationships.</p>
+
+					<div class="issue" id="issue-38"><div role="heading" class="issue-title marker" id="h-issue-22" aria-level="5"><a href="https://github.com/w3c/wpub/issues/38"><span>Issue 38</span></a><span style="text-transform: none">: What does "Reading Order" mean in the context of a Web Publication?</span></div><p class="">What is the interface for reading order navigation.</p></div>
+				</section>
+
+				<section id="enh-toc">
+					<h4 id="x7-2-2-table-of-contents"><span class="secno">7.2.2 </span>Table of Contents<span class="permalink"><a href="#enh-toc" aria-label="Permalink for 7.2.2 Table of Contents" title="Permalink for 7.2.2 Table of Contents"><span>§</span></a></span></h4>
+
+					<p>The table of contents is one of the key aids to navigating a publication, as it enables users to
+						quickly move to the start of major sections. It is also a useful aid in understanding the overall
+						structure and purpose of a publication (e.g., what topics are covered, where the user currently is in
+						relation to the overall structure). Users often want quick access the table contents for these
+						reasons.</p>
+
+					<p>User agents can use table of contents defined in the infoset to present an interface that allows users
+						to review and activate the links without leaving the resource they are currently viewing.</p>
+
+					<div class="issue" id="issue-9"><div role="heading" class="issue-title marker" id="h-issue-23" aria-level="5"><a href="https://github.com/w3c/wpub/issues/9"><span>Issue 9</span></a><span style="text-transform: none">: Machine-Readable navigation</span></div><p class="">Does the user agent need to provide access to the table of contents, or
+						do such mechanisms belong in the content.</p></div>
+				</section>
+			</section>
+
+			<section id="enh-offline-reading">
+				<h3 id="x7-3-offline-reading"><span class="secno">7.3 </span>Offline Reading<span class="permalink"><a href="#enh-offline-reading" aria-label="Permalink for 7.3 Offline Reading" title="Permalink for 7.3 Offline Reading"><span>§</span></a></span></h3>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-9" aria-level="4"><span>Editor's note</span></div><p class="">Detail on offline caching and reading will be included in a future draft.</p></div>
+			</section>
+
+			<section id="enh-search">
+				<h3 id="x7-4-search"><span class="secno">7.4 </span>Search<span class="permalink"><a href="#enh-search" aria-label="Permalink for 7.4 Search" title="Permalink for 7.4 Search"><span>§</span></a></span></h3>
+
+				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-10" aria-level="4"><span>Editor's note</span></div><p class="">Detail on inter-publication search across multiple resources will be included in a future
+					draft.</p></div>
+			</section>
+		</section>
+		<section id="locators" class="informative">
+			<!--OddPage--><h2 id="x8-web-publication-locators"><span class="secno">8. </span>Web Publication Locators<span class="permalink"><a href="#locators" aria-label="Permalink for 8. Web Publication Locators" title="Permalink for 8. Web Publication Locators"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
+
+			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
+					<a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> (e.g., for address(es), bookmarks, and annotations). Locators traditionally take
+				the form of fragment identifiers [<cite><a class="bibref" href="#bib-rfc3986">rfc3986</a></cite>], where the portion of a URL preceded by a number sign character
+					(<code>#</code>) identifies a specific position within the referenced resource.</p>
+
+			<p>For some use cases, it is essential to identify and reference a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> resource—or a location
+				in or a segment of a resource—in the scope or context of the Web Publication to which it belongs. A
+				traditional fragment identifier cannot satisfy this requirement, since only the URL of the constituent
+				resource containing the location or content fragment of interest is expressed. Web Publication Locators
+				[<cite><a class="bibref" href="#bib-pub-loc">pub-loc</a></cite>] address this issue by providing the means to express both the URL of the resource and the URL of
+				the Web Publication.</p>
+
+			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
+				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
+				locations with explicit anchor points. Web Publication locators include a variety of selectors that work
+				with the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-11" aria-level="3"><span>Editor's note</span></div><p class="">As Web Publication Locators currently rely on a JSON-based expression syntax, it is not yet
+				clear how much of this syntax can be translated to a fragment identifier. This may limit the usefulness
+				beyond expressions that are also JSON-based (e.g., outside of annotations or bookmarks).</p></div>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-12" aria-level="3"><span>Editor's note</span></div><div class="">
+				<p>Illustrate with example of an easy to understand Web Publication Locator, such as might be used in
+					annotating a simple Web Publication.</p>
+			</div></div>
+
+			<p>The semantics of Web Publication Locators are a mapping and extension of the Web Annotation Data Model
+				[<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>] and Vocabulary [<cite><a class="bibref" href="#bib-annotation-vocab">annotation-vocab</a></cite>] for describing and referencing a segment of a Web
+				resource. As a result, Web Publication Locators provide the expressiveness needed for a broad range of
+				annotation and bookmarking use cases. Additionally, Web Publication Locators provide a way to identify and
+				reference a location within a Web Publication (i.e., as distinct from identifying and referencing a content
+				fragment consisting of a span of characters or bytes). A Web Publication Locator can be used to identify,
+				retrieve and/or reference a fragment of a Web Publication that spans multiple resources. </p>
+
+			<div class="note"><div role="heading" class="note-title marker" id="h-note-6" aria-level="3"><span>Note</span></div><div class="">
+				<p>In composing a Web Publication Locator, use the canonical identifier of the Web Publication in preference
+					to any alternative addresses. Such use facilitates the collation of Web Publication Locators associated
+					with a particular Web Publication. URLs of Web Publication resources appearing in a Web Publication
+					Locator should match the URL of the resource provided in the <a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a>.</p>
+			</div></div>
+		</section>
+		<section id="security">
+			<!--OddPage--><h2 id="x9-security"><span class="secno">9. </span>Security<span class="permalink"><a href="#security" aria-label="Permalink for 9. Security" title="Permalink for 9. Security"><span>§</span></a></span></h2>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-13" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for security issues.</div></div>
+		</section>
+		<section id="privacy">
+			<!--OddPage--><h2 id="x10-privacy"><span class="secno">10. </span>Privacy<span class="permalink"><a href="#privacy" aria-label="Permalink for 10. Privacy" title="Permalink for 10. Privacy"><span>§</span></a></span></h2>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-14" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for privacy issues.</div></div>
+		</section>
+		        <section id="ack" class="appendix informative">
+    <!--OddPage--><h2 id="a-acknowledgements"><span class="secno">A. </span>Acknowledgements<span class="permalink"><a href="#ack" aria-label="Permalink for A. Acknowledgements" title="Permalink for A. Acknowledgements"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
+
+    <p>The following people contributed to the development of this specification:</p>
+
+    <ul class="ack">
+    <li>Jodi Schneider (University of Illinois at Urbana-Champaign)</li>
+        <li>Susanna Skinner (HarperCollins Publishers)</li>
+        <li>Jeff Xu (Rakuten,Inc.)</li>
+        <li>Laurent Le Meur (EDRLab)</li>
+        <li>Fred Chasen (Invited Experts without Member Access)</li>
+        <li>Fernando Pinto da Silva (EDRLab)</li>
+        <li>Peter Krautzberger (krautzource UG)</li>
+        <li>Vagner Diniz (NIC.br - Brazilian Network Information Center)</li>
+        <li>Christopher Maden (University of Illinois at Urbana-Champaign)</li>
+        <li>Jonathan McGlone (University of Michigan Library)</li>
+        <li>Shinyu Murakami (Vivliostyle Inc.)</li>
+        <li>Jason White (Educational Testing Service)</li>
+        <li>Evan Yamanishi (W. W. Norton)</li>
+        <li>Leonard Rosenthol (Adobe Systems Inc.)</li>
+        <li>Heather Flanagan (Invited Experts without Member Access)</li>
+        <li>Harriett Green (University of Illinois at Urbana-Champaign)</li>
+        <li>Leslie Hulse (HarperCollins Publishers)</li>
+        <li>Garth Conboy (Google, Inc.)</li>
+        <li>Ben Schroeter (Pearson plc)</li>
+        <li>Joshua Pyle (Wiley)</li>
+        <li>Vladimir Levantovsky (Monotype)</li>
+        <li>David Stroup (Pearson plc)</li>
+        <li>Daniel Weck (EDRLab)</li>
+        <li>Chris Powell (University of Michigan Library)</li>
+        <li>Matt Kuznicki (Datalogics, Inc.)</li>
+        <li>Brady Duga (Google, Inc.)</li>
+        <li>Jia Ma (Kaplan Publishing)</li>
+        <li>Hugh McGuire (The Rebus Foundation)</li>
+        <li>Timothy Cole (University of Illinois at Urbana-Champaign)</li>
+        <li>George Kerscher (DAISY Consortium)</li>
+        <li>Romain Deltour (DAISY Consortium)</li>
+        <li>Nicholas Ruffilo (VitalSource | Ingram Content Group)</li>
+        <li>Jun Gamo (Voyager Japan, Inc.)</li>
+        <li>Greg Albers (J. Paul Getty Trust)</li>
+        <li>Rick Johnson (VitalSource | Ingram Content Group)</li>
+        <li>Jeff Printy (Macmillan Higher Education)</li>
+        <li>Wendy Reid (Rakuten,Inc.)</li>
+        <li>Mia Lipner (Pearson plc)</li>
+        <li>Christopher Auclair (VitalSource | Ingram Content Group)</li>
+        <li>Markku Hakkinen (Educational Testing Service)</li>
+        <li>Makoto Murata (Vivliostyle Inc.)</li>
+        <li>Yuri Khramov (Evident Point Software Corp.)</li>
+        <li>Ryan Pugatch (Hachette Livre)</li>
+        <li>Maurice York (University of Michigan Library)</li>
+        <li>Baldur Bjarnason (The Rebus Foundation)</li>
+        <li>Tzviya Siegman (Wiley)</li>
+        <li>Lillian Sullam (Penguin Random House)</li>
+        <li>Daniel Weck (DAISY Consortium)</li>
+        <li>Charles LaPierre (Benetech)</li>
+        <li>Ben Dugas (Rakuten,Inc.)</li>
+        <li>Liisa McCloy-Kelley (Penguin Random House)</li>
+        <li>Maureen McMahon (Kaplan Publishing)</li>
+        <li>David Wood (Ephox Corporation)</li>
+        <li>Benjamin Young (Wiley)</li>
+        <li>Robert Sanderson (J. Paul Getty Trust)</li>
+        <li>Luc Audrain (Hachette Livre)</li>
+        <li>Katie Haritos-Shea (Knowbility, Inc)</li>
+        <li>Jonathan Thurston (Pearson plc)</li>
+        <li>Cristina Mussinelli (Associazione Italiana Editori)</li>
+        <li>Boris Anthony (The Rebus Foundation)</li>
+        <li>Edwina Lui (Kaplan Publishing)</li>
+        <li>Hadrien Gardeur (Feedbooks)</li>
+        <li>Mateus Teixeira (W. W. Norton)</li>
+        <li>Deborah Kaplan (Invited Experts without Member Access)</li>
+        <li>Marisa DeMeglio (DAISY Consortium)</li>
+        <li>Roger Espinosa (University of Michigan Library)</li>
+        <li>Avneesh Singh (DAISY Consortium)</li>
+        <li>Nick Brown (VitalSource | Ingram Content Group)</li>
+        <li>John Weise (University of Michigan Library)</li>
+        <li>Toshiaki Koike (Voyager Japan, Inc.)</li>
+        <li>Florian Rivoal (Vivliostyle Inc.)</li>
+        <li>Wolfgang Schindler (PONS GmbH)</li>
+        <li>Bill McCoy (<abbr title="World Wide Web Consortium">W3C</abbr> Staff)</li>
+        <li>Ivan Herman (<abbr title="World Wide Web Consortium">W3C</abbr> Staff)</li>
+        <li>Rachel Comerford (Macmillan Higher Education)</li>
+        <li>Richard Wright (EDRLab)</li>
+        <li>Dave Cramer (Hachette Livre)</li>
+        <li>Phil Madans (Hachette Livre)</li>
+        <li>Matt Garrish (DAISY Consortium)</li>
+        <li>Selma Morais (NIC.br - Brazilian Network Information Center)</li>
+        <li>Bill Kasdorf (Book Industry Study Group)</li>
+        <li>Reinaldo Ferraz (NIC.br - Brazilian Network Information Center)</li>
+    </ul>
+
+    <p>The Working Group would also like to thank the members of the
+    <a href="https://www.w3.org/dpub/IG/">Digital Publishing Interest Group</a> for all the hard work
+    they did paving the road for this specification.</p>
+</section>
+
+
+	
+
+<section id="references" class="appendix"><!--OddPage--><h2 id="b-references"><span class="secno">B. </span>References<span class="permalink"><a href="#references" aria-label="Permalink for B. References" title="Permalink for B. References"><span>§</span></a></span></h2><section id="normative-references"><h3 id="b-1-normative-references"><span class="secno">B.1 </span>Normative references<span class="permalink"><a href="#normative-references" aria-label="Permalink for B.1 Normative references" title="Permalink for B.1 Normative references"><span>§</span></a></span></h3><dl class="bibliography"><dt id="bib-bcp47">[bcp47]</dt><dd><a href="https://tools.ietf.org/html/bcp47"><cite>Tags for Identifying Languages</cite></a>. A. Phillips; M. Davis. IETF. September 2009. IETF Best Current Practice. URL: <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a>
+</dd><dt id="bib-css-break-3">[css-break-3]</dt><dd><a href="https://www.w3.org/TR/css-break-3/"><cite>CSS Fragmentation Module Level 3</cite></a>. Rossen Atanassov; Elika Etemad. W3C. 9 February 2017. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/css-break-3/">https://www.w3.org/TR/css-break-3/</a>
+</dd><dt id="bib-css-page-3">[css-page-3]</dt><dd><a href="https://www.w3.org/TR/css3-page/"><cite>CSS Paged Media Module Level 3</cite></a>. Melinda Grant; Elika Etemad; Håkon Wium Lie; Simon Sapin. W3C. 14 March 2013. W3C Working Draft. URL: <a href="https://www.w3.org/TR/css3-page/">https://www.w3.org/TR/css3-page/</a>
+</dd><dt id="bib-ecma-404">[ecma-404]</dt><dd><a href="https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"><cite>The JSON Data Interchange Format</cite></a>.  Ecma International. 1 October 2013. Standard. URL: <a href="https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf">https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf</a>
+</dd><dt id="bib-html">[html]</dt><dd><a href="https://www.w3.org/TR/html/"><cite>HTML 5.1</cite></a>. Steve Faulkner; Arron Eicholz; Travis Leithead; Alex Danilo. W3C. 2016-11-01. W3C Recommendation. URL: <a href="https://www.w3.org/TR/html/">https://www.w3.org/TR/html/</a>
+</dd><dt id="bib-publishing-linking">[publishing-linking]</dt><dd><a href="https://www.w3.org/TR/publishing-linking/"><cite>Publishing and Linking on the Web</cite></a>. Ashok Malhotra; Larry Masinter; Jeni Tennison; Daniel Appelquist. W3C. 30 April 2013. W3C Note. URL: <a href="https://www.w3.org/TR/publishing-linking/">https://www.w3.org/TR/publishing-linking/</a>
+</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd><a href="https://tools.ietf.org/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+</dd><dt id="bib-rfc3987">[rfc3987]</dt><dd><a href="https://tools.ietf.org/html/rfc3987"><cite>Internationalized Resource Identifiers (IRIs)</cite></a>. M. Duerst; M. Suignard. IETF. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987">https://tools.ietf.org/html/rfc3987</a>
+</dd><dt id="bib-rfc5988">[rfc5988]</dt><dd><a href="https://tools.ietf.org/html/rfc5988"><cite>Web Linking</cite></a>. M. Nottingham. IETF. October 2010. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc5988">https://tools.ietf.org/html/rfc5988</a>
+</dd><dt id="bib-svg">[svg]</dt><dd><a href="https://www.w3.org/TR/SVG/"><cite>Scalable Vector Graphics (SVG) 1.0 Specification</cite></a>. Jon Ferraiolo. W3C. 4 September 2001. W3C Recommendation. URL: <a href="https://www.w3.org/TR/SVG/">https://www.w3.org/TR/SVG/</a>
+</dd><dt id="bib-url">[url]</dt><dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
+</dd></dl></section><section id="informative-references"><h3 id="b-2-informative-references"><span class="secno">B.2 </span>Informative references<span class="permalink"><a href="#informative-references" aria-label="Permalink for B.2 Informative references" title="Permalink for B.2 Informative references"><span>§</span></a></span></h3><dl class="bibliography"><dt id="bib-annotation-model">[annotation-model]</dt><dd><a href="https://www.w3.org/TR/annotation-model/"><cite>Web Annotation Data Model</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-model/">https://www.w3.org/TR/annotation-model/</a>
+</dd><dt id="bib-annotation-vocab">[annotation-vocab]</dt><dd><a href="https://www.w3.org/TR/annotation-vocab/"><cite>Web Annotation Vocabulary</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-vocab/">https://www.w3.org/TR/annotation-vocab/</a>
+</dd><dt id="bib-appmanifest">[appmanifest]</dt><dd><a href="https://www.w3.org/TR/appmanifest/"><cite>Web App Manifest</cite></a>. Marcos Caceres; Kenneth Christiansen; Mounir Lamouri; Anssi Kostiainen; Rob Dolin. W3C. 26 October 2017. W3C Working Draft. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
+</dd><dt id="bib-css-device-adapt">[css-device-adapt]</dt><dd><a href="https://www.w3.org/TR/css-device-adapt-1/"><cite>CSS Device Adaptation Module Level 1</cite></a>. Rune Lillesveen; Florian Rivoal; Matt Rakow. W3C. 29 March 2016. W3C Working Draft. URL: <a href="https://www.w3.org/TR/css-device-adapt-1/">https://www.w3.org/TR/css-device-adapt-1/</a>
+</dd><dt id="bib-link-relation">[link-relation]</dt><dd><a href="https://tools.ietf.org/html/draft-vandesompel-identifier-00"><cite>Identifier: A Link Relation to Convey a Preferred URI for Referencing</cite></a>. H. Van de Sompel; M. Nelson; G. Bilder; J. Kunze; S. Warner. IETF. URL: <a href="https://tools.ietf.org/html/draft-vandesompel-identifier-00">https://tools.ietf.org/html/draft-vandesompel-identifier-00</a>
+</dd><dt id="bib-pub-loc">[pub-loc]</dt><dd><a href="https://w3.org/TR/pub-loc/"><cite>Locators for Web Publications</cite></a>. Timothy W. Cole; Ivan Herman..... URL: <a href="https://w3.org/TR/pub-loc/">https://w3.org/TR/pub-loc/</a>
+</dd><dt id="bib-rfc3986">[rfc3986]</dt><dd><a href="https://tools.ietf.org/html/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. T. Berners-Lee; R. Fielding; L. Masinter. IETF. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
+</dd><dt id="bib-rfc6596">[rfc6596]</dt><dd><a href="https://tools.ietf.org/html/rfc6596"><cite>The Canonical Link Relation</cite></a>. M. Ohye; J. Kupke. IETF. April 2012. Informational. URL: <a href="https://tools.ietf.org/html/rfc6596">https://tools.ietf.org/html/rfc6596</a>
+</dd><dt id="bib-wcag20">[wcag20]</dt><dd><a href="https://www.w3.org/TR/WCAG20/"><cite>Web Content Accessibility Guidelines (WCAG) 2.0</cite></a>. Ben Caldwell; Michael Cooper; Loretta Guarino Reid; Gregg Vanderheiden et al. W3C. 11 December 2008. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WCAG20/">https://www.w3.org/TR/WCAG20/</a>
+</dd></dl></section></section><p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
