@@ -171,14 +171,14 @@
 			<section id="what-is-wp" class="informative">
 				<h3>What is a Web Publication</h3>
 
-				<p>A <a>Web Publication</a> is a discoverable and identifiable collection of information about a publication
-					and its resources. This information is expressed in a machine-readable document called a <a>manifest</a>,
-					which is what enables user agents to understand the bounds of the Web Publication and the connection
-					between its resources.</p>
+				<p>A <a>Web Publication</a> is a discoverable and identifiable collection of resources. Information about the
+					Web Publication is expressed in a machine-readable document called a <a>manifest</a>, which is what
+					enables user agents to understand the bounds of the Web Publication and the connection between its
+					resources.</p>
 
 				<p>The manifest includes metadata that describes the Web Publication, as a publication has an identity and
 					nature beyond its constituent resources. The manifest also provides a list of all the resources that
-					belong to the Web Publication and the default reading order, which is how it connects resources into a
+					belong to the Web Publication and a default reading order, which is how it connects resources into a
 					single contiguous work.</p>
 
 				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest (via
@@ -225,7 +225,7 @@
 							duplication of concerns both in the expression and serialization of a manifest and in the
 							processing and compilation of the infoset. It is expected, however, that there will be
 							differences in the processing models of each (e.g., the initiation of the reading experience for
-							web publications versus installation for applications).</p>
+							Web Publications versus installation for applications).</p>
 
 						<p>The working assumption is that both applications and publications can use the same manifest and
 							serialization to express the information necessary to initiate themselves.</p>
@@ -297,7 +297,7 @@
 							specifications, like HTML&#160;[[!html]]. In particular, a URL allows for the usage of characters
 							from Unicode following&#160;[[!rfc3987]]. See <a
 								href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
-								document</a> for further details.</p>
+								specification</a> for further details.</p>
 					</dd>
 
 					<dt><dfn data-lt="Web Publications|Web Publication's">Web Publication</dfn></dt>
@@ -316,16 +316,15 @@
 				<p>This specification defines two conformance classes: one for <a>Web Publications</a> and one for user
 					agents that process them.</p>
 
-				<p id="wp-conformance">A Web Publication is conformant to this specification if it meets the following
+				<p id="wp-conformance">A Web Publication conforms to this specification if it meets the following
 					criteria:</p>
 
 				<ul>
 					<li>it has a <a>manifest</a> that conforms to <a href="#manifest-req"></a>;</li>
-					<li>ot adheres to the construction requirements defined in <a href="#wp-construction"></a>.</li>
+					<li>it adheres to the construction requirements defined in <a href="#wp-construction"></a>.</li>
 				</ul>
 
-				<p id="ua-conformance">A user agent is conformant to this specification if it meets the following
-					criteria:</p>
+				<p id="ua-conformance">A user agent conforms to this specification if it meets the following criteria:</p>
 
 				<ul>
 					<li>it is capable of generating a conforming <a href="#infoset">infoset</a> for a Web Publication.</li>
@@ -650,9 +649,9 @@
 
 					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
 						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it is
-						strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's constituent
-						resources. At a minimum, the resource list MUST include a list of all resources in the <a>default
-							reading order</a>.</p>
+						strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's
+						constituent resources. At a minimum, the resource list MUST include a list of all resources in the
+							<a>default reading order</a>.</p>
 
 					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g., third-party
 						scripts that reference resources from deep within their source), but a Web Publication SHOULD remain
@@ -852,7 +851,8 @@
 					<ul>
 						<li>whether the entry page must be a web publication resource</li>
 						<li>what specific purpose it serves</li>
-						<li>whether any information the page contains can be trusted for the infoset if it is not part of the publication</li>
+						<li>whether any information the page contains can be trusted for the infoset if it is not part of the
+							publication</li>
 					</ul>
 					<p>There is not yet consensus in the group on these issues, or on the name "entry page".</p>
 				</div>
@@ -1104,8 +1104,8 @@
 
 			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
 				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
-				locations with explicit anchor points. Web Publication locators include a variety of selectors that work
-				with the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
+				locations with explicit anchor points. Web Publication locators include a variety of selectors that work with
+				the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
 
 			<p class="ednote">As Web Publication Locators currently rely on a JSON-based expression syntax, it is not yet
 				clear how much of this syntax can be translated to a fragment identifier. This may limit the usefulness
