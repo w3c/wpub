@@ -120,9 +120,9 @@
 
 			<p>In particular, the Working Group seeks feedback on the following issues:</p>
 			<ul>
-				<li><a href="#rel-wam">Integration with Web App Manifest</a></li>
-				<li><a href="#wp-lifecycle">Supporting Web Publications in browsers</a></li>
-				<li><a href="#wp-address">The nature of the Web Publication address</a></li>
+				<li><a href="#rel-wam">Integration with Web App Manifest.</a></li>
+				<li><a href="#wp-lifecycle">Supporting Web Publications in browsers.</a></li>
+				<li><a href="#wp-address">The nature of the Web Publication address.</a></li>
 			</ul>
 		</section>
 		<section id="intro">
@@ -224,10 +224,11 @@
 
 					<div class="ednote">
 						<p>The working group is investigating integration with the work done on [[appmanifest]] to avoid
-							duplication of concerns both in the expression and serialization of a manifest and in the
-							processing and compilation of the infoset. It is expected, however, that there will be
-							differences in the processing models of each (e.g., the initiation of the reading experience for
-							Web Publications versus installation for applications).</p>
+							duplication of concerns both in the expression and serialization of a <a>manifest</a> and in the
+							processing and compilation of the <abbr title="information set"><a>infoset</a></abbr>. It is
+							expected, however, that there will be differences in the processing models of each (e.g., the
+							initiation of the reading experience for <a>Web Publications</a> versus installation for
+							applications).</p>
 
 						<p>The working assumption is that both applications and publications can use the same manifest and
 							serialization to express the information necessary to initiate themselves.</p>
@@ -240,13 +241,14 @@
 								in [[appmanifest]].</li>
 						</ul>
 
-						<p>The next stage will involve the serialization of the <a>infoset</a> in JSON to see how this
-							expression of the manifest can be aligned with the expression of the [[appmanifest]]. Wherever
-							semantically possible, the terms used and defined for [[appmanifest]] will be reused, and,
-							conversely, some of the members defined for Web Publications may be generally useful for
-							applications and may be added to the [[appmanifest]] as a common pool of information. To avoid
-							possible future conflicts, care will be taken to use a naming scheme that clearly separates terms
-							to be used for Web Publications only.</p>
+						<p>The next stage will involve the serialization of the <abbr title="information set">infoset</abbr>
+							in <abbr title="JavaScript Object Notation">JSON</abbr> to see how this expression of the
+							manifest can be aligned with the expression of the [[appmanifest]]. Wherever semantically
+							possible, the terms used and defined for [[appmanifest]] will be reused, and, conversely, some of
+							the members defined for Web Publications may be generally useful for applications and may be
+							added to the [[appmanifest]] as a common pool of information. To avoid possible future conflicts,
+							care will be taken to use a naming scheme that clearly separates terms to be used for Web
+							Publications only.</p>
 
 						<p>This specification consequently should be read and understood in this context of an ongoing
 							investigation, and that significant changes may occur in the future.</p>
@@ -263,7 +265,7 @@
 			<section id="terminology">
 				<h3>Terminology</h3>
 
-				<p>Wherever appropriate, this document relies on terminology defined by the note on "Publishing and Linking
+				<p>Wherever appropriate, this document relies on terminology defined by the W3C Note "Publishing and Linking
 					on the Web" [[!publishing-linking]], including, in particular, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN"
 						href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a
@@ -296,9 +298,9 @@
 					<dt><dfn data-lt="URLs">URL</dfn></dt>
 					<dd>
 						<p>The general term URL is defined by the URL Standard&#160;[[!url]]. It is used as in other W3C
-							specifications, like HTML&#160;[[!html]]. In particular, a URL allows for the usage of characters
-							from Unicode following&#160;[[!rfc3987]]. See <a
-								href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
+							specifications, like <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. In
+							particular, a URL allows for the usage of characters from Unicode following&#160;[[!rfc3987]].
+							See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
 								specification</a> for further details.</p>
 					</dd>
 
@@ -329,46 +331,51 @@
 				<p id="ua-conformance">A user agent conforms to this specification if it meets the following criteria:</p>
 
 				<ul>
-					<li>it is capable of generating a conforming <a href="#infoset">infoset</a> for a Web Publication.</li>
+					<li>it is capable of generating a conforming <a href="#infoset"><abbr title="information set"
+								>infoset</abbr></a> for a Web Publication.</li>
 				</ul>
 			</section>
 		</section>
 		<section id="infoset">
 			<h2>Information Set</h2>
 
-			<p class="ednote">The name "infoset" may change depending on feedback. Although this term has a different meaning
-				for individuals familiar with XML, alternatives such as "properties" and "metadata" do not fully capture the
-				nature or purpose of the collected information. See <a href="https://github.com/w3c/wpub/issues/63">issue
-					#63</a> for discussion.</p>
-
 			<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how properties are
-				compiled into the infoset remain unspecified. This includes, but is not limited to, what specific names the
-				properties will have in the infoset, whether the names in the manifest will be the same as those in the
-				infoset and/or whether mappings to properties from known vocabularies will be used.</p>
+				compiled into the <abbr title="information set">infoset</abbr> remain unspecified. This includes, but is not
+				limited to, what specific names the properties will have in the <abbr title="information set">infoset</abbr>,
+				whether the names in the <a>manifest</a> will be the same as those in the <abbr title="information set"
+					>infoset</abbr> and/or whether mappings to properties from known vocabularies will be used.</p>
+
+			<p class="issue" data-number="63">The name "<abbr title="information set">infoset</abbr>" might change depending
+				on feedback. Although this term has a different meaning for individuals familiar with <abbr
+					title="Extensible Markup Language">XML</abbr>, alternatives such as "properties" and "metadata" do not
+				fully capture the nature or purpose of the collected information.</p>
 
 			<section id="infoset-expl" class="informative">
 				<h3>Explanation</h3>
 
 				<p>A <a>Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset">information
-						set</dfn> (infoset). The infoset is logically divided into two sets of properties: those that
-					describe the publication and those that express key structures. These classifications only exist for the
-					purposes of understanding the function of the properties, however.</p>
+						set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr title="information set"
+						>infoset</abbr> is logically divided into two sets of properties: those that describe the publication
+					and those that express key structures. These classifications only exist for the purposes of understanding
+					the function of the properties, however.</p>
 
-				<p>The infoset is both abstract and concrete. It is abstract in the sense that it represents a set of
-					information that a user agent has to compile about the Web Publication, but it also becomes concrete when
-					the user agent creates an internal representation of that information.</p>
+				<p>The <abbr title="information set">infoset</abbr> is both abstract and concrete. It is abstract in the
+					sense that it represents a set of information that a user agent has to compile about the Web Publication,
+					but it also becomes concrete when the user agent creates an internal representation of that
+					information.</p>
 
-				<p>The infoset is primarily compiled from a Web Publication's <a>manifest</a>, whose serialization
-					requirements are defined in <a href="#manifest-serialization"></a>. Some information can be obtained in
-					outside the manifest, however. For example, fallback rules for properties defined in the following
-					subsections allow a user agent to compile information that the author has not provided in the manifest,
-					whether as an intentional optimization or by accidental omission.</p>
+				<p>The <abbr title="information set">infoset</abbr> is primarily compiled from a Web Publication's
+						<a>manifest</a>, whose serialization requirements are defined in <a href="#manifest-serialization"
+					></a>. Some information can be obtained in outside the manifest, however. For example, fallback rules for
+					properties defined in the following subsections allow a user agent to compile information that the author
+					has not provided in the manifest, whether as an intentional optimization or by accidental omission.</p>
 			</section>
 
 			<section id="infoset-req">
 				<h3>Requirements</h3>
 
-				<p>The requirements for the expression of infoset properties are as follows:</p>
+				<p>The requirements for the expression of <abbr title="information set"><a>infoset</a></abbr> properties are
+					as follows:</p>
 
 				<dl>
 					<dt>Descriptive Properties</dt>
@@ -398,11 +405,11 @@
 				</dl>
 
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
-					open that could change whether an item is required or recommended. See the following sections for more
-					information.</p>
+					open that could change whether an item is required or recommended. Refer to the property descriptions for
+					more information.</p>
 
-				<p class="issue" data-number="21">Whether the minimum manifest must include any metadata, or a specific slot
-					to handle metadata. (Note: this is now more specifically related to the infoset.)</p>
+				<p class="issue" data-number="21">Whether the <abbr title="information set"><a>infoset</a></abbr> must allow
+					any additional metadata, or define a specific mechanism to handle the inclusion of such.</p>
 			</section>
 
 			<section id="infoset-meta">
@@ -415,20 +422,20 @@
 						that enable its use by users with different reading requirements and needs.</p>
 
 					<p class="ednote">How to express accessibility metadata remains to be determined. This could be a
-						grouping of properties from schema.org, for example, or could be split out into a list of individual
-						properties.</p>
+						grouping of <a href="https://www.w3.org/wiki/WebSchemas/Accessibility">properties from
+						schema.org</a>, for example, or could be split out into a list of individual properties.</p>
 				</section>
 
 				<section id="wp-address">
 					<h4>Address</h4>
 
 					<p>A <a>Web Publication's</a>
-						<dfn>address</dfn> is a <a>URL</a> that refers to the Web Publication. It dereferences to the <a
-							href="#wp-entry-page">entry page</a>, which enables the retrieval of a representation of the
-							<a>manifest</a>.</p>
+						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr> that refers to the Web
+						Publication. It dereferences to the <a href="#wp-entry-page">entry page</a>, which enables the
+						retrieval of a representation of the <a>manifest</a>.</p>
 
 					<p>The availability of this address does not preclude the creation and use of other identifiers and/or
-						addresses to retrieve a representation of a <a>Web Publication</a> in whole or part.</p>
+						addresses to retrieve a representation of a <a>Web Publication</a>, whether in whole or in part.</p>
 
 					<div class="note">The Web Publication's address can also be used as value for an identifier link relation
 						[[link-relation]].</div>
@@ -437,7 +444,8 @@
 				<section id="wp-dir">
 					<h4>Base Direction</h4>
 
-					<p>The <dfn>base direction</dfn> identifies the display direction for <a>infoset</a> properties.</p>
+					<p>The <dfn>base direction</dfn> identifies the display direction for <abbr title="information set"
+								><a>infoset</a></abbr> properties.</p>
 
 					<p>The value of this property MUST be one of:</p>
 
@@ -462,31 +470,35 @@
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of the
 						Web Publication. The canonical identifier SHOULD be an <a>address</a>, but, if not, it MUST be
-						possible to make a one-to-one mapping to an address (e.g., a DOI can be resolved to a URL via a DOI
-						resolver).</p>
+						possible to make a one-to-one mapping to an address (e.g., a <abbr title="Digital Object Identifier"
+							>DOI</abbr> can be resolved to a <abbr title="Uniform Resource Locator">URL</abbr> via a <abbr
+							title="Digital Object Identifier">DOI</abbr> resolver).</p>
 
 					<p>If a Web Publication is hosted at more than one address, this identifier allows a user agent to
 						identify the shared relationship between the versions and to determine which of the available
 						addresses is primary.</p>
 
 					<p>The canonical identifier is also intended to provide a measure of permanence above and beyond the Web
-						Publication's address. Even if a Web Publication is permanently relocated to a new address, for
-						example, the canonical identifier will provide a way of locating the new location (e.g., a DOI
-						registry could be updated with the new URL, or a redirect could be added to the URL of the canonical
-						identifier).</p>
+						Publication's <a>address</a>. Even if a Web Publication is permanently relocated to a new address,
+						for example, the canonical identifier will provide a way of locating the new location (e.g., a <abbr
+							title="Digital Object Identifier">DOI</abbr> registry could be updated with the new <abbr
+							title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
+							title="Uniform Resource Locator">URL</abbr> of the canonical identifier).</p>
 
 					<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication,
 						independent of its address(es). Ensuring uniqueness is outside the scope of this specification,
 						however. The actual uniqueness achievable depends on such factors as the conventions of the
 						identifier scheme used and the degree of control over assignment of identifiers.</p>
 
-					<p class="note">If the canonical identifier is a URL, it can be used as the target of a "canonical"
-						link&#160;[[rfc6596]] (e.g., an [[html]] <code>link</code> element whose <code>rel</code> attribute
-						has the value <code>canonical</code> or a Link HTTP header field [[rfc5988]] similarly
+					<p class="note">If the canonical identifier is a <abbr title="Uniform Resource Locator">URL</abbr>, it
+						can be used as the target of a "canonical" link&#160;[[rfc6596]] (e.g., an [[html]] <code>link</code>
+						element whose <code>rel</code> attribute has the value <code>canonical</code> or a Link <abbr
+							title="Hypertext Transfer Protocol">HTTP</abbr> header field [[rfc5988]] similarly
 						identified).</p>
 
 					<p class="issue" data-number="58">The question is whether a canonical identifier is necessary to call out
-						explicitly in the infoset, or whether it is/can be handled by other metadata.</p>
+						explicitly in the <abbr title="information set">infoset</abbr>, or whether it is/can be handled by
+						other metadata.</p>
 				</section>
 
 				<section id="wp-creators">
@@ -503,7 +515,8 @@
 					<h4>Language</h4>
 
 					<p>The language specified in the <a>Web Publication's</a>
-						<a>infoset</a> identifies the natural language of its properties.</p>
+						<abbr title="information set"><a>infoset</a></abbr> identifies the natural language of its
+						properties.</p>
 
 					<p>When specified, the language MUST be a tag that conforms to [[!bcp47]].</p>
 
@@ -511,9 +524,9 @@
 							<strong>not</strong> a replacement for identifying the language of each resource as defined by
 						its format.</p>
 
-					<p>If a user agent requires the language and one is not available in the infoset, it MAY attempt to
-						determine the language. This specification does not mandate how such a language tag is created. The
-						user agent might:</p>
+					<p>If a user agent requires the language and one is not available in the <abbr title="information set"
+							>infoset</abbr>, it MAY attempt to determine the language. This specification does not mandate
+						how such a language tag is created. The user agent might:</p>
 
 					<ul>
 						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
@@ -525,8 +538,8 @@
 					<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
 
 					<div class="issue" data-number="53">
-						<p>The question is whether the language declared for the manifest content is the same as the language
-							of the publication, and how to deal with multilingual publications.</p>
+						<p>Is the language declared for the <a>manifest</a> content the same as the language of the
+							publication? If it is, how to deal with multilingual publications?</p>
 					</div>
 				</section>
 
@@ -560,11 +573,11 @@
 						such information is stored and for how long, whether it is personally identifiable, and how it can be
 						expunged. Including a statement that addresses all such privacy concerns is consequently an important
 						part of publishing <a>Web Publications</a>. Even if no information is collected, such a declaration
-						increases the trust users have with the content.</p>
+						increases the trust users have in the content.</p>
 
-					<p>To address this concern, the infoset allows a link to be provided to a privacy policy. The privacy
-						policy does not have to be a resource of the Web Publication, although including it as a resource is
-						RECOMMENDED.</p>
+					<p>To address this concern, the <abbr title="information set">infoset</abbr> allows a link to be provided
+						to a privacy policy. The privacy policy does not have to be a resource of the Web Publication,
+						although including it as a resource is RECOMMENDED.</p>
 
 					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
 						Publications.</p>
@@ -577,8 +590,9 @@
 
 					<p>When specified in the <a>manifest</a>, the title MUST be <a>non-empty</a>.</p>
 
-					<p>If a user agent requires a title and one is not available in the <a>infoset</a>, it MAY create one.
-						This specification does not mandate how such a title is created. The user agent might:</p>
+					<p>If a user agent requires a title and one is not available in the <abbr title="information set"
+								><a>infoset</a></abbr>, it MAY create one. This specification does not mandate how such a
+						title is created. The user agent might:</p>
 
 					<ul>
 						<li>use the first <a>non-empty</a>
@@ -621,24 +635,24 @@
 						<li>extract a list of resource paths referenced from the <code>href</code> attribute of all
 								<code>a</code> elements;</li>
 						<li>strip any fragment identifiers from the references;</li>
-						<li>resolve all relative paths to full URLs;</li>
+						<li>resolve all relative paths to full <abbr title="Uniform Resource Locators">URLs</abbr>;</li>
 						<li>remove all consecutive references to the same resource, leaving only the first.</li>
 					</ol>
 
-					<p>If a user agent requires a default reading order and one is not provided in the <a>infoset</a>, it MAY
-						attempt to construct one. This specification does not mandate how such a default reading order is
-						created. The user agent might:</p>
+					<p>If a user agent requires a default reading order and one is not provided in the <abbr
+							title="information set"><a>infoset</a></abbr>, it MAY attempt to construct one. This
+						specification does not mandate how such a default reading order is created. The user agent might:</p>
 
 					<ul>
 						<li>use only the resource the user accessed to reach the manifest;</li>
-						<li>search the list of resources for a <code>nav</code> element to use;</li>
+						<li>search the <a>resource list</a> for a <code>nav</code> element to use;</li>
 						<li>calculate the default reading order using its own algorithm.</li>
 					</ul>
 
-					<p class="issue" data-number="35">Define the default reading order of a Web Publication to be the files
-						referenced in the first</p>
-					<p class="issue" data-number="39">There is a consensus that a Web Publication must have a reading order
-						and must/should have a table of contents (the main navigation entry point).</p>
+					<p class="issue" data-number="35">Define the default reading order of a <a>Web Publication</a> to be the
+						files referenced in the table of contents.</p>
+					<p class="issue" data-number="39">There is consensus that a <a>Web Publication</a> must have a reading
+						order and must/should have a <a>table of contents</a> (the main navigation entry point).</p>
 				</section>
 
 				<section id="wp-resource-list">
@@ -664,15 +678,16 @@
 						resource as external to the Web Publication (e.g., it might alert the user before loading, open the
 						resource in a new window, or unload the current Web Publication and resume normal Web browsing).</p>
 
-					<p class="issue" data-number="22">The discussion led to the question whether the manifest/infoset MUST
-						list all resources or not. In this sense, this became a duplicate of <a
-							href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the same question.</p>
+					<p class="issue" data-number="22">The discussion led to the question whether the <a>manifest</a>/<abbr
+							title="information set">infoset</abbr> "must" list all resources or not. In this sense, this
+						became a duplicate of <a href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the
+						same question.</p>
 
-					<p class="issue" data-number="23">The question is whether the manifest/infoset MUST list all resources or
-						not.</p>
+					<p class="issue" data-number="23">Must the <a>manifest</a>/<abbr title="information set"
+							><a>infoset</a></abbr> list all resources or not?</p>
 
-					<p class="issue" data-number="59">The question is whether the manifest MUST list resources in the default
-						reading order or whether this can be inferred.</p>
+					<p class="issue" data-number="59">Must the <a>manifest</a> list resources in the default reading order or
+						can these can be inferred?</p>
 				</section>
 
 				<section id="wp-table-of-contents">
@@ -685,36 +700,38 @@
 
 					<p>The table of contents is either specified directly in the manifest or in an [[!html]] <code>nav</code>
 						element. In the latter case, the manifest MUST provide a link to the Web Publication resource that
-						contains the <code>nav </code>element, with a fragment identifier that specifically identifies
+						contains the <code>nav</code> element, with a fragment identifier that specifically identifies
 						it.</p>
 
 					<p>If a user agent requires a table of contents and one is not specified, it MAY construct one. This
 						specification does not mandate how such a table of contents is created. The user agent might: </p>
 
 					<ol>
-						<li>attempt to locate a table of contents in the default reading order (e.g., an HTML document with a
-								<code>nav</code> element that has the <code>role</code> attribute value
-							<code>doc-toc</code>);</li>
-						<li>use the titles of resources in the default reading order;</li>
+						<li>attempt to locate a table of contents in the <a>default reading order</a> (e.g., an <abbr
+								title="Hypertext Markup Language">HTML</abbr> document with a <code>nav</code> element that
+							has the <code>role</code> attribute value <code>doc-toc</code>);</li>
+						<li>use the titles of the resources in the default reading order;</li>
 						<li>calculate a table of contents using its own algorithms.</li>
 					</ol>
 
-					<p class="issue" data-number="9">The question is whether the manifest/infoset needs to provide
-						navigation, or whether such mechanisms belong in the content.</p>
+					<p class="issue" data-number="9">Does the <a>manifest</a>/<abbr title="information set">infoset</abbr>
+						need to provide navigation, or do such mechanisms belong in the content?</p>
 
-					<p class="issue">This question arises only if this mechanism is accepted: the question is whether a table
-						of contents navigation element can refer, via links, to any resource that is <em>not</em> listed in
-						the default reading order.</p>
+					<p class="issue">This question arises only if the table of contents is accepted: can a table of contents
+						navigation element refer, via links, to any resource that is <em>not</em> listed in the <a>default
+							reading order</a>?</p>
 
 					<div class="issue">
-						<p>The issue of using the HTML <code>nav</code> element as a possible encoding of the table of
-							contents is mentioned or explicitly addressed in the following issues:</p>
+						<p>The issue of using the <abbr title="Hypertext Markup Language">HTML</abbr>
+							<code>nav</code> element as a possible encoding of the table of contents is mentioned or
+							explicitly addressed in the following issues:</p>
 						<ul>
 							<li><a href="https://github.com/w3c/wpub/issues/35">Issue #35</a>: Define the resources in the
-								default reading order of a Web Publication to be the files referenced in the first.</li>
+									<a>default reading order</a> of a <a>Web Publication</a> to be the resources referenced
+								from the table of contents.</li>
 							<li><a href="https://github.com/w3c/wpub/issues/39">Issue #39</a>: There is a consensus that a
-								Web Publication must have a reading order and must/should have a table of contents (the main
-								navigation entry point).</li>
+								Web Publication must have a <a>default reading order</a> and must/should have a <a>table of
+									contents</a> (the main navigation entry point).</li>
 						</ul>
 					</div>
 				</section>
@@ -723,17 +740,18 @@
 			<section id="wp-extensibility">
 				<h3>Extensibility</h3>
 
-				<p>The infoset is designed to provide a basic set of properties for use by user agents in presenting and
-					rendering a Web Publication. It MAY be extended in the following ways:</p>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of properties
+					for use by user agents in presenting and rendering a <a>Web Publication</a>. It MAY be extended in the
+					following ways:</p>
 
 				<ol>
 					<li>through the inclusion of additional properties in the manifest;</li>
 					<li>by the provision of linked metadata records.</li>
 				</ol>
 
-				<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the infoset.
-					The use of linked records is RECOMMENDED whenever possible, as the use of native formats standardizes and
-					simplifies processing by user agents.</p>
+				<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the <abbr
+						title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever possible,
+					as the use of native formats standardizes and simplifies processing by user agents.</p>
 			</section>
 		</section>
 		<section id="manifest">
@@ -743,7 +761,7 @@
 				<h3>Overview</h3>
 
 				<p>A <a>manifest</a> is a specific serialization of a <a>Web Publication's</a>
-					<a>infoset</a>.</p>
+					<abbr title="information set"><a>infoset</a></abbr>.</p>
 			</section>
 
 			<section id="manifest-req">
@@ -760,8 +778,9 @@
 			<section id="manifest-declaration">
 				<h3>Declaration</h3>
 
-				<div class="ednote">A description of how a manifest declares it describes a web publication will be included
-					in a future draft, as such a mechanism will depend on integration with [[appmanifest]].</div>
+				<div class="ednote">A description of how a <a>manifest</a> declares it describes a <a>Web Publication</a>
+					will be included in a future draft, as such a mechanism will depend on integration with
+					[[appmanifest]].</div>
 			</section>
 
 			<section id="manifest-serialization">
@@ -810,8 +829,8 @@
 					</li>
 				</ul>
 
-				<p class="issue">How linking to a manifest is done (relationship, media type) may change depending on <a
-						href="#rel-wam">future integration with Web App Manifest</a>. For a list of differences in linking
+				<p class="issue">How linking to a <a>manifest</a> is done (relationship, media type) may change depending on
+						<a href="#rel-wam">future integration with Web App Manifest</a>. For a list of differences in linking
 					approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest"
 						>wiki analysis</a>. See <a href="https://github.com/w3c/wpub/issues/32"></a> for discussion.</p>
 
@@ -825,9 +844,9 @@
 					(e.g., based upon information it calculates or acquires out of band). In the absence of a preference by
 					user agent implementers, selection of the first manifest listed is suggested as a default.</p>
 
-				<p class="issue" data-number="13">If there is a collection of information about a web publication as a whole
-					("manifest") that exists separately from most of the publication's resources, there needs to be a way to
-					associate the manifest with the other publication resources.</p>
+				<p class="issue" data-number="13">If there is a collection of information about a <a>Web Publication</a> as a
+					whole ("<a>manifest</a>") that exists separately from most of the publication's resources, there needs to
+					be a way to associate the manifest with the other publication resources.</p>
 			</section>
 
 			<section id="wp-entry-page">
@@ -851,10 +870,10 @@
 				<div class="issue" data-number="103">
 					<p>This issue raises a number of questions:</p>
 					<ul>
-						<li>whether the entry page must be a web publication resource</li>
-						<li>what specific purpose it serves</li>
-						<li>whether any information the page contains can be trusted for the infoset if it is not part of the
-							publication</li>
+						<li>whether the entry page must be a <a>Web Publication</a> resource;</li>
+						<li>what specific purpose it serves;</li>
+						<li>whether any information the page contains can be trusted for the <abbr title="information set"
+								>infoset</abbr> if it is not part of the publication.</li>
 					</ul>
 					<p>There is not yet consensus in the group on these issues, or on the name "entry page".</p>
 				</div>
@@ -864,19 +883,20 @@
 			<h2>Web Publication Lifecycle</h2>
 
 			<div class="ednote">
-				<p>The publishing working group is currently evaluating the best approach for implementing Web Publications
-					in user agents. This note is intended to provide an overview of where current thinking is and what issues
-					are under consideration.</p>
+				<p>The publishing working group is currently evaluating the best approach for implementing <a>Web
+						Publications</a> in user agents. This note is intended to provide an overview of where current
+					thinking is at and what issues are under consideration.</p>
 
-				<p>The development of web publications is not viewed as a separate forking of the web, but an enhancement
-					layer that can be supported by user agents. To that end, the primary constraints on any solution for web
-					publications are that:</p>
+				<p>The development of Web Publications is not viewed as a separate forking of the Web, but an enhancement
+					layer that can be supported by user agents. To that end, the primary constraints on any solution for Web
+					Publications are that:</p>
 
 				<ul>
-					<li>the rendering of web publications must not interfere with the underlying web model and APIs. All
-						functionality and enhancements must be layered on top.</li>
-					<li>a web publication should not have to carry its own implementation code. Functionality is ideally
-						provided by the user agent and/or polyfill.</li>
+					<li>the rendering of Web Publications must not interfere with the underlying Web model and <abbr
+							title="Application Programming Interfaces">APIs</abbr> &#8212; all functionality and enhancements
+						must be layered on top;</li>
+					<li>a Web Publication should not have to carry its own implementation code &#8212; functionality is
+						ideally provided by the user agent and/or polyfill.</li>
 				</ul>
 
 				<p>While this specification will provide implementation flexibility for user agents, there are still a number
@@ -884,38 +904,38 @@
 
 				<ul>
 					<li>
-						<p>initialization expectations for a web publication:</p>
+						<p>initialization expectations for a Web Publication:</p>
 						<ul>
-							<li>use agent initiation v. user prompts;</li>
+							<li>automatic initiation v. user prompts;</li>
 							<li>linked v. directly loaded manifests;</li>
-							<li>resources that belong to more than one web publication.</li>
+							<li>resources that belong to more than one Web Publication.</li>
 						</ul>
 					</li>
 					<li>
 						<p>the creation of a "publication state":</p>
 						<ul>
-							<li>persistence of publication information across page loads</li>
+							<li>persistence of publication information across page loads;</li>
 							<li>location and persistence of UI;</li>
 							<li>indications of supported features;</li>
 							<li>DOM issues such as persistence of numbering schemes.</li>
 						</ul>
 					</li>
 					<li>
-						<p>tracking the extent of a publication:</p>
+						<p>tracking the extent of a Web Publication:</p>
 						<ul>
 							<li>taking an entire publication offline;</li>
 							<li>enabling search across documents.</li>
 						</ul>
 					</li>
 					<li>
-						<p>establishing the bounds of a publication:</p>
+						<p>establishing the bounds of a Web Publication:</p>
 						<ul>
 							<li>when to end the publication state;</li>
 							<li>document history traversal;</li>
 							<li>how to handle links outside the publication.</li>
 						</ul>
 					</li>
-					<li>updating of the manifest.</li>
+					<li>updating of the <a>manifest</a>.</li>
 				</ul>
 
 				<p>The working group intends to flesh out the lifecycle in later revisions once it is clearer what models are
@@ -935,18 +955,21 @@
 
 				<p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to all Web
 					content: [[!html]] documents are styled and laid out according to the rules of <a
-						href="https://www.w3.org/TR/CSS/">CSS</a>, [[!svg]] files are rendered as expected of that format,
-					and so on. This specification requires no particular profile or subset of CSS, HTML, or SVG to be
-					supported, other than the expectations set for these technologies by their respective specifications.</p>
+						href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [[!svg]]
+					documents are rendered as expected of that format, etc. This specification requires no particular profile
+					or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="Hypertext Markup Language"
+						>HTML</abbr>, or <abbr title="Scalable Vector Graphics">SVG</abbr> to be supported, other than the
+					expectations set for these technologies by their respective specifications.</p>
 
 
-				<div class="note">
-					<p>This specification intentionally refrains from introducing any new layout features. Any shortcoming of
-						the Web platform in terms of layout needs to be addressed for the whole Web platform, which means via
-						CSS.</p>
+				<div class="ednote">
+					<p>This specification intentionally avoids introducing any new layout features. Any shortcoming of the
+						Web platform in terms of layout needs to be addressed for the whole Web platform, which means via
+							<abbr title="Cascading Style Sheets">CSS</abbr>.</p>
 
-					<p>This working group will work with other relevant groups of the W3C to address platform-wide
-						limitations that negatively impact <a>Web Publications</a>.</p>
+					<p>This working group will work with other relevant groups of the <abbr title="World Wide Web Consortium"
+							>W3C</abbr> to address platform-wide limitations that negatively impact <a>Web
+						Publications</a>.</p>
 				</div>
 
 				<p>For the purposes of layout, each resource of a Web Publication is treated as a separate document. User
@@ -957,19 +980,18 @@
 
 				<div class="issue">
 					<p>Despite this general requirement that each resource should be treated as a separate document for the
-						purpose of layout, there are some places where CSS specifications should be amended to be able to
-						deal more intelligently with collections of resources like Web Publications.</p>
+						purpose of layout, there are some places where <abbr title="Cascading Style Sheets">CSS</abbr>
+						specifications should be amended to be able to deal more intelligently with collections of resources
+						like <a>Web Publications</a>.</p>
 
 					<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references"
-							>cross references</a>, which are currently restricted to work only within a single document. This
-						restriction should be relaxed to allow for cross references between separate resources of a single
+							>cross-references</a>, which are currently restricted to work only within a single document. This
+						restriction should be relaxed to allow for cross-references between separate resources of a single
 						Web Publication.</p>
 
-					<p>Another related one would be to allow <a
-							href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a> to accumulate across
-						multiple resources of a single <a>Web Publication</a> (e.g., so that figures in multiple sections may
-						be numbered in a single sequence).</p>
-
+					<p>Another related would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties"
+							>counters</a> to accumulate across multiple resources of a single Web Publication (e.g., so that
+						figures in multiple sections may be numbered in a single sequence).</p>
 				</div>
 
 				<section id="scrolling-or-paginating" class="informative">
@@ -996,7 +1018,7 @@
 				<section id="enh-pagination">
 					<h4>Paginated Layout</h4>
 
-					<p>When a User Agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each
+					<p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each
 						document in the <a>default reading order</a> sequentially, with the last page of a resource being
 						followed by the first page of the subsequent one.</p>
 
@@ -1006,7 +1028,7 @@
 								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (see
 							[[!css-page-3]]) would otherwise lead to it starting on the opposite page. It should also be
 							possible to use the <a href="https://www.w3.org/TR/css-break-3/#propdef-break-before"
-								>break-before</a> property (See [[!css-break-3]]) to force the content to resume on the
+								>break-before</a> property (see [[!css-break-3]]) to force the content to resume on the
 							opposite side if that was desired by the author.</p>
 
 						<p>[[css-page-3]] needs to be amended to describe this exception to the general behavior when dealing
@@ -1024,7 +1046,7 @@
 					</div>
 
 					<div class="issue">
-						<p>Should any of the above be normative, or should this be up to User Agents to explore, and only
+						<p>Should any of the above be normative, or should this be up to user agents to explore, and only
 							standardize if and when a clear winning approach emerges?</p>
 					</div>
 
@@ -1055,7 +1077,8 @@
 					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user
 						agent to automatically move the user to the next resource when a more natural action occurs, like a
 						general swipe across the screen. It is similar conceptually and functionally to the [[!html]]
-							<code>link</code> element's <code>next</code> and <code>prev</code> relationships.</p>
+							<code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#linkTypes"
+								><code>next</code> and <code>prev</code> relationships</a>.</p>
 
 					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
 				</section>
@@ -1069,11 +1092,12 @@
 						relation to the overall structure). Users often want quick access the table contents for these
 						reasons.</p>
 
-					<p>User agents can use table of contents defined in the infoset to present an interface that allows users
-						to review and activate the links without leaving the resource they are currently viewing.</p>
+					<p>User agents can use table of contents defined in the <abbr title="information set"
+							><a>infoset</a></abbr> to present an interface that allows users to review and activate the links
+						without leaving the resource they are currently viewing.</p>
 
 					<p class="issue"><a href="https://github.com/w3c/wpub/issues/9">Issue 9</a>: Does the user agent need to
-						provide access to the table of contents, or do such mechanisms belong in the content.</p>
+						provide access to the <a>table of contents</a>, or do such mechanisms belong in the content.</p>
 				</section>
 			</section>
 
@@ -1108,11 +1132,13 @@
 			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
 				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
 				locations with explicit anchor points. Web Publication locators include a variety of selectors that work with
-				the general structures and content of a resource (e.g., text selectors, CSS selectors).</p>
+				the general structures and content of a resource (e.g., text selectors, <abbr title="Cascading Style Sheets"
+					>CSS</abbr> selectors).</p>
 
-			<p class="ednote">As Web Publication Locators currently rely on a JSON-based expression syntax, it is not yet
-				clear how much of this syntax can be translated to a fragment identifier. This may limit the usefulness
-				beyond expressions that are also JSON-based (e.g., outside of annotations or bookmarks).</p>
+			<p class="ednote">As Web Publication Locators currently rely on a <abbr title="JavaScript Object Notation"
+					>JSON</abbr>-based expression syntax, it is not yet clear how much of this syntax can be translated to a
+				fragment identifier. This may limit the usefulness beyond expressions that are also <abbr
+					title="JavaScript Object Notation">JSON</abbr>-based (e.g., outside of annotations or bookmarks).</p>
 
 			<div class="ednote">
 				<p>Illustrate with example of an easy to understand Web Publication Locator, such as might be used in
@@ -1128,10 +1154,12 @@
 				retrieve and/or reference a fragment of a Web Publication that spans multiple resources. </p>
 
 			<div class="note">
-				<p>In composing a Web Publication Locator, use the canonical identifier of the Web Publication in preference
-					to any alternative addresses. Such use facilitates the collation of Web Publication Locators associated
-					with a particular Web Publication. URLs of Web Publication resources appearing in a Web Publication
-					Locator should match the URL of the resource provided in the <a>infoset</a>.</p>
+				<p>In composing a Web Publication Locator, use the <a>canonical identifier</a> of the Web Publication in
+					preference to any alternative addresses. Such use facilitates the collation of Web Publication Locators
+					associated with a particular Web Publication. <abbr title="Uniform Resource Locators">URLs</abbr> of Web
+					Publication resources appearing in a Web Publication Locator should match the <abbr
+						title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr
+						title="information set"><a>infoset</a></abbr>.</p>
 			</div>
 		</section>
 		<section id="security">
