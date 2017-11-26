@@ -277,8 +277,11 @@
 					<dd>
 						<p>An identifier is metadata that can be used to refer to <a class="externalDFN"
 								href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
-							persistent and unambiguous manner. URLs, URNs, DOIs, ISBNs, or PURLs are all examples of
-							persistent identifiers frequently used in publishing.</p>
+							persistent and unambiguous manner. <abbr title="Uniform Resource Locators">URLs</abbr>, <abbr
+								title="Uniform Resource Names">URNs</abbr>, <abbr title="Digital Object Identifiers"
+								>DOIs</abbr>, <abbr title="International Standard Book Numbers">ISBNs</abbr>, and <abbr
+								title="Persistent Uniform Resource Locators">PURLs</abbr> are all examples of persistent
+							identifiers frequently used in publishing.</p>
 					</dd>
 
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
@@ -297,10 +300,12 @@
 
 					<dt><dfn data-lt="URLs">URL</dfn></dt>
 					<dd>
-						<p>The general term URL is defined by the URL Standard&#160;[[!url]]. It is used as in other W3C
+						<p>The general term <abbr title="Uniform Resource Locator">URL</abbr> is defined by the URL
+							Standard&#160;[[!url]]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
 							specifications, like <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. In
-							particular, a URL allows for the usage of characters from Unicode following&#160;[[!rfc3987]].
-							See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
+							particular, a <abbr title="Uniform Resource Locator">URL</abbr> allows for the usage of
+							characters from Unicode following&#160;[[!rfc3987]]. See <a
+								href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
 								specification</a> for further details.</p>
 					</dd>
 
@@ -598,7 +603,7 @@
 						<li>use the first <a>non-empty</a>
 							<code>title</code> element found in a resource in the <a>default reading order</a>;</li>
 						<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
-						<li>use the URL of the manifest;</li>
+						<li>use the <abbr title="Uniform Resource Locator">URL</abbr> of the manifest;</li>
 						<li>calculate a title using its own algorithm.</li>
 					</ul>
 
@@ -853,8 +858,9 @@
 				<h3>Entry Page</h3>
 
 				<p>As described in <a href="#wp-address"></a>, a <a>Web Publication</a> has an <a>address</a> that can be
-					dereferenced. This URL MUST resolve to the <dfn>entry page</dfn>, which MUST be an [[!html]] document
-					that represents the primary entry point for the Web Publication.</p>
+					dereferenced. This <abbr title="Uniform Resource Locator">URL</abbr> MUST resolve to the <dfn>entry
+						page</dfn>, which MUST be an [[!html]] document that represents the primary entry point for the Web
+					Publication.</p>
 
 				<p>The entry page SHOULD be a resource of the Web Publication. It can be any resource, including one that is
 					not listed in the <a>default reading order</a>. Unlike other resources, the entry page MUST <a
@@ -1119,15 +1125,17 @@
 
 			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
 					<a>Web Publications</a> (e.g., for address(es), bookmarks, and annotations). Locators traditionally take
-				the form of fragment identifiers [[rfc3986]], where the portion of a URL preceded by a number sign character
-					(<code>#</code>) identifies a specific position within the referenced resource.</p>
+				the form of fragment identifiers [[rfc3986]], where the portion of a <abbr title="Uniform Resource Locator"
+					>URL</abbr> preceded by a number sign character (<code>#</code>) identifies a specific position within
+				the referenced resource.</p>
 
 			<p>For some use cases, it is essential to identify and reference a <a>Web Publication</a> resource—or a location
 				in or a segment of a resource—in the scope or context of the Web Publication to which it belongs. A
-				traditional fragment identifier cannot satisfy this requirement, since only the URL of the constituent
-				resource containing the location or content fragment of interest is expressed. Web Publication Locators
-				[[pub-loc]] address this issue by providing the means to express both the URL of the resource and the URL of
-				the Web Publication.</p>
+				traditional fragment identifier cannot satisfy this requirement, since only the <abbr
+					title="Uniform Resource Locator">URL</abbr> of the constituent resource containing the location or
+				content fragment of interest is expressed. Web Publication Locators [[pub-loc]] address this issue by
+				providing the means to express both the <abbr title="Uniform Resource Locator">URL</abbr> of the resource and
+				the <abbr title="Uniform Resource Locator">URL</abbr> of the Web Publication.</p>
 
 			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
 				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
