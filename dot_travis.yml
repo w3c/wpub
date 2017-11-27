@@ -1,0 +1,17 @@
+language: node_js
+ 
+branches:
+  only:
+    - publish_wd
+ 
+env:
+  global:
+    - URL="https://rawgit.com/w3c/wpub/publish_wd/snapshot/ECHIDNA"
+    - DECISION="@@@@"
+    - secure: "@@@@"
+ 
+script:
+  - echo "ok"
+ 
+after_success:
+  - test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
