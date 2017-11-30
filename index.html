@@ -810,6 +810,14 @@
 					[[appmanifest]].</div>
 			</section>
 
+			<section id="manifest-media-type">
+				<h3>Media Type</h3>
+				
+				<p>The media type for a Web Publication manifest is:</p>
+				
+				<pre><code>application/publication+json</code></pre>
+			</section>
+			
 			<section id="manifest-serialization">
 				<h3>Serialization</h3>
 
@@ -1173,6 +1181,57 @@
 			<h2>Privacy</h2>
 
 			<div class="ednote">Placeholder for privacy issues.</div>
+		</section>
+		<section id="app-manifest-media-type-registration" class="appendix">
+			<h2>Media Type Registration</h2>
+			
+			<p>This registration is for community review and will be submitted to the IESG for review, approval, and
+				registration with IANA.</p>
+			
+			<dl>
+				<dt>Type name:</dt>
+				<dd>application</dd>
+				<dt>Subtype name:</dt>
+				<dd>publication+json</dd>
+				<dt>Required parameters:</dt>
+				<dd>N/A</dd>
+				<dt>Optional parameters:</dt>
+				<dd>N/A</dd>
+				<dt>Encoding considerations:</dt>
+				<dd>Encoding considerations are identical to those specified for the "application/json" media type. See
+					[RFC7159].</dd>
+				<dt>Security and privacy considerations:</dt>
+				<dd>
+					<p>TBD</p>
+				</dd>
+				<dt>Applications that use this media type:</dt>
+				<dd>Web browsers</dd>
+				<dt>Additional information:</dt>
+				<dd>
+					<dl>
+						<dt>Magic number(s):</dt>
+						<dd>N/A</dd>
+						<dt>File extension(s):</dt>
+						<dd>.webpub</dd>
+						<dt>Macintosh file type code(s):</dt>
+						<dd>TEXT</dd>
+					</dl>
+				</dd>
+				<dt>Person &amp; email address to contact for further information:</dt>
+				<dd>The <a href="https://www.w3.org/Pubishing/WG/" rel="nofollow">Publishing Working Group</a> can be
+					contacted at <a href="https://lists.w3.org/Archives/Public/public-publ-wg/" rel="nofollow"
+						>public-publ-wg@w3.org</a>.</dd>
+				<dt>Intended usage:</dt>
+				<dd>COMMON</dd>
+				<dt>Restrictions on usage:</dt>
+				<dd>none</dd>
+				<dt>Author:</dt>
+				<dd>
+					<abbr title="World Wide Web Consortium">W3C</abbr>'s Publishing Working Group.</dd>
+				<dt>Change controller:</dt>
+				<dd>
+					<abbr title="World Wide Web Consortium">W3C</abbr>.</dd>
+			</dl>
 		</section>
 		<section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
 	</body>
