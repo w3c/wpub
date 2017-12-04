@@ -67,15 +67,15 @@ var biblio = {
         "Timothy W. Cole",
         "Ivan Herman"
       ],
-      "date": "..."
+      "date": "2018-01-02"
     },
     "pwpub": {
       "title": "Packaged Web Publications",
       "href": "https://w3.org/TR/pwpub/",
       "authors": [
-        "..."
+        "David Wood"
       ],
-      "date": "..."
+      "date": "2018-01-02"
     },
     "wpub": {
       "title": "Web Publications",
@@ -84,6 +84,6 @@ var biblio = {
         "Matt Garrish",
         "Ivan Herman"
       ],
-      "date": "..."
+      "date": "2018-01-02"
     }
 }
