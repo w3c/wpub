@@ -190,9 +190,9 @@
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored specifically
 					for their unique reading needs.</p>
 
-				<figure>	
-						<img src="images/WP-diagram.svg" alt="Simplified diagram of the structure of a web publication. The web publication is broken down into two elements. The first element is the actual contents (all the real things listed in the manifest.) This element is broken down into the CSS, the actual 'things' such as the html, audio, etc, and the images, fonts etc. The actual 'things' have an additional subset of items that includes the entry point to the  publication and all of the other documents. The second element is the Manifest (JSON). The manifest is used to generate the infoset, which consists of a list of  all the 'things' in the publication, the publication metadata, and the default reading order of content. It is noted in the diagram that the entry point  has to link to the manifest." />
-						 <figcaption>Simplified Diagram of the Structure of Web Publication. (The image is available in <a href="images/WP-diagram.svg">SVG</a> and in <a href="images/WP-diagram.png">PNG</a> formats.)
+				<figure id="WP-diagram">	
+						<img src="images/WP-diagram.svg" alt="Simplified diagram of the structure of a web publication. See the appendix for further details" />
+						 <figcaption>Simplified Diagram of the Structure of Web Publications. <br/>The image is available in <a href="images/WP-diagram.svg">SVG</a> and in <a href="images/WP-diagram.png">PNG</a> formats. A <a href="#WP-diagram-descr">longer description</a> of the diagram is also available in the Appendix.
 						</figcaption>
 				</figure>
 			</section>
@@ -1179,6 +1179,15 @@
 			<h2>Privacy</h2>
 
 			<div class="ednote">Placeholder for privacy issues.</div>
+		</section>
+		<section class="appendix">
+			<h2>Description of images</h2>
+
+			<dl>
+				<dt id="WP-diagram-descr">Description for <a href="#WP-diagram">the diagram for Web Publications</a>:</dt>
+				<dd>A simplified diagram of the structure of a <a>Web Publication</a>. The Web Publication is broken down into two elements. The first element is the actual contents (all the real things listed in the manifest). This element is broken down into the CSS, the actual “things” such as the HTML, audio, etc, and the images, fonts etc. The actual “things” have an additional subset of items that includes the entry point to the  publication and all of the other documents. The second element is the Manifest (JSON). The manifest is used to generate the <a href="#infoset">Information Set (“Infoset”)</a>, which consists of a list of  all the “things” in the publication, the publication metadata, and the default reading order of content. It is noted in the diagram that the entry point has to link to the manifest.</dd>
+			</dl>
+
 		</section>
 		<section id="ack" data-include="common/html/acknowledgements.html" data-include-replace="true"></section>
 	</body>
