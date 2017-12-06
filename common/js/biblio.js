@@ -62,7 +62,7 @@ var biblio = {
     },   
     "pub-loc": {
       "title": "Locators for Web Publications",
-      "href": "https://w3.org/TR/pub-loc/",
+      "href": "https://www.w3.org/TR/pub-loc/",
       "authors": [
         "Timothy W. Cole",
         "Ivan Herman"
@@ -71,7 +71,7 @@ var biblio = {
     },
     "pwpub": {
       "title": "Packaged Web Publications",
-      "href": "https://w3.org/TR/pwpub/",
+      "href": "https://www.w3.org/TR/pwpub/",
       "authors": [
         "David Wood"
       ],
@@ -79,7 +79,7 @@ var biblio = {
     },
     "wpub": {
       "title": "Web Publications",
-      "href": "https://w3.org/TR/wpub/",
+      "href": "https://www.w3.org/TR/wpub/",
       "authors": [
         "Matt Garrish",
         "Ivan Herman"
