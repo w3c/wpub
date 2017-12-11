@@ -386,47 +386,6 @@
 					has not provided in the manifest, whether as an intentional optimization or by accidental omission.</p>
 			</section>
 
-			<section id="infoset-req">
-				<h3>Requirements</h3>
-
-				<p>The requirements for the expression of <abbr title="information set"><a>infoset</a></abbr> properties are
-					as follows:</p>
-
-				<dl>
-					<dt>Descriptive Properties</dt>
-					<dd>
-						<p>REQUIRED: <a href="#wp-address">address</a></p>
-						<div>
-							<span>RECOMMENDED:</span>
-							<ul class="flat">
-								<li><a href="#wp-a11y">accessibility</a></li>
-								<li><a href="#wp-dir">base direction</a></li>
-								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
-								<li><a href="#wp-creators">creator</a></li>
-								<li><a href="#wp-language">language</a></li>
-								<li><a href="#wp-mod-date">modification date</a></li>
-								<li><a href="#wp-privacy">privacy policy</a></li>
-								<li><a href="#wp-pub-date">publication date</a></li>
-								<li><a href="#wp-title">title</a></li>
-							</ul>
-						</div>
-					</dd>
-					<dt>Structural Properties</dt>
-					<dd>
-						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a> and <a
-								href="#wp-resource-list">resource list</a></p>
-						<p>RECOMMENDED: <a href="#wp-table-of-contents">table of contents</a></p>
-					</dd>
-				</dl>
-
-				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues remain
-					open that could change whether an item is required or recommended. Refer to the property descriptions for
-					more information.</p>
-
-				<p class="issue" data-number="21">Whether the <abbr title="information set"><a>infoset</a></abbr> must allow
-					any additional metadata, or define a specific mechanism to handle the inclusion of such.</p>
-			</section>
-
 			<section id="infoset-meta">
 				<h3>Descriptive Properties</h3>
 
@@ -495,10 +454,10 @@
 						<dd>direction is determined from the value of the property</dd>
 					</dl>
 
-					<p>If not specified, the value <code>ltr</code> SHOULD be assumed.</p>
+					<p>If not specified, user agent's SHOULD assume the value <code>ltr</code>.</p>
 
-					<p>If property values are harvested from another resource, such as the <a>table of contents</a>,
-						precedence SHOULD be given to the base direction specified in the resource, when provided.</p>
+					<p>If property values are harvested from another resource, such as the <a>table of contents</a>, user
+						agents SHOULD give precedence to the base direction specified in the resource, when provided.</p>
 				</section>
 
 				<section id="wp-canonical-identifier">
@@ -507,9 +466,10 @@
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of the
 						Web Publication. The canonical identifier SHOULD be an <a>address</a>, but, if not, it MUST be
-						possible to make a one-to-one mapping to an address (e.g., a <abbr title="Digital Object Identifier"
-							>DOI</abbr> can be resolved to a <abbr title="Uniform Resource Locator">URL</abbr> via a <abbr
-							title="Digital Object Identifier">DOI</abbr> resolver).</p>
+						possible for a user agent to make a one-to-one mapping to an address (e.g., a <abbr
+							title="Digital Object Identifier">DOI</abbr> can be resolved to a <abbr
+							title="Uniform Resource Locator">URL</abbr> via a <abbr title="Digital Object Identifier"
+							>DOI</abbr> resolver).</p>
 
 					<p>If a Web Publication is hosted at more than one address, this identifier allows a user agent to
 						identify the shared relationship between the versions and to determine which of the available
@@ -544,7 +504,7 @@
 					<p>Creators are the individuals or entities responsible for the creation of the <a>Web
 						Publication</a>.</p>
 
-					<p>The role the creator played in the creation of the Web Publication SHOULD also be specified (e.g.,
+					<p>Authors should specify the role the creator played in the creation of the Web Publication (e.g.,
 						'author', 'illustrator', 'translator').</p>
 				</section>
 
@@ -562,8 +522,8 @@
 						its format.</p>
 
 					<p>If a user agent requires the language and one is not available in the <abbr title="information set"
-							>infoset</abbr>, it MAY attempt to determine the language. This specification does not mandate
-						how such a language tag is created. The user agent might:</p>
+							>infoset</abbr>, or the value is invalid, it MAY attempt to determine the language. This
+						specification does not mandate how such a language tag is created. The user agent might:</p>
 
 					<ul>
 						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
@@ -572,7 +532,8 @@
 						<li>calculate the language using its own algorithm.</li>
 					</ul>
 
-					<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
+					<p>If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"
+						(undetermined).</p>
 
 					<div class="issue" data-number="53">
 						<p>Is the language declared for the <a>manifest</a> content the same as the language of the
@@ -586,9 +547,10 @@
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
 						updated.</p>
 
-					<p>The last modification date SHOULD be updated whenever changes are made to the resources of the Web
-						Publication, including the <a>manifest</a>. It does not necessarily reflect all changes to the Web
-						Publication, however, as, for example, it might not reflect changes to third-party content.</p>
+					<p>Authors should update the last modification date SHOULD whenever changes are made to the resources of
+						the Web Publication, including the <a>manifest</a>. This date does not necessarily reflect all
+						changes to the Web Publication, however, as, for example, it might not reflect changes to third-party
+						content.</p>
 				</section>
 
 				<section id="wp-pub-date">
@@ -612,9 +574,9 @@
 						part of publishing <a>Web Publications</a>. Even if no information is collected, such a declaration
 						increases the trust users have in the content.</p>
 
-					<p>To address this concern, the <abbr title="information set">infoset</abbr> allows a link to be provided
-						to a privacy policy. The privacy policy does not have to be a resource of the Web Publication,
-						although including it as a resource is RECOMMENDED.</p>
+					<p>To address this concern, Authors can include a link to a privacy policy in the <abbr
+							title="information set">infoset</abbr>. The privacy policy does not have to be a resource of the
+						Web Publication, although including it as a resource is RECOMMENDED.</p>
 
 					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
 						Publications.</p>
@@ -625,11 +587,12 @@
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
 
-					<p>When specified in the <a>manifest</a>, the title MUST be <a>non-empty</a>.</p>
+					<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
+							<a>non-empty</a>.</p>
 
 					<p>If a user agent requires a title and one is not available in the <abbr title="information set"
-								><a>infoset</a></abbr>, it MAY create one. This specification does not mandate how such a
-						title is created. The user agent might:</p>
+							>infoset</abbr>, it MAY create one. This specification does not mandate how such a title is
+						created. The user agent might:</p>
 
 					<ul>
 						<li>use the first <a>non-empty</a>
@@ -659,7 +622,7 @@
 					<p>A user might follow alternative pathways through the content, but in the absence of such interaction
 						the default reading order defines the expected progression from one resource to the next.</p>
 
-					<p>The default reading order MUST include at least one resource.</p>
+					<p>Authors MUST include at least one resource in the default reading order.</p>
 
 					<p>The default reading order is either specified directly in the manifest or in an [[!html]]
 							<code>nav</code> element. In the latter case, the manifest MUST provide a link to the Web
@@ -701,8 +664,8 @@
 						Web Publication and which are external to it.</p>
 
 					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
-						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it is
-						strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's
+						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, authors
+						are strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's
 						constituent resources. At a minimum, the resource list MUST include a list of all resources in the
 							<a>default reading order</a>.</p>
 
@@ -732,8 +695,8 @@
 
 					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural outline
 						of the major sections of the Web Publication. There are no requirements on the completeness of the
-						table of contents, except that, when specified, it MUST link to at least one <a href="#wp-resources"
-							>resource</a>.</p>
+						table of contents, except that, when specified, authors MUST link to at least one <a
+							href="#wp-resources">resource</a>.</p>
 
 					<p>The table of contents is either specified directly in the manifest or in an [[!html]] <code>nav</code>
 						element. In the latter case, the manifest MUST provide a link to the Web Publication resource that
@@ -778,8 +741,8 @@
 				<h3>Extensibility</h3>
 
 				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of properties
-					for use by user agents in presenting and rendering a <a>Web Publication</a>. It MAY be extended in the
-					following ways:</p>
+					for use by user agents in presenting and rendering a <a>Web Publication</a>, but authors MAY extend it in
+					the following ways:</p>
 
 				<ol>
 					<li>through the inclusion of additional properties in the manifest;</li>
@@ -838,10 +801,10 @@
 			<section id="wp-resources">
 				<h2>Resources</h2>
 
-				<p>A <a>Web Publication</a> MUST include at least one [[!html]] document that <a href="#wp-linking">links to
-						the manifest</a>.</p>
+				<p>Authors MUST include at least one [[!html]] document that <a href="#wp-linking">links to the
+					manifest</a>.</p>
 
-				<p>There are no restrictions on a Web Publication beyond this requirement. It MAY reference resources of any
+				<p>There are no restrictions on a Web Publication beyond this requirement. Authors MAY reference resources of any
 					media type, both in the <a>default reading order</a> and as dependencies of other resources.</p>
 
 				<div class="note">
@@ -874,7 +837,7 @@
 					approaches, refer to the <a href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest"
 						>wiki analysis</a>. See <a href="https://github.com/w3c/wpub/issues/32"></a> for discussion.</p>
 
-				<p>A resource SHOULD link to the Web Publication(s) to which it belongs.</p>
+				<p>Authors SHOULD link resources to the Web Publication(s) to which they belong.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
 
@@ -1188,7 +1151,8 @@
 			<h2>Image Descriptions</h2>
 
 			<dl>
-				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">“Structure of Web Publications” diagram</a>:</dt>
+				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">“Structure of Web Publications”
+						diagram</a>:</dt>
 				<dd>A simplified diagram of the structure of a <a>Web Publication</a>. The Web Publication is broken down
 					into two elements. The first element is the actual contents (all the real things listed in the manifest).
 					This element is broken down into the CSS, the actual “things” such as the HTML, audio, etc, and the
@@ -1196,7 +1160,8 @@
 					to the publication and all of the other documents. The second element is the Manifest (JSON). The
 					manifest is used to generate the <a href="#infoset">Information Set (“Infoset”)</a>, which consists of a
 					list of all the “things” in the publication, the publication metadata, and the default reading order of
-					content. It is noted in the diagram that the entry point has to link to the manifest. (<a role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web Publication.)</dd>
+					content. It is noted in the diagram that the entry point has to link to the manifest. (<a
+						role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web Publication.)</dd>
 			</dl>
 
 		</section>
