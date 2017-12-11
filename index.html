@@ -549,13 +549,36 @@
 					</div>
 				</section>
 
+				<section id="wp-dir">
+					<h4>Base Direction</h4>
+
+					<p>The <dfn>base direction</dfn> identifies the display direction for <abbr title="information set"
+								><a>infoset</a></abbr> properties.</p>
+
+					<p>The value of this property MUST be one of:</p>
+
+					<dl>
+						<dt><code>ltr</code></dt>
+						<dd>left-to-right</dd>
+						<dt><code>rtl</code></dt>
+						<dd>right-to-left</dd>
+						<dt><code>auto</code></dt>
+						<dd>direction is determined from the value of the property</dd>
+					</dl>
+
+					<p>If not specified, user agent's SHOULD assume the value <code>ltr</code>.</p>
+
+					<p>If property values are harvested from another resource, such as the <a>table of contents</a>, user
+						agents SHOULD give precedence to the base direction specified in the resource, when provided.</p>
+				</section>
+
 				<section id="wp-canonical-identifier">
 					<h4>Canonical Identifier</h4>
 
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the
 						preferred version of the Web Publication. The canonical identifier SHOULD be
-						an <a>address</a>, but, if not, it MUST be possible to make a one-to-one
+						an <a>address</a>, but, if not, it MUST be possible for a user agent to make a one-to-one
 						mapping to an address (e.g., a <abbr title="Digital Object Identifier"
 							>DOI</abbr> can be resolved to a <abbr title="Uniform Resource Locator"
 							>URL</abbr> via a <abbr title="Digital Object Identifier">DOI</abbr>
@@ -599,8 +622,8 @@
 					<p>Creators are the individuals or entities responsible for the creation of the
 							<a>Web Publication</a>.</p>
 
-					<p>The role the creator played in the creation of the Web Publication SHOULD
-						also be specified (e.g., 'author', 'illustrator', 'translator').</p>
+					<p>Authors should specify the role the creator played in the creation of the Web Publication (e.g.,
+						'author', 'illustrator', 'translator').</p>
 				</section>
 
 				<section id="wp-language-and-dir">
@@ -644,11 +667,9 @@
 						in the <a>Web Publication's</a>
 						<abbr title="information set"><a>infoset</a></abbr> only. </p>
 
-					<p> If a user agent requires the language and one is not available in the <abbr
-							title="information set">infoset</abbr>, nor is it specified for a
-						specific property, it MAY attempt to determine the language. This
-						specification does not mandate how such a language tag is created. The user
-						agent might: </p>
+					<p>If a user agent requires the language and one is not available in the <abbr title="information set"
+							>infoset</abbr>, or the value is invalid, it MAY attempt to determine the language. This
+						specification does not mandate how such a language tag is created. The user agent might:</p>
 
 					<ul>
 						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
@@ -657,9 +678,9 @@
 						<li>calculate the language using its own algorithm.</li>
 					</ul>
 
-					<p>If a language tag cannot be determined, the value "<code>und</code>"
-						(undetermined) MUST be used. If the base direction cannot be determined, the
-						value <code>auto</code> MUST be assumed.</p>
+					<p>If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"
+						(undetermined). If the base direction cannot be determined, user agents MUST assume the
+						value <code>auto</code>.</p>
 
 					<div class="issue" data-number="53">
 						<p>Is the language declared for the <a>manifest</a> content the same as the
@@ -674,10 +695,10 @@
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web
 							Publication</a> was last updated.</p>
 
-					<p>The last modification date SHOULD be updated whenever changes are made to the
-						resources of the Web Publication, including the <a>manifest</a>. It does not
-						necessarily reflect all changes to the Web Publication, however, as, for
-						example, it might not reflect changes to third-party content.</p>
+					<p>Authors SHOULD update the last modification date whenever changes are made to the resources of
+						the Web Publication, including the <a>manifest</a>. This date does not necessarily reflect all
+						changes to the Web Publication, however, as, for example, it might not reflect changes to third-party
+						content.</p>
 				</section>
 
 				<section id="wp-pub-date">
@@ -697,21 +718,18 @@
 				<section id="wp-privacy">
 					<h4>Privacy Policy</h4>
 
-					<p>Users often have the legal right to know and control what information is
-						collected about them, how such information is stored and for how long,
-						whether it is personally identifiable, and how it can be expunged. Including
-						a statement that addresses all such privacy concerns is consequently an
-						important part of publishing <a>Web Publications</a>. Even if no information
-						is collected, such a declaration increases the trust users have in the
-						content.</p>
+					<p>Users often have the legal right to know and control what information is collected about them, how
+						such information is stored and for how long, whether it is personally identifiable, and how it can be
+						expunged. Including a statement that addresses all such privacy concerns is consequently an important
+						part of publishing <a>Web Publications</a>. Even if no information is collected, such a declaration
+						increases the trust users have in the content.</p>
 
-					<p>To address this concern, the <abbr title="information set">infoset</abbr>
-						allows a link to be provided to a privacy policy. The privacy policy does
-						not have to be a resource of the Web Publication, although including it as a
-						resource is RECOMMENDED.</p>
+					<p>To address this concern, Authors can include a link to a privacy policy in the <abbr
+							title="information set">infoset</abbr>. The privacy policy does not have to be a resource of the
+						Web Publication, although including it as a resource is RECOMMENDED.</p>
 
-					<p>Refer to <a href="#privacy"></a> for more information about privacy
-						considerations in Web Publications.</p>
+					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
+						Publications.</p>
 				</section>
 
 				<section id="wp-title">
@@ -719,13 +737,12 @@
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
 
-					<p>When specified in the <a>manifest</a>, the title MUST be
-						<a>non-empty</a>.</p>
+					<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
+							<a>non-empty</a>.</p>
 
-					<p>If a user agent requires a title and one is not available in the <abbr
-							title="information set"><a>infoset</a></abbr>, it MAY create one. This
-						specification does not mandate how such a title is created. The user agent
-						might:</p>
+					<p>If a user agent requires a title and one is not available in the <abbr title="information set"
+							>infoset</abbr>, the user agent MAY create one. This specification does not mandate how such a title is
+						created. The user agent might:</p>
 
 					<ul>
 						<li>use the first <a>non-empty</a>
@@ -760,7 +777,7 @@
 						absence of such interaction the default reading order defines the expected
 						progression from one resource to the next.</p>
 
-					<p>The default reading order MUST include at least one resource.</p>
+					<p>Authors MUST include at least one resource in the default reading order.</p>
 
 					<p>The default reading order is either specified directly in the manifest or in
 						an [[!html]] <code>nav</code> element. In the latter case, the manifest MUST
@@ -803,51 +820,44 @@
 				<section id="wp-resource-list">
 					<h4>Resource List</h4>
 
-					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources"
-							>resources</a> that are used in the processing and rendering of a <a>Web
-							Publication</a> (i.e., that are within its bounds). This list is the
-						definitive source that user agents have in determining which referenced
-						resources belong to the Web Publication and which are external to it.</p>
+					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used in the
+						processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds). This list is
+						the definitive source that user agents have in determining which referenced resources belong to the
+						Web Publication and which are external to it.</p>
 
-					<p>The completeness of the resource list will affect the usability of the Web
-						Publication in certain reading scenarios (e.g., the ability to read the Web
-						Publication offline). For this reason, it is strongly RECOMMENDED to always
-						provide a comprehensive list of all of the Web Publication's constituent
-						resources. At a minimum, the resource list MUST include a list of all
-						resources in the <a>default reading order</a>.</p>
+					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
+						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, authors
+						are strongly RECOMMENDED to always provide a comprehensive list of all of the Web Publication's
+						constituent resources. At a minimum, the resource list MUST include a list of all resources in the
+							<a>default reading order</a>.</p>
 
-					<p>In some cases, a comprehensive list of these resources might not be easily
-						achieved (e.g., third-party scripts that reference resources from deep
-						within their source), but a Web Publication SHOULD remain consumable even if
-						some of these resources are not identified as belonging to the Web
-						Publication (e.g., when it is taken offline without them).</p>
+					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g., third-party
+						scripts that reference resources from deep within their source), but a Web Publication SHOULD remain
+						consumable even if some of these resources are not identified as belonging to the Web Publication
+						(e.g., when it is taken offline without them).</p>
 
-					<p>If a user agent encounters a resource that it cannot locate in the resource
-						list, it MUST treat the resource as external to the Web Publication (e.g.,
-						it might alert the user before loading, open the resource in a new window,
-						or unload the current Web Publication and resume normal Web browsing).</p>
+					<p>If a user agent encounters a resource that it cannot locate in the resource list, it MUST treat the
+						resource as external to the Web Publication (e.g., it might alert the user before loading, open the
+						resource in a new window, or unload the current Web Publication and resume normal Web browsing).</p>
 
-					<p class="issue" data-number="22">The discussion led to the question whether the
-							<a>manifest</a>/<abbr title="information set">infoset</abbr> "must" list
-						all resources or not. In this sense, this became a duplicate of <a
-							href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at
-						the same question.</p>
+					<p class="issue" data-number="22">The discussion led to the question whether the <a>manifest</a>/<abbr
+							title="information set">infoset</abbr> "must" list all resources or not. In this sense, this
+						became a duplicate of <a href="https://github.com/w3c/wpub/issues/23">issue #23</a> ended up at the
+						same question.</p>
 
-					<p class="issue" data-number="23">Must the <a>manifest</a>/<abbr
-							title="information set"><a>infoset</a></abbr> list all resources or
-						not?</p>
+					<p class="issue" data-number="23">Must the <a>manifest</a>/<abbr title="information set"
+							><a>infoset</a></abbr> list all resources or not?</p>
 
-					<p class="issue" data-number="59">Must the <a>manifest</a> list resources in the
-						default reading order or can these can be inferred?</p>
+					<p class="issue" data-number="59">Must the <a>manifest</a> list resources in the default reading order or
+						can these can be inferred?</p>
 				</section>
 
 				<section id="wp-table-of-contents">
 					<h4>Table of Contents</h4>
 
-					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that
-						reflects the structural outline of the major sections of the Web
-						Publication. There are no requirements on the completeness of the table of
-						contents, except that, when specified, it MUST link to at least one <a
+					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural outline
+						of the major sections of the Web Publication. There are no requirements on the completeness of the
+						table of contents, except that, when specified, authors MUST link to at least one <a
 							href="#wp-resources">resource</a>.</p>
 
 					<p>The table of contents is either specified directly in the manifest or in an
@@ -899,9 +909,9 @@
 			<section id="wp-extensibility">
 				<h3>Extensibility</h3>
 
-				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a
-					basic set of properties for use by user agents in presenting and rendering a
-						<a>Web Publication</a>. It MAY be extended in the following ways:</p>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of properties
+					for use by user agents in presenting and rendering a <a>Web Publication</a>, but authors MAY extend it in
+					the following ways:</p>
 
 				<ol>
 					<li>through the inclusion of additional properties in the manifest;</li>
@@ -962,12 +972,11 @@
 			<section id="wp-resources">
 				<h2>Resources</h2>
 
-				<p>A <a>Web Publication</a> MUST include at least one [[!html]] document that <a
-						href="#wp-linking">links to the manifest</a>.</p>
+				<p>Authors MUST include at least one [[!html]] document that <a href="#wp-linking">links to the
+					manifest</a>.</p>
 
-				<p>There are no restrictions on a Web Publication beyond this requirement. It MAY
-					reference resources of any media type, both in the <a>default reading order</a>
-					and as dependencies of other resources.</p>
+				<p>There are no restrictions on a Web Publication beyond this requirement. Authors MAY reference resources of any
+					media type, both in the <a>default reading order</a> and as dependencies of other resources.</p>
 
 				<div class="note">
 					<p>When adding resources to a Web Publication, consider support in user agents.
@@ -1003,7 +1012,7 @@
 						>wiki analysis</a>. See <a href="https://github.com/w3c/wpub/issues/32"></a>
 					for discussion.</p>
 
-				<p>A resource SHOULD link to the Web Publication(s) to which it belongs.</p>
+				<p>Authors SHOULD link resources to the Web Publication(s) to which they belong.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a
 					future draft.</p>
@@ -1877,20 +1886,17 @@
 			<h2>Image Descriptions</h2>
 
 			<dl>
-				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">“Structure of
-						Web Publications” diagram</a>:</dt>
-				<dd>A simplified diagram of the structure of a <a>Web Publication</a>. The Web
-					Publication is broken down into two elements. The first element is the actual
-					contents (all the real things listed in the manifest). This element is broken
-					down into the CSS, the actual “things” such as the HTML, audio, etc, and the
-					images, fonts etc. The actual “things” have an additional subset of items that
-					includes the entry point to the publication and all of the other documents. The
-					second element is the Manifest (JSON). The manifest is used to generate the <a
-						href="#infoset">Information Set (“Infoset”)</a>, which consists of a list of
-					all the “things” in the publication, the publication metadata, and the default
-					reading order of content. It is noted in the diagram that the entry point has to
-					link to the manifest. (<a role="doc-backlink" href="#WP-diagram">Return to the
-						diagram</a> of Web Publication.)</dd>
+				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">“Structure of Web Publications”
+						diagram</a>:</dt>
+				<dd>A simplified diagram of the structure of a <a>Web Publication</a>. The Web Publication is broken down
+					into two elements. The first element is the actual contents (all the real things listed in the manifest).
+					This element is broken down into the CSS, the actual “things” such as the HTML, audio, etc, and the
+					images, fonts etc. The actual “things” have an additional subset of items that includes the entry point
+					to the publication and all of the other documents. The second element is the Manifest (JSON). The
+					manifest is used to generate the <a href="#infoset">Information Set (“Infoset”)</a>, which consists of a
+					list of all the “things” in the publication, the publication metadata, and the default reading order of
+					content. It is noted in the diagram that the entry point has to link to the manifest. (<a
+						role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web Publication.)</dd>
 			</dl>
 
 		</section>
