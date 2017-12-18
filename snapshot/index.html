@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US" data-vivaldi-spatnav-clickable="1"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 18.3.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 18.3.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
 div.example-title {
     min-width: 7.5em;
     color: #b9ab2d;
@@ -93,29 +93,6 @@ li.task-list-item {
 input.task-list-item-checkbox {
     margin: 0 0.35em 0.25em -1.6em;
     vertical-align: middle;
-}
-</style><style>/* --- PERMALINKS --- */
-
-.permalink {
-  width: 1px;
-  height: 1px;
-  overflow: visible;
-  font-size: 10pt;
-  font-style: normal;
-  vertical-align: middle;
-  margin-left: 4px;
-  float: right;
-}
-
-.permalink a, .permalink a:link, .permalink a:visited, .permalink a:hover, .permalink a:focus, .permalink a:active {
-  background:transparent !important;
-  text-decoration:none;
-  font-weight: bold;
-  color:#666 !important;
-}
-
-.permalink abbr {
-  border:0;
 }
 </style>
 		
@@ -458,7 +435,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     }
   ],
   "processVersion": 2017,
-  "includePermalinks": true,
+  "includePermalinks": false,
   "permalinkEdge": true,
   "permalinkHide": false,
   "diffTool": "http://www.aptest.com/standards/htmldiff/htmldiff.pl",
@@ -513,9 +490,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "rawDate": "2017-01-05",
       "status": "Recommended Specification"
     },
-    "pub-loc": {
-      "title": "Locators for Web Publications",
-      "href": "https://www.w3.org/TR/pub-loc/",
+    "wpub-ann": {
+      "title": "Web Annotation Extensions for Web Publications",
+      "href": "https://www.w3.org/TR/wpub-ann/",
       "authors": [
         "Timothy W. Cole",
         "Ivan Herman"
@@ -551,9 +528,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     <p>
       <a class="logo" href="https://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
     </p>
-  <p><!--_hyper: 1789206431;--></p>
+  <p><!--_hyper: -1118251943;--></p>
   <h1 class="title p-name" id="title">Web Publications</h1>
-  <h2 id="w3c-first-public-working-draft-04-january-2018"><abbr title="World Wide Web Consortium">W3C</abbr> First Public Working Draft <time class="dt-published" datetime="2018-01-04">04 January 2018</time><span class="permalink"><a href="#undefined" aria-label="Permalink for W3C First Public Working Draft 04 January 2018" title="Permalink for W3C First Public Working Draft 04 January 2018"><span>§</span></a></span></h2>
+  <h2 id="w3c-first-public-working-draft-04-january-2018"><abbr title="World Wide Web Consortium">W3C</abbr> First Public Working Draft <time class="dt-published" datetime="2018-01-04">04 January 2018</time></h2>
   <dl>
       <dt>This version:</dt>
       <dd><a class="u-url" href="https://www.w3.org/TR/2018/WD-wpub-20180104/">https://www.w3.org/TR/2018/WD-wpub-20180104/</a></dd>
@@ -659,12 +636,12 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
           </p>
         
 
-</section><nav id="toc" data-vivaldi-spatnav-clickable="1"><h2 class="introductory" id="table-of-contents">Table of Contents<span class="permalink"><a href="#undefined" aria-label="Permalink for Table of Contents" title="Permalink for Table of Contents"><span>§</span></a></span></h2><ol class="toc"><li class="tocline"><a href="#intro" class="tocxref"><span class="secno">1. </span>Introduction</a><ol class="toc"><li class="tocline"><a href="#why-wp" class="tocxref"><span class="secno">1.1 </span>Why Web Publications</a></li><li class="tocline"><a href="#what-is-wp" class="tocxref"><span class="secno">1.2 </span>What is a Web Publication</a></li><li class="tocline"><a href="#scope" class="tocxref"><span class="secno">1.3 </span>Scope</a></li><li class="tocline"><a href="#relationships" class="tocxref"><span class="secno">1.4 </span>Relationship to Other Specifications</a><ol class="toc"><li class="tocline"><a href="#rel-wam" class="tocxref"><span class="secno">1.4.1 </span>Web App Manifest</a></li></ol></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">1.5 </span>Terminology</a></li></ol></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a><ol class="toc"><li class="tocline"><a href="#conformance-classes" class="tocxref"><span class="secno">2.1 </span>Conformance Classes</a></li></ol></li><li class="tocline"><a href="#infoset" class="tocxref"><span class="secno">3. </span>Information Set</a><ol class="toc"><li class="tocline"><a href="#infoset-expl" class="tocxref"><span class="secno">3.1 </span>Explanation</a></li><li class="tocline"><a href="#infoset-req" class="tocxref"><span class="secno">3.2 </span>Requirements</a></li><li class="tocline"><a href="#infoset-meta" class="tocxref"><span class="secno">3.3 </span>Descriptive Properties</a><ol class="toc"><li class="tocline"><a href="#wp-a11y" class="tocxref"><span class="secno">3.3.1 </span>Accessibility</a></li><li class="tocline"><a href="#wp-address" class="tocxref"><span class="secno">3.3.2 </span>Address</a></li><li class="tocline"><a href="#wp-dir" class="tocxref"><span class="secno">3.3.3 </span>Base Direction</a></li><li class="tocline"><a href="#wp-canonical-identifier" class="tocxref"><span class="secno">3.3.4 </span>Canonical Identifier</a></li><li class="tocline"><a href="#wp-creators" class="tocxref"><span class="secno">3.3.5 </span>Creators</a></li><li class="tocline"><a href="#wp-language" class="tocxref"><span class="secno">3.3.6 </span>Language</a></li><li class="tocline"><a href="#wp-mod-date" class="tocxref"><span class="secno">3.3.7 </span>Last Modification Date</a></li><li class="tocline"><a href="#wp-pub-date" class="tocxref"><span class="secno">3.3.8 </span>Publication Date</a></li><li class="tocline"><a href="#wp-privacy" class="tocxref"><span class="secno">3.3.9 </span>Privacy Policy</a></li><li class="tocline"><a href="#wp-title" class="tocxref"><span class="secno">3.3.10 </span>Title</a></li></ol></li><li class="tocline"><a href="#infoset-structure" class="tocxref"><span class="secno">3.4 </span>Structural Properties</a><ol class="toc"><li class="tocline"><a href="#wp-default-reading-order" class="tocxref"><span class="secno">3.4.1 </span>Default Reading Order</a></li><li class="tocline"><a href="#wp-resource-list" class="tocxref"><span class="secno">3.4.2 </span>Resource List</a></li><li class="tocline"><a href="#wp-table-of-contents" class="tocxref"><span class="secno">3.4.3 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#wp-extensibility" class="tocxref"><span class="secno">3.5 </span>Extensibility</a></li></ol></li><li class="tocline"><a href="#manifest" class="tocxref"><span class="secno">4. </span>Manifest</a><ol class="toc"><li class="tocline"><a href="#manifest-intro" class="tocxref"><span class="secno">4.1 </span>Overview</a></li><li class="tocline"><a href="#manifest-req" class="tocxref"><span class="secno">4.2 </span>Requirements</a></li><li class="tocline"><a href="#manifest-declaration" class="tocxref"><span class="secno">4.3 </span>Declaration</a></li><li class="tocline"><a href="#manifest-serialization" class="tocxref"><span class="secno">4.4 </span>Serialization</a></li></ol></li><li class="tocline"><a href="#wp-construction" class="tocxref"><span class="secno">5. </span>Web Publication Construction</a><ol class="toc"><li class="tocline"><a href="#wp-resources" class="tocxref"><span class="secno">5.1 </span>Resources</a></li><li class="tocline"><a href="#wp-linking" class="tocxref"><span class="secno">5.2 </span>Linking to a Manifest</a></li></ol></li><li class="tocline"><a href="#wp-lifecycle" class="tocxref"><span class="secno">6. </span>Web Publication Lifecycle</a></li><li class="tocline"><a href="#wp-enhancements" class="tocxref"><span class="secno">7. </span>Reading Enhancements</a><ol class="toc"><li class="tocline"><a href="#layout" class="tocxref"><span class="secno">7.1 </span>Layout</a><ol class="toc"><li class="tocline"><a href="#scrolling-or-paginating" class="tocxref"><span class="secno">7.1.1 </span>Scrolling or Paginating</a></li><li class="tocline"><a href="#enh-pagination" class="tocxref"><span class="secno">7.1.2 </span>Paginated Layout</a></li></ol></li><li class="tocline"><a href="#enh-nav" class="tocxref"><span class="secno">7.2 </span>Navigation</a><ol class="toc"><li class="tocline"><a href="#enh-reading-order" class="tocxref"><span class="secno">7.2.1 </span>Reading Order</a></li><li class="tocline"><a href="#enh-toc" class="tocxref"><span class="secno">7.2.2 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#enh-offline-reading" class="tocxref"><span class="secno">7.3 </span>Offline Reading</a></li><li class="tocline"><a href="#enh-search" class="tocxref"><span class="secno">7.4 </span>Search</a></li></ol></li><li class="tocline"><a href="#locators" class="tocxref"><span class="secno">8. </span>Web Publication Locators</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">9. </span>Security</a></li><li class="tocline"><a href="#privacy" class="tocxref"><span class="secno">10. </span>Privacy</a></li><li class="tocline"><a href="#image-descriptions" class="tocxref"><span class="secno">A. </span>Image Descriptions</a></li><li class="tocline"><a href="#ack" class="tocxref"><span class="secno">B. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">C. </span>References</a><ol class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">C.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">C.2 </span>Informative references</a></li></ol></li></ol></nav>
+</section><nav id="toc" data-vivaldi-spatnav-clickable="1"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a href="#intro" class="tocxref"><span class="secno">1. </span>Introduction</a><ol class="toc"><li class="tocline"><a href="#why-wp" class="tocxref"><span class="secno">1.1 </span>Why Web Publications</a></li><li class="tocline"><a href="#what-is-wp" class="tocxref"><span class="secno">1.2 </span>What is a Web Publication</a></li><li class="tocline"><a href="#scope" class="tocxref"><span class="secno">1.3 </span>Scope</a></li><li class="tocline"><a href="#relationships" class="tocxref"><span class="secno">1.4 </span>Relationship to Other Specifications</a><ol class="toc"><li class="tocline"><a href="#rel-wam" class="tocxref"><span class="secno">1.4.1 </span>Web App Manifest</a></li></ol></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">1.5 </span>Terminology</a></li></ol></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a><ol class="toc"><li class="tocline"><a href="#conformance-classes" class="tocxref"><span class="secno">2.1 </span>Conformance Classes</a></li></ol></li><li class="tocline"><a href="#infoset" class="tocxref"><span class="secno">3. </span>Information Set</a><ol class="toc"><li class="tocline"><a href="#infoset-expl" class="tocxref"><span class="secno">3.1 </span>Explanation</a></li><li class="tocline"><a href="#infoset-req" class="tocxref"><span class="secno">3.2 </span>Requirements</a></li><li class="tocline"><a href="#infoset-meta" class="tocxref"><span class="secno">3.3 </span>Descriptive Properties</a><ol class="toc"><li class="tocline"><a href="#wp-a11y" class="tocxref"><span class="secno">3.3.1 </span>Accessibility</a></li><li class="tocline"><a href="#wp-address" class="tocxref"><span class="secno">3.3.2 </span>Address</a></li><li class="tocline"><a href="#wp-dir" class="tocxref"><span class="secno">3.3.3 </span>Base Direction</a></li><li class="tocline"><a href="#wp-canonical-identifier" class="tocxref"><span class="secno">3.3.4 </span>Canonical Identifier</a></li><li class="tocline"><a href="#wp-creators" class="tocxref"><span class="secno">3.3.5 </span>Creators</a></li><li class="tocline"><a href="#wp-language" class="tocxref"><span class="secno">3.3.6 </span>Language</a></li><li class="tocline"><a href="#wp-mod-date" class="tocxref"><span class="secno">3.3.7 </span>Last Modification Date</a></li><li class="tocline"><a href="#wp-pub-date" class="tocxref"><span class="secno">3.3.8 </span>Publication Date</a></li><li class="tocline"><a href="#wp-privacy" class="tocxref"><span class="secno">3.3.9 </span>Privacy Policy</a></li><li class="tocline"><a href="#wp-title" class="tocxref"><span class="secno">3.3.10 </span>Title</a></li></ol></li><li class="tocline"><a href="#infoset-structure" class="tocxref"><span class="secno">3.4 </span>Structural Properties</a><ol class="toc"><li class="tocline"><a href="#wp-default-reading-order" class="tocxref"><span class="secno">3.4.1 </span>Default Reading Order</a></li><li class="tocline"><a href="#wp-resource-list" class="tocxref"><span class="secno">3.4.2 </span>Resource List</a></li><li class="tocline"><a href="#wp-table-of-contents" class="tocxref"><span class="secno">3.4.3 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#wp-extensibility" class="tocxref"><span class="secno">3.5 </span>Extensibility</a></li></ol></li><li class="tocline"><a href="#manifest" class="tocxref"><span class="secno">4. </span>Manifest</a><ol class="toc"><li class="tocline"><a href="#manifest-intro" class="tocxref"><span class="secno">4.1 </span>Overview</a></li><li class="tocline"><a href="#manifest-req" class="tocxref"><span class="secno">4.2 </span>Requirements</a></li><li class="tocline"><a href="#manifest-declaration" class="tocxref"><span class="secno">4.3 </span>Declaration</a></li><li class="tocline"><a href="#manifest-serialization" class="tocxref"><span class="secno">4.4 </span>Serialization</a></li></ol></li><li class="tocline"><a href="#wp-construction" class="tocxref"><span class="secno">5. </span>Web Publication Construction</a><ol class="toc"><li class="tocline"><a href="#wp-resources" class="tocxref"><span class="secno">5.1 </span>Resources</a></li><li class="tocline"><a href="#wp-linking" class="tocxref"><span class="secno">5.2 </span>Linking to a Manifest</a></li></ol></li><li class="tocline"><a href="#wp-lifecycle" class="tocxref"><span class="secno">6. </span>Web Publication Lifecycle</a></li><li class="tocline"><a href="#wp-enhancements" class="tocxref"><span class="secno">7. </span>Reading Enhancements</a><ol class="toc"><li class="tocline"><a href="#layout" class="tocxref"><span class="secno">7.1 </span>Layout</a><ol class="toc"><li class="tocline"><a href="#scrolling-or-paginating" class="tocxref"><span class="secno">7.1.1 </span>Scrolling or Paginating</a></li><li class="tocline"><a href="#enh-pagination" class="tocxref"><span class="secno">7.1.2 </span>Paginated Layout</a></li></ol></li><li class="tocline"><a href="#enh-nav" class="tocxref"><span class="secno">7.2 </span>Navigation</a><ol class="toc"><li class="tocline"><a href="#enh-reading-order" class="tocxref"><span class="secno">7.2.1 </span>Reading Order</a></li><li class="tocline"><a href="#enh-toc" class="tocxref"><span class="secno">7.2.2 </span>Table of Contents</a></li></ol></li><li class="tocline"><a href="#enh-offline-reading" class="tocxref"><span class="secno">7.3 </span>Offline Reading</a></li><li class="tocline"><a href="#enh-search" class="tocxref"><span class="secno">7.4 </span>Search</a></li></ol></li><li class="tocline"><a href="#locators" class="tocxref"><span class="secno">8. </span>Web Publication Locators</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">9. </span>Security</a></li><li class="tocline"><a href="#privacy" class="tocxref"><span class="secno">10. </span>Privacy</a></li><li class="tocline"><a href="#image-descriptions" class="tocxref"><span class="secno">A. </span>Image Descriptions</a></li><li class="tocline"><a href="#ack" class="tocxref"><span class="secno">B. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">C. </span>References</a><ol class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">C.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">C.2 </span>Informative references</a></li></ol></li></ol></nav>
 		<section id="intro">
-			<!--OddPage--><h2 id="x1-introduction"><span class="secno">1. </span>Introduction<span class="permalink"><a href="#intro" aria-label="Permalink for 1. Introduction" title="Permalink for 1. Introduction"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x1-introduction"><span class="secno">1. </span>Introduction</h2>
 
 			<section id="why-wp" class="informative">
-				<h3 id="x1-1-why-web-publications"><span class="secno">1.1 </span>Why Web Publications<span class="permalink"><a href="#why-wp" aria-label="Permalink for 1.1 Why Web Publications" title="Permalink for 1.1 Why Web Publications"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+				<h3 id="x1-1-why-web-publications"><span class="secno">1.1 </span>Why Web Publications</h3><p><em>This section is non-normative.</em></p>
 
 				<p>The Web is a lonely place. It is unbounded: resources live out their lives on remote servers scattered
 					across the globe, only reachable by addresses sometimes known to only a few people. But life on the Web
@@ -706,7 +683,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="what-is-wp" class="informative">
-				<h3 id="x1-2-what-is-a-web-publication"><span class="secno">1.2 </span>What is a Web Publication<span class="permalink"><a href="#what-is-wp" aria-label="Permalink for 1.2 What is a Web Publication" title="Permalink for 1.2 What is a Web Publication"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+				<h3 id="x1-2-what-is-a-web-publication"><span class="secno">1.2 </span>What is a Web Publication</h3><p><em>This section is non-normative.</em></p>
 
 				<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> is a discoverable and identifiable collection of resources. Information about the
 					Web Publication is expressed in a machine-readable document called a <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a>, which is what
@@ -734,7 +711,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="scope" class="informative">
-				<h3 id="x1-3-scope"><span class="secno">1.3 </span>Scope<span class="permalink"><a href="#scope" aria-label="Permalink for 1.3 Scope" title="Permalink for 1.3 Scope"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+				<h3 id="x1-3-scope"><span class="secno">1.3 </span>Scope</h3><p><em>This section is non-normative.</em></p>
 
 				<p>This specification only defines requirements for the production and rendering of valid <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web
 						Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
@@ -759,10 +736,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="relationships">
-				<h3 id="x1-4-relationship-to-other-specifications"><span class="secno">1.4 </span>Relationship to Other Specifications<span class="permalink"><a href="#relationships" aria-label="Permalink for 1.4 Relationship to Other Specifications" title="Permalink for 1.4 Relationship to Other Specifications"><span>§</span></a></span></h3>
+				<h3 id="x1-4-relationship-to-other-specifications"><span class="secno">1.4 </span>Relationship to Other Specifications</h3>
 
 				<section id="rel-wam">
-					<h4 id="x1-4-1-web-app-manifest"><span class="secno">1.4.1 </span>Web App Manifest<span class="permalink"><a href="#rel-wam" aria-label="Permalink for 1.4.1 Web App Manifest" title="Permalink for 1.4.1 Web App Manifest"><span>§</span></a></span></h4>
+					<h4 id="x1-4-1-web-app-manifest"><span class="secno">1.4.1 </span>Web App Manifest</h4>
 
 					<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote" aria-level="5"><span>Editor's note</span></div><div class="">
 						<p>The working group is investigating integration with the work done on [<cite><a class="bibref" href="#bib-appmanifest">appmanifest</a></cite>] to avoid
@@ -805,7 +782,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="terminology">
-				<h3 id="x1-5-terminology"><span class="secno">1.5 </span>Terminology<span class="permalink"><a href="#terminology" aria-label="Permalink for 1.5 Terminology" title="Permalink for 1.5 Terminology"><span>§</span></a></span></h3>
+				<h3 id="x1-5-terminology"><span class="secno">1.5 </span>Terminology</h3>
 
 				<p>Wherever appropriate, this document relies on terminology defined by the <abbr title="World Wide Web Consortium">W3C</abbr> Note "Publishing and Linking
 					on the Web" [<cite><a class="bibref" href="#bib-publishing-linking">publishing-linking</a></cite>], including, in particular, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user">user</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-user-agent">user agent</a>, <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-browser">browser</a>, and <a class="externalDFN" href="https://www.w3.org/TR/publishing-linking/#dfn-address">address</a>.</p>
@@ -851,7 +828,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</dl>
 			</section>
 		</section>
-		<section id="conformance"><!--OddPage--><h2 id="x2-conformance"><span class="secno">2. </span>Conformance<span class="permalink"><a href="#conformance" aria-label="Permalink for 2. Conformance" title="Permalink for 2. Conformance"><span>§</span></a></span></h2>
+		<section id="conformance"><!--OddPage--><h2 id="x2-conformance"><span class="secno">2. </span>Conformance</h2>
 <p>
   As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
   and notes in this specification are non-normative. Everything else in this specification is
@@ -862,7 +839,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 </p>
 
 			<section id="conformance-classes">
-				<h3 id="x2-1-conformance-classes"><span class="secno">2.1 </span>Conformance Classes<span class="permalink"><a href="#conformance-classes" aria-label="Permalink for 2.1 Conformance Classes" title="Permalink for 2.1 Conformance Classes"><span>§</span></a></span></h3>
+				<h3 id="x2-1-conformance-classes"><span class="secno">2.1 </span>Conformance Classes</h3>
 
 				<p>This specification defines two conformance classes: one for <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> and one for user
 					agents that process them.</p>
@@ -883,7 +860,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 		</section>
 		<section id="infoset">
-			<!--OddPage--><h2 id="x3-information-set"><span class="secno">3. </span>Information Set<span class="permalink"><a href="#infoset" aria-label="Permalink for 3. Information Set" title="Permalink for 3. Information Set"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x3-information-set"><span class="secno">3. </span>Information Set</h2>
 
 			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-0" aria-level="3"><span>Editor's note</span></div><p class="">As the serialization of the manifest remains an open issue, specifics about how properties are
 				compiled into the <abbr title="information set">infoset</abbr> remain unspecified. This includes, but is not
@@ -895,7 +872,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				fully capture the nature or purpose of the collected information.</p></div>
 
 			<section id="infoset-expl" class="informative">
-				<h3 id="x3-1-explanation"><span class="secno">3.1 </span>Explanation<span class="permalink"><a href="#infoset-expl" aria-label="Permalink for 3.1 Explanation" title="Permalink for 3.1 Explanation"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+				<h3 id="x3-1-explanation"><span class="secno">3.1 </span>Explanation</h3><p><em>This section is non-normative.</em></p>
 
 				<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset|information set" data-dfn-type="dfn" id="dfn-infoset">information
 						set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr title="information set">infoset</abbr> is logically divided into two sets of properties: those that describe the publication
@@ -914,7 +891,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="infoset-req">
-				<h3 id="x3-2-requirements"><span class="secno">3.2 </span>Requirements<span class="permalink"><a href="#infoset-req" aria-label="Permalink for 3.2 Requirements" title="Permalink for 3.2 Requirements"><span>§</span></a></span></h3>
+				<h3 id="x3-2-requirements"><span class="secno">3.2 </span>Requirements</h3>
 
 				<p>The requirements for the expression of <abbr title="information set"><a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a></abbr> properties are
 					as follows:</p>
@@ -954,10 +931,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="infoset-meta">
-				<h3 id="x3-3-descriptive-properties"><span class="secno">3.3 </span>Descriptive Properties<span class="permalink"><a href="#infoset-meta" aria-label="Permalink for 3.3 Descriptive Properties" title="Permalink for 3.3 Descriptive Properties"><span>§</span></a></span></h3>
+				<h3 id="x3-3-descriptive-properties"><span class="secno">3.3 </span>Descriptive Properties</h3>
 
 				<section id="wp-a11y">
-					<h4 id="x3-3-1-accessibility"><span class="secno">3.3.1 </span>Accessibility<span class="permalink"><a href="#wp-a11y" aria-label="Permalink for 3.3.1 Accessibility" title="Permalink for 3.3.1 Accessibility"><span>§</span></a></span></h4>
+					<h4 id="x3-3-1-accessibility"><span class="secno">3.3.1 </span>Accessibility</h4>
 
 					<p>Accessibility metadata allows the discovery of features and affordances of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
 						that enable its use by users with different reading requirements and needs.</p>
@@ -968,7 +945,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-address">
-					<h4 id="x3-3-2-address"><span class="secno">3.3.2 </span>Address<span class="permalink"><a href="#wp-address" aria-label="Permalink for 3.3.2 Address" title="Permalink for 3.3.2 Address"><span>§</span></a></span></h4>
+					<h4 id="x3-3-2-address"><span class="secno">3.3.2 </span>Address</h4>
 
 					<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
 						<dfn data-dfn-type="dfn" id="dfn-address">address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr> that represents the primary
@@ -1004,7 +981,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-dir">
-					<h4 id="x3-3-3-base-direction"><span class="secno">3.3.3 </span>Base Direction<span class="permalink"><a href="#wp-dir" aria-label="Permalink for 3.3.3 Base Direction" title="Permalink for 3.3.3 Base Direction"><span>§</span></a></span></h4>
+					<h4 id="x3-3-3-base-direction"><span class="secno">3.3.3 </span>Base Direction</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-base-direction">base direction</dfn> identifies the display direction for <abbr title="information set"><a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a></abbr> properties.</p>
 
@@ -1026,7 +1003,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-canonical-identifier">
-					<h4 id="x3-3-4-canonical-identifier"><span class="secno">3.3.4 </span>Canonical Identifier<span class="permalink"><a href="#wp-canonical-identifier" aria-label="Permalink for 3.3.4 Canonical Identifier" title="Permalink for 3.3.4 Canonical Identifier"><span>§</span></a></span></h4>
+					<h4 id="x3-3-4-canonical-identifier"><span class="secno">3.3.4 </span>Canonical Identifier</h4>
 
 					<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
 						<dfn data-dfn-type="dfn" id="dfn-canonical-identifier">canonical identifier</dfn> is a unique identifier that resolves to the preferred version of the
@@ -1057,7 +1034,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-creators">
-					<h4 id="x3-3-5-creators"><span class="secno">3.3.5 </span>Creators<span class="permalink"><a href="#wp-creators" aria-label="Permalink for 3.3.5 Creators" title="Permalink for 3.3.5 Creators"><span>§</span></a></span></h4>
+					<h4 id="x3-3-5-creators"><span class="secno">3.3.5 </span>Creators</h4>
 
 					<p>Creators are the individuals or entities responsible for the creation of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web
 						Publication</a>.</p>
@@ -1067,7 +1044,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-language">
-					<h4 id="x3-3-6-language"><span class="secno">3.3.6 </span>Language<span class="permalink"><a href="#wp-language" aria-label="Permalink for 3.3.6 Language" title="Permalink for 3.3.6 Language"><span>§</span></a></span></h4>
+					<h4 id="x3-3-6-language"><span class="secno">3.3.6 </span>Language</h4>
 
 					<p>The language specified in the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
 						<abbr title="information set"><a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a></abbr> identifies the natural language of its
@@ -1098,7 +1075,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-mod-date">
-					<h4 id="x3-3-7-last-modification-date"><span class="secno">3.3.7 </span>Last Modification Date<span class="permalink"><a href="#wp-mod-date" aria-label="Permalink for 3.3.7 Last Modification Date" title="Permalink for 3.3.7 Last Modification Date"><span>§</span></a></span></h4>
+					<h4 id="x3-3-7-last-modification-date"><span class="secno">3.3.7 </span>Last Modification Date</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-last-modification-date">last modification date</dfn> is the date when the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> was last
 						updated.</p>
@@ -1109,7 +1086,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-pub-date">
-					<h4 id="x3-3-8-publication-date"><span class="secno">3.3.8 </span>Publication Date<span class="permalink"><a href="#wp-pub-date" aria-label="Permalink for 3.3.8 Publication Date" title="Permalink for 3.3.8 Publication Date"><span>§</span></a></span></h4>
+					<h4 id="x3-3-8-publication-date"><span class="secno">3.3.8 </span>Publication Date</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-publication-date">publication date</dfn> is the date on which the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> was originally
 						published. It represents a static event in the lifecycle of a Web Publication and allows subsequent
@@ -1121,7 +1098,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-privacy">
-					<h4 id="x3-3-9-privacy-policy"><span class="secno">3.3.9 </span>Privacy Policy<span class="permalink"><a href="#wp-privacy" aria-label="Permalink for 3.3.9 Privacy Policy" title="Permalink for 3.3.9 Privacy Policy"><span>§</span></a></span></h4>
+					<h4 id="x3-3-9-privacy-policy"><span class="secno">3.3.9 </span>Privacy Policy</h4>
 
 					<p>Users often have the legal right to know and control what information is collected about them, how
 						such information is stored and for how long, whether it is personally identifiable, and how it can be
@@ -1138,7 +1115,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-title">
-					<h4 id="x3-3-10-title"><span class="secno">3.3.10 </span>Title<span class="permalink"><a href="#wp-title" aria-label="Permalink for 3.3.10 Title" title="Permalink for 3.3.10 Title"><span>§</span></a></span></h4>
+					<h4 id="x3-3-10-title"><span class="secno">3.3.10 </span>Title</h4>
 
 					<p>The title provides the human-readable name of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>.</p>
 
@@ -1163,10 +1140,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="infoset-structure">
-				<h3 id="x3-4-structural-properties"><span class="secno">3.4 </span>Structural Properties<span class="permalink"><a href="#infoset-structure" aria-label="Permalink for 3.4 Structural Properties" title="Permalink for 3.4 Structural Properties"><span>§</span></a></span></h3>
+				<h3 id="x3-4-structural-properties"><span class="secno">3.4 </span>Structural Properties</h3>
 
 				<section id="wp-default-reading-order">
-					<h4 id="x3-4-1-default-reading-order"><span class="secno">3.4.1 </span>Default Reading Order<span class="permalink"><a href="#wp-default-reading-order" aria-label="Permalink for 3.4.1 Default Reading Order" title="Permalink for 3.4.1 Default Reading Order"><span>§</span></a></span></h4>
+					<h4 id="x3-4-1-default-reading-order"><span class="secno">3.4.1 </span>Default Reading Order</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-default-reading-order">default reading order</dfn> is a specific progression through a set of <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
 						resources.</p>
@@ -1207,7 +1184,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-resource-list">
-					<h4 id="x3-4-2-resource-list"><span class="secno">3.4.2 </span>Resource List<span class="permalink"><a href="#wp-resource-list" aria-label="Permalink for 3.4.2 Resource List" title="Permalink for 3.4.2 Resource List"><span>§</span></a></span></h4>
+					<h4 id="x3-4-2-resource-list"><span class="secno">3.4.2 </span>Resource List</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-resource-list">resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used in the
 						processing and rendering of a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> (i.e., that are within its bounds). This list is
@@ -1240,7 +1217,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="wp-table-of-contents">
-					<h4 id="x3-4-3-table-of-contents"><span class="secno">3.4.3 </span>Table of Contents<span class="permalink"><a href="#wp-table-of-contents" aria-label="Permalink for 3.4.3 Table of Contents" title="Permalink for 3.4.3 Table of Contents"><span>§</span></a></span></h4>
+					<h4 id="x3-4-3-table-of-contents"><span class="secno">3.4.3 </span>Table of Contents</h4>
 
 					<p>The <dfn data-dfn-type="dfn" id="dfn-table-of-contents">table of contents</dfn> is a hierarchical list of links that reflects the structural outline
 						of the major sections of the Web Publication. There are no requirements on the completeness of the
@@ -1285,7 +1262,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="wp-extensibility">
-				<h3 id="x3-5-extensibility"><span class="secno">3.5 </span>Extensibility<span class="permalink"><a href="#wp-extensibility" aria-label="Permalink for 3.5 Extensibility" title="Permalink for 3.5 Extensibility"><span>§</span></a></span></h3>
+				<h3 id="x3-5-extensibility"><span class="secno">3.5 </span>Extensibility</h3>
 
 				<p>The <abbr title="information set"><a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a></abbr> is designed to provide a basic set of properties
 					for use by user agents in presenting and rendering a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>. It <em class="rfc2119" title="MAY">MAY</em> be extended in the
@@ -1301,17 +1278,17 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 		</section>
 		<section id="manifest">
-			<!--OddPage--><h2 id="x4-manifest"><span class="secno">4. </span>Manifest<span class="permalink"><a href="#manifest" aria-label="Permalink for 4. Manifest" title="Permalink for 4. Manifest"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x4-manifest"><span class="secno">4. </span>Manifest</h2>
 
 			<section id="manifest-intro" class="informative">
-				<h3 id="x4-1-overview"><span class="secno">4.1 </span>Overview<span class="permalink"><a href="#manifest-intro" aria-label="Permalink for 4.1 Overview" title="Permalink for 4.1 Overview"><span>§</span></a></span></h3><p><em>This section is non-normative.</em></p>
+				<h3 id="x4-1-overview"><span class="secno">4.1 </span>Overview</h3><p><em>This section is non-normative.</em></p>
 
 				<p>A <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> is a specific serialization of a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication's</a>
 					<abbr title="information set"><a href="#dfn-infoset" class="internalDFN" data-link-type="dfn">infoset</a></abbr>.</p>
 			</section>
 
 			<section id="manifest-req">
-				<h3 id="x4-2-requirements"><span class="secno">4.2 </span>Requirements<span class="permalink"><a href="#manifest-req" aria-label="Permalink for 4.2 Requirements" title="Permalink for 4.2 Requirements"><span>§</span></a></span></h3>
+				<h3 id="x4-2-requirements"><span class="secno">4.2 </span>Requirements</h3>
 
 				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
 
@@ -1322,7 +1299,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="manifest-declaration">
-				<h3 id="x4-3-declaration"><span class="secno">4.3 </span>Declaration<span class="permalink"><a href="#manifest-declaration" aria-label="Permalink for 4.3 Declaration" title="Permalink for 4.3 Declaration"><span>§</span></a></span></h3>
+				<h3 id="x4-3-declaration"><span class="secno">4.3 </span>Declaration</h3>
 
 				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-3" aria-level="4"><span>Editor's note</span></div><div class="">A description of how a <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> declares it describes a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
 					will be included in a future draft, as such a mechanism will depend on integration with
@@ -1330,7 +1307,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="manifest-serialization">
-				<h3 id="x4-4-serialization"><span class="secno">4.4 </span>Serialization<span class="permalink"><a href="#manifest-serialization" aria-label="Permalink for 4.4 Serialization" title="Permalink for 4.4 Serialization"><span>§</span></a></span></h3>
+				<h3 id="x4-4-serialization"><span class="secno">4.4 </span>Serialization</h3>
 
 				<p>The manifest is serialized as a <abbr title="JavaScript Object Notation">JSON</abbr> document [<cite><a class="bibref" href="#bib-ecma-404">ecma-404</a></cite>].</p>
 
@@ -1342,10 +1319,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 		</section>
 		<section id="wp-construction">
-			<!--OddPage--><h2 id="x5-web-publication-construction"><span class="secno">5. </span>Web Publication Construction<span class="permalink"><a href="#wp-construction" aria-label="Permalink for 5. Web Publication Construction" title="Permalink for 5. Web Publication Construction"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x5-web-publication-construction"><span class="secno">5. </span>Web Publication Construction</h2>
 
 			<section id="wp-resources">
-				<h3 id="x5-1-resources"><span class="secno">5.1 </span>Resources<span class="permalink"><a href="#wp-resources" aria-label="Permalink for 5.1 Resources" title="Permalink for 5.1 Resources"><span>§</span></a></span></h3>
+				<h3 id="x5-1-resources"><span class="secno">5.1 </span>Resources</h3>
 
 				<p>A <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> <em class="rfc2119" title="MUST">MUST</em> include at least one [<cite><a class="bibref" href="#bib-html">html</a></cite>] document that <a href="#wp-linking">links to
 						the manifest</a>.</p>
@@ -1361,7 +1338,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="wp-linking">
-				<h3 id="x5-2-linking-to-a-manifest"><span class="secno">5.2 </span>Linking to a Manifest<span class="permalink"><a href="#wp-linking" aria-label="Permalink for 5.2 Linking to a Manifest" title="Permalink for 5.2 Linking to a Manifest"><span>§</span></a></span></h3>
+				<h3 id="x5-2-linking-to-a-manifest"><span class="secno">5.2 </span>Linking to a Manifest</h3>
 
 				<p>Providing a link from a resource to the <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> of the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> it belongs to allows
 					a user agent to discover that a Web Publication is available. Links <em class="rfc2119" title="MUST">MUST</em> take one or both of the
@@ -1398,7 +1375,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
-			<!--OddPage--><h2 id="x6-web-publication-lifecycle"><span class="secno">6. </span>Web Publication Lifecycle<span class="permalink"><a href="#wp-lifecycle" aria-label="Permalink for 6. Web Publication Lifecycle" title="Permalink for 6. Web Publication Lifecycle"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x6-web-publication-lifecycle"><span class="secno">6. </span>Web Publication Lifecycle</h2>
 
 			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-6" aria-level="3"><span>Editor's note</span></div><div class="">
 				<p>The publishing working group is currently evaluating the best approach for implementing <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web
@@ -1461,14 +1438,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</div></div>
 		</section>
 		<section id="wp-enhancements">
-			<!--OddPage--><h2 id="x7-reading-enhancements"><span class="secno">7. </span>Reading Enhancements<span class="permalink"><a href="#wp-enhancements" aria-label="Permalink for 7. Reading Enhancements" title="Permalink for 7. Reading Enhancements"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x7-reading-enhancements"><span class="secno">7. </span>Reading Enhancements</h2>
 
 			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-7" aria-level="3"><span>Editor's note</span></div><p class="">This section contains placeholders for possible reading enhancements/affordances the user agent
 				may/should/must provide. The list is subject to addition, modification and removal as the enhancements get
 				discussed in more detail.</p></div>
 
 			<section id="layout">
-				<h3 id="x7-1-layout"><span class="secno">7.1 </span>Layout<span class="permalink"><a href="#layout" aria-label="Permalink for 7.1 Layout" title="Permalink for 7.1 Layout"><span>§</span></a></span></h3>
+				<h3 id="x7-1-layout"><span class="secno">7.1 </span>Layout</h3>
 
 				<p>The layout and rendering of <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> is governed by the same rules that apply to all Web
 					content: [<cite><a class="bibref" href="#bib-html">html</a></cite>] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [<cite><a class="bibref" href="#bib-svg">svg</a></cite>]
@@ -1505,7 +1482,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</div></div>
 
 				<section id="scrolling-or-paginating" class="informative">
-					<h4 id="x7-1-1-scrolling-or-paginating"><span class="secno">7.1.1 </span>Scrolling or Paginating<span class="permalink"><a href="#scrolling-or-paginating" aria-label="Permalink for 7.1.1 Scrolling or Paginating" title="Permalink for 7.1.1 Scrolling or Paginating"><span>§</span></a></span></h4><p><em>This section is non-normative.</em></p>
+					<h4 id="x7-1-1-scrolling-or-paginating"><span class="secno">7.1.1 </span>Scrolling or Paginating</h4><p><em>This section is non-normative.</em></p>
 
 					<p>Publications have historically been presented via paged media, whereas Web pages almost always scroll.
 						As the preferences of individual readers vary, and as different types of publications are better
@@ -1521,7 +1498,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 					</div></div>
 				</section>
 				<section id="enh-pagination">
-					<h4 id="x7-1-2-paginated-layout"><span class="secno">7.1.2 </span>Paginated Layout<span class="permalink"><a href="#enh-pagination" aria-label="Permalink for 7.1.2 Paginated Layout" title="Permalink for 7.1.2 Paginated Layout"><span>§</span></a></span></h4>
+					<h4 id="x7-1-2-paginated-layout"><span class="secno">7.1.2 </span>Paginated Layout</h4>
 
 					<p>When a user agent renders a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> in a paginated layout, it <em class="rfc2119" title="MUST">MUST</em> lay out each
 						document in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading order</a> sequentially, with the last page of a resource being
@@ -1562,13 +1539,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="enh-nav">
-				<h3 id="x7-2-navigation"><span class="secno">7.2 </span>Navigation<span class="permalink"><a href="#enh-nav" aria-label="Permalink for 7.2 Navigation" title="Permalink for 7.2 Navigation"><span>§</span></a></span></h3>
+				<h3 id="x7-2-navigation"><span class="secno">7.2 </span>Navigation</h3>
 
 				<div class="issue" id="issue-86"><div role="heading" class="issue-title marker" id="h-issue-22" aria-level="4"><a href="https://github.com/w3c/wpub/issues/86"><span>Issue 86</span></a><span style="text-transform: none">: Accessibility requirements for navigation</span></div><p>The following wiki describes accessibility requirements for navigation from user perspective, and provides clarifications for some related concepts discussed in the group.<br>
 <a href="https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP">https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP</a></p></div>
 
 				<section id="enh-reading-order">
-					<h4 id="x7-2-1-reading-order"><span class="secno">7.2.1 </span>Reading Order<span class="permalink"><a href="#enh-reading-order" aria-label="Permalink for 7.2.1 Reading Order" title="Permalink for 7.2.1 Reading Order"><span>§</span></a></span></h4>
+					<h4 id="x7-2-1-reading-order"><span class="secno">7.2.1 </span>Reading Order</h4>
 
 					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach
 						the end of one resource, they have to activate a hyperlink to move to the next resource in the
@@ -1585,7 +1562,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				</section>
 
 				<section id="enh-toc">
-					<h4 id="x7-2-2-table-of-contents"><span class="secno">7.2.2 </span>Table of Contents<span class="permalink"><a href="#enh-toc" aria-label="Permalink for 7.2.2 Table of Contents" title="Permalink for 7.2.2 Table of Contents"><span>§</span></a></span></h4>
+					<h4 id="x7-2-2-table-of-contents"><span class="secno">7.2.2 </span>Table of Contents</h4>
 
 					<p>The table of contents is one of the key aids to navigating a publication, as it enables users to
 						quickly move to the start of major sections. It is also a useful aid in understanding the overall
@@ -1602,20 +1579,24 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</section>
 
 			<section id="enh-offline-reading">
-				<h3 id="x7-3-offline-reading"><span class="secno">7.3 </span>Offline Reading<span class="permalink"><a href="#enh-offline-reading" aria-label="Permalink for 7.3 Offline Reading" title="Permalink for 7.3 Offline Reading"><span>§</span></a></span></h3>
+				<h3 id="x7-3-offline-reading"><span class="secno">7.3 </span>Offline Reading</h3>
 
 				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-9" aria-level="4"><span>Editor's note</span></div><p class="">Detail on offline caching and reading will be included in a future draft.</p></div>
 			</section>
 
 			<section id="enh-search">
-				<h3 id="x7-4-search"><span class="secno">7.4 </span>Search<span class="permalink"><a href="#enh-search" aria-label="Permalink for 7.4 Search" title="Permalink for 7.4 Search"><span>§</span></a></span></h3>
+				<h3 id="x7-4-search"><span class="secno">7.4 </span>Search</h3>
 
 				<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-10" aria-level="4"><span>Editor's note</span></div><p class="">Detail on inter-publication search across multiple resources will be included in a future
 					draft.</p></div>
 			</section>
 		</section>
 		<section id="locators" class="informative">
-			<!--OddPage--><h2 id="x8-web-publication-locators"><span class="secno">8. </span>Web Publication Locators<span class="permalink"><a href="#locators" aria-label="Permalink for 8. Web Publication Locators" title="Permalink for 8. Web Publication Locators"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
+			<!--OddPage--><h2 id="x8-web-publication-locators"><span class="secno">8. </span>Web Publication Locators</h2><p><em>This section is non-normative.</em></p>
+
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-11" aria-level="3"><span>Editor's note</span></div><p class="">
+				The document referred from this section, i.e., Web Annotation Extensions for Web Publications&nbsp;[<cite><a class="bibref" href="#bib-wpub-ann">wpub-ann</a></cite>], has been recently renamed. Its previous was "Locators for Web Publication". The terminology used in this section has to be realigned with the name change.
+			</p></div>
 
 			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
 					<a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publications</a> (e.g., for address(es), bookmarks, and annotations). Locators traditionally take
@@ -1625,19 +1606,19 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			<p>For some use cases, it is essential to identify and reference a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a> resource—or a location
 				in or a segment of a resource—in the scope or context of the Web Publication to which it belongs. A
 				traditional fragment identifier cannot satisfy this requirement, since only the <abbr title="Uniform Resource Locator">URL</abbr> of the constituent resource containing the location or
-				content fragment of interest is expressed. Web Publication Locators [<cite><a class="bibref" href="#bib-pub-loc">pub-loc</a></cite>] address this issue by
+				content fragment of interest is expressed. The Web Annotation Extensions for Web Publications&nbsp;[<cite><a class="bibref" href="#bib-wpub-ann">wpub-ann</a></cite>] document, based on the Web Annotation Model&nbsp;[<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>], addresses this issue by
 				providing the means to express both the <abbr title="Uniform Resource Locator">URL</abbr> of the resource and
 				the <abbr title="Uniform Resource Locator">URL</abbr> of the Web Publication.</p>
 
 			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored with
 				such a need in mind. A fragment identifier can only reference elements with explicit identifiers and
-				locations with explicit anchor points. Web Publication locators include a variety of selectors that work with
+				locations with explicit anchor points. Web Publication Locators include a variety of selectors that work with
 				the general structures and content of a resource (e.g., text selectors, <abbr title="Cascading Style Sheets">CSS</abbr> selectors).</p>
 
-			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-11" aria-level="3"><span>Editor's note</span></div><p class="">As Web Publication Locators currently rely on a <abbr title="JavaScript Object Notation">JSON</abbr>-based expression syntax, it is not yet clear how much of this syntax can be translated to a
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-12" aria-level="3"><span>Editor's note</span></div><p class="">As Web Publication Locators currently rely on a <abbr title="JavaScript Object Notation">JSON</abbr>-based expression syntax, it is not yet clear how much of this syntax can be translated to a
 				fragment identifier. This may limit the usefulness beyond expressions that are also <abbr title="JavaScript Object Notation">JSON</abbr>-based (e.g., outside of annotations or bookmarks).</p></div>
 
-			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-12" aria-level="3"><span>Editor's note</span></div><div class="">
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-13" aria-level="3"><span>Editor's note</span></div><div class="">
 				<p>Illustrate with example of an easy to understand Web Publication Locator, such as might be used in
 					annotating a simple Web Publication.</p>
 			</div></div>
@@ -1658,17 +1639,17 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 			</div></div>
 		</section>
 		<section id="security">
-			<!--OddPage--><h2 id="x9-security"><span class="secno">9. </span>Security<span class="permalink"><a href="#security" aria-label="Permalink for 9. Security" title="Permalink for 9. Security"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x9-security"><span class="secno">9. </span>Security</h2>
 
-			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-13" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for security issues.</div></div>
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-14" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for security issues.</div></div>
 		</section>
 		<section id="privacy">
-			<!--OddPage--><h2 id="x10-privacy"><span class="secno">10. </span>Privacy<span class="permalink"><a href="#privacy" aria-label="Permalink for 10. Privacy" title="Permalink for 10. Privacy"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="x10-privacy"><span class="secno">10. </span>Privacy</h2>
 
-			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-14" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for privacy issues.</div></div>
+			<div class="ednote"><div role="heading" class="ednote-title marker" id="h-ednote-15" aria-level="3"><span>Editor's note</span></div><div class="">Placeholder for privacy issues.</div></div>
 		</section>
 		<section class="appendix" id="image-descriptions">
-			<!--OddPage--><h2 id="a-image-descriptions"><span class="secno">A. </span>Image Descriptions<span class="permalink"><a href="#image-descriptions" aria-label="Permalink for A. Image Descriptions" title="Permalink for A. Image Descriptions"><span>§</span></a></span></h2>
+			<!--OddPage--><h2 id="a-image-descriptions"><span class="secno">A. </span>Image Descriptions</h2>
 
 			<dl>
 				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram" class="fig-ref">“Structure of Web Publications” diagram</a>:</dt>
@@ -1684,7 +1665,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 		</section>
 		<section id="ack" class="appendix informative">
-    <!--OddPage--><h2 id="b-acknowledgements"><span class="secno">B. </span>Acknowledgements<span class="permalink"><a href="#ack" aria-label="Permalink for B. Acknowledgements" title="Permalink for B. Acknowledgements"><span>§</span></a></span></h2><p><em>This section is non-normative.</em></p>
+    <!--OddPage--><h2 id="b-acknowledgements"><span class="secno">B. </span>Acknowledgements</h2><p><em>This section is non-normative.</em></p>
 
     <p>The following people contributed to the development of this specification:</p>
 
@@ -1791,7 +1772,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 	
 
-<section id="references" class="appendix"><!--OddPage--><h2 id="c-references"><span class="secno">C. </span>References<span class="permalink"><a href="#references" aria-label="Permalink for C. References" title="Permalink for C. References"><span>§</span></a></span></h2><section id="normative-references"><h3 id="c-1-normative-references"><span class="secno">C.1 </span>Normative references<span class="permalink"><a href="#normative-references" aria-label="Permalink for C.1 Normative references" title="Permalink for C.1 Normative references"><span>§</span></a></span></h3><dl class="bibliography"><dt id="bib-bcp47">[bcp47]</dt><dd><a href="https://tools.ietf.org/html/bcp47"><cite>Tags for Identifying Languages</cite></a>. A. Phillips; M. Davis. IETF. September 2009. IETF Best Current Practice. URL: <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a>
+<section id="references" class="appendix"><!--OddPage--><h2 id="c-references"><span class="secno">C. </span>References</h2><section id="normative-references"><h3 id="c-1-normative-references"><span class="secno">C.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-annotation-model">[annotation-model]</dt><dd><a href="https://www.w3.org/TR/annotation-model/"><cite>Web Annotation Data Model</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-model/">https://www.w3.org/TR/annotation-model/</a>
+</dd><dt id="bib-bcp47">[bcp47]</dt><dd><a href="https://tools.ietf.org/html/bcp47"><cite>Tags for Identifying Languages</cite></a>. A. Phillips; M. Davis. IETF. September 2009. IETF Best Current Practice. URL: <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a>
 </dd><dt id="bib-css-break-3">[css-break-3]</dt><dd><a href="https://www.w3.org/TR/css-break-3/"><cite>CSS Fragmentation Module Level 3</cite></a>. Rossen Atanassov; Elika Etemad. W3C. 9 February 2017. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/css-break-3/">https://www.w3.org/TR/css-break-3/</a>
 </dd><dt id="bib-css-page-3">[css-page-3]</dt><dd><a href="https://www.w3.org/TR/css3-page/"><cite>CSS Paged Media Module Level 3</cite></a>. Melinda Grant; Elika Etemad; Håkon Wium Lie; Simon Sapin. W3C. 14 March 2013. W3C Working Draft. URL: <a href="https://www.w3.org/TR/css3-page/">https://www.w3.org/TR/css3-page/</a>
 </dd><dt id="bib-ecma-404">[ecma-404]</dt><dd><a href="https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"><cite>The JSON Data Interchange Format</cite></a>.  Ecma International. 1 October 2013. Standard. URL: <a href="https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf">https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf</a>
@@ -1802,12 +1784,11 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 </dd><dt id="bib-rfc5988">[rfc5988]</dt><dd><a href="https://tools.ietf.org/html/rfc5988"><cite>Web Linking</cite></a>. M. Nottingham. IETF. October 2010. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc5988">https://tools.ietf.org/html/rfc5988</a>
 </dd><dt id="bib-svg">[svg]</dt><dd><a href="https://www.w3.org/TR/SVG/"><cite>Scalable Vector Graphics (SVG) 1.0 Specification</cite></a>. Jon Ferraiolo. W3C. 4 September 2001. W3C Recommendation. URL: <a href="https://www.w3.org/TR/SVG/">https://www.w3.org/TR/SVG/</a>
 </dd><dt id="bib-url">[url]</dt><dd><a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren. WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
-</dd></dl></section><section id="informative-references"><h3 id="c-2-informative-references"><span class="secno">C.2 </span>Informative references<span class="permalink"><a href="#informative-references" aria-label="Permalink for C.2 Informative references" title="Permalink for C.2 Informative references"><span>§</span></a></span></h3><dl class="bibliography"><dt id="bib-annotation-model">[annotation-model]</dt><dd><a href="https://www.w3.org/TR/annotation-model/"><cite>Web Annotation Data Model</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-model/">https://www.w3.org/TR/annotation-model/</a>
-</dd><dt id="bib-annotation-vocab">[annotation-vocab]</dt><dd><a href="https://www.w3.org/TR/annotation-vocab/"><cite>Web Annotation Vocabulary</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-vocab/">https://www.w3.org/TR/annotation-vocab/</a>
+</dd><dt id="bib-wpub-ann">[wpub-ann]</dt><dd><a href="https://www.w3.org/TR/wpub-ann/"><cite>Web Annotation Extensions for Web Publications</cite></a>. Timothy W. Cole; Ivan Herman.2018-01-04. URL: <a href="https://www.w3.org/TR/wpub-ann/">https://www.w3.org/TR/wpub-ann/</a>
+</dd></dl></section><section id="informative-references"><h3 id="c-2-informative-references"><span class="secno">C.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-annotation-vocab">[annotation-vocab]</dt><dd><a href="https://www.w3.org/TR/annotation-vocab/"><cite>Web Annotation Vocabulary</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. 23 February 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/annotation-vocab/">https://www.w3.org/TR/annotation-vocab/</a>
 </dd><dt id="bib-appmanifest">[appmanifest]</dt><dd><a href="https://www.w3.org/TR/appmanifest/"><cite>Web App Manifest</cite></a>. Marcos Caceres; Kenneth Christiansen; Mounir Lamouri; Anssi Kostiainen; Rob Dolin. W3C. 29 November 2017. W3C Working Draft. URL: <a href="https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>
 </dd><dt id="bib-css-device-adapt">[css-device-adapt]</dt><dd><a href="https://www.w3.org/TR/css-device-adapt-1/"><cite>CSS Device Adaptation Module Level 1</cite></a>. Rune Lillesveen; Florian Rivoal; Matt Rakow. W3C. 29 March 2016. W3C Working Draft. URL: <a href="https://www.w3.org/TR/css-device-adapt-1/">https://www.w3.org/TR/css-device-adapt-1/</a>
 </dd><dt id="bib-link-relation">[link-relation]</dt><dd><a href="https://tools.ietf.org/html/draft-vandesompel-identifier-00"><cite>Identifier: A Link Relation to Convey a Preferred URI for Referencing</cite></a>. H. Van de Sompel; M. Nelson; G. Bilder; J. Kunze; S. Warner. IETF. URL: <a href="https://tools.ietf.org/html/draft-vandesompel-identifier-00">https://tools.ietf.org/html/draft-vandesompel-identifier-00</a>
-</dd><dt id="bib-pub-loc">[pub-loc]</dt><dd><a href="https://www.w3.org/TR/pub-loc/"><cite>Locators for Web Publications</cite></a>. Timothy W. Cole; Ivan Herman.2018-01-04. URL: <a href="https://www.w3.org/TR/pub-loc/">https://www.w3.org/TR/pub-loc/</a>
 </dd><dt id="bib-rfc3986">[rfc3986]</dt><dd><a href="https://tools.ietf.org/html/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. T. Berners-Lee; R. Fielding; L. Masinter. IETF. January 2005. Internet Standard. URL: <a href="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</a>
 </dd><dt id="bib-rfc6596">[rfc6596]</dt><dd><a href="https://tools.ietf.org/html/rfc6596"><cite>The Canonical Link Relation</cite></a>. M. Ohye; J. Kupke. IETF. April 2012. Informational. URL: <a href="https://tools.ietf.org/html/rfc6596">https://tools.ietf.org/html/rfc6596</a>
 </dd><dt id="bib-wcag20">[wcag20]</dt><dd><a href="https://www.w3.org/TR/WCAG20/"><cite>Web Content Accessibility Guidelines (WCAG) 2.0</cite></a>. Ben Caldwell; Michael Cooper; Loretta Guarino Reid; Gregg Vanderheiden et al. W3C. 11 December 2008. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WCAG20/">https://www.w3.org/TR/WCAG20/</a>
