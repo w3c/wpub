@@ -60,9 +60,9 @@ var biblio = {
         rawDate: "2017-01-05",
         status: "Recommended Specification"
     },   
-    "pub-loc": {
-      "title": "Locators for Web Publications",
-      "href": "https://www.w3.org/TR/pub-loc/",
+    "wpub-ann": {
+      "title": "Web Annotation Extensions for Web Publications",
+      "href": "https://www.w3.org/TR/wpub-ann/",
       "authors": [
         "Timothy W. Cole",
         "Ivan Herman"
