@@ -8,7 +8,7 @@ env:
   global:
     - URL="https://rawgit.com/w3c/wpub/publish_wd/snapshot/ECHIDNA"
     - DECISION="@@@@"
-    - secure: "@@@@"
+    - secure: "https://www.w3.org/publishing/groups/publ-wg/Meetings/Minutes/2017/2017-12-18-minutes#resolution2"
  
 script:
   - echo "ok"
