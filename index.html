@@ -63,6 +63,12 @@
                     "w3cid": 65283
                   },
 			      {
+                    "name": "Hadrien Gardeur",
+                    "company": "Feedbooks",
+                    "companyURL": "http://www.feedbooks.com/",
+                    "w3cid": 97094
+                  },
+			      {
                     "name": "Florian Rivoal",
                     "company": "Vivliostyle Inc.",
                     "companyURL": "http://vivliostyle.com/",
@@ -314,7 +320,7 @@
 					<dt><dfn data-lt="URLs">URL</dfn></dt>
 					<dd>
 						<p>The general term <abbr title="Uniform Resource Locator">URL</abbr> is defined by the URL
-							Standard&#160;[[!url]]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
+							Standard&#160;[[!URL]]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
 							specifications, like <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. In
 							particular, a <abbr title="Uniform Resource Locator">URL</abbr> allows for the usage of
 							characters from Unicode following&#160;[[!rfc3987]]. See <a
@@ -1191,7 +1197,108 @@
 
 			<div class="ednote">Placeholder for privacy issues.</div>
 		</section>
-		<section class="appendix">
+		<section class="appendix" id="webidl">
+            <h2>WebIDL</h2>
+            
+		    <section id="webpublicationmanifest-dictionary">
+                <h3>
+                    <dfn>WebPublicationManifest</dfn> dictionary
+                </h3>
+                <pre class="idl">
+                    dictionary WebPublicationManifest {
+                        PublicationMetadata                    metadata;
+                        sequence&lt;PublicationLink&gt;        links;
+                        sequence&lt;PublicationLink&gt;        spine;
+                        sequence&lt;PublicationLink&gt;        resources;
+                    };
+      </pre>
+                <p class="ednote">The current model is directly ported from the <a href="https://github.com/readium/webpub-manifest">Readium Web Publication Manifest</a> using a simplified syntax. This WG has not adopted a final syntax yet for the manifest.</p>
+            </section>
+            
+            <section id="publicationmetadata-dictionary">
+                <h3>
+                    <dfn>PublicationMetadata</dfn> dictionary
+                </h3>
+                <pre class="idl">
+                    dictionary PublicationMetadata {
+                        USVString                       title;          
+                        USVString                       identifier;
+                        sequence&lt;USVString&gt;       author;
+                        USVString                       language;
+                        USVString                       modified;
+                        USVString                       publicationDate;
+                        ReadingDirection                direction;
+                    };
+                </pre>
+                
+                <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where most metadata are expressed as simple strings.</p>
+                
+                <p class="issue" data-number="124">The current <abbr
+						title="information set"><a>infoset</a></abbr> is limited to a single <a href="#wp-language">language</a> and <a href="#wp-dir">direction</a> for all metadata elements. This could be an issue for multilingual editions or Japanese (where expressing the same string in kanji, katakana and hiragana is useful).</p>
+            </section>
+            
+            <section id="link-dictionary">
+                <h3>
+                    <dfn>PublicationLink</dfn> dictionary
+                </h3>
+                <pre class="idl">
+                    dictionary PublicationLink {
+                        required    USVString                   href;          
+                                    USVString                   type;        
+                                    USVString                   title;
+                                    sequence&lt;USVString&gt;   rel;
+                                    DOMString                   height;
+                                    DOMString                   width;
+                                    boolean                     templated;
+                    };
+                </pre>
+                <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where the link does not contain properties. In the context of EPUB 4, we might need to re-introduce these properties as well.</p>
+            </section>
+            
+            <section id="dir-idl">
+                <h3>
+                    <code>direction</code> member
+                </h3>
+                <pre class="idl">
+                    enum ReadingDirection {
+                        "ltr",
+                        "rtl",
+                        "auto"
+                    };
+                </pre>
+                <p>
+                    The <dfn>direction</dfn> member specifies the base direction for the directionality-capable members of the <a>manifest</a>. The <a>direction</a> member's value can be set to one of the <a>text-direction values</a>.
+                </p>
+                <p>
+                    The <dfn data-lt="text-direction value">text-direction values</dfn> defined by <dfn>ReadingDirection</dfn>, are the following:
+        </p>
+                <dl data-dfn-for="ReadingDirection">
+                  <dt>
+                    <dfn>ltr</dfn>
+                  </dt>
+                  <dd>
+                    left-to-right text.
+                  </dd>
+                  <dt>
+                    <dfn>rtl</dfn>
+                  </dt>
+                  <dd>
+                    right-to-left text.
+                  </dd>
+                  <dt>
+                    <dfn>auto</dfn>
+                  </dt>
+                  <dd>
+                
+                    programmatically determined from the value of the member.
+                  </dd>
+                </dl>
+            </section>
+            
+        </section>
+        
+        <section class="appendix">    
+            
 			<h2>Image Descriptions</h2>
 
 			<dl>
