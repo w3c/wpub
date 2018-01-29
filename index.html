@@ -1213,33 +1213,107 @@
                     };
       </pre>
                 <p class="ednote">The current model is directly ported from the <a href="https://github.com/readium/webpub-manifest">Readium Web Publication Manifest</a> using a simplified syntax. This WG has not adopted a final syntax yet for the manifest.</p>
+                
+                The <a>WebPublicationManifest</a> contains the following members:
+                <dl data-dfn-for="WebPublicationManifest">
+                    <dt>
+                        <dfn>metadata</dfn>
+                    </dt>
+                    <dd>
+                        Contains all the metadata from our <abbr title="information set"><a>infoset</a>.
+                    </dd>
+                    <dt>
+                        <dfn>links</dfn>
+                    </dt>
+                    <dd>
+                        Contains links to external resources.
+                    </dd>
+                    <dt>
+                        <dfn>spine</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>default reading order</a>.
+                    </dd>
+                    <dt>
+                        <dfn>resources</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>resource list</a>.
+                    </dd>
+                </dl>
             </section>
             
-            <section id="publicationmetadata-dictionary">
+            <section id="metadata-webidl">
                 <h3>
-                    <dfn>PublicationMetadata</dfn> dictionary
+                    <code>metadata</code> member
                 </h3>
                 <pre class="idl">
                     dictionary PublicationMetadata {
-                        USVString                       title;          
+                        USVString                       title;         
                         USVString                       identifier;
                         sequence&lt;USVString&gt;       author;
                         USVString                       language;
+                        ReadingDirection                direction;
                         USVString                       modified;
                         USVString                       publicationDate;
-                        ReadingDirection                direction;
                     };
                 </pre>
                 
                 <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where most metadata are expressed as simple strings.</p>
                 
-                <p class="issue" data-number="124">The current <abbr
-						title="information set"><a>infoset</a></abbr> is limited to a single <a href="#wp-language">language</a> and <a href="#wp-dir">direction</a> for all metadata elements. This could be an issue for multilingual editions or Japanese (where expressing the same string in kanji, katakana and hiragana is useful).</p>
+                <p>The <code>metadata</code> member is defined by the <dfn>PublicationMetadata</dfn> dictionary:</p>
+                <dl data-dfn-for="PublicationMetadata">
+                  <dt>
+                    <dfn>title</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a href="#wp-title">title</a>.
+                  </dd>
+                  <dt>
+                    <dfn>identifier</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a>canonical identifier</a>.
+                  </dd>
+                  <dt>
+                    <dfn>author</dfn>
+                  </dt>
+                  <dd>
+                    Contains one or more <a href="#wp-creators">creators</a>.
+                  </dd>
+                  <dt>
+                    <dfn>language</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a href="#wp-language">language</a>.
+                  </dd>
+                  <dt>
+                    <dfn>direction</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a>base direction</a>.
+                  </dd>
+                  <dt>
+                    <dfn>modified</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a>last modification date</a>.
+                  </dd>
+                  <dt>
+                    <dfn>publicationDate</dfn>
+                  </dt>
+                  <dd>
+                    Contains the <a>publication date</a>.
+                  </dd>
+                </dl>
+                
+                <p class="issue" data-number="124">The current <abbr title="information set"><a>infoset</a></abbr> is limited to a single <a href="#wp-language">language</a> and <a href="#wp-dir">direction</a> for all metadata elements. This could be ean issue for multilingual editions or Japanese (where expressing the same string in kanji, katakana and hiragana is useful).</p>
+            
             </section>
             
-            <section id="link-dictionary">
+            <section id="link-webidl">
                 <h3>
-                    <dfn>PublicationLink</dfn> dictionary
+                    <code>links</code>, <code>spine</code> and <code>resources</code> members
                 </h3>
                 <pre class="idl">
                     dictionary PublicationLink {
@@ -1252,7 +1326,56 @@
                                     boolean                     templated;
                     };
                 </pre>
+                
                 <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where the link does not contain properties. In the context of EPUB 4, we might need to re-introduce these properties as well.</p>
+                
+                <p>The <dfn>PublicationLink</dfn> dictionary contains the following members:</p>
+                
+                <dl data-dfn-for="PublicationLink">
+                    <dt>
+                        <dfn>href</dfn>
+                    </dt>
+                    <dd>
+                        Contains the [[!URL]] of the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>type</dfn>
+                    </dt>
+                    <dd>
+                        Contains the MIME media type of the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>title</dfn>
+                    </dt>
+                    <dd>
+                        Text label for the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>rel</dfn>
+                    </dt>
+                    <dd>
+                        Contains one or more rel based on the <a href="https://www.iana.org/assignments/link-relations.html">IANA link registry</a>.
+                    </dd>
+                    <dt>
+                        <dfn>height</dfn>
+                    </dt>
+                    <dd>
+                        Height of the linked resource, expressed in pixels.
+                    </dd>
+                    <dt>
+                        <dfn>width</dfn>
+                    </dt>
+                    <dd>
+                        Width of the linked resource, expressed in pixels.
+                    </dd>
+                    <dt>
+                        <dfn>templated</dfn>
+                    </dt>
+                    <dd>
+                        Indicates that the <a href="#dom-publicationlink-rel"><code>href</code></a> is a URI template.
+                    </dd>
+                </dl>
+                
             </section>
             
             <section id="dir-idl">
@@ -1267,11 +1390,8 @@
                     };
                 </pre>
                 <p>
-                    The <dfn>direction</dfn> member specifies the base direction for the directionality-capable members of the <a>manifest</a>. The <a>direction</a> member's value can be set to one of the <a>text-direction values</a>.
+                    The <code>direction</code> member's value are defined by <dfn>ReadingDirection</dfn> as:
                 </p>
-                <p>
-                    The <dfn data-lt="text-direction value">text-direction values</dfn> defined by <dfn>ReadingDirection</dfn>, are the following:
-        </p>
                 <dl data-dfn-for="ReadingDirection">
                   <dt>
                     <dfn>ltr</dfn>
