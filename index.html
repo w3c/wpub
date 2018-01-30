@@ -961,6 +961,110 @@
 					viable and what solutions can be standardized. Input on the feasibility and challenges of these
 					approaches is welcome at any time.</p>
 			</div>
+            
+            <section id="obtaining-manifest">
+                <h3>Obtaining a manifest</h3>
+                <p> <p>The <dfn data-lt="obtaining the manifest|obtaining a manifest">steps for obtaining a manifest</dfn> are given by the following algorithm.
+                The algorithm, if successful, returns a <a>processed manifest</a> and the <var>manifest URL</var>; otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest declaration.</p>
+                <ol>
+                    <li>
+                        From the <code>Document</code> of the top-level browsing context, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be the first <code>link</code> element in tree order whose <code>rel</code> attribute contains the token <code>publication</code>.
+                    </li>
+                    <li>
+                        If <var>origin</var> is an [[!HTML]] opaque origin, terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest link</var> is <code>null</code>, terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string, then abort these steps.
+                    </li>
+                    <li>
+                        Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code> attribute, relative to the element's base URL. If parsing fails, then abort these steps.
+                    </li>
+                    <li>
+                        Let <var>request</var> be a new [[!FETCH]] request, whose URL is <var>manifest URL</var>, and whose context is "<code>publication</code>".
+                    </li>
+                    <li>
+                        If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is '<code>use-credentials</code>', then set <var>request</var>'s credentials to '<code>include</code>'.
+                    </li>
+                    <li>
+                        Await the result of performing a [[!FETCH]] with <var>request</var>, letting <var>response</var> be the result.
+                    </li>
+                    <li>
+                        If <var>response</var> is a network error, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
+                    </li>
+                    <li>
+                        Let <var>manifest</var> be the result of running <a>processing a manifest</a> given <var>text</var>, <var>manifest URL</var>, and the URL that represents the address of the top-level browsing context.
+                    </li>
+                    <li>
+                        Return <var>manifest</var> and <var>manifest URL</var>.
+                    </li>
+                </ol>
+            </section>
+            <section id="processing-manifest">
+                <h3>Processing a manifest</h3>
+                <p>
+                    The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm.The algorithm takes a <var>text</var> string as an argument, which represents a <a>manifest</a>, and a [[!URL]] <var>manifest URL</var>, which represents the location of the manifest, and a [[!URL]] <var>document URL</var>. The output from inputting an JSON document into this algorithm is a <dfn>processed manifest</dfn>.
+                </p>
+                <ol>
+                    <li>
+                        Let <var>json</var> be the result of <a data-cite="!ECMASCRIPT#sec-json.parse">parsing</a> <var>text</var>. If <a data-cite="!ECMASCRIPT#sec-json.parse">parsing</a> throws an error:
+                        <ol>
+                            <li>
+                                Issue a developer warning with any details pertaining to the JSON parsing error.
+                            </li>
+                            <li>
+                                Set <var>json</var> to be the result of <a data-cite="!ECMASCRIPT#sec-15.12.2">parsing</a> the string <code>"{}"</code>.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        If Type(<var>json</var>) is not <code>Object</code>:
+                        <ol>
+                            <li>
+                                Issue a developer warning that the manifest needs to be an object.
+                            </li>
+                            <li>
+                                Set <var>json</var> to be the result of <a data-cite="!ECMASCRIPT#sec-15.12.2">parsing</a> the string <code>"{}"</code>.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        Extension point: process any proprietary and/or other supported members at this point in the algorithm.
+                    </li>
+                    <li>
+                        Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+                    </li>
+                    <li>
+                        Set <var>manifest</var>["spine"] to the result of running <a>processing the default reading order</a> given <var>manifest</var>["spine"], <var>manifest URL</var>, and <var>document URL</var>.
+                    </li>
+                    <li>
+                        Set <var>manifest</var>["metadata"["language"]] to the result of running processing the language given <var>manifest</var>["metadata"["language"]].
+                    </li>
+                    <li>
+                        Return <var>manifest</var>.
+                    </li>
+                </ol>
+            </section>
+            <section id="processing-reading-order">
+                <h3>Processing the default reading order</h3>
+                <p>
+                    The <dfn data-lt="processing the default reading order">steps for processing the reading order</dfn> are given by the following algorithm.
+                </p>
+                <p class="ednote">
+                    TODO
+                </p>
+            </section>
+            <section id="processing-language">
+                <h3>Processing the language</h3>
+                <p class="ednote">
+                    We need to add steps for processing the language and making sure that it's a valid BCP 47 language tag.
+                </p>
+            </section>
 		</section>
 		<section id="wp-enhancements">
 			<h2>Reading Enhancements</h2>
