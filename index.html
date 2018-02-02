@@ -77,7 +77,6 @@
               wgURI:             "https://www.w3.org/publishing/groups/publ-wg/",
               wgPublicList:      "public-publ-wg",
               wgPatentURI:       "https://www.w3.org/2004/01/pp-impl/100074/status",
-              license: 			 "w3c-software-doc", 
 			  github:			 {
 				  repoURL: "https://github.com/w3c/wpub",
 				  branch: "master"
@@ -403,7 +402,7 @@
 							<span>RECOMMENDED:</span>
 							<ul class="flat">
 								<li><a href="#wp-a11y">accessibility</a></li>
-								<li><a href="#wp-dir">base direction</a></li>
+								<li><a href="#wp-language">base direction</a></li>
 								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
 								<li><a href="#wp-creators">creator</a></li>
 								<li><a href="#wp-language">language</a></li>
@@ -481,29 +480,6 @@
 					</div>
 				</section>
 
-				<section id="wp-dir">
-					<h4>Base Direction</h4>
-
-					<p>The <dfn>base direction</dfn> identifies the display direction for <abbr title="information set"
-								><a>infoset</a></abbr> properties.</p>
-
-					<p>The value of this property MUST be one of:</p>
-
-					<dl>
-						<dt><code>ltr</code></dt>
-						<dd>left-to-right</dd>
-						<dt><code>rtl</code></dt>
-						<dd>right-to-left</dd>
-						<dt><code>auto</code></dt>
-						<dd>direction is determined from the value of the property</dd>
-					</dl>
-
-					<p>If not specified, the value <code>ltr</code> SHOULD be assumed.</p>
-
-					<p>If property values are harvested from another resource, such as the <a>table of contents</a>,
-						precedence SHOULD be given to the base direction specified in the resource, when provided.</p>
-				</section>
-
 				<section id="wp-canonical-identifier">
 					<h4>Canonical Identifier</h4>
 
@@ -552,30 +528,50 @@
 				</section>
 
 				<section id="wp-language">
-					<h4>Language</h4>
+					<h4>Language and Base Direction</h4>
 
-					<p>The language specified in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> identifies the natural language of its
-						properties.</p>
+					<p>
+						Each textual property in the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> (e.g., title, creators) MUST be <a href="https://w3c.github.io/string-meta/#dom-localizable">Localizable</a> [[string-meta]]. This means it MUST be possible to assign:
+					</p>
 
-					<p>When specified, the language MUST be a tag that conforms to [[!bcp47]].</p>
+					<ul>
+						<li>The natural <dfn>language</dfn>. When specified, the language MUST be a tag that conforms to [[!bcp47]].</li>
+						<li>The <dfn>base direction</dfn>, that identifies the display direction for the property. It is specified by a tag with the possible values of:
+							<ul>
+								<li><code>ltr</code>: left-to-right;</li>
+								<li><code>rtl</code>: right-to-left;</li>
+								<li><code>auto</code>: direction is determined from the value of the property;</li>
+							</ul>
+						</li>
+					</ul>
 
-					<p class="note">This language is not used in the processing or rendering of the Web Publication, and is
-							<strong>not</strong> a replacement for identifying the language of each resource as defined by
-						its format.</p>
+					<p>
+						Furthermore, the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> MAY contain global values for the language and the base direction using a [[!bcp47]] tag, and the values of <code>ltr</code>/<code>rtl</code>/<code>auto</code> as above, respectively. These are used as defaults for textual properties in the <abbr title="information set"><a>infoset</a></abbr>, unless overwritten by the property itself.
+					</p>
 
-					<p>If a user agent requires the language and one is not available in the <abbr title="information set"
-							>infoset</abbr>, it MAY attempt to determine the language. This specification does not mandate
-						how such a language tag is created. The user agent might:</p>
+					<p class="note">
+						These features make it possible to add the title of a publication in different languages, or repeat the creators’ name using different scripts.
+					</p>
+
+					<p class="note">
+						This default language/direction pair is not used in the processing or rendering of the Web Publication, and is
+						<strong>not</strong> a replacement for identifying the language of each resource as defined by
+						its format. These information items have an effect on the metadata expressed in the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> only.
+					</p>
+
+					<p>
+						If a user agent requires the language and one is not available in the <abbr title="information set">infoset</abbr>,
+						nor is it specified for a specific property, it MAY attempt to determine the language. This specification 
+						does not mandate how such a language tag is created. The user agent might:
+					</p>
 
 					<ul>
 						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
-						<li>use the first non-empty language declaration found in a resource in the <a>default reading
-								order</a>;</li>
+						<li>use the first non-empty language declaration found in a resource in the <a>default reading order</a>;</li>
 						<li>calculate the language using its own algorithm.</li>
 					</ul>
 
-					<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used.</p>
+					<p>If a language tag cannot be determined, the value "<code>und</code>" (undetermined) MUST be used. If the base direction cannot be determined, the value <code>ltr</code> MUST be assumed.</p>
 
 					<div class="issue" data-number="53">
 						<p>Is the language declared for the <a>manifest</a> content the same as the language of the
