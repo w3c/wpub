@@ -1006,7 +1006,7 @@
                 </ol>
             </section>
             <section id="processing-manifest">
-                <h3>Processing a manifest</h3>
+                <h3>Processing the manifest</h3>
                 <p>
                     The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm.The algorithm takes a <var>text</var> string as an argument, which represents a <a>manifest</a>, and a [[!URL]] <var>manifest URL</var>, which represents the location of the manifest, and a [[!URL]] <var>document URL</var>. The output from inputting an JSON document into this algorithm is a <dfn>processed manifest</dfn>.
                 </p>
@@ -1040,10 +1040,10 @@
                         Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
                     </li>
                     <li>
-                        Set <var>manifest</var>["spine"] to the result of running <a>processing the default reading order</a> given <var>manifest</var>["spine"], <var>manifest URL</var>, and <var>document URL</var>.
+                        Set <var>manifest</var>["reading_order"] to the result of <a>processing the default reading order</a> given <var>manifest</var>["reading_order"],  <var>manifest</var>["resources"], <var>manifest URL</var>, and <var>document URL</var>.
                     </li>
                     <li>
-                        Set <var>manifest</var>["metadata"["language"]] to the result of running processing the language given <var>manifest</var>["metadata"["language"]].
+                        Set <var>manifest</var>["lang"] to the result of processing the language given <var>manifest</var>["lang"].
                     </li>
                     <li>
                         Return <var>manifest</var>.
@@ -1053,8 +1053,22 @@
             <section id="processing-reading-order">
                 <h3>Processing the default reading order</h3>
                 <p>
-                    The <dfn data-lt="processing the default reading order">steps for processing the reading order</dfn> are given by the following algorithm.
+                    The <dfn data-lt="processing the default reading order">steps for processing the default reading order</dfn> are given by the following algorithm.
                 </p>
+                <ol>
+                    <li>
+                        If <var>manifest</var>["reading_order"] is not empty, return it and terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest</var>["resources"] is not empty, let <var>navigation document link</var> be the first <a>PublicationLink</a> whose <code>rel</code> member contains the token <code>contents</code>.
+                    </li>
+                    <li>
+                        If <var>navigation document link</var> is not <code>null</code> and its <code>href</code> member is not <code>empty</code>, let <var>navigation document URL</var> be the result of parsing the value of the <code>href</code> attribute, relative to the <var>manifest URL</var>.
+                    </li>
+                    <li>
+                        If <var>navigation document URL</var> is empty, set <var>navigation document URL</var> to <var>document URL</var>.
+                    </li>
+                </ol>
                 <p class="ednote">
                     TODO
                 </p>
@@ -1066,8 +1080,8 @@
                 </p>
             </section>
 		</section>
-		<section id="wp-enhancements">
-			<h2>Reading Enhancements</h2>
+		<section id="wp-affordances">
+			<h2>Affordances</h2>
 
 			<p class="ednote">This section contains placeholders for possible reading enhancements/affordances the user agent
 				may/should/must provide. The list is subject to addition, modification and removal as the enhancements get
@@ -1287,8 +1301,7 @@
 					preference to any alternative addresses. Such use facilitates the collation of Web Publication Locators
 					associated with a particular Web Publication. <abbr title="Uniform Resource Locators">URLs</abbr> of Web
 					Publication resources appearing in a Web Publication Locator should match the <abbr
-						title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr
-						title="information set"><a>infoset</a></abbr>.</p>
+						title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr title="information set"><a>infoset</a></abbr>.</p>
 			</div>
 		</section>
 		<section id="security">
@@ -1310,21 +1323,62 @@
                 </h3>
                 <pre class="idl">
                     dictionary WebPublicationManifest {
-                        PublicationMetadata                    metadata;
-                        sequence&lt;PublicationLink&gt;        links;
-                        sequence&lt;PublicationLink&gt;        spine;
-                        sequence&lt;PublicationLink&gt;        resources;
+                        DOMString                               lang;
+                        TextDirection                           dir = "auto";
+                        LocalizableString                       title;         
+                        DOMString                               identifier;
+                        sequence&lt;LocalizableString&gt;       author;
+                        DOMString                               modified;
+                        DOMString                               publication_date;
+                        sequence&lt;PublicationLink&gt;         links;
+                        sequence&lt;PublicationLink&gt;         reading_order;
+                        sequence&lt;PublicationLink&gt;         resources;
                     };
       </pre>
-                <p class="ednote">The current model is directly ported from the <a href="https://github.com/readium/webpub-manifest">Readium Web Publication Manifest</a> using a simplified syntax. This WG has not adopted a final syntax yet for the manifest.</p>
                 
-                The <a>WebPublicationManifest</a> contains the following members:
+                <p>The <a>WebPublicationManifest</a> has the following members:</p>
                 <dl data-dfn-for="WebPublicationManifest">
                     <dt>
-                        <dfn>metadata</dfn>
+                        <dfn>lang</dfn>
                     </dt>
                     <dd>
-                        Contains all the metadata from our <abbr title="information set"><a>infoset</a>.
+                        Contains the default value <a href="#wp-language">language</a>.
+                    </dd>
+                    <dt>
+                        <dfn>dir</dfn>
+                    </dt>
+                    <dd>
+                        Contains the default value for <a>base direction</a>.
+                    </dd>
+                    <dt>
+                        <dfn>title</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a href="#wp-title">title</a>.
+                    </dd>
+                    <dt>
+                        <dfn>identifier</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>canonical identifier</a>.
+                    </dd>
+                    <dt>
+                        <dfn>author</dfn>
+                    </dt>
+                    <dd>
+                        Contains one or more <a href="#wp-creators">creators</a>.
+                    </dd>
+                    <dt>
+                        <dfn>modified</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>last modification date</a>.
+                    </dd>
+                    <dt>
+                        <dfn>publication_date</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>publication date</a>.
                     </dd>
                     <dt>
                         <dfn>links</dfn>
@@ -1333,7 +1387,7 @@
                         Contains links to external resources.
                     </dd>
                     <dt>
-                        <dfn>spine</dfn>
+                        <dfn>reading_order</dfn>
                     </dt>
                     <dd>
                         Contains the <a>default reading order</a>.
@@ -1347,84 +1401,87 @@
                 </dl>
             </section>
             
-            <section id="metadata-webidl">
+            <section id="dir-idl">
                 <h3>
-                    <code>metadata</code> member
+                    <code>dir</code> member
                 </h3>
                 <pre class="idl">
-                    dictionary PublicationMetadata {
-                        USVString                       title;         
-                        USVString                       identifier;
-                        sequence&lt;USVString&gt;       author;
-                        USVString                       language;
-                        ReadingDirection                direction;
-                        USVString                       modified;
-                        USVString                       publicationDate;
+                    enum TextDirection {
+                        "ltr",
+                        "rtl",
+                        "auto"
                     };
                 </pre>
-                
-                <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where most metadata are expressed as simple strings.</p>
-                
-                <p>The <code>metadata</code> member is defined by the <dfn>PublicationMetadata</dfn> dictionary:</p>
-                <dl data-dfn-for="PublicationMetadata">
+                <p>
+                    The <code>dir</code> member's value are defined by <dfn>TextDirection</dfn> as:
+                </p>
+                <dl data-dfn-for="TextDirection">
                   <dt>
-                    <dfn>title</dfn>
+                    <dfn>ltr</dfn>
                   </dt>
                   <dd>
-                    Contains the <a href="#wp-title">title</a>.
+                    left-to-right text.
                   </dd>
                   <dt>
-                    <dfn>identifier</dfn>
+                    <dfn>rtl</dfn>
                   </dt>
                   <dd>
-                    Contains the <a>canonical identifier</a>.
+                    right-to-left text.
                   </dd>
                   <dt>
-                    <dfn>author</dfn>
+                    <dfn>auto</dfn>
                   </dt>
                   <dd>
-                    Contains one or more <a href="#wp-creators">creators</a>.
-                  </dd>
-                  <dt>
-                    <dfn>language</dfn>
-                  </dt>
-                  <dd>
-                    Contains the <a href="#wp-language">language</a>.
-                  </dd>
-                  <dt>
-                    <dfn>direction</dfn>
-                  </dt>
-                  <dd>
-                    Contains the <a>base direction</a>.
-                  </dd>
-                  <dt>
-                    <dfn>modified</dfn>
-                  </dt>
-                  <dd>
-                    Contains the <a>last modification date</a>.
-                  </dd>
-                  <dt>
-                    <dfn>publicationDate</dfn>
-                  </dt>
-                  <dd>
-                    Contains the <a>publication date</a>.
+                    determined by the Unicode Bidirectional Algorithm [[!UAX9]] algorithm.
                   </dd>
                 </dl>
-                
-                <p class="issue" data-number="124">The current <abbr title="information set"><a>infoset</a></abbr> is limited to a single <a href="#wp-language">language</a> and <a href="#wp-dir">direction</a> for all metadata elements. This could be ean issue for multilingual editions or Japanese (where expressing the same string in kanji, katakana and hiragana is useful).</p>
+            </section>
             
+            <section id="localizable-idl">
+                <h3>
+                    <dfn>LocalizableString</dfn> dictionary
+                </h3>
+                <p>In our <abbr title="information set"><a>infoset</a></abbr>, some metadata have strong requirements for  internationalization. For those members, we rely on the best practices established by the i18n WG and rely on a <dfn>Localizable</dfn> dictionary that contains the following members:</p>
+                <pre class="idl">
+                    dictionary LocalizableString {
+                        required    USVString       value;
+                                    DOMString       lang;
+                                    TextDirection   dir = "auto";
+                    };
+                </pre>
+                <p>When <code>lang</code> or <code>dir</code> are specified in <a>LocalizableString</a>, these values override the default language and base direction specificed in <a>WebPublicationManifest</a>.</p>
+                <p>The <a>WebPublicationManifest</a> has the following members:</p>
+                <dl data-dfn-for="LocalizableString">
+                    <dt>
+                        <dfn>value</dfn>
+                    </dt>
+                    <dd>
+                        Contains the localized string.
+                    </dd>
+                    <dt>
+                        <dfn>lang</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a href="#wp-language">language</a>.
+                    </dd>
+                    <dt>
+                        <dfn>dir</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>base direction</a>.
+                    </dd>
             </section>
             
             <section id="link-webidl">
                 <h3>
-                    <code>links</code>, <code>spine</code> and <code>resources</code> members
+                    <dfn>PublicationLink</dfn> dictionary
                 </h3>
                 <pre class="idl">
                     dictionary PublicationLink {
-                        required    USVString                   href;          
-                                    USVString                   type;        
+                        required    DOMString                   href;          
+                                    DOMString                   type;        
                                     USVString                   title;
-                                    sequence&lt;USVString&gt;   rel;
+                                    sequence&lt;DOMString&gt;   rel;
                                     DOMString                   height;
                                     DOMString                   width;
                                     boolean                     templated;
@@ -1433,7 +1490,7 @@
                 
                 <p class="ednote">This is also based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where the link does not contain properties. In the context of EPUB 4, we might need to re-introduce these properties as well.</p>
                 
-                <p>The <dfn>PublicationLink</dfn> dictionary contains the following members:</p>
+                <p>The PublicationLink dictionary contains the following members:</p>
                 
                 <dl data-dfn-for="PublicationLink">
                     <dt>
@@ -1480,43 +1537,6 @@
                     </dd>
                 </dl>
                 
-            </section>
-            
-            <section id="dir-idl">
-                <h3>
-                    <code>direction</code> member
-                </h3>
-                <pre class="idl">
-                    enum ReadingDirection {
-                        "ltr",
-                        "rtl",
-                        "auto"
-                    };
-                </pre>
-                <p>
-                    The <code>direction</code> member's value are defined by <dfn>ReadingDirection</dfn> as:
-                </p>
-                <dl data-dfn-for="ReadingDirection">
-                  <dt>
-                    <dfn>ltr</dfn>
-                  </dt>
-                  <dd>
-                    left-to-right text.
-                  </dd>
-                  <dt>
-                    <dfn>rtl</dfn>
-                  </dt>
-                  <dd>
-                    right-to-left text.
-                  </dd>
-                  <dt>
-                    <dfn>auto</dfn>
-                  </dt>
-                  <dd>
-                
-                    programmatically determined from the value of the member.
-                  </dd>
-                </dl>
             </section>
             
         </section>
