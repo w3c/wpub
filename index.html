@@ -1043,13 +1043,11 @@
                         Set <var>manifest</var>["reading_order"] to the result of <a>processing the default reading order</a> given <var>manifest</var>["reading_order"],  <var>manifest</var>["resources"], <var>manifest URL</var>, and <var>document URL</var>.
                     </li>
                     <li>
-                        Set <var>manifest</var>["lang"] to the result of processing the language given <var>manifest</var>["lang"].
-                    </li>
-                    <li>
                         Return <var>manifest</var>.
                     </li>
                 </ol>
             </section>
+            
             <section id="processing-reading-order">
                 <h3>Processing the default reading order</h3>
                 <p>
@@ -1068,17 +1066,42 @@
                     <li>
                         If <var>navigation document URL</var> is empty, set <var>navigation document URL</var> to <var>document URL</var>.
                     </li>
+                    <li>
+                        Let <var>request</var> be a new [[!FETCH]] request, whose URL is <var>navigation document URL</var>, and whose context is "<code>publication</code>".
+                    </li>
+                    <li>
+                        Await the result of performing a [[!FETCH]] with <var>request</var>, letting <var>response</var> be the result.
+                    </li>
+                    <li>
+                        If <var>response</var> is a network error, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>document</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
+                    </li>
+                    <li>
+                        If <var>document</var> is not a valid [[!HTML]] document, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>default reading order</var> be the result of processing <var>text</var>:
+                        <ol>
+                            <li>
+                                If <var>document</var> contains a <code>nav</code> element:
+                                <ol>
+                                    <li>Extract a list of resource paths referenced from the <code>href</code> attribute of all <code>a</code> elements.</li>
+                                    <li>Strip any fragment identifiers from the references.</li>
+                                    <li>Resolve all relative paths to full URLs.</li>
+                                    <li>Remove all consecutive references to the same resource, leaving only the first.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Otherwise terminate this algorithm.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>Return <var>default reading order</var>.</li>
                 </ol>
-                <p class="ednote">
-                    TODO
-                </p>
             </section>
-            <section id="processing-language">
-                <h3>Processing the language</h3>
-                <p class="ednote">
-                    We need to add steps for processing the language and making sure that it's a valid BCP 47 language tag.
-                </p>
-            </section>
+            
 		</section>
 		<section id="wp-affordances">
 			<h2>Affordances</h2>
@@ -1441,7 +1464,7 @@
                 <h3>
                     <dfn>LocalizableString</dfn> dictionary
                 </h3>
-                <p>In our <abbr title="information set"><a>infoset</a></abbr>, some metadata have strong requirements for  internationalization. For those members, we rely on the best practices established by the i18n WG and rely on a <dfn>Localizable</dfn> dictionary that contains the following members:</p>
+                <p>In our <abbr title="information set"><a>infoset</a></abbr>, some metadata have strong requirements for  internationalization. For those members, we rely on the <a href="https://w3c.github.io/string-meta/#bestPractices">best practices established by the i18n WG</a> and rely on a <a>LocalizableString</a> dictionary.</p>
                 <pre class="idl">
                     dictionary LocalizableString {
                         required    USVString       value;
@@ -1450,7 +1473,7 @@
                     };
                 </pre>
                 <p>When <code>lang</code> or <code>dir</code> are specified in <a>LocalizableString</a>, these values override the default language and base direction specificed in <a>WebPublicationManifest</a>.</p>
-                <p>The <a>WebPublicationManifest</a> has the following members:</p>
+                <p><a>LocalizableString</a> has the following members:</p>
                 <dl data-dfn-for="LocalizableString">
                     <dt>
                         <dfn>value</dfn>
