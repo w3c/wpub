@@ -1004,6 +1004,7 @@
                         Return <var>manifest</var> and <var>manifest URL</var>.
                     </li>
                 </ol>
+                <div class="ednote">The <code>publication</code> value for context doesn't exist yet. We'll need to define and register this context value properly.</div>
             </section>
             <section id="processing-manifest">
                 <h3>Processing the manifest</h3>
@@ -1123,7 +1124,7 @@
             <section id="aff-add-to-list">
                 <h3>Add to the list of publications</h3>
                 <p>User Agents SHOULD provide a <dfn>list of publications</dfn> where the User can browse, search, add and remove their publications.</p>
-                <p>When a User Agent <a>obtains a manifest</a> for a Web Publication that's not currently listed in the <a>list of publications</a>, it SHOULD provide an affordance to add it to the list.</p>
+                <p>When a User Agent <a>obtains a manifest</a> for a Web Publication that's not currently listed in the <a>list of publications</a>, it MAY provide an affordance to add it to the list.</p>
                 <p>This affordance has the following requirements:</p>
                 <ol>
                     <li>it SHOULD display the title of the Web Publication</li>
@@ -1359,8 +1360,8 @@
                     dictionary WebPublicationManifest {
                         DOMString                               lang;
                         TextDirection                           dir = "auto";
-                        sequence&lt;LocalizableString&gt;       title;         
-                        DOMString                               identifier;
+                        sequence&lt;LocalizableString&gt;       title;
+                        USVString                               identifier;
                         sequence&lt;LocalizableString&gt;       author;
                         DOMString                               modified;
                         DOMString                               publication_date;
@@ -1514,8 +1515,8 @@
                 </h3>
                 <pre class="idl">
                     dictionary PublicationLink {
-                        required    DOMString                   href;          
-                                    DOMString                   type;        
+                        required    USVString                   href;
+                                    DOMString                   type;
                                     USVString                   title;
                                     sequence&lt;DOMString&gt;   rel;
                                     DOMString                   height;
