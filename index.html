@@ -964,6 +964,10 @@
             
             <section id="obtaining-manifest">
                 <h3>Obtaining a manifest</h3>
+                <div class="ednote">
+                    <p><a href="#wp-linking">Discovery of a manifest</a> is currently tied to the <code>publication</code> value for the <code>rel</code> attribute in an HTTP <code>Link</code> header or an HTML <code>link</code> element.</p>
+                    <p>This could change in the future if our work aligns with [[appmanifest]] or another manifest format.</p>
+                </div>
                 <p> <p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining a manifest</dfn> are given by the following algorithm.
                 The algorithm, if successful, returns a <a>processed manifest</a> and the <var>manifest URL</var>; otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest declaration.</p>
                 <ol>
@@ -1008,6 +1012,10 @@
             </section>
             <section id="processing-manifest">
                 <h3>Processing the manifest</h3>
+                <div class="ednote">
+                    <p>The <a>manifest</a> could be processed differently if we align with [[appmanifest]] or another format in the future.</p> 
+                    <p>Instead of using our own algorithm, processing would have to be defined as an extension point for another algorithm.</p>
+                </div>
                 <p>
                     The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm.The algorithm takes a <var>text</var> string as an argument, which represents a <a>manifest</a>, and a [[!URL]] <var>manifest URL</var>, which represents the location of the manifest, and a [[!URL]] <var>document URL</var>. The output from inputting an JSON document into this algorithm is a <dfn>processed manifest</dfn>.
                 </p>
@@ -1080,10 +1088,10 @@
                         Let <var>document</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
                     </li>
                     <li>
-                        If <var>document</var> is not a valid [[!HTML]] document, terminate this algorithm.
+                        If <var>document</var> is not an [[!HTML]] document, terminate this algorithm.
                     </li>
                     <li>
-                        Let <var>default reading order</var> be the result of processing <var>text</var>:
+                        Let <var>default reading order</var> be the result of processing <var>document</var>:
                         <ol>
                             <li>
                                 If <var>document</var> contains a <code>nav</code> element:
