@@ -975,7 +975,7 @@
                         From the <code>Document</code> of the top-level browsing context, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be the first <code>link</code> element in tree order whose <code>rel</code> attribute contains the token <code>publication</code>.
                     </li>
                     <li>
-                        If <var>origin</var> is an [[!HTML]] opaque origin, terminate this algorithm.
+                        If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm.
                     </li>
                     <li>
                         If <var>manifest link</var> is <code>null</code>, terminate this algorithm.
@@ -1088,7 +1088,7 @@
                         Let <var>document</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
                     </li>
                     <li>
-                        If <var>document</var> is not an [[!HTML]] document, terminate this algorithm.
+                        If <var>document</var> is not an [[!html]] document, terminate this algorithm.
                     </li>
                     <li>
                         Let <var>default reading order</var> be the result of processing <var>document</var>:
@@ -1145,7 +1145,7 @@
                 <section id="layout">
                     <h4>Layout</h4>
 
-                    <p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to all Web content: [[!HTML]] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [[!SVG]] documents are rendered as expected of that format, etc. This specification requires no particular profile or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="Hypertext Markup Language">HTML</abbr>, or <abbr title="Scalable Vector Graphics">SVG</abbr> to be supported, other than the expectations set for these technologies by their respective specifications.</p>
+                    <p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to all Web content: [[html]] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [[!SVG]] documents are rendered as expected of that format, etc. This specification requires no particular profile or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="Hypertext Markup Language">HTML</abbr>, or <abbr title="Scalable Vector Graphics">SVG</abbr> to be supported, other than the expectations set for these technologies by their respective specifications.</p>
 
                     <div class="ednote">
                         <p>This specification intentionally avoids introducing any new layout features. Any shortcoming of the
@@ -1249,7 +1249,7 @@
 
 					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach the end of one resource, they have to activate a hyperlink to move to the next resource in the sequence. While this model of navigation is effective, it is also disruptive for immersive reading &#8212; it forces users to disengage from the content and perform the actions necessary to activate the links. It is also limited to media types that support hyperlinks.</p>
 
-					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user agent to automatically move the user to the next resource when a more natural action occurs, like a general swipe across the screen. It is similar conceptually and functionally to the [[!HTML]] <code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"><code>next</code> and <code>prev</code> relationships</a>.</p>
+					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user agent to automatically move the user to the next resource when a more natural action occurs, like a general swipe across the screen. It is similar conceptually and functionally to the [[!html]] <code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"><code>next</code> and <code>prev</code> relationships</a>.</p>
                         
                     <p>User agents MUST provide an affordance for moving forward and backward in the <a>default reading order</a> of a <a>Web Publication</a>.</p>
 
