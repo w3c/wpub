@@ -63,6 +63,12 @@
                     "w3cid": 65283
                   },
 			      {
+                    "name": "Hadrien Gardeur",
+                    "company": "Feedbooks",
+                    "companyURL": "http://www.feedbooks.com/",
+                    "w3cid": 97094
+                  },
+			      {
                     "name": "Florian Rivoal",
                     "company": "Vivliostyle Inc.",
                     "companyURL": "http://vivliostyle.com/",
@@ -314,7 +320,7 @@
 					<dt><dfn data-lt="URLs">URL</dfn></dt>
 					<dd>
 						<p>The general term <abbr title="Uniform Resource Locator">URL</abbr> is defined by the URL
-							Standard&#160;[[!url]]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
+							Standard&#160;[[!URL]]. It is used as in other <abbr title="World Wide Web Consortium">W3C</abbr>
 							specifications, like <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. In
 							particular, a <abbr title="Uniform Resource Locator">URL</abbr> allows for the usage of
 							characters from Unicode following&#160;[[!rfc3987]]. See <a
@@ -955,172 +961,333 @@
 					viable and what solutions can be standardized. Input on the feasibility and challenges of these
 					approaches is welcome at any time.</p>
 			</div>
+            
+            <section id="obtaining-manifest">
+                <h3>Obtaining a manifest</h3>
+                <div class="ednote">
+                    <p><a href="#wp-linking">Discovery of a manifest</a> is currently tied to the <code>publication</code> value for the <code>rel</code> attribute in an HTTP <code>Link</code> header or an HTML <code>link</code> element.</p>
+                    <p>This could change in the future if our work aligns with [[appmanifest]] or another manifest format.</p>
+                </div>
+                <p> <p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining a manifest</dfn> are given by the following algorithm.
+                The algorithm, if successful, returns a <a>processed manifest</a> and the <var>manifest URL</var>; otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest declaration.</p>
+                <ol>
+                    <li>
+                        From the <code>Document</code> of the top-level browsing context, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be the first <code>link</code> element in tree order whose <code>rel</code> attribute contains the token <code>publication</code>.
+                    </li>
+                    <li>
+                        If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest link</var> is <code>null</code>, terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string, then abort these steps.
+                    </li>
+                    <li>
+                        Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code> attribute, relative to the element's base URL. If parsing fails, then abort these steps.
+                    </li>
+                    <li>
+                        Let <var>request</var> be a new [[!FETCH]] request, whose URL is <var>manifest URL</var>, and whose context is "<code>publication</code>".
+                    </li>
+                    <li>
+                        If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is '<code>use-credentials</code>', then set <var>request</var>'s credentials to '<code>include</code>'.
+                    </li>
+                    <li>
+                        Await the result of performing a [[!FETCH]] with <var>request</var>, letting <var>response</var> be the result.
+                    </li>
+                    <li>
+                        If <var>response</var> is a network error, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
+                    </li>
+                    <li>
+                        Let <var>manifest</var> be the result of running <a>processing a manifest</a> given <var>text</var>, <var>manifest URL</var>, and the URL that represents the address of the top-level browsing context.
+                    </li>
+                    <li>
+                        Return <var>manifest</var> and <var>manifest URL</var>.
+                    </li>
+                </ol>
+                <div class="ednote">The <code>publication</code> value for context doesn't exist yet. We'll need to define and register this context value properly.</div>
+            </section>
+            <section id="processing-manifest">
+                <h3>Processing the manifest</h3>
+                <div class="ednote">
+                    <p>The <a>manifest</a> could be processed differently if we align with [[appmanifest]] or another format in the future.</p> 
+                    <p>Instead of using our own algorithm, processing would have to be defined as an extension point for another algorithm.</p>
+                </div>
+                <p>
+                    The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm.The algorithm takes a <var>text</var> string as an argument, which represents a <a>manifest</a>, and a [[!URL]] <var>manifest URL</var>, which represents the location of the manifest, and a [[!URL]] <var>document URL</var>. The output from inputting an JSON document into this algorithm is a <dfn>processed manifest</dfn>.
+                </p>
+                <ol>
+                    <li>
+                        Let <var>json</var> be the result of <a data-cite="!ECMASCRIPT#sec-json.parse">parsing</a> <var>text</var>. If <a data-cite="!ECMASCRIPT#sec-json.parse">parsing</a> throws an error:
+                        <ol>
+                            <li>
+                                Issue a developer warning with any details pertaining to the JSON parsing error.
+                            </li>
+                            <li>
+                                Set <var>json</var> to be the result of <a data-cite="!ECMASCRIPT#sec-15.12.2">parsing</a> the string <code>"{}"</code>.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        If Type(<var>json</var>) is not <code>Object</code>:
+                        <ol>
+                            <li>
+                                Issue a developer warning that the manifest needs to be an object.
+                            </li>
+                            <li>
+                                Set <var>json</var> to be the result of <a data-cite="!ECMASCRIPT#sec-15.12.2">parsing</a> the string <code>"{}"</code>.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        Extension point: process any proprietary and/or other supported members at this point in the algorithm.
+                    </li>
+                    <li>
+                        Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+                    </li>
+                    <li>
+                        Set <var>manifest</var>["reading_order"] to the result of <a>processing the default reading order</a> given <var>manifest</var>["reading_order"],  <var>manifest</var>["resources"], <var>manifest URL</var>, and <var>document URL</var>.
+                    </li>
+                    <li>
+                        Return <var>manifest</var>.
+                    </li>
+                </ol>
+            </section>
+            
+            <section id="processing-reading-order">
+                <h3>Processing the default reading order</h3>
+                <p>
+                    The <dfn data-lt="processing the default reading order">steps for processing the default reading order</dfn> are given by the following algorithm.
+                </p>
+                <ol>
+                    <li>
+                        If <var>manifest</var>["reading_order"] is not empty, return it and terminate this algorithm.
+                    </li>
+                    <li>
+                        If <var>manifest</var>["resources"] is not empty, let <var>navigation document link</var> be the first <a>PublicationLink</a> whose <code>rel</code> member contains the token <code>contents</code>.
+                    </li>
+                    <li>
+                        If <var>navigation document link</var> is not <code>null</code> and its <code>href</code> member is not <code>empty</code>, let <var>navigation document URL</var> be the result of parsing the value of the <code>href</code> attribute, relative to the <var>manifest URL</var>.
+                    </li>
+                    <li>
+                        If <var>navigation document URL</var> is empty, set <var>navigation document URL</var> to <var>document URL</var>.
+                    </li>
+                    <li>
+                        Let <var>request</var> be a new [[!FETCH]] request, whose URL is <var>navigation document URL</var>, and whose context is "<code>publication</code>".
+                    </li>
+                    <li>
+                        Await the result of performing a [[!FETCH]] with <var>request</var>, letting <var>response</var> be the result.
+                    </li>
+                    <li>
+                        If <var>response</var> is a network error, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>document</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!FETCH#concept-request-body">body</a>.
+                    </li>
+                    <li>
+                        If <var>document</var> is not an [[!html]] document, terminate this algorithm.
+                    </li>
+                    <li>
+                        Let <var>default reading order</var> be the result of processing <var>document</var>:
+                        <ol>
+                            <li>
+                                If <var>document</var> contains a <code>nav</code> element:
+                                <ol>
+                                    <li>Extract a list of resource paths referenced from the <code>href</code> attribute of all <code>a</code> elements.</li>
+                                    <li>Strip any fragment identifiers from the references.</li>
+                                    <li>Resolve all relative paths to full URLs.</li>
+                                    <li>Remove all consecutive references to the same resource, leaving only the first.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Otherwise terminate this algorithm.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>Return <var>default reading order</var>.</li>
+                </ol>
+            </section>
+            
 		</section>
-		<section id="wp-enhancements">
-			<h2>Reading Enhancements</h2>
+		<section id="wp-affordances">
+			<h2>Affordances</h2>
 
-			<p class="ednote">This section contains placeholders for possible reading enhancements/affordances the user agent
-				may/should/must provide. The list is subject to addition, modification and removal as the enhancements get
-				discussed in more detail.</p>
+			<p class="ednote">This section contains placeholders for possible reading enhancements/affordances the user agent may/should/must provide. The list is subject to addition, modification and removal as the enhancements get discussed in more detail.</p>
+            
+            <section id="aff-publication-mode">
+                <h3>Switch to publication mode</h3>
+                <p>When a User Agent <a>obtains a manifest</a> it SHOULD display an affordance for switching the display to <a>publication mode</a>.</p>
+                <p>This affordance has the following requirements:</p>
+                <ol>
+                    <li>it MUST inform the user that the current resource is part of a Web Publication</li>
+                    <li>it SHOULD display the title of the Web Publication</li>
+                    <li>it MAY display additional metadata from the <abbr title="information set"><a>infoset</a></abbr></li>
+                </ol>
+                <p><dfn>Publication mode</dfn> is a display mode implemented by the User Agent that follows the conventions listed in <a href="#aff-presentation">presentation</a> and <a href="#navigation">navigation</a>.</p>
+            </section>
+            
+            <section id="aff-add-to-list">
+                <h3>Add to the list of publications</h3>
+                <p>User Agents SHOULD provide a <dfn>list of publications</dfn> where the User can browse, search, add and remove their publications.</p>
+                <p>When a User Agent <a>obtains a manifest</a> for a Web Publication that's not currently listed in the <a>list of publications</a>, it MAY provide an affordance to add it to the list.</p>
+                <p>This affordance has the following requirements:</p>
+                <ol>
+                    <li>it SHOULD display the title of the Web Publication</li>
+                    <li>it MAY display additional metadata from the <abbr title="information set"><a>infoset</a></abbr></li>
+                </ol>
+            </section>
+            
+            <section id="aff-presentation">
+                <h3>Presentation</h3>
+                <section id="layout">
+                    <h4>Layout</h4>
 
-			<section id="layout">
-				<h3>Layout</h3>
+                    <p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to all Web content: [[html]] documents are styled and laid out according to the rules of <a href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [[!SVG]] documents are rendered as expected of that format, etc. This specification requires no particular profile or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="Hypertext Markup Language">HTML</abbr>, or <abbr title="Scalable Vector Graphics">SVG</abbr> to be supported, other than the expectations set for these technologies by their respective specifications.</p>
 
-				<p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to all Web
-					content: [[!html]] documents are styled and laid out according to the rules of <a
-						href="https://www.w3.org/TR/CSS/"><abbr title="Cascading Style Sheets">CSS</abbr></a>, [[!svg]]
-					documents are rendered as expected of that format, etc. This specification requires no particular profile
-					or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr title="Hypertext Markup Language"
-						>HTML</abbr>, or <abbr title="Scalable Vector Graphics">SVG</abbr> to be supported, other than the
-					expectations set for these technologies by their respective specifications.</p>
+                    <div class="ednote">
+                        <p>This specification intentionally avoids introducing any new layout features. Any shortcoming of the
+                            Web platform in terms of layout needs to be addressed for the whole Web platform, which means via
+                                <abbr title="Cascading Style Sheets">CSS</abbr>.</p>
 
+                        <p>This working group will work with other relevant groups of the <abbr title="World Wide Web Consortium"
+                                >W3C</abbr> to address platform-wide limitations that negatively impact <a>Web
+                            Publications</a>.</p>
+                    </div>
 
-				<div class="ednote">
-					<p>This specification intentionally avoids introducing any new layout features. Any shortcoming of the
-						Web platform in terms of layout needs to be addressed for the whole Web platform, which means via
-							<abbr title="Cascading Style Sheets">CSS</abbr>.</p>
+                    <p>For the purposes of layout, each resource of a Web Publication is treated as a separate document. User
+                        agents MUST NOT mix content from multiple resources in the same rendering (e.g., <a
+                            href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a
+                            href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">absolutely positioned
+                            elements</a> from one resource cannot intrude or overlap with content from an other resource).</p>
 
-					<p>This working group will work with other relevant groups of the <abbr title="World Wide Web Consortium"
-							>W3C</abbr> to address platform-wide limitations that negatively impact <a>Web
-						Publications</a>.</p>
-				</div>
+                    <div class="issue">
+                        <p>Despite this general requirement that each resource should be treated as a separate document for the
+                            purpose of layout, there are some places where <abbr title="Cascading Style Sheets">CSS</abbr>
+                            specifications should be amended to be able to deal more intelligently with collections of resources
+                            like <a>Web Publications</a>.</p>
 
-				<p>For the purposes of layout, each resource of a Web Publication is treated as a separate document. User
-					agents MUST NOT mix content from multiple resources in the same rendering (e.g., <a
-						href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a
-						href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">absolutely positioned
-						elements</a> from one resource cannot intrude or overlap with content from an other resource).</p>
+                        <p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references"
+                                >cross-references</a>, which are currently restricted to work only within a single document. This
+                            restriction should be relaxed to allow for cross-references between separate resources of a single
+                            Web Publication.</p>
 
-				<div class="issue">
-					<p>Despite this general requirement that each resource should be treated as a separate document for the
-						purpose of layout, there are some places where <abbr title="Cascading Style Sheets">CSS</abbr>
-						specifications should be amended to be able to deal more intelligently with collections of resources
-						like <a>Web Publications</a>.</p>
+                        <p>Another related would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties"
+                                >counters</a> to accumulate across multiple resources of a single Web Publication (e.g., so that
+                            figures in multiple sections may be numbered in a single sequence).</p>
+                    </div>
 
-					<p>One instance is the definition of <a href="https://drafts.csswg.org/css-content/#cross-references"
-							>cross-references</a>, which are currently restricted to work only within a single document. This
-						restriction should be relaxed to allow for cross-references between separate resources of a single
-						Web Publication.</p>
+                </section>
+                
+                <section id="aff-user-settings">
+                    <h4>User Settings</h4>
 
-					<p>Another related would be to allow <a href="https://drafts.csswg.org/css-lists-3/#counter-properties"
-							>counters</a> to accumulate across multiple resources of a single Web Publication (e.g., so that
-						figures in multiple sections may be numbered in a single sequence).</p>
-				</div>
+                    <p>When a user agent renders a <a>Web Publication</a>, it SHOULD provide user settings to customize the experience.</p>
+                    <p>User settings may include:</p>
+                    <ul>
+                        <li>text size</li>
+                        <li>font family</li>
+                        <li>display mode (night, high contrast...) </li>
+                        <li>playback speed (for audio and video resources) </li>
+                    </ul>
+                    <p>This specification does not cover how the user agent may override author styles to offer user settings.</p>
+                    
+                    <div class="ednote">
+                        <p>To provide user settings in their reader mode, browsers usually get rid of most of the author styles.</p>
+                        <p>There's always a tension in reading environments between author styles and the user's preference, which is very hard to balance.</p>
+                    </div>
+                    
 
-				<section id="scrolling-or-paginating" class="informative">
-					<h4>Scrolling or Paginating</h4>
+                </section>
+                
+                <section id="scrolling-or-paginating" class="informative">
+                    <h4>Scrolling or Paginating</h4>
 
-					<p>Publications have historically been presented via paged media, whereas Web pages almost always scroll.
-						As the preferences of individual readers vary, and as different types of publications are better
-						suited for one or the other, this specification encourages user agents to support both, and to offer
-						a choice to their users.</p>
+                    <p>Publications have historically been presented via paged media, whereas Web pages almost always scroll.
+                    As the preferences of individual readers vary, and as different types of publications are better suited for one or the other, this specification encourages user agents to support both, and to offer a choice to their users.</p>
 
-					<div class="issue">
-						<p>It may be useful for authors to be able to specify a preference between scrolling and pagination,
-							even if a strict requirement is not possible. This should most likely be addressed through an
-							extension of <a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"
-									><code>@viewport</code></a> or of <a
-								href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see
-							[[css-device-adapt]]), or possibly through an extension of <a
-								href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See
-							[[css-page-3]]). This should be discussed with the relevant working groups (<a
-								href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/"
-								>WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
-					</div>
-				</section>
-				<section id="enh-pagination">
-					<h4>Paginated Layout</h4>
+                    <div class="issue">
+                        <p>It may be useful for authors to be able to specify a preference between scrolling and pagination, even if a strict requirement is not possible. This should most likely be addressed through an extension of <a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"><code>@viewport</code></a> or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see [[css-device-adapt]]), or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See [[css-page-3]]). This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
+                    </div>
+                </section>
+                <section id="aff-pagination">
+                    <h4>Paginated Layout</h4>
 
-					<p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each
-						document in the <a>default reading order</a> sequentially, with the last page of a resource being
-						followed by the first page of the subsequent one.</p>
+                    <p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each document in the <a>default reading order</a> sequentially, with the last page of a resource being followed by the first page of the subsequent one.</p>
 
-					<div class="issue">
-						<p>To avoid blank pages, if a resource ends on a left page (resp. right page), the subsequent one
-							should start on a right page (resp. left page) even if the <a
-								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (see
-							[[!css-page-3]]) would otherwise lead to it starting on the opposite page. It should also be
-							possible to use the <a href="https://www.w3.org/TR/css-break-3/#propdef-break-before"
-								>break-before</a> property (see [[!css-break-3]]) to force the content to resume on the
-							opposite side if that was desired by the author.</p>
+                    <div class="issue">
+                        <p>To avoid blank pages, if a resource ends on a left page (resp. right page), the subsequent one should start on a right page (resp. left page) even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (see [[!css-page-3]]) would otherwise lead to it starting on the opposite page. It should also be possible to use the <a href="https://www.w3.org/TR/css-break-3/#propdef-break-before">break-before</a> property (see [[!css-break-3]]) to force the content to resume on the opposite side if that was desired by the author.</p>
 
-						<p>[[css-page-3]] needs to be amended to describe this exception to the general behavior when dealing
-							with collections of documents instead of individual documents.</p>
-					</div>
+                        <p>[[css-page-3]] needs to be amended to describe this exception to the general behavior when dealing with collections of documents instead of individual documents.</p>
+                    </div>
 
-					<div class="issue">
-						<p>How is pagination supposed to work when subsequent resources have opposite <a
-								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> directions (see
-							[[css-page-3]]). For example, due to different a different writing mode? This is not necessarily
-							a problem from a layout point of view, as each page is independent, but from an UI point of view.
-							If swiping left means next page until the end of one chapter, and starts meaning previous page in
-							the next chapter because the language is switched from English to Hebrew, this is going to be
-							confusing.</p>
-					</div>
+                    <div class="issue">
+                        <p>How is pagination supposed to work when subsequent resources have opposite <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> directions (see [[css-page-3]]). For example, due to different a different writing mode? This is not necessarily a problem from a layout point of view, as each page is independent, but from an UI point of view.
+                        If swiping left means next page until the end of one chapter, and starts meaning previous page in the next chapter because the language is switched from English to Hebrew, this is going to be confusing.</p>
+                    </div>
 
-					<div class="issue">
-						<p>Should any of the above be normative, or should this be up to user agents to explore, and only
-							standardize if and when a clear winning approach emerges?</p>
-					</div>
+                    <div class="issue">
+                        <p>Should any of the above be normative, or should this be up to user agents to explore, and only standardize if and when a clear winning approach emerges?</p>
+                    </div>
 
-					<div class="issue">
-						<p>[[css-page-3]] needs to be amended so that <a
-								href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are not
-							automatically reset to at the beginning of each new resource belonging to the same Web
-							Publication.</p>
-					</div>
+                    <div class="issue">
+                        <p>[[css-page-3]] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are not automatically reset to at the beginning of each new resource belonging to the same Web Publication.</p>
+                    </div>
 
-				</section>
-			</section>
+                </section>
+            </section>
 
-			<section id="enh-nav">
+			<section id="aff-nav">
 				<h3>Navigation</h3>
 
 				<p class="issue" data-number="86"></p>
 
-				<section id="enh-reading-order">
+				<section id="aff-reading-order">
 					<h4>Reading Order</h4>
 
-					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach
-						the end of one resource, they have to activate a hyperlink to move to the next resource in the
-						sequence. While this model of navigation is effective, it is also disruptive for immersive reading
-						&#8212; it forces users to disengage from the content and perform the actions necessary to activate
-						the links. It is also limited to media types that support hyperlinks.</p>
+					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users reach the end of one resource, they have to activate a hyperlink to move to the next resource in the sequence. While this model of navigation is effective, it is also disruptive for immersive reading &#8212; it forces users to disengage from the content and perform the actions necessary to activate the links. It is also limited to media types that support hyperlinks.</p>
 
-					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user
-						agent to automatically move the user to the next resource when a more natural action occurs, like a
-						general swipe across the screen. It is similar conceptually and functionally to the [[!html]]
-							<code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"
-								><code>next</code> and <code>prev</code> relationships</a>.</p>
+					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the user agent to automatically move the user to the next resource when a more natural action occurs, like a general swipe across the screen. It is similar conceptually and functionally to the [[!html]] <code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"><code>next</code> and <code>prev</code> relationships</a>.</p>
+                        
+                    <p>User agents MUST provide an affordance for moving forward and backward in the <a>default reading order</a> of a <a>Web Publication</a>.</p>
 
 					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
 				</section>
+                
+                <section id="aff-progression">
+					<h4>Progression</h4>
 
-				<section id="enh-toc">
+					<p>While reading a <a>Web Publication</a>, the user follows a natural progression within a resource as well as between resources (following the <a>default reading order</a>).</p>
+                    
+                    <p>User agents SHOULD provide an affordance that saves this progression in the publication and return the user to their current location the next time that they open the publication again.</p>
+                    
+                    <p>When the user agent <a>obtains a manifest</a> for the first time, it MAY also prompt the user whether they'd like to:</p>
+                    <ul>
+                        <li>continue reading the publication from their current location</li>
+                        <li>or start reading the publication from the first resource in the <a>default reading order</a></li>
+                    </ul>
+				</section>
+
+				<section id="aff-toc">
 					<h4>Table of Contents</h4>
 
-					<p>The table of contents is one of the key aids to navigating a publication, as it enables users to
-						quickly move to the start of major sections. It is also a useful aid in understanding the overall
-						structure and purpose of a publication (e.g., what topics are covered, where the user currently is in
-						relation to the overall structure). Users often want quick access the table contents for these
-						reasons.</p>
+					<p>The table of contents is one of the key aids to navigating a publication, as it enables users to quickly move to the start of major sections. It is also a useful aid in understanding the overall structure and purpose of a publication (e.g., what topics are covered, where the user currently is in relation to the overall structure). Users often want quick access the table contents for these reasons.</p>
 
-					<p>User agents can use table of contents defined in the <abbr title="information set"
-							><a>infoset</a></abbr> to present an interface that allows users to review and activate the links
-						without leaving the resource they are currently viewing.</p>
+					<p>User agents SHOULD provide an affordance for accessing this table of contents without leaving the resource they are currently viewing.</p>
 
-					<p class="issue"><a href="https://github.com/w3c/wpub/issues/9">Issue 9</a>: Does the user agent need to
-						provide access to the <a>table of contents</a>, or do such mechanisms belong in the content.</p>
+					<p class="issue"><a href="https://github.com/w3c/wpub/issues/9">Issue 9</a>: Does the user agent need to provide access to the <a>table of contents</a>, or do such mechanisms belong in the content.</p>
 				</section>
 			</section>
 
-			<section id="enh-offline-reading">
-				<h3>Offline Reading</h3>
+			<section id="aff-offline-access">
+				<h3>Offline Access</h3>
 
 				<p class="ednote">Detail on offline caching and reading will be included in a future draft.</p>
 			</section>
 
-			<section id="enh-search">
+			<section id="aff-search">
 				<h3>Search</h3>
 
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a future
@@ -1177,8 +1344,7 @@
 					preference to any alternative addresses. Such use facilitates the collation of Web Publication Locators
 					associated with a particular Web Publication. <abbr title="Uniform Resource Locators">URLs</abbr> of Web
 					Publication resources appearing in a Web Publication Locator should match the <abbr
-						title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr
-						title="information set"><a>infoset</a></abbr>.</p>
+						title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr title="information set"><a>infoset</a></abbr>.</p>
 			</div>
 		</section>
 		<section id="security">
@@ -1191,7 +1357,237 @@
 
 			<div class="ednote">Placeholder for privacy issues.</div>
 		</section>
-		<section class="appendix">
+		<section class="appendix" id="webidl">
+            <h2>WebIDL</h2>
+            
+		    <section id="webpublicationmanifest-dictionary">
+                <h3>
+                    <dfn>WebPublicationManifest</dfn> dictionary
+                </h3>
+                <pre class="idl">
+                    dictionary WebPublicationManifest {
+                        DOMString                               lang;
+                        TextDirection                           dir = "auto";
+                        sequence&lt;LocalizableString&gt;       title;
+                        USVString                               identifier;
+                        sequence&lt;LocalizableString&gt;       author;
+                        DOMString                               modified;
+                        DOMString                               publication_date;
+                        sequence&lt;PublicationLink&gt;         links;
+                        sequence&lt;PublicationLink&gt;         reading_order;
+                        sequence&lt;PublicationLink&gt;         resources;
+                    };
+      </pre>
+                
+                <p>The <a>WebPublicationManifest</a> has the following members:</p>
+                <dl data-dfn-for="WebPublicationManifest">
+                    <dt>
+                        <dfn>lang</dfn>
+                    </dt>
+                    <dd>
+                        Contains the default value <a href="#wp-language">language</a>.
+                    </dd>
+                    <dt>
+                        <dfn>dir</dfn>
+                    </dt>
+                    <dd>
+                        Contains the default value for <a>base direction</a>.
+                    </dd>
+                    <dt>
+                        <dfn>title</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a href="#wp-title">title</a>.
+                    </dd>
+                    <dt>
+                        <dfn>identifier</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>canonical identifier</a>.
+                    </dd>
+                    <dt>
+                        <dfn>author</dfn>
+                    </dt>
+                    <dd>
+                        Contains one or more <a href="#wp-creators">creators</a>.
+                    </dd>
+                    <dt>
+                        <dfn>modified</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>last modification date</a>.
+                    </dd>
+                    <dt>
+                        <dfn>publication_date</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>publication date</a>.
+                    </dd>
+                    <dt>
+                        <dfn>links</dfn>
+                    </dt>
+                    <dd>
+                        Contains links to external resources.
+                    </dd>
+                    <dt>
+                        <dfn>reading_order</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>default reading order</a>.
+                    </dd>
+                    <dt>
+                        <dfn>resources</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>resource list</a>.
+                    </dd>
+                </dl>
+            </section>
+            
+            <section id="dir-idl">
+                <h3>
+                    <code>dir</code> member
+                </h3>
+                <pre class="idl">
+                    enum TextDirection {
+                        "ltr",
+                        "rtl",
+                        "auto"
+                    };
+                </pre>
+                <p>
+                    The <code>dir</code> member's value are defined by <dfn>TextDirection</dfn> as:
+                </p>
+                <dl data-dfn-for="TextDirection">
+                  <dt>
+                    <dfn>ltr</dfn>
+                  </dt>
+                  <dd>
+                    left-to-right text.
+                  </dd>
+                  <dt>
+                    <dfn>rtl</dfn>
+                  </dt>
+                  <dd>
+                    right-to-left text.
+                  </dd>
+                  <dt>
+                    <dfn>auto</dfn>
+                  </dt>
+                  <dd>
+                    determined by the Unicode Bidirectional Algorithm [[!UAX9]] algorithm.
+                  </dd>
+                </dl>
+            </section>
+            
+            <section id="localizable-idl">
+                <h3>
+                    <dfn>LocalizableString</dfn> dictionary
+                </h3>
+                <p class="ednote">This is a slightly tweaked version of the i18n recommendation that also includes a string value in addition to a language and a direction.</p>
+                <p class="ednote">While this should be enough for the title, this strategy currently limits the manifest to a single author. We'll need to introduce an additional dictionary for authors to avoid this issue.</p>
+                <p>In our <abbr title="information set"><a>infoset</a></abbr>, some metadata have strong requirements for  internationalization. For those members, we rely on the <a href="https://w3c.github.io/string-meta/#bestPractices">best practices established by the i18n WG</a> and rely on a <a>LocalizableString</a> dictionary.</p>
+                <pre class="idl">
+                    dictionary LocalizableString {
+                        required    USVString       value;
+                                    DOMString       lang;
+                                    TextDirection   dir = "auto";
+                    };
+                </pre>
+                <p>When <code>lang</code> or <code>dir</code> are specified in <a>LocalizableString</a>, these values override the default language and base direction specificed in <a>WebPublicationManifest</a>.</p>
+                <p><a>LocalizableString</a> has the following members:</p>
+                <dl data-dfn-for="LocalizableString">
+                    <dt>
+                        <dfn>value</dfn>
+                    </dt>
+                    <dd>
+                        Contains the localized string.
+                    </dd>
+                    <dt>
+                        <dfn>lang</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a href="#wp-language">language</a>.
+                    </dd>
+                    <dt>
+                        <dfn>dir</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a>base direction</a>.
+                    </dd>
+            </section>
+            
+            <section id="link-webidl">
+                <h3>
+                    <dfn>PublicationLink</dfn> dictionary
+                </h3>
+                <pre class="idl">
+                    dictionary PublicationLink {
+                        required    USVString                   href;
+                                    DOMString                   type;
+                                    USVString                   title;
+                                    sequence&lt;DOMString&gt;   rel;
+                                    DOMString                   height;
+                                    DOMString                   width;
+                                    boolean                     templated;
+                    };
+                </pre>
+                
+                <p class="ednote">This is based on a simplifed model of <abbr title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest">RWPM</a></abbr> where the link does not contain properties. In the context of EPUB 4, we might need to re-introduce these properties as well.</p>
+                
+                <p>The PublicationLink dictionary contains the following members:</p>
+                
+                <dl data-dfn-for="PublicationLink">
+                    <dt>
+                        <dfn>href</dfn>
+                    </dt>
+                    <dd>
+                        Contains the [[!URL]] of the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>type</dfn>
+                    </dt>
+                    <dd>
+                        Contains the MIME media type of the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>title</dfn>
+                    </dt>
+                    <dd>
+                        Text label for the linked resource.
+                    </dd>
+                    <dt>
+                        <dfn>rel</dfn>
+                    </dt>
+                    <dd>
+                        Contains one or more rel based on the <a href="https://www.iana.org/assignments/link-relations.html">IANA link registry</a>.
+                    </dd>
+                    <dt>
+                        <dfn>height</dfn>
+                    </dt>
+                    <dd>
+                        Height of the linked resource, expressed in pixels.
+                    </dd>
+                    <dt>
+                        <dfn>width</dfn>
+                    </dt>
+                    <dd>
+                        Width of the linked resource, expressed in pixels.
+                    </dd>
+                    <dt>
+                        <dfn>templated</dfn>
+                    </dt>
+                    <dd>
+                        Indicates that the <a href="#dom-publicationlink-rel"><code>href</code></a> is a URI template.
+                    </dd>
+                </dl>
+                
+            </section>
+            
+        </section>
+        
+        <section class="appendix">    
+            
 			<h2>Image Descriptions</h2>
 
 			<dl>
