@@ -85,5 +85,14 @@ var biblio = {
         "Ivan Herman"
       ],
       "date": "2018-01-04"
+    },
+    "string-meta": {
+      "title": "Requirements for Language and Direction Metadata in Data Formats",
+      "href": "https://w3c.github.io/string-meta/",
+      "authors" : [
+        "Addison Phillips",
+        "Richard Ishida"
+      ],
+      "date": "2017-12-01"
     }
 }
