@@ -964,7 +964,7 @@
                     <p><a href="#wp-linking">Discovery of a manifest</a> is currently tied to the <code>publication</code> value for the <code>rel</code> attribute in an HTTP <code>Link</code> header or an HTML <code>link</code> element.</p>
                     <p>This could change in the future if our work aligns with [[appmanifest]] or another manifest format.</p>
                 </div>
-                <p> <p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining a manifest</dfn> are given by the following algorithm.
+                <p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining a manifest</dfn> are given by the following algorithm.
                 The algorithm, if successful, returns a <a>processed manifest</a> and the <var>manifest URL</var>; otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest declaration.</p>
                 <ol>
                     <li>
@@ -1004,6 +1004,9 @@
                         Return <var>manifest</var> and <var>manifest URL</var>.
                     </li>
                 </ol>
+
+                <p>(See the <a href="#obtaining-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm.)</p>
+
                 <div class="ednote">The <code>publication</code> value for context doesn't exist yet. We'll need to define and register this context value properly.</div>
             </section>
             <section id="processing-manifest">
@@ -1051,6 +1054,9 @@
                         Return <var>manifest</var>.
                     </li>
                 </ol>
+
+                <p>(See the <a href="#processing-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm.)</p>
+
             </section>
             
             <section id="processing-reading-order">
@@ -1105,6 +1111,9 @@
                     </li>
                     <li>Return <var>default reading order</var>.</li>
                 </ol>
+
+                <p>(See the <a href="#processing-reading-order-diagram">diagram in the appendix</a> for visual representation of the core of the algorithm and the <a href="#processing-reading-order-nav-diagram">separate diagram on handling the <code>nav</code> element</a>.)</p>
+
             </section>
             
 		</section>
