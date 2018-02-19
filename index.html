@@ -833,7 +833,6 @@
 				<div class="ednote">Additional serialization details will be included in a future draft, as these will depend
 					on integration with [[appmanifest]].</div>
 
-				<p class="issue" data-number="25"></p>
 				<p class="issue" data-number="32"></p>
 			</section>
 		</section>
@@ -1121,6 +1120,8 @@
 			<h2>Affordances</h2>
 
 			<p class="ednote">This section contains placeholders for possible reading enhancements/affordances the user agent may/should/must provide. The list is subject to addition, modification and removal as the enhancements get discussed in more detail.</p>
+
+			<p class="issue" data-number="143"></p>
             
             <section id="aff-publication-mode">
                 <h3>Switch to publication mode</h3>
@@ -1168,7 +1169,7 @@
                             href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">absolutely positioned
                             elements</a> from one resource cannot intrude or overlap with content from an other resource).</p>
 
-                    <div class="issue">
+                    <div class="note">
                         <p>Despite this general requirement that each resource should be treated as a separate document for the
                             purpose of layout, there are some places where <abbr title="Cascading Style Sheets">CSS</abbr>
                             specifications should be amended to be able to deal more intelligently with collections of resources
@@ -1203,7 +1204,10 @@
                         <p>To provide user settings in their reader mode, browsers usually get rid of most of the author styles.</p>
                         <p>There's always a tension in reading environments between author styles and the user's preference, which is very hard to balance.</p>
                     </div>
-                    
+
+ 					<p class="issue" data-number="138"></p>
+ 					<p class="issue" data-number="136"></p>
+                   
 
                 </section>
                 
@@ -1213,33 +1217,34 @@
                     <p>Publications have historically been presented via paged media, whereas Web pages almost always scroll.
                     As the preferences of individual readers vary, and as different types of publications are better suited for one or the other, this specification encourages user agents to support both, and to offer a choice to their users.</p>
 
-                    <div class="issue">
+                    <div class="note">
                         <p>It may be useful for authors to be able to specify a preference between scrolling and pagination, even if a strict requirement is not possible. This should most likely be addressed through an extension of <a href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"><code>@viewport</code></a> or of <a href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta tag</a>(see [[css-device-adapt]]), or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a> (See [[css-page-3]]). This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
                     </div>
+ 					<p class="issue" data-number="137"></p>
+
                 </section>
                 <section id="aff-pagination">
                     <h4>Paginated Layout</h4>
 
                     <p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each document in the <a>default reading order</a> sequentially, with the last page of a resource being followed by the first page of the subsequent one.</p>
 
-                    <div class="issue">
+                    <div class="note">
                         <p>To avoid blank pages, if a resource ends on a left page (resp. right page), the subsequent one should start on a right page (resp. left page) even if the <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> (see [[!css-page-3]]) would otherwise lead to it starting on the opposite page. It should also be possible to use the <a href="https://www.w3.org/TR/css-break-3/#propdef-break-before">break-before</a> property (see [[!css-break-3]]) to force the content to resume on the opposite side if that was desired by the author.</p>
 
                         <p>[[css-page-3]] needs to be amended to describe this exception to the general behavior when dealing with collections of documents instead of individual documents.</p>
                     </div>
 
-                    <div class="issue">
+
+                    <div class="note">
                         <p>How is pagination supposed to work when subsequent resources have opposite <a href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> directions (see [[css-page-3]]). For example, due to different a different writing mode? This is not necessarily a problem from a layout point of view, as each page is independent, but from an UI point of view.
                         If swiping left means next page until the end of one chapter, and starts meaning previous page in the next chapter because the language is switched from English to Hebrew, this is going to be confusing.</p>
                     </div>
 
-                    <div class="issue">
-                        <p>Should any of the above be normative, or should this be up to user agents to explore, and only standardize if and when a clear winning approach emerges?</p>
-                    </div>
-
-                    <div class="issue">
+                    <div class="note">
                         <p>[[css-page-3]] needs to be amended so that <a href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are not automatically reset to at the beginning of each new resource belonging to the same Web Publication.</p>
                     </div>
+
+ 					<p class="issue" data-number="137"></p>
 
                 </section>
             </section>
@@ -1258,7 +1263,9 @@
                         
                     <p>User agents MUST provide an affordance for moving forward and backward in the <a>default reading order</a> of a <a>Web Publication</a>.</p>
 
-					<p class="issue" data-number="38">What is the interface for reading order navigation.</p>
+					<p class="issue" data-number="144"></p>
+					<p class="issue" data-number="38"></p>
+					<p class="issue" data-number="136"></p>
 				</section>
                 
                 <section id="aff-progression">
@@ -1273,6 +1280,8 @@
                         <li>continue reading the publication from their current location</li>
                         <li>or start reading the publication from the first resource in the <a>default reading order</a></li>
                     </ul>
+					<p class="issue" data-number="145"></p>
+					<p class="issue" data-number="136"></p>
 				</section>
 
 				<section id="aff-toc">
@@ -1282,14 +1291,15 @@
 
 					<p>User agents SHOULD provide an affordance for accessing this table of contents without leaving the resource they are currently viewing.</p>
 
-					<p class="issue"><a href="https://github.com/w3c/wpub/issues/9">Issue 9</a>: Does the user agent need to provide access to the <a>table of contents</a>, or do such mechanisms belong in the content.</p>
+					<p class="issue" data-number="145"></p>
+					<p class="issue" data-number="9">Does the user agent need to provide access to the <a>table of contents</a>, or do such mechanisms belong in the content.</p>
 				</section>
 			</section>
 
 			<section id="aff-offline-access">
 				<h3>Offline Access</h3>
 
-				<p class="ednote">Detail on offline caching and reading will be included in a future draft.</p>
+				<p class="issue" data-number="141"></p>
 			</section>
 
 			<section id="aff-search">
@@ -1297,6 +1307,7 @@
 
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a future
 					draft.</p>
+				<p class="issue" data-number="136"></p>
 			</section>
 		</section>
 		<section id="locators" class="informative">
