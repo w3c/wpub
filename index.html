@@ -1382,21 +1382,28 @@
                 </h3>
                 <pre class="idl">
                     dictionary WebPublicationManifest {
-                        DOMString                               lang;
-                        TextDirection                           dir = "auto";
-                        sequence&lt;LocalizableString&gt;       title;
-                        USVString                               identifier;
-                        sequence&lt;LocalizableString&gt;       author;
-                        DOMString                               modified;
-                        DOMString                               publication_date;
-                        sequence&lt;PublicationLink&gt;         links;
-                        sequence&lt;PublicationLink&gt;         reading_order;
-                        sequence&lt;PublicationLink&gt;         resources;
+                        required    USVString                               address;
+                                    DOMString                               lang;
+                                    TextDirection                           dir = "auto";
+                                    sequence&lt;LocalizableString&gt;       title;
+                                    USVString                               identifier;
+                                    sequence&lt;LocalizableString&gt;       author;
+                                    DOMString                               modified;
+                                    DOMString                               publication_date;
+                                    sequence&lt;PublicationLink&gt;         links;
+                                    sequence&lt;PublicationLink&gt;         reading_order;
+                                    sequence&lt;PublicationLink&gt;         resources;
                     };
       </pre>
                 
                 <p>The <a>WebPublicationManifest</a> has the following members:</p>
                 <dl data-dfn-for="WebPublicationManifest">
+                    <dt>
+                        <dfn>address</dfn>
+                    </dt>
+                    <dd>
+                        Contains the <a href="#wp-address">address</a>. Required.
+                    </dd>
                     <dt>
                         <dfn>lang</dfn>
                     </dt>
