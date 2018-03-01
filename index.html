@@ -514,25 +514,27 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>
-						that represents the primary entry point for the Web Publication. This URL
-						MUST resolve to an [[!html]] document.</p>
+						that represents the primary entry point for the Web Publication. If this URL
+						does not resolve to an [[!html]] document, user agents SHOULD NOT provide
+						access to the URL to users.</p>
 
 					<p>The referenced document SHOULD be a resource of the Web Publication. It can
 						be any resource, including one that is not listed in the <a>default reading
-							order</a>. The document MUST <a href="#wp-linking">link to the
-							manifest</a> to ensure that user agents can locate that document.</p>
+							order</a>. This document MUST include a <a href="#wp-linking">link to
+							the manifest</a> to ensure a bidirectional linking relationship (i.e.,
+						that user agents can also locate the manifest from the document at the
+						address.</p>
 
 					<p>If the document is not a Web Publication resource, user agents SHOULD load
 						the first document in the <a>default reading order</a> when initiating the
 						Web Publication.</p>
 
-					<p class="note">Providing access on the referenced document to navigation aids
-						that facilitate consumption of the content improves the usability of the Web
-						Publication, particularly in user agents that do not support Web
-						Publications (e.g., include a table of contents on the page, or provide a
-						link to one).</p>
+					<p class="note">To improve the usability of Web Publications, particularly in
+						user agents that do not support Web Publications, include navigation aids in
+						the referenced document that facilitate consumption of the content, (e.g.,
+						provide a table of contents or a link to one).</p>
 
-					<p>The availability of this address does not preclude the creation and use of
+					<p>The availability of the address does not preclude the creation and use of
 						other identifiers and/or addresses to retrieve a representation of a <a>Web
 							Publication</a>, whether in whole or in part.</p>
 
@@ -557,12 +559,13 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the
-						preferred version of the Web Publication. The canonical identifier SHOULD be
-						an <a>address</a>, but, if not, it MUST be possible to make a one-to-one
-						mapping to an address (e.g., a <abbr title="Digital Object Identifier"
-							>DOI</abbr> can be resolved to a <abbr title="Uniform Resource Locator"
-							>URL</abbr> via a <abbr title="Digital Object Identifier">DOI</abbr>
-						resolver).</p>
+						preferred version of the Web Publication. The canonical identifier MUST be
+						an <a>address</a> or a value that allows a one-to-one mapping to an address
+						(e.g., a <abbr title="Digital Object Identifier">DOI</abbr> can be resolved
+						to a <abbr title="Uniform Resource Locator">URL</abbr> via a <abbr
+							title="Digital Object Identifier">DOI</abbr> resolver). If a user agent
+						cannot resolve the canonical identifier to an address, it SHOULD ignore the
+						property.</p>
 
 					<p>If a Web Publication is hosted at more than one address, this identifier
 						allows a user agent to identify the shared relationship between the versions
@@ -602,24 +605,26 @@
 					<p>Creators are the individuals or entities responsible for the creation of the
 							<a>Web Publication</a>.</p>
 
-					<p>The role the creator played in the creation of the Web Publication SHOULD
-						also be specified (e.g., 'author', 'illustrator', 'translator').</p>
+					<p>The creator property SHOULD include the role the creator played in the
+						creation of the Web Publication (e.g., 'author', 'illustrator',
+						'translator').</p>
 				</section>
 
 				<section id="wp-language-and-dir">
 					<h4>Language and Base Direction</h4>
 
-					<p> Each textual property in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> (e.g., title, creators)
-						MUST be <a href="https://w3c.github.io/string-meta/#dom-localizable"
-							>Localizable</a> [[string-meta]]. This means it MUST be possible to
-						assign: </p>
+					<p>Each textual property in the <a>Web Publication's</a>
+						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a
+							href="#wp-title">title</a>, <a href="#wp-creator">creators</a>) is <a
+							href="https://w3c.github.io/string-meta/#dom-localizable"
+							>Localizable</a> [[string-meta]]. This means it is possible for a user
+						agent to assign:</p>
 
 					<ul>
-						<li>The natural <dfn>language</dfn>. When specified, the language MUST be a
-							tag that conforms to [[!bcp47]].</li>
-						<li>The <dfn>base direction</dfn>, that identifies the display direction for
-							the property. It is specified by a tag with the possible values of: <ul>
+						<li>The natural <dfn>language</dfn>, which MUST be a tag that conforms to
+							[[!bcp47]].</li>
+						<li>The <dfn>base direction</dfn>, which identifies the display direction
+							for the property. The base direction has the possible values: <ul>
 								<li><code>ltr</code>: left-to-right;</li>
 								<li><code>rtl</code>: right-to-left;</li>
 								<li><code>auto</code>: direction is determined from the value of the
@@ -628,30 +633,31 @@
 						</li>
 					</ul>
 
-					<p> Furthermore, the <a>Web Publication's</a>
+					<p>Furthermore, the <a>Web Publication's</a>
 						<abbr title="information set"><a>infoset</a></abbr> MAY contain global
-						values for the language and the base direction using a [[!bcp47]] tag, and
-						the values of <code>ltr</code>/<code>rtl</code>/<code>auto</code> as above,
-						respectively. These are used as defaults for textual properties in the <abbr
+						declarations of the language and the base direction using the same
+						conventions (i.e., [[!bcp47]] tags for language, and the values of
+							<code>ltr</code>/<code>rtl</code>/<code>auto</code> for direction).
+						These are used as defaults for textual properties in the <abbr
 							title="information set"><a>infoset</a></abbr>, unless overwritten by the
-						property itself. </p>
+						properties themselves.</p>
 
-					<p class="note"> These features make it possible to add the title of a
-						publication in different languages, or repeat the creators’ name using
-						different scripts. </p>
+					<p class="note">These features make it possible to add the title of a
+						publication in different languages, or repeat the creators’ names using
+						different scripts.</p>
 
-					<p class="note"> This default language/direction pair is not used in the
-						processing or rendering of the Web Publication, and is <strong>not</strong>
-						a replacement for identifying the language of each resource as defined by
-						its format. These information items have an effect on the metadata expressed
-						in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> only. </p>
+					<p class="note">User agents MUST NOT use the language and direction in the
+						processing or rendering of the Web Publication. These values are
+							<strong>not</strong> a replacement for identifying the language of each
+						resource as defined by its format. These properties only affect the metadata
+						expressed in the <a>Web Publication's</a>
+						<abbr title="information set"><a>infoset</a></abbr>.</p>
 
-					<p> If a user agent requires the language and one is not available in the <abbr
-							title="information set">infoset</abbr>, nor is it specified for a
-						specific property, it MAY attempt to determine the language. This
-						specification does not mandate how such a language tag is created. The user
-						agent might: </p>
+					<p>If a user agent requires the language and one is not available in the <abbr
+							title="information set">infoset</abbr> (globally or specifically for the
+						property), or the obtained value is invalid, the user agent MAY attempt to
+						determine the language. This specification does not mandate how such a
+						language tag is created. The user agent might:</p>
 
 					<ul>
 						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
@@ -660,9 +666,9 @@
 						<li>calculate the language using its own algorithm.</li>
 					</ul>
 
-					<p>If a language tag cannot be determined, the value "<code>und</code>"
-						(undetermined) MUST be used. If the base direction cannot be determined, the
-						value <code>auto</code> MUST be assumed.</p>
+					<p>If a language tag cannot be determined, user agents MUST use the value
+							"<code>und</code>" (undetermined). If the base direction cannot be
+						determined, user agents MUST assume the value <code>auto</code>.</p>
 
 					<div class="issue" data-number="53">
 						<p>Is the language declared for the <a>manifest</a> content the same as the
@@ -675,12 +681,14 @@
 					<h4>Last Modification Date</h4>
 
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web
-							Publication</a> was last updated.</p>
+							Publication</a> was last updated (i.e., whenever changes were last made
+						to any of the resources of the Web Publication, including the
+							<a>manifest</a>).</p>
 
-					<p>The last modification date SHOULD be updated whenever changes are made to the
-						resources of the Web Publication, including the <a>manifest</a>. It does not
-						necessarily reflect all changes to the Web Publication, however, as, for
-						example, it might not reflect changes to third-party content.</p>
+					<p>This date does not necessarily reflect all changes to the Web Publication
+						(e.g., third-party content could change without the author being aware).
+						User agents SHOULD check the last modification date of individual resources
+						to determine if any need updating.</p>
 				</section>
 
 				<section id="wp-pub-date">
@@ -708,10 +716,13 @@
 						is collected, such a declaration increases the trust users have in the
 						content.</p>
 
-					<p>To address this concern, the <abbr title="information set">infoset</abbr>
-						allows a link to be provided to a privacy policy. The privacy policy does
+					<p>To address this concern, a link to a privacy policy can be included in the
+							<abbr title="information set">infoset</abbr>. The privacy policy does
 						not have to be a resource of the Web Publication, although including it as a
 						resource is RECOMMENDED.</p>
+
+					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable
+						format, such as HTML.</p>
 
 					<p>Refer to <a href="#privacy"></a> for more information about privacy
 						considerations in Web Publications.</p>
@@ -741,13 +752,13 @@
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
 
-					<p>When specified in the <a>manifest</a>, the title MUST be
-						<a>non-empty</a>.</p>
+					<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>,
+						the title MUST be <a>non-empty</a>.</p>
 
 					<p>If a user agent requires a title and one is not available in the <abbr
-							title="information set"><a>infoset</a></abbr>, it MAY create one. This
-						specification does not mandate how such a title is created. The user agent
-						might:</p>
+							title="information set">infoset</abbr>, the user agent MAY create one.
+						This specification does not mandate how such a title is created. The user
+						agent might:</p>
 
 					<ul>
 						<li>use the first <a>non-empty</a>
@@ -833,16 +844,16 @@
 
 					<p>The completeness of the resource list will affect the usability of the Web
 						Publication in certain reading scenarios (e.g., the ability to read the Web
-						Publication offline). For this reason, it is strongly RECOMMENDED to always
-						provide a comprehensive list of all of the Web Publication's constituent
-						resources. At a minimum, the resource list MUST include a list of all
-						resources in the <a>default reading order</a>.</p>
+						Publication offline). For this reason, it is strongly RECOMMENDED to provide
+						a comprehensive list of all of the Web Publication's constituent resources.
+						At a minimum, the resource list MUST include a list of all resources in the
+							<a>default reading order</a>.</p>
 
 					<p>In some cases, a comprehensive list of these resources might not be easily
 						achieved (e.g., third-party scripts that reference resources from deep
-						within their source), but a Web Publication SHOULD remain consumable even if
-						some of these resources are not identified as belonging to the Web
-						Publication (e.g., when it is taken offline without them).</p>
+						within their source), but a user agent SHOULD still be able to render a Web
+						Publication even if some of these resources are not identified as belonging
+						to the Web Publication (e.g., when it is taken offline without them).</p>
 
 					<p>If a user agent encounters a resource that it cannot locate in the resource
 						list, it MUST treat the resource as external to the Web Publication (e.g.,
@@ -869,8 +880,8 @@
 					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that
 						reflects the structural outline of the major sections of the Web
 						Publication. There are no requirements on the completeness of the table of
-						contents, except that, when specified, it MUST link to at least one <a
-							href="#wp-resources">resource</a>.</p>
+						contents, except that, when specified, it MUST include a link to at least
+						one <a href="#wp-resources">resource</a>.</p>
 
 					<p>The table of contents is either specified directly in the manifest or in an
 						[[!html]] <code>nav</code> element. In the latter case, the manifest MUST
@@ -923,7 +934,7 @@
 
 				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a
 					basic set of properties for use by user agents in presenting and rendering a
-						<a>Web Publication</a>. It MAY be extended in the following ways:</p>
+						<a>Web Publication</a>, but MAY be extended in the following ways:</p>
 
 				<ol>
 					<li>through the inclusion of additional properties in the manifest;</li>
@@ -987,9 +998,9 @@
 				<p>A <a>Web Publication</a> MUST include at least one [[!html]] document that <a
 						href="#wp-linking">links to the manifest</a>.</p>
 
-				<p>There are no restrictions on a Web Publication beyond this requirement. It MAY
-					reference resources of any media type, both in the <a>default reading order</a>
-					and as dependencies of other resources.</p>
+				<p>There are no restrictions on a Web Publication beyond this requirement. The Web
+					Publication MAY include references to resources of any media type, both in the
+						<a>default reading order</a> and as dependencies of other resources.</p>
 
 				<div class="note">
 					<p>When adding resources to a Web Publication, consider support in user agents.
@@ -1025,7 +1036,7 @@
 						>wiki analysis</a>. See <a href="https://github.com/w3c/wpub/issues/32"></a>
 					for discussion.</p>
 
-				<p>A resource SHOULD link to the Web Publication(s) to which it belongs.</p>
+				<p>Resources SHOULD be linked to the Web Publication(s) to which they belong.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a
 					future draft.</p>
