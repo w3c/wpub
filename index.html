@@ -476,8 +476,9 @@
 					</dd>
 					<dt>Structural Properties</dt>
 					<dd>
-						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a>
-							and <a href="#wp-resource-list">resource list</a></p>
+						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a>, 
+							<a href="#wp-resource-list">resource list</a>, and <a href="#wp-reading-progression">reading progression</a>.</p>
+
 						<p>RECOMMENDED: <a href="#wp-table-of-contents">table of contents</a></p>
 					</dd>
 				</dl>
@@ -714,6 +715,25 @@
 
 					<p>Refer to <a href="#privacy"></a> for more information about privacy
 						considerations in Web Publications.</p>
+				</section>
+
+				<section id="wp-reading-progression">
+					<h4>Reading Progression Direction</h4>
+
+					<p>The <dfn>reading progression</dfn> establishes the direction of reading <em>between</em> the resources within a <a>Web Publication</a>. The value of this item may be:</p>
+
+					<ul>
+						<li><code>ltr</code>: left-to-right;</li>
+						<li><code>rtl</code>: right-to-left;</li>
+					</ul>
+
+					<p>The default value is <code>ltr</code>.</p>
+
+					<p>This information item has <em>no effect</em> on the rendering of the individual primary resources; it is only relevant for the progression direction from one resource to the other.</p>
+
+					<p class="note">The reading progression of a <a>Web Publication</a> is used, e.g., to adapt such publication level interactions as menu position, swap direction, defining tap zones to lead the user to the next and previous pages, touch gestures, etc.</p>
+
+
 				</section>
 
 				<section id="wp-title">
