@@ -465,6 +465,7 @@
 								<li><a href="#wp-a11y">accessibility</a></li>
 								<li><a href="#wp-language-and-dir">base direction</a></li>
 								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
+								<li><a href="#wp-cover">cover</a></li>
 								<li><a href="#wp-creators">creator</a></li>
 								<li><a href="#wp-language-and-dir">language</a></li>
 								<li><a href="#wp-mod-date">modification date</a></li>
@@ -476,9 +477,9 @@
 					</dd>
 					<dt>Structural Properties</dt>
 					<dd>
-						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a>, 
-							<a href="#wp-resource-list">resource list</a>, and <a href="#wp-reading-progression">reading progression</a>.</p>
-
+						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a>,
+								<a href="#wp-resource-list">resource list</a>, and <a
+								href="#wp-reading-progression">reading progression</a>.</p>
 						<p>RECOMMENDED: <a href="#wp-table-of-contents">table of contents</a></p>
 					</dd>
 				</dl>
@@ -597,6 +598,29 @@
 					<p class="issue" data-number="58">The question is whether a canonical identifier
 						is necessary to call out explicitly in the <abbr title="information set"
 							>infoset</abbr>, or whether it is/can be handled by other metadata.</p>
+				</section>
+
+				<section id="wp-cover">
+					<h4>Cover</h4>
+
+					<p>The <abbr title="information set">infoset</abbr> SHOULD include a reference
+						to a cover image. This image can be used by user agents to present the Web
+						Publication to users (e.g., in a library or bookshelf, or when initially
+						loading the Web Publication).</p>
+
+					<p>User agents SHOULD NOT use the cover image as the sole means of selecting or
+						accessing Web Publications. The user agent SHOULD use the Web Publication's
+							<a href="#wp-title">title</a> and <a href="#wp-creators">creators</a> in
+						text alternatives for such interfaces.</p>
+
+					<p>More than one cover image MAY be referenced from the infoset to provide
+						alternative sizes and resolutions for different device screens.</p>
+
+					<p>A user agent MAY create a cover for a Web Publication if one is not present.
+						This specification does not define requirements for the creation of such
+						cover images (e.g., the user agent could use a placeholder image, generate
+						an image dynamically, or incorporate elements of infoset into a graphic,
+						such as tht title or creators).</p>
 				</section>
 
 				<section id="wp-creators">
@@ -731,7 +755,9 @@
 				<section id="wp-reading-progression">
 					<h4>Reading Progression Direction</h4>
 
-					<p>The <dfn>reading progression</dfn> establishes the direction of reading <em>between</em> the resources within a <a>Web Publication</a>. The value of this item may be:</p>
+					<p>The <dfn>reading progression</dfn> establishes the direction of reading
+							<em>between</em> the resources within a <a>Web Publication</a>. The
+						value of this item may be:</p>
 
 					<ul>
 						<li><code>ltr</code>: left-to-right;</li>
@@ -740,9 +766,14 @@
 
 					<p>The default value is <code>ltr</code>.</p>
 
-					<p>This information item has <em>no effect</em> on the rendering of the individual primary resources; it is only relevant for the progression direction from one resource to the other.</p>
+					<p>This information item has <em>no effect</em> on the rendering of the
+						individual primary resources; it is only relevant for the progression
+						direction from one resource to the other.</p>
 
-					<p class="note">The reading progression of a <a>Web Publication</a> is used, e.g., to adapt such publication level interactions as menu position, swap direction, defining tap zones to lead the user to the next and previous pages, touch gestures, etc.</p>
+					<p class="note">The reading progression of a <a>Web Publication</a> is used,
+						e.g., to adapt such publication level interactions as menu position, swap
+						direction, defining tap zones to lead the user to the next and previous
+						pages, touch gestures, etc.</p>
 
 
 				</section>
