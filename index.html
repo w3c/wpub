@@ -5,10 +5,12 @@
 		<title>Web Publications</title>
 		<script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer="defer"></script>
 		<script src="common/js/biblio.js" class="remove"></script>
+		<script src="common/js/orcid.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
+          	  postProcess: [show_orcid],
               wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
@@ -27,13 +29,7 @@
                     "url": "https://www.w3.org/People/Ivan/",
                     "company": "W3C",
 					"w3cid": 7382,
-                    "extras": [
-                    {
-                      //"name": "<img src='https://orcid.org/sites/default/files/images/orcid_16x16.gif' alt='orcid logo'/>",
-                      "name": "orcid",
-                      "href": "http://orcid.org/0000-0003-0782-2704",
-                      "class": "orcid"
-                    }],
+					"orcid": "0000-0003-0782-2704",
                     "companyURL": "https://www.w3.org",
                   }
               ],
@@ -50,13 +46,7 @@
                     "company": "University of Illinois at Urbana-Champaign",
                     "companyURL": "https://illinois.edu",
 					"w3cid": 53965,
-                    "extras": [
-                      {
-                        //"name": "<img src='https://orcid.org/sites/default/files/images/orcid_16x16.gif' alt='orcid logo'/>",
-                        "name": "orcid",
-                        "href": "https://orcid.org/0000-0002-5906-4581",
-                        "class": "orcid"
-                      }]
+					"orcid": "0000-0002-5906-4581"
                   },
 			      {
                     "name": "Dave Cramer",
