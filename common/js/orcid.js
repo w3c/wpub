@@ -10,7 +10,7 @@ function show_orcid(config) {
 	//--------------------------------------------------------------------------------
 	// 1st step: find the authors/editors who have set their ORCID number as part of the persons' structure
 	// This can be extracted from the configuration set by the user (and extended by respec)
-	let personKeys = ["editors", "authors"]
+	let personKeys = ["editors", "authors"];
 	personKeys.forEach( key => {
 		if( config[key] ) {
 			config[key].forEach( (editor) => {

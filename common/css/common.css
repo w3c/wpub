@@ -26,3 +26,7 @@ dt, dd {
 dfn {
 	font-weight: bold !important;
 }
+
+span.orcid a {
+	text-decoration: none !important;
+}
