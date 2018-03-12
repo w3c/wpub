@@ -1682,7 +1682,7 @@
                                     TextDirection                           dir = "auto";
                                     sequence&lt;LocalizableString&gt;       title;
                                     USVString                               identifier;
-                                    sequence&lt;LocalizableString&gt;       author;
+                                    sequence&lt;Contributor&gt;             author;
                                     DOMString                               modified;
                                     DOMString                               publication_date;
                                     sequence&lt;PublicationLink&gt;         links;
@@ -1755,16 +1755,38 @@
 					<dt>
 						<dfn>ltr</dfn>
 					</dt>
-					<dd> left-to-right text. </dd>
+					<dd> Left-to-right text. </dd>
 					<dt>
 						<dfn>rtl</dfn>
 					</dt>
-					<dd> right-to-left text. </dd>
+					<dd> Right-to-left text. </dd>
 					<dt>
 						<dfn>auto</dfn>
 					</dt>
-					<dd> determined by the Unicode Bidirectional Algorithm [[!UAX9]] algorithm.
+					<dd> Determined by the Unicode Bidirectional Algorithm [[!UAX9]] algorithm.
 					</dd>
+				</dl>
+			</section>
+            
+            <section id="contributor-idl">
+				<h3><code>author</code> member </h3>
+                <p class="ednote">The <a href="#wp-creators">current infoset for creators</a> is currently a little underdefined, and this dictionary might be further improved once this groups fully agrees how they should be handled.</p>
+				<pre class="idl">
+                    dictionary Contributor {
+                        required    LocalizableString       name;
+                                    USVString               identifier;
+                    };
+                </pre>
+				<p> The <code>author</code> member is a sequence of <dfn>Contributor</dfn> dictionaries where each dictionary has the following members: </p>
+				<dl data-dfn-for="Contributor">
+					<dt>
+						<dfn>name</dfn>
+					</dt>
+					<dd> Contains one or more localizable string for the contributor's name. </dd>
+					<dt>
+						<dfn>identifier</dfn>
+					</dt>
+					<dd> Contains a canonical identifier for the contributor. </dd>
 				</dl>
 			</section>
 
