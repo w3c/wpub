@@ -18,14 +18,15 @@
 
 var biblio = {
     "html": {
-        "title": "HTML 5.1",
+        "title": "HTML 5.2",
         "authors" : [
             "Steve Faulkner",
             "Arron Eicholz",
             "Travis Leithead",
-            "Alex Danilo"
+            "Alex Danilo",
+            "Sangwhan Moon"
         ],
-        "date": "2016-11-01",
+        "date": "2017-12-14",
         "status": "W3C Recommendation",
         "href": "https://www.w3.org/TR/html/",
         "publisher": "W3C"
@@ -59,7 +60,28 @@ var biblio = {
         publisher: "IDPF",
         rawDate: "2017-01-05",
         status: "Recommended Specification"
-    },   
+    },
+    "css": {
+        "title": "CSS Snapshot",
+        "authors" : [
+            "Tab Atkins Jr.",
+            "Elika J. Etemad",
+            "Florian Rivoal"
+        ],
+        "status": "W3C Working Group Note",
+        "href": "https://www.w3.org/TR/CSS/",
+        "publisher": "W3C"
+    },
+    "doi": {
+    	"title": "Information and documentation — Digital object identifier system",
+    	"date": "2012-05",
+    	"status": "Published",
+    	"href": "https://www.iso.org/standard/43506.html"
+    },
+    "iana-link-relations": {
+    	"title": "Link Relations",
+    	"href": "https://www.iana.org/assignments/link-relations/link-relations.xhtml"
+    },
     "wpub-ann": {
       "title": "Web Annotation Extensions for Web Publications",
       "href": "https://www.w3.org/TR/wpub-ann/",
