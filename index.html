@@ -723,7 +723,7 @@
 				<section id="wp-reading-progression">
 					<h4>Reading Progression Direction</h4>
 
-					<p>The <dfn>reading progression</dfn> establishes the reading direction from one
+					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the reading direction from one
 						resource to the next within a <a>Web Publication</a>. The value of this
 						property may be:</p>
 
@@ -1659,6 +1659,7 @@
                         required    USVString                               address;
                                     DOMString                               lang;
                                     TextDirection                           dir = "auto";
+                                    TextDirection                           progression = "auto";
                                     sequence&lt;LocalizableString&gt;       title;
                                     USVString                               identifier;
                                     sequence&lt;Contributor&gt;             author;
@@ -1685,6 +1686,10 @@
 						<dfn>dir</dfn>
 					</dt>
 					<dd>Contains the default value for <a>base direction</a>.</dd>
+					<dt>
+						<dfn>progression</dfn>
+					</dt>
+					<dd>Contains the value for the <a>reading progression direction</a>.</dd>
 					<dt>
 						<dfn>title</dfn>
 					</dt>
@@ -1717,36 +1722,6 @@
 						<dfn>resources</dfn>
 					</dt>
 					<dd>Contains the <a>resource list</a>.</dd>
-				</dl>
-			</section>
-
-			<section id="dir-idl">
-				<h3><code>dir</code> member </h3>
-
-				<pre class="idl">
-                    enum TextDirection {
-                        "ltr",
-                        "rtl",
-                        "auto"
-                    };
-                </pre>
-
-				<p> The <code>dir</code> member's value are defined by <dfn>TextDirection</dfn> as: </p>
-
-				<dl data-dfn-for="TextDirection">
-					<dt>
-						<dfn>ltr</dfn>
-					</dt>
-					<dd>Left-to-right text.</dd>
-					<dt>
-						<dfn>rtl</dfn>
-					</dt>
-					<dd>Right-to-left text.</dd>
-					<dt>
-						<dfn>auto</dfn>
-					</dt>
-					<dd>Determined by the Unicode Bidirectional Algorithm&#160;[[!uax9]]
-						algorithm.</dd>
 				</dl>
 			</section>
 
@@ -1880,6 +1855,35 @@
 				</dl>
 
 			</section>
+            
+            <section id="textdirection-idl">
+				<h3><code>TextDirection</code> enum </h3>
+
+				<pre class="idl">
+                    enum TextDirection {
+                        "ltr",
+                        "rtl",
+                        "auto"
+                    };
+                </pre>
+                
+                <p>The <dfn>TextDirection</dfn> enum can contain the following values:</p>
+				<dl data-dfn-for="TextDirection">
+					<dt>
+						<dfn>ltr</dfn>
+					</dt>
+					<dd>Left-to-right text.</dd>
+					<dt>
+						<dfn>rtl</dfn>
+					</dt>
+					<dd>Right-to-left text.</dd>
+					<dt>
+						<dfn>auto</dfn>
+					</dt>
+					<dd>Determined by the user agent.</dd>
+				</dl>
+			</section>
+            
 		</section>
 		<section class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
