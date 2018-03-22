@@ -399,7 +399,7 @@
 						<div>
 							<span>RECOMMENDED:</span>
 							<ul class="flat">
-								<li><a href="#wp-a11y">accessibility</a></li>
+								<li><a href="#wp-a11y">accessibility report</a></li>
 								<li><a href="#wp-language-and-dir">base direction</a></li>
 								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
 								<li><a href="#wp-cover">cover</a></li>
@@ -431,15 +431,21 @@
 				<h3>Descriptive Properties</h3>
 
 				<section id="wp-a11y">
-					<h4>Accessibility</h4>
+					<h4>Accessibility Report</h4>
 
-					<p>Accessibility metadata allows the discovery of features and affordances of the <a>Web
-							Publication</a> that enable its use by users with different reading requirements and
-						needs.</p>
+					<p>An accessibility report provides information about the suitability of a <a>Web Publication</a>
+						for consumption by users with varying preferred reading modalities. These reports typically
+						identify the result of an evaluation against established accessibility criteria, such as those
+						provided in [[WCAG20]], and are an important source of information in determining the usability
+						of a Web Publication.</p>
 
-					<p class="ednote">How to express accessibility metadata remains to be determined. This could be a
-						grouping of <a href="https://www.w3.org/wiki/WebSchemas/Accessibility">properties from
-							schema.org</a>, for example, or could be split out into a list of individual properties.</p>
+					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an accessibility
+						report when one is available for a Web Publication. It is RECOMMENDED that the report be
+						included as a resource of the Web Publication.</p>
+
+					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
+						as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these reports
+						with machine-processable metadata, such as provided in schema.org, is also RECOMMENDED.</p>
 				</section>
 
 				<section id="wp-address">
@@ -513,9 +519,9 @@
 				<section id="wp-cover">
 					<h4>Cover</h4>
 
-					<p>The <abbr title="information set">infoset</abbr> SHOULD include a reference to a cover image.
-						This image can be used by user agents to present the <a>Web Publication</a> to users (e.g., in a
-						library or bookshelf, or when initially loading the Web Publication).</p>
+					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
+						image. This image can be used by user agents to present the <a>Web Publication</a> to users
+						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
 
 					<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
 						Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a> and <a
@@ -631,8 +637,8 @@
 						collected, such a declaration increases the trust users have in the content.</p>
 
 					<p>To address this concern, a link to a privacy policy can be included in the <abbr
-							title="information set">infoset</abbr>. The privacy policy does not have to be a resource of
-						the Web Publication, although including it as a resource is RECOMMENDED.</p>
+							title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be
+						included as a resource of the Web Publication.</p>
 
 					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as <abbr
 							title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
