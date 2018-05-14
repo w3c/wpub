@@ -405,7 +405,7 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
-						represents the primary entry point for the Web Publication. If this URL does not resolve to an
+						represents the primary entry page for the Web Publication. If this URL does not resolve to an
 							<abbr title="Hypertext Markup Language">HTML</abbr> document&#160;[[!html]], user agents
 						SHOULD NOT provide access to it to users.</p>
 
@@ -762,7 +762,7 @@
 								referenced from the table of contents.</li>
 							<li><a href="https://github.com/w3c/wpub/issues/39">Issue #39</a>: There is a consensus that
 								a Web Publication must have a <a>default reading order</a> and must/should have a
-									<a>table of contents</a> (the main navigation entry point).</li>
+									<a>table of contents</a> (the main navigation entry page).</li>
 						</ul>
 					</div>
 				</section>
@@ -1722,11 +1722,11 @@
 					down into two elements. The first element is the actual contents (all the real things listed in the
 					manifest). This element is broken down into the CSS, the actual “things” such as the <abbr
 						title="Hypertext Markup Language">HTML</abbr> documents, audio, etc, and the images, fonts etc.
-					The actual “things” have an additional subset of items that includes the entry point to the
+					The actual “things” have an additional subset of items that includes the entry page to the
 					publication and all of the other documents. The second element is the Manifest (JSON). The manifest
 					is used to generate the <a href="#infoset">Information Set (“Infoset”)</a>, which consists of a list
 					of all the “things” in the publication, the publication metadata, and the default reading order of
-					content. It is noted in the diagram that the entry point has to link to the manifest. (<a
+					content. It is noted in the diagram that the entry page has to link to the manifest. (<a
 						role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web Publication.)</dd>
 			</dl>
 
