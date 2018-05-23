@@ -192,44 +192,8 @@
 				<section id="rel-wam">
 					<h4>Web App Manifest</h4>
 
-					<div class="ednote">
-						<p>The working group is investigating integration with the work done on the Web App
-							Manifest&#160;[[appmanifest]] specification to avoid duplication of concerns both in the
-							expression and serialization of a <a>manifest</a> and in the processing and compilation of
-							the <abbr title="information set"><a>infoset</a></abbr>. It is expected, however, that there
-							will be differences in the processing models of each (e.g., the initiation of the reading
-							experience for <a>Web Publications</a> versus installation for applications).</p>
+					<p class="ednote">We may want to write something here on the relationships...</p>
 
-						<p>The working assumption is that both applications and publications can use the same manifest
-							and serialization to express the information necessary to initiate themselves.</p>
-
-						<p>The initial stage of evaluating this assumption involves:</p>
-
-						<ul>
-							<li>the continuing analysis of necessary metadata and publication structure
-								requirements;</li>
-							<li>the comparison and harmonization of web publication requirements with those already
-								defined in Web App Manifest.</li>
-						</ul>
-
-						<p>The next stage will involve the serialization of the <abbr title="information set"
-								>infoset</abbr> in <abbr title="JavaScript Object Notation">JSON</abbr> to see how this
-							expression of the manifest can be aligned with the expression of the web app manifest.
-							Wherever semantically possible, the terms used and defined for web app manifests will be
-							reused, and, conversely, some of the members defined for Web Publications may be generally
-							useful for applications and may be added to the Web App Manifest specification as a common
-							pool of information. To avoid possible future conflicts, care will be taken to use a naming
-							scheme that clearly separates terms to be used for Web Publications only.</p>
-
-						<p>This specification consequently should be read and understood in this context of an ongoing
-							investigation, and that significant changes may occur in the future.</p>
-
-						<p>This section will be updated as appropriate to reflect the current status of this work, and
-							describe the evolving relationship.</p>
-
-						<p>See also <a href="https://github.com/w3c/wpub/issues/32">issue #32 in the GitHub tracker</a>
-							for more discussion about integration.</p>
-					</div>
 				</section>
 			</section>
 
@@ -818,8 +782,7 @@
 				<h3>Declaration</h3>
 
 				<div class="ednote">A description of how a <a>manifest</a> declares it describes a <a>Web
-						Publication</a> will be included in a future draft, as such a mechanism will depend on
-					integration with Web App Manifest&#160;[[appmanifest]].</div>
+						Publication</a> will be included in a future draft.</div>
 			</section>
 
 			<section id="manifest-serialization">
@@ -827,10 +790,7 @@
 
 				<p>The manifest is serialized as a JSON document&#160;[[!ecma-404]].</p>
 
-				<div class="ednote">Additional serialization details will be included in a future draft, as these will
-					depend on integration with Web App Manifest&#160;[[appmanifest]].</div>
-
-				<p class="issue" data-number="32"></p>
+				<div class="ednote">Additional serialization details will be included in a future draft.</div>
 			</section>
 		</section>
 		<section id="wp-construction">
@@ -872,10 +832,7 @@
 				</ul>
 
 				<p class="issue">How linking to a <a>manifest</a> is done (relationship, media type) may change
-					depending on <a href="#rel-wam">future integration with Web App Manifest</a>. For a list of
-					differences in linking approaches, refer to the <a
-						href="https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest">wiki analysis</a>. See
-						<a href="https://github.com/w3c/wpub/issues/32"></a> for discussion.</p>
+					in future versions of the draft. It should also be made clearer that the manifest may be placed in a data block in the HTML file, rather than into a separate JSON file.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
 
@@ -952,18 +909,8 @@
 					these approaches is welcome at any time.</p>
 			</div>
 
-			<p class="issue" data-number="104"></p>
-
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
-
-				<div class="ednote">
-					<p><a href="#wp-linking">Discovery of a manifest</a> is currently dependent on the presence of an
-						HTTP <code>Link</code> header or an HTML <code>link</code> element with the <code>rel</code>
-						attribute value <code>publication</code>. This approach might change in the future depending on
-						whether Web Publications align with Web App Manifest&#160;[[appmanifest]] or another manifest
-						format.</p>
-				</div>
 
 				<p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining
 						a manifest</dfn> are given by the following algorithm. The algorithm, if successful, returns a
@@ -983,7 +930,7 @@
 					<li>Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
 						attribute, relative to the element's base URL. If parsing fails, then abort these steps. </li>
 					<li>Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest URL</var>, and
-						whose context is "<code>publication</code>". </li>
+						whose context is the same as the browsing context of the <code>Document</code>. </li>
 					<li>If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
 							'<code>use-credentials</code>', then set <var>request</var>'s credentials to
 							'<code>include</code>'. </li>
@@ -1004,12 +951,6 @@
 
 			<section id="processing-manifest">
 				<h3>Processing the manifest</h3>
-
-				<div class="ednote">
-					<p>The <a>manifest</a> could be processed differently depending on future alignment with Web App
-						Manifest&#160;[[appmanifest]] or another format (e.g., as an extension point for another
-						algorithm.</p>
-				</div>
 
 				<p>The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
 						manifest</dfn> are given by the following algorithm. The algorithm takes a <var>text</var>
