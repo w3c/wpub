@@ -16,7 +16,7 @@
               shortName: "wpub",
               previousPublishDate: "2018-01-04",
   			  previousMaturity: "WD",
-            //   edDraftURI: "https://w3c.github.io/wpub/",
+              edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
       			      "name": "Matt Garrish",
@@ -57,13 +57,13 @@
 			      {
                     "name": "Hadrien Gardeur",
                     "company": "Feedbooks",
-                    "companyURL": "http://www.feedbooks.com/",
+                    "companyURL": "https://www.feedbooks.com/",
                     "w3cid": 97094
                   },
 			      {
                     "name": "Florian Rivoal",
                     "company": "Vivliostyle Inc.",
-                    "companyURL": "http://vivliostyle.com/",
+                    "companyURL": "https://vivliostyle.com/",
                     "w3cid": 43241
                   }
 			  ],
@@ -75,31 +75,39 @@
               wgURI:             "https://www.w3.org/publishing/groups/publ-wg/",
               wgPublicList:      "public-publ-wg",
               wgPatentURI:       "https://www.w3.org/2004/01/pp-impl/100074/status",
-			  github:			 {
-				  repoURL: "https://github.com/w3c/wpub",
-				  branch: "master"
-			  },
-            //   otherLinks: [
-            //       {
-            //         key: "Repository",
-            //         data: [{
-            //             value: "Github Repository",
-            //             href: "https://github.com/w3c/wpub"
-            //         }]
-            //       },
-            //       {
-            //         key: "Changes",
-            //         data: [
-            //         // {
-            //         //   value: "Diff to previous version",
-            //         //   href: "diff.html"
-            //         // },
-            //         {
-            //           value: "Commit history",
-            //           href: "https://github.com/w3c/wpub/commits/master"
-            //         }]
-            //       }
-            //   ],
+			  // github:			 {
+				//   repoURL: "https://github.com/w3c/wpub",
+				//   branch: "master"
+			  // },
+              otherLinks: [
+                  {
+                    key: "Participate",
+                    data: [{
+                        value: "Github w3c/wpub",
+                        href: "https://github.com/w3c/wpub"
+                      },
+					  {
+						value: "File a bug",
+						href: "https://github.com/w3c/wpub/issues"
+					  },
+					  {
+						value: "Commit history",
+						href: "https://github.com/w3c/wpub/commits/master"
+					  },
+					  {
+						value: "Pull requests",
+						href: "https://github.com/w3c/wpub/pulls"
+					}]
+                  },
+                  // {
+                  //   key: "Changes",
+                  //   data: [
+                  //   // {
+                  //   //   value: "Diff to previous version",
+                  //   //   href: "diff.html"
+                  //   // },
+                  // }
+              ],
               localBiblio: biblio
           };
           // ]]>
@@ -604,7 +612,7 @@
 
 					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the reading direction from one
 						resource to the next within a <a>Web Publication</a>. The value of this property may be:</p>
-          
+
 					<ul>
 						<li><code>ltr</code>: left-to-right;</li>
 						<li><code>rtl</code>: right-to-left;</li>
@@ -1632,7 +1640,7 @@
 				</dl>
 
 			</section>
-            
+
             <section id="textdirection-idl">
 				<h3><code>TextDirection</code> enum </h3>
 
@@ -1643,7 +1651,7 @@
                         "auto"
                     };
                 </pre>
-                
+
                 <p>The <dfn>TextDirection</dfn> enum can contain the following values:</p>
 				<dl data-dfn-for="TextDirection">
 					<dt>
@@ -1660,7 +1668,7 @@
 					<dd>Determined by the user agent.</dd>
 				</dl>
 			</section>
-            
+
 		</section>
 		<section class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
