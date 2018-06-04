@@ -958,6 +958,9 @@
 
 				<p class="note">See the <a href="#obtaining-manifest-diagram">diagram in the appendix</a> for a visual
 					representation of the algorithm.</p>
+                
+                <p class="ednote">This section will require additional work if we also decide to allow JSON-LD embedded in HTML.</p>
+                
 			</section>
 
 			<section id="processing-manifest">
@@ -988,62 +991,12 @@
 						algorithm. </li>
 					<li>Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary"
 							>converting</a> [[!WEBIDL]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary. </li>
-					<li>Set <var>manifest</var>["reading_order"] to the result of <a>processing the default reading
-							order</a> given <var>manifest</var>["reading_order"], <var>manifest</var>["resources"],
-							<var>manifest URL</var>, and <var>document URL</var>. </li>
-					<li>Return <var>manifest</var>. </li>
 				</ol>
 
 				<p class="note">See the <a href="#processing-manifest-diagram">diagram in the appendix</a> for a visual
 					representation of the algorithm.</p>
-
-			</section>
-
-			<section id="processing-reading-order">
-				<h3>Processing the default reading order</h3>
-
-				<p> The <dfn data-lt="processing the default reading order">steps for processing the default reading
-						order</dfn> are given by the following algorithm. </p>
-
-				<ol>
-					<li>If <var>manifest</var>["reading_order"] is not empty, return it and terminate this algorithm. </li>
-					<li>If <var>manifest</var>["resources"] is not empty, let <var>navigation document link</var> be the
-						first <a>PublicationLink</a> whose <code>rel</code> member contains the token
-							<code>contents</code>. </li>
-					<li>If <var>navigation document link</var> is not <code>null</code> and its <code>href</code> member
-						is not <code>empty</code>, let <var>navigation document URL</var> be the result of parsing the
-						value of the <code>href</code> attribute, relative to the <var>manifest URL</var>. </li>
-					<li>If <var>navigation document URL</var> is empty, set <var>navigation document URL</var> to
-							<var>document URL</var>. </li>
-					<li>Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>navigation document
-							URL</var>, and whose context is "<code>publication</code>". </li>
-					<li>Await the result of performing a fetch with <var>request</var>, letting <var>response</var> be
-						the result. </li>
-					<li>If <var>response</var> is a network error, terminate this algorithm. </li>
-					<li>Let <var>document</var> be the result of UTF-8 decoding <var>response</var>'s <a
-							data-cite="!fetch#concept-request-body">body</a>. </li>
-					<li>If <var>document</var> is not an <abbr title="Hypertext Markup Language">HTML</abbr>
-						document&#160;[[!html]], terminate this algorithm. </li>
-					<li>Let <var>default reading order</var> be the result of processing <var>document</var>: <ol>
-							<li>If <var>document</var> contains a <code>nav</code> element: <ol>
-									<li>Extract a list of resource paths referenced from the <code>href</code> attribute
-										of all <code>a</code> elements.</li>
-									<li>Strip any fragment identifiers from the references.</li>
-									<li>Resolve all relative paths to full URLs.</li>
-									<li>Remove all consecutive references to the same resource, leaving only the
-										first.</li>
-								</ol>
-							</li>
-							<li>Otherwise terminate this algorithm. </li>
-						</ol>
-					</li>
-					<li>Return <var>default reading order</var>.</li>
-				</ol>
-
-				<p class="note">See the <a href="#processing-reading-order-diagram">diagram in the appendix</a> for
-					visual representation of the core of the algorithm and the <a
-						href="#processing-reading-order-nav-diagram">separate diagram on handling the <code>nav</code>
-						element</a>.</p>
+                
+                <p class="ednote">The new JSON-LD based approach will require additional processing from the client. Due to the flexible nature of JSON-LD and schema.org, a simple conversion from JSON to WebIDL won't be enough.</p>
 
 			</section>
 
