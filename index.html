@@ -657,15 +657,12 @@
 					<h4>Resource List</h4>
 
 					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
-						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds).
-						This list is the definitive source that user agents have in determining which referenced
-						resources belong to the Web Publication and which are external to it.</p>
+						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds) and that are not listed in the <a>default reading order</a>. This list is the definitive source that user agents have in determining which referenced resources belong to the Web Publication and which are external to it.</p>
 
 					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
 						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it
 						is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
-						constituent resources. At a minimum, the resource list MUST include a list of all resources in
-						the <a>default reading order</a>.</p>
+						constituent resources beyond those listed in the <a>default reading order</a>.</p>
 
 					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
 						third-party scripts that reference resources from deep within their source), but a user agent
@@ -673,14 +670,17 @@
 						identified as belonging to the Web Publication (e.g., when it is taken offline without
 						them).</p>
 
-					<p>If a user agent encounters a resource that it cannot locate in the resource list, it MUST treat
-						the resource as external to the Web Publication (e.g., it might alert the user before loading,
-						open the resource in a new window, or unload the current Web Publication and resume normal Web
-						browsing).</p>
+					<div class="ednote">
+						The previous version of the draft included:
+						<blockquote>
+							<p>If a user agent encounters a resource that it cannot locate in the resource list, it MUST treat
+								the resource as external to the Web Publication (e.g., it might alert the user before loading,
+								open the resource in a new window, or unload the current Web Publication and resume normal Web
+								browsing).</p>
+						</blockquote>
 
-
-					<p class="issue" data-number="59">Must the <a>manifest</a> list resources in the default reading
-						order or can these can be inferred?</p>
+						<p>This was not decided on the Toronto F2F, and is still open.</p>
+					</div>
 				</section>
 
 				<section id="wp-table-of-contents">
