@@ -1,3 +1,5 @@
+Added on 2018-06-05.
+
 Inspired by [Dave's minimal WPUB](https://github.com/w3c/wpub/wiki/Minimal-WPUB) for a book, I tried to create one for what is equivalent to a scholarly paper. I wanted a real-life example; to avoid copyright issues, I took a W3C document instead: the [Model for Tabular Data and Metadata on the Web](https://www.w3.org/TR/tabular-data-model/). I believe that, as far as a WPUB goes, it is equivalent to a scholarly paper.
 
 The interesting points of this publication, from our point of view:

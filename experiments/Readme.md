@@ -1,0 +1,1 @@
+This folder lists a number of "experiments", ie, example files, books, publications, etc, that show what a final version of a WP would look like. These experiments, by their nature, may become obsolete as the final spec evolves, but are kept here nevertheless.
