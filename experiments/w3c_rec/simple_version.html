@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model for Tabular Data and Metadata on the Web</title>
+    <link href="#wpm" rel="publication" />
+    ...
+    <script id="wpm" type="application/ld+json">
+    {
+        "@context"              : [
+            "https://schema.org",
+            {
+                "publ-resources" : null,
+                "publ-toc"       : null
+            }
+        ],
+        "@id"                   : "http://www.w3.org/TR/tabular-data-model/",
+        "url"                   : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        "creator"               : [
+            {
+                "@type"         : "Person",
+                "name"          : "Jeni Tennison",
+            },
+            {
+                "@type"         : "Person",
+                "name"          : "Gregg Kellogg",
+            },
+            {
+                "@type"         : "Person",
+                "name"          : "Ivan Herman",
+            }
+        ],
+        "datePublished"         : "2015-12-17",
+        "publ-resources"        : [
+            "datatypes.html",
+            "datatypes.svg",
+            "datatypes.png",
+            "diff.html",
+            "test-utf8.csv",
+            "test-utf8-bom.csv",
+            "test-utf16.csv",
+            "test-utf16-bom.csv",
+            "test.xls",
+            "test.xlsx"
+        ],
+        "publ-toc"              : "#toc"
+    }
+    </script>
+</head>
+<body>
+    ....
+
+    <section id="toc">
+        <h2 resource="#h-toc" id="h-toc" class="introductory">Table of Contents</h2>
+        <ul class="toc">
+            <li class="tocline"><a class="tocxref" href="#intro"><span class="secno">1. </span>Introduction</a></li>
+            ...
+        </ul>
+    </section>
+    ...
+
+</body>
+</html>
