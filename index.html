@@ -650,32 +650,7 @@
 
 					<p>The default reading order MUST include at least one resource.</p>
 
-					<p>The default reading order is either specified directly in the manifest or in a <code>nav</code>
-						element&#160;[[!html]]. In the latter case, the manifest MUST provide a link to the Web
-						Publication resource that contains the <code>nav</code> element, with a fragment identifier that
-						specifically identifies it.</p>
-
-					<p>The process for extracting a default reading order from a <code>nav</code> element are as
-						follows:</p>
-
-					<ol>
-						<li>extract a list of resource paths referenced from the <code>href</code> attribute of all
-								<code>a</code> elements;</li>
-						<li>strip any fragment identifiers from the references;</li>
-						<li>resolve all relative paths to full <abbr title="Uniform Resource Locators">URLs</abbr>;</li>
-						<li>remove all consecutive references to the same resource, leaving only the first.</li>
-					</ol>
-
-					<p>If a user agent requires a default reading order and one is not provided in the <abbr
-							title="information set"><a>infoset</a></abbr>, it MAY attempt to construct one. This
-						specification does not mandate how such a default reading order is created. The user agent
-						might:</p>
-
-					<ul>
-						<li>use only the resource the user accessed to reach the manifest;</li>
-						<li>search the <a>resource list</a> for a <code>nav</code> element to use;</li>
-						<li>calculate the default reading order using its own algorithm.</li>
-					</ul>
+					<p>The default reading order is either specified directly in the manifest; if this is not the case, the reading order consists of one single resource, namely the primary entry page of the Web Publication (i.e., the resource the user accessed to reach the manifest, see <a href="#wp-linking"></a>.)</p>
 				</section>
 
 				<section id="wp-resource-list">
