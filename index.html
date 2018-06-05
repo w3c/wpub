@@ -691,39 +691,13 @@
 						completeness of the table of contents, except that, when specified, it MUST include a link to at
 						least one <a href="#wp-resources">resource</a>.</p>
 
-					<p>The table of contents is either specified directly in the manifest or in a <code>nav</code>
-						element&#160;[[!html]]. In the latter case, the manifest MUST provide a link to the Web
-						Publication resource that contains the <code>nav</code> element, with a fragment identifier that
-						specifically identifies it.</p>
-
-					<p>If a user agent requires a table of contents and one is not specified, it MAY construct one. This
-						specification does not mandate how such a table of contents is created. The user agent might: </p>
-
-					<ol>
-						<li>attempt to locate a table of contents in the <a>default reading order</a> (e.g., an <abbr
-								title="Hypertext Markup Language">HTML</abbr> document with a <code>nav</code> element
-							that has the <code>role</code> attribute value <code>doc-toc</code>);</li>
-						<li>use the titles of the resources in the default reading order;</li>
-						<li>calculate a table of contents using its own algorithms.</li>
-					</ol>
+					<p>
+						The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set to <code>doc-toc</code>.
+					</p>
 
 					<p class="issue">This question arises only if the table of contents is accepted: can a table of
 						contents navigation element refer, via links, to any resource that is <em>not</em> listed in the
 							<a>default reading order</a>?</p>
-
-					<div class="issue">
-						<p>The issue of using the <abbr title="Hypertext Markup Language">HTML</abbr>
-							<code>nav</code> element as a possible encoding of the table of contents was mentioned or
-							explicitly addressed in the following (now closed) issues:</p>
-						<ul>
-							<li><a href="https://github.com/w3c/wpub/issues/35">Issue #35</a>: Define the resources in
-								the <a>default reading order</a> of a <a>Web Publication</a> to be the resources
-								referenced from the table of contents.</li>
-							<li><a href="https://github.com/w3c/wpub/issues/39">Issue #39</a>: There is a consensus that
-								a Web Publication must have a <a>default reading order</a> and must/should have a
-									<a>table of contents</a> (the main navigation entry page).</li>
-						</ul>
-					</div>
 				</section>
 			</section>
 
