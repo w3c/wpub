@@ -770,16 +770,117 @@
 			</section>
 		</section>
 		<section id="manifest">
-			<h2>Manifest</h2>
+			<h2>Web Publication Manifest</h2>
 
-			<section id="manifest-intro" class="informative">
+			<section id="manifest-intro">
 				<h3>Overview</h3>
 
-				<p>A <a>manifest</a> is a specific serialization of a <a>Web Publication's</a>
-					<abbr title="information set"><a>infoset</a></abbr>.</p>
+				<p>
+					A <a>manifest</a> is a serialization of a <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr>.
+					The manifest is serialized using the JSON&nbsp;[[!ecma-404]], more specifically  the JSON-LD&nbsp;[[!json-ld]] format. The manifest can be a separate JSON-LD file, or it can be
+					part of an HTML resource using the <a href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"><code>script</code> element</a> in HTML&nbsp;[[!html]]. If the latter, the <code>type</code> attribute of the <code>script</code> element MUST be set to <code>application/ld+json</code>.
+				</p>
+
+<pre class="example" title="A Web Publication Manifest included in an HTML resource">
+	&lt;script id="example_manifest" type="application/ld+json"&gt;
+	{
+    ...
+	}
+	&lt;/script&gt;
+</pre>
+
+				<section>
+					<h4>Descriptive Infoset Properties in the Web Publication Manifest</h4>
+
+					<p>
+						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based on the terms defined by <a href="https://schema.org">Schema.org</a>&nbsp;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org).
+						This means that the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting their syntax and semantics).
+					</p>
+
+					<p>
+						As required by Schema.org, in order for the Web Publication Manifest to use these terms, the manifest MUST begin by declaring the Schema.org context. I.e., the JSON-LD content MUST begin by:
+					</p>
+
+<pre class=example title="'Declaring' the usage of Schema.org">
+{
+    "@context" : "http://schema.org",
+    ...
+}
+</pre>
+
+				<p class="note">Schema.org includes a large number of terms that, though relevant for publishing, are not mentioned in this Recommendation. Web Publication authors may use any of those; this document defines only the minimal set of infoset items, and their mapping to Schema.org.</p>
+
+				<p class=ednote>There are discussion on whether a best practices document would be created, referring to more schema.org terms. If so, it should be linked from here.</p>
+				</section>
+
+
+				<section>
+					<h4>Structural Infoset Properties in the Web Publication Manifest</h4>
+
+					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.json`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST begin declaring <em>both</em> the Schema.org and the Web Publication Manifest context files. I.e.:</p>
+
+					<pre class=example>
+					{
+					    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.json"],
+					    ...
+					}
+					</pre>
+
+					<p>Values of structural properties are usually links to external resources, or an array thereof. Such a link may be expressed in one of two ways:</p>
+
+					<ol>
+						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
+						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue">StructuredValue</a> that can be used to express, beyond the URL, the media type and other characteristics of the target resource.</li>
+					</ol>
+
+<pre class="example" title="Expressing external links, either as strings or as objects">
+	{
+        ...
+        "resources" : [
+            "datatypes.svg",
+            {
+                "@type"      : "StructuredValue",
+                "url"        : "test-utf8.csv",
+                "fileFormat" : "text/csv"
+            }
+		]
+	}
+</pre>
+				</section>
 			</section>
 
-			<section id="manifest-req">
+			<section>
+				<h3>Detailed Specification of Web Publication Manifest Items</h3>
+
+				<section>
+					<h4>Descriptive Infoset Properties</h4>
+					<section>
+						<h4>Accessibility Report</h4>
+						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					</section>
+					<section>
+						<h4>Address</h4>
+						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					</section>
+					etc.
+				</section>
+				<section>
+					<h4>Structural Infoset Properties</h4>
+					<section>
+						<h4>Default Reading Order</h4>
+						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					</section>
+					<section>
+						<h4>Resource List</h4>
+						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					</section>
+					etc.
+				</section>
+			</section>
+
+
+
+			<!-- <section id="manifest-req">
 				<h3>Requirements</h3>
 
 				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
@@ -803,7 +904,7 @@
 				<p>The manifest is serialized as a JSON document&#160;[[!ecma-404]].</p>
 
 				<div class="ednote">Additional serialization details will be included in a future draft.</div>
-			</section>
+			</section> -->
 		</section>
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
@@ -843,8 +944,21 @@
 					</li>
 				</ul>
 
-				<p class="issue">How linking to a <a>manifest</a> is done (relationship, media type) may change
-					in future versions of the draft. It should also be made clearer that the manifest may be placed in a data block in the HTML file, rather than into a separate JSON file.</p>
+				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web Publication Manifest expressed as part of an HTML resource (see <a href="#manifest-intro"></a>).
+				</p>
+
+<pre class="example" title="Link to a manifest within the same HTML resource">
+	&lt;link href="#example_manifest" rel="publication"&gt;
+	...
+	&lt;script id="example_manifest" type="application/ld+json"&gt;
+	{
+    "@context" : "http://schema.org",
+    ...
+	}
+	&lt;/script&gt;
+</pre>
+
+				<p class="issue">The exact value of <code>rel</code> is still to be agreen upon.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
 
