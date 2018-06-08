@@ -1370,18 +1370,19 @@
 
 				<pre class="idl">
                     dictionary WebPublicationManifest {
-                        required    USVString                               address;
+                        required    DOMString                               address;
                                     DOMString                               lang;
                                     TextDirection                           dir = "auto";
                                     TextDirection                           progression = "auto";
                                     sequence&lt;LocalizableString&gt;       title;
-                                    USVString                               identifier;
-                                    sequence&lt;Contributor&gt;             author;
+                                    DOMString                               identifier;
+                                    sequence&lt;Contributor&gt;             authors;
                                     DOMString                               modified;
                                     DOMString                               publication_date;
                                     sequence&lt;PublicationLink&gt;         links;
                                     sequence&lt;PublicationLink&gt;         reading_order;
                                     sequence&lt;PublicationLink&gt;         resources;
+                                    sequence&lt;PublicationLink&gt;         toc;
                     };
       </pre>
 
@@ -1413,7 +1414,7 @@
 					</dt>
 					<dd>Contains the <a>canonical identifier</a>.</dd>
 					<dt>
-						<dfn>author</dfn>
+						<dfn>authors</dfn>
 					</dt>
 					<dd>Contains one or more <a href="#wp-creators">creators</a>.</dd>
 					<dt>
@@ -1436,6 +1437,10 @@
 						<dfn>resources</dfn>
 					</dt>
 					<dd>Contains the <a>resource list</a>.</dd>
+					<dt>
+						<dfn>toc</dfn>
+					</dt>
+					<dd>Contains the <a>table of contents</a>.</dd>
 				</dl>
 			</section>
 
@@ -1448,7 +1453,7 @@
 				<pre class="idl">
                     dictionary Contributor {
                         required    LocalizableString       name;
-                                    USVString               identifier;
+                                    DOMString               identifier;
                     };
                 </pre>
 
@@ -1480,7 +1485,7 @@
 
 				<pre class="idl">
                     dictionary LocalizableString {
-                        required    USVString       value;
+                        required    DOMString       value;
                                     DOMString       lang;
                                     TextDirection   dir = "auto";
                     };
@@ -1512,13 +1517,11 @@
 
 				<pre class="idl">
                     dictionary PublicationLink {
-                        required    USVString                   href;
-                                    DOMString                   type;
-                                    USVString                   title;
-                                    sequence&lt;DOMString&gt;   rel;
-                                    DOMString                   height;
-                                    DOMString                   width;
-                                    boolean                     templated;
+                        required    DOMString                           href;
+                                    DOMString                           type;
+                                    DOMString                           title;
+                                    sequence&lt;DOMString&gt;           rel;
+                                    sequence&lt;PublicationLink&gt;     children;
                     };
                 </pre>
 
@@ -1548,18 +1551,9 @@
 					<dd>Contains one or more relations based on the IANA link
 						registry.&#160;[[!iana-link-relations]]</dd>
 					<dt>
-						<dfn>height</dfn>
+						<dfn>children</dfn>
 					</dt>
-					<dd>Height of the linked resource, expressed in CSS pixels.&#160;[[!css]]</dd>
-					<dt>
-						<dfn>width</dfn>
-					</dt>
-					<dd>Width of the linked resource, expressed in CSS pixels.&#160;[[!css]]</dd>
-					<dt>
-						<dfn>templated</dfn>
-					</dt>
-					<dd>Indicates that the <a href="#dom-publicationlink-rel"><code>href</code></a> is a URI
-						template.&#160;[[!rfc6570]]</dd>
+					<dd>Contains one or more child resources for the current resource.</dd>
 				</dl>
 
 			</section>
