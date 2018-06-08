@@ -742,11 +742,11 @@
 				<section>
 					<h4>Structural Infoset Properties in the Web Publication Manifest</h4>
 
-					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.json`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST declare <em>both</em> the Schema.org and the Web Publication Manifest context. I.e.:</p>
+					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.jsonld`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST declare <em>both</em> the Schema.org and the Web Publication Manifest context. I.e.:</p>
 
 					<pre class=example>
 					{
-					    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.json"],
+					    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
 					    ...
 					}
 					</pre>
