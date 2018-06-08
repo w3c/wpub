@@ -1,0 +1,11 @@
+{
+  "@context": {
+    "reading_order": {
+      "@container": "@list",
+      "@id": "http://schema.org/hasPart"
+    },
+    "resources": {
+      "@container": "@set"
+    }
+  }
+}
