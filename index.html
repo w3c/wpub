@@ -1279,8 +1279,57 @@
 
 					<p class="issue" data-number="145"></p>
 				</section>
-			</section>
 
+				<section>
+					<h4>Guided Navigation</h4>
+					<p class="issue" data-number="139"></p>
+
+					<section>
+						<h5>Short description</h5>
+						<p>
+							The author should be able to define a preferred navigation across the resources of a Web Publication. From the perspective of a User Agent this would be based on the <a>Default Reading Order</a> which defines the sequence in which to present the resources of the Web Publication to the user. A <a>Table of Contents</a> may expose that order explicitly to the user.
+						</p>
+					</section>
+
+					<section>
+						<h5>Dependencies</h5>
+						<p>
+							The preferred navigation would be defined in terms of the <a>Default Reading Order</a> which is a required item of the Information Set.
+						</p>
+					</section>
+					<section>
+						<h5>Use Case Reference</h5>
+						<p>
+							<a href="https://www.w3.org/TR/pwp-ucr/#r_reading-order">Req. 12</a>: “There should be a means to indicate the author’s preferred navigation structure among the resources of a Web Publication.
+							A user agent needs to know the sequence in which to present components of a Web Publication to the user, including the starting point.” (See [[pwp-ucr]])
+						</p>
+					</section>
+					<section>
+						<h5>Examples</h5>
+
+						<p>
+							Example 1 (quoted from [[pwp-ucr]]):<br />
+							Moby Dick contains 136 chapters. Each chapter is a separate HTML document, with a logical order for reading them. It should be possible for the publication to inform the user agent that the proper order for consumption of the HTML documents is sequentially, starting by the first chapter.
+						</p>
+
+						<p>
+							Example 2: <br />
+							Martina is consuming a scientific book—a well-known introductory overview of a specific topic (e.g. UX)—for her senior thesis. The author has taken great care to explain first the basic concepts and then the theoretic approaches step by step in subsequent chapters which logically build upon each other so that the reader is supposed to master the contents of the previous chapters. For a novice to that subject, it is strongly recommended to follow the default reading order laid down by the author.
+						</p>
+
+						<p>
+							Example 3: <br />
+							Joan is learning French at school. The schoolbook authors have divided all the stuff to be learned together with appropriate classroom activities across several chapters by defining a learning progression that is adequate for Joan’s age and her level of education. In consuming this schoolbook Joan and her teachers should respect this default order of chapters.
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<h5>Testing</h5>
+					<p>
+						If a test user opens up a WP in a WP-aware UA, he or she should have a means to detect and follow the default reading order. By inspecting the manifest of the WP, a tester should find two items: the default reading order and the list of resources.
+					</p>
+				</section>
 			<section id="aff-offline-access">
 				<h3>Offline Access</h3>
 
