@@ -116,7 +116,7 @@ var biblio = {
         "Richard Ishida"
       ],
       "date": "2017-12-01"
-    }
+    },
     "schema.org": {
         "title": "Schema.org",
         "href": "https://schema.org"

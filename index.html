@@ -79,35 +79,6 @@
 				  repoURL: "https://github.com/w3c/wpub/",
 				  branch: "master"
 			  },
-              // otherLinks: [
-              //     {
-              //       key: "Participate",
-              //       data: [{
-              //           value: "Github w3c/wpub",
-              //           href: "https://github.com/w3c/wpub"
-              //         },
-				// 	  {
-				// 		value: "File a bug",
-				// 		href: "https://github.com/w3c/wpub/issues"
-				// 	  },
-				// 	  {
-				// 		value: "Commit history",
-				// 		href: "https://github.com/w3c/wpub/commits/master"
-				// 	  },
-				// 	  {
-				// 		value: "Pull requests",
-				// 		href: "https://github.com/w3c/wpub/pulls"
-				// 	}]
-              //     },
-              //     // {
-              //     //   key: "Changes",
-              //     //   data: [
-              //     //   // {
-              //     //   //   value: "Diff to previous version",
-              //     //   //   href: "diff.html"
-              //     //   // },
-              //     // }
-              // ],
               localBiblio: biblio
           };
           // ]]>
@@ -752,7 +723,7 @@
 					</p>
 
 					<p>
-						As required by Schema.org, in order for the Web Publication Manifest to use these terms, the manifest MUST begin by declaring the Schema.org context. I.e., the JSON-LD content MUST begin by:
+						As required by Schema.org, in order for the Web Publication Manifest to use these terms, the manifest MUST declare the Schema.org context. I.e., the JSON-LD content MUST begin by:
 					</p>
 
 <pre class=example title="'Declaring' the usage of Schema.org">
@@ -771,7 +742,7 @@
 				<section>
 					<h4>Structural Infoset Properties in the Web Publication Manifest</h4>
 
-					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.json`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST begin declaring <em>both</em> the Schema.org and the Web Publication Manifest context files. I.e.:</p>
+					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.json`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST declare <em>both</em> the Schema.org and the Web Publication Manifest context. I.e.:</p>
 
 					<pre class=example>
 					{
@@ -1194,7 +1165,6 @@
 					</div>
 
 					<p class="issue" data-number="138"></p>
-					<p class="issue" data-number="136"></p>
 				</section>
 
 				<section id="scrolling-or-paginating" class="informative">
@@ -1291,7 +1261,6 @@
 
 					<p class="issue" data-number="144"></p>
 					<p class="issue" data-number="38"></p>
-					<p class="issue" data-number="136"></p>
 				</section>
 
 				<section id="aff-progression">
@@ -1312,7 +1281,6 @@
 							order</a>.</li>
 					</ul>
 					<p class="issue" data-number="145"></p>
-					<p class="issue" data-number="136"></p>
 				</section>
 
 				<section id="aff-toc">
@@ -1342,7 +1310,6 @@
 
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a
 					future draft.</p>
-				<p class="issue" data-number="136"></p>
 			</section>
 		</section>
 		<section id="locators" class="informative">
