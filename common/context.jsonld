@@ -1,12 +1,5 @@
 {
   "@context": {
-    "bib": "http://bib.schema.org/",
-    "artist": "http://bib.schema.org/artist",
-    "colorist": "http://bib.schema.org/colorist",
-    "inker": "http://bib.schema.org/inker",
-    "penciler": "http://bib.schema.org/penciler",
-    "letterer": "http://bib.schema.org/letterer",
-    "readBy": "http://bib.schema.org/readBy",
     "reading_order": {
       "@container": "@list",
       "@id": "http://schema.org/hasPart"
