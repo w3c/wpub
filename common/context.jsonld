@@ -9,7 +9,7 @@
       "@id": "http://www.w3.org/ns/wpub/resources"
     },
     "readingProgression": {
-        "@id": "http://www.w3.org/ns/wpub/resources"
+        "@id": "http://www.w3.org/ns/wpub/readingProgression"
     },
     "author": {
         "@container" : "@list",
