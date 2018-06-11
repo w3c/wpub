@@ -1370,17 +1370,17 @@
 
 				<pre class="idl">
                     dictionary WebPublicationManifest {
-                        required    DOMString                               address;
+                        required    DOMString                               url;
                                     DOMString                               lang;
-                                    TextDirection                           dir = "auto";
-                                    TextDirection                           progression = "auto";
-                                    sequence&lt;LocalizableString&gt;       title;
-                                    DOMString                               identifier;
+                                    TextDirection                           direction = "auto";
+                                    TextDirection                           readingProgression = "auto";
+                                    sequence&lt;LocalizableString&gt;       name;
+                                    DOMString                               id;
                                     sequence&lt;Contributor&gt;             authors;
-                                    DOMString                               modified;
-                                    DOMString                               publication_date;
+                                    DOMString                               dateModified;
+                                    DOMString                               datePublished;
                                     sequence&lt;PublicationLink&gt;         links;
-                                    sequence&lt;PublicationLink&gt;         reading_order;
+                                    sequence&lt;PublicationLink&gt;         readingOrder;
                                     sequence&lt;PublicationLink&gt;         resources;
                                     sequence&lt;PublicationLink&gt;         toc;
                     };
@@ -1390,7 +1390,7 @@
 
 				<dl data-dfn-for="WebPublicationManifest">
 					<dt>
-						<dfn>address</dfn>
+						<dfn>url</dfn>
 					</dt>
 					<dd>Contains the <a href="#wp-address">address</a>. Required.</dd>
 					<dt>
@@ -1398,19 +1398,19 @@
 					</dt>
 					<dd>Contains the default value <a href="#wp-language">language</a>.</dd>
 					<dt>
-						<dfn>dir</dfn>
+						<dfn>direction</dfn>
 					</dt>
 					<dd>Contains the default value for <a>base direction</a>.</dd>
 					<dt>
-						<dfn>progression</dfn>
+						<dfn>readingProgression</dfn>
 					</dt>
 					<dd>Contains the value for the <a>reading progression direction</a>.</dd>
 					<dt>
-						<dfn>title</dfn>
+						<dfn>name</dfn>
 					</dt>
 					<dd>Contains the <a href="#wp-title">title</a>.</dd>
 					<dt>
-						<dfn>identifier</dfn>
+						<dfn>id</dfn>
 					</dt>
 					<dd>Contains the <a>canonical identifier</a>.</dd>
 					<dt>
@@ -1418,11 +1418,11 @@
 					</dt>
 					<dd>Contains one or more <a href="#wp-creators">creators</a>.</dd>
 					<dt>
-						<dfn>modified</dfn>
+						<dfn>dateModified</dfn>
 					</dt>
 					<dd>Contains the <a>last modification date</a>.</dd>
 					<dt>
-						<dfn>publication_date</dfn>
+						<dfn>datePublished</dfn>
 					</dt>
 					<dd>Contains the <a>publication date</a>.</dd>
 					<dt>
@@ -1430,7 +1430,7 @@
 					</dt>
 					<dd>Contains links to external resources.</dd>
 					<dt>
-						<dfn>reading_order</dfn>
+						<dfn>readingOrder</dfn>
 					</dt>
 					<dd>Contains the <a>default reading order</a>.</dd>
 					<dt>
@@ -1445,7 +1445,7 @@
 			</section>
 
 			<section id="contributor-idl">
-				<h3><code>author</code> member </h3>
+				<h3><code>authors</code> member </h3>
 
 				<p class="ednote">The <a href="#wp-creators">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
@@ -1453,7 +1453,7 @@
 				<pre class="idl">
                     dictionary Contributor {
                         required    LocalizableString       name;
-                                    DOMString               identifier;
+                                    DOMString               id;
                     };
                 </pre>
 
@@ -1466,7 +1466,7 @@
 					</dt>
 					<dd>Contains one or more localizable string for the contributor's name.</dd>
 					<dt>
-						<dfn>identifier</dfn>
+						<dfn>id</dfn>
 					</dt>
 					<dd>Contains a canonical identifier for the contributor.</dd>
 				</dl>
@@ -1517,24 +1517,19 @@
 
 				<pre class="idl">
                     dictionary PublicationLink {
-                        required    DOMString                           href;
+                        required    DOMString                           url;
                                     DOMString                           type;
-                                    DOMString                           title;
+                                    DOMString                           name;
                                     sequence&lt;DOMString&gt;           rel;
                                     sequence&lt;PublicationLink&gt;     children;
                     };
                 </pre>
 
-				<p class="ednote">This definition is based on a simplifed model of <abbr
-						title="Readium Web Publication Manifest"><a href="https://github.com/readium/webpub-manifest"
-							>RWPM</a></abbr>, where the link does not contain properties. In the context of EPUB 4, the
-					working group might also need to re-introduce these properties.</p>
-
 				<p>The PublicationLink dictionary contains the following members:</p>
 
 				<dl data-dfn-for="PublicationLink">
 					<dt>
-						<dfn>href</dfn>
+						<dfn>url</dfn>
 					</dt>
 					<dd>Contains the URL of the linked resource.&#160;[[!url]]</dd>
 					<dt>
@@ -1542,7 +1537,7 @@
 					</dt>
 					<dd>Contains the MIME media type of the linked resource.&#160;[[!rfc2046]]</dd>
 					<dt>
-						<dfn>title</dfn>
+						<dfn>name</dfn>
 					</dt>
 					<dd>Text label for the linked resource.</dd>
 					<dt>
