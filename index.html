@@ -979,11 +979,15 @@
 					<section id="wp-canonical-identifier-wpm">
 						<h4>Canonical Identifier</h4>
 						<p>
-							As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/identifier"><code>itentifier</code></a> term.
+							As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/id"><code>id</code></a> term, whose value is a URL.
 						</p>
 
 						<p>
-							In Schema.org, the value of this term can be a URL, a textual information that represents a unique identification, or more complex objects defined in Schema.org. There are also sub-properties that can be used on their own right, like <a href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"><code>issn</code></a>, or <a href="http://schema.org/serialNumber"><code>serialNumber</code></a>. See also the Schema.org description for further details.
+							Additionally, the term <a href="http://schema.org/identifier"><code>itentifier</code></a> MAY also be used; in Schema.org, the value of this term can be a URL, a textual information that represents a unique identification, or more complex objects defined in Schema.org. There are also sub-properties that can be used on their own right, like <a href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"><code>issn</code></a>, or <a href="http://schema.org/serialNumber"><code>serialNumber</code></a>. See also the Schema.org description for further details.
+						</p>
+
+						<p class=ednote>
+							Not clear how one would describe the relationships between these two...
 						</p>
 
 						<table class="zebra">
@@ -1000,7 +1004,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<a href="http://schema.org/identifier"><code>itentifier</code></a>
+										<a href="http://schema.org/id"><code>id</code></a>
 									</td>
 									<td>
 										Preferred version of the Web Publication.
@@ -1013,7 +1017,7 @@
 {
     "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     ...
-    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     ...
 }
