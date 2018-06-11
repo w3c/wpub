@@ -6,6 +6,26 @@
     },
     "resources": {
       "@container": "@set"
+    },
+    "author": {
+        "@container" : "@list",
+        "@id": "http://schema.org/author"
+    },
+    "creator": {
+        "@container" : "@list",
+        "@id": "http://schema.org/creator"
+    },
+    "editor": {
+        "@container" : "@list",
+        "@id": "http://schema.org/editor"
+    },
+    "translator": {
+        "@container" : "@list",
+        "@id": "http://schema.org/translator"
+    },
+    "publisher": {
+        "@container" : "@list",
+        "@id": "http://schema.org/publisher"
     }
   }
 }

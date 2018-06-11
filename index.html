@@ -983,7 +983,7 @@
 					<section id="wp-canonical-identifier-wpm">
 						<h4>Canonical Identifier</h4>
 						<p>
-							A <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/identifier">itentifier</a> term.
+							As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/identifier">itentifier</a> term.
 						</p>
 
 						<p>
@@ -1033,6 +1033,154 @@
 }
 </pre>
 
+					</section>
+					<section id="wp-creators-wpm">
+						<h4>Creator</h4>
+						<p>
+							As desribed in <a href="#wp-creators"></a>, a <a>Web Publication's</a> <a>creators</a> are the individuals or entities responsible for the creation of the <a>Web Publication</a>. There is no one single Schema.org term this item must be mapped onto; instead, there are a number of terms, and, if this Infoset Item is used, the Web Publication Manifest SHOULD use one of those. The value of these terms are one or several <a href="http://schema.org/Person">Person</a> objects or, in some cases, <a href="http://schema.org/Person">Person</a> or an <a href="http://schema.org/Organization">Organization</a> items. These terms are:
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="https://schema.org/author">author</a
+									</td>
+									<td>
+										The author of this content. The value can be on or more <a href="http://schema.org/Person">Person</a> or <a href="http://schema.org/Organization">Organization</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/creator">creator</a
+									</td>
+									<td>
+										The creator of this content. The value can be on or more <a href="http://schema.org/Person">Person</a> or <a href="http://schema.org/Organization">Organization</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/editor">editor</a
+									</td>
+									<td>
+										The editor of this content. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/publisher">publisher</a
+									</td>
+									<td>
+										The publisher of the creative work. The value can be on or more <a href="http://schema.org/Person">Person</a> or <a href="http://schema.org/Organization">Organization</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/illustrator">illustrator</a
+									</td>
+									<td>
+										The illustrator of a publication. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/translator">translator</a
+									</td>
+									<td>
+										The illustrator of a publication. The value can be on or more <a href="http://schema.org/Person">Person</a> or <a href="http://schema.org/Organization">Organization</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/readBy">readBy</a
+									</td>
+									<td>
+										A person who reads (performs) the audiobook. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/artist">artist</a
+									</td>
+									<td>
+										The primary artist for a work in a medium other than pencils or digital line art. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/colorist">colorist</a
+									</td>
+									<td>
+										The individual who adds color to inked drawings. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/letterer">letterer</a
+									</td>
+									<td>
+										The individual who adds lettering, including speech balloons and sound effects, to artwork. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/penciler">penciler</a
+									</td>
+									<td>
+										The individual who draws the primary narrative artwork.. The value can be on or more <a href="http://schema.org/Person">Person</a>.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Author of a book">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "url"   : "https://publisher.example.org/mobydick",
+    "author"  : {
+        "name" : Herman Melville"
+    }
+}
+</pre>
+<pre class=example title="Separate listing of editors, authors, and publisher">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "author"     : [{
+        "name" : "Jeni Tennison",
+    },{
+        "name" : "Gregg Kellogg",
+    },{
+        "name" : "Ivan Herman",
+    }],
+    "editor"    : [{
+        "name" : "Jeni Tennison",
+    },{
+        "name" : "Gregg Kellogg",
+    }],
+    "publisher" : {
+        "name" : "World Wide Web Consortium"
+    }
+    ...
+}
+</pre>
+						<p class="issue">
+							A problem with all the Schema.org terms liste above is that the <em>order</em> of the values (i.e., the order of authors) is not significant, and that is contrary to the requirements of publishing. As <em>temporary</em> measure order is enforced in the Web Publication Manifest context file, but this should be subject of further discussions with the Schema.org maintainers.
+						</p>
 					</section>
 				</section>
 				<section>
