@@ -7,6 +7,43 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<script src="common/js/orcid.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
+		<style>
+			/* Table zebra style... */
+			table.zebra {
+				font-size:inherit;
+				font:90%;
+				margin:1em;
+			}
+
+			table.zebra td {
+			  	padding-left: 0.3em;
+			}
+
+			table.zebra th {
+				font-weight: bold;
+				text-align: center;
+				background-color: NavyBlue !important;
+				font-size: 110%;
+				background: hsl(180, 30%, 50%);
+				color: #fff;
+			}
+
+			table.zebra th a:link {
+			  color: #fff;
+			}
+
+			table.zebra th a:visited {
+			  color: #aaa;
+			}
+
+			table.zebra tr:nth-child(even) {
+				background-color: hsl(180, 30%, 93%)
+			}
+
+			table.zebra th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+			table.zebra td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+		</style>
+
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
@@ -347,7 +384,7 @@
 
 					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
 						as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these reports
-						with machine-processable metadata, such as provided in schema.org, is also RECOMMENDED.</p>
+						with machine-processable metadata, such as provided in Schema.org[[schema.org]], is also RECOMMENDED.</p>
 
 					<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format is
 						used to externalize publication metadata (e.g., to ensure availability for search). Depending
@@ -715,43 +752,33 @@
 </pre>
 
 				<section>
-					<h4>Descriptive Infoset Properties in the Web Publication Manifest</h4>
+					<h4>Descriptive Infoset Properties</h4>
 
 					<p>
 						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based on the terms defined by <a href="https://schema.org">Schema.org</a>&nbsp;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org).
 						This means that the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting their syntax and semantics).
 					</p>
 
-					<p>
-						As required by Schema.org, in order for the Web Publication Manifest to use these terms, the manifest MUST declare the Schema.org context. I.e., the JSON-LD content MUST begin by:
+					<p class="note">
+						Schema.org includes a large number of terms that, though relevant for publishing, are not mentioned in this Recommendation. Web Publication authors may use any of those; this document defines only the minimal set of infoset items, and their mapping to Schema.org.
 					</p>
 
-<pre class=example title="'Declaring' the usage of Schema.org">
-{
-    "@context" : "http://schema.org",
-    ...
-}
-</pre>
-
-				<p class="note">Schema.org includes a large number of terms that, though relevant for publishing, are not mentioned in this Recommendation. Web Publication authors may use any of those; this document defines only the minimal set of infoset items, and their mapping to Schema.org.</p>
-
-				<p class=ednote>There are discussion on whether a best practices document would be created, referring to more schema.org terms. If so, it should be linked from here.</p>
+					<p class=ednote>
+						There are discussion on whether a best practices document would be created, referring to more schema.org terms. If so, it should be linked from here.
+					</p>
 				</section>
 
 
 				<section>
-					<h4>Structural Infoset Properties in the Web Publication Manifest</h4>
+					<h4>Structural Infoset Properties</h4>
 
-					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.jsonld`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST declare <em>both</em> the Schema.org and the Web Publication Manifest context. I.e.:</p>
+					<p>
+						<a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that refer to one or more external resources (images, script files, separate metadata files, etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore defined separately by this specification.
+					</p>
 
-					<pre class=example>
-					{
-					    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-					    ...
-					}
-					</pre>
-
-					<p>Values of structural properties are usually links to external resources, or an array thereof. Such a link may be expressed in one of two ways:</p>
+					<p>
+						Values of structural properties are usually links to external resources, or an array thereof. Such a link may be expressed in one of two ways:
+					</p>
 
 					<ol>
 						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
@@ -771,17 +798,146 @@
 		]
 	}
 </pre>
+
+					<p class=note>
+						There will be continuous contacts with Schema.org to see whether some of the structural property terms should not be included in the core Schema.org hierarchy, or one of its extensions.
+					</p>
+				</section>
+
+				<section>
+					<h4>Web Publication Manifest Contexts</h4>
+
+					<p>
+						A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This context has two major components:
+					</p>
+					<ul>
+						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
+						<li>the separate, WP-specific context files: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
+					</ul>
+
+					<p>
+						Note that the latter may also add some features to terms defined in Schema.org.
+					</p>
+
+					<div class=note>
+						<p>
+							An example is the requirement for the <a href="https://schema.org/creator">creator</a> term to be order preserving.
+						</p>
+						<p>
+							As part of the continuous contacts with Schema.org the additional requirements defined in the WP specific context file may migrate to the core Schema.org.
+						</p>
+					</div>
+
+					<p>
+						In practice, this means that a Web Publication Manifest MUST begin with, at the minimum:
+					</p>
+
+<pre class=example>
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+}
+</pre>
+
+					<p>
+						In some cases, this structure may have to be extended by additional, local information, see the <a>language and base direction below @@@@</a>.
+					</p>
 				</section>
 			</section>
 
 			<section>
-				<h3>Detailed Specification of Web Publication Manifest Items</h3>
+				<h3>Specification of Web Publication Manifest Items</h3>
 
 				<section>
 					<h4>Descriptive Infoset Properties</h4>
-					<section>
-						<h4>Accessibility Report</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					<section id="wp-a11y-wpm">
+						<h4>Accessibility</h4>
+
+						<p>
+							As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility metadata, as expressed by Schema.org. A more detailed description of these terms, as well as the possible values, are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>. These terms are:
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessMode">accessMode</a>
+									</td>
+									<td>
+										The human sensory perceptual system or cognitive faculty through which a person may process or perceive information.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessModeSufficient">accessModeSufficient</a>
+									</td>
+									<td>
+										A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://schema.org/accessibilityAPI">accessibilityAPI</a>
+									</td>
+									<td>
+										Indicates that the resource is compatible with the referenced accessibility API.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityControl">accessibilityControl</a>
+									</td>
+									<td>
+										Identifies input methods that are sufficient to fully control the described resource.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityFeature">accessibilityFeature</a>
+									</td>
+									<td>
+										Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityHazard">accessibilityHazard</a>
+									</td>
+									<td>
+										A characteristic of the described resource that is physiologically dangerous to some users.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilitySummary">accessibilitySummary</a>
+									</td>
+									<td>
+										A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as “short descriptions are present but long descriptions will be needed for non-visual users” or “short descriptions are present and no long descriptions are needed.”
+									</td>
+								</tr>
+							<tbody>
+						</table>
+
+<pre class=example title="Example for accessiblity metadata of a purely textual document">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+	...
+	"accessMode"            : ["textual", "visual"],
+	"accessModeSufficient"  : ["textual"],
+	...
+}
+</pre>
+
 					</section>
 					<section>
 						<h4>Address</h4>
