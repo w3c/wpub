@@ -853,9 +853,10 @@
 					<section id="wp-a11y-wpm">
 						<h4>Accessibility</h4>
 
+						<p class="issue" data-number=216></p>
+
 						<p>
-							As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility metadata, as expressed by Schema.org. A more detailed description of these terms, as well as the possible values, are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>. These terms are:
-						</p>
+							As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility metadata. These MUST be mapped on the family of accessibility terms, as expressed by Schema.org. (A more detailed description of these terms, as well as the possible values, are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.) These terms are: </p>
 
 						<table class="zebra">
 							<thead>
@@ -931,19 +932,108 @@
 <pre class=example title="Example for accessiblity metadata of a purely textual document">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-	...
-	"accessMode"            : ["textual", "visual"],
-	"accessModeSufficient"  : ["textual"],
-	...
+    ...
+    "accessMode"            : ["textual", "visual"],
+    "accessModeSufficient"  : ["textual"],
+    ...
 }
 </pre>
 
 					</section>
 					<section>
 						<h4>Address</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As described in <a href="#wp-address"></a>, a <a>Web Publication's</a>
+							<a>address</a> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
+							represents the primary entry page for the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/url">url</a> term.
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/url">url</a>
+									</td>
+									<td>
+										URL of the primary entry page.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Example for setting the address of the main entry point">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    ...
+}
+</pre>
 					</section>
-					etc.
+					<section id="wp-canonical-identifier-wpm">
+						<h4>Canonical Identifier</h4>
+						<p>
+							A <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/identifier">itentifier</a> term.
+						</p>
+
+						<p>
+							Note that, in Schema.org, the value of this term can be a URL, a textual information that represents a unique identification, or more complex objects defined in Schema.org. There are also sub-properties that can be used on their own right, like <a href="http://schema.org/isbn">isbn</a>, <a href="http://schema.org/issn">issn</a>, or <a href="http://schema.org/serialNumber">serialNumber</a>. See also the Schema.org description for further details.
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/identifier">itentifier</a
+									</td>
+									<td>
+										Preferred version of the Web Publication.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Example for setting both the canonical identifier as URL and the address of the same document">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+}
+</pre>
+
+<pre class=example title="Example for setting both the ISBN and the address of the same document">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "isbn"  : "1234567890123",
+    "url"   : "https://publisher.example.org/mobydick",
+    ...
+}
+</pre>
+
+					</section>
 				</section>
 				<section>
 					<h4>Structural Infoset Properties</h4>
@@ -961,31 +1051,6 @@
 
 
 
-			<!-- <section id="manifest-req">
-				<h3>Requirements</h3>
-
-				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
-
-				<ol>
-					<li>It MUST <a href="#manifest-declaration">declare</a> that it describes a Web Publication.</li>
-					<li>It MUST be serialized as defined in <a href="#manifest-serialization"></a>.</li>
-				</ol>
-			</section>
-
-			<section id="manifest-declaration">
-				<h3>Declaration</h3>
-
-				<div class="ednote">A description of how a <a>manifest</a> declares it describes a <a>Web
-						Publication</a> will be included in a future draft.</div>
-			</section>
-
-			<section id="manifest-serialization">
-				<h3>Serialization</h3>
-
-				<p>The manifest is serialized as a JSON document&#160;[[!ecma-404]].</p>
-
-				<div class="ednote">Additional serialization details will be included in a future draft.</div>
-			</section> -->
 		</section>
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
