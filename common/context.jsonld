@@ -5,7 +5,11 @@
       "@id": "http://schema.org/hasPart"
     },
     "resources": {
-      "@container": "@set"
+      "@container": "@set",
+      "@id": "http://www.w3.org/ns/wpub/resources"
+    },
+    "readingProgression": {
+        "@id": "http://www.w3.org/ns/wpub/resources"
     },
     "author": {
         "@container" : "@list",
