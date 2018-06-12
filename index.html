@@ -1518,7 +1518,7 @@
 				<pre class="idl">
                     dictionary PublicationLink {
                         required    DOMString                           url;
-                                    DOMString                           type;
+                                    DOMString                           fileFormat;
                                     DOMString                           name;
                                     sequence&lt;DOMString&gt;           rel;
                                     sequence&lt;PublicationLink&gt;     children;
@@ -1533,7 +1533,7 @@
 					</dt>
 					<dd>Contains the URL of the linked resource.&#160;[[!url]]</dd>
 					<dt>
-						<dfn>type</dfn>
+						<dfn>fileFormat</dfn>
 					</dt>
 					<dd>Contains the MIME media type of the linked resource.&#160;[[!rfc2046]]</dd>
 					<dt>
