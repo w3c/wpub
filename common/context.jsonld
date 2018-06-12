@@ -1,35 +1,35 @@
 {
-  "@context": {
-    "reading_order": {
-      "@container": "@list",
-      "@id": "http://schema.org/hasPart"
-    },
-    "resources": {
-      "@container": "@set",
-      "@id": "http://www.w3.org/ns/wpub/resources"
-    },
-    "readingProgression": {
-        "@id": "http://www.w3.org/ns/wpub/readingProgression"
-    },
-    "author": {
-        "@container" : "@list",
-        "@id": "http://schema.org/author"
-    },
-    "creator": {
-        "@container" : "@list",
-        "@id": "http://schema.org/creator"
-    },
-    "editor": {
-        "@container" : "@list",
-        "@id": "http://schema.org/editor"
-    },
-    "translator": {
-        "@container" : "@list",
-        "@id": "http://schema.org/translator"
-    },
-    "publisher": {
-        "@container" : "@list",
-        "@id": "http://schema.org/publisher"
+    "@context": {
+        "readingOrder": {
+            "@container": "@list",
+            "@id": "http://www.w3.org/ns/wpub#readingOrder"
+        },
+        "resources": {
+            "@container": "@set",
+            "@id": "http://www.w3.org/ns/wpub#resources"
+        },
+        "readingProgression": {
+            "@id": "http://www.w3.org/ns/wpub#readingProgression"
+        },
+        "author": {
+            "@container": "@list",
+            "@id": "http://schema.org/author"
+        },
+        "creator": {
+            "@container": "@list",
+            "@id": "http://schema.org/creator"
+        },
+        "editor": {
+            "@container": "@list",
+            "@id": "http://schema.org/editor"
+        },
+        "translator": {
+            "@container": "@list",
+            "@id": "http://schema.org/translator"
+        },
+        "publisher": {
+            "@container": "@list",
+            "@id": "http://schema.org/publisher"
+        }
     }
-  }
 }
