@@ -1,16 +1,5 @@
 {
     "@context": {
-        "readingOrder": {
-            "@container": "@list",
-            "@id": "http://www.w3.org/ns/wpub#readingOrder"
-        },
-        "resources": {
-            "@container": "@set",
-            "@id": "http://www.w3.org/ns/wpub#resources"
-        },
-        "readingProgression": {
-            "@id": "http://www.w3.org/ns/wpub#readingProgression"
-        },
         "author": {
             "@container": "@list",
             "@id": "http://schema.org/author"
@@ -23,13 +12,48 @@
             "@container": "@list",
             "@id": "http://schema.org/editor"
         },
+        "publisher": {
+            "@container": "@list",
+            "@id": "http://schema.org/publisher"
+        },
+        "illustrator": {
+            "@container": "@list",
+            "@id": "http://schema.org/illustrator"
+        },
         "translator": {
             "@container": "@list",
             "@id": "http://schema.org/translator"
         },
-        "publisher": {
+        "readBy": {
             "@container": "@list",
-            "@id": "http://schema.org/publisher"
+            "@id": "http://schema.org/readBy"
+        },
+        "artist": {
+            "@container": "@list",
+            "@id": "http://schema.org/artist"
+        },
+        "colorist": {
+            "@container": "@list",
+            "@id": "http://schema.org/colorist"
+        },
+        "letterer": {
+            "@container": "@list",
+            "@id": "http://schema.org/letterer"
+        },
+        "penciler": {
+            "@container": "@list",
+            "@id": "http://schema.org/penciler"
+        },
+        "readingProgression": {
+            "@id": "http://www.w3.org/ns/wpub#readingProgression"
+        },
+        "readingOrder": {
+            "@container": "@list",
+            "@id": "http://www.w3.org/ns/wpub#readingOrder"
+        },
+        "resources": {
+            "@container": "@set",
+            "@id": "http://www.w3.org/ns/wpub#resources"
         }
     }
 }
