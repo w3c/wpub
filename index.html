@@ -800,7 +800,7 @@
 					</p>
 				</section>
 
-				<section>
+				<section id="wpub-context">
 					<h4>Web Publication Manifest Contexts</h4>
 
 					<p>
@@ -808,7 +808,7 @@
 					</p>
 					<ul>
 						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
-						<li>the separate, WP-specific context files: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
+						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
 					</ul>
 
 					<p>
@@ -830,7 +830,7 @@
 
 <pre class=example>
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     ...
 }
 </pre>
@@ -1407,11 +1407,161 @@
 </pre>
 					</section>
 				</section>
-				<section>
+				<section id="structural-infoset-properties-wpm">
 					<h4>Structural Infoset Properties</h4>
-					<section>
+
+					<p>
+						Structural infoset properties typically refer to external resources via a URL. This URL-s may refer to resources playing different roles (e.g., cover or privacy policy), may need some additional metadata for, e.g., accessibility purposes.
+					</p>
+					<p id="publication-link-def">
+						The structural properties are expressed via JSON-LD terms that are typically publication specific (i.e., defined through the JSON-LD context file defined for Web Publications, see <a href="#wpub-context"></a>). This context also defines a general type used for external links, called <code>PublicationLink</code>, that contains that following properties (note that most of the properties are ):
+					</p>
+
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>
+									Term name
+								</th>
+								<th>
+									Short description
+								</th>
+								<th>
+									Required/Optional
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="http://schema.org/name"><code>url</code></a>
+								</td>
+								<td>
+									URL&nbsp;[[url]] of the resource.
+								</td>
+								<td>
+									Required.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
+								</td>
+								<td>
+									Media type, typically the MIME format&nbsp;[[!rfc2046]] of the content e.g. <code>application/zip</code>.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/name"><code>name</code></a>
+								</td>
+								<td>
+									Name of the item.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/description"><code>description</code></a>
+								</td>
+								<td>
+									Description of the item.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>rel</code>
+								</td>
+								<td>
+									A single relation the IANA link registry&nbsp;[[!iana-link-relations]], or an array of similar relations.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<section id="wp-default-reading-order-wpm">
 						<h4>Default Reading Order</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As defined in <a href="#wp-default-reading-order"></a>, the <a>default reading order</a> is a specific progression through a set of Web Publication resources. If represented in the Wep Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>readingOrder</code> term, defined specifically for Web Publications.
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>readingOrder</code>
+									</td>
+									<td>
+										An array of:
+										<ul>
+											<li>string, representing the URL&nbsp;[[url]] of the resource; or</li>
+											<li>instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Reading order expressed as a simple list of URL-s">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [
+        "html/title.html",
+        "html/copyright.html",
+        "html/introduction.html",
+        "html/epigraph.html",
+        "html/c001.html",
+        ...
+    ]
+}
+</pre>
+<pre class=example title="Reading order expressed as objects providing more information on items">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [{
+        "@type"      : "PublicationList",
+        "url"        : "html/title.html",
+        "fileFormat" : "text/html",
+        "name"       : "Title page"
+    },{
+        "@type"      : "PublicationList",
+        "url"        : "html/copyright.html",
+        "fileFormat" : "text/html",
+        "name"       : "Copyright page"
+    },{
+        ...
+    }]
+}
+</pre>
+
+
+
+
 					</section>
 					<section>
 						<h4>Resource List</h4>

@@ -54,6 +54,13 @@
         "resources": {
             "@container": "@set",
             "@id": "http://www.w3.org/ns/wpub#resources"
+        },
+        "PublicationLink": {
+            "@id": "http://www.w3.org/ns/wpub#PublicationLink"
+        },
+        "rel": {
+            "@container": "@set",
+            "@id": "http://www.w3.org/ns/wpub#PublicationLink"
         }
     }
 }
