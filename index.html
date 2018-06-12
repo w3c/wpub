@@ -1493,7 +1493,7 @@
 					<section id="wp-default-reading-order-wpm">
 						<h4>Default Reading Order</h4>
 						<p>
-							As defined in <a href="#wp-default-reading-order"></a>, the <a>default reading order</a> is a specific progression through a set of Web Publication resources. If represented in the Wep Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>readingOrder</code> term, defined specifically for Web Publications.
+							As defined in <a href="#wp-default-reading-order"></a>, the <a>default reading order</a> is a specific progression through a set of Web Publication resources. If present in the Web Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>readingOrder</code> term, defined specifically for Web Publications.
 						</p>
 						<table class="zebra">
 							<thead>
@@ -1514,9 +1514,10 @@
 									<td>
 										An array of:
 										<ul>
-											<li>string, representing the URL&nbsp;[[url]] of the resource; or</li>
-											<li>instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+											<li>a string, representing the URL&nbsp;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
 										</ul>
+										The order in the array is <em>significant</em>.
 									</td>
 								</tr>
 							</tbody>
@@ -1558,22 +1559,124 @@
     }]
 }
 </pre>
-
-
-
-
 					</section>
-					<section>
+					<section id="wp-resource-list-wpm">
 						<h4>Resource List</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As defined in <a href="#wp-resource-list"></a>, the <a>resource list</a> enumerates all <a href="#wp-resources">resources</a> that are used in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds) and that are not listed in the <a>default reading order</a>. If present in the Web Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>resources</code> term, defined specifically for Web Publications.
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>resources</code>
+									</td>
+									<td>
+										An array of:
+										<ul>
+											<li>a string, representing the URL&nbsp;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+										The order in the array is <em>significant</em>.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Listing resources, some via a simple URL, some with more details">
+{
+    "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    ...
+    "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
+    "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+    "resources": [
+        "datatypes.html",
+        "datatypes.svg",
+        "datatypes.png",
+        "diff.html",
+        {
+            "@type"         : "PublicationLink",
+            "url"           : "test-utf8.csv",
+            "fileFormat"    : "text/csv"
+        },{
+            "@type"         : "PublicationLink",
+            "url"           : "test-utf8-bom.csv",
+            "fileFormat"    : "text/csv"
+        },{
+            ...
+        }
+    ],
+    ...
+}
+</pre>
+
 					</section>
-					etc.
+					<section id="wp-table-of-contents-wpm">
+						<h4>Table of Contents</h4>
+						<p>
+							As defined in <a href="#wp-table-of-contents"></a>, the manifest SHOULD provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> representing the table of content. If present in the Web Publication Manifest this item MUST be mapped on the <code>tableOfContents</code> term, defined specifically for Web Publications.
+							</p>
+							<table class="zebra">
+								<thead>
+									<tr>
+										<th>
+											Term name with link to definition
+										</th>
+										<th>
+											Short description
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<code>tableOfContents</code>
+										</td>
+										<td>
+											A (relative or absolute) URL&nbsp;[[url]]
+										</td>
+									</tr>
+								</tbody>
+							</table>
+<pre class=example title="Reference to a table of content element, in the same file that contains the manifest is">
+&lt;head&gt;
+    ...
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        ...
+        "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
+        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        "tableOfContents" : "#toc"
+        ...
+    }
+    &lt;/script&gt;
+    ...
+&lt;/head&gt;
+&lt;body&gt;
+    ...
+    &lt;section id="toc" role="doc-toc"&gt;
+        ...
+    &lt;/section&gt;
+    ...
+&lt;/body&gt;
+</pre>
+						<p class="issue">
+							The term <code>tableOfContents</code> has not been approved by the Working Group yet; it is currently a placeholder.
+						</p>
+					</section>
 				</section>
 			</section>
-
-
-
-
 		</section>
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>

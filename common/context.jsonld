@@ -55,6 +55,9 @@
             "@container": "@set",
             "@id": "http://www.w3.org/ns/wpub#resources"
         },
+        "tableOfContents": {
+            "@id": "http://www.w3.org/ns/wpub#tableOfContents"
+        },
         "PublicationLink": {
             "@id": "http://www.w3.org/ns/wpub#PublicationLink"
         },
