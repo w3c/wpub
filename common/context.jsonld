@@ -1,6 +1,6 @@
 {
   "@context": {
-    "reading_order": {
+    "readingOrder": {
       "@container": "@list",
       "@id": "http://schema.org/hasPart"
     },
