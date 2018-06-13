@@ -839,6 +839,20 @@
 						In some cases, this structure may have to be extended by additional, local information, see the <a href="#manifest-language-and-dir"></a>.
 					</p>
 				</section>
+				<section>
+					<h4>Publication Types</h4>
+					<p>
+						The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using the <code>@type</code> of JSON-LD&nbsp;[[json-ld]]. Schema.org also includes a number of more specific types (see the <a href="http://schema.org/CreativeWork">list</a> on the Schema.org site) which include a type for <a href="http://schema.org/Article">Article</a>, <a href="http://schema.org/Book">Book</a>, or <a href="http://schema.org/Book">Book</a>; these may MAY also be used instead of <code>CreativeWork</code>.
+					</p>
+<pre class=example title="Setting type of the publication to be a Book">
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book"
+    ...
+}
+</pre>
+
+				</section>
 			</section>
 
 			<section>
@@ -928,6 +942,7 @@
 <pre class=example title="Example for accessiblity metadata of a purely textual document">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
     ...
     "accessMode"            : ["textual", "visual"],
     "accessModeSufficient"  : ["textual"],
@@ -970,6 +985,7 @@
 <pre class=example title="Example for setting the address of the main entry point">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
     "url"      : "https://publisher.example.org/mobydick",
     ...
@@ -1015,20 +1031,22 @@
 
 <pre class=example title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
     ...
-    "id"         : "http://www.w3.org/TR/tabular-data-model/",
-    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "id"       : "http://www.w3.org/TR/tabular-data-model/",
+    "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     ...
 }
 </pre>
 
 <pre class=example title="Example for setting both the ISBN and the address of the same document">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
-    "isbn"  : "1234567890123",
-    "url"   : "https://publisher.example.org/mobydick",
+    "isbn"     : "1234567890123",
+    "url"      : "https://publisher.example.org/mobydick",
     ...
 }
 </pre>
@@ -1146,10 +1164,11 @@
 
 <pre class=example title="Author of a book">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
-    "url"        : "https://publisher.example.org/mobydick",
-    "author"     : {
+    "url"      : "https://publisher.example.org/mobydick",
+    "author"   : {
 		"@type" : "Person",
         "name"  : "Herman Melville"
     }
@@ -1158,6 +1177,7 @@
 <pre class=example title="Separate listing of editors, authors, and publisher">
 {
     "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
     ...
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
@@ -1228,7 +1248,8 @@
 							</p>
 <pre class=example title="Setting the default metadata language to French">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
     "author" : {
         "@type" : "Person",
@@ -1277,6 +1298,7 @@
 <pre class=example title="Modification date of the publication">
 {
     "@context"     : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"        : "CreativeWork",
     ...
     "identifier"   : "http://www.w3.org/TR/tabular-data-model/",
     "url"          : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
@@ -1318,6 +1340,7 @@
 <pre class=example title="Creation and modification date of the publication">
 {
     "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
     ...
     "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
     "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
@@ -1360,6 +1383,7 @@
 <pre class=example title="Reading progression set explicitl to ltr">
 {
     "@context"           : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"              : "Book",
     ...
     "url"                : "https://publisher.example.org/mobydick",
     "readingProgression" : "ltr"
@@ -1400,6 +1424,7 @@
 <pre class=example title="Title of the book set explicitly">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick"
@@ -1525,6 +1550,7 @@
 <pre class=example title="Reading order expressed as a simple list of URL-s">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
@@ -1541,6 +1567,7 @@
 <pre class=example title="Reading order expressed as objects providing more information on items">
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
     ...
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
@@ -1594,12 +1621,13 @@
 						</table>
 <pre class=example title="Listing resources, some via a simple URL, some with more details">
 {
-    "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
     ...
-    "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
-    "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     ...
-    "resources": [
+    "resources"  : [
         "datatypes.html",
         "datatypes.svg",
         "datatypes.png",
@@ -1654,6 +1682,7 @@
     &lt;script type="application/ld+json"&gt;
     {
         "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        "@type"           : "CreativeWork",
         ...
         "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
         "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
