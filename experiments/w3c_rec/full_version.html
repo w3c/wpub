@@ -8,13 +8,13 @@
     {
         "@context"              : [
             "https://schema.org",
+            "https://www.w3.org/ns/wpub.jsonld",
             {
-                "publ-resources" : null,
-                "publ-toc"       : null,
                 "@language"      : "en-US"
             }
         ],
-        "@id"                   : "http://www.w3.org/TR/tabular-data-model/",
+        "@type"                 : "CreativeWork",
+        "id"                    : "http://www.w3.org/TR/tabular-data-model/",
         "url"                   : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
         "accessMode"            : ["textual", "visual"],
         "accessModeSufficient"  : ["textual"],
@@ -77,7 +77,7 @@
         ],
         "datePublished"         : "2015-12-17",
         "dateModified"          : "2015-12-17",
-        "publ-resources"        : [
+        "resources"             : [
             "datatypes.html",
             "datatypes.svg",
             "datatypes.png",
@@ -117,14 +117,14 @@
                 "fileFormat"    : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             }
         ],
-        "publ-toc"              : "#toc"
+        "tableOfContents"       : "#toc"
     }
     </script>
 </head>
 <body>
     ....
 
-    <section id="toc">
+    <section id="toc" role="doc-toc">
         <h2 resource="#h-toc" id="h-toc" class="introductory">Table of Contents</h2>
         <ul class="toc">
             <li class="tocline"><a class="tocxref" href="#intro"><span class="secno">1. </span>Introduction</a></li>

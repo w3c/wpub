@@ -7,6 +7,43 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<script src="common/js/orcid.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
+		<style>
+			/* Table zebra style... */
+			table.zebra {
+				font-size:inherit;
+				font:90%;
+				margin:1em;
+			}
+
+			table.zebra td {
+			  	padding-left: 0.3em;
+			}
+
+			table.zebra th {
+				font-weight: bold;
+				text-align: center;
+				background-color: NavyBlue !important;
+				font-size: 110%;
+				background: hsl(180, 30%, 50%);
+				color: #fff;
+			}
+
+			table.zebra th a:link {
+			  color: #fff;
+			}
+
+			table.zebra th a:visited {
+			  color: #aaa;
+			}
+
+			table.zebra tr:nth-child(even) {
+				background-color: hsl(180, 30%, 93%)
+			}
+
+			table.zebra th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+			table.zebra td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+		</style>
+
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
@@ -347,7 +384,7 @@
 
 					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
 						as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these reports
-						with machine-processable metadata, such as provided in schema.org, is also RECOMMENDED.</p>
+						with machine-processable metadata, such as provided in Schema.org[[schema.org]], is also RECOMMENDED.</p>
 
 					<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format is
 						used to externalize publication metadata (e.g., to ensure availability for search). Depending
@@ -505,10 +542,6 @@
 						(undetermined). If the base direction cannot be determined, user agents MUST assume the value
 							<code>auto</code>.</p>
 
-					<div class="issue" data-number="53">
-						<p>Is the language declared for the <a>manifest</a> content the same as the language of the
-							publication? If it is, how to deal with multilingual publications?</p>
-					</div>
 				</section>
 
 				<section id="wp-mod-date">
@@ -702,7 +735,7 @@
 
 				<p>
 					A <a>manifest</a> is a serialization of a <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr>.
-					The manifest is serialized using the JSON&nbsp;[[!ecma-404]], more specifically  the JSON-LD&nbsp;[[!json-ld]] format. The manifest can be a separate JSON-LD file, or it can be
+					The manifest is serialized using the JSON&nbsp;[[!ecma-404]], more specifically the JSON-LD&nbsp;[[!json-ld]] format. The manifest can be a separate JSON-LD file, or it can be
 					part of an HTML resource using the <a href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"><code>script</code> element</a> in HTML&nbsp;[[!html]]. If the latter, the <code>type</code> attribute of the <code>script</code> element MUST be set to <code>application/ld+json</code>.
 				</p>
 
@@ -715,47 +748,37 @@
 </pre>
 
 				<section>
-					<h4>Descriptive Infoset Properties in the Web Publication Manifest</h4>
+					<h4>Descriptive Infoset Properties</h4>
 
 					<p>
-						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based on the terms defined by <a href="https://schema.org">Schema.org</a>&nbsp;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org).
+						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based, wherever possible, on the terms defined by <a href="https://schema.org">Schema.org</a>&nbsp;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org).
 						This means that the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting their syntax and semantics).
 					</p>
 
-					<p>
-						As required by Schema.org, in order for the Web Publication Manifest to use these terms, the manifest MUST declare the Schema.org context. I.e., the JSON-LD content MUST begin by:
+					<p class="note">
+						Schema.org includes a large number of terms that, though relevant for publishing, are not mentioned in this Recommendation. Web Publication authors may use any of those; this document defines only the minimal set of infoset items, and their mapping to Schema.org when appropriate.
 					</p>
 
-<pre class=example title="'Declaring' the usage of Schema.org">
-{
-    "@context" : "http://schema.org",
-    ...
-}
-</pre>
-
-				<p class="note">Schema.org includes a large number of terms that, though relevant for publishing, are not mentioned in this Recommendation. Web Publication authors may use any of those; this document defines only the minimal set of infoset items, and their mapping to Schema.org.</p>
-
-				<p class=ednote>There are discussion on whether a best practices document would be created, referring to more schema.org terms. If so, it should be linked from here.</p>
+					<p class=ednote>
+						There are discussion on whether a best practices document would be created, referring to more schema.org terms. If so, it should be linked from here.
+					</p>
 				</section>
 
 
 				<section>
-					<h4>Structural Infoset Properties in the Web Publication Manifest</h4>
+					<h4>Structural Infoset Properties</h4>
 
-					<p><a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that are defined in a separate JSON-LD context file, namely `https://www.w3.org/ns/wpub.jsonld`. However, values of the corresponding terms MAY also refer to object types that are defined by Schema.org; consequently, if a Web Publication Manifest uses these structural properties, the JSON-LD content MUST declare <em>both</em> the Schema.org and the Web Publication Manifest context. I.e.:</p>
+					<p>
+						<a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms that refer to one or more external resources (images, script files, separate metadata files, etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore defined separately by this specification.
+					</p>
 
-					<pre class=example>
-					{
-					    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-					    ...
-					}
-					</pre>
-
-					<p>Values of structural properties are usually links to external resources, or an array thereof. Such a link may be expressed in one of two ways:</p>
+					<p>
+						Values of structural properties are usually links to external resources, or an array thereof. Such a link may be expressed in one of two ways:
+					</p>
 
 					<ol>
 						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue">StructuredValue</a> that can be used to express, beyond the URL, the media type and other characteristics of the target resource.</li>
+						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"><code>StructuredValue</code></a> that can be used to express, beyond the URL, the media type and other characteristics of the target resource.</li>
 					</ol>
 
 <pre class="example" title="Expressing external links, either as strings or as objects">
@@ -771,65 +794,918 @@
 		]
 	}
 </pre>
+
+					<p class=note>
+						There will be continuous contacts with Schema.org to see whether some of the structural property terms should not be included in the core Schema.org hierarchy, or one of its extensions.
+					</p>
+				</section>
+
+				<section id="wpub-context">
+					<h4>Web Publication Manifest Contexts</h4>
+
+					<p>
+						A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This context has two major components:
+					</p>
+					<ul>
+						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
+						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
+					</ul>
+
+					<p>
+						Note that the latter may also add some features to terms defined in Schema.org.
+					</p>
+
+					<div class=note>
+						<p>
+							An example for the latter is the requirement for the <a href="https://schema.org/creator">creator</a> term to be order preserving.
+						</p>
+						<p>
+							As part of the continuous contacts with Schema.org the additional requirements defined in the WP specific context file may migrate to the core Schema.org.
+						</p>
+					</div>
+
+					<p>
+						In practice, this means that a Web Publication Manifest MUST begin with, at the minimum:
+					</p>
+
+<pre class=example>
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    ...
+}
+</pre>
+
+					<p>
+						In some cases, this structure may have to be extended by additional, local information, see the <a href="#manifest-language-and-dir"></a>.
+					</p>
+				</section>
+				<section>
+					<h4>Publication Types</h4>
+					<p>
+						The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using the <code>@type</code> of JSON-LD&nbsp;[[json-ld]]. Schema.org also includes a number of more specific types (see the <a href="http://schema.org/CreativeWork">list</a> on the Schema.org site) which include a type for <a href="http://schema.org/Article">Article</a>, <a href="http://schema.org/Book">Book</a>, or <a href="http://schema.org/Book">Book</a>; these may MAY also be used instead of <code>CreativeWork</code>.
+					</p>
+<pre class=example title="Setting type of the publication to be a Book">
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book"
+    ...
+}
+</pre>
+
 				</section>
 			</section>
 
 			<section>
-				<h3>Detailed Specification of Web Publication Manifest Items</h3>
+				<h3>Specification of Web Publication Manifest Items</h3>
 
 				<section>
 					<h4>Descriptive Infoset Properties</h4>
-					<section>
-						<h4>Accessibility Report</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+					<section id="wp-a11y-wpm">
+						<h4>Accessibility</h4>
+
+						<p class="issue" data-number=216></p>
+
+						<p>
+							As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility metadata. These SHOULD be mapped on the family of accessibility terms, as expressed by Schema.org. (A more detailed description of these terms, as well as the possible values, are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.) These terms are: </p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessMode"><code>accessMode</code></a>
+									</td>
+									<td>
+										The human sensory perceptual system or cognitive faculty through which a person may process or perceive information.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessModeSufficient"><code>accessModeSufficient</code></a>
+									</td>
+									<td>
+										A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
+									</td>
+									<td>
+										Indicates that the resource is compatible with the referenced accessibility API.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityControl"><code>accessibilityControl</code></a>
+									</td>
+									<td>
+										Identifies input methods that are sufficient to fully control the described resource.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityFeature"><code>accessibilityFeature</code></a>
+									</td>
+									<td>
+										Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityHazard"><code>accessibilityHazard</code></a>
+									</td>
+									<td>
+										A characteristic of the described resource that is physiologically dangerous to some users.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilitySummary"><code>accessibilitySummary</code></a>
+									</td>
+									<td>
+										A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as “short descriptions are present but long descriptions will be needed for non-visual users” or “short descriptions are present and no long descriptions are needed.”
+									</td>
+								</tr>
+							<tbody>
+						</table>
+
+<pre class=example title="Example for accessiblity metadata of a purely textual document">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
+    ...
+    "accessMode"            : ["textual", "visual"],
+    "accessModeSufficient"  : ["textual"],
+    ...
+}
+</pre>
+
 					</section>
 					<section>
 						<h4>Address</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As described in <a href="#wp-address"></a>, a <a>Web Publication's</a>
+							<a>address</a> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
+							represents the primary entry page for the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/url"><code>url</code></a> term.
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/url"><code>url</code></a>
+									</td>
+									<td>
+										URL of the primary entry page.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Example for setting the address of the main entry point">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    ...
+}
+</pre>
 					</section>
-					etc.
+					<section id="wp-canonical-identifier-wpm">
+						<h4>Canonical Identifier</h4>
+						<p>
+							As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a> <a>canonical identifier</a> is a unique identifier that resolves to the preferred version of the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/id"><code>id</code></a> term, whose value is a URL.
+						</p>
+
+						<p>
+							Additionally, the term <a href="http://schema.org/identifier"><code>itentifier</code></a> MAY also be used; in Schema.org, the value of this term can be a URL, a textual information that represents a unique identification, or more complex objects defined in Schema.org. There are also sub-properties that can be used on their own right, like <a href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"><code>issn</code></a>, or <a href="http://schema.org/serialNumber"><code>serialNumber</code></a>. See also the Schema.org description for further details.
+						</p>
+
+						<p class=ednote>
+							Not clear how one would describe the relationships between these two...
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/id"><code>id</code></a>
+									</td>
+									<td>
+										Preferred version of the Web Publication.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Example for setting both the canonical identifier as URL and the address of the same document">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
+    ...
+    "id"       : "http://www.w3.org/TR/tabular-data-model/",
+    "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+}
+</pre>
+
+<pre class=example title="Example for setting both the ISBN and the address of the same document">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "isbn"     : "1234567890123",
+    "url"      : "https://publisher.example.org/mobydick",
+    ...
+}
+</pre>
+
+					</section>
+					<section id="wp-creators-wpm">
+						<h4>Creator</h4>
+						<p>
+							As desribed in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the individuals or entities responsible for the creation of the <a>Web Publication</a>. There isn’t one single Schema.org term this item must be mapped onto; instead, there are a number of terms and, if this Infoset Item is used, the Web Publication Manifest SHOULD use one of those. The value of these terms are one or more <a href="http://schema.org/Person"><code>Person</code></a> objects or, in some cases, <a href="http://schema.org/Person"><code>Person</code></a> or an <a href="http://schema.org/Organization"><code><code>Organization</code></code></a> items. These terms are:
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="https://schema.org/author"><code>author</code></a>
+									</td>
+									<td>
+										The author of this content. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a> or <a href="http://schema.org/Organization"><code>Organization</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/creator"><code>creator</code></a>
+									</td>
+									<td>
+										The creator of this content. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a> or <a href="http://schema.org/Organization"><code>Organization</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/editor">editor</a>
+									</td>
+									<td>
+										The editor of this content. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/publisher"><code>publisher</code></a>
+									</td>
+									<td>
+										The publisher of the creative work. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a> or <a href="http://schema.org/Organization"><code>Organization</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
+									</td>
+									<td>
+										The illustrator of a publication. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/translator"><code>translator</code></a>
+									</td>
+									<td>
+										The illustrator of a publication. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a> or <a href="http://schema.org/Organization"><code>Organization</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
+									</td>
+									<td>
+										A person who reads (performs) the audiobook. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/artist"><code>artist</code></a>
+									</td>
+									<td>
+										The primary artist for a work in a medium other than pencils or digital line art. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/colorist"><code>colorist</code></a>
+									</td>
+									<td>
+										The individual who adds color to inked drawings. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/letterer"><code>letterer</code></a>
+									</td>
+									<td>
+										The individual who adds lettering, including speech balloons and sound effects, to artwork. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="https://bib.schema.org/penciler"><code>penciler</code></a>
+									</td>
+									<td>
+										The individual who draws the primary narrative artwork.. The value can be on or more <a href="http://schema.org/Person"><code>Person</code></a>.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class=example title="Author of a book">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "author"   : {
+		"@type" : "Person",
+        "name"  : "Herman Melville"
+    }
+}
+</pre>
+<pre class=example title="Separate listing of editors, authors, and publisher">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "author"     : [{
+		"@type" : "Person",
+        "name" : "Jeni Tennison",
+    },{
+		"@type" : "Person",
+        "name" : "Gregg Kellogg",
+    },{
+		"@type" : "Person",
+        "name" : "Ivan Herman",
+        "url"  : "https://www.w3.org/People/Ivan/"
+    }],
+    "editor"    : [{
+		"@type" : "Person",
+        "name" : "Jeni Tennison",
+    },{
+		"@type" : "Person",
+        "name" : "Gregg Kellogg",
+    }],
+    "publisher" : {
+		"@type" : "Organization",
+        "name" : "World Wide Web Consortium",
+        "url"  : "https://www.w3.org/"
+    }
+    ...
+}
+</pre>
+						<p class="issue" data-number=217></p>
+					</section>
+
+					<section id="wp-language-and-dir-wpm">
+						<h4>Language and Base Direction</h4>
+						<p>
+							As described in <a href="#wp-language-and-dir"></a> this infoset item refers to several aspects of setting language and direction; these are treated separately.
+						</p>
+						<section id="manifest-language-and-dir">
+							<h5>Default language and direction</h5>
+							<p>
+								The infoset described in <a href="#wp-language-and-dir"></a> requires the possibility to set a <em>default</em> language and base direction for all textual information in the manifest. These MUST be set by <em>extending</em> the context of the manifest to include the right features.
+							</p>
+							<p>
+								To set the language, the context information must be <em>extended</em> by the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"><code>@language</code> term</a> of JSON-LD[[!json-ld]]:
+							</p>
+
+<pre class=example title="Setting the default metadata language to French">
+{
+    "@context"   : [
+        "http://schema.org",
+        "https://www.w3.org/ns/wpub.jsonld",
+        {
+            "@language" : "fr"
+        }
+    ],
+    ...
+}
+</pre>
+
+							<p>The value of the language tag must be set to the language code as defined in [[!bcp47]]. If not set, the default value is <code>en</code>.</p>
+
+							<p class="issue" data-number=218></p>
+						</section>
+						<section>
+							<h5>Item specific language and direction</h5>
+							<p>
+								The infoset described in <a href="#wp-language-and-dir"></a> also requires the possibility to set the language and base direction for any textual information in the manifest. This MUST be set for each item separately, also using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"><code>@value</code> and <code>@language</code> terms</a> of JSON-LD[[!json-ld]]:
+							</p>
+<pre class=example title="Setting the default metadata language to French">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "author" : {
+        "@type" : "Person",
+        "name" : {
+            "@value" : "Marcel Proust",
+            "@language" : "fr"
+        }
+    }
+}
+</pre>
+							<p>The value of the language tag must be set to the language code as defined in [[!bcp47]]. If not set, the default value is the <a href="#manifest-language-and-dir">default value of the manifest</a>.</p>
+
+							<p class="issue" data-number=219></p>
+						</section>
+						<p class="issue" data-number=220></p>
+					</section>
+					<section id="wp-mod-date-wpm">
+						<h4>Last Modification Date</h4>
+
+						<p>
+							As described in <a href="#wp-mod-date"></a>, the <a>last modification date</a> is the date when the <a>Web Publication</a> was last updated. This infoset item MUST be mapped on the <a href="http://schema.org/dateModified"><code>dateModified</code></a> term, whose value is a <a href="http://schema.org/Date"><code>Date</code></a> or <a href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601 date, or Date Time formats, respectively [[iso8601]].
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/dateModified"><code>dateModified</code></a>
+									</td>
+									<td>
+										Last modification date of the publication
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Modification date of the publication">
+{
+    "@context"     : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"        : "CreativeWork",
+    ...
+    "identifier"   : "http://www.w3.org/TR/tabular-data-model/",
+    "url"          : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "dateModified" : "2015-12-17",
+    ...
+}
+</pre>
+
+					</section>
+					<section id="wp-pub-date-wpm">
+						<h4>Publication Date</h4>
+
+						<p>
+							As described in <a href="#wp-pub-date"></a>, the <a>last modification date</a> is the date when the <a>Web Publication</a> was originall published. This infoset item MUST be mapped on the <a href="http://schema.org/datePublished"><code>datePublished</code></a> term, whose value is a <a href="http://schema.org/Date"><code>Date</code></a> or <a href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601 date, or Date Time formats, respectively [[iso8601]].
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/datePublished"><code>datePublished</code></a>
+									</td>
+									<td>
+										Creation date of the publication
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Creation and modification date of the publication">
+{
+    "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
+    ...
+    "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
+    "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "datePublished" : "2015-12-17",
+    "dateModified"  : "2016-01-30",
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-reading-progression-wpm">
+						<h4>Reading Progression Direction</h4>
+						<p>
+							As described in <a href="#wp-reading-progression"></a>, this infoset item establishes the reading direction from one resource to the next. There is no corresponding term in Schema.org; instead, this item MUST be mapped on the <code>readingProgression</code> term, defined specifically for Web Publications.
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>readingProgression</code>
+									</td>
+									<td>
+										Reading direction from one resource to the other; the value of this term MUST be <code>ltr</code>, <code>rtl</code>, or <code>auto</code> (see <a href="#wp-reading-progression"></a> for further details).
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>If this value is not set, its default value is <code>ltr</code>.</p>
+
+<pre class=example title="Reading progression set explicitl to ltr">
+{
+    "@context"           : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"              : "Book",
+    ...
+    "url"                : "https://publisher.example.org/mobydick",
+    "readingProgression" : "ltr"
+}
+</pre>
+
+					</section>
+
+					<section id="wp-title-wmp">
+						<h4>Title</h4>
+
+						<p>
+							As described in <a href="#wp-title"></a>, the title provides the human-readable name of the Web Publication. If set explicitly in the Manifest (i.e., if it is not to be derived from the <code>title</code> element of the primary entry point), this item MUST be mapped on the Schema.org <a href="http://schema.org/name"><code>name</code></a> term.
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/name"><code>name</code></a>
+									</td>
+									<td>
+										Human-readable name of the Web Publication.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Title of the book set explicitly">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick"
+}
+</pre>
+					</section>
 				</section>
-				<section>
+				<section id="structural-infoset-properties-wpm">
 					<h4>Structural Infoset Properties</h4>
-					<section>
+
+					<p>
+						Structural infoset properties typically refer to external resources via a URL. This URL-s may refer to resources playing different roles (e.g., cover or privacy policy), may need some additional metadata for, e.g., accessibility purposes.
+					</p>
+					<p id="publication-link-def">
+						The structural properties are expressed via JSON-LD terms that are typically publication specific (i.e., defined through the JSON-LD context file defined for Web Publications, see <a href="#wpub-context"></a>). This context also defines a general type used for external links, called <code>PublicationLink</code>, that contains that following properties (note that most of the properties are ):
+					</p>
+
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>
+									Term name
+								</th>
+								<th>
+									Short description
+								</th>
+								<th>
+									Required/Optional
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="http://schema.org/name"><code>url</code></a>
+								</td>
+								<td>
+									URL&nbsp;[[url]] of the resource.
+								</td>
+								<td>
+									Required.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
+								</td>
+								<td>
+									Media type, typically the MIME format&nbsp;[[!rfc2046]] of the content e.g. <code>application/zip</code>.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/name"><code>name</code></a>
+								</td>
+								<td>
+									Name of the item.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://schema.org/description"><code>description</code></a>
+								</td>
+								<td>
+									Description of the item.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>rel</code>
+								</td>
+								<td>
+									A single relation the IANA link registry&nbsp;[[!iana-link-relations]], or an array of similar relations.
+								</td>
+								<td>
+									Optional.
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<section id="wp-default-reading-order-wpm">
 						<h4>Default Reading Order</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As defined in <a href="#wp-default-reading-order"></a>, the <a>default reading order</a> is a specific progression through a set of Web Publication resources. If present in the Web Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>readingOrder</code> term, defined specifically for Web Publications.
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>readingOrder</code>
+									</td>
+									<td>
+										An array of:
+										<ul>
+											<li>a string, representing the URL&nbsp;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+										The order in the array is <em>significant</em>.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Reading order expressed as a simple list of URL-s">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [
+        "html/title.html",
+        "html/copyright.html",
+        "html/introduction.html",
+        "html/epigraph.html",
+        "html/c001.html",
+        ...
+    ]
+}
+</pre>
+<pre class=example title="Reading order expressed as objects providing more information on items">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    ...
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [{
+        "@type"      : "PublicationList",
+        "url"        : "html/title.html",
+        "fileFormat" : "text/html",
+        "name"       : "Title page"
+    },{
+        "@type"      : "PublicationList",
+        "url"        : "html/copyright.html",
+        "fileFormat" : "text/html",
+        "name"       : "Copyright page"
+    },{
+        ...
+    }]
+}
+</pre>
 					</section>
-					<section>
+					<section id="wp-resource-list-wpm">
 						<h4>Resource List</h4>
-						<p class=ednote>Describe the mapping and add one or more examples.</p>
+						<p>
+							As defined in <a href="#wp-resource-list"></a>, the <a>resource list</a> enumerates all <a href="#wp-resources">resources</a> that are used in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds) and that are not listed in the <a>default reading order</a>. If present in the Web Publication Manifest (i.e., if the Web Publication has other items in the default reading order than just the primary entry page), this item MUST be mapped on the <code>resources</code> term, defined specifically for Web Publications.
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>
+										Term name with link to definition
+									</th>
+									<th>
+										Short description
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>resources</code>
+									</td>
+									<td>
+										An array of:
+										<ul>
+											<li>a string, representing the URL&nbsp;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+										The order in the array is <em>significant</em>.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+<pre class=example title="Listing resources, some via a simple URL, some with more details">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+    "resources"  : [
+        "datatypes.html",
+        "datatypes.svg",
+        "datatypes.png",
+        "diff.html",
+        {
+            "@type"         : "PublicationLink",
+            "url"           : "test-utf8.csv",
+            "fileFormat"    : "text/csv"
+        },{
+            "@type"         : "PublicationLink",
+            "url"           : "test-utf8-bom.csv",
+            "fileFormat"    : "text/csv"
+        },{
+            ...
+        }
+    ],
+    ...
+}
+</pre>
+
 					</section>
-					etc.
+					<section id="wp-table-of-contents-wpm">
+						<h4>Table of Contents</h4>
+						<p>
+							As defined in <a href="#wp-table-of-contents"></a>, the manifest SHOULD provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> representing the table of content. If present in the Web Publication Manifest this item MUST be mapped on the <code>tableOfContents</code> term, defined specifically for Web Publications.
+							</p>
+							<table class="zebra">
+								<thead>
+									<tr>
+										<th>
+											Term name with link to definition
+										</th>
+										<th>
+											Short description
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<code>tableOfContents</code>
+										</td>
+										<td>
+											A (relative or absolute) URL&nbsp;[[url]]
+										</td>
+									</tr>
+								</tbody>
+							</table>
+<pre class=example title="Reference to a table of content element, in the same file that contains the manifest is">
+&lt;head&gt;
+    ...
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        "@type"           : "CreativeWork",
+        ...
+        "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
+        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        "tableOfContents" : "#toc"
+        ...
+    }
+    &lt;/script&gt;
+    ...
+&lt;/head&gt;
+&lt;body&gt;
+    ...
+    &lt;section id="toc" role="doc-toc"&gt;
+        ...
+    &lt;/section&gt;
+    ...
+&lt;/body&gt;
+</pre>
+						<p class="issue">
+							The term <code>tableOfContents</code> has not been approved by the Working Group yet; it is currently a placeholder.
+						</p>
+					</section>
 				</section>
 			</section>
-
-
-
-			<!-- <section id="manifest-req">
-				<h3>Requirements</h3>
-
-				<p>The requirements for a conforming Web Publication manifest are as follows:</p>
-
-				<ol>
-					<li>It MUST <a href="#manifest-declaration">declare</a> that it describes a Web Publication.</li>
-					<li>It MUST be serialized as defined in <a href="#manifest-serialization"></a>.</li>
-				</ol>
-			</section>
-
-			<section id="manifest-declaration">
-				<h3>Declaration</h3>
-
-				<div class="ednote">A description of how a <a>manifest</a> declares it describes a <a>Web
-						Publication</a> will be included in a future draft.</div>
-			</section>
-
-			<section id="manifest-serialization">
-				<h3>Serialization</h3>
-
-				<p>The manifest is serialized as a JSON document&#160;[[!ecma-404]].</p>
-
-				<div class="ednote">Additional serialization details will be included in a future draft.</div>
-			</section> -->
 		</section>
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
