@@ -14,11 +14,11 @@
 				font: 90%;
 				margin: 1em;
 			}
-			
+
 			table.zebra td {
 				padding-left: 0.3em;
 			}
-			
+
 			table.zebra th {
 				font-weight: bold;
 				text-align: center;
@@ -27,19 +27,19 @@
 				background: hsl(180, 30%, 50%);
 				color: #fff;
 			}
-			
+
 			table.zebra th a:link {
 				color: #fff;
 			}
-			
+
 			table.zebra th a:visited {
 				color: #aaa;
 			}
-			
+
 			table.zebra tr:nth-child(even) {
 				background-color: hsl(180, 30%, 93%)
 			}
-			
+
 			table.zebra th {
 				border-bottom: 1px solid #bbb;
 				padding: .2em 1em;
@@ -2160,6 +2160,48 @@
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a
 					future draft.</p>
 			</section>
+
+			<section id="aff-reading-state">
+	      <h4>Reading State</h4>
+
+	      <p class="issue" data-number="145"></p>
+
+	       <h5>Short description</h5>
+	        <p>
+	        The user must be able to leave the web publication and return to it at the last position they left from. The User Agent must retain the reading position, based on the last known position of the reader in the web publication. The position should be based on the reader's position in the file, within the reading order. <br />
+	        The user agent may retain reading state if the web publication is revised.
+	        </p>
+
+	       <h5>Dependencies</h5>
+	        <p>
+	        The navigation of the web publication should be defined in the <a>Default Reading Order</a> required by the Information Set.
+	        </p>
+	        <p>
+					User Agents should not have to set reading state in the following resources:
+					</p>
+	        <ul>
+	        	<li>External Links (i.e. a link to google.com)</li>
+	        	<li>Data references (i.e. a linked CSV file)</li>
+	        	<li>Multimedia content (i.e. a video)</li>
+	        </ul>
+
+	        <p>
+	        Reading state should only apply to content documents listed as within the bounds of the web publication.
+	        </p>
+
+	        <p class="issue" data-number="205"></p>
+
+	       <h5>Examples</h5>
+	       	<p>
+	        Example 1:<br />
+	        Sarah is reading a long article on her way to work. She arrives before she has finished, but wants to continue from the place she left off. The user agent should remember her reading state for the next time she opens the publication.
+	        </p>
+
+	       <h5>Testing</h5>
+	       	<p>
+	        If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the reader, then reopens it, they should be returned to the last known reading state.
+	        </p>
+	    </section>
 		</section>
 		<section id="locators" class="informative">
 			<h3>Web Publication Locators</h3>
