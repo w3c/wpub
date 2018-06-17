@@ -7,48 +7,6 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<script src="common/js/orcid.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
-		<style>
-			/* Table zebra style... */
-			table.zebra {
-				font-size: inherit;
-				font: 90%;
-				margin: 1em;
-			}
-			
-			table.zebra td {
-				padding-left: 0.3em;
-			}
-			
-			table.zebra th {
-				font-weight: bold;
-				text-align: center;
-				background-color: NavyBlue !important;
-				font-size: 110%;
-				background: hsl(180, 30%, 50%);
-				color: #fff;
-			}
-			
-			table.zebra th a:link {
-				color: #fff;
-			}
-			
-			table.zebra th a:visited {
-				color: #aaa;
-			}
-			
-			table.zebra tr:nth-child(even) {
-				background-color: hsl(180, 30%, 93%)
-			}
-			
-			table.zebra th {
-				border-bottom: 1px solid #bbb;
-				padding: .2em 1em;
-			}
-			table.zebra td {
-				border-bottom: 1px solid #ddd;
-				padding: .2em 1em;
-			}</style>
-
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
@@ -207,7 +165,7 @@
 				<section id="rel-wam">
 					<h4>Web App Manifest</h4>
 
-					<p class="ednote">We may want to write something here on the relationships...</p>
+					<p class="ednote">We may want to write something here on the relationships&#8230;</p>
 
 				</section>
 			</section>
@@ -756,7 +714,7 @@
 				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
-    ...
+    &#8230;
 	}
 	&lt;/script&gt;
 </pre>
@@ -802,7 +760,7 @@
 
 					<pre class="example" title="Expressing external links, either as strings or as objects">
 	{
-        ...
+        &#8230;
         "resources" : [
             "datatypes.svg",
             {
@@ -843,7 +801,7 @@
 					<pre class="example">
 {
     "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
-    ...
+    &#8230;
 }
 </pre>
 
@@ -863,7 +821,7 @@
 {
     "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book"
-    ...
+    &#8230;
 }
 </pre>
 
@@ -958,10 +916,10 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "CreativeWork",
-    ...
+    &#8230;
     "accessMode"            : ["textual", "visual"],
     "accessModeSufficient"  : ["textual"],
-    ...
+    &#8230;
 }
 </pre>
 
@@ -994,9 +952,9 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "url"      : "https://publisher.example.org/mobydick",
-    ...
+    &#8230;
 }
 </pre>
 					</section>
@@ -1016,7 +974,7 @@
 									><code>serialNumber</code></a>. See also the Schema.org description for further
 							details. </p>
 
-						<p class="ednote"> Not clear how one would describe the relationships between these two... </p>
+						<p class="ednote"> Not clear how one would describe the relationships between these two&#8230; </p>
 
 						<table class="zebra">
 							<thead>
@@ -1039,10 +997,10 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "CreativeWork",
-    ...
+    &#8230;
     "id"       : "http://www.w3.org/TR/tabular-data-model/",
     "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    ...
+    &#8230;
 }
 </pre>
 
@@ -1050,10 +1008,10 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "isbn"     : "1234567890123",
     "url"      : "https://publisher.example.org/mobydick",
-    ...
+    &#8230;
 }
 </pre>
 
@@ -1169,7 +1127,7 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "author"   : {
         "@type" : "Person",
@@ -1181,7 +1139,7 @@
 {
     "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "CreativeWork",
-    ...
+    &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "author"     : [{
@@ -1207,7 +1165,7 @@
         "name" : "World Wide Web Consortium",
         "url"  : "https://www.w3.org/"
     }
-    ...
+    &#8230;
 }
 </pre>
 						<p class="issue" data-number="217"></p>
@@ -1236,7 +1194,7 @@
             "@language" : "fr"
         }
     ],
-    ...
+    &#8230;
 }
 </pre>
 
@@ -1257,7 +1215,7 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "author" : {
         "@type" : "Person",
         "name" : {
@@ -1305,11 +1263,11 @@
 {
     "@context"     : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"        : "CreativeWork",
-    ...
+    &#8230;
     "identifier"   : "http://www.w3.org/TR/tabular-data-model/",
     "url"          : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "dateModified" : "2015-12-17",
-    ...
+    &#8230;
 }
 </pre>
 
@@ -1344,12 +1302,12 @@
 {
     "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"         : "CreativeWork",
-    ...
+    &#8230;
     "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
     "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "datePublished" : "2015-12-17",
     "dateModified"  : "2016-01-30",
-    ...
+    &#8230;
 }
 </pre>
 					</section>
@@ -1384,7 +1342,7 @@
 {
     "@context"           : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"              : "Book",
-    ...
+    &#8230;
     "url"                : "https://publisher.example.org/mobydick",
     "readingProgression" : "ltr"
 }
@@ -1420,7 +1378,7 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick"
 }
@@ -1519,7 +1477,7 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
     "readingOrder" : [
@@ -1528,7 +1486,7 @@
         "html/introduction.html",
         "html/epigraph.html",
         "html/c001.html",
-        ...
+        &#8230;
     ]
 }
 </pre>
@@ -1536,7 +1494,7 @@
 {
     "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
-    ...
+    &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
     "readingOrder" : [{
@@ -1550,7 +1508,7 @@
         "fileFormat" : "text/html",
         "name"       : "Copyright page"
     },{
-        ...
+        &#8230;
     }]
 }
 </pre>
@@ -1588,10 +1546,10 @@
 {
     "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "CreativeWork",
-    ...
+    &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    ...
+    &#8230;
     "resources"  : [
         "datatypes.html",
         "datatypes.svg",
@@ -1606,10 +1564,10 @@
             "url"           : "test-utf8-bom.csv",
             "fileFormat"    : "text/csv"
         },{
-            ...
+            &#8230;
         }
     ],
-    ...
+    &#8230;
 }
 </pre>
 
@@ -1638,26 +1596,26 @@
 						</table>
 						<pre class="example" title="Reference to a table of content element, in the same file that contains the manifest is">
 &lt;head&gt;
-    ...
+    &#8230;
     &lt;script type="application/ld+json"&gt;
     {
         "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
         "@type"           : "CreativeWork",
-        ...
+        &#8230;
         "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
         "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
         "tableOfContents" : "#toc"
-        ...
+        &#8230;
     }
     &lt;/script&gt;
-    ...
+    &#8230;
 &lt;/head&gt;
 &lt;body&gt;
-    ...
+    &#8230;
     &lt;section id="toc" role="doc-toc"&gt;
-        ...
+        &#8230;
     &lt;/section&gt;
-    ...
+    &#8230;
 &lt;/body&gt;
 </pre>
 						<p class="issue"> The term <code>tableOfContents</code> has not been approved by the Working
@@ -1709,11 +1667,11 @@
 
 				<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
-	...
+	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
     "@context" : "http://schema.org",
-    ...
+    &#8230;
 	}
 	&lt;/script&gt;
 </pre>
@@ -2106,7 +2064,7 @@
 
 				<section id="aff-toc">
 					<h4>Table of Contents</h4>
-					<p class="issue" data-number=146></p>
+					<p class="issue" data-number="146"></p>
 
 					<section>
 				        <h5>Short description</h5>
