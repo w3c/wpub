@@ -1825,7 +1825,7 @@
 					<li>Extension point: process any proprietary and/or other supported members at this point in the
 						algorithm. </li>
 					<li>Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary"
-							>converting</a> [[!WEBIDL]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+							>converting</a> [[!webidl-1]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
 					</li>
 				</ol>
 
@@ -2236,6 +2236,19 @@
 		</section>
 		<section class="appendix" id="webidl">
 			<h2>WebIDL</h2>
+
+			<section id="webidl-intro" class="informative">
+				<h3>Introduction</h3>
+
+				<p>Although a Web Publication manifest is authored as [[json-ld]], user agents process this information
+					into an internal data structure representing the infoset in order to utilize the properties. The
+					exact manner in which this processing occurs, and how the data is used internally, is user
+					agent-dependent. To ensure interoperability when exposing the infoset items, however, this appendix
+					defines a common, abstract representation of the data structures using the standard formalism of the
+					Web Interface Definition Language [[webidl-1]] which can express the expected names, datatypes, and
+					possible restrictions for each member of the infoset. (A WebIDL representation can be mapped onto
+					ECMAScript, C, or other programming languages.)</p>
+			</section>
 
 			<section id="webpublicationmanifest-dictionary">
 				<h3><dfn>WebPublicationManifest</dfn> dictionary </h3>
