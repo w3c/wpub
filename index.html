@@ -866,7 +866,7 @@
 
 						<p class="issue" data-number="216"></p>
 
-						<p> As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility
+						<p> As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY include accessibility
 							metadata. These SHOULD be mapped on the family of accessibility terms, as expressed by
 							Schema.org. (A more detailed description of these terms, as well as the possible values, are
 							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
@@ -939,6 +939,8 @@
 								</tr>
 							</tbody>
 						</table>
+
+						<p>Note that the author MAY also provide a reference to a more detailed <a href="#wp-a11y-report-wpm">Accessibility Report</a>, beyond the accessibility information expressed by these terms.</p>
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
@@ -1046,9 +1048,9 @@
 					</section>
 					<section id="wp-creators-wpm">
 						<h4>Creator</h4>
-						<p> As desribed in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the
+						<p> As described in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the
 							individuals or entities responsible for the creation of the <a>Web Publication</a>. There
-							isn’t one single Schema.org term this item must be mapped onto; instead, there are a number
+							isn’t one specific single Schema.org term this item must be mapped onto; instead, there are a number
 							of terms and, if this Infoset Item is used, the Web Publication Manifest SHOULD use one of
 							those. The value of these terms are one or more <a href="http://schema.org/Person"
 									><code>Person</code></a> objects or, in some cases, <a
@@ -1467,8 +1469,7 @@
 								<td>
 									<code>rel</code>
 								</td>
-								<td> A single relation using the IANA link registry&#160;[[!iana-link-relations]] (or possibly specially minted URL-s if no suitable link registry item exists), or an array
-									of similar relations. </td>
+								<td> One or more relations; the values are either the relevant relationship terms of the IANA link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable link registry item exists.</td>
 								<td> Optional. </td>
 							</tr>
 						</tbody>
@@ -1493,11 +1494,12 @@
 									<td>
 										<code>readingOrder</code>
 									</td>
-									<td> An array of: <ul>
+									<td> An array of: 
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>significant</em>. </td>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul> 
+										The order in the array is <em>significant</em>. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1562,11 +1564,12 @@
 									<td>
 										<code>resources</code>
 									</td>
-									<td> An array of: <ul>
+									<td> An array of: 
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>significant</em>. </td>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+										The order in the array is <em>not significant</em>. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1600,6 +1603,37 @@
 </pre>
 
 					</section>
+
+					<section id="wp-extra-list-wpm">
+						<h4>List of extra resources</h4>
+						<p> 
+							As defined in <a href="#wp-extra-list"></a>, the <a>list of extra resources</a> enumerates all <a href="#wp-resources">resources</a> that are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within its bounds but are, rather, external to the Web Publication. If present in the Web Publication Manifest, this item MUST be mapped on the <code>extraResources</code> term, defined specifically for Web Publications. 
+						</p>
+						<p class=note>
+							The <code>extraResources</code> to be used in JSON has not yet been decided; waiting on the resolution of issue #225
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th> Term name with link to definition </th>
+									<th> Short description </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>extraResources</code>
+									</td>
+									<td> An array of: <ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul> The order in the array is <em>not significant</em>. </td>
+								</tr>
+							</tbody>
+						</table>
+						<p class=issue data-number="225"></p>
+					</section>
+
 					<section id="wp-table-of-contents-wpm">
 						<h4>Table of Contents</h4>
 						<p> As defined in <a href="#wp-table-of-contents"></a>, the manifest SHOULD provide a link to an
@@ -1648,6 +1682,117 @@
 </pre>
 						<p class="issue"> The term <code>tableOfContents</code> has not been approved by the Working
 							Group yet; it is currently a placeholder. </p>
+					</section>
+					<section id="wp-cover-wpm">
+						<h4>Cover</h4>
+
+						<p>
+							As described in <a href="#wp-cover"></a>, the infoset SHOULD include a reference to a cover. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub/cover-page</code> identifier.
+						</p>
+
+						<p class=note>
+							The Working Group will attempt to define the <code>cover-page</code> term by IANA, to avoid using a URL.
+						</p>
+						<pre class="example" title="Cover page expressed as resource">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "@type"      : "PublicationLink",
+        "url"        : "whale-image.jpg",
+        "fileFormat" : "image/jpeg"
+        "rel"        : "https://www.w3.org/ns/wpub/cover-page"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-privacy-wpm">
+						<h4>Privacy Policy</h4>
+
+						<p>
+							As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be included as a resource of the Web Publication. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code> (IANA) identifier.
+						</p>
+
+						<pre class="example" title="Privacy policy expressed as an external link">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+    "externalResources"  : [{
+        "@type"      : "PublicationLink",
+        "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+        "fileFormat" : "text/html",
+        "rel"        : "privacy-policy"
+    },{
+            ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-a11y-report-wpm">
+						<h4>Accessibility Report</h4>
+
+						<p>
+							As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report providing information about the suitability of a <a>Web Publication</a> for consumption by users with varying preferred reading modalities. This report may be complementary to the information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"></a>. This report is accessed via an external resource (e.g., and HTML file). When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.
+						</p>
+						<p class=note>
+							The Working Group will attempt to define the <code>accessibility-report</code> term by IANA, to avoid using a URL.
+						</p>
+						<pre class="example" title="Link to an accessibility report">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "extraResources"  : [{
+        "@type"       : "PublicationLink",
+        "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
+        "rel"         : "https://www.w3.org/ns/wpub/accessibility-report"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-external-metadata-wpm">
+						<h4>External Metadata</h4>
+
+						<p>
+							As described in <a href="#wp-extensibility"></a>, the infoset items of a <a>Web Publication</a> MAY be extended by linking to further metadata records. This may include, for example, links to an external ONIX&nbsp;[[onix]] or BibTeX&nbsp;[[bibtex]] file. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier. 
+						</p>
+
+						<pre class="example" title="Link to external ONIX for Books Metadata file">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "extraResources"  : [{
+        "@type"       : "PublicationLink",
+        "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
+        "fileFormat"  : "application/xml",
+        "rel"         : "describedby"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+
+						
 					</section>
 				</section>
 			</section>
