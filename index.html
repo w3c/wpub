@@ -308,18 +308,23 @@
 								<li><a href="#wp-cover">cover</a></li>
 								<li><a href="#wp-creators">creator</a></li>
 								<li><a href="#wp-language-and-dir">language</a></li>
-								<li><a href="#wp-mod-date">modification date</a></li>
+								<li><a href="#wp-mod-date">last modification date</a></li>
 								<li><a href="#wp-privacy">privacy policy</a></li>
 								<li><a href="#wp-pub-date">publication date</a></li>
+								<li><a href="#wp-reading-progression">reading progression direction</a></li>
 								<li><a href="#wp-title">title</a></li>
 							</ul>
 						</div>
 					</dd>
 					<dt>Structural Properties</dt>
 					<dd>
-						<p>REQUIRED: <a href="#wp-default-reading-order">default reading order</a>, <a
-								href="#wp-resource-list">resource list</a>, and <a href="#wp-reading-progression"
-								>reading progression</a>.</p>
+						<div>
+							<span>REQUIRED: </span>
+							<ul class="flat">
+								<li><a href="#wp-default-reading-order">default reading order</a></li>
+								<li><a href="#wp-resource-list">resource list</a></li>
+							</ul>
+						</div>
 						<p>RECOMMENDED: <a href="#wp-table-of-contents">table of contents</a></p>
 					</dd>
 				</dl>
@@ -342,19 +347,114 @@
 						provided in [[WCAG20]], and are an important source of information in determining the usability
 						of a Web Publication.</p>
 
-					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an accessibility
-						report when one is available for a Web Publication. It is RECOMMENDED that the report be
-						included as a resource of the Web Publication.</p>
+					<section id="wp-a11y-infoset">
+						<h5>Infoset Requirements</h5>
 
-					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
-						as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these reports
-						with machine-processable metadata, such as provided in Schema.org[[schema.org]], is also
-						RECOMMENDED.</p>
+						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an
+							accessibility report when one is available for a Web Publication. It is RECOMMENDED that the
+							report be included as a resource of the Web Publication.</p>
 
-					<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format is
-						used to externalize publication metadata (e.g., to ensure availability for search). Depending
-						how this externalizing is done, adding machine-processable accessibility metadata to such a
-						record could take precedence over, or complement, the accessibility record.</p>
+						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
+							such as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these
+							reports with machine-processable metadata, such as provided in Schema.org [[schema.org]], is
+							also RECOMMENDED.</p>
+
+						<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format
+							is used to externalize publication metadata (e.g., to ensure availability for search).
+							Depending how this externalizing is done, adding machine-processable accessibility metadata
+							to such a record could take precedence over, or complement, the accessibility record.</p>
+					</section>
+
+					<section id="wp-a11y-manifest">
+						<h4>Manifest Expression</h4>
+
+						<p class="issue" data-number="216"></p>
+
+						<p>The accessibility metadata SHOULD map to the family of accessibility terms, as expressed by
+							Schema.org. (A more detailed description of these terms, as well as the possible values, are
+							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
+								site</a>.) These terms are: </p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th> Term name with link to definition </th>
+									<th> Short description </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessMode"><code>accessMode</code></a>
+									</td>
+									<td> The human sensory perceptual system or cognitive faculty through which a person
+										may process or perceive information. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessModeSufficient"
+												><code>accessModeSufficient</code></a>
+									</td>
+									<td> A list of single or combined accessModes that are sufficient to understand all
+										the intellectual content of a resource. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
+									</td>
+									<td> Indicates that the resource is compatible with the referenced accessibility
+										API. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityControl"
+												><code>accessibilityControl</code></a>
+									</td>
+									<td> Identifies input methods that are sufficient to fully control the described
+										resource. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityFeature"
+												><code>accessibilityFeature</code></a>
+									</td>
+									<td> Content features of the resource, such as accessible media, alternatives and
+										supported enhancements for accessibility. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilityHazard"
+												><code>accessibilityHazard</code></a>
+									</td>
+									<td> A characteristic of the described resource that is physiologically dangerous to
+										some users. </td>
+								</tr>
+								<tr>
+									<td>
+										<a href="http://meta.schema.org/accessibilitySummary"
+												><code>accessibilitySummary</code></a>
+									</td>
+									<td> A human-readable summary of specific accessibility features or deficiencies,
+										consistent with the other accessibility metadata but expressing subtleties such
+										as “short descriptions are present but long descriptions will be needed for
+										non-visual users” or “short descriptions are present and no long descriptions
+										are needed.” </td>
+								</tr>
+							</tbody>
+						</table>
+
+						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork",
+    &#8230;
+    "accessMode"            : ["textual", "visual"],
+    "accessModeSufficient"  : ["textual"],
+    &#8230;
+}
+</pre>
+
+					</section>
 				</section>
 
 				<section id="wp-address">
@@ -362,28 +462,69 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
-						represents the primary entry page for the Web Publication. If this URL does not resolve to an
-							<abbr title="Hypertext Markup Language">HTML</abbr> document&#160;[[!html]], user agents
-						SHOULD NOT provide access to it to users.</p>
+						represents the primary entry page for the Web Publication.</p>
 
-					<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
-						including one that is not listed in the <a>default reading order</a>. This document MUST include
-						a <a href="#wp-linking">link to the manifest</a> to ensure a bidirectional linking relationship
-						(i.e., that user agents can also locate the manifest from the document at the address.</p>
+					<section id="wp-address-infoset">
+						<h5>Infoset Requirements</h5>
 
-					<p>If the document is not a Web Publication resource, user agents SHOULD load the first document in
-						the <a>default reading order</a> when initiating the Web Publication.</p>
+						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
+							including one that is not listed in the <a>default reading order</a>. This document MUST
+							include a <a href="#wp-linking">link to the manifest</a> to ensure a bidirectional linking
+							relationship (i.e., that user agents can also locate the manifest from the document at the
+							address.</p>
 
-					<p class="note">To improve the usability of Web Publications, particularly in user agents that do
-						not support Web Publications, include navigation aids in the referenced document that facilitate
-						consumption of the content, (e.g., provide a table of contents or a link to one).</p>
+						<p>If the canonical URL does not resolve to an <abbr title="Hypertext Markup Language"
+								>HTML</abbr> document&#160;[[!html]], user agents SHOULD NOT provide access to it to
+							users.</p>
 
-					<p>The availability of the address does not preclude the creation and use of other identifiers
-						and/or addresses to retrieve a <a>Web Publication</a>, whether in whole or in part.</p>
+						<p>If the document is not a Web Publication resource, user agents SHOULD load the first document
+							in the <a>default reading order</a> when initiating the Web Publication.</p>
 
-					<div class="note">The Web Publication's address can also be used as value for an identifier link
-						relation&#160;[[link-relation]].</div>
+						<p class="note">To improve the usability of Web Publications, particularly in user agents that
+							do not support Web Publications, include navigation aids in the referenced document that
+							facilitate consumption of the content, (e.g., provide a table of contents or a link to
+							one).</p>
 
+						<p>The availability of the address does not preclude the creation and use of other identifiers
+							and/or addresses to retrieve a <a>Web Publication</a>, whether in whole or in part.</p>
+
+						<div class="note">The Web Publication's address can also be used as value for an identifier link
+							relation&#160;[[link-relation]].</div>
+					</section>
+
+					<section id="wp-address-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>This infoset item MUST be mapped on the <a href="http://schema.org/url"><code>url</code></a>
+							term.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th> Term name with link to definition </th>
+									<th> Short description </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="http://schema.org/url"><code>url</code></a>
+									</td>
+									<td> URL of the primary entry page. </td>
+								</tr>
+							</tbody>
+						</table>
+
+						<pre class="example" title="Example for setting the address of the main entry point">
+{
+    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book",
+    &#8230;
+    "url"      : "https://publisher.example.org/mobydick",
+    &#8230;
+}
+</pre>
+					</section>
 				</section>
 
 				<section id="wp-canonical-identifier">
@@ -446,11 +587,11 @@
 					<p class="issue" data-number="210"></p>
 				</section>
 
-				<section id="wp-creators">
-					<h4>Creators</h4>
+				<section id="wp-creator">
+					<h4>Creator</h4>
 
-					<p>Creators are the individuals or entities responsible for the creation of the <a>Web
-							Publication</a>.</p>
+					<p>The creator is the individual or entity responsible for the creation of the <a>Web
+							Publication</a>. A Web Publication MAY have more than one creator.</p>
 
 					<p>The creator property SHOULD include the role the creator played in the creation of the Web
 						Publication (e.g., 'author', 'illustrator', 'translator').</p>
@@ -485,10 +626,10 @@
 					<p class="note">These features make it possible to add the title of a publication in different
 						languages, or repeat the creators’ names using different scripts.</p>
 
-					<p>User agents MUST NOT use the language and base direction outside the context of the manifest
-						(e.g., in the processing or rendering of the Web Publication content). These values are
-							<strong>not</strong> a replacement for such declarations in each resource as defined by its
-						format.</p>
+					<p>User agents MUST NOT use the language and base direction outside the context of the infoset
+						(e.g., in the processing or rendering of the Web Publication content). These values do
+							<strong>not</strong> override similar declarations in any resource, nor do they serve as
+						global defaults when such information is not provided in a resource.</p>
 
 					<p>If a user agent requires the language and one is not available in the <abbr
 							title="information set">infoset</abbr> (globally or specifically for the property), or the
@@ -538,9 +679,9 @@
 
 					<p>Users often have the legal right to know and control what information is collected about them,
 						how such information is stored and for how long, whether it is personally identifiable, and how
-						it can be expunged. Including a statement that addresses all such privacy concerns is
-						consequently an important part of publishing <a>Web Publications</a>. Even if no information is
-						collected, such a declaration increases the trust users have in the content.</p>
+						it can be expunged. Including a statement that addresses such privacy concerns is consequently
+						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
+						such a declaration increases the trust users have in the content.</p>
 
 					<p>To address this concern, a link to a privacy policy can be included in the <abbr
 							title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be
@@ -635,9 +776,11 @@
 
 					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
 						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds)
-						and that are not listed in the <a>default reading order</a>. This list is the definitive source
-						that user agents have in determining which referenced resources belong to the Web Publication
-						and which are external to it.</p>
+						and that are not listed in the <a>default reading order</a>.</p>
+
+					<p class="note">The union of the resource list and default reading order represents the definitive
+						list of resources that belong to the Web Publication. All other resources are external to the
+						Web Publication.</p>
 
 					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
 						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it
@@ -833,131 +976,6 @@
 
 				<section>
 					<h4>Descriptive Infoset Properties</h4>
-					<section id="wp-a11y-wpm">
-						<h4>Accessibility</h4>
-
-						<p class="issue" data-number="216"></p>
-
-						<p> As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility
-							metadata. These SHOULD be mapped on the family of accessibility terms, as expressed by
-							Schema.org. (A more detailed description of these terms, as well as the possible values, are
-							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
-								site</a>.) These terms are: </p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessMode"><code>accessMode</code></a>
-									</td>
-									<td> The human sensory perceptual system or cognitive faculty through which a person
-										may process or perceive information. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessModeSufficient"
-												><code>accessModeSufficient</code></a>
-									</td>
-									<td> A list of single or combined accessModes that are sufficient to understand all
-										the intellectual content of a resource. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
-									</td>
-									<td> Indicates that the resource is compatible with the referenced accessibility
-										API. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessibilityControl"
-												><code>accessibilityControl</code></a>
-									</td>
-									<td> Identifies input methods that are sufficient to fully control the described
-										resource. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessibilityFeature"
-												><code>accessibilityFeature</code></a>
-									</td>
-									<td> Content features of the resource, such as accessible media, alternatives and
-										supported enhancements for accessibility. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessibilityHazard"
-												><code>accessibilityHazard</code></a>
-									</td>
-									<td> A characteristic of the described resource that is physiologically dangerous to
-										some users. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="http://meta.schema.org/accessibilitySummary"
-												><code>accessibilitySummary</code></a>
-									</td>
-									<td> A human-readable summary of specific accessibility features or deficiencies,
-										consistent with the other accessibility metadata but expressing subtleties such
-										as “short descriptions are present but long descriptions will be needed for
-										non-visual users” or “short descriptions are present and no long descriptions
-										are needed.” </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
-{
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-    "@type"    : "CreativeWork",
-    &#8230;
-    "accessMode"            : ["textual", "visual"],
-    "accessModeSufficient"  : ["textual"],
-    &#8230;
-}
-</pre>
-
-					</section>
-					<section>
-						<h4>Address</h4>
-						<p> As described in <a href="#wp-address"></a>, a <a>Web Publication's</a>
-							<a>address</a> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
-							represents the primary entry page for the Web Publication. This infoset item MUST be mapped
-							on the <a href="http://schema.org/url"><code>url</code></a> term. </p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<a href="http://schema.org/url"><code>url</code></a>
-									</td>
-									<td> URL of the primary entry page. </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="example" title="Example for setting the address of the main entry point">
-{
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-    "@type"    : "Book",
-    &#8230;
-    "url"      : "https://publisher.example.org/mobydick",
-    &#8230;
-}
-</pre>
-					</section>
 					<section id="wp-canonical-identifier-wpm">
 						<h4>Canonical Identifier</h4>
 						<p> As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a>
@@ -1838,10 +1856,10 @@
 			</section>
 
 		</section>
-		<section id="wp-affordances">
-			<h2>Affordances</h2>
+		<section id="wp-features">
+			<h2>User Agent Features</h2>
 
-			<p class="ednote">This section contains placeholders for possible reading enhancements/affordances the user
+			<p class="ednote">This section contains placeholders for possible reading enhancements/features the user
 				agent may/should/must provide. The list is subject to addition, modification and removal as the
 				enhancements get discussed in more detail.</p>
 
@@ -1850,10 +1868,10 @@
 			<section id="aff-publication-mode">
 				<h3>Switch to publication mode</h3>
 
-				<p>When a user agent <a>obtains a manifest</a> it SHOULD display an affordance for switching the display
-					to <a>publication mode</a>.</p>
+				<p>When a user agent <a>obtains a manifest</a> it SHOULD provide the option to switch the display to
+						<a>publication mode</a>.</p>
 
-				<p>This affordance has the following requirements:</p>
+				<p>This feature has the following requirements:</p>
 
 				<ol>
 					<li>it MUST inform the user that the current resource is part of a <a>Web Publication</a></li>
@@ -2035,7 +2053,7 @@
 							<code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"
 								><code>next</code> and <code>prev</code> relationships</a>&#160;[[!html]].</p>
 
-					<p>User agents MUST provide an affordance for moving forward and backward in the <a>default reading
+					<p>User agents MUST provide the ability to move forward and backward in the <a>default reading
 							order</a> of a <a>Web Publication</a>.</p>
 
 					<p class="issue" data-number="144"></p>
@@ -2048,8 +2066,8 @@
 					<p>While reading a <a>Web Publication</a>, the user follows a natural progression within a resource
 						as well as between resources (following the <a>default reading order</a>).</p>
 
-					<p>User agents SHOULD provide an affordance that saves this progression in the publication and
-						returns the user to their last location the next time they open the publication.</p>
+					<p>User agents SHOULD provide the option to save this progression in the publication and returns the
+						user to their last location the next time they open the publication.</p>
 
 					<p>When the user agent <a>obtains a manifest</a> for the first time, it MAY also prompt the user
 						whether they would like to:</p>
@@ -2067,41 +2085,37 @@
 					<p class="issue" data-number="146"></p>
 
 					<section>
-				        <h5>Short description</h5>
-						<p>
-							The user agent should provide access to the table of contents without leaving current resource from anywhere in the publication.
-						</p>
-						<p>
-							For accessibility reasons, it is RECOMMENDED for User Agents to use a table of contents to allow multiple ways for users to access content.
-						</p>
+						<h5>Short description</h5>
+						<p> The user agent should provide access to the table of contents without leaving current
+							resource from anywhere in the publication. </p>
+						<p> For accessibility reasons, it is RECOMMENDED for User Agents to use a table of contents to
+							allow multiple ways for users to access content. </p>
 					</section>
 					<section>
-				        <h5>Affordances</h5>
-						<p>
-							The table of contents is a listed as a structural property in the infoset, see <a href="#wp-table-of-contents"></a>
+						<h5>Affordances</h5>
+						<p> The table of contents is a listed as a structural property in the infoset, see <a
+								href="#wp-table-of-contents"></a>
 						</p>
-						<p>
-							The table of content is referred to in the Web Publication Manifest (see <a href="#wp-table-of-contents-pwm"></a>) and is expressed using and HTML element; see <a href="#wp-table-of-contents"></a> for further details.
-						</p>
-						<p>
-							User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not explicitly specified to create a table of contents.
-						</p>
-				    </section>
-				    <section>
-				        <h5>Use Case References</h5>
+						<p> The table of content is referred to in the Web Publication Manifest (see <a
+								href="#wp-table-of-contents-pwm"></a>) and is expressed using and HTML element; see <a
+								href="#wp-table-of-contents"></a> for further details. </p>
+						<p> User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
+							explicitly specified to create a table of contents. </p>
+					</section>
+					<section>
+						<h5>Use Case References</h5>
 
-							<dl>
-								<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_reading-order">Req. 12</a></dt>
-								<dd>
-									“There should be a means to indicate the author’s preferred navigation structure among the resources of a Web Publication.
-						            A user agent needs to know the sequence in which to present components of a Web Publication to the user, including the starting point.” (See [[pwp-ucr]])
-								</dd>
-								<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_random-access">Req. 13</a></dt>
-								<dd>
-									“Authors of a Web Publication should be able to provide the user agent with information to access random parts of the publication” (See [[pwp-ucr]])
-								</dd>
-							</dl>
-				    </section>
+						<dl>
+							<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_reading-order">Req. 12</a></dt>
+							<dd> “There should be a means to indicate the author’s preferred navigation structure among
+								the resources of a Web Publication. A user agent needs to know the sequence in which to
+								present components of a Web Publication to the user, including the starting point.” (See
+								[[pwp-ucr]]) </dd>
+							<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_random-access">Req. 13</a></dt>
+							<dd> “Authors of a Web Publication should be able to provide the user agent with information
+								to access random parts of the publication” (See [[pwp-ucr]]) </dd>
+						</dl>
+					</section>
 				</section>
 			</section>
 
