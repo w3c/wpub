@@ -5,7 +5,7 @@
     <link href="#wpm" rel="publication" />
     ...
     <script id="wpm" type="application/ld+json">
-    {
+   {
         "@context"              : [
             "https://schema.org",
             "https://www.w3.org/ns/wpub.jsonld",
@@ -13,68 +13,61 @@
                 "@language"      : "en-US"
             }
         ],
-        "@type"                 : "CreativeWork",
+         "@type"                 : "CreativeWork",
         "id"                    : "http://www.w3.org/TR/tabular-data-model/",
         "url"                   : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
         "accessMode"            : ["textual", "visual"],
         "accessModeSufficient"  : ["textual"],
-        "editor"                : [
-            {
-                "@type"         : "Person",
-                "name"          : "Jeni Tennison",
-                "givenName"     : "Jeni",
-                "familyName"    : "Tennison",
-                "affiliation"   :  {
-                    "name"  : "The Open Data Institute",
-                    "url"   : "http://theodi.org/"
-                }
-            },
-            {
-                "@type"         : "Person",
-                "@id"           : "http://greggkellogg.net/",
-                "name"          : "Gregg Kellogg",
-                "givenName"     : "Gregg",
-                "familyName"    : "Kellogg",
-                "affiliation"   : {
-                    "name"  : "Kellogg Associates",
-                    "url"   : "http://kellogg-assoc.com/"
-                }
+        "editor"                : [{
+            "@type"         : "Person",
+            "name"          : "Jeni Tennison",
+            "givenName"     : "Jeni",
+            "familyName"    : "Tennison",
+            "affiliation"   :  {
+                "name"  : "The Open Data Institute",
+                "url"   : "http://theodi.org/"
             }
-        ],
-        "author"                : [
-            {
-                "@type"         : "Person",
-                "name"          : "Jeni Tennison",
-                "givenName"     : "Jeni",
-                "familyName"    : "Tennison",
-                "affiliation"   :  {
-                    "name"  : "The Open Data Institute",
-                    "url"   : "http://theodi.org/"
-                }
-            },
-            {
-                "@type"         : "Person",
-                "@id"           : "http://greggkellogg.net/",
-                "name"          : "Gregg Kellogg",
-                "givenName"     : "Gregg",
-                "familyName"    : "Kellogg",
-                "affiliation"   : {
-                    "name"  : "Kellogg Associates",
-                    "url"   : "http://kellogg-assoc.com/"
-                }
-            },
-            {
-                "@type"         : "Person",
-                "@id"           : "https://www.w3.org/People/Ivan/",
-                "name"          : "Ivan Herman",
-                "givenName"     : "Ivan",
-                "familyName"    : "Herman",
-                "affiliation"   : {
-                    "name"  : "World Wide Web Consortium",
-                    "url"   : "https://www.w3.org"
-                }
+        },{
+            "@type"         : "Person",
+            "@id"           : "http://greggkellogg.net/",
+            "name"          : "Gregg Kellogg",
+            "givenName"     : "Gregg",
+            "familyName"    : "Kellogg",
+            "affiliation"   : {
+                "name"  : "Kellogg Associates",
+                "url"   : "http://kellogg-assoc.com/"
             }
-        ],
+        }],
+        "author"                : [{
+            "@type"         : "Person",
+            "name"          : "Jeni Tennison",
+            "givenName"     : "Jeni",
+            "familyName"    : "Tennison",
+            "affiliation"   :  {
+                "name"  : "The Open Data Institute",
+                "url"   : "http://theodi.org/"
+            }
+        },{
+            "@type"         : "Person",
+            "@id"           : "http://greggkellogg.net/",
+            "name"          : "Gregg Kellogg",
+            "givenName"     : "Gregg",
+            "familyName"    : "Kellogg",
+            "affiliation"   : {
+                "name"  : "Kellogg Associates",
+                "url"   : "http://kellogg-assoc.com/"
+            }
+        },{
+            "@type"         : "Person",
+            "@id"           : "https://www.w3.org/People/Ivan/",
+            "name"          : "Ivan Herman",
+            "givenName"     : "Ivan",
+            "familyName"    : "Herman",
+            "affiliation"   : {
+                "name"  : "World Wide Web Consortium",
+                "url"   : "https://www.w3.org"
+            }
+        }],
         "datePublished"         : "2015-12-17",
         "dateModified"          : "2015-12-17",
         "resources"             : [
@@ -117,6 +110,17 @@
                 "fileFormat"    : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             }
         ],
+        "externalResources"     : [{
+            "@type"      : "PublicationLink",
+            "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+            "fileFormat" : "text/html",
+            "rel"        : "privacy-policy"
+        },{
+            "@type"      : "PublicationLink",
+            "url"        : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
+            "fileFormat" : "text/html",
+            "rel"        : "copyright"
+        }],
         "tableOfContents"       : "#toc"
     }
     </script>

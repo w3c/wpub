@@ -305,12 +305,10 @@
 							<ul class="flat">
 								<li><a href="#wp-a11y">accessibility report</a></li>
 								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
-								<li><a href="#wp-cover">cover</a></li>
 								<li><a href="#wp-creators">creator</a></li>
 								<li><a href="#wp-language-and-dir">language and base direction</a></li>
 								<li><a href="#wp-mod-date">last modification date</a></li>
 								<li><a href="#wp-pub-date">publication date</a></li>
-								<li><a href="#wp-privacy">privacy policy</a></li>
 								<li><a href="#wp-reading-progression">reading progression direction</a></li>
 								<li><a href="#wp-title">title</a></li>
 							</ul>
@@ -324,6 +322,8 @@
 							<ul class="flat">
 								<li><a href="#wp-resource-list">resource list</a></li>
 								<li><a href="#wp-table-of-contents">table of contents</a></li>
+								<li><a href="#wp-cover">cover</a></li>
+								<li><a href="#wp-privacy">privacy policy</a></li>
 							</ul>
 						</div>
 					</dd>
@@ -353,7 +353,7 @@
 
 					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
 						as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these reports
-						with machine-processable metadata, such as provided in Schema.org[[schema.org]], is also
+						with machine-processable metadata, such as provided in Schema.org[[!schema.org]], is also
 						RECOMMENDED.</p>
 
 					<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format is
@@ -427,28 +427,6 @@
 
 					<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in the
 							<abbr title="information set">infoset</abbr>, or can it be handled by other metadata.</p>
-				</section>
-
-				<section id="wp-cover">
-					<h4>Cover</h4>
-
-					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
-						image. This image can be used by user agents to present the <a>Web Publication</a> to users
-						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
-
-					<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
-						Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a> and <a
-							href="#wp-creators">creators</a> as text alternatives for such interfaces.</p>
-
-					<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
-						resolutions for different device screens.</p>
-
-					<p>A user agent MAY create a cover for a Web Publication if one is not present. This specification
-						does not define requirements for the creation of such cover images (e.g., the user agent could
-						use a placeholder image, generate an image dynamically, or incorporate properties of the infoset
-						into a graphic, such as the title or creators).</p>
-
-					<p class="issue" data-number="210"></p>
 				</section>
 
 				<section id="wp-creators">
@@ -536,29 +514,6 @@
 					<p>The exact moment of publication is intentionally left open to interpretation: it could be when
 						the Web Publication is first made available online or could be a point in time before
 						publication when the Web Publication is considered final.</p>
-				</section>
-
-				<section id="wp-privacy">
-					<h4>Privacy Policy</h4>
-
-					<p>Users often have the legal right to know and control what information is collected about them,
-						how such information is stored and for how long, whether it is personally identifiable, and how
-						it can be expunged. Including a statement that addresses all such privacy concerns is
-						consequently an important part of publishing <a>Web Publications</a>. Even if no information is
-						collected, such a declaration increases the trust users have in the content.</p>
-
-					<p>To address this concern, a link to a privacy policy can be included in the <abbr
-							title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be
-						included as a resource of the Web Publication.</p>
-
-					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as <abbr
-							title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
-
-					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
-						Publications.</p>
-
-					<p class="issue" data-number="203"></p>
-
 				</section>
 
 				<section id="wp-reading-progression">
@@ -664,6 +619,28 @@
 						<p>This was not decided on the Toronto F2F, and is still open.</p>
 					</div>
 				</section>
+				<section id="wp-extra-list">
+					<h4>List of extra resources</h4>
+
+					<p>
+						The <dfn>list of extra resources</dfn> enumerates all 
+						<a href="#wp-resources">resources</a> that are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within its bounds (i.e., are not listed  in the <a>default reading order</a> or the <a>resource list</a>) but are, rather, external to the Web Publication.
+					</p>
+
+					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
+					    scenarios (e.g., the ability to access privacy policy information). For this reason, it
+						is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
+						external resources beyond those listed in the <a>default reading order</a> or <a>resource list</a>.</p>
+
+					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
+						third-party scripts that reference resources from deep within their source), but a user agent
+						SHOULD still be able to render a Web Publication even if some of these resources are not
+						identified as belonging to the Web Publication (e.g., when it is taken offline without
+						them).</p>
+
+					<p class=issue data-number=225></p>
+
+				</section>
 
 				<section id="wp-table-of-contents">
 					<h4>Table of Contents</h4>
@@ -682,6 +659,52 @@
 						contents navigation element refer, via links, to any resource that is <em>not</em> listed in the
 							<a>default reading order</a>?</p>
 				</section>
+
+				<section id="wp-cover">
+					<h4>Cover</h4>
+
+					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
+						image. This image can be used by user agents to present the <a>Web Publication</a> to users
+						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
+
+					<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
+						Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a> and <a
+							href="#wp-creators">creators</a> as text alternatives for such interfaces.</p>
+
+					<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
+						resolutions for different device screens.</p>
+
+					<p>A user agent MAY create a cover for a Web Publication if one is not present. This specification
+						does not define requirements for the creation of such cover images (e.g., the user agent could
+						use a placeholder image, generate an image dynamically, or incorporate properties of the infoset
+						into a graphic, such as the title or creators).</p>
+
+					<p class="issue" data-number="210"></p>
+				</section>
+
+				<section id="wp-privacy">
+					<h4>Privacy Policy</h4>
+
+					<p>Users often have the legal right to know and control what information is collected about them,
+						how such information is stored and for how long, whether it is personally identifiable, and how
+						it can be expunged. Including a statement that addresses all such privacy concerns is
+						consequently an important part of publishing <a>Web Publications</a>. Even if no information is
+						collected, such a declaration increases the trust users have in the content.</p>
+
+					<p>To address this concern, a link to a privacy policy can be included in the <abbr
+							title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be
+						included as a resource of the Web Publication.</p>
+
+					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as <abbr
+							title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
+
+					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
+						Publications.</p>
+
+					<p class="issue" data-number="203"></p>
+
+				</section>
+
 			</section>
 
 			<section id="wp-extensibility">
@@ -730,7 +753,7 @@
 					<p>
 						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based,
 						wherever possible, on the terms defined by <a href="https://schema.org"
-						>Schema.org</a>&#160;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html"
+						>Schema.org</a>&#160;[[!schema.org]] (including <a href="http://schema.org/docs/schemas.html"
 							>hosted extensions</a> of Schema.org). This means that the descriptive infoset properties
 						are mapped to one or several Schema.org properties (inheriting their syntax and semantics). </p>
 
@@ -843,7 +866,7 @@
 
 						<p class="issue" data-number="216"></p>
 
-						<p> As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY inlude accessibility
+						<p> As defined in <a href="#wp-a11y"></a>, the Web Publication Manifest MAY include accessibility
 							metadata. These SHOULD be mapped on the family of accessibility terms, as expressed by
 							Schema.org. (A more detailed description of these terms, as well as the possible values, are
 							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
@@ -916,6 +939,8 @@
 								</tr>
 							</tbody>
 						</table>
+
+						<p>Note that the author MAY also provide a reference to a more detailed <a href="#wp-a11y-report-wpm">Accessibility Report</a>, beyond the accessibility information expressed by these terms.</p>
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
@@ -1023,9 +1048,9 @@
 					</section>
 					<section id="wp-creators-wpm">
 						<h4>Creator</h4>
-						<p> As desribed in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the
+						<p> As described in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the
 							individuals or entities responsible for the creation of the <a>Web Publication</a>. There
-							isn’t one single Schema.org term this item must be mapped onto; instead, there are a number
+							isn’t one specific single Schema.org term this item must be mapped onto; instead, there are a number
 							of terms and, if this Infoset Item is used, the Web Publication Manifest SHOULD use one of
 							those. The value of these terms are one or more <a href="http://schema.org/Person"
 									><code>Person</code></a> objects or, in some cases, <a
@@ -1444,12 +1469,15 @@
 								<td>
 									<code>rel</code>
 								</td>
-								<td> A single relation using the IANA link registry&#160;[[!iana-link-relations]] (or possibly specially minted URL-s if no suitable link registry item exists), or an array
-									of similar relations. </td>
+								<td> One or more relations; the values are either the relevant relationship terms of the IANA link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable link registry item exists.</td>
 								<td> Optional. </td>
 							</tr>
 						</tbody>
 					</table>
+					<p class=issue data-number=235></p>
+
+					<p class=ednote>If the document is reorganized the "specific" external resources (cover, accessibility report, etc) should be separated in from the general structures and list definitions.</p>
+
 
 					<section id="wp-default-reading-order-wpm">
 						<h4>Default Reading Order</h4>
@@ -1470,11 +1498,12 @@
 									<td>
 										<code>readingOrder</code>
 									</td>
-									<td> An array of: <ul>
+									<td> An array of: 
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>significant</em>. </td>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul> 
+										The order in the array is <em>significant</em>. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1539,11 +1568,12 @@
 									<td>
 										<code>resources</code>
 									</td>
-									<td> An array of: <ul>
+									<td> An array of: 
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>significant</em>. </td>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul>
+										The order in the array is <em>not significant</em>. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1577,6 +1607,37 @@
 </pre>
 
 					</section>
+
+					<section id="wp-extra-list-wpm">
+						<h4>List of extra resources</h4>
+						<p> 
+							As defined in <a href="#wp-extra-list"></a>, the <a>list of extra resources</a> enumerates all <a href="#wp-resources">resources</a> that are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within its bounds but are, rather, external to the Web Publication. If present in the Web Publication Manifest, this item MUST be mapped on the <code>extraResources</code> term, defined specifically for Web Publications. 
+						</p>
+						<p class=note>
+							The <code>extraResources</code> to be used in JSON has not yet been decided; waiting on the resolution of issue #225
+						</p>
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th> Term name with link to definition </th>
+									<th> Short description </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>extraResources</code>
+									</td>
+									<td> An array of: <ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object</li>
+										</ul> The order in the array is <em>not significant</em>. </td>
+								</tr>
+							</tbody>
+						</table>
+						<p class=issue data-number="225"></p>
+					</section>
+
 					<section id="wp-table-of-contents-wpm">
 						<h4>Table of Contents</h4>
 						<p> As defined in <a href="#wp-table-of-contents"></a>, the manifest SHOULD provide a link to an
@@ -1625,6 +1686,118 @@
 </pre>
 						<p class="issue"> The term <code>tableOfContents</code> has not been approved by the Working
 							Group yet; it is currently a placeholder. </p>
+						<p class=issue data-number=234></p>
+					</section>
+					<section id="wp-cover-wpm">
+						<h4>Cover</h4>
+
+						<p>
+							As described in <a href="#wp-cover"></a>, the infoset SHOULD include a reference to a cover. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub/cover-page</code> identifier.
+						</p>
+
+						<p class=note>
+							The Working Group will attempt to define the <code>cover-page</code> term by IANA, to avoid using a URL.
+						</p>
+						<pre class="example" title="Cover page expressed as resource">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "@type"      : "PublicationLink",
+        "url"        : "whale-image.jpg",
+        "fileFormat" : "image/jpeg"
+        "rel"        : "https://www.w3.org/ns/wpub/cover-page"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-privacy-wpm">
+						<h4>Privacy Policy</h4>
+
+						<p>
+							As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be included as a resource of the Web Publication. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code> (IANA) identifier.
+						</p>
+
+						<pre class="example" title="Privacy policy expressed as an external link">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
+    ...
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    ...
+    "externalResources"  : [{
+        "@type"      : "PublicationLink",
+        "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+        "fileFormat" : "text/html",
+        "rel"        : "privacy-policy"
+    },{
+            ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-a11y-report-wpm">
+						<h4>Accessibility Report</h4>
+
+						<p>
+							As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report providing information about the suitability of a <a>Web Publication</a> for consumption by users with varying preferred reading modalities. This report may be complementary to the information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"></a>. This report is accessed via an external resource (e.g., and HTML file). When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.
+						</p>
+						<p class=note>
+							The Working Group will attempt to define the <code>accessibility-report</code> term by IANA, to avoid using a URL.
+						</p>
+						<pre class="example" title="Link to an accessibility report">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "extraResources"  : [{
+        "@type"       : "PublicationLink",
+        "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
+        "rel"         : "https://www.w3.org/ns/wpub/accessibility-report"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+					</section>
+					<section id="wp-external-metadata-wpm">
+						<h4>External Metadata</h4>
+
+						<p>
+							As described in <a href="#wp-extensibility"></a>, the infoset items of a <a>Web Publication</a> MAY be extended by linking to further metadata records. This may include, for example, links to an external ONIX&nbsp;[[onix]] or BibTeX&nbsp;[[bibtex]] file. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier. 
+						</p>
+
+						<pre class="example" title="Link to external ONIX for Books Metadata file">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "Book",
+    ...
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "extraResources"  : [{
+        "@type"       : "PublicationLink",
+        "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
+        "fileFormat"  : "application/xml",
+        "rel"         : "describedby"
+    },{
+        ...
+    }],
+    ...
+}
+</pre>
+
+						
 					</section>
 				</section>
 			</section>
