@@ -1476,6 +1476,8 @@
 					</table>
 					<p class=issue data-number=235></p>
 
+					<p class=ednote>If the document is reorganized the "specific" external resources (cover, accessibility report, etc) should be separated in from the general structures and list definitions.</p>
+
 
 					<section id="wp-default-reading-order-wpm">
 						<h4>Default Reading Order</h4>
@@ -1690,7 +1692,7 @@
 						<h4>Cover</h4>
 
 						<p>
-							As described in <a href="#wp-cover"></a>, the infoset SHOULD include a reference to a cover. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub/cover-page</code> identifier.
+							As described in <a href="#wp-cover"></a>, the infoset SHOULD include a reference to a cover. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub/cover-page</code> identifier.
 						</p>
 
 						<p class=note>
@@ -1719,7 +1721,7 @@
 						<h4>Privacy Policy</h4>
 
 						<p>
-							As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be included as a resource of the Web Publication. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code> (IANA) identifier.
+							As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be included as a resource of the Web Publication. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code> (IANA) identifier.
 						</p>
 
 						<pre class="example" title="Privacy policy expressed as an external link">
@@ -1746,7 +1748,7 @@
 						<h4>Accessibility Report</h4>
 
 						<p>
-							As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report providing information about the suitability of a <a>Web Publication</a> for consumption by users with varying preferred reading modalities. This report may be complementary to the information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"></a>. This report is accessed via an external resource (e.g., and HTML file). When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.
+							As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report providing information about the suitability of a <a>Web Publication</a> for consumption by users with varying preferred reading modalities. This report may be complementary to the information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"></a>. This report is accessed via an external resource (e.g., and HTML file). When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.
 						</p>
 						<p class=note>
 							The Working Group will attempt to define the <code>accessibility-report</code> term by IANA, to avoid using a URL.
@@ -1773,7 +1775,7 @@
 						<h4>External Metadata</h4>
 
 						<p>
-							As described in <a href="#wp-extensibility"></a>, the infoset items of a <a>Web Publication</a> MAY be extended by linking to further metadata records. This may include, for example, links to an external ONIX&nbsp;[[onix]] or BibTeX&nbsp;[[bibtex]] file. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object and be part either of the <a>resource list</a> or the <a>list of extra resources</a>. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier. 
+							As described in <a href="#wp-extensibility"></a>, the infoset items of a <a>Web Publication</a> MAY be extended by linking to further metadata records. This may include, for example, links to an external ONIX&nbsp;[[onix]] or BibTeX&nbsp;[[bibtex]] file. When present, link to such resource MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier. 
 						</p>
 
 						<pre class="example" title="Link to external ONIX for Books Metadata file">
