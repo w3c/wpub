@@ -166,7 +166,6 @@
 					<h4>Web App Manifest</h4>
 
 					<p class="ednote">We may want to write something here on the relationships&#8230;</p>
-
 				</section>
 			</section>
 
@@ -253,23 +252,11 @@
 				</ul>
 			</section>
 		</section>
-		<section id="infoset">
-			<h2>Information Set</h2>
+		<section id="wp-construct">
+			<h2>Web Publication Construction</h2>
 
-			<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how properties
-				are compiled into the <abbr title="information set">infoset</abbr> remain under-specified. This
-				includes, but is not limited to, what specific names the properties will have in the <abbr
-					title="information set">infoset</abbr>, whether the names in the <a>manifest</a> will be the same as
-				those in the <abbr title="information set">infoset</abbr> and/or whether mappings to properties from
-				known vocabularies will be used.</p>
-
-			<p class="issue" data-number="63">The name "<abbr title="information set">infoset</abbr>" might change
-				depending on feedback. Although this term has a different meaning for individuals familiar with <abbr
-					title="Extensible Markup Language">XML</abbr>, alternatives such as "properties" and "metadata" do
-				not fully capture the nature or purpose of the collected information.</p>
-
-			<section id="infoset-expl" class="informative">
-				<h3>Explanation</h3>
+			<section id="wp-intro" class="informative">
+				<h3>Infoset and Manifest</h3>
 
 				<p>A <a>Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset"
 						>information set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr
@@ -287,10 +274,162 @@
 						href="#manifest-serialization"></a>. Some information can be obtained outside the
 					manifest—fallback rules for properties defined in the following subsections allow a user agent to
 					compile information that the author has not provided in the manifest, for example.</p>
+
+				<p> A <a>manifest</a> is a serialization of a <a>Web Publication's</a>
+					<abbr title="information set"><a>infoset</a></abbr>. The manifest is serialized using the
+					JSON&#160;[[!ecma-404]], more specifically the JSON-LD&#160;[[!json-ld]] format. The manifest can be
+					a separate JSON-LD file, or it can be part of an HTML resource using the <a
+						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
+							><code>script</code> element</a> in HTML&#160;[[!html]]. If the latter, the
+						<code>type</code> attribute of the <code>script</code> element MUST be set to
+						<code>application/ld+json</code>. </p>
+
+				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
+	&lt;script id="example_manifest" type="application/ld+json"&gt;
+	{
+    &#8230;
+	}
+	&lt;/script&gt;
+</pre>
 			</section>
 
-			<section id="infoset-req">
+			<section id="wp-manifest">
+				<h3>Creating a Manifest</h3>
+
+				<section id="wpub-context">
+					<h4>Web Publication Manifest Contexts</h4>
+
+					<p> A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This
+						context has two major components: </p>
+					<ul>
+						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
+						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
+					</ul>
+
+					<p> Note that the latter may also add some features to terms defined in Schema.org. </p>
+
+					<div class="note">
+						<p> An example for the latter is the requirement for the <a href="https://schema.org/creator"
+								>creator</a> term to be order preserving. </p>
+						<p> As part of the continuous contacts with Schema.org the additional requirements defined in
+							the WP specific context file may migrate to the core Schema.org. </p>
+					</div>
+
+					<p> In practice, this means that a Web Publication Manifest MUST begin with, at the minimum: </p>
+
+					<pre class="example">
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    &#8230;
+}
+</pre>
+
+					<p> In some cases, this structure may have to be extended by additional, local information, see the
+							<a href="#manifest-language-and-dir"></a>. </p>
+				</section>
+				<section>
+					<h4>Publication Types</h4>
+					<p> The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the
+						Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using
+						the <code>@type</code> of JSON-LD&#160;[[json-ld]]. Schema.org also includes a number of more
+						specific types (see the <a href="http://schema.org/CreativeWork">list</a> on the Schema.org
+						site) which include a type for <a href="http://schema.org/Article">Article</a>, <a
+							href="http://schema.org/Book">Book</a>, or <a href="http://schema.org/Course">Course</a>;
+						these may MAY also be used instead of <code>CreativeWork</code>. </p>
+					<pre class="example" title="Setting type of the publication to be a Book">
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "Book"
+    &#8230;
+}
+</pre>
+				</section>
+				<section id="manifest-properties">
+					<h3>Properties</h3>
+					
+					<p>The naming, syntax and requirements for manifest properties are defined in <a href="#wp-properties"/>.</p>
+				</section>
+			</section>
+
+			<section id="wp-resources">
+				<h2>Resources</h2>
+
+				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
+						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>.</p>
+
+				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
+					include references to resources of any media type, both in the <a>default reading order</a> and as
+					dependencies of other resources.</p>
+
+				<div class="note">
+					<p>When adding resources to a Web Publication, consider support in user agents. The use of
+						progressive enhancement techniques and the provision of fallback content, as appropriate, will
+						ensure a more consistent reading experience for users regardless of their preferred user
+						agent.</p>
+				</div>
+			</section>
+
+			<section id="wp-linking">
+				<h2>Linking to a Manifest</h2>
+
+				<p>Resources SHOULD provide a link to the manifest of the Web Publication to which they belong to enable
+					discovery. Links MUST take one or both of the following forms:</p>
+
+				<ul>
+					<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code> parameter
+							set to the value "<code>publication</code>".</p>
+						<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
+					</li>
+					<li><p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
+							value "<code>publication</code>".</p>
+						<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
+					</li>
+				</ul>
+
+				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web
+					Publication Manifest expressed as part of an HTML resource (see <a href="#manifest-intro"></a>). </p>
+
+				<pre class="example" title="Link to a manifest within the same HTML resource">
+	&lt;link href="#example_manifest" rel="publication"&gt;
+	&#8230;
+	&lt;script id="example_manifest" type="application/ld+json"&gt;
+	{
+    "@context" : "http://schema.org",
+    &#8230;
+	}
+	&lt;/script&gt;
+</pre>
+
+				<p class="issue">The exact value of <code>rel</code> is still to be agreen upon.</p>
+
+				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
+
+				<p>When a resource links to multiple manifests, a user agent MAY choose to present one or more
+					alternatives to the end user, or choose a single alternative on its own. The user agent MAY choose
+					to present any manifest based upon information that it possesses, even one that is not explicitly
+					listed as a parent (e.g., based upon information it calculates or acquires out of band). In the
+					absence of a preference by user agent implementers, selection of the first manifest listed is
+					suggested as a default.</p>
+
+			</section>
+		</section>
+		<section id="wp-properties">
+			<h3>Web Publication Properties</h3>
+
+			<section id="infoset">
 				<h3>Requirements</h3>
+
+				<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how
+					properties are compiled into the <abbr title="information set">infoset</abbr> remain
+					under-specified. This includes, but is not limited to, what specific names the properties will have
+					in the <abbr title="information set">infoset</abbr>, whether the names in the <a>manifest</a> will
+					be the same as those in the <abbr title="information set">infoset</abbr> and/or whether mappings to
+					properties from known vocabularies will be used.</p>
+
+				<p class="issue" data-number="63">The name "<abbr title="information set">infoset</abbr>" might change
+					depending on feedback. Although this term has a different meaning for individuals familiar with
+						<abbr title="Extensible Markup Language">XML</abbr>, alternatives such as "properties" and
+					"metadata" do not fully capture the nature or purpose of the collected information.</p>
 
 				<p>The requirements for the expression of <abbr title="information set"><a>infoset</a></abbr> properties
 					are as follows:</p>
@@ -332,11 +471,28 @@
 				<p class="ednote">These requirements reflect the current minimum consensus, though a number of issues
 					remain open that could change whether an item is required or recommended. Refer to the property
 					descriptions for more information.</p>
-
 			</section>
-
-			<section id="infoset-meta">
+			<section id="wp-descriptive-properties">
 				<h3>Descriptive Properties</h3>
+
+				<section id="wp-descriptive-properties-intro">
+					<h4>Introduction</h4>
+
+					<p>
+						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based,
+						wherever possible, on the terms defined by <a href="https://schema.org"
+						>Schema.org</a>&#160;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html"
+							>hosted extensions</a> of Schema.org). This means that the descriptive infoset properties
+						are mapped to one or several Schema.org properties (inheriting their syntax and semantics). </p>
+
+					<p class="note"> Schema.org includes a large number of terms that, though relevant for publishing,
+						are not mentioned in this Recommendation. Web Publication authors may use any of those; this
+						document defines only the minimal set of infoset items, and their mapping to Schema.org when
+						appropriate. </p>
+
+					<p class="ednote"> There are discussion on whether a best practices document would be created,
+						referring to more schema.org terms. If so, it should be linked from here. </p>
+				</section>
 
 				<section id="wp-a11y">
 					<h4>Accessibility Report</h4>
@@ -532,456 +688,52 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
-						the Web Publication. The canonical identifier MUST be an <a>address</a> or a value that allows a
-						one-to-one mapping to an address (e.g., a <abbr title="Digital Object Identifier"
-						>DOI</abbr>&#160;[[doi]] can be resolved to a <abbr title="Uniform Resource Locator"
-						>URL</abbr>&#160;[[url]] via a <abbr title="Digital Object Identifier">DOI</abbr> resolver). If
-						a user agent cannot resolve the canonical identifier to an address, it SHOULD ignore the
-						property.</p>
-
-					<p>If a Web Publication is hosted at more than one address, the canonical identifier allows a user
-						agent to identify the shared relationship between the versions and to determine which of the
-						available addresses is primary.</p>
-
-					<p>The canonical identifier is also intended to provide a measure of permanence above and beyond the
-						Web Publication's <a>address</a>. Even if a Web Publication is permanently relocated to a new
-						address, for example, the canonical identifier will provide a way of locating the new location
-						(e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the
-						new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
-							title="Uniform Resource Locator">URL</abbr> of the canonical identifier).</p>
-
-					<p>When assigned, the canonical identifier needs to be unique to one and only one Web Publication,
-						independent of its address(es). Ensuring uniqueness is outside the scope of this specification,
-						however. The actual uniqueness achievable depends on such factors as the conventions of the
-						identifier scheme used and the degree of control over assignment of identifiers.</p>
-
-					<p class="note">If the canonical identifier is a <abbr title="Uniform Resource Locator">URL</abbr>,
-						it can be used as the target of a "canonical" link&#160;[[rfc6596]] (e.g., a <code>link</code>
-						element&#160;[[html]] whose <code>rel</code> attribute has the value <code>canonical</code> or
-						an <abbr title="Hypertext Transfer Protocol">HTTP</abbr>
-						<code>Link</code> header field&#160;[[rfc5988]] similarly identified).</p>
-
-					<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in the
-							<abbr title="information set">infoset</abbr>, or can it be handled by other metadata.</p>
-				</section>
-
-				<section id="wp-cover">
-					<h4>Cover</h4>
-
-					<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
-						image. This image can be used by user agents to present the <a>Web Publication</a> to users
-						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
-
-					<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
-						Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a> and <a
-							href="#wp-creators">creators</a> as text alternatives for such interfaces.</p>
-
-					<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
-						resolutions for different device screens.</p>
-
-					<p>A user agent MAY create a cover for a Web Publication if one is not present. This specification
-						does not define requirements for the creation of such cover images (e.g., the user agent could
-						use a placeholder image, generate an image dynamically, or incorporate properties of the infoset
-						into a graphic, such as the title or creators).</p>
-
-					<p class="issue" data-number="210"></p>
-				</section>
-
-				<section id="wp-creator">
-					<h4>Creator</h4>
-
-					<p>The creator is the individual or entity responsible for the creation of the <a>Web
-							Publication</a>. A Web Publication MAY have more than one creator.</p>
-
-					<p>The creator property SHOULD include the role the creator played in the creation of the Web
-						Publication (e.g., 'author', 'illustrator', 'translator').</p>
-				</section>
-
-				<section id="wp-language-and-dir">
-					<h4>Language and Base Direction</h4>
-
-					<p>Each textual property in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wp-title">title</a>, <a
-							href="#wp-creator">creators</a>) is <a
-							href="https://w3c.github.io/string-meta/#dom-localizable"
-						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
-
-					<ul>
-						<li>the natural <dfn>language</dfn>, which MUST be a tag that conforms to&#160;[[!bcp47]];</li>
-						<li>the <dfn>base direction</dfn>, which identifies the display direction for the property using
-							one of the following possible values: <ul>
-								<li><code>ltr</code>: left-to-right;</li>
-								<li><code>rtl</code>: right-to-left;</li>
-								<li><code>auto</code>: direction is determined from the value of the property.</li>
-							</ul>
-						</li>
-					</ul>
-
-					<p>The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global language
-						and the base direction declarations using the same conventions (i.e., [[!bcp47]] tags for
-						language, and the values <code>ltr</code>/<code>rtl</code>/<code>auto</code> for base
-						direction). These are used as defaults for textual properties in the <abbr
-							title="information set">infoset</abbr>, unless overwritten by the properties themselves.</p>
-
-					<p class="note">These features make it possible to add the title of a publication in different
-						languages, or repeat the creators’ names using different scripts.</p>
-
-					<p>User agents MUST NOT use the language and base direction outside the context of the infoset
-						(e.g., in the processing or rendering of the Web Publication content). These values do
-							<strong>not</strong> override similar declarations in any resource, nor do they serve as
-						global defaults when such information is not provided in a resource.</p>
-
-					<p>If a user agent requires the language and one is not available in the <abbr
-							title="information set">infoset</abbr> (globally or specifically for the property), or the
-						obtained value is invalid, the user agent MAY attempt to determine the language. This
-						specification does not mandate how such a language tag is created. The user agent might:</p>
-
-					<ul>
-						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
-						<li>use the first non-empty language declaration found in a resource in the <a>default reading
-								order</a>;</li>
-						<li>calculate the language using its own algorithm.</li>
-					</ul>
-
-					<p>If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"
-						(undetermined). If the base direction cannot be determined, user agents MUST assume the value
-							<code>auto</code>.</p>
-
-				</section>
-
-				<section id="wp-mod-date">
-					<h4>Last Modification Date</h4>
-
-					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
-						updated (i.e., whenever changes were last made to any of the resources of the Web Publication,
-						including the <a>manifest</a>).</p>
-
-					<p>This date does not necessarily reflect all changes to the Web Publication (e.g., third-party
-						content could change without the author being aware). User agents SHOULD check the last
-						modification date of individual resources to determine if they have changed and need
-						updating.</p>
-				</section>
-
-				<section id="wp-pub-date">
-					<h4>Publication Date</h4>
-
-					<p>The <dfn>publication date</dfn> is the date on which the <a>Web Publication</a> was originally
-						published. It represents a static event in the lifecycle of a Web Publication and allows
-						subsequent revisions to be identified and compared.</p>
-
-					<p>The exact moment of publication is intentionally left open to interpretation: it could be when
-						the Web Publication is first made available online or could be a point in time before
-						publication when the Web Publication is considered final.</p>
-				</section>
-
-				<section id="wp-privacy">
-					<h4>Privacy Policy</h4>
-
-					<p>Users often have the legal right to know and control what information is collected about them,
-						how such information is stored and for how long, whether it is personally identifiable, and how
-						it can be expunged. Including a statement that addresses such privacy concerns is consequently
-						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
-						such a declaration increases the trust users have in the content.</p>
-
-					<p>To address this concern, a link to a privacy policy can be included in the <abbr
-							title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be
-						included as a resource of the Web Publication.</p>
-
-					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as <abbr
-							title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
-
-					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
-						Publications.</p>
-
-					<p class="issue" data-number="203"></p>
-
-				</section>
-
-				<section id="wp-reading-progression">
-					<h4>Reading Progression Direction</h4>
-
-					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the
-						reading direction from one resource to the next within a <a>Web Publication</a>. The value of
-						this property may be:</p>
-
-					<ul>
-						<li><code>ltr</code>: left-to-right;</li>
-						<li><code>rtl</code>: right-to-left;</li>
-						<li><code>auto</code>: the user agent chooses the direction.</li>
-					</ul>
-
-					<p>The default value is <code>auto</code>.</p>
-
-					<p>This information item has <em>no effect</em> on the rendering of the individual primary
-						resources; it is only relevant for the progression direction from one resource to the other.</p>
-
-					<p class="note">The reading progression of a <a>Web Publication</a> is used to adapt such
-						publication level interactions as menu position, swap direction, defining tap zones to lead the
-						user to the next and previous pages, touch gestures, etc.</p>
-
-
-				</section>
-
-				<section id="wp-title">
-					<h4>Title</h4>
-
-					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
-
-					<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
-							<a>non-empty</a>.</p>
-
-					<p>If a user agent requires a title and one is not available in the <abbr title="information set"
-							>infoset</abbr>, the user agent MAY create one. This specification does not mandate how such
-						a title is created. The user agent might:</p>
-
-					<ul>
-						<li>use the first <a>non-empty</a>
-							<code>title</code> element found in a resource in the <a>default reading order</a>;</li>
-						<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
-						<li>use the <abbr title="Uniform Resource Locator">URL</abbr> of the manifest;</li>
-						<li>calculate a title using its own algorithm.</li>
-					</ul>
-
-					<div class="note">
-						<p>A user agent is not expected to produce a <a
-								href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
-							title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
-					</div>
-				</section>
-			</section>
-
-			<section id="infoset-structure">
-				<h3>Structural Properties</h3>
-
-				<section id="wp-default-reading-order">
-					<h4>Default Reading Order</h4>
-
-					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
-							Publication</a> resources.</p>
-
-					<p>A user might follow alternative pathways through the content, but in the absence of such
-						interaction the default reading order defines the expected progression from one resource to the
-						next.</p>
-
-					<p>The default reading order MUST include at least one resource.</p>
-
-					<p>The default reading order is specified directly in the manifest. If the reading order consists of
-						one single resource, namely the primary entry page of the Web Publication (i.e., the resource
-						the user accesses to reach the manifest, see <a href="#wp-linking"></a>), the default reading
-						order need not be specified in the manifest.</p>
-				</section>
-
-				<section id="wp-resource-list">
-					<h4>Resource List</h4>
-
-					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
-						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds)
-						and that are not listed in the <a>default reading order</a>.</p>
-
-					<p class="note">The union of the resource list and default reading order represents the definitive
-						list of resources that belong to the Web Publication. All other resources are external to the
-						Web Publication.</p>
-
-					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
-						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it
-						is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
-						constituent resources beyond those listed in the <a>default reading order</a>.</p>
-
-					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
-						third-party scripts that reference resources from deep within their source), but a user agent
-						SHOULD still be able to render a Web Publication even if some of these resources are not
-						identified as belonging to the Web Publication (e.g., when it is taken offline without
-						them).</p>
-
-					<div class="ednote"> The previous version of the draft included: <blockquote>
-							<p>If a user agent encounters a resource that it cannot locate in the resource list, it MUST
-								treat the resource as external to the Web Publication (e.g., it might alert the user
-								before loading, open the resource in a new window, or unload the current Web Publication
-								and resume normal Web browsing).</p>
-						</blockquote>
-						<p>This was not decided on the Toronto F2F, and is still open.</p>
-					</div>
-				</section>
-
-				<section id="wp-table-of-contents">
-					<h4>Table of Contents</h4>
-
-					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
-						outline of the major sections of the Web Publication. There are no requirements on the
-						completeness of the table of contents, except that, when specified, it MUST include a link to at
-						least one <a href="#wp-resources">resource</a>.</p>
-
-					<p> The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD
-						provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most
-						likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set
-						to <code>doc-toc</code>. </p>
-
-					<p class="issue">This question arises only if the table of contents is accepted: can a table of
-						contents navigation element refer, via links, to any resource that is <em>not</em> listed in the
-							<a>default reading order</a>?</p>
-				</section>
-			</section>
-
-			<section id="wp-extensibility">
-				<h3>Extensibility</h3>
-
-				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
-					extended in the following ways:</p>
-
-				<ol>
-					<li>through the inclusion of additional properties in the manifest;</li>
-					<li>by the provision of linked metadata records.</li>
-				</ol>
-
-				<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the
-						<abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever
-					possible, as the use of native formats standardizes and simplifies processing by user agents.</p>
-			</section>
-		</section>
-		<section id="manifest">
-			<h2>Web Publication Manifest</h2>
-
-			<section id="manifest-intro">
-				<h3>Overview</h3>
-
-				<p> A <a>manifest</a> is a serialization of a <a>Web Publication's</a>
-					<abbr title="information set"><a>infoset</a></abbr>. The manifest is serialized using the
-					JSON&#160;[[!ecma-404]], more specifically the JSON-LD&#160;[[!json-ld]] format. The manifest can be
-					a separate JSON-LD file, or it can be part of an HTML resource using the <a
-						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a> in HTML&#160;[[!html]]. If the latter, the
-						<code>type</code> attribute of the <code>script</code> element MUST be set to
-						<code>application/ld+json</code>. </p>
-
-				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
-	&lt;script id="example_manifest" type="application/ld+json"&gt;
-	{
-    &#8230;
-	}
-	&lt;/script&gt;
-</pre>
-
-				<section>
-					<h4>Descriptive Infoset Properties</h4>
-
-					<p>
-						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based,
-						wherever possible, on the terms defined by <a href="https://schema.org"
-						>Schema.org</a>&#160;[[schema.org]] (including <a href="http://schema.org/docs/schemas.html"
-							>hosted extensions</a> of Schema.org). This means that the descriptive infoset properties
-						are mapped to one or several Schema.org properties (inheriting their syntax and semantics). </p>
-
-					<p class="note"> Schema.org includes a large number of terms that, though relevant for publishing,
-						are not mentioned in this Recommendation. Web Publication authors may use any of those; this
-						document defines only the minimal set of infoset items, and their mapping to Schema.org when
-						appropriate. </p>
-
-					<p class="ednote"> There are discussion on whether a best practices document would be created,
-						referring to more schema.org terms. If so, it should be linked from here. </p>
-				</section>
-
-
-				<section>
-					<h4>Structural Infoset Properties</h4>
-
-					<p>
-						<a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms
-						that refer to one or more external resources (images, script files, separate metadata files,
-						etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore
-						defined separately by this specification. </p>
-
-					<p> Values of structural properties are usually links to external resources, or an array thereof.
-						Such a link may be expressed in one of two ways: </p>
-
-					<ol>
-						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"
-									><code>StructuredValue</code></a> that can be used to express, beyond the URL, the
-							media type and other characteristics of the target resource.</li>
-					</ol>
-
-					<pre class="example" title="Expressing external links, either as strings or as objects">
-	{
-        &#8230;
-        "resources" : [
-            "datatypes.svg",
-            {
-                "@type"      : "StructuredValue",
-                "url"        : "test-utf8.csv",
-                "fileFormat" : "text/csv"
-            }
-		]
-	}
-</pre>
-
-					<p class="note"> There will be continuous contacts with Schema.org to see whether some of the
-						structural property terms should not be included in the core Schema.org hierarchy, or one of its
-						extensions. </p>
-				</section>
-
-				<section id="wpub-context">
-					<h4>Web Publication Manifest Contexts</h4>
-
-					<p> A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This
-						context has two major components: </p>
-					<ul>
-						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
-						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
-					</ul>
-
-					<p> Note that the latter may also add some features to terms defined in Schema.org. </p>
-
-					<div class="note">
-						<p> An example for the latter is the requirement for the <a href="https://schema.org/creator"
-								>creator</a> term to be order preserving. </p>
-						<p> As part of the continuous contacts with Schema.org the additional requirements defined in
-							the WP specific context file may migrate to the core Schema.org. </p>
-					</div>
-
-					<p> In practice, this means that a Web Publication Manifest MUST begin with, at the minimum: </p>
-
-					<pre class="example">
-{
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
-    &#8230;
-}
-</pre>
-
-					<p> In some cases, this structure may have to be extended by additional, local information, see the
-							<a href="#manifest-language-and-dir"></a>. </p>
-				</section>
-				<section>
-					<h4>Publication Types</h4>
-					<p> The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the
-						Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using
-						the <code>@type</code> of JSON-LD&#160;[[json-ld]]. Schema.org also includes a number of more
-						specific types (see the <a href="http://schema.org/CreativeWork">list</a> on the Schema.org
-						site) which include a type for <a href="http://schema.org/Article">Article</a>, <a
-							href="http://schema.org/Book">Book</a>, or <a href="http://schema.org/Course">Course</a>;
-						these may MAY also be used instead of <code>CreativeWork</code>. </p>
-					<pre class="example" title="Setting type of the publication to be a Book">
-{
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
-    "@type"    : "Book"
-    &#8230;
-}
-</pre>
-
-				</section>
-			</section>
-
-			<section>
-				<h3>Specification of Web Publication Manifest Items</h3>
-
-				<section>
-					<h4>Descriptive Infoset Properties</h4>
-					<section id="wp-canonical-identifier-wpm">
-						<h4>Canonical Identifier</h4>
-						<p> As described in <a href="#wp-canonical-identifier"></a>, a <a>Web Publication's</a>
-							<a>canonical identifier</a> is a unique identifier that resolves to the preferred version of
-							the Web Publication. This infoset item MUST be mapped on the <a href="http://schema.org/id"
-									><code>id</code></a> term, whose value is a URL. </p>
+						the Web Publication.</p>
+
+					<section id="wp-canonical-identifier-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The canonical identifier MUST be an <a>address</a> or a value that allows a one-to-one
+							mapping to an address (e.g., a <abbr title="Digital Object Identifier"
+							>DOI</abbr>&#160;[[doi]] can be resolved to a <abbr title="Uniform Resource Locator"
+								>URL</abbr>&#160;[[url]] via a <abbr title="Digital Object Identifier">DOI</abbr>
+							resolver). If a user agent cannot resolve the canonical identifier to an address, it SHOULD
+							ignore the property.</p>
+
+						<p>If a Web Publication is hosted at more than one address, the canonical identifier allows a
+							user agent to identify the shared relationship between the versions and to determine which
+							of the available addresses is primary.</p>
+
+						<p>The canonical identifier is also intended to provide a measure of permanence above and beyond
+							the Web Publication's <a>address</a>. Even if a Web Publication is permanently relocated to
+							a new address, for example, the canonical identifier will provide a way of locating the new
+							location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be
+							updated with the new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could
+							be added to the <abbr title="Uniform Resource Locator">URL</abbr> of the canonical
+							identifier).</p>
+
+						<p>When assigned, the canonical identifier needs to be unique to one and only one Web
+							Publication, independent of its address(es). Ensuring uniqueness is outside the scope of
+							this specification, however. The actual uniqueness achievable depends on such factors as the
+							conventions of the identifier scheme used and the degree of control over assignment of
+							identifiers.</p>
+
+						<p class="note">If the canonical identifier is a <abbr title="Uniform Resource Locator"
+								>URL</abbr>, it can be used as the target of a "canonical" link&#160;[[rfc6596]] (e.g.,
+							a <code>link</code> element&#160;[[html]] whose <code>rel</code> attribute has the value
+								<code>canonical</code> or an <abbr title="Hypertext Transfer Protocol">HTTP</abbr>
+							<code>Link</code> header field&#160;[[rfc5988]] similarly identified).</p>
+
+						<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in
+							the <abbr title="information set">infoset</abbr>, or can it be handled by other
+							metadata.</p>
+					</section>
+
+					<section id="wp-canonical-identifier-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>This infoset item MUST be mapped on the <a href="http://schema.org/id"><code>id</code></a>
+							term, whose value is a URL. </p>
 
 						<p> Additionally, the term <a href="http://schema.org/identifier"><code>itentifier</code></a>
 							MAY also be used; in Schema.org, the value of this term can be a URL, a textual information
@@ -1034,13 +786,63 @@
 </pre>
 
 					</section>
-					<section id="wp-creators-wpm">
-						<h4>Creator</h4>
-						<p> As desribed in <a href="#wp-creators"></a>, a <a>Web Publication's</a> creators are the
-							individuals or entities responsible for the creation of the <a>Web Publication</a>. There
-							isn’t one single Schema.org term this item must be mapped onto; instead, there are a number
-							of terms and, if this Infoset Item is used, the Web Publication Manifest SHOULD use one of
-							those. The value of these terms are one or more <a href="http://schema.org/Person"
+				</section>
+
+				<section id="wp-cover">
+					<h4>Cover</h4>
+
+					<p>The <dfn>cover</dfn> is an image that user agents can use to present the <a>Web Publication</a>
+						to users (e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
+
+					<section id="wp-cover-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
+							image.</p>
+
+						<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
+							Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a>
+							and <a href="#wp-creators">creators</a> as text alternatives for such interfaces.</p>
+
+						<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
+							resolutions for different device screens.</p>
+
+						<p>A user agent MAY create a cover for a Web Publication if one is not present. This
+							specification does not define requirements for the creation of such cover images (e.g., the
+							user agent could use a placeholder image, generate an image dynamically, or incorporate
+							properties of the infoset into a graphic, such as the title or creators).</p>
+
+						<p class="issue" data-number="210"></p>
+					</section>
+
+					<section id="wp-cover-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>&#8230;</p>
+					</section>
+				</section>
+
+				<section id="wp-creator">
+					<h4>Creator</h4>
+
+					<p>The <dfn>creator</dfn> is the individual or entity responsible for the creation of the <a>Web
+							Publication</a>.</p>
+
+					<section id="wp-creator-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>A Web Publication MAY have more than one creator.</p>
+
+						<p>The creator property SHOULD include the role the creator played in the creation of the Web
+							Publication (e.g., 'author', 'illustrator', 'translator').</p>
+					</section>
+
+					<section id="wp-creator-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>There isn’t one single Schema.org term this item must be mapped onto; instead, there are a
+							number of terms and, if this Infoset Item is used, the Web Publication Manifest SHOULD use
+							one of those. The value of these terms are one or more <a href="http://schema.org/Person"
 									><code>Person</code></a> objects or, in some cases, <a
 								href="http://schema.org/Person"><code>Person</code></a> or an <a
 								href="http://schema.org/Organization"><code><code>Organization</code></code></a> items.
@@ -1188,13 +990,73 @@
 </pre>
 						<p class="issue" data-number="217"></p>
 					</section>
+				</section>
 
-					<section id="wp-language-and-dir-wpm">
-						<h4>Language and Base Direction</h4>
-						<p> As described in <a href="#wp-language-and-dir"></a> this infoset item refers to several
-							aspects of setting language and direction; these are treated separately. </p>
-						<section id="manifest-language-and-dir">
-							<h5>Default language and direction</h5>
+				<section id="wp-language-and-dir">
+					<h4>Language and Base Direction</h4>
+
+					<p>Each textual property in the <a>Web Publication's</a>
+						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wp-title">title</a>, <a
+							href="#wp-creator">creators</a>) is <a
+							href="https://w3c.github.io/string-meta/#dom-localizable"
+						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
+
+					<ul>
+						<li>the natural <dfn>language</dfn>, which MUST be a tag that conforms to&#160;[[!bcp47]];</li>
+						<li>the <dfn>base direction</dfn>, which identifies the display direction for the property using
+							one of the following possible values: <ul>
+								<li><code>ltr</code>: left-to-right;</li>
+								<li><code>rtl</code>: right-to-left;</li>
+								<li><code>auto</code>: direction is determined from the value of the property.</li>
+							</ul>
+						</li>
+					</ul>
+
+					<section id="wp-language-and-dir-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global
+							language and the base direction declarations using the same conventions (i.e., [[!bcp47]]
+							tags for language, and the values <code>ltr</code>/<code>rtl</code>/<code>auto</code> for
+							base direction). These are used as defaults for textual properties in the <abbr
+								title="information set">infoset</abbr>, unless overwritten by the properties
+							themselves.</p>
+
+						<p class="note">These features make it possible to add the title of a publication in different
+							languages, or repeat the creators’ names using different scripts.</p>
+
+						<p>User agents MUST NOT use the language and base direction outside the context of the infoset
+							(e.g., in the processing or rendering of the Web Publication content). These values do
+								<strong>not</strong> override similar declarations in any resource, nor do they serve as
+							global defaults when such information is not provided in a resource.</p>
+
+						<p>If a user agent requires the language and one is not available in the <abbr
+								title="information set">infoset</abbr> (globally or specifically for the property), or
+							the obtained value is invalid, the user agent MAY attempt to determine the language. This
+							specification does not mandate how such a language tag is created. The user agent might:</p>
+
+						<ul>
+							<li>use the <a>non-empty</a> language declaration of the manifest;</li>
+							<li>use the first non-empty language declaration found in a resource in the <a>default
+									reading order</a>;</li>
+							<li>calculate the language using its own algorithm.</li>
+						</ul>
+
+						<p>If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"
+							(undetermined). If the base direction cannot be determined, user agents MUST assume the
+							value <code>auto</code>.</p>
+					</section>
+
+
+					<section id="wp-language-and-dir-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>As this infoset item refers to several aspects of setting language and direction, each is
+							treated separately. </p>
+
+						<section id="manifest-default-language-and-dir">
+							<h6>Default language and direction</h6>
+
 							<p> The infoset described in <a href="#wp-language-and-dir"></a> requires the possibility to
 								set a <em>default</em> language and base direction for all textual information in the
 								manifest. These MUST be set by <em>extending</em> the context of the manifest to include
@@ -1221,8 +1083,10 @@
 
 							<p class="issue" data-number="218"></p>
 						</section>
-						<section>
-							<h5>Item specific language and direction</h5>
+
+						<section id="manifest-specific-language-and-dir">
+							<h6>Item specific language and direction</h6>
+
 							<p> The infoset described in <a href="#wp-language-and-dir"></a> also requires the
 								possibility to set the language and base direction for any textual information in the
 								manifest. This MUST be set for each item separately, also using the <a
@@ -1249,17 +1113,35 @@
 
 							<p class="issue" data-number="219"></p>
 						</section>
+
 						<p class="issue" data-number="220"></p>
 					</section>
-					<section id="wp-mod-date-wpm">
-						<h4>Last Modification Date</h4>
+				</section>
 
-						<p> As described in <a href="#wp-mod-date"></a>, the <a>last modification date</a> is the date
-							when the <a>Web Publication</a> was last updated. This infoset item MUST be mapped on the <a
-								href="http://schema.org/dateModified"><code>dateModified</code></a> term, whose value is
-							a <a href="http://schema.org/Date"><code>Date</code></a> or <a
+				<section id="wp-mod-date">
+					<h4>Last Modification Date</h4>
+
+					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
+						updated (i.e., whenever changes were last made to any of the resources of the Web Publication,
+						including the <a>manifest</a>).</p>
+
+					<section id="wp-mod-date-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The last modification date does not necessarily reflect all changes to the Web Publication
+							(e.g., third-party content could change without the author being aware). User agents SHOULD
+							check the last modification date of individual resources to determine if they have changed
+							and need updating.</p>
+					</section>
+
+					<section id="wp-mod-date-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>This infoset item MUST be mapped on the <a href="http://schema.org/dateModified"
+									><code>dateModified</code></a> term, whose value is a <a
+								href="http://schema.org/Date"><code>Date</code></a> or <a
 								href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601
-							date, or Date Time formats, respectively [[iso8601]]. </p>
+							date, or Date Time formats, respectively [[iso8601]].</p>
 
 						<table class="zebra">
 							<thead>
@@ -1290,13 +1172,31 @@
 </pre>
 
 					</section>
-					<section id="wp-pub-date-wpm">
-						<h4>Publication Date</h4>
+				</section>
 
-						<p> As described in <a href="#wp-pub-date"></a>, the <a>last modification date</a> is the date
-							when the <a>Web Publication</a> was originall published. This infoset item MUST be mapped on
-							the <a href="http://schema.org/datePublished"><code>datePublished</code></a> term, whose
-							value is a <a href="http://schema.org/Date"><code>Date</code></a> or <a
+				<section id="wp-pub-date">
+					<h4>Publication Date</h4>
+
+					<p>The <dfn>publication date</dfn> is the date on which the <a>Web Publication</a> was originally
+						published. It represents a static event in the lifecycle of a Web Publication and allows
+						subsequent revisions to be identified and compared.</p>
+
+					<p>The exact moment of publication is intentionally left open to interpretation: it could be when
+						the Web Publication is first made available online or could be a point in time before
+						publication when the Web Publication is considered final.</p>
+
+					<section id="wp-pub-date-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>&#8230;</p>
+					</section>
+
+					<section id="wp-pub-date-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>This infoset item MUST be mapped on the <a href="http://schema.org/datePublished"
+									><code>datePublished</code></a> term, whose value is a <a
+								href="http://schema.org/Date"><code>Date</code></a> or <a
 								href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601
 							date, or Date Time formats, respectively [[iso8601]]. </p>
 
@@ -1329,12 +1229,74 @@
 }
 </pre>
 					</section>
-					<section id="wp-reading-progression-wpm">
-						<h4>Reading Progression Direction</h4>
-						<p> As described in <a href="#wp-reading-progression"></a>, this infoset item establishes the
-							reading direction from one resource to the next. There is no corresponding term in
-							Schema.org; instead, this item MUST be mapped on the <code>readingProgression</code> term,
-							defined specifically for Web Publications. </p>
+				</section>
+
+				<section id="wp-privacy">
+					<h4>Privacy Policy</h4>
+
+					<p>Users often have the legal right to know and control what information is collected about them,
+						how such information is stored and for how long, whether it is personally identifiable, and how
+						it can be expunged. Including a statement that addresses such privacy concerns is consequently
+						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
+						such a declaration increases the trust users have in the content.</p>
+
+					<section id="wp-privacy-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>To address this concern, a link to a privacy policy can be included in the <abbr
+								title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy
+							be included as a resource of the Web Publication.</p>
+
+						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
+								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
+
+						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
+							Publications.</p>
+
+						<p class="issue" data-number="203"></p>
+					</section>
+
+					<section id="wp-privacy-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>&#8230;</p>
+					</section>
+				</section>
+
+				<section id="wp-reading-progression">
+					<h4>Reading Progression Direction</h4>
+
+					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the
+						reading direction from one resource to the next within a <a>Web Publication</a>.</p>
+
+					<section id="wp-reading-progression-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The value of this property may be:</p>
+
+						<ul>
+							<li><code>ltr</code>: left-to-right;</li>
+							<li><code>rtl</code>: right-to-left;</li>
+							<li><code>auto</code>: the user agent chooses the direction.</li>
+						</ul>
+
+						<p>The default value is <code>auto</code>.</p>
+
+						<p>This information item has <em>no effect</em> on the rendering of the individual primary
+							resources; it is only relevant for the progression direction from one resource to the
+							other.</p>
+
+						<p class="note">The reading progression of a <a>Web Publication</a> is used to adapt such
+							publication level interactions as menu position, swap direction, defining tap zones to lead
+							the user to the next and previous pages, touch gestures, etc.</p>
+					</section>
+
+					<section id="wp-reading-progression-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>There is no corresponding term in Schema.org; instead, this item MUST be mapped on the
+								<code>readingProgression</code> term, defined specifically for Web Publications. </p>
+
 						<table class="zebra">
 							<thead>
 								<tr>
@@ -1367,13 +1329,43 @@
 </pre>
 
 					</section>
+				</section>
 
-					<section id="wp-title-wmp">
-						<h4>Title</h4>
+				<section id="wp-title">
+					<h4>Title</h4>
 
-						<p> As described in <a href="#wp-title"></a>, the title provides the human-readable name of the
-							Web Publication. If set explicitly in the Manifest (i.e., if it is not to be derived from
-							the <code>title</code> element of the primary entry point), this item MUST be mapped on the
+					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
+
+					<section id="wp-title-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
+								<a>non-empty</a>.</p>
+
+						<p>If a user agent requires a title and one is not available in the <abbr
+								title="information set">infoset</abbr>, the user agent MAY create one. This
+							specification does not mandate how such a title is created. The user agent might:</p>
+
+						<ul>
+							<li>use the first <a>non-empty</a>
+								<code>title</code> element found in a resource in the <a>default reading order</a>;</li>
+							<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
+							<li>use the <abbr title="Uniform Resource Locator">URL</abbr> of the manifest;</li>
+							<li>calculate a title using its own algorithm.</li>
+						</ul>
+
+						<div class="note">
+							<p>A user agent is not expected to produce a <a
+									href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
+									title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
+						</div>
+					</section>
+
+					<section id="wp-title-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>If set explicitly in the Manifest (i.e., if it is not to be derived from the
+								<code>title</code> element of the primary entry point), this item MUST be mapped on the
 							Schema.org <a href="http://schema.org/name"><code>name</code></a> term. </p>
 
 						<table class="zebra">
@@ -1403,9 +1395,50 @@
 </pre>
 					</section>
 				</section>
-				<section id="structural-infoset-properties-wpm">
+			</section>
+
+			<section id="wp-structural-properties">
+				<h3>Structural Properties</h3>
+
+				<section>
 					<h4>Structural Infoset Properties</h4>
 
+					<p>
+						<a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms
+						that refer to one or more external resources (images, script files, separate metadata files,
+						etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore
+						defined separately by this specification. </p>
+
+					<p> Values of structural properties are usually links to external resources, or an array thereof.
+						Such a link may be expressed in one of two ways: </p>
+
+					<ol>
+						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
+						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"
+									><code>StructuredValue</code></a> that can be used to express, beyond the URL, the
+							media type and other characteristics of the target resource.</li>
+					</ol>
+
+					<pre class="example" title="Expressing external links, either as strings or as objects">
+	{
+        &#8230;
+        "resources" : [
+            "datatypes.svg",
+            {
+                "@type"      : "StructuredValue",
+                "url"        : "test-utf8.csv",
+                "fileFormat" : "text/csv"
+            }
+		]
+	}
+</pre>
+
+					<p class="note"> There will be continuous contacts with Schema.org to see whether some of the
+						structural property terms should not be included in the core Schema.org hierarchy, or one of its
+						extensions. </p>
+				</section>
+
+				<section>
 					<p> Structural infoset properties typically refer to external resources via a URL. This URL-s may
 						refer to resources playing different roles (e.g., cover or privacy policy), may need some
 						additional metadata for, e.g., accessibility purposes. </p>
@@ -1463,14 +1496,35 @@
 							</tr>
 						</tbody>
 					</table>
+				</section>
 
-					<section id="wp-default-reading-order-wpm">
-						<h4>Default Reading Order</h4>
-						<p> As defined in <a href="#wp-default-reading-order"></a>, the <a>default reading order</a> is
-							a specific progression through a set of Web Publication resources. If present in the Web
-							Publication Manifest (i.e., if the Web Publication has other items in the default reading
-							order than just the primary entry page), this item MUST be mapped on the
-								<code>readingOrder</code> term, defined specifically for Web Publications. </p>
+				<section id="wp-default-reading-order">
+					<h4>Default Reading Order</h4>
+
+					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
+							Publication</a> resources.</p>
+
+					<p>A user might follow alternative pathways through the content, but in the absence of such
+						interaction the default reading order defines the expected progression from one resource to the
+						next.</p>
+
+					<section id="wp-default-reading-order-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The default reading order MUST include at least one resource.</p>
+
+						<p>The default reading order is specified directly in the manifest. If the reading order
+							consists of one single resource, namely the primary entry page of the Web Publication (i.e.,
+							the resource the user accesses to reach the manifest, see <a href="#wp-linking"></a>), the
+							default reading order need not be specified in the manifest.</p>
+					</section>
+
+					<section id="wp-default-reading-order-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>If present in the Web Publication Manifest (i.e., if the Web Publication has other items in
+							the default reading order than just the primary entry page), this item MUST be mapped on the
+								<code>readingOrder</code> term, defined specifically for Web Publications.</p>
 						<table class="zebra">
 							<thead>
 								<tr>
@@ -1531,8 +1585,47 @@
 }
 </pre>
 					</section>
-					<section id="wp-resource-list-wpm">
-						<h4>Resource List</h4>
+				</section>
+
+				<section id="wp-resource-list">
+					<h4>Resource List</h4>
+
+					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
+						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds)
+						and that are not listed in the <a>default reading order</a>.</p>
+
+					<p class="note">The union of the resource list and default reading order represents the definitive
+						list of resources that belong to the Web Publication. All other resources are external to the
+						Web Publication.</p>
+
+					<section id="wp-resource-list-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The completeness of the resource list will affect the usability of the Web Publication in
+							certain reading scenarios (e.g., the ability to read the Web Publication offline). For this
+							reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the Web
+							Publication's constituent resources beyond those listed in the <a>default reading
+							order</a>.</p>
+
+						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
+							third-party scripts that reference resources from deep within their source), but a user
+							agent SHOULD still be able to render a Web Publication even if some of these resources are
+							not identified as belonging to the Web Publication (e.g., when it is taken offline without
+							them).</p>
+
+						<div class="ednote"> The previous version of the draft included: <blockquote>
+								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
+									MUST treat the resource as external to the Web Publication (e.g., it might alert the
+									user before loading, open the resource in a new window, or unload the current Web
+									Publication and resume normal Web browsing).</p>
+							</blockquote>
+							<p>This was not decided on the Toronto F2F, and is still open.</p>
+						</div>
+					</section>
+
+					<section id="wp-resource-list-manifest">
+						<h5>Manifest Expression</h5>
+
 						<p> As defined in <a href="#wp-resource-list"></a>, the <a>resource list</a> enumerates all <a
 								href="#wp-resources">resources</a> that are used in the processing and rendering of a
 								<a>Web Publication</a> (i.e., that are within its bounds) and that are not listed in the
@@ -1540,6 +1633,7 @@
 							Web Publication has other items in the default reading order than just the primary entry
 							page), this item MUST be mapped on the <code>resources</code> term, defined specifically for
 							Web Publications. </p>
+
 						<table class="zebra">
 							<thead>
 								<tr>
@@ -1590,12 +1684,36 @@
 </pre>
 
 					</section>
-					<section id="wp-table-of-contents-wpm">
-						<h4>Table of Contents</h4>
-						<p> As defined in <a href="#wp-table-of-contents"></a>, the manifest SHOULD provide a link to an
-							HTML element in one of the <a href="#wp-resources">resources</a> representing the table of
-							content. If present in the Web Publication Manifest this item MUST be mapped on the
+				</section>
+
+				<section id="wp-table-of-contents">
+					<h4>Table of Contents</h4>
+
+					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
+						outline of the major sections of the Web Publication.</p>
+
+					<section id="wp-table-of-contents-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>There are no requirements on the completeness of the table of contents, except that, when
+							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
+
+						<p> The table of contents is not specified directly in the manifest. Instead, the manifest
+							SHOULD provide a link to an HTML element in one of the <a href="#wp-resources">resources</a>
+							(most likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute
+							value set to <code>doc-toc</code>. </p>
+
+						<p class="issue">This question arises only if the table of contents is accepted: can a table of
+							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
+							the <a>default reading order</a>?</p>
+					</section>
+
+					<section id="wp-table-of-contents-manifest">
+						<h5>Table of Contents</h5>
+
+						<p>If present in the Web Publication Manifest this item MUST be mapped on the
 								<code>tableOfContents</code> term, defined specifically for Web Publications. </p>
+
 						<table class="zebra">
 							<thead>
 								<tr>
@@ -1641,70 +1759,22 @@
 					</section>
 				</section>
 			</section>
-		</section>
-		<section id="wp-construction">
-			<h2>Web Publication Construction</h2>
 
-			<section id="wp-resources">
-				<h2>Resources</h2>
+			<section id="wp-extensibility">
+				<h3>Extensibility</h3>
 
-				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
-						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>.</p>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
+					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
+					extended in the following ways:</p>
 
-				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
-					include references to resources of any media type, both in the <a>default reading order</a> and as
-					dependencies of other resources.</p>
+				<ol>
+					<li>through the inclusion of additional properties in the manifest;</li>
+					<li>by the provision of linked metadata records.</li>
+				</ol>
 
-				<div class="note">
-					<p>When adding resources to a Web Publication, consider support in user agents. The use of
-						progressive enhancement techniques and the provision of fallback content, as appropriate, will
-						ensure a more consistent reading experience for users regardless of their preferred user
-						agent.</p>
-				</div>
-			</section>
-
-			<section id="wp-linking">
-				<h2>Linking to a Manifest</h2>
-
-				<p>Resources SHOULD provide a link to the manifest of the Web Publication to which they belong to enable
-					discovery. Links MUST take one or both of the following forms:</p>
-
-				<ul>
-					<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code> parameter
-							set to the value "<code>publication</code>".</p>
-						<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
-					</li>
-					<li><p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
-							value "<code>publication</code>".</p>
-						<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
-					</li>
-				</ul>
-
-				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web
-					Publication Manifest expressed as part of an HTML resource (see <a href="#manifest-intro"></a>). </p>
-
-				<pre class="example" title="Link to a manifest within the same HTML resource">
-	&lt;link href="#example_manifest" rel="publication"&gt;
-	&#8230;
-	&lt;script id="example_manifest" type="application/ld+json"&gt;
-	{
-    "@context" : "http://schema.org",
-    &#8230;
-	}
-	&lt;/script&gt;
-</pre>
-
-				<p class="issue">The exact value of <code>rel</code> is still to be agreen upon.</p>
-
-				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
-
-				<p>When a resource links to multiple manifests, a user agent MAY choose to present one or more
-					alternatives to the end user, or choose a single alternative on its own. The user agent MAY choose
-					to present any manifest based upon information that it possesses, even one that is not explicitly
-					listed as a parent (e.g., based upon information it calculates or acquires out of band). In the
-					absence of a preference by user agent implementers, selection of the first manifest listed is
-					suggested as a default.</p>
-
+				<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the
+						<abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever
+					possible, as the use of native formats standardizes and simplifies processing by user agents.</p>
 			</section>
 		</section>
 		<section id="wp-lifecycle">
