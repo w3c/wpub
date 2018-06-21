@@ -10,11 +10,9 @@
   "datePublished": "2008-10-12",
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
 
-  "links": [
-    {"rel": "http://schema.org/CoverArt", "url": "http://ia800704.us.archive.org/9/items/LibrivoxCdCoverArt12/Flatland_1109.jpg", "fileFormat": "image/jpeg"},
-    {"rel": "alternate", "url": "https://archive.org/download/flatland_rg_librivox/Flatland_64kb_librivox.m4b", "fileFormat": "audio/x-m4b"},
-    {"rel": "alternate", "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_rg_librivox_64kb_mp3.zip", "fileFormat": "application/zip"},
-    {"rel": "alternate", "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_rg_librivox_archive.torrent", "fileFormat": "application/x-bittorrent"}
+  "resources": [
+    {"rel": "cover", "url": "http://ia800704.us.archive.org/9/items/LibrivoxCdCoverArt12/Flatland_1109.jpg", "fileFormat": "image/jpeg"},
+    {"rel": "contents", "url": "toc.html", "fileFormat": "text/html"}
   ],
 
   "readingOrder": [
