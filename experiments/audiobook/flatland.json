@@ -1,0 +1,31 @@
+{
+  "@context": ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+  "@type": "Audiobook",
+  "id": "https://librivox.org/flatland-a-romance-of-many-dimensions-by-edwin-abbott-abbott/",
+  "name": "Flatland: A Romance of Many Dimensions",
+  "author": "Edwin Abbott Abbott",
+  "readBy": "Ruth Golding",
+  "publisher": "Librivox",
+  "dateModified": "2018-06-14T19:32:18Z",
+  "datePublished": "2008-10-12",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+
+  "links": [
+    {"rel": "http://schema.org/CoverArt", "url": "http://ia800704.us.archive.org/9/items/LibrivoxCdCoverArt12/Flatland_1109.jpg", "fileFormat": "image/jpeg"},
+    {"rel": "alternate", "url": "https://archive.org/download/flatland_rg_librivox/Flatland_64kb_librivox.m4b", "fileFormat": "audio/x-m4b"},
+    {"rel": "alternate", "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_rg_librivox_64kb_mp3.zip", "fileFormat": "application/zip"},
+    {"rel": "alternate", "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_rg_librivox_archive.torrent", "fileFormat": "application/x-bittorrent"}
+  ],
+
+  "readingOrder": [
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 1, Sections 1 - 3"},
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_2_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 1, Sections 4 - 5"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_3_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 1, Sections 6 - 7"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 1, Sections 8 - 10"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_5_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 1, Sections 11 - 12"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 2, Sections 13 - 14"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 2, Sections 15 - 17"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 2, Sections 18 - 20"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_9_abbott.mp3", "fileFormat": "audio/mpeg", "name": "Part 2, Sections 21 - 22"}
+  ]
+}

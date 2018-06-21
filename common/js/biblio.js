@@ -120,5 +120,13 @@ var biblio = {
     "schema.org": {
         "title": "Schema.org",
         "href": "https://schema.org"
+    },
+    "onix": {
+        "title": "ONIX for Books",
+        "href": "http://www.editeur.org/83/Overview"
+    },
+    "bibtex": {
+         "title": "BibTeX Format Description",
+         "href" : "http://www.bibtex.org/Format/"
     }
 }

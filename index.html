@@ -1424,6 +1424,10 @@
 							</tr>
 						</tbody>
 					</table>
+					<p class=issue data-number=235></p>
+
+					<p class=ednote>If the document is reorganized the "specific" external resources (cover, accessibility report, etc) should be separated in from the general structures and list definitions.</p>
+
 
 					<p class="issue" data-number="235"></p>
 
@@ -1602,7 +1606,8 @@
 									<td>
 										<code>extraResources</code>
 									</td>
-									<td> An array of: <ul>
+									<td> An array of: 
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
@@ -2130,7 +2135,7 @@
 					<li>Extension point: process any proprietary and/or other supported members at this point in the
 						algorithm. </li>
 					<li>Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary"
-							>converting</a> [[!WEBIDL]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+							>converting</a> [[!webidl-1]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
 					</li>
 				</ol>
 
@@ -2419,6 +2424,52 @@
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a
 					future draft.</p>
 			</section>
+
+			<section id="aff-reading-state">
+	      <h4>Reading State</h4>
+
+	      <p class="issue" data-number="145"></p>
+
+			<section>	      
+				<h5>Short description</h5>
+		        <p>
+			        The user must be able to leave the Web Publication and return to it at the last position they left from. The User Agent must retain the reading position, based on the last known position of the reader in the web publication. The position should be based on the reader's position in the file, within the reading order.
+			    </p>
+			    <p>
+		        	The user agent may retain reading state if the web publication is revised.
+		        </p>
+			</section>
+			<section>  
+		       <h5>Affordances</h5>
+		        <p>
+		        	The navigation of the web publication should be defined in the <a>Default Reading Order</a> required by the Information Set.
+		        </p>
+		        <p>
+					User Agents should not have to set the reading state in the following type of resources:
+				</p>
+		        <ul>
+		        	<li>External Links (i.e. a link to google.com)</li>
+		        	<li>Data references (i.e. a linked CSV file)</li>
+		        	<li>Multimedia content (i.e. a video)</li>
+		        </ul>
+
+	        	<p>
+	        		Reading state should only apply to content documents listed as being within the bounds of the Web Publication.
+	        	</p>
+			</section>
+			<section>		
+		       <h5>Examples</h5>
+		       	<p>
+		        Example 1:<br />
+		        Sarah is reading a long article on her way to work. She arrives before she has finished, but wants to continue from the place she left off. The user agent should remember her reading state for the next time she opens the publication.
+		        </p>
+
+		       <h5>Testing</h5>
+		       	<p>
+		        If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the reader, then reopens it, they should be returned to the last known reading state.
+		        </p>
+			</section>
+	    </section>
 		</section>
 		<section id="locators" class="informative">
 			<h3>Web Publication Locators</h3>
@@ -2490,6 +2541,19 @@
 		</section>
 		<section class="appendix" id="webidl">
 			<h2>WebIDL</h2>
+
+			<section id="webidl-intro" class="informative">
+				<h3>Introduction</h3>
+
+				<p>Although a Web Publication manifest is authored as [[json-ld]], user agents process this information
+					into an internal data structure representing the infoset in order to utilize the properties. The
+					exact manner in which this processing occurs, and how the data is used internally, is user
+					agent-dependent. To ensure interoperability when exposing the infoset items, however, this appendix
+					defines a common, abstract representation of the data structures using the standard formalism of the
+					Web Interface Definition Language [[webidl-1]] which can express the expected names, datatypes, and
+					possible restrictions for each member of the infoset. (A WebIDL representation can be mapped onto
+					ECMAScript, C, or other programming languages.)</p>
+			</section>
 
 			<section id="webpublicationmanifest-dictionary">
 				<h3><dfn>WebPublicationManifest</dfn> dictionary </h3>

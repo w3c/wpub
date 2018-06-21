@@ -55,6 +55,10 @@
             "@container": "@set",
             "@id": "http://www.w3.org/ns/wpub#resources"
         },
+        "externalResources": {
+            "@container": "@set",
+            "@id": "http://www.w3.org/ns/wpub#resources"
+        },
         "tableOfContents": {
             "@id": "http://www.w3.org/ns/wpub#tableOfContents"
         },
