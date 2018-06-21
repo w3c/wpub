@@ -270,10 +270,10 @@
 					that information.</p>
 
 				<p>The <abbr title="information set">infoset</abbr> is primarily compiled from a Web Publication's
-						<a>manifest</a>, whose serialization requirements are defined in <a
-						href="#wp-manifest"></a>. Some information can be obtained outside the
-					manifest—fallback rules for properties defined in the following subsections allow a user agent to
-					compile information that the author has not provided in the manifest, for example.</p>
+						<a>manifest</a>, whose serialization requirements are defined in <a href="#wp-manifest"></a>.
+					Some information can be obtained outside the manifest—fallback rules for properties defined in the
+					following subsections allow a user agent to compile information that the author has not provided in
+					the manifest, for example.</p>
 
 				<p> A <a>manifest</a> is a serialization of a <a>Web Publication's</a>
 					<abbr title="information set"><a>infoset</a></abbr>. The manifest is serialized using the
@@ -417,6 +417,121 @@
 		<section id="wp-properties">
 			<h2>Web Publication Properties</h2>
 
+			<section id="wp-properties-intro">
+				<h3>Introduction</h3>
+
+				<p>Desciptive Properties in the Web Publication Manifest are based, wherever possible, on the terms
+					defined by <a href="https://schema.org">Schema.org</a>&#160;[[!schema.org]] (including <a
+						href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means that
+					the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting
+					their syntax and semantics). </p>
+
+				<p class="note">Schema.org includes a large number of terms that, though relevant for publishing, are
+					not mentioned in this Recommendation. Web Publication authors may use any of those; this document
+					defines only the minimal set of infoset items, and their mapping to Schema.org when appropriate. </p>
+
+				<p class="ednote">There are discussion on whether a best practices document would be created, referring
+					to more schema.org terms. If so, it should be linked from here. </p>
+
+				<p><a href="#wp-structural-properties">Structural Properties</a> in the Web Publication Manifest use
+					terms that refer to one or more external resources (images, script files, separate metadata files,
+					etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore defined
+					separately by this specification.</p>
+
+				<p>Values of structural properties are usually links to external resources, or an array thereof. Such a
+					link may be expressed in one of two ways:</p>
+
+				<ol>
+					<li>a string encoding the (absolute or relative) URL of the resources; or</li>
+					<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"
+								><code>StructuredValue</code></a> that can be used to express, beyond the URL, the media
+						type and other characteristics of the target resource.</li>
+				</ol>
+
+				<pre class="example" title="Expressing external links, either as strings or as objects">
+	{
+        &#8230;
+        "resources" : [
+            "datatypes.svg",
+            {
+                "@type"      : "StructuredValue",
+                "url"        : "test-utf8.csv",
+                "fileFormat" : "text/csv"
+            }
+		]
+	}
+</pre>
+
+				<p class="note"> There will be continuous contacts with Schema.org to see whether some of the structural
+					property terms should not be included in the core Schema.org hierarchy, or one of its extensions. </p>
+
+				<p>Structural infoset properties typically refer to external resources via a URL. This URL-s may refer
+					to resources playing different roles (e.g., cover or privacy policy), may need some additional
+					metadata for, e.g., accessibility purposes. </p>
+
+				<p id="publication-link-def"> The structural properties are expressed via JSON-LD terms that are
+					typically publication specific (i.e., defined through the JSON-LD context file defined for Web
+					Publications, see <a href="#wpub-context"></a>). This context also defines a general type used for
+					external links, called <code>PublicationLink</code>, that contains that following properties (note
+					that most of the properties are ): </p>
+
+				<table class="zebra">
+					<thead>
+						<tr>
+							<th> Term name </th>
+							<th> Short description </th>
+							<th> Required/Optional </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<a href="http://schema.org/name"><code>url</code></a>
+							</td>
+							<td> URL&#160;[[url]] of the resource. </td>
+							<td> Required. </td>
+						</tr>
+						<tr>
+							<td>
+								<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
+							</td>
+							<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
+									<code>application/zip</code>. </td>
+							<td> Optional. </td>
+						</tr>
+						<tr>
+							<td>
+								<a href="http://schema.org/name"><code>name</code></a>
+							</td>
+							<td> Name of the item. </td>
+							<td> Optional. </td>
+						</tr>
+						<tr>
+							<td>
+								<a href="http://schema.org/description"><code>description</code></a>
+							</td>
+							<td> Description of the item. </td>
+							<td> Optional. </td>
+						</tr>
+						<tr>
+							<td>
+								<code>rel</code>
+							</td>
+							<td>One or more relations; the values are either the relevant relationship terms of the IANA
+								link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable
+								link registry item exists.</td>
+							<td>Optional.</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<p class="issue" data-number="235"></p>
+
+				<p class="ednote">If the document is reorganized the "specific" external resources (cover, accessibility
+					report, etc) should be separated in from the general structures and list definitions.</p>
+
+			</section>
+
 			<section id="wp-properties-req">
 				<h3>Requirements</h3>
 
@@ -436,41 +551,31 @@
 					are as follows:</p>
 
 				<dl>
-					<dt>Descriptive Properties</dt>
+					<dt>REQUIRED:</dt>
 					<dd>
-						<p>REQUIRED: <a href="#wp-address">address</a></p>
-						<div>
-							<span>RECOMMENDED:</span>
-							<ul class="flat">
-								<li><a href="#wp-a11y">accessibility report</a></li>
-								<li><a href="#wp-language-and-dir">base direction</a></li>
-								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
-								<li><a href="#wp-creator">creator</a></li>
-								<li><a href="#wp-language-and-dir">language</a></li>
-								<li><a href="#wp-mod-date">last modification date</a></li>
-								<li><a href="#wp-pub-date">publication date</a></li>
-								<li><a href="#wp-reading-progression">reading progression direction</a></li>
-								<li><a href="#wp-title">title</a></li>
-							</ul>
-						</div>
+						<ul>
+							<li><a href="#wp-address">address</a></li>
+							<li><a href="#wp-default-reading-order">default reading order</a></li>
+							<li><a href="#wp-resource-list">resource list</a></li>
+						</ul>
 					</dd>
-					<dt>Structural Properties</dt>
+					<dt>RECOMMENDED:</dt>
 					<dd>
-						<div>
-							<span>REQUIRED: </span>
-							<ul class="flat">
-								<li><a href="#wp-default-reading-order">default reading order</a></li>
-								<li><a href="#wp-resource-list">resource list</a></li>
-							</ul>
-						</div>
-						<div>
-							<span>RECOMMENDED:</span>
-							<ul>
-								<li><a href="#wp-cover">cover</a></li>
-								<li><a href="#wp-privacy">privacy policy</a></li>
-								<li><a href="#wp-table-of-contents">table of contents</a></li>
-							</ul>
-						</div>
+						<ul>
+							<li><a href="#wp-a11y">accessibility report</a></li>
+							<li><a href="#wp-language-and-dir">base direction</a></li>
+							<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
+							<li><a href="#wp-cover">cover</a></li>
+							<li><a href="#wp-creator">creator</a></li>
+							<li><a href="#wp-extra-resources">extra resources</a></li>
+							<li><a href="#wp-language-and-dir">language</a></li>
+							<li><a href="#wp-mod-date">last modification date</a></li>
+							<li><a href="#wp-pub-date">publication date</a></li>
+							<li><a href="#wp-privacy">privacy policy</a></li>
+							<li><a href="#wp-reading-progression">reading progression direction</a></li>
+							<li><a href="#wp-table-of-contents">table of contents</a></li>
+							<li><a href="#wp-title">title</a></li>
+						</ul>
 					</dd>
 				</dl>
 
@@ -481,24 +586,6 @@
 
 			<section id="wp-descriptive-properties">
 				<h3>Descriptive Properties</h3>
-
-				<section id="wp-descriptive-properties-intro">
-					<h4>Introduction</h4>
-
-					<p> Desciptive Properties in the Web Publication Manifest are based, wherever possible, on the terms
-						defined by <a href="https://schema.org">Schema.org</a>&#160;[[!schema.org]] (including <a
-							href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means
-						that the descriptive infoset properties are mapped to one or several Schema.org properties
-						(inheriting their syntax and semantics). </p>
-
-					<p class="note"> Schema.org includes a large number of terms that, though relevant for publishing,
-						are not mentioned in this Recommendation. Web Publication authors may use any of those; this
-						document defines only the minimal set of infoset items, and their mapping to Schema.org when
-						appropriate. </p>
-
-					<p class="ednote"> There are discussion on whether a best practices document would be created,
-						referring to more schema.org terms. If so, it should be linked from here. </p>
-				</section>
 
 				<section id="wp-a11y">
 					<h4>Accessibility</h4>
@@ -1064,8 +1151,8 @@
 }
 </pre>
 							<p>The value of the language tag must be set to the language code as defined in [[!bcp47]].
-								If not set, the default value is the <a href="#wp-language-and-dir-manifest">default value
-									of the manifest</a>.</p>
+								If not set, the default value is the <a href="#wp-language-and-dir-manifest">default
+									value of the manifest</a>.</p>
 
 							<p class="issue" data-number="219"></p>
 						</section>
@@ -1321,112 +1408,8 @@
 				</section>
 			</section>
 
-			<section id="wp-structural-properties">
-				<h3>Structural Properties</h3>
-
-				<section id="wp-structural-properties-intro">
-					<h4>Introduction</h4>
-
-					<p>
-						<a href="#wp-structural-properties">Structural Properties</a> in the Web Publication Manifest
-						use terms that refer to one or more external resources (images, script files, separate metadata
-						files, etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore
-						defined separately by this specification. </p>
-
-					<p> Values of structural properties are usually links to external resources, or an array thereof.
-						Such a link may be expressed in one of two ways: </p>
-
-					<ol>
-						<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-						<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"
-									><code>StructuredValue</code></a> that can be used to express, beyond the URL, the
-							media type and other characteristics of the target resource.</li>
-					</ol>
-
-					<pre class="example" title="Expressing external links, either as strings or as objects">
-	{
-        &#8230;
-        "resources" : [
-            "datatypes.svg",
-            {
-                "@type"      : "StructuredValue",
-                "url"        : "test-utf8.csv",
-                "fileFormat" : "text/csv"
-            }
-		]
-	}
-</pre>
-
-					<p class="note"> There will be continuous contacts with Schema.org to see whether some of the
-						structural property terms should not be included in the core Schema.org hierarchy, or one of its
-						extensions. </p>
-
-					<p>Structural infoset properties typically refer to external resources via a URL. This URL-s may
-						refer to resources playing different roles (e.g., cover or privacy policy), may need some
-						additional metadata for, e.g., accessibility purposes. </p>
-
-					<p id="publication-link-def"> The structural properties are expressed via JSON-LD terms that are
-						typically publication specific (i.e., defined through the JSON-LD context file defined for Web
-						Publications, see <a href="#wpub-context"></a>). This context also defines a general type used
-						for external links, called <code>PublicationLink</code>, that contains that following properties
-						(note that most of the properties are ): </p>
-
-					<table class="zebra">
-						<thead>
-							<tr>
-								<th> Term name </th>
-								<th> Short description </th>
-								<th> Required/Optional </th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<a href="http://schema.org/name"><code>url</code></a>
-								</td>
-								<td> URL&#160;[[url]] of the resource. </td>
-								<td> Required. </td>
-							</tr>
-							<tr>
-								<td>
-									<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
-								</td>
-								<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
-										<code>application/zip</code>. </td>
-								<td> Optional. </td>
-							</tr>
-							<tr>
-								<td>
-									<a href="http://schema.org/name"><code>name</code></a>
-								</td>
-								<td> Name of the item. </td>
-								<td> Optional. </td>
-							</tr>
-							<tr>
-								<td>
-									<a href="http://schema.org/description"><code>description</code></a>
-								</td>
-								<td> Description of the item. </td>
-								<td> Optional. </td>
-							</tr>
-							<tr>
-								<td>
-									<code>rel</code>
-								</td>
-								<td>One or more relations; the values are either the relevant relationship terms of the
-									IANA link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no
-									suitable link registry item exists.</td>
-								<td>Optional.</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<p class="issue" data-number="235"></p>
-
-					<p class="ednote">If the document is reorganized the "specific" external resources (cover,
-						accessibility report, etc) should be separated in from the general structures and list
-						definitions.</p>
-				</section>
+			<section id="wp-informative-properties">
+				<h3>Informative Properties</h3>
 
 				<section id="wp-a11y-report">
 					<h4>Accessibility Report</h4>
@@ -1492,6 +1475,67 @@
 					</section>
 				</section>
 
+				<section id="wp-privacy">
+					<h4>Privacy Policy</h4>
+
+					<p>Users often have the legal right to know and control what information is collected about them,
+						how such information is stored and for how long, whether it is personally identifiable, and how
+						it can be expunged. Including a statement that addresses such privacy concerns is consequently
+						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
+						such a declaration increases the trust users have in the content.</p>
+
+					<section id="wp-privacy-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>To address this concern, a link to a privacy policy can be included in the <abbr
+								title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy
+							be included as a resource of the Web Publication.</p>
+
+						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
+								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
+
+						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
+							Publications.</p>
+
+						<p class="issue" data-number="203"></p>
+					</section>
+
+					<section id="wp-privacy-manifest">
+						<h4>Manifest Expression</h4>
+
+						<p>As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be
+							included as a resource of the Web Publication. When present, link to such resource MUST be
+							expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object.
+							The <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code>
+							(IANA) identifier.</p>
+
+						<pre class="example" title="Privacy policy expressed as an external link">
+{
+    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@type"      : "CreativeWork",
+    &#8230;
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    &#8230;
+    "externalResources"  : [{
+        "@type"      : "PublicationLink",
+        "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+        "fileFormat" : "text/html",
+        "rel"        : "privacy-policy"
+    },{
+            &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					</section>
+				</section>
+			</section>
+
+			<section id="wp-structural-properties">
+				<h3>Structural Properties</h3>
+
 				<section id="wp-cover">
 					<h4>Cover</h4>
 
@@ -1550,35 +1594,33 @@
 					</section>
 				</section>
 
-				<section id="wp-extra-list">
-					<h4>List of extra resources</h4>
+				<section id="wp-table-of-contents">
+					<h4>Table of Contents</h4>
 
-					<p>The <dfn>list of extra resources</dfn> enumerates all <a href="#wp-resources">resources</a> that
-						are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within
-						its bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource
-						list</a>) but are, rather, external to the Web Publication. </p>
+					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
+						outline of the major sections of the Web Publication.</p>
 
-					<section id="wp-extra-list-infoset">
+					<section id="wp-table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The completeness of the resource list will affect the usability of the Web Publication in
-							certain scenarios (e.g., the ability to access privacy policy information). For this reason,
-							it is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
-							external resources beyond those listed in the <a>default reading order</a> or <a>resource
-								list</a>.</p>
+						<p>There are no requirements on the completeness of the table of contents, except that, when
+							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
-						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
-							third-party scripts that reference resources from deep within their source), but a user
-							agent SHOULD still be able to render a Web Publication even if some of these resources are
-							not identified as belonging to the Web Publication (e.g., when it is taken offline without
-							them).</p>
+						<p>The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD
+							provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most
+							likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value
+							set to <code>doc-toc</code>.</p>
+
+						<p class="issue">This question arises only if the table of contents is accepted: can a table of
+							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
+							the <a>default reading order</a>?</p>
 					</section>
 
-					<section id="wp-extra-list-manifest">
-						<h5>Manifest Expression</h5>
+					<section id="wp-table-of-contents-manifest">
+						<h5>Manifest Expresion</h5>
 
-						<p>If present in the Web Publication Manifest, the list of extra resources MUST be mapped on the
-								<code>extraResources</code> term, defined specifically for Web Publications. </p>
+						<p>If present in the Web Publication Manifest this item MUST be mapped on the
+								<code>tableOfContents</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
@@ -1590,18 +1632,46 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>extraResources</code>
+										<code>tableOfContents</code>
 									</td>
-									<td> An array of: <ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>not significant</em>. </td>
+									<td> A (relative or absolute) URL&#160;[[url]] </td>
 								</tr>
 							</tbody>
 						</table>
+						<pre class="example" title="Reference to a table of content element, in the same file that contains the manifest is">
+&lt;head&gt;
+    &#8230;
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        "@type"           : "CreativeWork",
+        &#8230;
+        "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
+        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        "tableOfContents" : "#toc"
+        &#8230;
+    }
+    &lt;/script&gt;
+    &#8230;
+&lt;/head&gt;
+&lt;body&gt;
+    &#8230;
+    &lt;section id="toc" role="doc-toc"&gt;
+        &#8230;
+    &lt;/section&gt;
+    &#8230;
+&lt;/body&gt;
+</pre>
+						<p class="issue">The term <code>tableOfContents</code> has not been approved by the Working
+							Group yet; it is currently a placeholder. </p>
+
+						<p class="issue" data-number="234"></p>
 					</section>
 				</section>
+			</section>
+
+			<section id="wp-categorization-properties">
+				<h3>Resource Categorization Properties</h3>
 
 				<section id="wp-default-reading-order">
 					<h4>Default Reading Order</h4>
@@ -1691,63 +1761,6 @@
     },{
         &#8230;
     }]
-}
-</pre>
-					</section>
-				</section>
-
-				<section id="wp-privacy">
-					<h4>Privacy Policy</h4>
-
-					<p>Users often have the legal right to know and control what information is collected about them,
-						how such information is stored and for how long, whether it is personally identifiable, and how
-						it can be expunged. Including a statement that addresses such privacy concerns is consequently
-						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
-						such a declaration increases the trust users have in the content.</p>
-
-					<section id="wp-privacy-infoset">
-						<h5>Infoset Requirements</h5>
-
-						<p>To address this concern, a link to a privacy policy can be included in the <abbr
-								title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy
-							be included as a resource of the Web Publication.</p>
-
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
-
-						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
-							Publications.</p>
-
-						<p class="issue" data-number="203"></p>
-					</section>
-
-					<section id="wp-privacy-manifest">
-						<h4>Manifest Expression</h4>
-
-						<p>As described in <a href="#wp-privacy"></a>, it is RECOMMENDED that the privacy policy be
-							included as a resource of the Web Publication. When present, link to such resource MUST be
-							expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object.
-							The <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code>
-							(IANA) identifier.</p>
-
-						<pre class="example" title="Privacy policy expressed as an external link">
-{
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-    "@type"      : "CreativeWork",
-    &#8230;
-    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
-    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    &#8230;
-    "externalResources"  : [{
-        "@type"      : "PublicationLink",
-        "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
-        "fileFormat" : "text/html",
-        "rel"        : "privacy-policy"
-    },{
-            &#8230;
-    }],
-    &#8230;
 }
 </pre>
 					</section>
@@ -1856,33 +1869,35 @@
 					</section>
 				</section>
 
-				<section id="wp-table-of-contents">
-					<h4>Table of Contents</h4>
+				<section id="wp-extra-list">
+					<h4>List of extra resources</h4>
 
-					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
-						outline of the major sections of the Web Publication.</p>
+					<p>The <dfn>list of extra resources</dfn> enumerates all <a href="#wp-resources">resources</a> that
+						are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within
+						its bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource
+						list</a>) but are, rather, external to the Web Publication. </p>
 
-					<section id="wp-table-of-contents-infoset">
+					<section id="wp-extra-list-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>There are no requirements on the completeness of the table of contents, except that, when
-							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
+						<p>The completeness of the resource list will affect the usability of the Web Publication in
+							certain scenarios (e.g., the ability to access privacy policy information). For this reason,
+							it is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
+							external resources beyond those listed in the <a>default reading order</a> or <a>resource
+								list</a>.</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD
-							provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most
-							likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value
-							set to <code>doc-toc</code>.</p>
-
-						<p class="issue">This question arises only if the table of contents is accepted: can a table of
-							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
-							the <a>default reading order</a>?</p>
+						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
+							third-party scripts that reference resources from deep within their source), but a user
+							agent SHOULD still be able to render a Web Publication even if some of these resources are
+							not identified as belonging to the Web Publication (e.g., when it is taken offline without
+							them).</p>
 					</section>
 
-					<section id="wp-table-of-contents-manifest">
-						<h5>Manifest Expresion</h5>
+					<section id="wp-extra-list-manifest">
+						<h5>Manifest Expression</h5>
 
-						<p>If present in the Web Publication Manifest this item MUST be mapped on the
-								<code>tableOfContents</code> term, defined specifically for Web Publications. </p>
+						<p>If present in the Web Publication Manifest, the list of extra resources MUST be mapped on the
+								<code>extraResources</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
@@ -1894,40 +1909,16 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>tableOfContents</code>
+										<code>extraResources</code>
 									</td>
-									<td> A (relative or absolute) URL&#160;[[url]] </td>
+									<td> An array of: <ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"
+														><code>PublicationLink</code></a> object</li>
+										</ul> The order in the array is <em>not significant</em>. </td>
 								</tr>
 							</tbody>
 						</table>
-						<pre class="example" title="Reference to a table of content element, in the same file that contains the manifest is">
-&lt;head&gt;
-    &#8230;
-    &lt;script type="application/ld+json"&gt;
-    {
-        "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
-        "@type"           : "CreativeWork",
-        &#8230;
-        "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
-        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-        "tableOfContents" : "#toc"
-        &#8230;
-    }
-    &lt;/script&gt;
-    &#8230;
-&lt;/head&gt;
-&lt;body&gt;
-    &#8230;
-    &lt;section id="toc" role="doc-toc"&gt;
-        &#8230;
-    &lt;/section&gt;
-    &#8230;
-&lt;/body&gt;
-</pre>
-						<p class="issue">The term <code>tableOfContents</code> has not been approved by the Working
-							Group yet; it is currently a placeholder. </p>
-
-						<p class="issue" data-number="234"></p>
 					</section>
 				</section>
 			</section>
@@ -2158,8 +2149,8 @@
 				</ol>
 
 				<p><dfn>Publication mode</dfn> is a display mode implemented by the user agent that follows the
-					conventions listed in <a href="#feature-presentation">presentation</a> and <a href="#feature-navigation"
-						>navigation</a>.</p>
+					conventions listed in <a href="#feature-presentation">presentation</a> and <a
+						href="#feature-navigation">navigation</a>.</p>
 			</section>
 
 			<section id="feature-presentation">
@@ -2374,8 +2365,8 @@
 								href="#wp-table-of-contents"></a>
 						</p>
 						<p> The table of content is referred to in the Web Publication Manifest (see <a
-								href="#wp-table-of-contents-manifest"></a>) and is expressed using and HTML element; see <a
-								href="#wp-table-of-contents"></a> for further details. </p>
+								href="#wp-table-of-contents-manifest"></a>) and is expressed using and HTML element; see
+								<a href="#wp-table-of-contents"></a> for further details. </p>
 						<p> User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
 							explicitly specified to create a table of contents. </p>
 					</section>
