@@ -239,7 +239,7 @@
 					criteria:</p>
 
 				<ul>
-					<li>it has a <a>manifest</a> that conforms to <a href="#manifest-req"></a>;</li>
+					<li>it has a <a>manifest</a> that conforms to <a href="#wp-properties-req"></a>;</li>
 					<li>it adheres to the construction requirements defined in <a href="#wp-construction"></a>.</li>
 				</ul>
 
@@ -247,12 +247,12 @@
 					criteria:</p>
 
 				<ul>
-					<li>it is capable of generating a conforming <a href="#infoset"><abbr title="information set"
+					<li>it is capable of generating a conforming <a href="#wp-properties"><abbr title="information set"
 								>infoset</abbr></a> for a Web Publication.</li>
 				</ul>
 			</section>
 		</section>
-		<section id="wp-construct">
+		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
 
 			<section id="wp-intro" class="informative">
@@ -271,7 +271,7 @@
 
 				<p>The <abbr title="information set">infoset</abbr> is primarily compiled from a Web Publication's
 						<a>manifest</a>, whose serialization requirements are defined in <a
-						href="#manifest-serialization"></a>. Some information can be obtained outside the
+						href="#wp-manifest"></a>. Some information can be obtained outside the
 					manifest—fallback rules for properties defined in the following subsections allow a user agent to
 					compile information that the author has not provided in the manifest, for example.</p>
 
@@ -325,7 +325,7 @@
 </pre>
 
 					<p> In some cases, this structure may have to be extended by additional, local information, see the
-							<a href="#manifest-language-and-dir"></a>. </p>
+							<a href="#wp-language-and-dir-manifest"></a>. </p>
 				</section>
 				<section>
 					<h4>Publication Types</h4>
@@ -388,7 +388,7 @@
 				</ul>
 
 				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web
-					Publication Manifest expressed as part of an HTML resource (see <a href="#manifest-intro"></a>). </p>
+					Publication Manifest expressed as part of an HTML resource (see <a href="#wp-intro"></a>). </p>
 
 				<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
@@ -445,7 +445,7 @@
 								<li><a href="#wp-a11y">accessibility report</a></li>
 								<li><a href="#wp-language-and-dir">base direction</a></li>
 								<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
-								<li><a href="#wp-creators">creator</a></li>
+								<li><a href="#wp-creator">creator</a></li>
 								<li><a href="#wp-language-and-dir">language</a></li>
 								<li><a href="#wp-mod-date">last modification date</a></li>
 								<li><a href="#wp-pub-date">publication date</a></li>
@@ -485,12 +485,11 @@
 				<section id="wp-descriptive-properties-intro">
 					<h4>Introduction</h4>
 
-					<p>
-						<a href="infoset-meta">Desciptive Properties</a> in the Web Publication Manifest are based,
-						wherever possible, on the terms defined by <a href="https://schema.org"
-						>Schema.org</a>&#160;[[!schema.org]] (including <a href="http://schema.org/docs/schemas.html"
-							>hosted extensions</a> of Schema.org). This means that the descriptive infoset properties
-						are mapped to one or several Schema.org properties (inheriting their syntax and semantics). </p>
+					<p> Desciptive Properties in the Web Publication Manifest are based, wherever possible, on the terms
+						defined by <a href="https://schema.org">Schema.org</a>&#160;[[!schema.org]] (including <a
+							href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means
+						that the descriptive infoset properties are mapped to one or several Schema.org properties
+						(inheriting their syntax and semantics). </p>
 
 					<p class="note"> Schema.org includes a large number of terms that, though relevant for publishing,
 						are not mentioned in this Recommendation. Web Publication authors may use any of those; this
@@ -591,7 +590,7 @@
 						</table>
 
 						<p>Note that the author MAY also provide a reference to a more detailed <a
-								href="#wp-a11y-report-wpm">Accessibility Report</a>, beyond the accessibility
+								href="#wp-a11y-report-manifest">Accessibility Report</a>, beyond the accessibility
 							information expressed by these terms.</p>
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
@@ -1068,7 +1067,7 @@
 }
 </pre>
 							<p>The value of the language tag must be set to the language code as defined in [[!bcp47]].
-								If not set, the default value is the <a href="#manifest-language-and-dir">default value
+								If not set, the default value is the <a href="#wp-language-and-dir-manifest">default value
 									of the manifest</a>.</p>
 
 							<p class="issue" data-number="219"></p>
@@ -1332,9 +1331,9 @@
 					<h4>Introduction</h4>
 
 					<p>
-						<a href="infoset-structure">Structural Properties</a> in the Web Publication Manifest use terms
-						that refer to one or more external resources (images, script files, separate metadata files,
-						etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore
+						<a href="#wp-structural-properties">Structural Properties</a> in the Web Publication Manifest
+						use terms that refer to one or more external resources (images, script files, separate metadata
+						files, etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore
 						defined separately by this specification. </p>
 
 					<p> Values of structural properties are usually links to external resources, or an array thereof.
@@ -1465,11 +1464,12 @@
 						<p>As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report
 							providing information about the suitability of a <a>Web Publication</a> for consumption by
 							users with varying preferred reading modalities. This report may be complementary to the
-							information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"
-							></a>. This report is accessed via an external resource (e.g., and HTML file). When present,
-							link to such resource MUST be expressed using a <a href="#publication-link-def"
-									><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a
-								href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+							information expressed by the descriptive properties as described in <a
+								href="#wp-a11y-manifest"></a>. This report is accessed via an external resource (e.g.,
+							and HTML file). When present, link to such resource MUST be expressed using a <a
+								href="#publication-link-def"><code>PublicationLink</code></a> object. The
+								<code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the
 								<code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.</p>
 
 						<p class="note">The Working Group will attempt to define the <code>accessibility-report</code>
@@ -1509,7 +1509,7 @@
 
 						<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
 							Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a>
-							and <a href="#wp-creators">creators</a> as text alternatives for such interfaces.</p>
+							and <a href="#wp-creator">creators</a> as text alternatives for such interfaces.</p>
 
 						<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
 							resolutions for different device screens.</p>
@@ -2153,7 +2153,7 @@
 
 			<p class="issue" data-number="143"></p>
 
-			<section id="aff-publication-mode">
+			<section id="feature-publication-mode">
 				<h3>Switch to publication mode</h3>
 
 				<p>When a user agent <a>obtains a manifest</a> it SHOULD provide the option to switch the display to
@@ -2169,11 +2169,11 @@
 				</ol>
 
 				<p><dfn>Publication mode</dfn> is a display mode implemented by the user agent that follows the
-					conventions listed in <a href="#aff-presentation">presentation</a> and <a href="#navigation"
+					conventions listed in <a href="#feature-presentation">presentation</a> and <a href="#feature-navigation"
 						>navigation</a>.</p>
 			</section>
 
-			<section id="aff-presentation">
+			<section id="feature-presentation">
 				<h3>Presentation</h3>
 
 				<section id="layout">
@@ -2225,7 +2225,7 @@
 
 				</section>
 
-				<section id="aff-user-settings">
+				<section id="feature-user-settings">
 					<h4>User Settings</h4>
 
 					<p>When a user agent renders a <a>Web Publication</a>, it SHOULD provide user settings to customize
@@ -2277,7 +2277,7 @@
 					<p class="issue" data-number="137"></p>
 				</section>
 
-				<section id="aff-pagination">
+				<section id="feature-pagination">
 					<h4>Paginated Layout</h4>
 
 					<p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each
@@ -2321,12 +2321,12 @@
 				</section>
 			</section>
 
-			<section id="aff-nav">
+			<section id="feature-navigation">
 				<h3>Navigation</h3>
 
 				<p class="issue" data-number="86"></p>
 
-				<section id="aff-reading-order">
+				<section id="feature-reading-order">
 					<h4>Reading Order</h4>
 
 					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users
@@ -2348,7 +2348,7 @@
 					<p class="issue" data-number="38"></p>
 				</section>
 
-				<section id="aff-progression">
+				<section id="feature-progression">
 					<h4>Progression</h4>
 
 					<p>While reading a <a>Web Publication</a>, the user follows a natural progression within a resource
@@ -2368,7 +2368,7 @@
 					<p class="issue" data-number="145"></p>
 				</section>
 
-				<section id="aff-toc">
+				<section id="feature-toc">
 					<h4>Table of Contents</h4>
 					<p class="issue" data-number="146"></p>
 
@@ -2385,7 +2385,7 @@
 								href="#wp-table-of-contents"></a>
 						</p>
 						<p> The table of content is referred to in the Web Publication Manifest (see <a
-								href="#wp-table-of-contents-pwm"></a>) and is expressed using and HTML element; see <a
+								href="#wp-table-of-contents-manifest"></a>) and is expressed using and HTML element; see <a
 								href="#wp-table-of-contents"></a> for further details. </p>
 						<p> User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
 							explicitly specified to create a table of contents. </p>
@@ -2407,20 +2407,20 @@
 				</section>
 			</section>
 
-			<section id="aff-offline-access">
+			<section id="feature-offline-access">
 				<h3>Offline Access</h3>
 
 				<p class="issue" data-number="141"></p>
 			</section>
 
-			<section id="aff-search">
+			<section id="feature-search">
 				<h3>Search</h3>
 
 				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a
 					future draft.</p>
 			</section>
 
-			<section id="aff-reading-state">
+			<section id="feature-reading-state">
 				<h4>Reading State</h4>
 
 				<p class="issue" data-number="145"></p>
@@ -2574,7 +2574,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the default value <a href="#wp-language">language</a>.</dd>
+					<dd>Contains the default value <a href="#wp-language-and-dir">language</a>.</dd>
 					<dt>
 						<dfn>direction</dfn>
 					</dt>
@@ -2594,7 +2594,7 @@
 					<dt>
 						<dfn>authors</dfn>
 					</dt>
-					<dd>Contains one or more <a href="#wp-creators">creators</a>.</dd>
+					<dd>Contains one or more <a href="#wp-creator">creators</a>.</dd>
 					<dt>
 						<dfn>dateModified</dfn>
 					</dt>
@@ -2625,7 +2625,7 @@
 			<section id="contributor-idl">
 				<h3><code>authors</code> member </h3>
 
-				<p class="ednote">The <a href="#wp-creators">current infoset for creators</a> is not fully defined; this
+				<p class="ednote">The <a href="#wp-creator">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
 
 				<pre class="idl">
@@ -2682,7 +2682,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the <a href="#wp-language">language</a>.</dd>
+					<dd>Contains the <a href="#wp-language-and-dir">language</a>.</dd>
 					<dt>
 						<dfn>dir</dfn>
 					</dt>
