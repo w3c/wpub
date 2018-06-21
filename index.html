@@ -1364,11 +1364,11 @@
 					<p class="note"> There will be continuous contacts with Schema.org to see whether some of the
 						structural property terms should not be included in the core Schema.org hierarchy, or one of its
 						extensions. </p>
-					
+
 					<p>Structural infoset properties typically refer to external resources via a URL. This URL-s may
 						refer to resources playing different roles (e.g., cover or privacy policy), may need some
 						additional metadata for, e.g., accessibility purposes. </p>
-					
+
 					<p id="publication-link-def"> The structural properties are expressed via JSON-LD terms that are
 						typically publication specific (i.e., defined through the JSON-LD context file defined for Web
 						Publications, see <a href="#wpub-context"></a>). This context also defines a general type used
@@ -1424,10 +1424,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<p class=issue data-number=235></p>
-
-					<p class=ednote>If the document is reorganized the "specific" external resources (cover, accessibility report, etc) should be separated in from the general structures and list definitions.</p>
-
 
 					<p class="issue" data-number="235"></p>
 
@@ -1438,47 +1434,47 @@
 
 				<section id="wp-a11y-report">
 					<h4>Accessibility Report</h4>
-					
+
 					<p>An accessibility report provides information about the suitability of a <a>Web Publication</a>
 						for consumption by users with varying preferred reading modalities. These reports typically
 						identify the result of an evaluation against established accessibility criteria, such as those
 						provided in [[WCAG20]], and are an important source of information in determining the usability
 						of a Web Publication.</p>
-					
+
 					<section id="wp-a11y-report-infoset">
 						<h5>Infoset Requirements</h5>
-						
+
 						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an
 							accessibility report when one is available for a Web Publication. It is RECOMMENDED that the
 							report be included as a resource of the Web Publication.</p>
-						
+
 						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
 							such as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these
 							reports with machine-processable metadata, such as provided in Schema.org [[schema.org]], is
 							also RECOMMENDED.</p>
-						
+
 						<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format
 							is used to externalize publication metadata (e.g., to ensure availability for search).
 							Depending how this externalizing is done, adding machine-processable accessibility metadata
 							to such a record could take precedence over, or complement, the accessibility record.</p>
 					</section>
-					
+
 					<section id="wp-a11y-report-manifest">
 						<h5>Manifest Expression</h5>
-						
+
 						<p>As described in <a href="#wp-a11y"></a> the authors MAY provide an accessibility report
 							providing information about the suitability of a <a>Web Publication</a> for consumption by
 							users with varying preferred reading modalities. This report may be complementary to the
 							information expressed by the descriptive properties as described in <a href="#wp-a11y-wpm"
-								></a>. This report is accessed via an external resource (e.g., and HTML file). When present,
+							></a>. This report is accessed via an external resource (e.g., and HTML file). When present,
 							link to such resource MUST be expressed using a <a href="#publication-link-def"
-								><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a
-									href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
-							<code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.</p>
-						
+									><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a
+								href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+								<code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.</p>
+
 						<p class="note">The Working Group will attempt to define the <code>accessibility-report</code>
 							term by IANA, to avoid using a URL.</p>
-						
+
 						<pre class="example" title="Link to an accessibility report">
 {
     "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
@@ -1498,7 +1494,7 @@
 </pre>
 					</section>
 				</section>
-				
+
 				<section id="wp-cover">
 					<h4>Cover</h4>
 
@@ -1606,8 +1602,7 @@
 									<td>
 										<code>extraResources</code>
 									</td>
-									<td> An array of: 
-										<ul>
+									<td> An array of: <ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
@@ -1877,17 +1872,17 @@
 
 					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
 						outline of the major sections of the Web Publication.</p>
-					
+
 					<section id="wp-table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>There are no requirements on the completeness of the table of contents, except that, when
 							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, the manifest
-							SHOULD provide a link to an HTML element in one of the <a href="#wp-resources">resources</a>
-							(most likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute
-							value set to <code>doc-toc</code>.</p>
+						<p>The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD
+							provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most
+							likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value
+							set to <code>doc-toc</code>.</p>
 
 						<p class="issue">This question arises only if the table of contents is accepted: can a table of
 							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
@@ -2426,50 +2421,43 @@
 			</section>
 
 			<section id="aff-reading-state">
-	      <h4>Reading State</h4>
+				<h4>Reading State</h4>
 
-	      <p class="issue" data-number="145"></p>
+				<p class="issue" data-number="145"></p>
 
-			<section>	      
-				<h5>Short description</h5>
-		        <p>
-			        The user must be able to leave the Web Publication and return to it at the last position they left from. The User Agent must retain the reading position, based on the last known position of the reader in the web publication. The position should be based on the reader's position in the file, within the reading order.
-			    </p>
-			    <p>
-		        	The user agent may retain reading state if the web publication is revised.
-		        </p>
+				<section>
+					<h5>Short description</h5>
+					<p> The user must be able to leave the Web Publication and return to it at the last position they
+						left from. The User Agent must retain the reading position, based on the last known position of
+						the reader in the web publication. The position should be based on the reader's position in the
+						file, within the reading order. </p>
+					<p> The user agent may retain reading state if the web publication is revised. </p>
+				</section>
+				<section>
+					<h5>Affordances</h5>
+					<p> The navigation of the web publication should be defined in the <a>Default Reading Order</a>
+						required by the Information Set. </p>
+					<p> User Agents should not have to set the reading state in the following type of resources: </p>
+					<ul>
+						<li>External Links (i.e. a link to google.com)</li>
+						<li>Data references (i.e. a linked CSV file)</li>
+						<li>Multimedia content (i.e. a video)</li>
+					</ul>
+
+					<p> Reading state should only apply to content documents listed as being within the bounds of the
+						Web Publication. </p>
+				</section>
+				<section>
+					<h5>Examples</h5>
+					<p> Example 1:<br /> Sarah is reading a long article on her way to work. She arrives before she has
+						finished, but wants to continue from the place she left off. The user agent should remember her
+						reading state for the next time she opens the publication. </p>
+
+					<h5>Testing</h5>
+					<p> If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the
+						reader, then reopens it, they should be returned to the last known reading state. </p>
+				</section>
 			</section>
-			<section>  
-		       <h5>Affordances</h5>
-		        <p>
-		        	The navigation of the web publication should be defined in the <a>Default Reading Order</a> required by the Information Set.
-		        </p>
-		        <p>
-					User Agents should not have to set the reading state in the following type of resources:
-				</p>
-		        <ul>
-		        	<li>External Links (i.e. a link to google.com)</li>
-		        	<li>Data references (i.e. a linked CSV file)</li>
-		        	<li>Multimedia content (i.e. a video)</li>
-		        </ul>
-
-	        	<p>
-	        		Reading state should only apply to content documents listed as being within the bounds of the Web Publication.
-	        	</p>
-			</section>
-			<section>		
-		       <h5>Examples</h5>
-		       	<p>
-		        Example 1:<br />
-		        Sarah is reading a long article on her way to work. She arrives before she has finished, but wants to continue from the place she left off. The user agent should remember her reading state for the next time she opens the publication.
-		        </p>
-
-		       <h5>Testing</h5>
-		       	<p>
-		        If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the reader, then reopens it, they should be returned to the last known reading state.
-		        </p>
-			</section>
-	    </section>
 		</section>
 		<section id="locators" class="informative">
 			<h3>Web Publication Locators</h3>
