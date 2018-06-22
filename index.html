@@ -308,6 +308,7 @@
 
 					<p> Note that the latter may also add some features to terms defined in Schema.org. </p>
 
+					<p class=issue data-number=236></p>
 					<div class="note">
 						<p> An example for the latter is the requirement for the <a href="https://schema.org/creator"
 								>creator</a> term to be order preserving. </p>
@@ -395,7 +396,7 @@
 	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
-    "@context" : "http://schema.org",
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     &#8230;
 	}
 	&lt;/script&gt;
@@ -443,8 +444,8 @@
 
 				<ol>
 					<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-					<li>an instance of a Schema.org <a href="http://schema.org/StructuredValue"
-								><code>StructuredValue</code></a> that can be used to express, beyond the URL, the media
+					<li>an instance of a Schema.org <a href="#publication-link-def"
+								><code>PublicationLink</code></a> that can be used to express, beyond the URL, the media
 						type and other characteristics of the target resource.</li>
 				</ol>
 
@@ -454,7 +455,7 @@
         "resources" : [
             "datatypes.svg",
             {
-                "@type"      : "StructuredValue",
+                "@type"      : "PublicationLink",
                 "url"        : "test-utf8.csv",
                 "fileFormat" : "text/csv"
             }
@@ -1919,6 +1920,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<p class=issue data-number=237></p>
 					</section>
 				</section>
 			</section>
