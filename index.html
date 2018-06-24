@@ -260,44 +260,30 @@
 
 				<p>A <a>Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset"
 						>information set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr
-						title="information set">infoset</abbr> is logically divided into two sets of properties: those
-					that describe the publication and those that express key structures. These classifications only
-					exist for the purposes of understanding the function of the properties, however.</p>
-
-				<p>The <abbr title="information set">infoset</abbr> is both abstract and concrete. It is abstract in the
+						title="information set">infoset</abbr> is both abstract and concrete. It is abstract in the
 					sense that it represents a set of information that a user agent has to compile about the Web
 					Publication, but it also becomes concrete when the user agent creates an internal representation of
 					that information.</p>
 
-				<p>The <abbr title="information set">infoset</abbr> is primarily compiled from a Web Publication's
-						<a>manifest</a>, whose serialization requirements are defined in <a href="#wp-manifest"></a>.
-					Some information can be obtained outside the manifest—fallback rules for properties defined in the
-					following subsections allow a user agent to compile information that the author has not provided in
-					the manifest, for example.</p>
-
-				<p> A <a>manifest</a> is a serialization of a <a>Web Publication's</a>
-					<abbr title="information set"><a>infoset</a></abbr>. The manifest is serialized using the
-					JSON&#160;[[!ecma-404]], more specifically the JSON-LD&#160;[[!json-ld]] format. The manifest can be
-					a separate JSON-LD file, or it can be part of an HTML resource using the <a
+				<p>A <a>manifest</a>, on the other hand, is a serialization of a <a>Web Publication's</a>
+					<abbr title="information set"><a>infoset</a></abbr> created by the author. The manifest is expressed
+					using the JSON-LD&#160;[[!json-ld]] format &#8212; a variant of JSON&#160;[[!ecma-404]] for
+					expressing linked data. The manifest can be created as a standalone resource or it can be embedded
+					within an HTML resource using the <a
 						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a> in HTML&#160;[[!html]]. If the latter, the
-						<code>type</code> attribute of the <code>script</code> element MUST be set to
-						<code>application/ld+json</code>. </p>
+							><code>script</code> element</a>&#160;[[!html]].</p>
 
-				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
-	&lt;script id="example_manifest" type="application/ld+json"&gt;
-	{
-    &#8230;
-	}
-	&lt;/script&gt;
-</pre>
+				<p>Although the <abbr title="information set">infoset</abbr> is primarily compiled from a Web
+					Publication's <a>manifest</a>, some information can be obtained outside the manifest. For example,
+					fallback rules for properties defined in the following subsections allow a user agent to compile
+					information that the author has not provided in the manifest, for example.</p>
 			</section>
 
 			<section id="wp-manifest">
 				<h3>Creating a Manifest</h3>
 
-				<section id="wpub-context">
-					<h4>Web Publication Manifest Contexts</h4>
+				<section id="manifest-context">
+					<h4>Manifest Contexts</h4>
 
 					<p> A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This
 						context has two major components: </p>
@@ -306,15 +292,15 @@
 						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
 					</ul>
 
-					<p> Note that the latter may also add some features to terms defined in Schema.org. </p>
-
-					<p class=issue data-number=236></p>
 					<div class="note">
-						<p> An example for the latter is the requirement for the <a href="https://schema.org/creator"
-								>creator</a> term to be order preserving. </p>
+						<p>The latter might also add some features to the properties defined in Schema.org. For example,
+							the requirement for the <a href="https://schema.org/creator">creator</a> property to be
+							order preserving. </p>
 						<p> As part of the continuous contacts with Schema.org the additional requirements defined in
 							the WP specific context file may migrate to the core Schema.org. </p>
 					</div>
+
+					<p class="issue" data-number="236"></p>
 
 					<p> In practice, this means that a Web Publication Manifest MUST begin with, at the minimum: </p>
 
@@ -328,7 +314,8 @@
 					<p> In some cases, this structure may have to be extended by additional, local information, see the
 							<a href="#wp-language-and-dir-manifest"></a>. </p>
 				</section>
-				<section>
+
+				<section id="manifest-pub-types">
 					<h4>Publication Types</h4>
 					<p> The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the
 						Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using
@@ -345,6 +332,7 @@
 }
 </pre>
 				</section>
+
 				<section id="manifest-properties">
 					<h3>Properties</h3>
 
@@ -353,22 +341,19 @@
 				</section>
 			</section>
 
-			<section id="wp-resources">
-				<h2>Resources</h2>
+			<section id="manifest-embedding">
+				<h3>Embedding a Manifest</h3>
 
-				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
-						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>.</p>
+				<p>When embedding a manifest in an HTML resource, the <code>type</code> attribute of the containing
+						<code>script</code> element MUST be set to <code>application/ld+json</code>.</p>
 
-				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
-					include references to resources of any media type, both in the <a>default reading order</a> and as
-					dependencies of other resources.</p>
-
-				<div class="note">
-					<p>When adding resources to a Web Publication, consider support in user agents. The use of
-						progressive enhancement techniques and the provision of fallback content, as appropriate, will
-						ensure a more consistent reading experience for users regardless of their preferred user
-						agent.</p>
-				</div>
+				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
+&lt;script id="example_manifest" type="application/ld+json"&gt;
+   {
+      &#8230;
+   }
+&lt;/script&gt;
+</pre>
 			</section>
 
 			<section id="wp-linking">
@@ -414,39 +399,57 @@
 					suggested as a default.</p>
 
 			</section>
+
+			<section id="wp-resources">
+				<h2>Resources</h2>
+
+				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
+						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>.</p>
+
+				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
+					include references to resources of any media type, both in the <a>default reading order</a> and as
+					dependencies of other resources.</p>
+
+				<div class="note">
+					<p>When adding resources to a Web Publication, consider support in user agents. The use of
+						progressive enhancement techniques and the provision of fallback content, as appropriate, will
+						ensure a more consistent reading experience for users regardless of their preferred user
+						agent.</p>
+				</div>
+			</section>
 		</section>
 		<section id="wp-properties">
 			<h2>Web Publication Properties</h2>
 
-			<section id="wp-properties-intro">
+			<section id="wp-properties-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>Desciptive Properties in the Web Publication Manifest are based, wherever possible, on the terms
-					defined by <a href="https://schema.org">Schema.org</a>&#160;[[!schema.org]] (including <a
+				<p>Descriptive items in the Web Publication Manifest are based, wherever possible, on the properties
+					defined by <a href="https://schema.org">Schema.org</a>&#160;[[schema.org]] (including <a
 						href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means that
 					the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting
 					their syntax and semantics). </p>
 
-				<p class="note">Schema.org includes a large number of terms that, though relevant for publishing, are
-					not mentioned in this Recommendation. Web Publication authors may use any of those; this document
-					defines only the minimal set of infoset items, and their mapping to Schema.org when appropriate. </p>
+				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
+					are are not mentioned in this specification; Web Publication authors can use any of those
+					properties. This document defines only the minimal set of infoset items, and their mapping to
+					Schema.org when appropriate. </p>
 
 				<p class="ednote">There are discussion on whether a best practices document would be created, referring
 					to more schema.org terms. If so, it should be linked from here. </p>
 
-				<p><a href="#wp-structural-properties">Structural Properties</a> in the Web Publication Manifest use
-					terms that refer to one or more external resources (images, script files, separate metadata files,
-					etc.). These terms do not necessarily have a counterpart in Schema.org, and are therefore defined
-					separately by this specification.</p>
+				<p>The subsequent groupings of items refer to one or more external resources (images, script files,
+					separate metadata files, etc.). These items do not necessarily have a counterpart in Schema.org, and
+					are therefore defined specifically for this specification.</p>
 
-				<p>Values of structural properties are usually links to external resources, or an array thereof. Such a
-					link may be expressed in one of two ways:</p>
+				<p>The value of these items is usually a link to a resource, or an array of such resources. Such a link
+					may be expressed in one of two ways:</p>
 
 				<ol>
 					<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-					<li>an instance of a Schema.org <a href="#publication-link-def"
-								><code>PublicationLink</code></a> that can be used to express, beyond the URL, the media
-						type and other characteristics of the target resource.</li>
+					<li>an instance of a Schema.org <a href="#publication-link-def"><code>PublicationLink</code></a>
+						that can be used to express, beyond the URL, the media type and other characteristics of the
+						target resource.</li>
 				</ol>
 
 				<pre class="example" title="Expressing external links, either as strings or as objects">
@@ -463,81 +466,21 @@
 	}
 </pre>
 
-				<p class="note"> There will be continuous contacts with Schema.org to see whether some of the structural
-					property terms should not be included in the core Schema.org hierarchy, or one of its extensions. </p>
+				<p class="note">There will be continuous contacts with Schema.org to see whether some of the structural
+					properties should be included in the core Schema.org hierarchy, or one of its extensions. </p>
 
-				<p>Structural infoset properties typically refer to external resources via a URL. This URL-s may refer
-					to resources playing different roles (e.g., cover or privacy policy), may need some additional
-					metadata for, e.g., accessibility purposes. </p>
-
-				<p id="publication-link-def"> The structural properties are expressed via JSON-LD terms that are
-					typically publication specific (i.e., defined through the JSON-LD context file defined for Web
-					Publications, see <a href="#wpub-context"></a>). This context also defines a general type used for
-					external links, called <code>PublicationLink</code>, that contains that following properties (note
-					that most of the properties are ): </p>
-
-				<table class="zebra">
-					<thead>
-						<tr>
-							<th> Term name </th>
-							<th> Short description </th>
-							<th> Required/Optional </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<a href="http://schema.org/name"><code>url</code></a>
-							</td>
-							<td> URL&#160;[[url]] of the resource. </td>
-							<td> Required. </td>
-						</tr>
-						<tr>
-							<td>
-								<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
-							</td>
-							<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
-									<code>application/zip</code>. </td>
-							<td> Optional. </td>
-						</tr>
-						<tr>
-							<td>
-								<a href="http://schema.org/name"><code>name</code></a>
-							</td>
-							<td> Name of the item. </td>
-							<td> Optional. </td>
-						</tr>
-						<tr>
-							<td>
-								<a href="http://schema.org/description"><code>description</code></a>
-							</td>
-							<td> Description of the item. </td>
-							<td> Optional. </td>
-						</tr>
-						<tr>
-							<td>
-								<code>rel</code>
-							</td>
-							<td>One or more relations; the values are either the relevant relationship terms of the IANA
-								link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable
-								link registry item exists.</td>
-							<td>Optional.</td>
-						</tr>
-					</tbody>
-				</table>
+				<p>Structural infoset items typically refer to external resources via a URL. The URL(s) can refer to
+					resources playing different roles (e.g., cover or privacy policy), which might need some additional
+					metadata (e.g., accessibility purposes).</p>
 
 				<p class="issue" data-number="235"></p>
-
-				<p class="ednote">If the document is reorganized the "specific" external resources (cover, accessibility
-					report, etc) should be separated in from the general structures and list definitions.</p>
-
 			</section>
 
-			<section id="wp-properties-req">
+			<section id="wp-items-req">
 				<h3>Requirements</h3>
 
 				<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how
-					properties are compiled into the <abbr title="information set">infoset</abbr> remain
+					manifest terms are compiled into the <abbr title="information set">infoset</abbr> items remain
 					under-specified. This includes, but is not limited to, what specific names the properties will have
 					in the <abbr title="information set">infoset</abbr>, whether the names in the <a>manifest</a> will
 					be the same as those in the <abbr title="information set">infoset</abbr> and/or whether mappings to
@@ -602,82 +545,123 @@
 					<section id="wp-a11y-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>The accessibility metadata SHOULD map to the family of accessibility terms, as expressed by
-							Schema.org. (A more detailed description of these terms, as well as the possible values, are
-							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
-								site</a>.) These terms are: </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
-										<a href="http://meta.schema.org/accessMode"><code>accessMode</code></a>
+										<code>accessMode</code>
 									</td>
 									<td> The human sensory perceptual system or cognitive faculty through which a person
 										may process or perceive information. </td>
+									<td> Text. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
+									<td>
+										<a href="http://meta.schema.org/accessMode"><code>accessMode</code></a>
+									</td>
 								</tr>
 								<tr>
+									<td>
+										<code>accessModeSufficient</code>
+									</td>
+									<td> A list of single or combined accessModes that are sufficient to understand all
+										the intellectual content of a resource. </td>
+									<td> Comma-separated values. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
 									<td>
 										<a href="http://meta.schema.org/accessModeSufficient"
 												><code>accessModeSufficient</code></a>
 									</td>
-									<td> A list of single or combined accessModes that are sufficient to understand all
-										the intellectual content of a resource. </td>
 								</tr>
 								<tr>
 									<td>
-										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
+										<code>accessibilityAPI</code>
 									</td>
 									<td> Indicates that the resource is compatible with the referenced accessibility
 										API. </td>
+									<td> Text. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
+									<td>
+										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
+									</td>
 								</tr>
 								<tr>
+									<td>
+										<code>accessibilityControl</code>
+									</td>
+									<td> Identifies input methods that are sufficient to fully control the described
+										resource. </td>
+									<td> Text. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
 									<td>
 										<a href="http://meta.schema.org/accessibilityControl"
 												><code>accessibilityControl</code></a>
 									</td>
-									<td> Identifies input methods that are sufficient to fully control the described
-										resource. </td>
 								</tr>
 								<tr>
+									<td>
+										<code>accessibilityFeature</code>
+									</td>
+									<td> Content features of the resource, such as accessible media, alternatives and
+										supported enhancements for accessibility. </td>
+									<td> Text. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
 									<td>
 										<a href="http://meta.schema.org/accessibilityFeature"
 												><code>accessibilityFeature</code></a>
 									</td>
-									<td> Content features of the resource, such as accessible media, alternatives and
-										supported enhancements for accessibility. </td>
 								</tr>
 								<tr>
+									<td>
+										<code>accessibilityHazard</code>
+									</td>
+									<td> A characteristic of the described resource that is physiologically dangerous to
+										some users. </td>
+									<td> Text. <a
+											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+											>Expected values</a>. </td>
 									<td>
 										<a href="http://meta.schema.org/accessibilityHazard"
 												><code>accessibilityHazard</code></a>
 									</td>
-									<td> A characteristic of the described resource that is physiologically dangerous to
-										some users. </td>
 								</tr>
 								<tr>
 									<td>
-										<a href="http://meta.schema.org/accessibilitySummary"
-												><code>accessibilitySummary</code></a>
+										<code>accessibilitySummary</code>
 									</td>
-									<td> A human-readable summary of specific accessibility features or deficiencies,
+									<td>A human-readable summary of specific accessibility features or deficiencies,
 										consistent with the other accessibility metadata but expressing subtleties such
 										as “short descriptions are present but long descriptions will be needed for
 										non-visual users” or “short descriptions are present and no long descriptions
 										are needed.” </td>
+									<td>Text.</td>
+									<td>
+										<a href="http://meta.schema.org/accessibilitySummary"
+												><code>accessibilitySummary</code></a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
 
+						<p class="note">A more detailed description of these properties, as well as the possible values,
+							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
+								Wiki site</a>.</p>
+
 						<p>Note that the author MAY also provide a reference to a more detailed <a
 								href="#wp-a11y-report-manifest">Accessibility Report</a>, beyond the accessibility
-							information expressed by these terms.</p>
+							information expressed by these properties.</p>
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
@@ -731,22 +715,25 @@
 					<section id="wp-address-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>This infoset item MUST be mapped on the <a href="http://schema.org/url"><code>url</code></a>
-							term.</p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
+										<code>url</code>
+									</td>
+									<td>URL of the primary entry page.</td>
+									<td>A URL [[!url]].</td>
+									<td>
 										<a href="http://schema.org/url"><code>url</code></a>
 									</td>
-									<td> URL of the primary entry page. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -812,36 +799,48 @@
 					<section id="wp-canonical-identifier-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>This infoset item MUST be mapped on the <a href="http://schema.org/id"><code>id</code></a>
-							term, whose value is a URL. </p>
-
-						<p> Additionally, the term <a href="http://schema.org/identifier"><code>itentifier</code></a>
-							MAY also be used; in Schema.org, the value of this term can be a URL, a textual information
-							that represents a unique identification, or more complex objects defined in Schema.org.
-							There are also sub-properties that can be used on their own right, like <a
-								href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"
-									><code>issn</code></a>, or <a href="http://schema.org/serialNumber"
-									><code>serialNumber</code></a>. See also the Schema.org description for further
-							details. </p>
-
-						<p class="ednote"> Not clear how one would describe the relationships between these two&#8230; </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
+										<code>id</code>
+									</td>
+									<td>Preferred version of the Web Publication.</td>
+									<td>A URL [[!url]].</td>
+									<td>
 										<a href="http://schema.org/id"><code>id</code></a>
 									</td>
-									<td> Preferred version of the Web Publication. </td>
+								</tr>
+								<tr>
+									<td>
+										<code>identifier</code>
+									</td>
+									<td>Preferred version of the Web Publication.</td>
+									<td>A URL, a textual information that represents a unique identification, or more
+										complex objects defined in [[!schema.org]].</td>
+									<td>
+										<a href="http://schema.org/identifier"><code>identifier</code></a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
+
+						<p>There are also sub-properties that can be used on their own right, like <a
+								href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"
+									><code>issn</code></a>, or <a href="http://schema.org/serialNumber"
+									><code>serialNumber</code></a>. See also the Schema.org description for further
+							details.</p>
+
+						<p class="ednote">Not clear how one would describe the relationships between these
+							two&#8230;</p>
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
@@ -886,107 +885,134 @@
 					<section id="wp-creator-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>This Infoset Item is mapped to the following [[!schema.org]] terms: </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
-										<a href="https://schema.org/author"><code>author</code></a>
+										<code>artist</code>
 									</td>
-									<td> The author of this content. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://schema.org/creator"><code>creator</code></a>
-									</td>
-									<td> The creator of this content. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://schema.org/editor">editor</a>
-									</td>
-									<td> The editor of this content. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://schema.org/publisher"><code>publisher</code></a>
-									</td>
-									<td> The publisher of the creative work. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
-									</td>
-									<td> The illustrator of a publication. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://bib.schema.org/translator"><code>translator</code></a>
-									</td>
-									<td> The illustrator of a publication. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
-								</tr>
-								<tr>
-									<td>
-										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
-									</td>
-									<td> A person who reads (performs) the audiobook. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a>. </td>
-								</tr>
-
-								<tr>
+									<td>The primary artist for a work in a medium other than pencils or digital line
+										art.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/artist"><code>artist</code></a>
 									</td>
-									<td> The primary artist for a work in a medium other than pencils or digital line
-										art. The value can be on or more <a href="http://schema.org/Person"
-												><code>Person</code></a>. </td>
 								</tr>
 								<tr>
+									<td>
+										<code>author</code>
+									</td>
+									<td>The author of this content.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
+											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>
+										<a href="https://schema.org/author"><code>author</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>colorist</code>
+									</td>
+									<td>The individual who adds color to inked drawings.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/colorist"><code>colorist</code></a>
 									</td>
-									<td> The individual who adds color to inked drawings. The value can be on or more <a
-											href="http://schema.org/Person"><code>Person</code></a>. </td>
 								</tr>
 								<tr>
+									<td>
+										<code>creator</code>
+									</td>
+									<td>The creator of this content.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
+											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>
+										<a href="https://schema.org/creator"><code>creator</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>editor</code>
+									</td>
+									<td>The editor of this content.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>
+										<a href="https://schema.org/editor"><code>editor</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>illustrator</code>
+									</td>
+									<td>The illustrator of a publication.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>
+										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>letterer</code>
+									</td>
+									<td>The individual who adds lettering, including speech balloons and sound effects,
+										to artwork.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/letterer"><code>letterer</code></a>
 									</td>
-									<td> The individual who adds lettering, including speech balloons and sound effects,
-										to artwork. The value can be on or more <a href="http://schema.org/Person"
-												><code>Person</code></a>. </td>
 								</tr>
 								<tr>
 									<td>
+										<code>penciler</code>
+									</td>
+									<td>The individual who draws the primary narrative artwork.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>
 										<a href="https://bib.schema.org/penciler"><code>penciler</code></a>
 									</td>
-									<td> The individual who draws the primary narrative artwork.. The value can be on or
-										more <a href="http://schema.org/Person"><code>Person</code></a>. </td>
+								</tr>
+								<tr>
+									<td>
+										<code>publisher</code>
+									</td>
+									<td>The publisher of the creative work.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
+											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>
+										<a href="https://schema.org/publisher"><code>publisher</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>readBy</code>
+									</td>
+									<td>A person who reads (performs) the audiobook.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>. </td>
+									<td>
+										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>translator</code>
+									</td>
+									<td>The translator of a publication.</td>
+									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
+											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
+									<td>
+										<a href="https://bib.schema.org/translator"><code>translator</code></a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
-
-						<p>The Web Publication Manifest SHOULD use one or more <a href="http://schema.org/Person"
-									><code>Person</code></a> or <a href="http://schema.org/Organization"
-										><code><code>Organization</code></code></a> items, as appropriate for the
-							specified term.</p>
 
 						<pre class="example" title="Author of a book">
 {
@@ -1101,13 +1127,13 @@
 						<section id="manifest-default-language-and-dir">
 							<h6>Default language and direction</h6>
 
-							<p> The infoset described in <a href="#wp-language-and-dir"></a> requires the possibility to
-								set a <em>default</em> language and base direction for all textual information in the
-								manifest. These MUST be set by <em>extending</em> the context of the manifest to include
-								the right features. </p>
-							<p> To set the language, the context information must be <em>extended</em> by the <a
+							<p>The <em>default</em> language and base direction for all textual information in the
+								manifest MUST be set by <em>extending</em> the context of the manifest to include the
+								right features.</p>
+
+							<p>To set the language, the context information must be <em>extended</em> by the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@language</code> term</a> of JSON-LD[[!json-ld]]: </p>
+										><code>@language</code> keyword</a> of JSON-LD[[!json-ld]]: </p>
 
 							<pre class="example" title="Setting the default metadata language to French">
 {
@@ -1135,7 +1161,7 @@
 								possibility to set the language and base direction for any textual information in the
 								manifest. This MUST be set for each item separately, also using the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> terms</a> of
+										><code>@value</code> and <code>@language</code> keywords</a> of
 								JSON-LD[[!json-ld]]: </p>
 							<pre class="example" title="Setting the default metadata language to French">
 {
@@ -1181,28 +1207,32 @@
 					<section id="wp-mod-date-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>This infoset item MUST be mapped on the <a href="http://schema.org/dateModified"
-									><code>dateModified</code></a> term, whose value is a <a
-								href="http://schema.org/Date"><code>Date</code></a> or <a
-								href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601
-							date, or Date Time formats, respectively [[iso8601]].</p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
+										<code>dateModified</code>
+									</td>
+									<td>Last modification date of the publication.</td>
+									<td>A <a href="http://schema.org/Date"><code>Date</code></a> or <a
+											href="http://schema.org/DateTime"><code>DateTime</code></a> value
+										[[!schema.org]], both expressed in ISO 8601 date, or Date Time formats,
+										respectively [[iso8601]].</td>
+									<td>
 										<a href="http://schema.org/dateModified"><code>dateModified</code></a>
 									</td>
-									<td> Last modification date of the publication </td>
 								</tr>
 							</tbody>
 						</table>
+
 						<pre class="example" title="Modification date of the publication">
 {
     "@context"     : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
@@ -1238,25 +1268,27 @@
 					<section id="wp-pub-date-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>This infoset item MUST be mapped on the <a href="http://schema.org/datePublished"
-									><code>datePublished</code></a> term, whose value is a <a
-								href="http://schema.org/Date"><code>Date</code></a> or <a
-								href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed in ISO 8601
-							date, or Date Time formats, respectively [[iso8601]]. </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
+										<code>datePublished</code>
+									</td>
+									<td>Creation date of the publication.</td>
+									<td>A <a href="http://schema.org/Date"><code>Date</code></a> or <a
+											href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed
+										in ISO 8601 date, or Date Time formats, respectively [[!iso8601]].</td>
+									<td>
 										<a href="http://schema.org/datePublished"><code>datePublished</code></a>
 									</td>
-									<td> Creation date of the publication </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1294,7 +1326,7 @@
 
 						<p>The default value is <code>auto</code>.</p>
 
-						<p>This information item has <em>no effect</em> on the rendering of the individual primary
+						<p>This infoset item has <em>no effect</em> on the rendering of the individual primary
 							resources; it is only relevant for the progression direction from one resource to the
 							other.</p>
 
@@ -1306,14 +1338,13 @@
 					<section id="wp-reading-progression-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>There is no corresponding term in Schema.org; instead, this item MUST be mapped on the
-								<code>readingProgression</code> term, defined specifically for Web Publications. </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1321,9 +1352,9 @@
 									<td>
 										<code>readingProgression</code>
 									</td>
-									<td> Reading direction from one resource to the other; the value of this term MUST
-										be <code>ltr</code>, <code>rtl</code>, or <code>auto</code> (see <a
-											href="#wp-reading-progression"></a> for further details). </td>
+									<td>Reading direction from one resource to the other.</td>
+									<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
+									<td>(none)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1376,23 +1407,25 @@
 					<section id="wp-title-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If set explicitly in the Manifest (i.e., if it is not to be derived from the
-								<code>title</code> element of the primary entry point), this item MUST be mapped on the
-							Schema.org <a href="http://schema.org/name"><code>name</code></a> term. </p>
-
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
+										<code>name</code>
+									</td>
+									<td>Human-readable name of the Web Publication.</td>
+									<td>Text.</td>
+									<td>
 										<a href="http://schema.org/name"><code>name</code></a>
 									</td>
-									<td> Human-readable name of the Web Publication. </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1626,8 +1659,10 @@
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1635,7 +1670,9 @@
 									<td>
 										<code>tableOfContents</code>
 									</td>
-									<td> A (relative or absolute) URL&#160;[[url]] </td>
+									<td></td>
+									<td>A (relative or absolute) URL&#160;[[!url]].</td>
+									<td>(none)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1671,7 +1708,7 @@
 				</section>
 			</section>
 
-			<section id="wp-categorization-properties">
+			<section id="wp-resource-categorization-properties">
 				<h3>Resource Categorization Properties</h3>
 
 				<section id="wp-default-reading-order">
@@ -1704,8 +1741,10 @@
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1713,6 +1752,7 @@
 									<td>
 										<code>readingOrder</code>
 									</td>
+									<td></td>
 									<td>
 										<p>An array of:</p>
 										<ul>
@@ -1722,6 +1762,7 @@
 										</ul>
 										<p>The order in the array is <em>significant</em>.</p>
 									</td>
+									<td>(none)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1811,14 +1852,16 @@
 								<a>Web Publication</a> (i.e., that are within its bounds) and that are not listed in the
 								<a>default reading order</a>. If present in the Web Publication Manifest (i.e., if the
 							Web Publication has other items in the default reading order than just the primary entry
-							page), this item MUST be mapped on the <code>resources</code> term, defined specifically for
-							Web Publications. </p>
+							page), this item maps to the <code>resources</code> term, defined specifically for Web
+							Publications. </p>
 
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1826,6 +1869,7 @@
 									<td>
 										<code>resources</code>
 									</td>
+									<td></td>
 									<td>
 										<p>An array of:</p>
 										<ul>
@@ -1835,6 +1879,7 @@
 										</ul>
 										<p>The order in the array is <em>not significant</em>.</p>
 									</td>
+									<td>(none)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1897,14 +1942,16 @@
 					<section id="wp-extra-list-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the Web Publication Manifest, the list of extra resources MUST be mapped on the
+						<p>If present in the Web Publication Manifest, the list of extra resources maps to the
 								<code>extraResources</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
 								<tr>
-									<th> Term name with link to definition </th>
-									<th> Short description </th>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -1912,15 +1959,21 @@
 									<td>
 										<code>extraResources</code>
 									</td>
-									<td> An array of: <ul>
+									<td></td>
+									<td>
+										<p>An array of:</p>
+										<ul>
 											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
-										</ul> The order in the array is <em>not significant</em>. </td>
+										</ul>
+										<p>The order in the array is <em>not significant</em>.</p>
+									</td>
+									<td>(none)</td>
 								</tr>
 							</tbody>
 						</table>
-						<p class=issue data-number=237></p>
+						<p class="issue" data-number="237"></p>
 					</section>
 				</section>
 			</section>
@@ -2508,6 +2561,65 @@
 			<h2>Privacy</h2>
 
 			<div class="ednote">Placeholder for privacy issues.</div>
+		</section>
+		<section class="appendix" id="publicationLink">
+			<h2>The <code>PublicationLink</code> type</h2>
+
+			<p id="publication-link-def">Certain manifest properties are expressed via JSON-LD terms that are typically
+				publication specific (i.e., defined through the JSON-LD context file defined for Web Publications, see
+					<a href="#wpub-context"></a>). This context also defines a general type used for external links,
+				called <code>PublicationLink</code>, that contains that following properties (note that most of the
+				properties are):</p>
+
+			<table class="zebra">
+				<thead>
+					<tr>
+						<th>Term name</th>
+						<th>Short description</th>
+						<th>Required/Optional</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<a href="http://schema.org/name"><code>url</code></a>
+						</td>
+						<td> URL&#160;[[url]] of the resource. </td>
+						<td> Required. </td>
+					</tr>
+					<tr>
+						<td>
+							<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
+						</td>
+						<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
+								<code>application/zip</code>. </td>
+						<td> Optional. </td>
+					</tr>
+					<tr>
+						<td>
+							<a href="http://schema.org/name"><code>name</code></a>
+						</td>
+						<td> Name of the item. </td>
+						<td> Optional. </td>
+					</tr>
+					<tr>
+						<td>
+							<a href="http://schema.org/description"><code>description</code></a>
+						</td>
+						<td> Description of the item. </td>
+						<td> Optional. </td>
+					</tr>
+					<tr>
+						<td>
+							<code>rel</code>
+						</td>
+						<td>One or more relations; the values are either the relevant relationship terms of the IANA
+							link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable link
+							registry item exists.</td>
+						<td>Optional.</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<section class="appendix" id="webidl">
 			<h2>WebIDL</h2>
