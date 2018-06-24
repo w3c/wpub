@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Audiobook Player</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="flatland.json" rel="publication">
+</head>
+<body>
+  <main>
+    <img id="cover" style="display:block; margin:auto;">
+    <audio id="audio-element" controls controlsList="nodownload" style="display:block; margin:auto;">
+      <source id="audio-source" type="audio/mpeg">
+    </audio>
+  </main>
+  <nav style="text-align: center; margin-top: 10px;">
+  	<a id="previous" rel="prev">&lt;&nbsp;Previous Track</a>
+  	&nbsp;&nbsp;
+  	<a id="next" rel="next">Next Track&nbsp;&gt;</a>
+  </nav>
+  <script src="polyfills/fetch.js"></script>
+  <script src="polyfills/urlsearchparams.js"></script>
+  <script src="player.js" async></script>
+</body>
+</html>
