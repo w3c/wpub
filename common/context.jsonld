@@ -2,47 +2,47 @@
     "@context": {
         "author": {
             "@container": "@list",
-            "@id": "http://schema.org/author"
+            "@id": "https://schema.org/author"
         },
         "creator": {
             "@container": "@list",
-            "@id": "http://schema.org/creator"
+            "@id": "http:s//schema.org/creator"
         },
         "editor": {
             "@container": "@list",
-            "@id": "http://schema.org/editor"
+            "@id": "https://schema.org/editor"
         },
         "publisher": {
             "@container": "@list",
-            "@id": "http://schema.org/publisher"
+            "@id": "https://schema.org/publisher"
         },
         "illustrator": {
             "@container": "@list",
-            "@id": "http://schema.org/illustrator"
+            "@id": "https://schema.org/illustrator"
         },
         "translator": {
             "@container": "@list",
-            "@id": "http://schema.org/translator"
+            "@id": "https://schema.org/translator"
         },
         "readBy": {
             "@container": "@list",
-            "@id": "http://schema.org/readBy"
+            "@id": "https://schema.org/readBy"
         },
         "artist": {
             "@container": "@list",
-            "@id": "http://schema.org/artist"
+            "@id": "https://schema.org/artist"
         },
         "colorist": {
             "@container": "@list",
-            "@id": "http://schema.org/colorist"
+            "@id": "https://schema.org/colorist"
         },
         "letterer": {
             "@container": "@list",
-            "@id": "http://schema.org/letterer"
+            "@id": "https://schema.org/letterer"
         },
         "penciler": {
             "@container": "@list",
-            "@id": "http://schema.org/penciler"
+            "@id": "https://schema.org/penciler"
         },
         "readingProgression": {
             "@id": "http://www.w3.org/ns/wpub#readingProgression"
