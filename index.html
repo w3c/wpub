@@ -258,25 +258,25 @@
 			<section id="wp-intro" class="informative">
 				<h3>Infoset and Manifest</h3>
 
-				<p>A <a>Web Publication</a> is defined by a set of properties known as its <dfn data-lt="infoset"
-						>information set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr
-						title="information set">infoset</abbr> is both abstract and concrete. It is abstract in the
-					sense that it represents a set of information that a user agent has to compile about the Web
-					Publication, but it also becomes concrete when the user agent creates an internal representation of
-					that information.</p>
+				<p>A <a>Web Publication</a> is defined by a set of items known as its <dfn data-lt="infoset">information
+						set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr title="information set"
+						>infoset</abbr> is both abstract and concrete. It is abstract in the sense that it represents a
+					set of information that a user agent has to compile about the Web Publication, but it also becomes
+					concrete when the user agent creates an internal representation of that information.</p>
 
-				<p>A <a>manifest</a>, on the other hand, is a serialization of a <a>Web Publication's</a>
-					<abbr title="information set"><a>infoset</a></abbr> created by the author. The manifest is expressed
-					using the JSON-LD&#160;[[!json-ld]] format &#8212; a variant of JSON&#160;[[!ecma-404]] for
+				<p>A <a>manifest</a>, on the other hand, is a serialization of an <abbr title="information set"
+							><a>infoset</a></abbr> created by the author of a <a>Web Publication</a>. The manifest is
+					expressed using the JSON-LD&#160;[[!json-ld]] format &#8212; a variant of JSON&#160;[[ecma-404]] for
 					expressing linked data. The manifest can be created as a standalone resource or it can be embedded
-					within an HTML resource using the <a
-						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a>&#160;[[!html]].</p>
+					within an HTML document.</p>
 
 				<p>Although the <abbr title="information set">infoset</abbr> is primarily compiled from a Web
-					Publication's <a>manifest</a>, some information can be obtained outside the manifest. For example,
-					fallback rules for properties defined in the following subsections allow a user agent to compile
-					information that the author has not provided in the manifest, for example.</p>
+					Publication's <a>manifest</a>, some information is obtained outside the manifest. The table of
+					contents, for example, is referenced from the manifest but serialized in an HTML document.</p>
+
+				<p>This specification describes the requirements for creating both the infoset and manifest. This
+					section, in particular, details how to create a manifest, and <a href="wp-properties">the next</a>
+					lists the various properties common to infosets and manifests.</p>
 			</section>
 
 			<section id="wp-manifest">
@@ -285,52 +285,66 @@
 				<section id="manifest-context">
 					<h4>Manifest Contexts</h4>
 
-					<p> A Web Publication Manifest MUST start by setting the appropriate (JSON-LD) contexts. This
-						context has two major components: </p>
+					<p> A Web Publication Manifest MUST start by setting the JSON-LD context [[!json-ld]]. The context
+						has the following two major components:</p>
+
 					<ul>
-						<li>the “core” Schema.org context, i.e., <code>http://schema.org</code>;</li>
-						<li>the separate, WP-specific context file: <code>https://www.w3.org/ns/wpub.jsonld</code></li>
+						<li>the core [[!schema.org]] context: <code>http://schema.org</code></li>
+						<li>the location of the Web Publication-specific context file:
+								<code>https://www.w3.org/ns/wpub.jsonld</code></li>
 					</ul>
 
-					<div class="note">
-						<p>The latter might also add some features to the properties defined in Schema.org. For example,
-							the requirement for the <a href="https://schema.org/creator">creator</a> property to be
-							order preserving. </p>
-						<p> As part of the continuous contacts with Schema.org the additional requirements defined in
-							the WP specific context file may migrate to the core Schema.org. </p>
-					</div>
-
-					<p class="issue" data-number="236"></p>
-
-					<p> In practice, this means that a Web Publication Manifest MUST begin with, at the minimum: </p>
-
-					<pre class="example">
+					<pre class="example" title="The context declaration.">
 {
     "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     &#8230;
 }
 </pre>
 
-					<p> In some cases, this structure may have to be extended by additional, local information, see the
-							<a href="#wp-language-and-dir-manifest"></a>. </p>
+					<p>The context file MAY add features to the properties defined in Schema.org (e.g., the requirement
+						for the <a href="https://schema.org/creator">creator</a> property to be order preserving).</p>
+
+					<div class="note">
+						<p>As part of the continuous contacts with Schema.org the additional requirements defined in the
+							context file could migrate to the core Schema.org vocabulary.</p>
+					</div>
+
+					<p>In some cases, the context MAY be extended by additional, local information. For example, see <a
+							href="#wp-language-and-dir-manifest"></a>. </p>
+
+					<p class="issue" data-number="236"></p>
 				</section>
 
 				<section id="manifest-pub-types">
 					<h4>Publication Types</h4>
-					<p> The manifest MUST also include a <dfn>Publication Type</dfn>. This MAY be mapped onto the
-						Schema.org <a href="http://schema.org/CreativeWork"><code>CreativeWork</code></a> type, using
-						the <code>@type</code> of JSON-LD&#160;[[json-ld]]. Schema.org also includes a number of more
-						specific types (see the <a href="http://schema.org/CreativeWork">list</a> on the Schema.org
-						site) which include a type for <a href="http://schema.org/Article">Article</a>, <a
-							href="http://schema.org/Book">Book</a>, or <a href="http://schema.org/Course">Course</a>;
-						these may MAY also be used instead of <code>CreativeWork</code>. </p>
-					<pre class="example" title="Setting type of the publication to be a Book">
+
+					<p> The Web Publication Manifest MUST include a <dfn>Publication Type</dfn> using the
+							<code>@type</code> keyword&#160;[[!json-ld]]. The tyoe MAY be mapped onto the <a
+							href="http://schema.org/CreativeWork"><code>CreativeWork</code></a>
+						type&#160;[[!schema.org]].</p>
+
+					<pre class="example" title="Setting a Web Publication's type to CreativeWork.">
+{
+    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@type"    : "CreativeWork"
+    &#8230;
+}
+</pre>
+
+					<p>Schema.org also includes a number of more specific types, such as <a
+							href="http://schema.org/Article">Article</a>, <a href="http://schema.org/Book">Book</a>, and
+							<a href="http://schema.org/Course">Course</a>. These MAY be used instead of
+							<code>CreativeWork</code>. </p>
+
+					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
     "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book"
     &#8230;
 }
 </pre>
+					<p class="note">Refer to the Schema.org site for the <a href="http://schema.org/CreativeWork"
+							>complete list of types</a>.</p>
 				</section>
 
 				<section id="manifest-properties">
@@ -338,14 +352,23 @@
 
 					<p>The naming, syntax and requirements for manifest properties are defined in <a
 							href="#wp-properties"></a>.</p>
+
+					<p class="note">Although authors only have to understand the serialization requirements for manifest
+						terms, they are encouraged to read through the infoset definitions for each property, as well.
+						The infoset definitions describe, in some cases, how items are compiled in the absence of
+						explicit information in the manifest.</p>
 				</section>
 			</section>
 
 			<section id="manifest-embedding">
 				<h3>Embedding a Manifest</h3>
 
-				<p>When embedding a manifest in an HTML resource, the <code>type</code> attribute of the containing
-						<code>script</code> element MUST be set to <code>application/ld+json</code>.</p>
+				<p>A manifest can be embedded within an HTML page using the <a
+						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
+							><code>script</code> element</a>&#160;[[html]].</p>
+
+				<p>When embedding a manifest, the <code>type</code> attribute of the containing <code>script</code>
+					element MUST be set to <code>application/ld+json</code>.</p>
 
 				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
 &lt;script id="example_manifest" type="application/ld+json"&gt;
