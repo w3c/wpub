@@ -289,17 +289,22 @@
 						has the following two major components:</p>
 
 					<ul>
-						<li>the core [[!schema.org]] context: <code>http://schema.org</code></li>
+						<li>the core [[!schema.org]] context: <code>https://schema.org</code></li>
 						<li>the location of the Web Publication-specific context file:
 								<code>https://www.w3.org/ns/wpub.jsonld</code></li>
 					</ul>
 
 					<pre class="example" title="The context declaration.">
 {
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     &#8230;
 }
 </pre>
+
+					<p class="note">Although Schema.org is often referenced using the <code>http</code> URI scheme, <a
+							href="https://schema.org/docs/faq.html#19">the vocabulary is being migrated</a> to use the
+						secure <code>https</code> scheme as its default. This specification requires the use
+							<code>https</code> when referencing Schema.org in the manifest.</p>
 
 					<p>The context file MAY add features to the properties defined in Schema.org (e.g., the requirement
 						for the <a href="https://schema.org/creator">creator</a> property to be order preserving).</p>
@@ -320,30 +325,30 @@
 
 					<p> The Web Publication Manifest MUST include a <dfn>Publication Type</dfn> using the
 							<code>@type</code> keyword&#160;[[!json-ld]]. The tyoe MAY be mapped onto the <a
-							href="http://schema.org/CreativeWork"><code>CreativeWork</code></a>
+							href="https://schema.org/CreativeWork"><code>CreativeWork</code></a>
 						type&#160;[[!schema.org]].</p>
 
 					<pre class="example" title="Setting a Web Publication's type to CreativeWork.">
 {
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "CreativeWork"
     &#8230;
 }
 </pre>
 
 					<p>Schema.org also includes a number of more specific types, such as <a
-							href="http://schema.org/Article">Article</a>, <a href="http://schema.org/Book">Book</a>, and
-							<a href="http://schema.org/Course">Course</a>. These MAY be used instead of
+							href="https://schema.org/Article">Article</a>, <a href="https://schema.org/Book">Book</a>,
+						and <a href="https://schema.org/Course">Course</a>. These MAY be used instead of
 							<code>CreativeWork</code>. </p>
 
 					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book"
     &#8230;
 }
 </pre>
-					<p class="note">Refer to the Schema.org site for the <a href="http://schema.org/CreativeWork"
+					<p class="note">Refer to the Schema.org site for the <a href="https://schema.org/CreativeWork"
 							>complete list of types</a>.</p>
 				</section>
 
@@ -404,7 +409,7 @@
 	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
-    "@context" : ["http://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
     &#8230;
 	}
 	&lt;/script&gt;
@@ -449,9 +454,9 @@
 
 				<p>Descriptive items in the Web Publication Manifest are based, wherever possible, on the properties
 					defined by <a href="https://schema.org">Schema.org</a>&#160;[[schema.org]] (including <a
-						href="http://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means that
-					the descriptive infoset properties are mapped to one or several Schema.org properties (inheriting
-					their syntax and semantics). </p>
+						href="https://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means
+					that the descriptive infoset properties are mapped to one or several Schema.org properties
+					(inheriting their syntax and semantics). </p>
 
 				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
 					are are not mentioned in this specification; Web Publication authors can use any of those
@@ -615,7 +620,7 @@
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
-										<a href="http://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
+										<a href="https://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
 									</td>
 								</tr>
 								<tr>
@@ -688,7 +693,7 @@
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "CreativeWork",
     &#8230;
     "accessMode"            : ["textual", "visual"],
@@ -755,7 +760,7 @@
 									<td>URL of the primary entry page.</td>
 									<td>A URL [[!url]].</td>
 									<td>
-										<a href="http://schema.org/url"><code>url</code></a>
+										<a href="https://schema.org/url"><code>url</code></a>
 									</td>
 								</tr>
 							</tbody>
@@ -763,7 +768,7 @@
 
 						<pre class="example" title="Example for setting the address of the main entry point">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -839,7 +844,7 @@
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
 									<td>
-										<a href="http://schema.org/id"><code>id</code></a>
+										<a href="https://schema.org/id"><code>id</code></a>
 									</td>
 								</tr>
 								<tr>
@@ -850,15 +855,15 @@
 									<td>A URL, a textual information that represents a unique identification, or more
 										complex objects defined in [[!schema.org]].</td>
 									<td>
-										<a href="http://schema.org/identifier"><code>identifier</code></a>
+										<a href="https://schema.org/identifier"><code>identifier</code></a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 
 						<p>There are also sub-properties that can be used on their own right, like <a
-								href="http://schema.org/isbn"><code>isbn</code></a>, <a href="http://schema.org/issn"
-									><code>issn</code></a>, or <a href="http://schema.org/serialNumber"
+								href="https://schema.org/isbn"><code>isbn</code></a>, <a href="https://schema.org/issn"
+									><code>issn</code></a>, or <a href="https://schema.org/serialNumber"
 									><code>serialNumber</code></a>. See also the Schema.org description for further
 							details.</p>
 
@@ -867,7 +872,7 @@
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "CreativeWork",
     &#8230;
     "id"       : "http://www.w3.org/TR/tabular-data-model/",
@@ -878,7 +883,7 @@
 
 						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "isbn"     : "1234567890123",
@@ -924,7 +929,7 @@
 									</td>
 									<td>The primary artist for a work in a medium other than pencils or digital line
 										art.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/artist"><code>artist</code></a>
 									</td>
@@ -934,8 +939,8 @@
 										<code>author</code>
 									</td>
 									<td>The author of this content.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
+											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
 										<a href="https://schema.org/author"><code>author</code></a>
 									</td>
@@ -945,7 +950,7 @@
 										<code>colorist</code>
 									</td>
 									<td>The individual who adds color to inked drawings.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/colorist"><code>colorist</code></a>
 									</td>
@@ -955,8 +960,8 @@
 										<code>creator</code>
 									</td>
 									<td>The creator of this content.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
+											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
 										<a href="https://schema.org/creator"><code>creator</code></a>
 									</td>
@@ -966,7 +971,7 @@
 										<code>editor</code>
 									</td>
 									<td>The editor of this content.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://schema.org/editor"><code>editor</code></a>
 									</td>
@@ -976,7 +981,7 @@
 										<code>illustrator</code>
 									</td>
 									<td>The illustrator of a publication.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
 									</td>
@@ -987,7 +992,7 @@
 									</td>
 									<td>The individual who adds lettering, including speech balloons and sound effects,
 										to artwork.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/letterer"><code>letterer</code></a>
 									</td>
@@ -997,7 +1002,7 @@
 										<code>penciler</code>
 									</td>
 									<td>The individual who draws the primary narrative artwork.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/penciler"><code>penciler</code></a>
 									</td>
@@ -1007,8 +1012,8 @@
 										<code>publisher</code>
 									</td>
 									<td>The publisher of the creative work.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
+											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
 										<a href="https://schema.org/publisher"><code>publisher</code></a>
 									</td>
@@ -1018,7 +1023,7 @@
 										<code>readBy</code>
 									</td>
 									<td>A person who reads (performs) the audiobook.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a>. </td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
 									<td>
 										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
 									</td>
@@ -1028,8 +1033,8 @@
 										<code>translator</code>
 									</td>
 									<td>The translator of a publication.</td>
-									<td>One or more <a href="http://schema.org/Person"><code>Person</code></a> or <a
-											href="http://schema.org/Organization"><code>Organization</code></a>. </td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
+											href="https://schema.org/Organization"><code>Organization</code></a>. </td>
 									<td>
 										<a href="https://bib.schema.org/translator"><code>translator</code></a>
 									</td>
@@ -1039,7 +1044,7 @@
 
 						<pre class="example" title="Author of a book">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1051,7 +1056,7 @@
 </pre>
 						<pre class="example" title="Separate listing of editors, authors, and publisher">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -1161,7 +1166,7 @@
 							<pre class="example" title="Setting the default metadata language to French">
 {
     "@context"   : [
-        "http://schema.org",
+        "https://schema.org",
         "https://www.w3.org/ns/wpub.jsonld",
         {
             "@language" : "fr"
@@ -1188,7 +1193,7 @@
 								JSON-LD[[!json-ld]]: </p>
 							<pre class="example" title="Setting the default metadata language to French">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "author" : {
@@ -1245,12 +1250,12 @@
 										<code>dateModified</code>
 									</td>
 									<td>Last modification date of the publication.</td>
-									<td>A <a href="http://schema.org/Date"><code>Date</code></a> or <a
-											href="http://schema.org/DateTime"><code>DateTime</code></a> value
+									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
+											href="https://schema.org/DateTime"><code>DateTime</code></a> value
 										[[!schema.org]], both expressed in ISO 8601 date, or Date Time formats,
 										respectively [[iso8601]].</td>
 									<td>
-										<a href="http://schema.org/dateModified"><code>dateModified</code></a>
+										<a href="https://schema.org/dateModified"><code>dateModified</code></a>
 									</td>
 								</tr>
 							</tbody>
@@ -1258,7 +1263,7 @@
 
 						<pre class="example" title="Modification date of the publication">
 {
-    "@context"     : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"     : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"        : "CreativeWork",
     &#8230;
     "identifier"   : "http://www.w3.org/TR/tabular-data-model/",
@@ -1306,18 +1311,18 @@
 										<code>datePublished</code>
 									</td>
 									<td>Creation date of the publication.</td>
-									<td>A <a href="http://schema.org/Date"><code>Date</code></a> or <a
-											href="http://schema.org/DateTime"><code>DateTime</code></a>, both expressed
+									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
+											href="https://schema.org/DateTime"><code>DateTime</code></a>, both expressed
 										in ISO 8601 date, or Date Time formats, respectively [[!iso8601]].</td>
 									<td>
-										<a href="http://schema.org/datePublished"><code>datePublished</code></a>
+										<a href="https://schema.org/datePublished"><code>datePublished</code></a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<pre class="example" title="Creation and modification date of the publication">
 {
-    "@context"      : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"      : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"         : "CreativeWork",
     &#8230;
     "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
@@ -1386,7 +1391,7 @@
 
 						<pre class="example" title="Reading progression set explicitl to ltr">
 {
-    "@context"           : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"           : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"              : "Book",
     &#8230;
     "url"                : "https://publisher.example.org/mobydick",
@@ -1447,14 +1452,14 @@
 									<td>Human-readable name of the Web Publication.</td>
 									<td>Text.</td>
 									<td>
-										<a href="http://schema.org/name"><code>name</code></a>
+										<a href="https://schema.org/name"><code>name</code></a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<pre class="example" title="Title of the book set explicitly">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1514,7 +1519,7 @@
 
 						<pre class="example" title="Link to an accessibility report">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
@@ -1569,7 +1574,7 @@
 
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -1632,7 +1637,7 @@
 
 						<pre class="example" title="Cover page expressed as resource">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
@@ -1704,7 +1709,7 @@
     &#8230;
     &lt;script type="application/ld+json"&gt;
     {
-        "@context"        : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        "@context"        : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
         "@type"           : "CreativeWork",
         &#8230;
         "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
@@ -1791,7 +1796,7 @@
 						</table>
 						<pre class="example" title="Reading order expressed as a simple list of URL-s">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1808,7 +1813,7 @@
 </pre>
 						<pre class="example" title="Reading order expressed as objects providing more information on items">
 {
-    "@context" : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1908,7 +1913,7 @@
 						</table>
 						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -2034,7 +2039,7 @@
 
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
-    "@context"   : ["http://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
@@ -2605,14 +2610,14 @@
 				<tbody>
 					<tr>
 						<td>
-							<a href="http://schema.org/name"><code>url</code></a>
+							<a href="https://schema.org/name"><code>url</code></a>
 						</td>
 						<td> URL&#160;[[url]] of the resource. </td>
 						<td> Required. </td>
 					</tr>
 					<tr>
 						<td>
-							<a href="http://schema.org/fileFormat"><code>fileFormat</code></a>
+							<a href="https://schema.org/fileFormat"><code>fileFormat</code></a>
 						</td>
 						<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
 								<code>application/zip</code>. </td>
@@ -2620,14 +2625,14 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="http://schema.org/name"><code>name</code></a>
+							<a href="https://schema.org/name"><code>name</code></a>
 						</td>
 						<td> Name of the item. </td>
 						<td> Optional. </td>
 					</tr>
 					<tr>
 						<td>
-							<a href="http://schema.org/description"><code>description</code></a>
+							<a href="https://schema.org/description"><code>description</code></a>
 						</td>
 						<td> Description of the item. </td>
 						<td> Optional. </td>
