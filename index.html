@@ -368,14 +368,18 @@
 			<section id="manifest-embedding">
 				<h3>Embedding a Manifest</h3>
 
-				<p>A manifest can be embedded within an HTML page using the <a
+				<p>A manifest can be embedded within an HTML document using the <a
 						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a>&#160;[[html]].</p>
+							><code>script</code> element</a>&#160;[[!html]].</p>
 
 				<p>When embedding a manifest, the <code>type</code> attribute of the containing <code>script</code>
 					element MUST be set to <code>application/ld+json</code>.</p>
 
-				<pre class="example" title="A Web Publication Manifest included in an HTML resource">
+				<p>Additionally, the <code>script</code> element MUST include a unique identifier in an <code>id</code>
+					attribute&#160;[[!html]]. This identifier ensures that the manifest <a href="wp-linking">can be
+						referenced</a>.</p>
+
+				<pre class="example" title="A Web Publication Manifest included in an HTML document">
 &lt;script id="example_manifest" type="application/ld+json"&gt;
    {
       &#8230;
@@ -401,9 +405,9 @@
 					</li>
 				</ul>
 
-				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web
-					Publication Manifest expressed as part of an HTML resource (see <a href="#wp-infoset-manifest"
-					></a>). </p>
+				<p>When a manifest is embedded within an HTML document, the link MUST include a fragment identifier that
+					references the <code>script</code> element that contains the manifest (see <a
+						href="#manifest-embedding"></a>). </p>
 
 				<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
@@ -447,10 +451,10 @@
 				</div>
 			</section>
 		</section>
-		<section id="wp-properties">
-			<h2>Web Publication Properties</h2>
+		<section id="infoset-items">
+			<h2>Infoset Items</h2>
 
-			<section id="wp-properties-intro" class="informative">
+			<section id="infoset-items-intro" class="informative">
 				<h3>Introduction</h3>
 
 				<p>Descriptive items in the Web Publication Manifest are based, wherever possible, on the properties
@@ -505,7 +509,7 @@
 				<p class="issue" data-number="235"></p>
 			</section>
 
-			<section id="wp-properties-req">
+			<section id="infoset-req">
 				<h3>Requirements</h3>
 
 				<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how
@@ -557,10 +561,10 @@
 					descriptions for more information.</p>
 			</section>
 
-			<section id="wp-descriptive-properties">
-				<h3>Descriptive Properties</h3>
+			<section id="infoset-descriptive-items">
+				<h3>Descriptive Items</h3>
 
-				<section id="wp-a11y">
+				<section id="accessibility">
 					<h4>Accessibility</h4>
 
 					<p>&#8230;</p>
@@ -706,7 +710,7 @@
 					</section>
 				</section>
 
-				<section id="wp-address">
+				<section id="address">
 					<h4>Address</h4>
 
 					<p>A <a>Web Publication's</a>
@@ -779,7 +783,7 @@
 					</section>
 				</section>
 
-				<section id="wp-canonical-identifier">
+				<section id="canonical-identifier">
 					<h4>Canonical Identifier</h4>
 
 					<p>A <a>Web Publication's</a>
@@ -896,7 +900,7 @@
 					</section>
 				</section>
 
-				<section id="wp-creator">
+				<section id="creator">
 					<h4>Creator</h4>
 
 					<p>The <dfn>creator</dfn> is the individual or entity responsible for the creation of the <a>Web
@@ -1091,7 +1095,7 @@
 					</section>
 				</section>
 
-				<section id="wp-language-and-dir">
+				<section id="language-and-dir">
 					<h4>Language and Base Direction</h4>
 
 					<p>Each textual property in the <a>Web Publication's</a>
@@ -1217,7 +1221,7 @@
 					</section>
 				</section>
 
-				<section id="wp-mod-date">
+				<section id="last-modification-date">
 					<h4>Last Modification Date</h4>
 
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
@@ -1277,7 +1281,7 @@
 					</section>
 				</section>
 
-				<section id="wp-pub-date">
+				<section id="publication-date">
 					<h4>Publication Date</h4>
 
 					<p>The <dfn>publication date</dfn> is the date on which the <a>Web Publication</a> was originally
@@ -1336,7 +1340,7 @@
 					</section>
 				</section>
 
-				<section id="wp-reading-progression">
+				<section id="reading-progression-direction">
 					<h4>Reading Progression Direction</h4>
 
 					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the
@@ -1403,7 +1407,7 @@
 					</section>
 				</section>
 
-				<section id="wp-title">
+				<section id="title">
 					<h4>Title</h4>
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
@@ -1471,10 +1475,10 @@
 				</section>
 			</section>
 
-			<section id="wp-informative-properties">
-				<h3>Informative Properties</h3>
+			<section id="infoset-informative-items">
+				<h3>Informative Items</h3>
 
-				<section id="wp-a11y-report">
+				<section id="accessibility-report">
 					<h4>Accessibility Report</h4>
 
 					<p>An accessibility report provides information about the suitability of a <a>Web Publication</a>
@@ -1538,7 +1542,7 @@
 					</section>
 				</section>
 
-				<section id="wp-privacy">
+				<section id="privacy-policy">
 					<h4>Privacy Policy</h4>
 
 					<p>Users often have the legal right to know and control what information is collected about them,
@@ -1596,10 +1600,10 @@
 				</section>
 			</section>
 
-			<section id="wp-structural-properties">
-				<h3>Structural Properties</h3>
+			<section id="infoset-structural-items">
+				<h3>Structural Items</h3>
 
-				<section id="wp-cover">
+				<section id="cover">
 					<h4>Cover</h4>
 
 					<p>The <dfn>cover</dfn> is an image that user agents can use to present the <a>Web Publication</a>
@@ -1657,7 +1661,7 @@
 					</section>
 				</section>
 
-				<section id="wp-table-of-contents">
+				<section id="table-of-contents">
 					<h4>Table of Contents</h4>
 
 					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
@@ -1737,10 +1741,10 @@
 				</section>
 			</section>
 
-			<section id="wp-resource-categorization-properties">
-				<h3>Resource Categorization Properties</h3>
+			<section id="infoset-resource-categorization-items">
+				<h3>Resource Categorization Items</h3>
 
-				<section id="wp-default-reading-order">
+				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
 
 					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
@@ -1837,7 +1841,7 @@
 					</section>
 				</section>
 
-				<section id="wp-resource-list">
+				<section id="resource-list">
 					<h4>Resource List</h4>
 
 					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
@@ -1944,7 +1948,7 @@
 					</section>
 				</section>
 
-				<section id="wp-extra-resources">
+				<section id="extra-resources">
 					<h4>List of extra resources</h4>
 
 					<p>The <dfn>list of extra resources</dfn> enumerates all <a href="#wp-resources">resources</a> that
@@ -2007,7 +2011,7 @@
 				</section>
 			</section>
 
-			<section id="wp-extensibility">
+			<section id="extensibility">
 				<h3>Extensibility</h3>
 
 				<section id="wp-extensibility-infoset">
