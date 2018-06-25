@@ -291,12 +291,12 @@
 					<ul>
 						<li>the core [[!schema.org]] context: <code>https://schema.org</code></li>
 						<li>the location of the Web Publication-specific context file:
-								<code>https://www.w3.org/ns/wpub.jsonld</code></li>
+								<code>https://www.w3.org/ns/wp-context</code></li>
 					</ul>
 
 					<pre class="example" title="The context declaration.">
 {
-    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     &#8230;
 }
 </pre>
@@ -330,7 +330,7 @@
 
 					<pre class="example" title="Setting a Web Publication's type to CreativeWork.">
 {
-    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     "@type"    : "CreativeWork"
     &#8230;
 }
@@ -343,7 +343,7 @@
 
 					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
-    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     "@type"    : "Book"
     &#8230;
 }
@@ -410,7 +410,7 @@
 	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
-    "@context" : ["https://schema.org", "https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     &#8230;
 	}
 	&lt;/script&gt;
@@ -694,7 +694,7 @@
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "CreativeWork",
     &#8230;
     "accessMode"            : ["textual", "visual"],
@@ -769,7 +769,7 @@
 
 						<pre class="example" title="Example for setting the address of the main entry point">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -873,7 +873,7 @@
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "CreativeWork",
     &#8230;
     "id"       : "http://www.w3.org/TR/tabular-data-model/",
@@ -884,7 +884,7 @@
 
 						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "isbn"     : "1234567890123",
@@ -1045,7 +1045,7 @@
 
 						<pre class="example" title="Author of a book">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1057,7 +1057,7 @@
 </pre>
 						<pre class="example" title="Separate listing of editors, authors, and publisher">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -1168,7 +1168,7 @@
 {
     "@context"   : [
         "https://schema.org",
-        "https://www.w3.org/ns/wpub.jsonld",
+        "https://www.w3.org/ns/wp-context",
         {
             "@language" : "fr"
         }
@@ -1194,7 +1194,7 @@
 								JSON-LD[[!json-ld]]: </p>
 							<pre class="example" title="Setting the default metadata language to French">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "author" : {
@@ -1264,7 +1264,7 @@
 
 						<pre class="example" title="Modification date of the publication">
 {
-    "@context"     : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"     : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"        : "CreativeWork",
     &#8230;
     "identifier"   : "http://www.w3.org/TR/tabular-data-model/",
@@ -1323,7 +1323,7 @@
 						</table>
 						<pre class="example" title="Creation and modification date of the publication">
 {
-    "@context"      : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"      : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"         : "CreativeWork",
     &#8230;
     "identifier"    : "http://www.w3.org/TR/tabular-data-model/",
@@ -1392,7 +1392,7 @@
 
 						<pre class="example" title="Reading progression set explicitl to ltr">
 {
-    "@context"           : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"           : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"              : "Book",
     &#8230;
     "url"                : "https://publisher.example.org/mobydick",
@@ -1460,7 +1460,7 @@
 						</table>
 						<pre class="example" title="Title of the book set explicitly">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1513,14 +1513,14 @@
 								href="#publication-link-def"><code>PublicationLink</code></a> object. The
 								<code>rel</code> value of the <a href="#publication-link-def"
 									><code>PublicationLink</code></a> MUST include the
-								<code>https://www.w3.org/ns/wpub#accessibility-report</code> identifier.</p>
+								<code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
 
 						<p class="note">The Working Group will attempt to define the <code>accessibility-report</code>
 							term by IANA, to avoid using a URL.</p>
 
 						<pre class="example" title="Link to an accessibility report">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
@@ -1528,7 +1528,7 @@
     "extraResources"  : [{
         "@type"       : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
-        "rel"         : "https://www.w3.org/ns/wpub/accessibility-report"
+        "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
     },{
         &#8230;
     }],
@@ -1575,7 +1575,7 @@
 
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -1631,14 +1631,14 @@
 							When present, link to such resource MUST be expressed using a <a
 								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
 							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
-							the <code>https://www.w3.org/ns/wpub/cover-page</code> identifier.</p>
+							the <code>https://www.w3.org/ns/wp#cover-page</code> identifier.</p>
 
 						<p class="note">The Working Group will attempt to define the <code>cover-page</code> term by
 							IANA, to avoid using a URL.</p>
 
 						<pre class="example" title="Cover page expressed as resource">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
@@ -1647,7 +1647,7 @@
         "@type"      : "PublicationLink",
         "url"        : "whale-image.jpg",
         "fileFormat" : "image/jpeg"
-        "rel"        : "https://www.w3.org/ns/wpub/cover-page"
+        "rel"        : "https://www.w3.org/ns/wp#cover-page"
     },{
         &#8230;
     }],
@@ -1710,7 +1710,7 @@
     &#8230;
     &lt;script type="application/ld+json"&gt;
     {
-        "@context"        : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+        "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
         "@type"           : "CreativeWork",
         &#8230;
         "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
@@ -1797,7 +1797,7 @@
 						</table>
 						<pre class="example" title="Reading order expressed as a simple list of URL-s">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1814,7 +1814,7 @@
 </pre>
 						<pre class="example" title="Reading order expressed as objects providing more information on items">
 {
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
@@ -1914,7 +1914,7 @@
 						</table>
 						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "CreativeWork",
     &#8230;
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
@@ -2040,7 +2040,7 @@
 
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wpub.jsonld"],
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
