@@ -255,7 +255,7 @@
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
 
-			<section id="wp-intro" class="informative">
+			<section id="wp-infoset-manifest" class="informative">
 				<h3>Infoset and Manifest</h3>
 
 				<p>A <a>Web Publication</a> is defined by a set of items known as its <dfn data-lt="infoset">information
@@ -275,7 +275,7 @@
 					contents, for example, is referenced from the manifest but serialized in an HTML document.</p>
 
 				<p>This specification describes the requirements for creating both the infoset and manifest. This
-					section, in particular, details how to create a manifest, and <a href="wp-properties">the next</a>
+					section, in particular, details how to create a manifest, and <a href="#wp-properties">the next</a>
 					lists the various properties common to infosets and manifests.</p>
 			</section>
 
@@ -402,7 +402,8 @@
 				</ul>
 
 				<p>The <code>href</code> attribute may also contain a fragment identifier, referring to the Web
-					Publication Manifest expressed as part of an HTML resource (see <a href="#wp-intro"></a>). </p>
+					Publication Manifest expressed as part of an HTML resource (see <a href="#wp-infoset-manifest"
+					></a>). </p>
 
 				<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
@@ -504,7 +505,7 @@
 				<p class="issue" data-number="235"></p>
 			</section>
 
-			<section id="wp-items-req">
+			<section id="wp-properties-req">
 				<h3>Requirements</h3>
 
 				<p class="ednote">As the serialization of the manifest remains an open issue, specifics about how
@@ -1943,7 +1944,7 @@
 					</section>
 				</section>
 
-				<section id="wp-extra-list">
+				<section id="wp-extra-resources">
 					<h4>List of extra resources</h4>
 
 					<p>The <dfn>list of extra resources</dfn> enumerates all <a href="#wp-resources">resources</a> that
@@ -2595,7 +2596,7 @@
 
 			<p id="publication-link-def">Certain manifest properties are expressed via JSON-LD terms that are typically
 				publication specific (i.e., defined through the JSON-LD context file defined for Web Publications, see
-					<a href="#wpub-context"></a>). This context also defines a general type used for external links,
+					<a href="#manifest-context"></a>). This context also defines a general type used for external links,
 				called <code>PublicationLink</code>, that contains that following properties (note that most of the
 				properties are):</p>
 
@@ -2927,10 +2928,11 @@
 						title="Hypertext Markup Language">HTML</abbr> documents, audio, etc, and the images, fonts etc.
 					The actual “things” have an additional subset of items that includes the entry page to the
 					publication and all of the other documents. The second element is the Manifest (JSON). The manifest
-					is used to generate the <a href="#infoset">Information Set (“Infoset”)</a>, which consists of a list
-					of all the “things” in the publication, the publication metadata, and the default reading order of
-					content. It is noted in the diagram that the entry page has to link to the manifest. (<a
-						role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web Publication.)</dd>
+					is used to generate the <a href="#wp-infoset-manifest">Information Set (“Infoset”)</a>, which
+					consists of a list of all the “things” in the publication, the publication metadata, and the default
+					reading order of content. It is noted in the diagram that the entry page has to link to the
+					manifest. (<a role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web
+					Publication.)</dd>
 			</dl>
 
 		</section>
