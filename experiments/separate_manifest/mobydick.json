@@ -3,7 +3,7 @@
   "@id": "https://publisher.example.org/mobydick",
 
   "metadata": {
-    "@type": "http://schema.org/Book",
+    "@type": "https://schema.org/Book",
     "title": "Moby-Dick",
     "author": "Herman Melville",
     "language": "en",
