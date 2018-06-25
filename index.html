@@ -1529,7 +1529,7 @@
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
-    "extraResources"  : [{
+    "links"  : [{
         "@type"       : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
         "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
@@ -1585,7 +1585,7 @@
     "identifier" : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     &#8230;
-    "externalResources"  : [{
+    "links"  : [{
         "@type"      : "PublicationLink",
         "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
         "fileFormat" : "text/html",
@@ -1673,10 +1673,13 @@
 						<p>There are no requirements on the completeness of the table of contents, except that, when
 							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, the manifest SHOULD
-							provide a link to an HTML element in one of the <a href="#wp-resources">resources</a> (most
+						<p>The table of contents is not specified directly in the manifest. Instead, it is expressed as 
+							an HTML element in one of the <a href="#wp-resources">resources</a> (most
 							likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value
-							set to <code>doc-toc</code>.</p>
+							set to <code>doc-toc</code>. This element SHOULD be in the HTML resource that embeds or 
+							links to the manifest (see <a href="#wp-construction"></a>); otherwise, the manifest SHOULD provide
+							a link to that HTML element in one of the <a href="#wp-resources">resources</a>. 
+						</p>
 
 						<p class="issue">This question arises only if the table of contents is accepted: can a table of
 							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
@@ -1684,32 +1687,14 @@
 					</section>
 
 					<section id="wp-table-of-contents-manifest">
-						<h5>Manifest Expresion</h5>
+						<h5>Manifest Expression</h5>
 
-						<p>If present in the Web Publication Manifest this item MUST be mapped on the
-								<code>tableOfContents</code> term, defined specifically for Web Publications. </p>
+						<p>If present in the manifest, the table of content MUST be expressed using a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
+							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
+							the <code>contents</code> (IANA) identifier.</p>
 
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>tableOfContents</code>
-									</td>
-									<td></td>
-									<td>A (relative or absolute) URL&#160;[[!url]].</td>
-									<td>(none)</td>
-								</tr>
-							</tbody>
-						</table>
-						<pre class="example" title="Reference to a table of content element, in the same file that contains the manifest is">
+						<pre class="example" title="Reference to a table of content element, in the same file that contains the manifest is (note that this reference is actually not necessary, it is included only for the purpose of the example)">
 &lt;head&gt;
     &#8230;
     &lt;script type="application/ld+json"&gt;
@@ -1719,7 +1704,14 @@
         &#8230;
         "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
         "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-        "tableOfContents" : "#toc"
+        "resources" : "#toc"
+        "resources"  : [{
+            "@type"         : "PublicationLink",
+            "url"           : "#toc",
+            "rel"           : "contents"
+        },{
+            &#8230;
+        }],
         &#8230;
     }
     &lt;/script&gt;
@@ -1733,10 +1725,6 @@
     &#8230;
 &lt;/body&gt;
 </pre>
-						<p class="issue">The term <code>tableOfContents</code> has not been approved by the Working
-							Group yet; it is currently a placeholder. </p>
-
-						<p class="issue" data-number="234"></p>
 					</section>
 				</section>
 			</section>
@@ -1976,7 +1964,7 @@
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the Web Publication Manifest, the list of extra resources maps to the
-								<code>extraResources</code> term, defined specifically for Web Publications. </p>
+								<code>links</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
@@ -1990,7 +1978,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>extraResources</code>
+										<code>links</code>
 									</td>
 									<td></td>
 									<td>
@@ -2049,7 +2037,7 @@
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
-    "extraResources"  : [{
+    "links"  : [{
         "@type"       : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
         "fileFormat"  : "application/xml",
