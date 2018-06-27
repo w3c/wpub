@@ -196,8 +196,8 @@
 					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
 					<dd>
 						<p>A manifest represents structured information about a <a>Web Publication</a>, such as
-							informative metadata, a <a href="#wp-resource-list">list of all resources</a>, and a
-								<a>default reading order</a>.</p>
+							informative metadata, a <a href="#resource-list">list of all resources</a>, and a <a>default
+								reading order</a>.</p>
 					</dd>
 
 					<dt><dfn>Non-empty</dfn></dt>
@@ -229,7 +229,7 @@
 			</section>
 		</section>
 		<section id="conformance">
-			<section>
+			<section id="conformance-classes">
 				<h2>Conformance Classes</h2>
 
 				<p>This specification defines two conformance classes: one for <a>Web Publications</a> and one for user
@@ -315,7 +315,7 @@
 							<code>https</code> when referencing Schema.org in the manifest.</p>
 
 					<p>In some cases, the context MAY be extended by additional, local information. For example, see <a
-							href="#wp-language-and-dir-manifest"></a>. </p>
+							href="#language-and-dir-manifest"></a>. </p>
 
 				</section>
 
@@ -375,7 +375,7 @@
 					element MUST be set to <code>application/ld+json</code>.</p>
 
 				<p>Additionally, the <code>script</code> element MUST include a unique identifier in an <code>id</code>
-					attribute&#160;[[!html]]. This identifier ensures that the manifest <a href="wp-linking">can be
+					attribute&#160;[[!html]]. This identifier ensures that the manifest <a href="#wp-linking">can be
 						referenced</a>.</p>
 
 				<pre class="example" title="A Web Publication Manifest included in an HTML document">
@@ -458,32 +458,111 @@
 			<section id="properties-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>Both the Web Publication infoset and manifest are defined by a common set of common properties. This
-					section describes these properties, including the rules for how they are expressed and compiled.
-					Note that the categorization of properties is done to simplify comprehension of their purpose; the
+				<p>Both the Web Publication infoset and manifest are defined by a common set of properties that describe
+					the basic information a user agent requires to process and render a Web Publication. These
+					properties are categorized as followed:</p>
+
+				<dl>
+					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
+					<dd>
+						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#title"
+								>title</a>, <a href="#creator">creator</a>, and <a href="#language-and-dir"
+							>language</a>. These properties are primarily drawn from <a href="https://schema.org"
+								>Schema.org</a> and its <a href="https://schema.org/docs/schemas.html">hosted
+								extensions</a>&#160;[[schema.org]], so they map to one or several Schema.org properties
+							and inherit their syntax and semantics. (The following property categories typically do not
+							have Schema.org equivalents, so are defined specifically for Web Publications.)</p>
+					</dd>
+					<dt><a href="#informative-properties">informative properties</a></dt>
+					<dd>
+						<p>Informative properties identify resources that contain additional information about the Web
+							Publication, such as its <a href="#privacy-policy">privacy policy</a> or an <a
+								href="#accessibility-report">accessibility report</a>.</p>
+					</dd>
+					<dt><a href="#structural-properties">structural properties</a></dt>
+					<dd>
+						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
+								href="#cover">cover image</a> or the the location of the <a href="#table-of-contents"
+								>table of contents</a>.</p>
+					</dd>
+					<dt><a href="#resource-categorization-properties">resource categorization</a></dt>
+					<dd>
+						<p>Resource categorization properties describe or identify common sets of resources, such as the
+								<a href="#resource-list">resource list</a> and <a href="#default-reading-order">default
+								reading order</a>. These properties refer to one or more external resources (images,
+							script files, separate metadata files, etc.).</p>
+					</dd>
+				</dl>
+
+
+				<p class="note">The categorization of properties is done to simplify comprehension of their purpose; the
 					groupings have no relevance outside this specification (i.e., the groupings do not exist in the
 					infoset or manifest).</p>
 
-				<p>The <a href="#descriptive-properties">descriptive properties</a> are based, wherever possible, on the
-					properties defined by <a href="https://schema.org">Schema.org</a> (including <a
-						href="https://schema.org/docs/schemas.html">hosted extensions</a>)&#160;[[schema.org]]. This
-					means that the descriptive infoset properties are mapped to one or several Schema.org properties
-					(inheriting their syntax and semantics). </p>
 
-				<p>The categorization of resources (see <a href="#wp-resource-categorization-properties"></a>) refer to
-					one or more external resources (images, script files, separate metadata files, etc.). These
-					categorizations do not have a counterpart in Schema.org, and are therefore defined specifically by
-					this specification.</p>
+				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
+					are are not mentioned in this specification; Web Publication authors can use any of those
+					properties. This document defines only the minimal set of infoset items, and their mapping to
+					Schema.org when appropriate. </p>
 
-				<p>The value of these categories is a link to a resource, or an array of such resources. These resources
-					are either informative (see <a href="#wp-informative-properties"></a>) or structural (see <a
-						href="#wp-structural-properties"></a>). Such a link may be expressed in one of two ways:</p>
+				<p class="ednote">There are discussion on whether a best practices document would be created, referring
+					to more schema.org terms. If so, it should be linked from here. </p>
+
+				<p class="issue" data-number="235"></p>
+			</section>
+
+			<section id="wp-properties-req">
+				<h3>Requirements</h3>
+
+				<p>The requirements for the expression of Web Publication properties are defined by the <abbr
+						title="information set"><a>infoset</a></abbr> as follows:</p>
+
+				<dl>
+					<dt>REQUIRED:</dt>
+					<dd>
+						<ul>
+							<li><a href="#address">address</a></li>
+							<li><a href="#default-reading-order">default reading order</a></li>
+							<li><a href="#resource-list">resource list</a></li>
+						</ul>
+					</dd>
+					<dt>RECOMMENDED:</dt>
+					<dd>
+						<ul>
+							<li><a href="#accessibility-report">accessibility report</a></li>
+							<li><a href="#language-and-dir">base direction</a></li>
+							<li><a href="#canonical-identifier">canonical identifier</a></li>
+							<li><a href="#cover">cover</a></li>
+							<li><a href="#creator">creator</a></li>
+							<li><a href="#extra-resources">extra resources</a></li>
+							<li><a href="#language-and-dir">language</a></li>
+							<li><a href="#last-modification-date">last modification date</a></li>
+							<li><a href="#publication-date">publication date</a></li>
+							<li><a href="#privacy-policy">privacy policy</a></li>
+							<li><a href="#reading-progression-direction">reading progression direction</a></li>
+							<li><a href="#table-of-contents">table of contents</a></li>
+							<li><a href="#title">title</a></li>
+						</ul>
+					</dd>
+				</dl>
+
+				<p>As the infoset properties do not all have to be serialized in the manifest, the requirements for the
+					manifest will differ in some cases. Refer to each property's definition to determine whether it is
+					required in the manifest or can be compiled from other information.</p>
+			</section>
+
+			<section id="properties-linked">
+				<h3>Link Values</h3>
+
+				<p>With the exception of the <a href="#descriptive-properties">descriptive properties</a>, the Web
+					Publication properties typically link to one or more resources. When a property requires a link
+					value, the link MUST be expressed in one of the following two ways:</p>
 
 				<ol>
-					<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-					<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object
-						(defined by this specification) that can be used to express, beyond the URL, the media type and
-						other characteristics of the target resource.</li>
+					<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]]; or</li>
+					<li>as an instance of a <a href="#publication-link-def"><code>PublicationLink</code> object</a> that
+						can be used to express, beyond the URL, the media type and other characteristics of the target
+						resource.</li>
 				</ol>
 
 				<pre class="example" title="Expressing external links, either as strings or as objects">
@@ -499,56 +578,6 @@
 		]
 	}
 </pre>
-
-				<p>Structural infoset items typically refer to external resources via a URL. The URL(s) can refer to
-					resources playing different roles (e.g., cover or privacy policy), which might need some additional
-					metadata (e.g., accessibility purposes).</p>
-
-				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
-					are are not mentioned in this specification; Web Publication authors can use any of those
-					properties. This document defines only the minimal set of infoset items, and their mapping to
-					Schema.org when appropriate. </p>
-
-				<p class="ednote">There are discussion on whether a best practices document would be created, referring
-					to more schema.org terms. If so, it should be linked from here. </p>
-
-				<p class="issue" data-number="235"></p>
-			</section>
-
-			<section id="properties-req">
-				<h3>Requirements</h3>
-
-				<p>The requirements for the expression of <abbr title="information set"><a>infoset</a></abbr> properties
-					are as follows:</p>
-
-				<dl>
-					<dt>REQUIRED:</dt>
-					<dd>
-						<ul>
-							<li><a href="#wp-address">address</a></li>
-							<li><a href="#wp-default-reading-order">default reading order</a></li>
-							<li><a href="#wp-resource-list">resource list</a></li>
-						</ul>
-					</dd>
-					<dt>RECOMMENDED:</dt>
-					<dd>
-						<ul>
-							<li><a href="#wp-a11y">accessibility report</a></li>
-							<li><a href="#wp-language-and-dir">base direction</a></li>
-							<li><a href="#wp-canonical-identifier">canonical identifier</a></li>
-							<li><a href="#wp-cover">cover</a></li>
-							<li><a href="#wp-creator">creator</a></li>
-							<li><a href="#wp-extra-resources">extra resources</a></li>
-							<li><a href="#wp-language-and-dir">language</a></li>
-							<li><a href="#wp-mod-date">last modification date</a></li>
-							<li><a href="#wp-pub-date">publication date</a></li>
-							<li><a href="#wp-privacy">privacy policy</a></li>
-							<li><a href="#wp-reading-progression">reading progression direction</a></li>
-							<li><a href="#wp-table-of-contents">table of contents</a></li>
-							<li><a href="#wp-title">title</a></li>
-						</ul>
-					</dd>
-				</dl>
 			</section>
 
 			<section id="descriptive-properties">
@@ -562,15 +591,15 @@
 						properties typically identify part of the result of an evaluation against established
 						accessibility criteria, such as those provided in [[WCAG20]]. The information provided by these
 						properties may be completed by a more detailed accessibility report (see <a
-							href="#wp-a11y-report"></a>). </p>
+							href="#accessibility-report"></a>). </p>
 
-					<section id="wp-a11y-infoset">
+					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>&#8230;</p>
 					</section>
 
-					<section id="wp-a11y-manifest">
+					<section id="accessibility-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -688,7 +717,7 @@
 								Wiki site</a>.</p>
 
 						<p>Note that the author MAY also provide a reference to a more detailed <a
-								href="#wp-a11y-report-manifest">Accessibility Report</a>, beyond the accessibility
+								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
 							information expressed by these properties.</p>
 
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
@@ -712,7 +741,7 @@
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
 						represents the <a>primary entry page</a> for the Web Publication.</p>
 
-					<section id="wp-address-infoset">
+					<section id="address-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
@@ -740,7 +769,7 @@
 							relation&#160;[[link-relation]].</div>
 					</section>
 
-					<section id="wp-address-manifest">
+					<section id="address-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -785,7 +814,7 @@
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
 						the Web Publication.</p>
 
-					<section id="wp-canonical-identifier-infoset">
+					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The canonical identifier MUST be an <a>address</a> or a value that allows a one-to-one
@@ -824,7 +853,7 @@
 							metadata.</p>
 					</section>
 
-					<section id="wp-canonical-identifier-manifest">
+					<section id="canonical-identifier-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -1096,8 +1125,8 @@
 					<h4>Language and Base Direction</h4>
 
 					<p>Each textual property in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wp-title">title</a>, <a
-							href="#wp-creator">creators</a>) is <a
+						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a
+							href="#creator">creators</a>) is <a
 							href="https://w3c.github.io/string-meta/#dom-localizable"
 						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
 
@@ -1112,7 +1141,7 @@
 						</li>
 					</ul>
 
-					<section id="wp-language-and-dir-infoset">
+					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global
@@ -1148,7 +1177,7 @@
 					</section>
 
 
-					<section id="wp-language-and-dir-manifest">
+					<section id="language-and-dir-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>As this infoset item refers to several aspects of setting language and direction, each is
@@ -1187,9 +1216,9 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item specific language and direction</h6>
 
-							<p> The infoset described in <a href="#wp-language-and-dir"></a> also requires the
-								possibility to set the language and base direction for any textual information in the
-								manifest. This MUST be set for each item separately, also using the <a
+							<p> The infoset described in <a href="#language-and-dir"></a> also requires the possibility
+								to set the language and base direction for any textual information in the manifest. This
+								MUST be set for each item separately, also using the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
 										><code>@value</code> and <code>@language</code> keywords</a> of
 								JSON-LD[[!json-ld]]: </p>
@@ -1208,8 +1237,8 @@
 }
 </pre>
 							<p>The value of the language tag MUST be set to the language code as defined in [[!bcp47]].
-								If not set, the default value is the <a href="#wp-language-and-dir-manifest">default
-									value of the manifest</a>.</p>
+								If not set, the default value is the <a href="#language-and-dir-manifest">default value
+									of the manifest</a>.</p>
 
 							<p class="issue" data-number="219"></p>
 						</section>
@@ -1225,7 +1254,7 @@
 						updated (i.e., whenever changes were last made to any of the resources of the Web Publication,
 						including the <a>manifest</a>).</p>
 
-					<section id="wp-mod-date-infoset">
+					<section id="last-modification-date-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The last modification date does not necessarily reflect all changes to the Web Publication
@@ -1234,7 +1263,7 @@
 							and need updating.</p>
 					</section>
 
-					<section id="wp-mod-date-manifest">
+					<section id="last-modification-date-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -1289,13 +1318,13 @@
 						the Web Publication is first made available online or could be a point in time before
 						publication when the Web Publication is considered final.</p>
 
-					<section id="wp-pub-date-infoset">
+					<section id="publication-date-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>&#8230;</p>
 					</section>
 
-					<section id="wp-pub-date-manifest">
+					<section id="publication-date-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -1343,7 +1372,7 @@
 					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the
 						reading direction from one resource to the next within a <a>Web Publication</a>.</p>
 
-					<section id="wp-reading-progression-infoset">
+					<section id="reading-progression-direction-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The value of this property may be:</p>
@@ -1365,7 +1394,7 @@
 							the user to the next and previous pages, touch gestures, etc.</p>
 					</section>
 
-					<section id="wp-reading-progression-manifest">
+					<section id="reading-progression-direction-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -1409,13 +1438,13 @@
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
 
-					<section id="wp-title-infoset">
+					<section id="title-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The title MAY be specified by the HTML <a
 								href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
 									><code>title</code> element</a> (if present) of the Web Publication’s <a>primary
-								entry page</a>. This value is, however, overwritten if <a href="#wp-title-manifest"
+								entry page</a>. This value is, however, overwritten if <a href="#title-manifest"
 								>manifest expression</a>, if present, i.e., the manifest expression MUST have a higher
 							priority.</p>
 
@@ -1449,7 +1478,7 @@
 						</div>
 					</section>
 
-					<section id="wp-title-manifest">
+					<section id="title-manifest">
 						<h5>Manifest Expression</h5>
 
 						<table class="zebra">
@@ -1499,7 +1528,7 @@
 						provided in [[WCAG20]], and are an important source of information in determining the usability
 						of a Web Publication.</p>
 
-					<section id="wp-a11y-report-infoset">
+					<section id="accessibility-report-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an
@@ -1517,7 +1546,7 @@
 							to such a record could take precedence over, or complement, the accessibility record.</p>
 					</section>
 
-					<section id="wp-a11y-report-manifest">
+					<section id="accessibility-report-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the manifest, the accessibility report MUST be expressed using a <a
@@ -1558,7 +1587,7 @@
 						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
 						such a declaration increases the trust users have in the content.</p>
 
-					<section id="wp-privacy-infoset">
+					<section id="privacy-policy-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>To address this concern, a link to a privacy policy can be included in the <abbr
@@ -1574,7 +1603,7 @@
 						<p class="issue" data-number="203"></p>
 					</section>
 
-					<section id="wp-privacy-manifest">
+					<section id="privacy-policy-manifest">
 						<h4>Manifest Expression</h4>
 
 						<p>If present in the manifest, the privacy policy MUST be expressed using a <a
@@ -1615,15 +1644,15 @@
 					<p>The <dfn>cover</dfn> is an image that user agents can use to present the <a>Web Publication</a>
 						to users (e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
 
-					<section id="wp-cover-infoset">
+					<section id="cover-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a cover
 							image.</p>
 
 						<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
-							Publications. A user agent SHOULD use the Web Publication's <a href="#wp-title">title</a>
-							and <a href="#wp-creator">creators</a> as text alternatives for such interfaces.</p>
+							Publications. A user agent SHOULD use the Web Publication's <a href="#title">title</a> and
+								<a href="#creator">creators</a> as text alternatives for such interfaces.</p>
 
 						<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
 							resolutions for different device screens.</p>
@@ -1634,7 +1663,7 @@
 							properties of the infoset into a graphic, such as the title or creators).</p>
 					</section>
 
-					<section id="wp-cover-manifest">
+					<section id="cover-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the manifest, the cover MUST be expressed using a <a
@@ -1673,7 +1702,7 @@
 					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
 						outline of the major sections of the Web Publication.</p>
 
-					<section id="wp-table-of-contents-infoset">
+					<section id="table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>There are no requirements on the completeness of the table of contents, except that, when
@@ -1683,7 +1712,7 @@
 							an HTML element in one of the <a href="#wp-resources">resources</a> (most likely a
 								<code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set
 							to <code>doc-toc</code>. This element SHOULD be in the <a>primary entry page</a> of the Web
-							Publication; if that is not the case, a <a href="#wp-table-of-contents-manifest">manifest
+							Publication; if that is not the case, a <a href="#table-of-contents-manifest">manifest
 								expression</a> SHOULD identify the element in another resource. </p>
 
 						<p class="issue">This question arises only if the table of contents is accepted: can a table of
@@ -1691,7 +1720,7 @@
 							the <a>default reading order</a>?</p>
 					</section>
 
-					<section id="wp-table-of-contents-manifest">
+					<section id="table-of-contents-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the manifest, the table of content MUST be expressed using a <a
@@ -1744,7 +1773,7 @@
 				</section>
 			</section>
 
-			<section id="resource-categorization-Properties">
+			<section id="resource-categorization-properties">
 				<h3>Resource Categorization Properties</h3>
 
 				<section id="default-reading-order">
@@ -1757,7 +1786,7 @@
 						interaction the default reading order defines the expected progression from one resource to the
 						next.</p>
 
-					<section id="wp-default-reading-order-infoset">
+					<section id="default-reading-order-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The default reading order MUST include at least one resource.</p>
@@ -1767,7 +1796,7 @@
 							Publication, the default reading order need not be specified.</p>
 					</section>
 
-					<section id="wp-default-reading-order-manifest">
+					<section id="default-reading-order-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
@@ -1853,7 +1882,7 @@
 						list of resources that belong to the Web Publication. All other resources are external to the
 						Web Publication.</p>
 
-					<section id="wp-resource-list-infoset">
+					<section id="resource-list-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The completeness of the resource list will affect the usability of the Web Publication in
@@ -1878,7 +1907,7 @@
 						</div>
 					</section>
 
-					<section id="wp-resource-list-manifest">
+					<section id="resource-list-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
@@ -1952,7 +1981,7 @@
 						its bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource
 						list</a>) but are, rather, external to the Web Publication. </p>
 
-					<section id="wp-extra-list-infoset">
+					<section id="extra-resources-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The completeness of the list of extra resources will affect the usability of the Web
@@ -1968,7 +1997,7 @@
 							them).</p>
 					</section>
 
-					<section id="wp-extra-list-manifest">
+					<section id="extra-resources-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
@@ -2445,11 +2474,11 @@
 					<section>
 						<h5>Affordances</h5>
 						<p> The table of contents is a listed as a structural property in the infoset, see <a
-								href="#wp-table-of-contents"></a>
+								href="#table-of-contents"></a>
 						</p>
 						<p> The table of content is referred to in the Web Publication Manifest (see <a
-								href="#wp-table-of-contents-manifest"></a>) and is expressed using and HTML element; see
-								<a href="#wp-table-of-contents"></a> for further details. </p>
+								href="#table-of-contents-manifest"></a>) and is expressed using and HTML element; see <a
+								href="#table-of-contents"></a> for further details. </p>
 						<p> User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
 							explicitly specified to create a table of contents. </p>
 					</section>
@@ -2692,11 +2721,11 @@
 					<dt>
 						<dfn>url</dfn>
 					</dt>
-					<dd>Contains the <a href="#wp-address">address</a>. Required.</dd>
+					<dd>Contains the <a href="#address">address</a>. Required.</dd>
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the default value <a href="#wp-language-and-dir">language</a>.</dd>
+					<dd>Contains the default value <a href="#language-and-dir">language</a>.</dd>
 					<dt>
 						<dfn>direction</dfn>
 					</dt>
@@ -2708,7 +2737,7 @@
 					<dt>
 						<dfn>name</dfn>
 					</dt>
-					<dd>Contains the <a href="#wp-title">title</a>.</dd>
+					<dd>Contains the <a href="#title">title</a>.</dd>
 					<dt>
 						<dfn>id</dfn>
 					</dt>
@@ -2716,7 +2745,7 @@
 					<dt>
 						<dfn>authors</dfn>
 					</dt>
-					<dd>Contains one or more <a href="#wp-creator">creators</a>.</dd>
+					<dd>Contains one or more <a href="#creator">creators</a>.</dd>
 					<dt>
 						<dfn>dateModified</dfn>
 					</dt>
@@ -2747,7 +2776,7 @@
 			<section id="contributor-idl">
 				<h3><code>authors</code> member </h3>
 
-				<p class="ednote">The <a href="#wp-creator">current infoset for creators</a> is not fully defined; this
+				<p class="ednote">The <a href="#creator">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
 
 				<pre class="idl">
@@ -2804,7 +2833,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the <a href="#wp-language-and-dir">language</a>.</dd>
+					<dd>Contains the <a href="#language-and-dir">language</a>.</dd>
 					<dt>
 						<dfn>dir</dfn>
 					</dt>
