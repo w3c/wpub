@@ -272,7 +272,8 @@
 
 				<p>Although the <abbr title="information set">infoset</abbr> is primarily compiled from a Web
 					Publication's <a>manifest</a>, some information is obtained outside the manifest. The table of
-					contents, for example, may be referenced from the manifest but is serialized in an HTML document.</p>
+					contents, for example, may be referenced from the manifest but is serialized in an HTML
+					document.</p>
 
 				<p>This specification describes the requirements for creating both the infoset and manifest. This
 					section, in particular, details how to create a manifest, and <a href="#wp-properties">the next</a>
@@ -300,12 +301,13 @@
 }
 </pre>
 
-					<p>The Web Publication context file MAY add features to the properties defined in Schema.org (e.g., the requirement
-						for the <a href="https://schema.org/creator">creator</a> property to be order preserving).</p>
+					<p>The Web Publication context file MAY add features to the properties defined in Schema.org (e.g.,
+						the requirement for the <a href="https://schema.org/creator">creator</a> property to be order
+						preserving).</p>
 
 
-					<p class="note">As part of the continuous contacts with Schema.org the additional features defined in the
-							Web Publication context file could migrate to the core Schema.org vocabulary.</p>
+					<p class="note">As part of the continuous contacts with Schema.org the additional features defined
+						in the Web Publication context file could migrate to the core Schema.org vocabulary.</p>
 
 					<p class="note">Although Schema.org is often referenced using the <code>http</code> URI scheme, <a
 							href="https://schema.org/docs/faq.html#19">the vocabulary is being migrated</a> to use the
@@ -333,10 +335,10 @@
 }
 </pre>
 
-					<p>Schema.org also includes a number of more specific types, all subtypes of <code>CreativeWork</code>, such as <a
-							href="https://schema.org/Article">Article</a>, <a href="https://schema.org/Book">Book</a>,
-						and <a href="https://schema.org/Course">Course</a>. These MAY be used instead of
-							<code>CreativeWork</code>. </p>
+					<p>Schema.org also includes a number of more specific types, all subtypes of
+							<code>CreativeWork</code>, such as <a href="https://schema.org/Article">Article</a>, <a
+							href="https://schema.org/Book">Book</a>, and <a href="https://schema.org/Course">Course</a>.
+						These MAY be used instead of <code>CreativeWork</code>. </p>
 
 					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
@@ -345,8 +347,8 @@
     &#8230;
 }
 </pre>
-					<p class="note">Refer to the Schema.org site for the complete <a href="https://schema.org/CreativeWork"
-							>list of  <code>CreativeWork</code> subtypes</a>.</p>
+					<p class="note">Refer to the Schema.org site for the complete <a
+							href="https://schema.org/CreativeWork">list of <code>CreativeWork</code> subtypes</a>.</p>
 				</section>
 
 				<section id="manifest-properties">
@@ -417,7 +419,8 @@
 	&lt;/script&gt;
 </pre>
 
-				<p class="issue">The exact value of <code>rel</code> is still to be agreed upon and should be registered by IANA.</p>
+				<p class="issue">The exact value of <code>rel</code> is still to be agreed upon and should be registered
+					by IANA.</p>
 
 				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
 
@@ -435,7 +438,7 @@
 
 				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
 						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>. This
-						page is referred to as the <dfn>primary entry page</dfn> of the Web Publication.</p>
+					page is referred to as the <dfn>primary entry page</dfn> of the Web Publication.</p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -449,37 +452,38 @@
 				</div>
 			</section>
 		</section>
-		<section id="infoset-items">
-			<h2>Infoset Items</h2>
+		<section id="wp-properties">
+			<h2>Web Publication Properties</h2>
 
-			<section id="infoset-items-intro" class="informative">
+			<section id="properties-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>Descriptive items in the Web Publication Manifest are based, wherever possible, on the properties
-					defined by <a href="https://schema.org">Schema.org</a>&#160;[[schema.org]] (including <a
-						href="https://schema.org/docs/schemas.html">hosted extensions</a> of Schema.org). This means
-					that the descriptive infoset properties are mapped to one or several Schema.org properties
+				<p>Both the Web Publication infoset and manifest are defined by a common set of common properties. This
+					section describes these properties, including the rules for how they are expressed and compiled.
+					Note that the categorization of properties is done to simplify comprehension of their purpose; the
+					groupings have no relevance outside this specification (i.e., the groupings do not exist in the
+					infoset or manifest).</p>
+
+				<p>The <a href="#descriptive-properties">descriptive properties</a> are based, wherever possible, on the
+					properties defined by <a href="https://schema.org">Schema.org</a> (including <a
+						href="https://schema.org/docs/schemas.html">hosted extensions</a>)&#160;[[schema.org]]. This
+					means that the descriptive infoset properties are mapped to one or several Schema.org properties
 					(inheriting their syntax and semantics). </p>
 
-				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
-					are are not mentioned in this specification; Web Publication authors can use any of those
-					properties. This document defines only the minimal set of infoset items, and their mapping to
-					Schema.org when appropriate. </p>
+				<p>The categorization of resources (see <a href="#wp-resource-categorization-properties"></a>) refer to
+					one or more external resources (images, script files, separate metadata files, etc.). These
+					categorizations do not have a counterpart in Schema.org, and are therefore defined specifically by
+					this specification.</p>
 
-				<p class="ednote">There are discussion on whether a best practices document would be created, referring
-					to more schema.org terms. If so, it should be linked from here. </p>
-
-				<p>The categorization of resources (see <a href="#wp-resource-categorization-properties"></a>) refer to one or more 
-					external resources (images, script files, separate metadata files, etc.). These categorizations do not have a counterpart in Schema.org, and are therefore defined specifically by this specification.</p>
-
-				<p>The value of these categories is a link to a resource, or an array of such resources. These resources are either informative (see <a href="#wp-informative-properties"></a>) or structural (see <a href="#wp-structural-properties"></a>). Such a link
-					may be expressed in one of two ways:</p>
+				<p>The value of these categories is a link to a resource, or an array of such resources. These resources
+					are either informative (see <a href="#wp-informative-properties"></a>) or structural (see <a
+						href="#wp-structural-properties"></a>). Such a link may be expressed in one of two ways:</p>
 
 				<ol>
 					<li>a string encoding the (absolute or relative) URL of the resources; or</li>
-					<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object (defined by this specification)
-						that can be used to express, beyond the URL, the media type and other characteristics of the
-						target resource.</li>
+					<li>an instance of a <a href="#publication-link-def"><code>PublicationLink</code></a> object
+						(defined by this specification) that can be used to express, beyond the URL, the media type and
+						other characteristics of the target resource.</li>
 				</ol>
 
 				<pre class="example" title="Expressing external links, either as strings or as objects">
@@ -500,10 +504,18 @@
 					resources playing different roles (e.g., cover or privacy policy), which might need some additional
 					metadata (e.g., accessibility purposes).</p>
 
+				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
+					are are not mentioned in this specification; Web Publication authors can use any of those
+					properties. This document defines only the minimal set of infoset items, and their mapping to
+					Schema.org when appropriate. </p>
+
+				<p class="ednote">There are discussion on whether a best practices document would be created, referring
+					to more schema.org terms. If so, it should be linked from here. </p>
+
 				<p class="issue" data-number="235"></p>
 			</section>
 
-			<section id="infoset-req">
+			<section id="properties-req">
 				<h3>Requirements</h3>
 
 				<p>The requirements for the expression of <abbr title="information set"><a>infoset</a></abbr> properties
@@ -539,18 +551,18 @@
 				</dl>
 			</section>
 
-			<section id="infoset-descriptive-items">
-				<h3>Descriptive Items</h3>
+			<section id="descriptive-properties">
+				<h3>Descriptive Properties</h3>
 
 				<section id="accessibility">
 					<h4>Accessibility</h4>
 
-					<p>The accessibility properties provides information about the suitability of a <a>Web Publication</a>
-						for consumption by users with varying preferred reading modalities. These properties typically
-						identify part of the result of an evaluation against established accessibility criteria, such as those
-						provided in [[WCAG20]]. The information provided by these properties may be completed by a more detailed 
-						accessibility report (see <a href="#wp-a11y-report"></a>).
-					</p>
+					<p>The accessibility properties provides information about the suitability of a <a>Web
+							Publication</a> for consumption by users with varying preferred reading modalities. These
+						properties typically identify part of the result of an evaluation against established
+						accessibility criteria, such as those provided in [[WCAG20]]. The information provided by these
+						properties may be completed by a more detailed accessibility report (see <a
+							href="#wp-a11y-report"></a>). </p>
 
 					<section id="wp-a11y-infoset">
 						<h5>Infoset Requirements</h5>
@@ -831,17 +843,16 @@
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
-									<td>
-										(None; the schema.org context files maps this on the <a href="https://www.w3.org/TR/json-ld/#node-objects"><code>@id</code></a> keyword.)
-									</td>
+									<td> (None. Maps to the <a href="https://www.w3.org/TR/json-ld/#node-objects"
+												><code>@id</code></a> keyword [[!json-ld]].) </td>
 								</tr>
 								<tr>
 									<td>
 										<code>identifier</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
-									<td>A textual information that represents a unique identification, or more
-										complex objects defined in [[!schema.org]].</td>
+									<td>A textual information that represents a unique identification, or more complex
+										objects defined in [[!schema.org]].</td>
 									<td>
 										<a href="https://schema.org/identifier"><code>identifier</code></a>
 									</td>
@@ -849,15 +860,17 @@
 							</tbody>
 						</table>
 
-						<p class=note>Although the value of <code>identifier</code> can also be a URL, the usage of <code>id</code> is RECOMMENDED in that case.</p>
+						<p class="note">Although the value of <code>identifier</code> can also be a URL, the usage of
+								<code>id</code> is RECOMMENDED in that case.</p>
 
-						<p class=note>The <code>id</code> term and the <code>@id</code> keyword can be used interchangeably; the former is 
-						mapped onto the second by the schema.org context.</p>
+						<p class="note">The <code>id</code> term and the <code>@id</code> keyword can be used
+							interchangeably; the former is mapped onto the second by the schema.org context.</p>
 
-						<p>There are also sub-properties for <code>identifier</code> that can be used on their own right, like <a
-								href="https://schema.org/isbn"><code>isbn</code></a>, <a href="https://schema.org/issn"
-									><code>issn</code></a>, or <a href="https://schema.org/serialNumber"
-									><code>serialNumber</code></a>. See also the <a href="https://schema.org/identifier">Schema.org</a> description for further details.</p>
+						<p>There are also sub-properties for <code>identifier</code> that can be used on their own
+							right, like <a href="https://schema.org/isbn"><code>isbn</code></a>, <a
+								href="https://schema.org/issn"><code>issn</code></a>, or <a
+								href="https://schema.org/serialNumber"><code>serialNumber</code></a>. See also the <a
+								href="https://schema.org/identifier">Schema.org</a> description for further details.</p>
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
@@ -1165,8 +1178,8 @@
 }
 </pre>
 
-							<p>The value of the language tag MUST be set to the language code as defined in&nbsp;[[!bcp47]].
-								If not set, the default value is <code>en</code>.</p>
+							<p>The value of the language tag MUST be set to the language code as defined
+								in&#160;[[!bcp47]]. If not set, the default value is <code>en</code>.</p>
 
 							<p class="issue" data-number="218"></p>
 						</section>
@@ -1399,13 +1412,20 @@
 					<section id="wp-title-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>
-							The title MAY be specified by the HTML <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"><code>title</code> element</a> (if present) of the Web Publication’s <a>primary entry page</a>. This value is, however, overwritten if <a href="#wp-title-manifest">manifest expression</a>, if present, i.e., the manifest expression MUST have a higher priority.
-						<p>
-						
-						<p class=note>
-							Relying on the <code>title</code> element may be semantically problematic if the Web Publication consists of several HTML resources (e.g., one per chapter of a book), because the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element">HTML definition</a> defines this element as a "metadata" for the enclosing HTML resource, as opposed to a collection of resources. Relying to this element is, on the other hand, perfectly appropriate, and preferred, in the case of a publication consisting of one single HTML resource, e.g., a scholarly journal article.
-						</p> 
+						<p>The title MAY be specified by the HTML <a
+								href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
+									><code>title</code> element</a> (if present) of the Web Publication’s <a>primary
+								entry page</a>. This value is, however, overwritten if <a href="#wp-title-manifest"
+								>manifest expression</a>, if present, i.e., the manifest expression MUST have a higher
+							priority.</p>
+
+						<p class="note">Relying on the <code>title</code> element may be semantically problematic if the
+							Web Publication consists of several HTML resources (e.g., one per chapter of a book),
+							because the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
+								>HTML definition</a> defines this element as a "metadata" for the enclosing HTML
+							resource, as opposed to a collection of resources. Relying to this element is, on the other
+							hand, perfectly appropriate, and preferred, in the case of a publication consisting of one
+							single HTML resource, e.g., a scholarly journal article.</p>
 
 						<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
 								<a>non-empty</a>.</p>
@@ -1467,8 +1487,8 @@
 				</section>
 			</section>
 
-			<section id="infoset-informative-items">
-				<h3>Informative Items</h3>
+			<section id="informative-properties">
+				<h3>Informative Properties</h3>
 
 				<section id="accessibility-report">
 					<h4>Accessibility Report</h4>
@@ -1560,8 +1580,8 @@
 						<p>If present in the manifest, the privacy policy MUST be expressed using a <a
 								href="#publication-link-def"><code>PublicationLink</code></a> object. The
 								<code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the
-								<code>privacy-policy</code> (IANA) identifier.</p>
+									><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code>
+							(IANA) identifier.</p>
 
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
@@ -1586,8 +1606,8 @@
 				</section>
 			</section>
 
-			<section id="infoset-structural-items">
-				<h3>Structural Items</h3>
+			<section id="structural-properties">
+				<h3>Structural Properties</h3>
 
 				<section id="cover">
 					<h4>Cover</h4>
@@ -1659,13 +1679,12 @@
 						<p>There are no requirements on the completeness of the table of contents, except that, when
 							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, it is expressed via 
-							an HTML element in one of the <a href="#wp-resources">resources</a> (most
-							likely a <code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value
-							set to <code>doc-toc</code>. This element SHOULD be in the <a>primary entry page</a> of the Web Publication; 
-							if that is not the case, a <a href="#wp-table-of-contents-manifest">manifest expression</a> SHOULD identify 
-							the element in another resource.
-						</p>
+						<p>The table of contents is not specified directly in the manifest. Instead, it is expressed via
+							an HTML element in one of the <a href="#wp-resources">resources</a> (most likely a
+								<code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set
+							to <code>doc-toc</code>. This element SHOULD be in the <a>primary entry page</a> of the Web
+							Publication; if that is not the case, a <a href="#wp-table-of-contents-manifest">manifest
+								expression</a> SHOULD identify the element in another resource. </p>
 
 						<p class="issue">This question arises only if the table of contents is accepted: can a table of
 							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
@@ -1698,7 +1717,7 @@
 }
 </pre>
 
-<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
+						<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
 &lt;head&gt;
     &#8230;
     &lt;script type="application/ld+json"&gt;
@@ -1725,8 +1744,8 @@
 				</section>
 			</section>
 
-			<section id="infoset-resource-categorization-items">
-				<h3>Resource Categorization Items</h3>
+			<section id="resource-categorization-Properties">
+				<h3>Resource Categorization Properties</h3>
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
@@ -1743,9 +1762,9 @@
 
 						<p>The default reading order MUST include at least one resource.</p>
 
-						<p>The default reading order is specified directly in the manifest. However, if the reading order
-							consists of one single resource, namely the <a>primary entry page</a> of the Web Publication, the
-							default reading order need not be specified.</p>
+						<p>The default reading order is specified directly in the manifest. However, if the reading
+							order consists of one single resource, namely the <a>primary entry page</a> of the Web
+							Publication, the default reading order need not be specified.</p>
 					</section>
 
 					<section id="wp-default-reading-order-manifest">
@@ -1862,7 +1881,8 @@
 					<section id="wp-resource-list-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the <code>resources</code> term, defined specifically for Web Publications. </p>
+						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
+								<code>resources</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
@@ -1935,11 +1955,11 @@
 					<section id="wp-extra-list-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The completeness of the list of extra resources will affect the usability of the Web Publication in
-							certain scenarios (e.g., the ability to access privacy policy information). For this reason,
-							it is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
-							extra resources beyond those listed in the <a>default reading order</a> or <a>resource
-								list</a>.</p>
+						<p>The completeness of the list of extra resources will affect the usability of the Web
+							Publication in certain scenarios (e.g., the ability to access privacy policy information).
+							For this reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the
+							Web Publication's extra resources beyond those listed in the <a>default reading order</a> or
+								<a>resource list</a>.</p>
 
 						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
 							third-party scripts that reference resources from deep within their source), but a user
@@ -1951,7 +1971,8 @@
 					<section id="wp-extra-list-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the <code>links</code> term, defined specifically for Web Publications. </p>
+						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
+								<code>links</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
