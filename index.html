@@ -565,19 +565,90 @@
 						resource.</li>
 				</ol>
 
-				<pre class="example" title="Expressing external links, either as strings or as objects">
-	{
-        &#8230;
-        "resources" : [
-            "datatypes.svg",
-            {
-                "@type"      : "PublicationLink",
-                "url"        : "test-utf8.csv",
-                "fileFormat" : "text/csv"
-            }
-		]
-	}
+				<pre class="example" title="Resource list includes one link using a string value ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
+{
+    &#8230;
+    "resources" : [
+        "datatypes.svg",
+        {
+            "@type"       : "PublicationLink",
+            "url"         : "test-utf8.csv",
+            "fileFormat"  : "text/csv",
+            "name"        : "Test Results",
+            "description" : "CSV file containing the full data set used in this research."
+        },
+        {
+            "@type"       : "PublicationLink",
+            "url"         : "terminology.html",
+            "fileFormat"  : "text/html",
+            "rel"         : "glossary"
+        }
+    ]
+}
 </pre>
+
+				<section id="publicationLink">
+					<h2>The <code>PublicationLink</code> type</h2>
+
+					<p id="publication-link-def">Certain manifest properties are expressed via JSON-LD terms that are
+						typically publication specific (i.e., defined through the JSON-LD context file defined for Web
+						Publications, see <a href="#manifest-context"></a>). This context also defines a general type
+						used for external links, called <code>PublicationLink</code>, that contains that following
+						properties (note that most of the properties are):</p>
+
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term name</th>
+								<th>Short description</th>
+								<th>Required/Optional</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="https://schema.org/url"><code>url</code></a>
+								</td>
+								<td>URL&#160;[[url]] of the resource.</td>
+								<td>Required.</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="https://schema.org/fileFormat"><code>fileFormat</code></a>
+								</td>
+								<td>Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
+										<code>application/zip</code>.</td>
+								<td>Optional.</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="https://schema.org/name"><code>name</code></a>
+								</td>
+								<td>Name of the item.</td>
+								<td>Optional.</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="https://schema.org/description"><code>description</code></a>
+								</td>
+								<td>Description of the item.</td>
+								<td>Optional.</td>
+							</tr>
+							<tr>
+								<td>
+									<code>rel</code>
+								</td>
+								<td>
+									<p>One or more relations.</p>
+									<p>The values are either the relevant relationship terms of the IANA link
+										registry&#160;[[!iana-link-relations]], or specially minted URLs if no suitable
+										link registry item exists.</p>
+								</td>
+								<td>Optional.</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
 			</section>
 
 			<section id="descriptive-properties">
@@ -2618,65 +2689,6 @@
 			<h2>Privacy</h2>
 
 			<div class="ednote">Placeholder for privacy issues.</div>
-		</section>
-		<section class="appendix" id="publicationLink">
-			<h2>The <code>PublicationLink</code> type</h2>
-
-			<p id="publication-link-def">Certain manifest properties are expressed via JSON-LD terms that are typically
-				publication specific (i.e., defined through the JSON-LD context file defined for Web Publications, see
-					<a href="#manifest-context"></a>). This context also defines a general type used for external links,
-				called <code>PublicationLink</code>, that contains that following properties (note that most of the
-				properties are):</p>
-
-			<table class="zebra">
-				<thead>
-					<tr>
-						<th>Term name</th>
-						<th>Short description</th>
-						<th>Required/Optional</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<a href="https://schema.org/name"><code>url</code></a>
-						</td>
-						<td> URL&#160;[[url]] of the resource. </td>
-						<td> Required. </td>
-					</tr>
-					<tr>
-						<td>
-							<a href="https://schema.org/fileFormat"><code>fileFormat</code></a>
-						</td>
-						<td> Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
-								<code>application/zip</code>. </td>
-						<td> Optional. </td>
-					</tr>
-					<tr>
-						<td>
-							<a href="https://schema.org/name"><code>name</code></a>
-						</td>
-						<td> Name of the item. </td>
-						<td> Optional. </td>
-					</tr>
-					<tr>
-						<td>
-							<a href="https://schema.org/description"><code>description</code></a>
-						</td>
-						<td> Description of the item. </td>
-						<td> Optional. </td>
-					</tr>
-					<tr>
-						<td>
-							<code>rel</code>
-						</td>
-						<td>One or more relations; the values are either the relevant relationship terms of the IANA
-							link registry&#160;[[!iana-link-relations]], or specially minted URL-s if no suitable link
-							registry item exists.</td>
-						<td>Optional.</td>
-					</tr>
-				</tbody>
-			</table>
 		</section>
 		<section class="appendix" id="webidl">
 			<h2>WebIDL</h2>
