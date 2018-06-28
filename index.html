@@ -457,6 +457,34 @@
 						agent.</p>
 				</div>
 			</section>
+
+			<section id="wp-table-of-contents">
+				<h3>Table of Contents</h3>
+
+				<p>The <dfn>table of contents</dfn> provides a hierarchical list of links that reflects the structural
+					outline of the major sections of the Web Publication.</p>
+
+				<p>The table of contents is expressed via an HTML element in one of the <a href="#wp-resources"
+						>resources</a> (typically a <code>nav</code> element&#160;[[!html]]). This element MUST be
+					identified by the <code>role</code> attribute&#160;[[!html]] value
+					"<code>doc-toc</code>"&#160;[[!dpub-aria]], and MUST be the first element in the document so
+					designated.</p>
+
+				<p>The table of contents SHOULD be located in the <a>primary entry page</a> of the Web Publication. If
+					not, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a> that
+					contains the structure.</p>
+
+				<p>There are no requirements on the table of contents iteself, except that, when specified, it MUST
+					include a link to at least one <a href="#wp-resources">resource</a>.</p>
+
+				<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
+					information on how to identify in the infoset and manifest which resource contains the table of
+					contents.</p>
+
+				<p class="issue">This question arises only if the table of contents is accepted: can a table of contents
+					navigation element refer, via links, to any resource that is <em>not</em> listed in the <a>default
+						reading order</a>?</p>
+			</section>
 		</section>
 		<section id="wp-properties">
 			<h2>Web Publication Properties</h2>
@@ -1791,25 +1819,26 @@
 				<section id="table-of-contents">
 					<h4>Table of Contents</h4>
 
-					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
-						outline of the major sections of the Web Publication.</p>
+					<p>The <dfn>table of contents</dfn> property identifies the resource that contains the Web
+						Publication's <a href="#wp-table-of-contents">table of contents</a>.</p>
 
 					<section id="table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>There are no requirements on the completeness of the table of contents, except that, when
-							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
+						<p>User agents MUST compute the <code>table-of-contents</code> as follows:</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, it is expressed via
-							an HTML element in one of the <a href="#wp-resources">resources</a> (most likely a
-								<code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set
-							to <code>doc-toc</code>. This element SHOULD be in the <a>primary entry page</a> of the Web
-							Publication; if that is not the case, a <a href="#table-of-contents-manifest">manifest
-								expression</a> SHOULD identify the element in another resource. </p>
+						<ul>
+							<li>If a resource in either the <a href="#default-reading-order">default reading order</a>
+								or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
+								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>href</code>
+								value of the specified resource as the link to the table of contents.</li>
+							<li>If the <a>primary entry page</a> contains an HTML element with the
+								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria]], use the
+									<code>href</code> value of that document as the link to the table of contents.</li>
+						</ul>
 
-						<p class="issue">This question arises only if the table of contents is accepted: can a table of
-							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
-							the <a>default reading order</a>?</p>
+						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
+							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
 					</section>
 
 					<section id="table-of-contents-manifest">
@@ -1818,7 +1847,11 @@
 						<p>If present in the manifest, the table of content MUST be expressed using a <a
 								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
 							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
-							the <code>contents</code> (IANA) identifier.</p>
+							the <code>contents</code> identifier&#160;[[!iana-link-relations]].</p>
+
+						<p>The link to the table of contents MAY be specified in either the <a
+								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
+								>resource-list</a>, but MUST NOT be specified in both.</p>
 
 						<pre class="example" title="Table of content identified in another resource of the Web Publication">
 {
@@ -2946,17 +2979,17 @@
 		</section>
 		<section id="app-manifest-examples" class="appendix informative">
 			<h2>Manifest Examples</h2>
-			
+
 			<section>
 				<h3>Basic Book</h3>
 				<pre class="example" data-include="experiments/separate_manifest/mobydick.json" data-include-format="text"></pre>
 			</section>
-			
+
 			<section>
 				<h3>Single-Document Publication</h3>
 				<pre class="example" data-include="experiments/w3c_rec/simple_version.html" data-include-format="text"></pre>
 			</section>
-			
+
 			<section>
 				<h3>Audiobook</h3>
 				<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
