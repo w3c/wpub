@@ -461,13 +461,13 @@
 			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
-				<p>The <dfn>table of contents</dfn> provides a hierarchical list of links that reflects the structural
-					outline of the major sections of the Web Publication.</p>
+				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
+					the major sections of the Web Publication.</p>
 
 				<p>The table of contents is expressed via an HTML element in one of the <a href="#wp-resources"
 						>resources</a> (typically a <code>nav</code> element&#160;[[!html]]). This element MUST be
 					identified by the <code>role</code> attribute&#160;[[!html]] value
-					"<code>doc-toc</code>"&#160;[[!dpub-aria]], and MUST be the first element in the document so
+					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so
 					designated.</p>
 
 				<p>The table of contents SHOULD be located in the <a>primary entry page</a> of the Web Publication. If
@@ -1833,8 +1833,8 @@
 								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>href</code>
 								value of the specified resource as the link to the table of contents.</li>
 							<li>If the <a>primary entry page</a> contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria]], use the
-									<code>href</code> value of that document as the link to the table of contents.</li>
+								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], use
+								the <code>href</code> value of that document as the link to the table of contents.</li>
 						</ul>
 
 						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
