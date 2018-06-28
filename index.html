@@ -440,13 +440,11 @@
 						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>. This
 					page is referred to as the <dfn>primary entry page</dfn> of the Web Publication.</p>
 
-				<p>
-					The manifest may be <a href="manifest-embedding">embedded</a> into the <a>primary entry page</a>; in this case the link element MUST use a relative URL to refer to the manifest.
-				</p>
+				<p> The manifest may be <a href="manifest-embedding">embedded</a> into the <a>primary entry page</a>; in
+					this case the link element MUST use a relative URL to refer to the manifest. </p>
 
-				<p>
-					The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST NOT appear as part of the <a href="#wp-resource-categorization-properties"></a>.
-				</p>
+				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST
+					NOT appear as part of the <a href="#wp-resource-categorization-properties"></a>. </p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -569,7 +567,7 @@
 				<ol>
 					<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]]; or</li>
 					<li>as an instance of a <a href="#publication-link-def"><code>PublicationLink</code> object</a> that
-						can be used to express, beyond the URL, the media type and other characteristics of the target
+						can be used to express the URL, the media type, and other characteristics of the target
 						resource.</li>
 				</ol>
 
@@ -596,63 +594,78 @@
 </pre>
 
 				<section id="publicationLink">
-					<h2>The <code>PublicationLink</code> type</h2>
+					<h2><code>PublicationLink</code> Definition</h2>
 
-					<p id="publication-link-def">Certain manifest properties are expressed via JSON-LD terms that are
-						typically publication specific (i.e., defined through the JSON-LD context file defined for Web
-						Publications, see <a href="#manifest-context"></a>). This context also defines a general type
-						used for external links, called <code>PublicationLink</code>, that contains that following
-						properties (note that most of the properties are):</p>
+					<p id="publication-link-def">This specification defines a new type for links called
+								<dfn><code>PublicationLink</code></dfn>. It consists of the following properties:</p>
 
 					<table class="zebra">
 						<thead>
 							<tr>
-								<th>Term name</th>
-								<th>Short description</th>
-								<th>Required/Optional</th>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+								<th>Optionality</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
+									<code>url</code>
+								</td>
+								<td>Location of the resource.</td>
+								<td>A URL&#160;[[url]].</td>
+								<td>
 									<a href="https://schema.org/url"><code>url</code></a>
 								</td>
-								<td>URL&#160;[[url]] of the resource.</td>
-								<td>Required.</td>
+								<td>REQUIRED</td>
 							</tr>
 							<tr>
+								<td>
+									<code>fileFormat</code>
+								</td>
+								<td>Media type of the resource (e.g., <code>text/html</code>).</td>
+								<td>MIME Media Type&#160;[[!rfc2046]].</td>
 								<td>
 									<a href="https://schema.org/fileFormat"><code>fileFormat</code></a>
 								</td>
-								<td>Media type, typically the MIME format&#160;[[!rfc2046]] of the content e.g.
-										<code>application/zip</code>.</td>
-								<td>Optional.</td>
+								<td>OPTIONAL</td>
 							</tr>
 							<tr>
+								<td>
+									<code>name</code>
+								</td>
+								<td>Name of the item.</td>
+								<td>Text.</td>
 								<td>
 									<a href="https://schema.org/name"><code>name</code></a>
 								</td>
-								<td>Name of the item.</td>
-								<td>Optional.</td>
+								<td>OPTIONAL</td>
 							</tr>
 							<tr>
 								<td>
-									<a href="https://schema.org/description"><code>description</code></a>
+									<code>description</code>
 								</td>
 								<td>Description of the item.</td>
-								<td>Optional.</td>
+								<td>Text.</td>
+								<td>
+									<a href="https://schema.org/description"><code>description</code></a>
+								</td>
+								<td>OPTIONAL</td>
 							</tr>
 							<tr>
 								<td>
 									<code>rel</code>
 								</td>
+								<td>The relationship of the resource to the Web Publication.</td>
 								<td>
-									<p>One or more relations.</p>
-									<p>The values are either the relevant relationship terms of the IANA link
-										registry&#160;[[!iana-link-relations]], or specially minted URLs if no suitable
-										link registry item exists.</p>
+									<p>One or more relations. The values are either the relevant relationship terms of
+										the IANA link registry&#160;[[!iana-link-relations]], or specially-defined URLs
+										if no suitable link registry item exists.</p>
 								</td>
-								<td>Optional.</td>
+								<td>(None)</td>
+								<td>OPTIONAL</td>
 							</tr>
 						</tbody>
 					</table>
