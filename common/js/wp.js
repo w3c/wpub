@@ -54,6 +54,21 @@ function create_wp(config) {
 		}
 	})
 
+
+	// This is a fixed portion...
+
+	manifest["links"] = [{
+            "@type"      : "PublicationLink",
+            "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+            "fileFormat" : "text/html",
+            "rel"        : "privacy-policy"
+    },{
+            "@type"      : "PublicationLink",
+            "url"        : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
+            "fileFormat" : "text/html",
+            "rel"        : "copyright"
+    }];
+
 	// Get a link to the manifest reference:
 	let head = document.getElementsByTagName("head")[0];
 	let link = document.createElement("link");
