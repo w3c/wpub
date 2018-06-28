@@ -643,7 +643,7 @@
 									<code>url</code>
 								</td>
 								<td>Location of the resource.</td>
-								<td>A URL&#160;[[url]].</td>
+								<td>A URL with no or empty fragment identifier&#160;[[!url]].</td>
 								<td>
 									<a href="https://schema.org/url"><code>url</code></a>
 								</td>
@@ -1839,6 +1839,10 @@
 
 						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
 							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
+
+						<p>If the table of contents resource contains more than one element identified by the
+								<code>role</code> "<code>doc-toc</code>", user agents MUST use the first element in
+							document order as the table of contents.</p>
 					</section>
 
 					<section id="table-of-contents-manifest">
@@ -1862,7 +1866,7 @@
     "name"       : "Moby Dick",
     "resources"  : [{
         "@type"      : "PublicationLink",
-        "url"        : "toc_file.html#toc",
+        "url"        : "toc_file.html",
         "rel"        : "contents"
     },{
         &#8230;
@@ -1900,6 +1904,14 @@
 
 			<section id="resource-categorization-properties">
 				<h3>Resource Categorization Properties</h3>
+
+				<p><a>Web Publication</a> resources MAY be specified via the <a>default reading order</a>, the
+						<a>resource list</a>, or the <a>list of extra resources</a>, defined in this section. These
+					lists can contain, for example, references to <a href="#informative-properties">informative
+						properties</a> like the <a href="#privacy-policy">privacy policy</a>, or <a
+						href="#structural-properties">structural properties</a> like the <a>table of contents</a>. A
+					particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST NOT be
+					repeated within a list.</p>
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
