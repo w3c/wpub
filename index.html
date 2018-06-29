@@ -474,7 +474,7 @@
 					not, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a> that
 					contains the structure.</p>
 
-				<p>There are no requirements on the table of contents iteself, except that, when specified, it MUST
+				<p>There are no requirements on the table of contents itself, except that, when specified, it MUST
 					include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
 				<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
@@ -1830,11 +1830,10 @@
 						<ul>
 							<li>If a resource in either the <a href="#default-reading-order">default reading order</a>
 								or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
-								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>href</code>
-								value of the specified resource as the link to the table of contents.</li>
+								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>url</code>
+								value of the specified resource as the link leading to the table of contents.</li>
 							<li>If the <a>primary entry page</a> contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], use
-								the <code>href</code> value of that document as the link to the table of contents.</li>
+								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], use that element as the tabke of contents.</li>
 						</ul>
 
 						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
