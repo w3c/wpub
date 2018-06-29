@@ -445,7 +445,7 @@
 					this case the link element MUST use a relative URL to refer to the manifest. </p>
 
 				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST
-					NOT appear as part of the <a href="#wp-resource-categorization-properties"></a>. </p>
+					NOT appear as part of the <a href="#resource-categorization-properties"></a>. </p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -457,6 +457,34 @@
 						ensure a more consistent reading experience for users regardless of their preferred user
 						agent.</p>
 				</div>
+			</section>
+
+			<section id="wp-table-of-contents">
+				<h3>Table of Contents</h3>
+
+				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
+					the major sections of the Web Publication.</p>
+
+				<p>The table of contents is expressed via an HTML element in one of the <a href="#wp-resources"
+						>resources</a> (typically a <code>nav</code> element&#160;[[!html]]). This element MUST be
+					identified by the <code>role</code> attribute&#160;[[!html]] value
+					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so
+					designated.</p>
+
+				<p>The table of contents SHOULD be located in the <a>primary entry page</a> of the Web Publication. If
+					not, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a> that
+					contains the structure.</p>
+
+				<p>There are no requirements on the table of contents itself, except that, when specified, it MUST
+					include a link to at least one <a href="#wp-resources">resource</a>.</p>
+
+				<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
+					information on how to identify in the infoset and manifest which resource contains the table of
+					contents.</p>
+
+				<p class="issue">This question arises only if the table of contents is accepted: can a table of contents
+					navigation element refer, via links, to any resource that is <em>not</em> listed in the <a>default
+						reading order</a>?</p>
 			</section>
 		</section>
 		<section id="wp-properties">
@@ -598,7 +626,7 @@
 					<h2><code>PublicationLink</code> Definition</h2>
 
 					<p id="publication-link-def">This specification defines a new type for links called
-								<dfn><code>PublicationLink</code></dfn>. It consists of the following properties:</p>
+							<code>PublicationLink</code>. It consists of the following properties:</p>
 
 					<table class="zebra">
 						<thead>
@@ -616,7 +644,8 @@
 									<code>url</code>
 								</td>
 								<td>Location of the resource.</td>
-								<td>A URL&#160;[[url]].</td>
+								<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type for
+									additional restrictions.</td>
 								<td>
 									<a href="https://schema.org/url"><code>url</code></a>
 								</td>
@@ -1759,9 +1788,11 @@
 					<section id="cover-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the manifest, the cover MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a> object. The
-								<code>rel</code> value of the <a href="#publication-link-def"
+						<p>If present in the manifest, the cover MUST be expressed as a <a href="#publication-link-def"
+									><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term
+							MUST NOT include a fragment identifier.</p>
+
+						<p>The <code>rel</code> value of the <a href="#publication-link-def"
 									><code>PublicationLink</code></a> MUST include the
 								<code>https://www.w3.org/ns/wp#cover-page</code> identifier.</p>
 
@@ -1792,34 +1823,46 @@
 				<section id="table-of-contents">
 					<h4>Table of Contents</h4>
 
-					<p>The <dfn>table of contents</dfn> is a hierarchical list of links that reflects the structural
-						outline of the major sections of the Web Publication.</p>
+					<p>The <dfn>table of contents</dfn> property identifies the resource that contains the Web
+						Publication's <a href="#wp-table-of-contents">table of contents</a>.</p>
 
 					<section id="table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>There are no requirements on the completeness of the table of contents, except that, when
-							specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.</p>
+						<p>User agents MUST compute the <code>table-of-contents</code> as follows:</p>
 
-						<p>The table of contents is not specified directly in the manifest. Instead, it is expressed via
-							an HTML element in one of the <a href="#wp-resources">resources</a> (most likely a
-								<code>nav</code> element&#160;[[!html]]), with a <code>role</code> attribute value set
-							to <code>doc-toc</code>. This element SHOULD be in the <a>primary entry page</a> of the Web
-							Publication; if that is not the case, a <a href="#table-of-contents-manifest">manifest
-								expression</a> SHOULD identify the element in another resource. </p>
+						<ul>
+							<li>If a resource in either the <a href="#default-reading-order">default reading order</a>
+								or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
+								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>url</code>
+								value of the specified resource as the link leading to the table of contents.</li>
+							<li>If the <a>primary entry page</a> contains an HTML element with the
+								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], use
+								that element as the tabke of contents.</li>
+						</ul>
 
-						<p class="issue">This question arises only if the table of contents is accepted: can a table of
-							contents navigation element refer, via links, to any resource that is <em>not</em> listed in
-							the <a>default reading order</a>?</p>
+						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
+							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
+
+						<p>If the table of contents resource contains more than one element identified by the
+								<code>role</code> "<code>doc-toc</code>", user agents MUST use the first element in
+							document order as the table of contents.</p>
 					</section>
 
 					<section id="table-of-contents-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the manifest, the table of content MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
-							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
-							the <code>contents</code> (IANA) identifier.</p>
+						<p>If present in the manifest, the table of content MUST be expressed as a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
+								<code>url</code> term MUST NOT include a fragment identifier.</p>
+
+						<p>The <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the <code>contents</code>
+							identifier&#160;[[!iana-link-relations]].</p>
+
+						<p>The link to the table of contents MAY be specified in either the <a
+								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
+								>resource-list</a>, but MUST NOT be specified in both.</p>
 
 						<pre class="example" title="Table of content identified in another resource of the Web Publication">
 {
@@ -1830,7 +1873,7 @@
     "name"       : "Moby Dick",
     "resources"  : [{
         "@type"      : "PublicationLink",
-        "url"        : "toc_file.html#toc",
+        "url"        : "toc_file.html",
         "rel"        : "contents"
     },{
         &#8230;
@@ -1869,6 +1912,14 @@
 			<section id="resource-categorization-properties">
 				<h3>Resource Categorization Properties</h3>
 
+				<p><a>Web Publication</a> resources MAY be specified via the <a>default reading order</a>, the
+						<a>resource list</a>, or the <a>list of extra resources</a>, defined in this section. These
+					lists can contain, for example, references to <a href="#informative-properties">informative
+						properties</a> like the <a href="#privacy-policy">privacy policy</a>, or <a
+						href="#structural-properties">structural properties</a> like the <a>table of contents</a>. A
+					particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST NOT be
+					repeated within a list.</p>
+
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
 
@@ -1894,6 +1945,7 @@
 
 						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
 								<code>readingOrder</code> term, defined specifically for Web Publications.</p>
+
 						<table class="zebra">
 							<thead>
 								<tr>
@@ -1916,7 +1968,8 @@
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
 										</ul>
-										<p>The order in the array is <em>significant</em>.</p>
+										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
+											fragment identifiers.</p>
 									</td>
 									<td>(none)</td>
 								</tr>
@@ -2028,7 +2081,8 @@
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
 										</ul>
-										<p>The order in the array is <em>not significant</em>.</p>
+										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
+											fragment identifiers.</p>
 									</td>
 									<td>(none)</td>
 								</tr>
@@ -2066,22 +2120,22 @@
 					</section>
 				</section>
 
-				<section id="extra-resources">
-					<h4>List of extra resources</h4>
+				<section id="links">
+					<h4>Links</h4>
 
-					<p>The <dfn>list of extra resources</dfn> enumerates all <a href="#wp-resources">resources</a> that
-						are used in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within
-						its bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource
-						list</a>) but are, rather, external to the Web Publication. </p>
+					<p>The <dfn>links</dfn> property enumerates all <a href="#wp-resources">resources</a> that are used
+						in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within its
+						bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource list</a>)
+						but are, rather, external to the Web Publication.</p>
 
-					<section id="extra-resources-infoset">
+					<section id="links-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The completeness of the list of extra resources will affect the usability of the Web
+						<p>The completeness of the <code>links</code> list will affect the usability of the Web
 							Publication in certain scenarios (e.g., the ability to access privacy policy information).
 							For this reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the
-							Web Publication's extra resources beyond those listed in the <a>default reading order</a> or
-								<a>resource list</a>.</p>
+							Web Publication's extra resources (i.e., beyond those listed in the <a>default reading
+								order</a> or <a>resource list</a>).</p>
 
 						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
 							third-party scripts that reference resources from deep within their source), but a user
@@ -2090,7 +2144,7 @@
 							them).</p>
 					</section>
 
-					<section id="extra-resources-manifest">
+					<section id="links-manifest">
 						<h5>Manifest Expression</h5>
 
 						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
@@ -2947,17 +3001,17 @@
 		</section>
 		<section id="app-manifest-examples" class="appendix informative">
 			<h2>Manifest Examples</h2>
-			
+
 			<section>
 				<h3>Basic Book</h3>
 				<pre class="example" data-include="experiments/separate_manifest/mobydick.json" data-include-format="text"></pre>
 			</section>
-			
+
 			<section>
 				<h3>Single-Document Publication</h3>
 				<pre class="example" data-include="experiments/w3c_rec/simple_version.html" data-include-format="text"></pre>
 			</section>
-			
+
 			<section>
 				<h3>Audiobook</h3>
 				<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
