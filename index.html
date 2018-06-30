@@ -710,10 +710,9 @@
 
 					<p>The accessibility properties provides information about the suitability of a <a>Web
 							Publication</a> for consumption by users with varying preferred reading modalities. These
-						properties typically identify part of the result of an evaluation against established
-						accessibility criteria, such as those provided in [[WCAG20]]. The information provided by these
-						properties may be completed by a more detailed accessibility report (see <a
-							href="#accessibility-report"></a>). </p>
+						properties typically supplement an evaluation against established accessibility criteria, such
+						as those provided in [[WCAG20]]. (For linking to a detailed accessibility report, see <a
+							href="#accessibility-report"></a>.)</p>
 
 					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
@@ -917,7 +916,7 @@
 							</tbody>
 						</table>
 
-						<pre class="example" title="Example for setting the address of the main entry point">
+						<pre class="example" title="Setting the address of the main entry page">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
@@ -990,20 +989,22 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code>
+										<code>id</code>/ <code>@id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
-									<td> (None. Maps to the <a href="https://www.w3.org/TR/json-ld/#node-objects"
-												><code>@id</code></a> keyword [[!json-ld]].) </td>
+									<td> (None. <code>id</code> maps to the <a
+											href="https://www.w3.org/TR/json-ld/#node-objects"><code>@id</code></a>
+										keyword [[!json-ld]].) </td>
 								</tr>
 								<tr>
 									<td>
 										<code>identifier</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
-									<td>A textual information that represents a unique identification, or more complex
-										objects defined in [[!schema.org]].</td>
+									<td>A textual string that represents a unique identifier, or a <a
+											href="https://schema.org/PropertyValue"><code>PropertyValue</code> type</a>
+										[[!schema.org]].</td>
 									<td>
 										<a href="https://schema.org/identifier"><code>identifier</code></a>
 									</td>
@@ -1011,11 +1012,10 @@
 							</tbody>
 						</table>
 
-						<p class="note">Although the value of <code>identifier</code> can also be a URL, the usage of
-								<code>id</code> is RECOMMENDED in that case.</p>
+						<p>The use of <code>id</code> is RECOMMENDED when the identifier is a URL.</p>
 
 						<p class="note">The <code>id</code> term and the <code>@id</code> keyword can be used
-							interchangeably; the former is mapped onto the second by the schema.org context.</p>
+							interchangeably: the former is mapped onto the second by the schema.org context.</p>
 
 						<p>There are also sub-properties for <code>identifier</code> that can be used on their own
 							right, like <a href="https://schema.org/isbn"><code>isbn</code></a>, <a
@@ -1039,7 +1039,7 @@
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
     &#8230;
-    "isbn"     : "1234567890123",
+    "isbn"     : "9780123456789",
     "url"      : "https://publisher.example.org/mobydick",
     &#8230;
 }
@@ -1059,8 +1059,8 @@
 
 						<p>A Web Publication MAY have more than one creator.</p>
 
-						<p>The creator property SHOULD include the role the creator played in the creation of the Web
-							Publication (e.g., 'author', 'illustrator', 'translator').</p>
+						<p>The creator property SHOULD retain the role the creator played in the creation of the Web
+							Publication, when available (e.g., 'author', 'illustrator', 'translator').</p>
 					</section>
 
 					<section id="wp-creator-manifest">
@@ -1080,8 +1080,8 @@
 									<td>
 										<code>artist</code>
 									</td>
-									<td>The primary artist for a work in a medium other than pencils or digital line
-										art.</td>
+									<td>The primary artist for the publication, in a medium other than pencils or
+										digital line art.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/artist"><code>artist</code></a>
@@ -1091,7 +1091,7 @@
 									<td>
 										<code>author</code>
 									</td>
-									<td>The author of this content.</td>
+									<td>The author of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
@@ -1112,7 +1112,7 @@
 									<td>
 										<code>creator</code>
 									</td>
-									<td>The creator of this content.</td>
+									<td>The creator of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
@@ -1123,7 +1123,7 @@
 									<td>
 										<code>editor</code>
 									</td>
-									<td>The editor of this content.</td>
+									<td>The editor of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://schema.org/editor"><code>editor</code></a>
@@ -1133,7 +1133,7 @@
 									<td>
 										<code>illustrator</code>
 									</td>
-									<td>The illustrator of a publication.</td>
+									<td>The illustrator of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
@@ -1164,7 +1164,7 @@
 									<td>
 										<code>publisher</code>
 									</td>
-									<td>The publisher of the creative work.</td>
+									<td>The publisher of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
@@ -1175,7 +1175,7 @@
 									<td>
 										<code>readBy</code>
 									</td>
-									<td>A person who reads (performs) the audiobook.</td>
+									<td>A person who reads (performs) the publication (for audiobooks).</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
 									<td>
 										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
@@ -1185,7 +1185,7 @@
 									<td>
 										<code>translator</code>
 									</td>
-									<td>The translator of a publication.</td>
+									<td>The translator of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>. </td>
 									<td>
@@ -1253,25 +1253,27 @@
 						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
 
 					<ul>
-						<li>the natural <dfn>language</dfn>, which MUST be a tag that conforms to&#160;[[!bcp47]];</li>
-						<li>the <dfn>base direction</dfn>, which identifies the display direction for the property using
-							one of the following possible values: <ul>
-								<li><code>ltr</code>: left-to-right;</li>
-								<li><code>rtl</code>: right-to-left;</li>
-								<li><code>auto</code>: direction is determined from the value of the property.</li>
-							</ul>
-						</li>
+						<li>the natural <dfn>language</dfn>;</li>
+						<li>the <dfn>base direction</dfn> (the display direction for the property).</li>
 					</ul>
 
 					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global
-							language and the base direction declarations using the same conventions (i.e., [[!bcp47]]
-							tags for language, and the values <code>ltr</code>/<code>rtl</code>/<code>auto</code> for
-							base direction). These are used as defaults for textual properties in the <abbr
-								title="information set">infoset</abbr>, unless overwritten by the properties
-							themselves.</p>
+							language and the base direction declarations. The natural language MUST be a tag that
+							conforms to&#160;[[!bcp47]], while the base language direction MUST have one of the
+							following values:</p>
+
+						<ul>
+							<li><code>ltr</code>: left-to-right;</li>
+							<li><code>rtl</code>: right-to-left;</li>
+							<li><code>auto</code>: direction is determined from the value of the property.</li>
+						</ul>
+
+						<p>When specified, these properties are used as defaults for textual values in the <abbr
+								title="information set">infoset</abbr>, but they MAY be overridden by individual
+							properties.</p>
 
 						<p class="note">These features make it possible to add the title of a publication in different
 							languages, or repeat the creators’ names using different scripts.</p>
@@ -1282,8 +1284,8 @@
 							global defaults when such information is not provided in a resource.</p>
 
 						<p>If a user agent requires the language and one is not available in the <abbr
-								title="information set">infoset</abbr> (globally or specifically for the property), or
-							the obtained value is invalid, the user agent MAY attempt to determine the language. This
+								title="information set">infoset</abbr> (globally or specifically for a property), or the
+							obtained value is invalid, the user agent MAY attempt to determine the language. This
 							specification does not mandate how such a language tag is created. The user agent might:</p>
 
 						<ul>
@@ -1312,11 +1314,11 @@
 								manifest MUST be set by <em>extending</em> the context of the manifest to include the
 								right features.</p>
 
-							<p>To set the language, the context information must be <em>extended</em> by the <a
+							<p>To set the language, the context information MUST be <em>extended</em> by the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@language</code> keyword</a> of JSON-LD[[!json-ld]]: </p>
+										><code>@language</code> keyword</a> [[!json-ld]]: </p>
 
-							<pre class="example" title="Setting the default metadata language to French">
+							<pre class="example" title="Setting the default language to French">
 {
     "@context"   : [
         "https://schema.org",
@@ -1329,7 +1331,7 @@
 }
 </pre>
 
-							<p>The value of the language tag MUST be set to the language code as defined
+							<p>The value of the language tag MUST be set to a language code as defined
 								in&#160;[[!bcp47]]. If not set, the default value is <code>en</code>.</p>
 
 							<p class="issue" data-number="218"></p>
@@ -1338,13 +1340,11 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item specific language and direction</h6>
 
-							<p> The infoset described in <a href="#language-and-dir"></a> also requires the possibility
-								to set the language and base direction for any textual information in the manifest. This
-								MUST be set for each item separately, also using the <a
+							<p> It is possible to set the language and base direction for any textual value in the
+								manifest. This information MUST be set for each item separately using the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> keywords</a> of
-								JSON-LD[[!json-ld]]: </p>
-							<pre class="example" title="Setting the default metadata language to French">
+										><code>@value</code> and <code>@language</code> keywords</a>&#160;[[!json-ld]]: </p>
+							<pre class="example" title="Setting the default language of an author name to French">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
@@ -1358,9 +1358,9 @@
     }
 }
 </pre>
-							<p>The value of the language tag MUST be set to the language code as defined in [[!bcp47]].
-								If not set, the default value is the <a href="#language-and-dir-manifest">default value
-									of the manifest</a>.</p>
+							<p>The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. If
+								not set, the default value is the <a href="#language-and-dir-manifest">default value of
+									the manifest</a>.</p>
 
 							<p class="issue" data-number="219"></p>
 						</section>
@@ -1404,9 +1404,9 @@
 									</td>
 									<td>Last modification date of the publication.</td>
 									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
-											href="https://schema.org/DateTime"><code>DateTime</code></a> value
-										[[!schema.org]], both expressed in ISO 8601 date, or Date Time formats,
-										respectively [[iso8601]].</td>
+											href="https://schema.org/DateTime"><code>DateTime</code></a>
+										value&#160;[[!schema.org]], both expressed in ISO 8601 date, or Date Time
+										formats, respectively [[iso8601]].</td>
 									<td>
 										<a href="https://schema.org/dateModified"><code>dateModified</code></a>
 									</td>
@@ -1414,7 +1414,7 @@
 							</tbody>
 						</table>
 
-						<pre class="example" title="Modification date of the publication">
+						<pre class="example" title="Las modification date of the publication">
 {
     "@context"     : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"        : "CreativeWork",
@@ -1535,7 +1535,7 @@
 									</td>
 									<td>Reading direction from one resource to the other.</td>
 									<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
-									<td>(none)</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1551,7 +1551,6 @@
     "readingProgression" : "ltr"
 }
 </pre>
-
 					</section>
 				</section>
 
@@ -1563,35 +1562,27 @@
 					<section id="title-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The title MAY be specified by the HTML <a
+						<p>The title is specified by the <a href="#title-manifest">manifest expression</a>, when
+							present. If not included in the manifest, user agents MAY use the value of the <a
 								href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-									><code>title</code> element</a> (if present) of the Web Publication’s <a>primary
-								entry page</a>. This value is, however, overwritten if <a href="#title-manifest"
-								>manifest expression</a>, if present, i.e., the manifest expression MUST have a higher
-							priority.</p>
+									><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary
+								entry page</a> (if present) .</p>
 
-						<p class="note">Relying on the <code>title</code> element may be semantically problematic if the
-							Web Publication consists of several HTML resources (e.g., one per chapter of a book),
+						<p class="note">Relying on the <code>title</code> element could be semantically problematic if
+							the Web Publication consists of several HTML resources (e.g., one per chapter of a book),
 							because the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-								>HTML definition</a> defines this element as a "metadata" for the enclosing HTML
-							resource, as opposed to a collection of resources. Relying to this element is, on the other
-							hand, perfectly appropriate, and preferred, in the case of a publication consisting of one
-							single HTML resource, e.g., a scholarly journal article.</p>
+								>HTML definition</a> defines this element as "metadata" for the enclosing HTML document,
+							not for a collection of resources. Using this element is, on the other hand, preferred in
+							the case of a publication consisting of a single HTML document (e.g., a scholarly journal
+							article).</p>
 
 						<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
 								<a>non-empty</a>.</p>
 
 						<p>If a user agent requires a title and one is not available in the <abbr
-								title="information set">infoset</abbr>, the user agent MAY create one. This
-							specification does not mandate how such a title is created. The user agent might:</p>
-
-						<ul>
-							<li>use the first <a>non-empty</a>
-								<code>title</code> element found in a resource in the <a>default reading order</a>;</li>
-							<li>provide a language-specific placeholder title (e.g., 'Untitled Publication');</li>
-							<li>use the <abbr title="Uniform Resource Locator">URL</abbr> of the manifest;</li>
-							<li>calculate a title using its own algorithm.</li>
-						</ul>
+								title="information set">infoset</abbr>, it MAY create one (e.g., provide a
+							language-specific placeholder title or use the <abbr title="Uniform Resource Locator"
+								>URL</abbr> of the manifest).</p>
 
 						<div class="note">
 							<p>A user agent is not expected to produce a <a
@@ -1647,7 +1638,7 @@
 					<p>An accessibility report provides information about the suitability of a <a>Web Publication</a>
 						for consumption by users with varying preferred reading modalities. These reports typically
 						identify the result of an evaluation against established accessibility criteria, such as those
-						provided in [[WCAG20]], and are an important source of information in determining the usability
+						provided in [[WCAG21]], and are an important source of information in determining the usability
 						of a Web Publication.</p>
 
 					<section id="accessibility-report-infoset">
@@ -1658,7 +1649,7 @@
 							report be included as a resource of the Web Publication.</p>
 
 						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
-							such as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]]. Augmenting these
+							such as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]]. Augmenting these
 							reports with machine-processable metadata, such as provided in Schema.org [[schema.org]], is
 							also RECOMMENDED.</p>
 
@@ -1671,13 +1662,12 @@
 					<section id="accessibility-report-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>If present in the manifest, the accessibility report MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a> object. The
-								<code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the
-								<code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
+						<p>If present in the manifest, the accessibility report MUST be expressed as a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
+							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
+							the <code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
 
-						<p class="note">The Working Group will attempt to define the <code>accessibility-report</code>
+						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
 							term by IANA, to avoid using a URL.</p>
 
 						<pre class="example" title="Link to an accessibility report">
@@ -1712,12 +1702,12 @@
 					<section id="privacy-policy-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>To address this concern, a link to a privacy policy can be included in the <abbr
-								title="information set"><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy
-							be included as a resource of the Web Publication.</p>
+						<p>A link to a privacy policy can be included in the <abbr title="information set"
+									><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be included as a
+							resource of the Web Publication.</p>
 
 						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[!html]].</p>
+								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
 
 						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
 							Publications.</p>
@@ -1728,11 +1718,10 @@
 					<section id="privacy-policy-manifest">
 						<h4>Manifest Expression</h4>
 
-						<p>If present in the manifest, the privacy policy MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a> object. The
-								<code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>privacy-policy</code>
-							(IANA) identifier.</p>
+						<p>If present in the manifest, the privacy policy MUST be expressed as a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
+							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
+							the <code>privacy-policy</code> identifier&#160;[[!iana-link-relations]].</p>
 
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
@@ -1912,13 +1901,14 @@
 			<section id="resource-categorization-properties">
 				<h3>Resource Categorization Properties</h3>
 
-				<p><a>Web Publication</a> resources MAY be specified via the <a>default reading order</a>, the
-						<a>resource list</a>, or the <a>list of extra resources</a>, defined in this section. These
-					lists can contain, for example, references to <a href="#informative-properties">informative
-						properties</a> like the <a href="#privacy-policy">privacy policy</a>, or <a
-						href="#structural-properties">structural properties</a> like the <a>table of contents</a>. A
-					particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST NOT be
-					repeated within a list.</p>
+				<p><a>Web Publication</a> resources are specified via the <a>default reading order</a>, the <a>resource
+						list</a>, and the <a>links list</a>, as defined in this section. These lists contain references
+					to <a href="#informative-properties">informative properties</a> like the <a href="#privacy-policy"
+						>privacy policy</a>, and <a href="#structural-properties">structural properties</a> like the
+						<a>table of contents</a>.</p>
+
+				<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST
+					NOT be repeated within a list.</p>
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
@@ -1936,7 +1926,7 @@
 						<p>The default reading order MUST include at least one resource.</p>
 
 						<p>The default reading order is specified directly in the manifest. However, if the reading
-							order consists of one single resource, namely the <a>primary entry page</a> of the Web
+							order consists of only a single resource, namely the <a>primary entry page</a> of the Web
 							Publication, the default reading order need not be specified.</p>
 					</section>
 
@@ -1971,7 +1961,7 @@
 										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
 											fragment identifiers.</p>
 									</td>
-									<td>(none)</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -2084,7 +2074,7 @@
 										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
 											fragment identifiers.</p>
 									</td>
-									<td>(none)</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -2174,7 +2164,7 @@
 										</ul>
 										<p>The order in the array is <em>not significant</em>.</p>
 									</td>
-									<td>(none)</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
