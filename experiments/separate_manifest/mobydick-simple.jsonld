@@ -1,0 +1,54 @@
+{
+    "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+    "@type": "Book",
+    "url": "https://publisher.example.org/mobydick",
+    "author":
+    {
+        "@type": "Person",
+        "name": "Herman Melville"
+    },
+    "dateModified": "2018-02-10T17:00:00Z",
+
+    "readingOrder": [
+        "html/title.html",
+        "html/copyright.html",
+        "html/introduction.html",
+        "html/epigraph.html",
+        "html/c001.html",
+        "html/c002.html",
+        "html/c003.html",
+        "html/c004.html",
+        "html/c005.html",
+        "html/c006.html"
+    ],
+
+    "resources": [
+        "css/mobydick.css",
+        {
+            "@type": "PublicationLink",
+            "rel": "https://www.w3.org/ns/wp#cover-page",
+            "url": "images/cover.jpg",
+            "fileFormat": "image/jpeg"
+        },{
+            "@type": "PublicationLink",
+            "url": "html/toc.html",
+            "rel": "contents",
+        },{
+            "@type": "PublicationLink",
+            "url": "fonts/STIXGeneral.otf",
+            "fileFormat": "application/vnd.ms-opentype"
+        },{
+            "@type": "PublicationLink",
+            "url": "fonts/STIXGeneralBol.otf",
+            "fileFormat": "application/vnd.ms-opentype"
+        },{
+            "@type": "PublicationLink",
+            "url": "fonts/STIXGeneralBolIta.otf",
+            "fileFormat": "application/vnd.ms-opentype"
+        },{
+            "@type": "PublicationLink",
+            "url": "fonts/STIXGeneralItalic.otf",
+            "fileFormat": "application/vnd.ms-opentype"
+        }
+    ]
+}
