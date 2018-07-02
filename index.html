@@ -1436,14 +1436,12 @@
 						published. It represents a static event in the lifecycle of a Web Publication and allows
 						subsequent revisions to be identified and compared.</p>
 
-					<p>The exact moment of publication is intentionally left open to interpretation: it could be when
-						the Web Publication is first made available online or could be a point in time before
-						publication when the Web Publication is considered final.</p>
-
 					<section id="publication-date-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>&#8230;</p>
+						<p>The exact moment of publication is intentionally left open to interpretation: it could be
+							when the Web Publication is first made available online or could be a point in time before
+							publication when the Web Publication is considered final.</p>
 					</section>
 
 					<section id="publication-date-manifest">
@@ -1902,8 +1900,8 @@
 				<h3>Resource Categorization Properties</h3>
 
 				<p><a>Web Publication</a> resources are specified via the <a>default reading order</a>, the <a>resource
-						list</a>, and the <a>links</a>, as defined in this section. These lists contain references
-					to <a href="#informative-properties">informative properties</a> like the <a href="#privacy-policy"
+						list</a>, and the <a>links</a>, as defined in this section. These lists contain references to <a
+						href="#informative-properties">informative properties</a> like the <a href="#privacy-policy"
 						>privacy policy</a>, and <a href="#structural-properties">structural properties</a> like the
 						<a>table of contents</a>.</p>
 
@@ -2113,32 +2111,41 @@
 				<section id="links">
 					<h4>Links</h4>
 
-					<p>The <dfn>links</dfn> property enumerates all <a href="#wp-resources">resources</a> that are used
-						in the processing and rendering of a <a>Web Publication</a> but are <em>not</em> within its
-						bounds (i.e., are not listed in the <a>default reading order</a> or the <a>resource list</a>)
-						but are, rather, external to the Web Publication.</p>
+					<p>The <dfn>links</dfn> property enumerates <a href="#wp-resources">resources</a> that are
+						significant to a <a>Web Publication</a> but are <em>not</em> essential to the processing and
+						rendering of it (i.e., the content of the Web Publication remains readable even if the resources
+						are not available). Examples of linked resources might include:</p>
+
+					<ul>
+						<li>a privacy policy or license that a user agent might offer a link to from a shelf;</li>
+						<li>a metadata record that user agents could use to discover and display more information about
+							the Web Publication;</li>
+						<li>a dictionary of terms a user agent could process to provide enhanced language help;</li>
+						<li>large fonts files that enhance the appearance of the Web Publication but are not vital to
+							its rendering;</li>
+						<li>third-party scripts that are not intended for use when a Web Publication is taken offline or
+							packaged (e.g. tracking scripts).</li>
+					</ul>
 
 					<section id="links-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The completeness of the <code>links</code> list will affect the usability of the Web
-							Publication in certain scenarios (e.g., the ability to access privacy policy information).
-							For this reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the
-							Web Publication's extra resources (i.e., beyond those listed in the <a>default reading
-								order</a> or <a>resource list</a>).</p>
+						<p>The completeness of the <code>links</code> list might affect the usability of the Web
+							Publication in certain scenarios (e.g., a user agent might chose to omit these resources
+							when taking a publication offline, or they could be omitted when packaged version of the Web
+							Publication is created). For this reason, it is strongly RECOMMENDED to provide a
+							comprehensive list of all of the Web Publication's non-critical resources.</p>
 
-						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
-							third-party scripts that reference resources from deep within their source), but a user
-							agent SHOULD still be able to render a Web Publication even if some of these resources are
-							not identified as belonging to the Web Publication (e.g., when it is taken offline without
-							them).</p>
+						<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource
+							(e.g., scripts, images, style sheets).</p>
+
+						<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
+								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
+								>resource list</a>.</p>
 					</section>
 
 					<section id="links-manifest">
 						<h5>Manifest Expression</h5>
-
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
-								<code>links</code> term, defined specifically for Web Publications. </p>
 
 						<table class="zebra">
 							<thead>
@@ -2196,14 +2203,22 @@
 				<section id="wp-extensibility-manifest">
 					<h4>Manifest</h4>
 
-					<p>Extending the manifest to allow additional infoset properties is done, for example, via links to
-						an external ONIX&#160;[[onix]] or BibTeX&#160;[[bibtex]] file. When present, link to such
-						resource MUST be expressed using a <a href="#publication-link-def"
-							><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a
-							href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
-							<code>describedby</code> (IANA) identifier.</p>
+					<section id="extensibiity-manifest-descriptive">
+						<h5>Descriptive Properties</h5>
 
-					<pre class="example" title="Link to external ONIX for Books Metadata file">
+						<p>Extending the manifest to allow additional <a href="#descriptive-properties">descriptive
+								properties</a> is done via links to a metadata records, such as an ONIX&#160;[[onix]] or
+							BibTeX&#160;[[bibtex]] file.</p>
+
+						<p>When present, links to such metadata resources MUST be expressed using a <a
+								href="#publication-link-def"><code>PublicationLink</code></a> object. The
+								<code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA)
+							identifier.</p>
+
+						<p>Links to metadata resources MUST be included in the <a href="#links">links list</a>.</p>
+
+						<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
@@ -2221,6 +2236,7 @@
     &#8230;
 }
 </pre>
+					</section>
 				</section>
 			</section>
 		</section>
@@ -2994,13 +3010,19 @@
 
 			<section>
 				<h3>Basic Book</h3>
-				<p>This is the simple version of a book manifest example. A somewhat more elaborate version for the same publication is also <a href="https://github.com/w3c/wpub/blob/master/experiments/separate_manifest/mobydick.jsonld">available</a> as an example.</p>
+				<p>This is the simple version of a book manifest example. A somewhat more elaborate version for the same
+					publication is also <a
+						href="https://github.com/w3c/wpub/blob/master/experiments/separate_manifest/mobydick.jsonld"
+						>available</a> as an example.</p>
 				<pre class="example" data-include="experiments/separate_manifest/mobydick-simple.jsonld" data-include-format="text"></pre>
 			</section>
 
 			<section>
 				<h3>Single-Document Publication</h3>
-				<p>This is the simple version of an embedded manifest example. A more elaborate version for the same document is also <a href="https://github.com/w3c/wpub/blob/master/experiments/w3c_rec/full_version.html">available</a> as an example.</p>
+				<p>This is the simple version of an embedded manifest example. A more elaborate version for the same
+					document is also <a
+						href="https://github.com/w3c/wpub/blob/master/experiments/w3c_rec/full_version.html"
+						>available</a> as an example.</p>
 				<pre class="example" data-include="experiments/w3c_rec/simple_version.html" data-include-format="text"></pre>
 			</section>
 
