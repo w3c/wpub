@@ -2199,7 +2199,9 @@
 					<h5>Additional descriptive properties in the Manifest</h5>
 
 					<p>
-						Additional terms, besides <a href="#descriptive-properties">descriptive properties</a>, can be added to the manifest. This may, for example, include relevant [[!schema.org]] terms not mentioned in this specification, or the inclusion of terms defined by [[dcterms]]. 
+						Additional terms, beyond the ones defined as <a href="#descriptive-properties">descriptive properties</a> in this document, can be used in the manifest. 
+						It is RECOMMENDED that these additional properties use terms from public vocabularies like [[schema.org]] or [[dcterms]].
+						Proprietary terms MAY be used; it is RECOMMENDED that such terms be included using JSON-LD's <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact IRI-s</a>, with prefixes defined as part of the context.
 					</p>
 
 					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
@@ -2214,6 +2216,22 @@
     &#8230;
 }
 </pre>
+
+					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "CreativeWork",
+    &#8230;
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "dc:subject" : ["Document Structures","Resource Description Framework (RDF)"]
+    &#8230;
+}
+</pre>
+					<p class=note>
+						A prefix definition <code>dc</code> for [[dcterms]] is included in the context file of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is true for a number of other public vocabularies; see the <a href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further details.
+					</p>
+
 			</section>
 
 			<section>
