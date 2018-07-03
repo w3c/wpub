@@ -2182,30 +2182,27 @@
 			<section id="extensibility">
 				<h3>Extensibility</h3>
 
-				<section id="wp-extensibility-infoset">
-					<h4>Infoset</h4>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
+					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY
+					be extended in the following ways:</p>
 
-					<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-						properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY
-						be extended in the following ways:</p>
+				<ol>
+					<li>through the inclusion of additional descriptive properties in the manifest;</li>
+					<li>by the provision of linked metadata records.</li>
+				</ol>
 
-					<ol>
-						<li>through the inclusion of additional descriptive properties in the manifest;</li>
-						<li>by the provision of linked metadata records.</li>
-					</ol>
+				<p>
+					User Agents MAY support additional properties but MUST NOT include unrecognized properties in the <abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever possible, as the use of native formats standardizes and simplifies processing by user agents. 
+				</p>
+
+				<section id="extensibiity-manifest-descriptive">
+					<h5>Additional descriptive properties in the Manifest</h5>
 
 					<p>
-						User Agents MAY support additional properties but MUST NOT include unrecognized properties in the <abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever possible, as the use of native formats standardizes and simplifies processing by user agents. 
+						Additional terms, besides <a href="#descriptive-properties">descriptive properties</a>, can be added to the manifest. This may, for example, include relevant [[!schema.org]] terms not mentioned in this specification, or the inclusion of terms defined by [[dcterms]]. 
 					</p>
 
-					<section id="extensibiity-manifest-descriptive">
-						<h5>Manifest for additional descriptive properties</h5>
-
-						<p>
-							Additional terms, besides <a href="#descriptive-properties">descriptive properties</a>, can be added to the manifest. This may, for example, include relevant [[!schema.org]] terms not mentioned in this specification, or the inclusion of terms defined by [[dcterms]]. 
-						</p>
-
-						<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
+					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
     "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"           : "CreativeWork",
@@ -2217,15 +2214,15 @@
     &#8230;
 }
 </pre>
-					</section>
+			</section>
 
-					<section>
-						<h5>Manifest for linked metadata records</h5>
-						<p>
-							Extending the manifest through links to a metadata records, such as an ONIX&#160;[[onix]] or BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier and it MAY also include additional relevant identifiers defined by IANA or by other organizations. The value of the <code>fileFormat</code> in the link MUST the MIME type defined for that particular record type, if applicable.
-							Links to metadata resources MUST be included in either the <a href="#resource-list">resource list</a> or the <a href="#links">links list</a>.
-						</p>
-						<pre class="example" title="Link to external ONIX for Books Metadata file">
+			<section>
+					<h5>Linked records</h5>
+					<p>
+						Extending the manifest through links to a metadata records, such as an ONIX&#160;[[onix]] or BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA) identifier and it MAY also include additional relevant identifiers defined by IANA or by other organizations. The value of the <code>fileFormat</code> in the link MUST the MIME type defined for that particular record type, if applicable.
+						Links to metadata resources MUST be included in either the <a href="#resource-list">resource list</a> or the <a href="#links">links list</a>.
+					</p>
+					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
@@ -2243,11 +2240,9 @@
     &#8230;
 }
 </pre>
-						<p class=note>
-							The <code>application/onix+xml</code> MIME type has not yet been registered by IANA at the time of writing this document, and is included in the example for illustrative purposes only.
-						</p>
-
-					</section>
+					<p class=note>
+						The <code>application/onix+xml</code> MIME type has not yet been registered by IANA at the time of writing this document, and is included in the example for illustrative purposes only.
+					</p>
 				</section>
 			</section>
 		</section>
