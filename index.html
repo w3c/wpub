@@ -2198,11 +2198,11 @@
 				<section id="extensibiity-manifest-properties">
 					<h5>Additional Properties in the Manifest</h5>
 
-					<p> Additional terms can be used in the manifest. It is RECOMMENDED that these term use properties
-						from public vocabularies like [[schema.org]] or [[dcterms]]. Proprietary terms MAY be used, but
-						it is RECOMMENDED that such terms be included using JSON-LD's <a
-							href="https://www.w3.org/TR/json-ld/#compact-iris">Compact IRI-s</a>, with prefixes defined
-						as part of the context.</p>
+					<p> Additional properties can be used in the manifest. It is RECOMMENDED that these properties use
+						terms from public vocabularies like [[schema.org]] or [[dcterms]]. Proprietary terms MAY be
+						used, but it is RECOMMENDED that such terms be included using <a
+							href="https://www.w3.org/TR/json-ld/#compact-iris">Compact IRI-s</a> [[!json-ld]], with
+						prefixes defined as part of the context.</p>
 
 					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
@@ -2248,7 +2248,7 @@
 						in the link MUST the MIME type defined for that particular record type, if applicable. Links to
 						metadata resources MUST be included in either the <a href="#resource-list">resource list</a> or
 						the <a href="#links">links list</a>. </p>
-					
+
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
