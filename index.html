@@ -1257,6 +1257,8 @@
 						<li>the <dfn>base direction</dfn> (the display direction for the property).</li>
 					</ul>
 
+					<p class="issue" data-number="220"></p>
+					
 					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
@@ -1268,7 +1270,6 @@
 						<ul>
 							<li><code>ltr</code>: left-to-right;</li>
 							<li><code>rtl</code>: right-to-left;</li>
-							<li><code>auto</code>: direction is determined from the value of the property.</li>
 						</ul>
 
 						<p>When specified, these properties are used as defaults for textual values in the <abbr
@@ -1285,8 +1286,9 @@
 
 						<p>If a user agent requires the language and one is not available in the <abbr
 								title="information set">infoset</abbr> (globally or specifically for a property), or the
-							obtained value is invalid, the user agent MAY attempt to determine the language. This
-							specification does not mandate how such a language tag is created. The user agent might:</p>
+							obtained value is invalid, has been specified, the user agent MAY attempt to determine the
+							language. This specification does not mandate how such a language tag is created. The user
+							agent might:</p>
 
 						<ul>
 							<li>use the <a>non-empty</a> language declaration of the manifest;</li>
@@ -1296,8 +1298,10 @@
 						</ul>
 
 						<p>If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"
-							(undetermined). If the base direction cannot be determined, user agents MUST assume the
-							value <code>auto</code>.</p>
+							(undetermined).</p>
+
+						<p>If the base direction is not specified, or is an invalid value, the value of this item MUST
+							be set to "<code>ltr</code>".</p>
 					</section>
 
 
@@ -1332,7 +1336,10 @@
 </pre>
 
 							<p>The value of the language tag MUST be set to a language code as defined
-								in&#160;[[!bcp47]]. If not set, the default value is <code>en</code>.</p>
+								in&#160;[[!bcp47]].</p>
+
+							<p>The value of the base direction MUST be "<code>ltr</code>" or "<code>rtl</code>", as
+								appropriate.</p>
 
 							<p class="issue" data-number="218"></p>
 						</section>
@@ -1344,6 +1351,7 @@
 								manifest. This information MUST be set for each item separately using the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
 										><code>@value</code> and <code>@language</code> keywords</a>&#160;[[!json-ld]]: </p>
+
 							<pre class="example" title="Setting the default language of an author name to French">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1362,10 +1370,11 @@
 								not set, the default value is the <a href="#language-and-dir-manifest">default value of
 									the manifest</a>.</p>
 
+							<p>The value of the base direction MUST be "<code>ltr</code>" or "<code>rtl</code>", as
+								appropriate.</p>
+
 							<p class="issue" data-number="219"></p>
 						</section>
-
-						<p class="issue" data-number="220"></p>
 					</section>
 				</section>
 
