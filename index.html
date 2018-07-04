@@ -2187,22 +2187,68 @@
 					extended in the following ways:</p>
 
 				<ol>
-					<li>through the inclusion of additional descriptive properties in the manifest;</li>
-					<li>by the provision of linked metadata records.</li>
+					<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
+					<li>through the inclusion of <a href="#extensibility-manifest-properties">additional properties in
+							the manifest</a>;</li>
 				</ol>
 
-				<p> User Agents MAY support additional properties but MUST NOT include unrecognized properties in the
-						<abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED whenever
-					possible, as the use of native formats standardizes and simplifies processing by user agents. </p>
+				<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
+
+				<p>This specification does not define how such additional properties are compiled, stored or exposed by
+					user agents in their internal representation of the infoset. A user agent MAY ignore some or all
+					extended properties.</p>
+
+				<section id="extensibility-linked-records">
+					<h5>Linked records</h5>
+
+					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
+						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
+								><code>PublicationLink</code></a> object, where:</p>
+
+					<ul>
+						<li>the <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA)
+							identifier and it MAY also include additional relevant identifiers defined by IANA or by
+							other organizations;</li>
+						<li>the value of the <code>fileFormat</code> in the link MUST use the MIME media
+							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
+					</ul>
+
+					<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
+						part of the Web Publication (i.e., are needed for more than just infoset extensibility).
+						Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
+
+					<pre class="example" title="Link to external ONIX for Books Metadata file">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "links"  : [{
+        "@type"       : "PublicationLink",
+        "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
+        "fileFormat"  : "application/onix+xml",
+        "rel"         : "describedby"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					<p class="note">The <code>application/onix+xml</code> MIME type has not yet been registered by IANA
+						at the time of writing this document, and is included in the example for illustrative purposes
+						only. </p>
+				</section>
 
 				<section id="extensibiity-manifest-properties">
 					<h5>Additional Properties in the Manifest</h5>
 
-					<p> Additional properties can be used in the manifest. It is RECOMMENDED that these properties use
-						terms from public vocabularies like [[schema.org]] or [[dcterms]]. Proprietary terms MAY be
-						used, but it is RECOMMENDED that such terms be included using <a
-							href="https://www.w3.org/TR/json-ld/#compact-iris">Compact IRI-s</a> [[!json-ld]], with
-						prefixes defined as part of the context.</p>
+					<p>Additional properties can be included directly in the manifest. It is RECOMMENDED that these
+						properties be taken from public schemes like [[schema.org]] or [[dcterms]] and use values from
+						controlled vocabularies whenever possible. Proprietary terms MAY be used, but it is RECOMMENDED
+						that such terms be included using <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact
+							IRIs</a>&#160;[[!json-ld]], with prefixes defined as part of the context.</p>
 
 					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
@@ -2234,42 +2280,6 @@
 							href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
 						details. </p>
 
-				</section>
-
-				<section>
-					<h5>Linked records</h5>
-
-					<p>Extending the manifest through links to an external record, such as an ONIX&#160;[[onix]] or
-						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
-								><code>PublicationLink</code></a> object. The <code>rel</code> value of the <a
-							href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
-							<code>describedby</code> (IANA) identifier and it MAY also include additional relevant
-						identifiers defined by IANA or by other organizations. The value of the <code>fileFormat</code>
-						in the link MUST the MIME type defined for that particular record type, if applicable. Links to
-						metadata resources MUST be included in either the <a href="#resource-list">resource list</a> or
-						the <a href="#links">links list</a>. </p>
-
-					<pre class="example" title="Link to external ONIX for Books Metadata file">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "links"  : [{
-        "@type"       : "PublicationLink",
-        "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
-        "fileFormat"  : "application/onix+xml",
-        "rel"         : "describedby"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-					<p class="note">The <code>application/onix+xml</code> MIME type has not yet been registered by IANA
-						at the time of writing this document, and is included in the example for illustrative purposes
-						only. </p>
 				</section>
 			</section>
 		</section>
