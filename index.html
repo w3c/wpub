@@ -501,7 +501,7 @@
 					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
 					<dd>
 						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#title"
-								>title</a>, <a href="#creator">creator</a>, and <a href="#language-and-dir"
+								>title</a>, <a href="#creators">creator</a>, and <a href="#language-and-dir"
 							>language</a>. These properties are primarily drawn from <a href="https://schema.org"
 								>Schema.org</a> and its <a href="https://schema.org/docs/schemas.html">hosted
 								extensions</a>&#160;[[schema.org]], so they map to one or several Schema.org properties
@@ -568,7 +568,7 @@
 							<li><a href="#language-and-dir">base direction</a></li>
 							<li><a href="#canonical-identifier">canonical identifier</a></li>
 							<li><a href="#cover">cover</a></li>
-							<li><a href="#creator">creator</a></li>
+							<li><a href="#creators">creator</a></li>
 							<li><a href="#language-and-dir">language</a></li>
 							<li><a href="#links">links</a></li>
 							<li><a href="#last-modification-date">last modification date</a></li>
@@ -717,7 +717,17 @@
 					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>&#8230;</p>
+						<p>The following infoset items are categorized as accessibility properties:</p>
+
+						<ul>
+							<li>accessMode</li>
+							<li>accessModeSufficient</li>
+							<li>accessibilityAPI</li>
+							<li>accessibilityControl</li>
+							<li>accessibilityFeature</li>
+							<li>accessibilityHazard</li>
+							<li>accessibilitySummary</li>
+						</ul>
 					</section>
 
 					<section id="accessibility-manifest">
@@ -1048,19 +1058,32 @@
 					</section>
 				</section>
 
-				<section id="creator">
-					<h4>Creator</h4>
+				<section id="creators">
+					<h4>Creators</h4>
 
-					<p>The <dfn>creator</dfn> is the individual or entity responsible for the creation of the <a>Web
+					<p>A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
 							Publication</a>.</p>
 
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>A Web Publication MAY have more than one creator.</p>
+						<p>The following infoset items are categorized as creators:</p>
 
-						<p>The creator property SHOULD retain the role the creator played in the creation of the Web
-							Publication, when available (e.g., 'author', 'illustrator', 'translator').</p>
+						<ul>
+							<li>artist</li>
+							<li>author</li>
+							<li>contributor</li>
+							<li>creator</li>
+							<li>editor</li>
+							<li>illustrator</li>
+							<li>letterer</li>
+							<li>penciler</li>
+							<li>publisher</li>
+							<li>readBy</li>
+							<li>translator</li>
+						</ul>
+
+						<p>A Web Publication MAY have more than one of each of these types of creators.</p>
 					</section>
 
 					<section id="wp-creator-manifest">
@@ -1259,7 +1282,7 @@
 
 					<p>Each textual property in the <a>Web Publication's</a>
 						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a
-							href="#creator">creators</a>) is <a
+							href="#creators">creators</a>) is <a
 							href="https://w3c.github.io/string-meta/#dom-localizable"
 						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
 
@@ -1772,7 +1795,7 @@
 
 						<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
 							Publications. A user agent SHOULD use the Web Publication's <a href="#title">title</a> and
-								<a href="#creator">creators</a> as text alternatives for such interfaces.</p>
+								<a href="#creators">creators</a> as text alternatives for such interfaces.</p>
 
 						<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
 							resolutions for different device screens.</p>
@@ -2850,7 +2873,7 @@
 					<dt>
 						<dfn>authors</dfn>
 					</dt>
-					<dd>Contains one or more <a href="#creator">creators</a>.</dd>
+					<dd>Contains one or more <a href="#creators">creators</a>.</dd>
 					<dt>
 						<dfn>dateModified</dfn>
 					</dt>
@@ -2881,7 +2904,7 @@
 			<section id="contributor-idl">
 				<h3><code>authors</code> member </h3>
 
-				<p class="ednote">The <a href="#creator">current infoset for creators</a> is not fully defined; this
+				<p class="ednote">The <a href="#creators">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
 
 				<pre class="idl">
