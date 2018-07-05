@@ -949,12 +949,7 @@
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be an <a>address</a> or a value that allows a one-to-one
-							mapping to an address (e.g., a <abbr title="Digital Object Identifier"
-							>DOI</abbr>&#160;[[doi]] that can be resolved to a <abbr title="Uniform Resource Locator"
-								>URL</abbr>&#160;[[url]] via a <abbr title="Digital Object Identifier">DOI</abbr>
-							resolver). If a user agent cannot resolve the canonical identifier to an address, it SHOULD
-							ignore the property.</p>
+						<p>The canonical identifier MUST be an <a>address</a>.</p>
 
 						<p>If a Web Publication is hosted at more than one address, the canonical identifier allows a
 							user agent to identify the shared relationship between the versions and to determine which
@@ -974,10 +969,15 @@
 							conventions of the identifier scheme used and the degree of control over assignment of
 							identifiers.</p>
 
-						<p class="note">If the canonical identifier is a <abbr title="Uniform Resource Locator"
-								>URL</abbr>, it can be used as the target of a "canonical" link&#160;[[rfc6596]] (e.g.,
-							a <code>link</code> element&#160;[[html]] whose <code>rel</code> attribute has the value
-								<code>canonical</code> or an <abbr title="Hypertext Transfer Protocol">HTTP</abbr>
+						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
+							does not have a canonical identifier. In this case, a user agent MUST NOT make any
+							assumptions about the relationship between the current Web Publication and any other
+							possible versions of it (i.e., treat each instance as unique).</p>
+
+						<p class="note">The canonical identifier can be used as the target of a "canonical"
+							link&#160;[[rfc6596]] (e.g., a <code>link</code> element&#160;[[html]] whose
+								<code>rel</code> attribute has the value <code>canonical</code> or an <abbr
+								title="Hypertext Transfer Protocol">HTTP</abbr>
 							<code>Link</code> header field&#160;[[rfc5988]] similarly identified).</p>
 
 						<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in
@@ -1000,39 +1000,25 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code>/ <code>@id</code>
+										<code>id</code> / <code>@id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
-									<td> (None. <code>id</code> maps to the <a
-											href="https://www.w3.org/TR/json-ld/#node-objects"><code>@id</code></a>
-										keyword [[!json-ld]].) </td>
-								</tr>
-								<tr>
-									<td>
-										<code>identifier</code>
-									</td>
-									<td>Preferred version of the Web Publication.</td>
-									<td>A textual string that represents a unique identifier, or a <a
-											href="https://schema.org/PropertyValue"><code>PropertyValue</code> type</a>
-										[[!schema.org]].</td>
-									<td>
-										<a href="https://schema.org/identifier"><code>identifier</code></a>
-									</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
 
-						<p>The use of <code>id</code> is RECOMMENDED when the identifier is a URL.</p>
+						<p>The manifest MUST NOT contain both <code>id</code> and <code>@id</code> declarations &#8212;
+							only one is permitted.</p>
 
 						<p class="note">The <code>id</code> term and the <code>@id</code> keyword can be used
 							interchangeably: the former is mapped onto the second by the schema.org context.</p>
 
-						<p>There are also sub-properties for <code>identifier</code> that can be used on their own
-							right, like <a href="https://schema.org/isbn"><code>isbn</code></a>, <a
-								href="https://schema.org/issn"><code>issn</code></a>, or <a
-								href="https://schema.org/serialNumber"><code>serialNumber</code></a>. See also the <a
-								href="https://schema.org/identifier">Schema.org</a> description for further details.</p>
+						<p>The specification of a canonical identifier does not preclude the use of the <a
+								href="https://schema.org/identifier"><code>identifier</code>
+							property</a>&#160;[[!schema.org]] or its subtypes to specify other identifiers for a Web
+							Publication.</p>
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
