@@ -502,7 +502,7 @@
 					<dd>
 						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#title"
 								>title</a>, <a href="#creators">creator</a>, and <a href="#language-and-dir"
-							>language</a>. These properties are primarily drawn from <a href="https://schema.org"
+								>language</a>. These properties are primarily drawn from <a href="https://schema.org"
 								>Schema.org</a> and its <a href="https://schema.org/docs/schemas.html">hosted
 								extensions</a>&#160;[[schema.org]], so they map to one or several Schema.org properties
 							and inherit their syntax and semantics. (The following property categories typically do not
@@ -564,11 +564,12 @@
 					<dt>RECOMMENDED:</dt>
 					<dd>
 						<ul>
+							<li><a href="#accessibility">accessibility</a></li>
 							<li><a href="#accessibility-report">accessibility report</a></li>
 							<li><a href="#language-and-dir">base direction</a></li>
 							<li><a href="#canonical-identifier">canonical identifier</a></li>
 							<li><a href="#cover">cover</a></li>
-							<li><a href="#creators">creator</a></li>
+							<li><a href="#creators">creators</a></li>
 							<li><a href="#language-and-dir">language</a></li>
 							<li><a href="#links">links</a></li>
 							<li><a href="#last-modification-date">last modification date</a></li>
@@ -728,6 +729,10 @@
 							<li>accessibilityHazard</li>
 							<li>accessibilitySummary</li>
 						</ul>
+
+						<p class="note">More detailed descriptions of these properties, as well as the possible values,
+							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
+								Wiki site</a>.</p>
 					</section>
 
 					<section id="accessibility-manifest">
@@ -842,10 +847,6 @@
 								</tr>
 							</tbody>
 						</table>
-
-						<p class="note">A more detailed description of these properties, as well as the possible values,
-							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
-								Wiki site</a>.</p>
 
 						<p>Note that the author MAY also provide a reference to a more detailed <a
 								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
@@ -1135,7 +1136,8 @@
 									<td>
 										<code>contributor</code>
 									</td>
-									<td>Contributor whose role does not fit to one of the other roles in this table.</td>
+									<td>Contributor whose role does not fit to one of the other roles in this
+										table.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
