@@ -2212,43 +2212,41 @@
 			<section id="extensibility">
 				<h3>Extensibility</h3>
 
-				<section id="wp-extensibility-infoset">
-					<h4>Infoset</h4>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
+					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
+					extended in the following ways:</p>
 
-					<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-						properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY
-						be extended in the following ways:</p>
+				<ol>
+					<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
+					<li>through the inclusion of <a href="#extensibility-manifest-properties">additional properties in
+							the manifest</a>;</li>
+				</ol>
 
-					<ol>
-						<li>through the inclusion of additional properties in the manifest;</li>
-						<li>by the provision of linked metadata records.</li>
-					</ol>
+				<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
 
-					<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the
-							<abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED
-						whenever possible, as the use of native formats standardizes and simplifies processing by user
-						agents.</p>
-				</section>
+				<p>This specification does not define how such additional properties are compiled, stored or exposed by
+					user agents in their internal representation of the infoset. A user agent MAY ignore some or all
+					extended properties.</p>
 
-				<section id="wp-extensibility-manifest">
-					<h4>Manifest</h4>
+				<section id="extensibility-linked-records">
+					<h5>Linked records</h5>
 
-					<section id="extensibiity-manifest-descriptive">
-						<h5>Descriptive Properties</h5>
+					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
+						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
+								><code>PublicationLink</code></a> object, where:</p>
+					<ul>
+						<li>
+							the <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by IANA or by other organizations; if the link record contains descriptive metadata it MUST include the <code>describedby</code> (IANA) identifier;
+						</li>
+						<li>the value of the <code>fileFormat</code> in the link MUST use the MIME media
+							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
+					</ul>
 
-						<p>Extending the manifest to allow additional <a href="#descriptive-properties">descriptive
-								properties</a> is done via links to a metadata records, such as an ONIX&#160;[[onix]] or
-							BibTeX&#160;[[bibtex]] file.</p>
+					<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
+						part of the Web Publication (i.e., are needed for more than just infoset extensibility).
+						Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
 
-						<p>When present, links to such metadata resources MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a> object. The
-								<code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA)
-							identifier.</p>
-
-						<p>Links to metadata resources MUST be included in the <a href="#links">links list</a>.</p>
-
-						<pre class="example" title="Link to external ONIX for Books Metadata file">
+					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
@@ -2258,7 +2256,7 @@
     "links"  : [{
         "@type"       : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
-        "fileFormat"  : "application/xml",
+        "fileFormat"  : "application/onix+xml",
         "rel"         : "describedby"
     },{
         &#8230;
@@ -2266,7 +2264,50 @@
     &#8230;
 }
 </pre>
-					</section>
+					<p class="note">The <code>application/onix+xml</code> MIME type has not yet been registered by IANA
+						at the time of writing this document, and is included in the example for illustrative purposes
+						only. </p>
+				</section>
+
+				<section id="extensibiity-manifest-properties">
+					<h5>Additional Properties in the Manifest</h5>
+
+					<p>Additional properties can be included directly in the manifest. It is RECOMMENDED that these
+						properties be taken from public schemes like [[schema.org]] or [[dcterms]] and use values from
+						controlled vocabularies whenever possible. Proprietary terms MAY be used, but it is RECOMMENDED
+						that such terms be included using <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact
+							IRIs</a>&#160;[[!json-ld]], with prefixes defined as part of the context.</p>
+
+					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
+{
+    "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"           : "CreativeWork",
+    &#8230;
+    "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
+    "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "copyrightYear"   : "2015",
+    "copyrightHolder" : "World Wide Web Consortium",    
+    &#8230;
+}
+</pre>
+
+					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "CreativeWork",
+    &#8230;
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "dc:subject" : ["Document Structures","Resource Description Framework (RDF)"]
+    &#8230;
+}
+</pre>
+					<p class="note"> A prefix definition <code>dc</code> for [[dcterms]] is included in the context file
+						of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is
+						true for a number of other public vocabularies; see the <a
+							href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
+						details. </p>
+
 				</section>
 			</section>
 		</section>
