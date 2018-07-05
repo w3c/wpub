@@ -951,9 +951,9 @@
 
 						<p>The canonical identifier MUST be an <a>address</a>.</p>
 
-						<p>If a Web Publication is hosted at more than one address, the canonical identifier allows a
-							user agent to identify the shared relationship between the versions and to determine which
-							of the available addresses is primary.</p>
+						<p>If a Web Publication is hosted at multiple addresses, the canonical identifier allows a user
+							agent to identify the shared relationship between the versions and to determine which of the
+							available addresses is primary.</p>
 
 						<p>The canonical identifier is also intended to provide a measure of permanence above and beyond
 							the Web Publication's <a>address</a>. Even if a Web Publication is permanently relocated to
@@ -1009,16 +1009,15 @@
 							</tbody>
 						</table>
 
-						<p>The manifest MUST NOT contain both <code>id</code> and <code>@id</code> declarations &#8212;
-							only one is permitted.</p>
+						<p>The <code>id</code> term and the <code>@id</code> keyword can be used interchangeably: the
+							former is mapped onto the second by the schema.org context. The manifest MUST NOT contain
+							both <code>id</code> and <code>@id</code> declarations, however, as only one is
+							permitted.</p>
 
-						<p class="note">The <code>id</code> term and the <code>@id</code> keyword can be used
-							interchangeably: the former is mapped onto the second by the schema.org context.</p>
-
-						<p>The specification of a canonical identifier does not preclude the use of the <a
+						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
+							additional types of identifiers for the Web Publication using the <a
 								href="https://schema.org/identifier"><code>identifier</code>
-							property</a>&#160;[[!schema.org]] or its subtypes to specify other identifiers for a Web
-							Publication.</p>
+							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
