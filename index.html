@@ -2204,12 +2204,10 @@
 					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
 						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
 								><code>PublicationLink</code></a> object, where:</p>
-
 					<ul>
-						<li>the <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA)
-							identifier and it MAY also include additional relevant identifiers defined by IANA or by
-							other organizations;</li>
+						<li>
+							the <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by IANA or by other organizations; if the link record contains descriptive metadata it MUST include the <code>describedby</code> (IANA) identifier;
+						</li>
 						<li>the value of the <code>fileFormat</code> in the link MUST use the MIME media
 							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
 					</ul>
