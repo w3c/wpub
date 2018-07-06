@@ -91,6 +91,11 @@ function create_wp(config) {
             "rel"        : "privacy-policy"
         },{
             "@type"      : "PublicationLink",
+            "url"        : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
+            "fileFormat" : "text/html",
+            "rel"        : "license describedby"
+    },{
+            "@type"      : "PublicationLink",
             "url"        : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
             "fileFormat" : "text/html",
             "rel"        : "copyright"
@@ -279,5 +284,4 @@ function create_wp(config) {
     // For debug: display the manifest in JSON
     // alert(JSON.stringify(manifest, null, 4));
 }
-
 

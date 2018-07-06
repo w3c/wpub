@@ -501,8 +501,8 @@
 					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
 					<dd>
 						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#title"
-								>title</a>, <a href="#creator">creator</a>, and <a href="#language-and-dir"
-							>language</a>. These properties are primarily drawn from <a href="https://schema.org"
+								>title</a>, <a href="#creators">creator</a>, and <a href="#language-and-dir"
+								>language</a>. These properties are primarily drawn from <a href="https://schema.org"
 								>Schema.org</a> and its <a href="https://schema.org/docs/schemas.html">hosted
 								extensions</a>&#160;[[schema.org]], so they map to one or several Schema.org properties
 							and inherit their syntax and semantics. (The following property categories typically do not
@@ -564,11 +564,12 @@
 					<dt>RECOMMENDED:</dt>
 					<dd>
 						<ul>
+							<li><a href="#accessibility">accessibility</a></li>
 							<li><a href="#accessibility-report">accessibility report</a></li>
 							<li><a href="#language-and-dir">base direction</a></li>
 							<li><a href="#canonical-identifier">canonical identifier</a></li>
 							<li><a href="#cover">cover</a></li>
-							<li><a href="#creator">creator</a></li>
+							<li><a href="#creators">creators</a></li>
 							<li><a href="#language-and-dir">language</a></li>
 							<li><a href="#links">links</a></li>
 							<li><a href="#last-modification-date">last modification date</a></li>
@@ -717,7 +718,21 @@
 					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>&#8230;</p>
+						<p>The following infoset items are categorized as accessibility properties:</p>
+
+						<ul>
+							<li>accessMode</li>
+							<li>accessModeSufficient</li>
+							<li>accessibilityAPI</li>
+							<li>accessibilityControl</li>
+							<li>accessibilityFeature</li>
+							<li>accessibilityHazard</li>
+							<li>accessibilitySummary</li>
+						</ul>
+
+						<p class="note">More detailed descriptions of these properties, as well as the possible values,
+							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
+								Wiki site</a>.</p>
 					</section>
 
 					<section id="accessibility-manifest">
@@ -833,10 +848,6 @@
 							</tbody>
 						</table>
 
-						<p class="note">A more detailed description of these properties, as well as the possible values,
-							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
-								Wiki site</a>.</p>
-
 						<p>Note that the author MAY also provide a reference to a more detailed <a
 								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
 							information expressed by these properties.</p>
@@ -938,16 +949,11 @@
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be an <a>address</a> or a value that allows a one-to-one
-							mapping to an address (e.g., a <abbr title="Digital Object Identifier"
-							>DOI</abbr>&#160;[[doi]] that can be resolved to a <abbr title="Uniform Resource Locator"
-								>URL</abbr>&#160;[[url]] via a <abbr title="Digital Object Identifier">DOI</abbr>
-							resolver). If a user agent cannot resolve the canonical identifier to an address, it SHOULD
-							ignore the property.</p>
+						<p>The canonical identifier MUST be an <a>address</a>.</p>
 
-						<p>If a Web Publication is hosted at more than one address, the canonical identifier allows a
-							user agent to identify the shared relationship between the versions and to determine which
-							of the available addresses is primary.</p>
+						<p>If a Web Publication is hosted at multiple addresses, the canonical identifier allows a user
+							agent to identify the shared relationship between the versions and to determine which of the
+							available addresses is primary.</p>
 
 						<p>The canonical identifier is also intended to provide a measure of permanence above and beyond
 							the Web Publication's <a>address</a>. Even if a Web Publication is permanently relocated to
@@ -963,10 +969,15 @@
 							conventions of the identifier scheme used and the degree of control over assignment of
 							identifiers.</p>
 
-						<p class="note">If the canonical identifier is a <abbr title="Uniform Resource Locator"
-								>URL</abbr>, it can be used as the target of a "canonical" link&#160;[[rfc6596]] (e.g.,
-							a <code>link</code> element&#160;[[html]] whose <code>rel</code> attribute has the value
-								<code>canonical</code> or an <abbr title="Hypertext Transfer Protocol">HTTP</abbr>
+						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
+							does not have a canonical identifier. In this case, a user agent MUST NOT make any
+							assumptions about the relationship between the current Web Publication and any other
+							possible versions of it (i.e., treat each instance as unique).</p>
+
+						<p class="note">The canonical identifier can be used as the target of a "canonical"
+							link&#160;[[rfc6596]] (e.g., a <code>link</code> element&#160;[[html]] whose
+								<code>rel</code> attribute has the value <code>canonical</code> or an <abbr
+								title="Hypertext Transfer Protocol">HTTP</abbr>
 							<code>Link</code> header field&#160;[[rfc5988]] similarly identified).</p>
 
 						<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in
@@ -989,39 +1000,24 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code>/ <code>@id</code>
+										<code>id</code> / <code>@id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
-									<td> (None. <code>id</code> maps to the <a
-											href="https://www.w3.org/TR/json-ld/#node-objects"><code>@id</code></a>
-										keyword [[!json-ld]].) </td>
-								</tr>
-								<tr>
-									<td>
-										<code>identifier</code>
-									</td>
-									<td>Preferred version of the Web Publication.</td>
-									<td>A textual string that represents a unique identifier, or a <a
-											href="https://schema.org/PropertyValue"><code>PropertyValue</code> type</a>
-										[[!schema.org]].</td>
-									<td>
-										<a href="https://schema.org/identifier"><code>identifier</code></a>
-									</td>
+									<td>(None)</td>
 								</tr>
 							</tbody>
 						</table>
 
-						<p>The use of <code>id</code> is RECOMMENDED when the identifier is a URL.</p>
+						<p>The <code>id</code> term and the <code>@id</code> keyword can be used interchangeably: the
+							former is mapped onto the second by the schema.org context. The manifest MUST NOT contain
+							both <code>id</code> and <code>@id</code> declarations, however, as only one is
+							permitted.</p>
 
-						<p class="note">The <code>id</code> term and the <code>@id</code> keyword can be used
-							interchangeably: the former is mapped onto the second by the schema.org context.</p>
-
-						<p>There are also sub-properties for <code>identifier</code> that can be used on their own
-							right, like <a href="https://schema.org/isbn"><code>isbn</code></a>, <a
-								href="https://schema.org/issn"><code>issn</code></a>, or <a
-								href="https://schema.org/serialNumber"><code>serialNumber</code></a>. See also the <a
-								href="https://schema.org/identifier">Schema.org</a> description for further details.</p>
+						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
+							additional types of identifiers for the Web Publication using the <a
+								href="https://schema.org/identifier"><code>identifier</code>
+							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
@@ -1048,19 +1044,32 @@
 					</section>
 				</section>
 
-				<section id="creator">
-					<h4>Creator</h4>
+				<section id="creators">
+					<h4>Creators</h4>
 
-					<p>The <dfn>creator</dfn> is the individual or entity responsible for the creation of the <a>Web
+					<p>A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
 							Publication</a>.</p>
 
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>A Web Publication MAY have more than one creator.</p>
+						<p>The following infoset items are categorized as creators:</p>
 
-						<p>The creator property SHOULD retain the role the creator played in the creation of the Web
-							Publication, when available (e.g., 'author', 'illustrator', 'translator').</p>
+						<ul>
+							<li>artist</li>
+							<li>author</li>
+							<li>contributor</li>
+							<li>creator</li>
+							<li>editor</li>
+							<li>illustrator</li>
+							<li>letterer</li>
+							<li>penciler</li>
+							<li>publisher</li>
+							<li>readBy</li>
+							<li>translator</li>
+						</ul>
+
+						<p>A Web Publication MAY have more than one of each of these types of creators.</p>
 					</section>
 
 					<section id="wp-creator-manifest">
@@ -1106,6 +1115,18 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
 										<a href="https://bib.schema.org/colorist"><code>colorist</code></a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>contributor</code>
+									</td>
+									<td>Contributor whose role does not fit to one of the other roles in this
+										table.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
+											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
+									<td>
+										<a href="https://schema.org/contributor"><code>contributor</code></a>
 									</td>
 								</tr>
 								<tr>
@@ -1248,7 +1269,7 @@
 
 					<p>Each textual property in the <a>Web Publication's</a>
 						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a
-							href="#creator">creators</a>) is <a
+							href="#creators">creators</a>) is <a
 							href="https://w3c.github.io/string-meta/#dom-localizable"
 						>Localizable</a>&#160;[[string-meta]]. This means it is possible to assign:</p>
 
@@ -1770,7 +1791,7 @@
 
 						<p>User agents SHOULD NOT use the cover image as the sole means of selecting or accessing Web
 							Publications. A user agent SHOULD use the Web Publication's <a href="#title">title</a> and
-								<a href="#creator">creators</a> as text alternatives for such interfaces.</p>
+								<a href="#creators">creators</a> as text alternatives for such interfaces.</p>
 
 						<p>More than one cover image MAY be referenced from the infoset to provide alternative sizes and
 							resolutions for different device screens.</p>
@@ -2191,43 +2212,41 @@
 			<section id="extensibility">
 				<h3>Extensibility</h3>
 
-				<section id="wp-extensibility-infoset">
-					<h4>Infoset</h4>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
+					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
+					extended in the following ways:</p>
 
-					<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-						properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY
-						be extended in the following ways:</p>
+				<ol>
+					<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
+					<li>through the inclusion of <a href="#extensibility-manifest-properties">additional properties in
+							the manifest</a>;</li>
+				</ol>
 
-					<ol>
-						<li>through the inclusion of additional properties in the manifest;</li>
-						<li>by the provision of linked metadata records.</li>
-					</ol>
+				<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
 
-					<p>User Agents MAY support additional properties but MUST NOT include unrecognized properties in the
-							<abbr title="information set">infoset</abbr>. The use of linked records is RECOMMENDED
-						whenever possible, as the use of native formats standardizes and simplifies processing by user
-						agents.</p>
-				</section>
+				<p>This specification does not define how such additional properties are compiled, stored or exposed by
+					user agents in their internal representation of the infoset. A user agent MAY ignore some or all
+					extended properties.</p>
 
-				<section id="wp-extensibility-manifest">
-					<h4>Manifest</h4>
+				<section id="extensibility-linked-records">
+					<h5>Linked records</h5>
 
-					<section id="extensibiity-manifest-descriptive">
-						<h5>Descriptive Properties</h5>
+					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
+						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
+								><code>PublicationLink</code></a> object, where:</p>
+					<ul>
+						<li>
+							the <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by IANA or by other organizations; if the link record contains descriptive metadata it MUST include the <code>describedby</code> (IANA) identifier;
+						</li>
+						<li>the value of the <code>fileFormat</code> in the link MUST use the MIME media
+							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
+					</ul>
 
-						<p>Extending the manifest to allow additional <a href="#descriptive-properties">descriptive
-								properties</a> is done via links to a metadata records, such as an ONIX&#160;[[onix]] or
-							BibTeX&#160;[[bibtex]] file.</p>
+					<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
+						part of the Web Publication (i.e., are needed for more than just infoset extensibility).
+						Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
 
-						<p>When present, links to such metadata resources MUST be expressed using a <a
-								href="#publication-link-def"><code>PublicationLink</code></a> object. The
-								<code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>describedby</code> (IANA)
-							identifier.</p>
-
-						<p>Links to metadata resources MUST be included in the <a href="#links">links list</a>.</p>
-
-						<pre class="example" title="Link to external ONIX for Books Metadata file">
+					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "Book",
@@ -2237,7 +2256,7 @@
     "links"  : [{
         "@type"       : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-onix.xml",
-        "fileFormat"  : "application/xml",
+        "fileFormat"  : "application/onix+xml",
         "rel"         : "describedby"
     },{
         &#8230;
@@ -2245,7 +2264,50 @@
     &#8230;
 }
 </pre>
-					</section>
+					<p class="note">The <code>application/onix+xml</code> MIME type has not yet been registered by IANA
+						at the time of writing this document, and is included in the example for illustrative purposes
+						only. </p>
+				</section>
+
+				<section id="extensibiity-manifest-properties">
+					<h5>Additional Properties in the Manifest</h5>
+
+					<p>Additional properties can be included directly in the manifest. It is RECOMMENDED that these
+						properties be taken from public schemes like [[schema.org]] or [[dcterms]] and use values from
+						controlled vocabularies whenever possible. Proprietary terms MAY be used, but it is RECOMMENDED
+						that such terms be included using <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact
+							IRIs</a>&#160;[[!json-ld]], with prefixes defined as part of the context.</p>
+
+					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
+{
+    "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"           : "CreativeWork",
+    &#8230;
+    "identifier"      : "http://www.w3.org/TR/tabular-data-model/",
+    "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "copyrightYear"   : "2015",
+    "copyrightHolder" : "World Wide Web Consortium",    
+    &#8230;
+}
+</pre>
+
+					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "CreativeWork",
+    &#8230;
+    "identifier" : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    "dc:subject" : ["Document Structures","Resource Description Framework (RDF)"]
+    &#8230;
+}
+</pre>
+					<p class="note"> A prefix definition <code>dc</code> for [[dcterms]] is included in the context file
+						of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is
+						true for a number of other public vocabularies; see the <a
+							href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
+						details. </p>
+
 				</section>
 			</section>
 		</section>
@@ -2848,7 +2910,7 @@
 					<dt>
 						<dfn>authors</dfn>
 					</dt>
-					<dd>Contains one or more <a href="#creator">creators</a>.</dd>
+					<dd>Contains one or more <a href="#creators">creators</a>.</dd>
 					<dt>
 						<dfn>dateModified</dfn>
 					</dt>
@@ -2879,7 +2941,7 @@
 			<section id="contributor-idl">
 				<h3><code>authors</code> member </h3>
 
-				<p class="ednote">The <a href="#creator">current infoset for creators</a> is not fully defined; this
+				<p class="ednote">The <a href="#creators">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
 
 				<pre class="idl">
