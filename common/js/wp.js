@@ -42,7 +42,7 @@ function create_wp(config) {
 	// if it wants the publication to be properly cached/packaged, or not. At this moment,
 	// it seems to be not true. 
 	// This flag controls on what should happen if the full boundary is supposed to be included in the manifest...
-	const FULL_BOUNDARY = true;
+	const FULL_BOUNDARY = false;
 
     // There are minor differences between the terms used in the respec config file and the ones in schema.org...
     let person_keys_mapping = {
