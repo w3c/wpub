@@ -4,9 +4,18 @@
 * @param config: the respec configuration object
 */
 function create_wp(config) {
-	// Rudimentary check whether the URL is relative or not. Surely not ideal...
+    // It is currently unclear whether the WP manifest should include all possible resources (like in EPUB)
+    // if it wants the publication to be properly cached/packaged, or not. At this moment,
+    // it seems to be not true. 
+    // This flag controls on what should happen if the full boundary is supposed to be included in the manifest...
+    const FULL_BOUNDARY = false;
+
+    // ----------------------------------------------------------------------------------- //
+	// Rudimentary check whether the URL is relative or not. Surely not ideal, but I did not want to include a full URI library...
+    // (Why, oh why is not URL management part of the default JS environment?)
 	const is_relative = (url) => {
-		return (url[0] === '#' || url.startsWith("http://") || url.startsWith("https://" || url.startsWith("mailto:"))) ? false : true;
+        //alert(url);
+		return (url[0] === '#' || url.startsWith("http://") || url.startsWith("https://") || url.startsWith("mailto:")) ? false : true;
 	};
 
 	const image_type = (img) => {
@@ -14,10 +23,14 @@ function create_wp(config) {
 			return "image/gif";
 		} else if( img.endsWith(".png") ) {
 			return "image/png";
+        } else if( img.endsWith(".bmp") ) {
+            return "image/bmp";
 		} else if( img.endsWith(".jpg") || img.endsWith(".jpeg") ) {
 			return "image/jpeg";
 		} else if( img.endsWith(".svg") ) {
 			return "image/svg+xml";
+        } else if( img.endsWith(".pdf") ) {
+            return "application/pdf";
 		} else {
 			return null;
 		}
@@ -37,12 +50,6 @@ function create_wp(config) {
 	    })
 	};
 
-
-	// It is currently unclear whether the WP manifest should include all possible resources (like in EPUB)
-	// if it wants the publication to be properly cached/packaged, or not. At this moment,
-	// it seems to be not true. 
-	// This flag controls on what should happen if the full boundary is supposed to be included in the manifest...
-	const FULL_BOUNDARY = false;
 
     // There are minor differences between the terms used in the respec config file and the ones in schema.org...
     let person_keys_mapping = {
@@ -94,7 +101,7 @@ function create_wp(config) {
             "url"        : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
             "fileFormat" : "text/html",
             "rel"        : "license describedby"
-    },{
+        },{
             "@type"      : "PublicationLink",
             "url"        : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
             "fileFormat" : "text/html",
@@ -205,6 +212,16 @@ function create_wp(config) {
 		})		
 	}
 
+    // If the ORCID extension is used, the ORCID logo should also be added to the list of resources
+    if( document.querySelector("span.orcid") ) {
+        manifest.resources.push({
+            "@type"       : "PublicationLink",
+            "url"         : "https://orcid.org/sites/default/files/images/orcid_16x16.gif",
+            "fileFormat"  : "image/gif",
+            "description" : "ORCID logo"                    
+        })              
+    }
+
     // =====================================================================
     // Add the dynamic parts that are requested/expected for a full boundary
     // =====================================================================
@@ -227,7 +244,7 @@ function create_wp(config) {
     			}
     			manifest.resources.push(retval);
     		}
-    	})
+    	});
     	document.querySelectorAll("img").forEach((element) => {
     		let href= element.getAttribute("src");
     		if( href && is_relative(href) ) {
@@ -245,7 +262,7 @@ function create_wp(config) {
     			}
     			manifest.resources.push(retval);
     		}
-    	})
+    	});
     	document.querySelectorAll("a").forEach((element) => {
     		let href= element.getAttribute("href");
     		if( href && is_relative(href) ) {
@@ -253,9 +270,32 @@ function create_wp(config) {
     				"@type"  : "PublicationLink",
     				"url"    : `${href}`    				
     			}
+                let type = element.getAttribute("type");
+                if( type ) {
+                    retval.fileFormat = type
+                }
+                let rel = element.getAttribute("rel");
+                if( type ) {
+                    retval.rel = rel
+                }
     			manifest.resources.push(retval);
     		}
-    	})
+    	});
+        document.querySelectorAll("script").forEach((element) => {
+            if( element.getAttribute("class") !== "remove" ) {
+                let href= element.getAttribute("src");
+                if( href && is_relative(href) ) {
+                    let retval = {
+                        "@type"  : "PublicationLink",
+                        "url"    : `${href}`                    
+                    }
+                    if( href.endsWith(".js") ) {
+                        retval.fileFormat = "application/Javascript"
+                    }
+                    manifest.resources.push(retval);
+                }                
+            }
+        });
 
     	manifest.resources = uniq(manifest.resources);
     }
