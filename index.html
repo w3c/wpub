@@ -876,15 +876,16 @@
 					<section id="address-infoset">
 						<h5>Infoset Requirements</h5>
 
+						<p>If the address does not resolve to an <abbr title="Hypertext Markup Language">HTML</abbr>
+							document&#160;[[!html]], user agents SHOULD NOT provide access to it to users. A Web
+							Publication MAY have more than one address, but all the addresses MUST resolve to the same
+							document.</p>
+
 						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
 							including one that is not listed in the <a>default reading order</a>. This document MUST
 							include a <a href="#wp-linking">link to the manifest</a> to ensure a bidirectional linking
 							relationship (i.e., that user agents can also locate the manifest from the document at the
 							address.</p>
-
-						<p>If the canonical URL does not resolve to an <abbr title="Hypertext Markup Language"
-								>HTML</abbr> document&#160;[[!html]], user agents SHOULD NOT provide access to it to
-							users.</p>
 
 						<p>If the document is not a Web Publication resource, user agents SHOULD load the first document
 							in the <a>default reading order</a> when initiating the Web Publication.</p>
@@ -893,9 +894,6 @@
 							do not support Web Publications, include navigation aids in the referenced document that
 							facilitate consumption of the content, (e.g., provide a table of contents or a link to
 							one).</p>
-
-						<p>The availability of the address does not preclude the creation and use of other identifiers
-							and/or addresses to retrieve a <a>Web Publication</a>, whether in whole or in part.</p>
 
 						<div class="note">The Web Publication's address can also be used as value for an identifier link
 							relation&#160;[[link-relation]].</div>
@@ -946,25 +944,23 @@
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
 						the Web Publication.</p>
 
+					<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
+						specification. The actual uniqueness achievable depends on such factors as the conventions of
+						the identifier scheme used and the degree of control over assignment of identifiers.</p>
+
 					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
-						Publication's <a>address</a>. Even if a Web Publication is permanently relocated to a new
-						address, for example, the canonical identifier will provide a way of locating the new location
+						Publication's <a>address(es)</a>. Even if a Web Publication is permanently relocated to a new
+						URL, for example, the canonical identifier will provide a way of locating the new location
 						(e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the
 						new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
-							title="Uniform Resource Locator">URL</abbr> of the canonical identifier).</p>
+							title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
+						intended to provide a means of identifying instances of the same Web Publication hosted at
+						different URLs.</p>
 
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be an <a>address</a>. When assigned, the canonical identifier
-							needs to be unique to one and only one Web Publication, regardless of how many locations it
-							might be hosted at (i.e., a user might encounter the same publication at different URLs, but
-							they are considered instances of the same Web Publication if they share the same canonical
-							identifier).</p>
-
-						<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
-							specification. The actual uniqueness achievable depends on such factors as the conventions
-							of the identifier scheme used and the degree of control over assignment of identifiers.</p>
+						<p>The canonical identifier MUST be a URL&#160;[[!url]].</p>
 
 						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
 							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
