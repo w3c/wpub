@@ -949,10 +949,10 @@
 						the identifier scheme used and the degree of control over assignment of identifiers.</p>
 
 					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
-						Publication's <a>address(es)</a>. Even if a Web Publication is permanently relocated to a new
-						URL, for example, the canonical identifier will provide a way of locating the new location
-						(e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the
-						new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
+						Publication's <a>address(es)</a>. If a Web Publication is permanently relocated to a new URL,
+						for example, the canonical identifier provides a way of discovering the new location (e.g., a
+							<abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the new
+							<abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
 							title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
 						intended to provide a means of identifying instances of the same Web Publication hosted at
 						different URLs.</p>
@@ -960,10 +960,7 @@
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be a URL&#160;[[!url]]. If both the <code>@id</code> and
-								<code>id</code> terms are specified in the manfiest, user agents MUST use the value of
-							the <code>@id</code> term as the canonical identifier and ignore the <code>id</code>
-							term.</p>
+						<p>The canonical identifier MUST be a URL&#160;[[!url]].</p>
 
 						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
 							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
@@ -995,7 +992,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>@id</code> / <code>id</code>
+										<code>@id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
@@ -1003,11 +1000,6 @@
 								</tr>
 							</tbody>
 						</table>
-
-						<p>The <code>@id</code> keyword&#160;[[!json-ld]] and <code>id</code> term can be used
-							interchangeably: the latter is mapped to the former by the schema.org context. The manifest
-							MUST NOT contain both <code>id</code> and <code>@id</code> declarations, however, as only
-							one is permitted.</p>
 
 						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
 							additional types of identifiers for the Web Publication using the <a
