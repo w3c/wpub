@@ -960,7 +960,10 @@
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be a URL&#160;[[!url]].</p>
+						<p>The canonical identifier MUST be a URL&#160;[[!url]]. If both the <code>@id</code> and
+								<code>id</code> terms are specified in the manfiest, user agents MUST use the value of
+							the <code>@id</code> term as the canonical identifier and ignore the <code>id</code>
+							term.</p>
 
 						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
 							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
@@ -992,7 +995,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code> / <code>@id</code>
+										<code>@id</code> / <code>id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
@@ -1001,10 +1004,10 @@
 							</tbody>
 						</table>
 
-						<p>The <code>id</code> term and the <code>@id</code> keyword can be used interchangeably: the
-							former is mapped onto the second by the schema.org context. The manifest MUST NOT contain
-							both <code>id</code> and <code>@id</code> declarations, however, as only one is
-							permitted.</p>
+						<p>The <code>@id</code> keyword&#160;[[!json-ld]] and <code>id</code> term can be used
+							interchangeably: the latter is mapped to the former by the schema.org context. The manifest
+							MUST NOT contain both <code>id</code> and <code>@id</code> declarations, however, as only
+							one is permitted.</p>
 
 						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
 							additional types of identifiers for the Web Publication using the <a
