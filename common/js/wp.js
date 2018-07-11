@@ -79,33 +79,33 @@ function create_wp(config) {
         "accessModeSufficient" : ["textual"],
 
         "resources"            : [{
-            "@type"       : "PublicationLink",
-            "url"         : "https://www.w3.org/StyleSheets/TR/2016/logos/W3C",
-            "fileFormat"  : "image/svg+xml",
-            "description" : "W3C Logo"           
+            "@type"           : "PublicationLink",
+            "url"             : "https://www.w3.org/StyleSheets/TR/2016/logos/W3C",
+            "encodingFormat"  : "image/svg+xml",
+            "description"     : "W3C Logo"           
         },{
-            "@type"       : "PublicationLink",
-            "url"         : "https://www.w3.org/StyleSheets/TR/2016/base.css",
-            "rel"         : "stylesheet",
-            "fileFormat"  : "tex/css",
-            "description" : "Generic CSS file for W3C TR documents"                   	
+            "@type"           : "PublicationLink",
+            "url"             : "https://www.w3.org/StyleSheets/TR/2016/base.css",
+            "rel"             : "stylesheet",
+            "encodingFormat"  : "tex/css",
+            "description"     : "Generic CSS file for W3C TR documents"                   	
         }],
 
         "links"                : [{
-            "@type"      : "PublicationLink",
-            "url"        : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
-            "fileFormat" : "text/html",
-            "rel"        : "privacy-policy"
+            "@type"          : "PublicationLink",
+            "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+            "encodingFormat" : "text/html",
+            "rel"            : "privacy-policy"
         },{
-            "@type"      : "PublicationLink",
-            "url"        : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
-            "fileFormat" : "text/html",
-            "rel"        : "license describedby"
+            "@type"          : "PublicationLink",
+            "url"            : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
+            "encodingFormat" : "text/html",
+            "rel"            : "license describedby"
         },{
-            "@type"      : "PublicationLink",
-            "url"        : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
-            "fileFormat" : "text/html",
-            "rel"        : "copyright"
+            "@type"          : "PublicationLink",
+            "url"            : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
+            "encodingFormat" : "text/html",
+            "rel"            : "copyright"
         }]
     }
 
@@ -186,39 +186,39 @@ function create_wp(config) {
 
 	if( styleFile !== undefined ) {
 		manifest.resources.push({
-	        "@type"       : "PublicationLink",
-	        "url"         : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
-	        "rel"         : "stylesheet",
-	        "fileFormat"  : "tex/css",
-	        "description" : "CSS file depending on the status of the document"                   	
+	        "@type"           : "PublicationLink",
+	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
+	        "rel"             : "stylesheet",
+	        "encodingFormat"  : "tex/css",
+	        "description"     : "CSS file depending on the status of the document"                   	
 		})		
 	}
    
 	if( logoFile !== undefined ) {
 		manifest.resources.push({
-	        "@type"       : "PublicationLink",
-	        "url"         : `https://www.w3.org/StyleSheets/TR/2016/logos/${logoFile}`,
-	        "fileFormat"  : `${logoFormat}`,
-	        "description" : "Sidebar logo reflecting the status of the document"                   	
+	        "@type"           : "PublicationLink",
+	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${logoFile}`,
+	        "encodingFormat"  : `${logoFormat}`,
+	        "description"     : "Sidebar logo reflecting the status of the document"                   	
 		})		
 	}
 
 	if( watermark !== undefined ) {
 		manifest.resources.push({
-	        "@type"       : "PublicationLink",
-	        "url"         : `https://www.w3.org/StyleSheets/TR/2016/logos/${watermark}`,
-	        "fileFormat"  : "image/png",
-	        "description" : "Background watermark reflecting the status of the document"                   	
+	        "@type"           : "PublicationLink",
+	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${watermark}`,
+	        "encodingFormat"  : "image/png",
+	        "description"     : "Background watermark reflecting the status of the document"                   	
 		})		
 	}
 
     // If the ORCID extension is used, the ORCID logo should also be added to the list of resources
     if( document.querySelector("span.orcid") ) {
         manifest.resources.push({
-            "@type"       : "PublicationLink",
-            "url"         : "https://orcid.org/sites/default/files/images/orcid_16x16.gif",
-            "fileFormat"  : "image/gif",
-            "description" : "ORCID logo"                    
+            "@type"           : "PublicationLink",
+            "url"             : "https://orcid.org/sites/default/files/images/orcid_16x16.gif",
+            "encodingFormat"  : "image/gif",
+            "description"     : "ORCID logo"                    
         })              
     }
 
@@ -240,7 +240,7 @@ function create_wp(config) {
     			}
     			let type = element.getAttribute("type");
     			if( type ) {
-    				retval.fileFormat = type
+    				retval.encodingFormat = type
     			}
     			manifest.resources.push(retval);
     		}
@@ -254,7 +254,7 @@ function create_wp(config) {
     			}
     			let type = image_type(href);
     			if( type ) {
-    				retval.fileFormat = type;
+    				retval.encodingFormat = type;
     			}
     			let alt = element.getAttribute("alt");
     			if( alt ) {
@@ -272,7 +272,7 @@ function create_wp(config) {
     			}
                 let type = element.getAttribute("type");
                 if( type ) {
-                    retval.fileFormat = type
+                    retval.encodingFormat = type
                 }
                 let rel = element.getAttribute("rel");
                 if( type ) {
@@ -290,7 +290,7 @@ function create_wp(config) {
                         "url"    : `${href}`                    
                     }
                     if( href.endsWith(".js") ) {
-                        retval.fileFormat = "application/Javascript"
+                        retval.encodingFormat = "application/Javascript"
                     }
                     manifest.resources.push(retval);
                 }                

@@ -12,52 +12,52 @@
     "readingOrder": [{
         "@type" : "PublicationLink",
         "url": "html/title.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Title Page"
     },{
         "@type" : "PublicationLink",
         "url": "html/copyright.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Copyright"
     },{
         "@type" : "PublicationLink",
         "url": "html/introduction.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Etymology"
     },{
         "@type" : "PublicationLink",
         "url": "html/epigraph.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Extracts"
     },{
         "@type" : "PublicationLink",
         "url": "html/c001.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 1 - Loomings"
     },{
         "@type" : "PublicationLink",
         "url": "html/c002.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 2 - The Carpet-Bad"
     },{
         "@type" : "PublicationLink",
         "url": "html/c003.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 3 - The Spouter-Inn"
     },{
         "@type" : "PublicationLink",
         "url": "html/c004.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 4 - The Counterpane"
     },{
         "@type" : "PublicationLink",
         "url": "html/c005.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 5 - Breakfast"
     },{
         "@type" : "PublicationLink",
         "url": "html/c006.html",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Chapter 6 - The Street"
     }],
 
@@ -65,32 +65,32 @@
         "@type" : "PublicationLink",
         "url": "html/toc.html",
         "rel": "contents",
-        "fileFormat": "text/html",
+        "encodingFormat": "text/html",
         "name": "Table of Contents"
     },{
         "@type" : "PublicationLink",
         "rel": "https://www.w3.org/ns/wp#cover-page",
         "url": "images/cover.jpg",
-        "fileFormat": "image/jpeg"
+        "encodingFormat": "image/jpeg"
     },{
         "@type" : "PublicationLink",
         "url": "css/mobydick.css",
-        "fileFormat": "text/css"
+        "encodingFormat": "text/css"
     },{
         "@type" : "PublicationLink",
         "url": "fonts/STIXGeneral.otf",
-        "fileFormat": "application/vnd.ms-opentype"
+        "encodingFormat": "application/vnd.ms-opentype"
     },{
         "@type" : "PublicationLink",
         "url": "fonts/STIXGeneralBol.otf",
-        "fileFormat": "application/vnd.ms-opentype"
+        "encodingFormat": "application/vnd.ms-opentype"
     },{
         "@type" : "PublicationLink",
         "url": "fonts/STIXGeneralBolIta.otf",
-        "fileFormat": "application/vnd.ms-opentype"
+        "encodingFormat": "application/vnd.ms-opentype"
     },{
         "@type" : "PublicationLink",
         "url": "fonts/STIXGeneralItalic.otf",
-        "fileFormat": "application/vnd.ms-opentype"
+        "encodingFormat": "application/vnd.ms-opentype"
     }]
 }

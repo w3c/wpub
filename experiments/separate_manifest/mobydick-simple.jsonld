@@ -28,7 +28,7 @@
             "@type": "PublicationLink",
             "rel": "https://www.w3.org/ns/wp#cover-page",
             "url": "images/cover.jpg",
-            "fileFormat": "image/jpeg"
+            "encodingFormat": "image/jpeg"
         },{
             "@type": "PublicationLink",
             "url": "html/toc.html",
@@ -36,19 +36,19 @@
         },{
             "@type": "PublicationLink",
             "url": "fonts/STIXGeneral.otf",
-            "fileFormat": "application/vnd.ms-opentype"
+            "encodingFormat": "application/vnd.ms-opentype"
         },{
             "@type": "PublicationLink",
             "url": "fonts/STIXGeneralBol.otf",
-            "fileFormat": "application/vnd.ms-opentype"
+            "encodingFormat": "application/vnd.ms-opentype"
         },{
             "@type": "PublicationLink",
             "url": "fonts/STIXGeneralBolIta.otf",
-            "fileFormat": "application/vnd.ms-opentype"
+            "encodingFormat": "application/vnd.ms-opentype"
         },{
             "@type": "PublicationLink",
             "url": "fonts/STIXGeneralItalic.otf",
-            "fileFormat": "application/vnd.ms-opentype"
+            "encodingFormat": "application/vnd.ms-opentype"
         }
     ]
 }
