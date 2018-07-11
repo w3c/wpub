@@ -128,7 +128,7 @@
         console.log("Setting audio element src to: "+item[current_index].url)
         audio_source.src = new URL(item[current_index].url, url).href;
         localStorage.setItem(url+"#track", audio_source.src);
-        audio_source.type = item[current_index].fileFormat;
+        audio_source.type = item[current_index].encodingFormat;
         audio.load();
 
         if (current_index > 0) {
