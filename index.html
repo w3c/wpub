@@ -441,8 +441,8 @@
 						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>. This
 					page is referred to as the <dfn>primary entry page</dfn> of the Web Publication.</p>
 
-				<p> The manifest may be <a href="#manifest-embedding">embedded</a> into the <a>primary entry page</a>; in
-					this case the link element MUST use a relative URL to refer to the manifest. </p>
+				<p> The manifest may be <a href="#manifest-embedding">embedded</a> into the <a>primary entry page</a>;
+					in this case the link element MUST use a relative URL to refer to the manifest. </p>
 
 				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST
 					NOT appear as part of the <a href="#resource-categorization-properties"></a>. </p>
@@ -876,15 +876,16 @@
 					<section id="address-infoset">
 						<h5>Infoset Requirements</h5>
 
+						<p>If the address does not resolve to an <abbr title="Hypertext Markup Language">HTML</abbr>
+							document&#160;[[!html]], user agents SHOULD NOT provide access to it to users. A Web
+							Publication MAY have more than one address, but all the addresses MUST resolve to the same
+							document.</p>
+
 						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
 							including one that is not listed in the <a>default reading order</a>. This document MUST
 							include a <a href="#wp-linking">link to the manifest</a> to ensure a bidirectional linking
 							relationship (i.e., that user agents can also locate the manifest from the document at the
-							address.</p>
-
-						<p>If the canonical URL does not resolve to an <abbr title="Hypertext Markup Language"
-								>HTML</abbr> document&#160;[[!html]], user agents SHOULD NOT provide access to it to
-							users.</p>
+							address).</p>
 
 						<p>If the document is not a Web Publication resource, user agents SHOULD load the first document
 							in the <a>default reading order</a> when initiating the Web Publication.</p>
@@ -893,9 +894,6 @@
 							do not support Web Publications, include navigation aids in the referenced document that
 							facilitate consumption of the content, (e.g., provide a table of contents or a link to
 							one).</p>
-
-						<p>The availability of the address does not preclude the creation and use of other identifiers
-							and/or addresses to retrieve a <a>Web Publication</a>, whether in whole or in part.</p>
 
 						<div class="note">The Web Publication's address can also be used as value for an identifier link
 							relation&#160;[[link-relation]].</div>
@@ -946,33 +944,27 @@
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
 						the Web Publication.</p>
 
+					<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
+						specification. The actual uniqueness achievable depends on such factors as the conventions of
+						the identifier scheme used and the degree of control over assignment of identifiers.</p>
+
+					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
+						Publication's <a>address(es)</a>. If a Web Publication is permanently relocated to a new URL,
+						for example, the canonical identifier provides a way of discovering the new location (e.g., a
+							<abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the new
+							<abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
+							title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
+						intended to provide a means of identifying instances of the same Web Publication hosted at
+						different URLs.</p>
+
 					<section id="canonical-identifier-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The canonical identifier MUST be an <a>address</a>.</p>
-
-						<p>If a Web Publication is hosted at multiple addresses, the canonical identifier allows a user
-							agent to identify the shared relationship between the versions and to determine which of the
-							available addresses is primary.</p>
-
-						<p>The canonical identifier is also intended to provide a measure of permanence above and beyond
-							the Web Publication's <a>address</a>. Even if a Web Publication is permanently relocated to
-							a new address, for example, the canonical identifier will provide a way of locating the new
-							location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be
-							updated with the new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could
-							be added to the <abbr title="Uniform Resource Locator">URL</abbr> of the canonical
-							identifier).</p>
-
-						<p>When assigned, the canonical identifier needs to be unique to one and only one Web
-							Publication, independent of its address(es). Ensuring uniqueness is outside the scope of
-							this specification, however. The actual uniqueness achievable depends on such factors as the
-							conventions of the identifier scheme used and the degree of control over assignment of
-							identifiers.</p>
+						<p>The canonical identifier MUST be a URL&#160;[[!url]].</p>
 
 						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
-							does not have a canonical identifier. In this case, a user agent MUST NOT make any
-							assumptions about the relationship between the current Web Publication and any other
-							possible versions of it (i.e., treat each instance as unique).</p>
+							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
+							identifier from any other identifiers provided in the manifest.</p>
 
 						<p class="note">The canonical identifier can be used as the target of a "canonical"
 							link&#160;[[rfc6596]] (e.g., a <code>link</code> element&#160;[[html]] whose
@@ -1000,7 +992,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code> / <code>@id</code>
+										<code>@id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
@@ -1008,11 +1000,6 @@
 								</tr>
 							</tbody>
 						</table>
-
-						<p>The <code>id</code> term and the <code>@id</code> keyword can be used interchangeably: the
-							former is mapped onto the second by the schema.org context. The manifest MUST NOT contain
-							both <code>id</code> and <code>@id</code> declarations, however, as only one is
-							permitted.</p>
 
 						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
 							additional types of identifiers for the Web Publication using the <a
@@ -1279,7 +1266,7 @@
 					</ul>
 
 					<p class="issue" data-number="220"></p>
-					
+
 					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
@@ -2235,9 +2222,10 @@
 						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
 								><code>PublicationLink</code></a> object, where:</p>
 					<ul>
-						<li>
-							the <code>rel</code> value of the <a href="#publication-link-def"><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by IANA or by other organizations; if the link record contains descriptive metadata it MUST include the <code>describedby</code> (IANA) identifier;
-						</li>
+						<li> the <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by
+							IANA or by other organizations; if the link record contains descriptive metadata it MUST
+							include the <code>describedby</code> (IANA) identifier; </li>
 						<li>the value of the <code>fileFormat</code> in the link MUST use the MIME media
 							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
 					</ul>
