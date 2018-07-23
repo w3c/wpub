@@ -1793,27 +1793,13 @@
 									><code>PublicationLink</code></a> MUST include the
 								<code>https://www.w3.org/ns/wp#cover</code> identifier.</p>
 
-						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by
-							IANA, to avoid using a URL.</p>
+						<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD
+							be provided. User agents can use these properties to provide alternative text and
+							descriptions when necessary for accessibility.</p>
 
-						<pre class="example" title="Cover image">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "resources"  : [{
-        "@type"          : "PublicationLink",
-        "url"            : "whale-image.jpg",
-        "encodingFormat" : "image/jpeg"
-        "rel"            : "https://www.w3.org/ns/wp#cover"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
+						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
+							to avoid using a URL.</p>
+
 						<pre class="example" title="Cover HTML page">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1832,6 +1818,28 @@
     &#8230;
 }
 </pre>
+
+						<pre class="example" title="Cover image with title and description">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "@type"          : "PublicationLink",
+        "url"            : "whale-image.jpg",
+        "encodingFormat" : "image/jpeg",
+        "rel"            : "https://www.w3.org/ns/wp#cover",
+        "title"          : "Moby Dick attacking hunters",
+        "description"    : "A white whale is seen surfacing from the water to attack a small whaling boat"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+
 						<pre class="example" title="Cover image in JPEG and SVG formats">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1842,12 +1850,12 @@
     "resources"  : [{
         "@type"          : "PublicationLink",
         "url"            : "lilliput.jpg",
-        "encodingFormat" : "image/jpeg"
+        "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover"
     },{
         "@type"          : "PublicationLink",
         "url"            : "lilliput.svg",
-        "encodingFormat" : "image/svg+xml"
+        "encodingFormat" : "image/svg+xml",
         "rel"            : "https://www.w3.org/ns/wp#cover"
     },{
         &#8230;
