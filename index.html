@@ -2850,24 +2850,8 @@
 			<section id="webpublicationmanifest-dictionary">
 				<h3><dfn>WebPublicationManifest</dfn> dictionary </h3>
 
-				<pre class="idl">
-                    dictionary WebPublicationManifest {
-                        required    DOMString                               url;
-                                    DOMString                               lang;
-                                    TextDirection                           direction = "auto";
-                                    TextDirection                           readingProgression = "auto";
-                                    sequence&lt;LocalizableString&gt;       name;
-                                    DOMString                               id;
-                                    sequence&lt;Contributor&gt;             authors;
-                                    DOMString                               dateModified;
-                                    DOMString                               datePublished;
-                                    sequence&lt;PublicationLink&gt;         links;
-                                    sequence&lt;PublicationLink&gt;         readingOrder;
-                                    sequence&lt;PublicationLink&gt;         resources;
-                                    sequence&lt;PublicationLink&gt;         toc;
-                    };
-      </pre>
-
+				<pre class="idl" data-include="webidl/manifest.webidl" data-include-format="text"></pre>
+ 
 				<p>The <a>WebPublicationManifest</a> has the following members:</p>
 
 				<dl data-dfn-for="WebPublicationManifest">
@@ -2932,11 +2916,7 @@
 				<p class="ednote">The <a href="#creators">current infoset for creators</a> is not fully defined; this
 					dictionary might be further improved once there is agreement on how they should be handled.</p>
 
-				<pre class="idl">
-                    dictionary Contributor {
-                        required    LocalizableString       name;
-                                    DOMString               id;
-                    };
+				<pre class="idl" data-include="webidl/contributor.webidl" data-include-format="text">
                 </pre>
 
 				<p>The <code>author</code> member is a sequence of <dfn>Contributor</dfn> dictionaries where each
@@ -2965,13 +2945,7 @@
 						href="https://w3c.github.io/string-meta/#bestPractices">best practices established by the i18n
 						WG</a> and on the <a>LocalizableString</a> dictionary.</p>
 
-				<pre class="idl">
-                    dictionary LocalizableString {
-                        required    DOMString       value;
-                                    DOMString       lang;
-                                    TextDirection   dir = "auto";
-                    };
-                </pre>
+				<pre class="idl" data-include="webidl/localizable_string.webidl" data-include-format="text"></pre>
 
 				<p>When <code>lang</code> or <code>dir</code> are specified in <a>LocalizableString</a>, these values
 					override the default language and base direction specificed in <a>WebPublicationManifest</a>.</p>
@@ -2997,15 +2971,7 @@
 			<section id="link-webidl">
 				<h3><dfn>PublicationLink</dfn> dictionary </h3>
 
-				<pre class="idl">
-                    dictionary PublicationLink {
-                        required    DOMString                           url;
-                                    DOMString                           encodingFormat;
-                                    DOMString                           name;
-                                    sequence&lt;DOMString&gt;           rel;
-                                    sequence&lt;PublicationLink&gt;     children;
-                    };
-                </pre>
+				<pre class="idl" data-include="webidl/publication_link.webidl" data-include-format="text"></pre>
 
 				<p>The PublicationLink dictionary contains the following members:</p>
 
@@ -3038,13 +3004,7 @@
 			<section id="textdirection-idl">
 				<h3><code>TextDirection</code> enum </h3>
 
-				<pre class="idl">
-                    enum TextDirection {
-                        "ltr",
-                        "rtl",
-                        "auto"
-                    };
-                </pre>
+				<pre class="idl" data-include="webidl/text_direction.webidl" data-include-format="text"></pre>
 
 				<p>The <dfn>TextDirection</dfn> enum can contain the following values:</p>
 				<dl data-dfn-for="TextDirection">
