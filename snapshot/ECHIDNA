@@ -10,3 +10,8 @@ images/lifecycle_process_a_manifest.svg
 experiments/separate_manifest/mobydick-simple.jsonld
 experiments/w3c_rec/simple_version.html
 experiments/audiobook/flatland.json
+webidl/contributor.webidl
+webidl/localizable_string.webidl
+webidl/manifest.webidl
+webidl/publication_link.webidl
+webidl/text_direction.webidl
