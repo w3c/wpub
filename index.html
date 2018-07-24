@@ -353,7 +353,7 @@
 				</section>
 
 				<section id="manifest-properties">
-					<h3>Properties</h3>
+					<h4>Properties</h4>
 
 					<p>The naming, syntax, and requirements for manifest properties are defined in <a
 							href="#wp-properties"></a>.</p>
@@ -362,6 +362,30 @@
 						terms, they are encouraged to read through the infoset definitions for each property, as well.
 						The infoset definitions describe, in some cases, how items are compiled in the absence of
 						explicit information in the manifest.</p>
+				</section>
+
+				<section id="manifest-resolving-urls">
+					<h4>Resolving URLs</h4>
+
+					<p><a href="https://url.spec.whatwg.org/#relative-url-string">Relative URL strings</a> MAY be used
+						in the manifest. These URLs are resolved into <a
+							href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a> using a <a
+							href="https://url.spec.whatwg.org/#concept-base-url">base URL</a> (see&#160;[[!url]]).</p>
+
+					<p>The base URL for relative URLs is determined as follows:</p>
+
+					<ul>
+						<li>In the case of an <a href="#manifest-embedding">embedded manifest</a>, it is the <a
+								href="https://www.w3.org/TR/html/infrastructure.html#document-base-url">document base
+								URL</a>&#160;[[!html]] of the <a>primary entry page</a> of the Web Publication;</li>
+						<li>In the case of a <a href="#wp-linking">linked manifest</a>, it is URL of the manifest
+							resource.</li>
+					</ul>
+
+					<p>For embedded manifests, this means that relative URLs are resolved against the URL of the primary
+						entry page <em>unless</em> the page declares a base direction in a <a
+							href="https://www.w3.org/TR/html/document-metadata.html#the-base-element"
+								><code>&lt;base&gt;</code> element</a> in its header&#160;[[html]].</p>
 				</section>
 			</section>
 
@@ -457,24 +481,6 @@
 						ensure a more consistent reading experience for users regardless of their preferred user
 						agent.</p>
 				</div>
-			</section>
-
-			<section>
-				<h3>Resolving URLs in Manifests</h3>
-
-				<p>
-					Manifests may contain <a href="https://url.spec.whatwg.org/#relative-url-string">relative URL strings</a>. To resolve such URLs into <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a>, a <a href="https://url.spec.whatwg.org/#concept-base-url">base URL</a> is necessary (see&nbsp;[[!url]]). This base URL for the manifest is:
-				</p>
-
-				<ul>
-					<li>in the case of an <a href="#manifest-embedding">embedded Manifest</a> this is the <a href="https://www.w3.org/TR/html/infrastructure.html#document-base-url">document base URL</a>&nbsp;[[!html]] of the <a>primary entry page</a> of the Web Publication;</li>
-					<li>in the case of a <a href='#wp-linking'>linked Manifest</a> this is URL of the manifest resource.</li>
-				</ul>
-
-				<p class=ednote>
-					For embedded manifests this means that relative URLs will be resolved against the URL of the primary entry page, <em>unless</em> the latter includes, e.g., a <code>&lt;base&gt;</code> element in the header. See&nbsp;[[html]] for further details.
-				</p>
-
 			</section>
 
 			<section id="wp-table-of-contents">
@@ -967,11 +973,11 @@
 						the identifier scheme used and the degree of control over assignment of identifiers.</p>
 
 					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
-						Publication's <a href="#address">address(es)</a>. If a Web Publication is permanently relocated to a new URL,
-						for example, the canonical identifier provides a way of discovering the new location (e.g., a
-							<abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the new
-							<abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
-							title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
+						Publication's <a href="#address">address(es)</a>. If a Web Publication is permanently relocated
+						to a new URL, for example, the canonical identifier provides a way of discovering the new
+						location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be updated
+						with the new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to
+						the <abbr title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
 						intended to provide a means of identifying instances of the same Web Publication hosted at
 						different URLs.</p>
 
@@ -2869,7 +2875,7 @@
 				<h3><dfn>WebPublicationManifest</dfn> dictionary </h3>
 
 				<pre class="idl" data-include="webidl/manifest.webidl" data-include-format="text"></pre>
- 
+
 				<p>The <a>WebPublicationManifest</a> has the following members:</p>
 
 				<dl data-dfn-for="WebPublicationManifest">
