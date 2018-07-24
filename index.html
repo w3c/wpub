@@ -1259,7 +1259,7 @@
 					</p>
 
 					<ul>
-						<li>the natural <dfn>language</dfn>;</li>
+						<li>the natural <dfn>language</dfn>&thinsp;;</li>
 						<li>the <dfn>base direction</dfn> (the display direction for the value).</li>
 					</ul>
 					
@@ -1281,7 +1281,7 @@
 						</p>
 
 						<p class=note>
-							The language and base direction for the publication may influence, for example, some of the user interface features used by the user agent for the publication.
+							The language and base direction set for the Web Publication may influence, for example, user interface features for the publication used by the user agent.
 						</p>
 
 						<p class=note>
@@ -1293,11 +1293,7 @@
 						</p>
 
 						<p>
-							User agents, when using Web Publication manifests with bidirectional text (i.e., in the case the <a>base direction</a> is set) should identify the base direction of any given natural language value by scanning the text for the first strong directional character. Once the base direction has been identified, user agents must determine the appropriate rendering and display of natural language values, according to the Unicode Bidirectional Algorithm&nbsp[[!bidi]]. This may necessitate wrapping additional control characters or markup around the string prior to display, in order to apply the base direction. (See <a href="#bidi-examples"></a>.)
-						</p>
-
-						<p class="note">
-							These features make it possible to add the title of a publication in different languages, or repeat the creators’ names using different scripts. 
+							User agents, when using Web Publication manifests with bidirectional text (i.e., if the <a>base direction</a> is set) should identify the base direction of any given natural language value by scanning the text for the first strong directional character. Once the base direction has been identified, user agents must determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp[[!bidi]]. This may necessitate wrapping additional control characters or markup around the string prior to display, in order to apply the base direction. (See <a href="#bidi-examples"></a>.)
 						</p>
 
 						<p class=issue>
@@ -1305,7 +1301,7 @@
 						</p>
 
 						<p>
-							If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a <code>script</code> element, and the manifest does not include specific settings for the global language and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"><code>lang</code></a> and the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a> attributes, valid for the <code>script</code> element (see [[!html]]) are used as the global <a>language</a>a> and <a>base direction</a>, respectively.
+							If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a <code>script</code> element, and the manifest does not set the global language and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"><code>lang</code></a> and the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a> attributes, valid for the <code>script</code> element (see [[!html]]), are used as the global <a>language</a> and <a>base direction</a>, respectively.
 						</p>
 
 						<p>
@@ -1319,7 +1315,7 @@
 						</ul>
 
 						<p>
-							If a language tag cannot be determined, user agents MUST use the value "<code>und</code>"(undetermined). There is <em>no</em> default value for the default base direction.
+							No default values are specified for the <a>language</a> or the default <a>base direction</a>.
 						</p>
 
 					</section>
@@ -1328,7 +1324,7 @@
 					<section id="language-and-dir-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>As this infoset item refers to several aspects of setting language and direction, each is treated separately. </p>
+						<p>As this infoset item refers to several aspects of setting language and direction, these are treated separately. </p>
 
 						<section id="manifest-default-language-and-dir">
 							<h6>Global Language and Direction</h6>
@@ -1347,7 +1343,7 @@
 										<td>
 											<code>inLanguage</code>
 										</td>
-										<td>Default language for natural language properties as well as for the <a>Web Publication</a></td>
+										<td>Default <a>language</a> for textual values as well as for the <a>Web Publication</a></td>
 										<td>language code as defined in&#160;[[!bcp47]]</td>
 										<td><a href="https://schema.org/inLanguage"><code>inLanguage</code></a></td>
 									</tr>
@@ -1357,7 +1353,7 @@
 										<td>
 											<code>inDirection</code>
 										</td>
-										<td>Default base direction for natural language properties</td>
+										<td>Default <a>base direction</a> for textual values as well as for the <a>Web Publication</a></td>
 										<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
 										<td>(None)</td>
 									</tr>
@@ -1373,10 +1369,9 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
 
-							<p> It is possible to set the language for any textual value in the
-								manifest. This information MUST be set for each item separately using the <a
-									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> keywords</a>&#160;[[!json-ld]]: </p>
+							<p>
+								It is possible to set the language for any textual value in the manifest. This information MUST be set using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"><code>@value</code> and <code>@language</code> keywords</a> (instead of a simple string)&nbsp;[[!json-ld]]:
+							</p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -1393,7 +1388,7 @@
 }
 </pre>
 							<p>
-								The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. If not set, the default value is the <a href="#language-and-dir-manifest">default value of the manifest</a>.
+								The value of the language tag MUST be set to a language code as defined in [[!bcp47]].
 							</p>
 
 							<p>It is <em>not</em> possible to set the direction explicitly for a value</p>
