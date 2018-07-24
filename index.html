@@ -307,7 +307,7 @@
 						preserving).</p>
 
 
-					<p class="note">As part of the continuous contacts with Schema.org the additional features defined
+					<p class="ednote">As part of the continuous contacts with Schema.org the additional features defined
 						in the Web Publication context file could migrate to the core Schema.org vocabulary.</p>
 
 					<p class="note">Although Schema.org is often referenced using the <code>http</code> URI scheme, <a
@@ -477,12 +477,9 @@
 					include references to resources of any media type, both in the <a>default reading order</a> and as
 					dependencies of other resources.</p>
 
-				<div class="note">
-					<p>When adding resources to a Web Publication, consider support in user agents. The use of
-						progressive enhancement techniques and the provision of fallback content, as appropriate, will
-						ensure a more consistent reading experience for users regardless of their preferred user
-						agent.</p>
-				</div>
+				<p class="note">When adding resources to a Web Publication, consider support in user agents. The use of
+					progressive enhancement techniques and the provision of fallback content, as appropriate, will
+					ensure a more consistent reading experience for users regardless of their preferred user agent.</p>
 			</section>
 
 			<section id="wp-table-of-contents">
@@ -562,7 +559,7 @@
 
 
 				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
-					are are not mentioned in this specification; Web Publication authors can use any of those
+					are are not mentioned in this specification &#8212; Web Publication authors can use any of these
 					properties. This document defines only the minimal set of infoset items, and their mapping to
 					Schema.org when appropriate. </p>
 
@@ -1625,11 +1622,9 @@
 							language-specific placeholder title or use the <abbr title="Uniform Resource Locator"
 								>URL</abbr> of the manifest).</p>
 
-						<div class="note">
-							<p>A user agent is not expected to produce a <a
-									href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
-									title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
-						</div>
+						<p class="note">A user agent is not expected to produce a <a
+								href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
+							title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
 					</section>
 
 					<section id="title-manifest">
@@ -2323,9 +2318,9 @@
     &#8230;
 }
 </pre>
-					<p class="note">The <code>application/onix+xml</code> MIME type has not yet been registered by IANA
-						at the time of writing this document, and is included in the example for illustrative purposes
-						only. </p>
+					<p class="ednote">The <code>application/onix+xml</code> MIME type has not yet been registered by
+						IANA at the time of writing this document, and is included in the example for illustrative
+						purposes only. </p>
 				</section>
 
 				<section id="extensibility-manifest-properties">
@@ -2473,8 +2468,8 @@
 				<p class="note">See the <a href="#obtaining-manifest-diagram">diagram in the appendix</a> for a visual
 					representation of the algorithm.</p>
 
-				<p class="ednote">This section will require additional work if we also decide to allow JSON-LD embedded
-					in HTML.</p>
+				<p class="ednote">This section requires additional work now that we also allow JSON-LD embedded in
+					HTML.</p>
 
 			</section>
 
