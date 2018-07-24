@@ -949,11 +949,11 @@
 						the identifier scheme used and the degree of control over assignment of identifiers.</p>
 
 					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
-						Publication's <a href="#address">address(es)</a>. If a Web Publication is permanently relocated to a new URL,
-						for example, the canonical identifier provides a way of discovering the new location (e.g., a
-							<abbr title="Digital Object Identifier">DOI</abbr> registry could be updated with the new
-							<abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to the <abbr
-							title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
+						Publication's <a href="#address">address(es)</a>. If a Web Publication is permanently relocated
+						to a new URL, for example, the canonical identifier provides a way of discovering the new
+						location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be updated
+						with the new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect could be added to
+						the <abbr title="Uniform Resource Locator">URL</abbr> of the canonical identifier). It is also
 						intended to provide a means of identifying instances of the same Web Publication hosted at
 						different URLs.</p>
 
@@ -1254,87 +1254,96 @@
 				<section id="language-and-dir">
 					<h4>Language and Base Direction</h4>
 
-					<p>
-						The <a>Web Publication</a> has a natural language value (English, French, Chinese…), as well as a natural base direction of writing (left-to-right, right-to-left). The <abbr title="information set"><a>infoset</a></abbr> has entries to set these values, which can influence, e.g., the behavior of a user agent.
-					</p>
+					<p>The <a>Web Publication</a> has a natural language value (e.g., English, French, Chinese), as well
+						as a natural base writing direction (left-to-right or right-to-left). The <abbr
+							title="information set"><a>infoset</a></abbr> has entries to set these values, which can
+						influence, for example, the behavior of a user agent (e.g., it might place a pop-up for a table
+						of contents on the right hand side for publications whose natural base direction is
+						right-to-left).</p>
 
-					<p class=note>
-						A user agent may, for example, choose to place pop-ups for table of contents on the right hand side of its window, rather than on the left hand side, for publications whose natural base direction is right-to-left.
-					</p>
+					<p>Similarly, each natural language property value in the <a>Web Publication's</a>
+						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a
+							href="#creators">creators</a>) is <a
+							href="https://w3c.github.io/string-meta/#dom-localizable"
+						>localizable</a>&#160;[[string-meta]], meaning that the same information is available for
+						each.</p>
 
-					<p>
-						Furthermore, each natural language property value in the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a href="#creators">creators</a>) must also hold similar information: these values are <a href="https://w3c.github.io/string-meta/#dom-localizable">Localizable</a>&#160;[[string-meta]]. 
-					</p>
-
-					<p>
-						This means the <abbr title="information set"><a>infoset</a></abbr> must have entries to set:
-					</p>
-
+					<p>As a result, the <abbr title="information set"><a>infoset</a></abbr> has entries to set:</p>
 
 					<ul>
 						<li>the natural <dfn>language</dfn>, and </li>
 						<li>the <dfn>base direction</dfn> (the display direction for the value)</li>
 					</ul>
 
-					<p>of the <a>Web Publication</a>; these values also apply to the natural language property values of the <abbr title="information set"><a>infoset</a></abbr>.</p>
+					<p>of both the <a>Web Publication</a> and the natural language properties values of the <abbr
+							title="information set"><a>infoset</a></abbr>.</p>
 
 
-					
 					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>
-							The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global language and the base direction declarations valid for the Web Publication. The natural language MUST be a tag that conforms to&nbsp;[[!bcp47]], while the base language direction MUST have one of the following values:
-						</p>
-						
+						<p>The <abbr title="information set">infoset</abbr> MAY contain global language and base
+							direction declarations for the Web Publication. The natural language MUST be a tag that
+							conforms to&#160;[[!bcp47]], while the base language direction MUST have one of the
+							following values: </p>
+
 						<ul>
-							<li><code>ltr</code>: indicates that the textual values are explicitly directionally set to left-to-right text;</li>
-							<li><code>rtl</code>: indicates that the textual values are explicitly directionally set to right-to-left text;</li>
-							<li><code>auto</code>: indicates that the textual values are explicitly directionally set to the direction of the first character with a strong directionality.</li>
+							<li><code>ltr</code>: indicates that the textual values are explicitly directionally set to
+								left-to-right text;</li>
+							<li><code>rtl</code>: indicates that the textual values are explicitly directionally set to
+								right-to-left text;</li>
+							<li><code>auto</code>: indicates that the textual values are explicitly directionally set to
+								the direction of the first character with a strong directionality.</li>
 						</ul>
 
-						<p>
-							When specified, these properties are also used as defaults for textual values in the <abbr title="information set">infoset</abbr>. 
-						</p>
+						<p>When specified, these properties are also used as defaults for textual values in the <abbr
+								title="information set">infoset</abbr>.</p>
 
 
-						<p class=note>
-							It is important to differentiate between the language <em>for the publication</em> as opposed to the language and the base direction for individual resources. If such a resource is, e.g., in HTML, it is RECOMMENDED to set the language and direction in that resource, too. 
-						</p>
+						<p class="note">It is important to differentiate the language <em>of the publication</em> from
+							the language and the base direction of the individual resources that compose it. If such
+							resources are, for example, in HTML, the language and direction need to be set in those
+							resources, too. The language and base direction of the publication are not inherited.</p>
 
-						<p>
-							The (global) language information MAY be overridden by individual values. 
-						</p>
+						<p>The global language information MAY be overridden by individual values.</p>
 
-						<p>
-							User agents, when using Web Publication manifests with bidirectional text should identify the base direction of any given natural language value by scanning the text for the first strong directional character. Once the base direction has been identified, user agents must determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp[[!bidi]]. This may necessitate wrapping additional control characters or markup around the string prior to display, in order to apply the base direction. (See <a href="#bidi-examples"></a>.)
-						</p>
+						<p>When using Web Publication manifests with bidirectional text, user agents SHOULD identify the
+							base direction of any given natural language value by scanning the text for the first strong
+							directional character. Once the base direction has been identified, user agents MUST
+							determine the appropriate rendering and display of natural language values according to the
+							Unicode Bidirectional Algorithm&#160;[[!bidi]]. This could require wrapping additional
+							control characters or markup around the string prior to display, in order to apply the base
+							direction. (See <a href="#bidi-examples"></a>.) </p>
 
-						<p class=issue>
-							This section, in particular the features related to text directions, must be reviewed by I18N experts.
-						</p>
+						<p class="issue"> This section, in particular the features related to text directions, must be
+							reviewed by I18N experts. </p>
 
-						<p>
-							If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a <code>script</code> element, and the manifest does not set the global language and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"><code>lang</code></a> and the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a> attributes, valid for the <code>script</code> element (see [[!html]]), are used as the global <a>language</a> and <a>base direction</a>, respectively.
-						</p>
+						<p>If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a
+								<code>script</code> element, and the manifest does not set the global language and/or
+							the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a
+								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
+									><code>lang</code></a> and the <a
+								href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
+							attributes of the <code>script</code> element are used as the global <a>language</a> and
+								<a>base direction</a>, respectively (see [[!html]]).</p>
 
-						<p class=issue>
-							It is to be discussed whether this last paragraph, i.e., inheriting values from <code>script</code>, should be kept.
-						</p>
+						<p class="issue">It is to be discussed whether this last paragraph, i.e., inheriting values from
+								<code>script</code>, should be kept.</p>
 
-						<p>
-							If a user agent requires the language and one is not available in the <abbr title="information set">infoset</abbr> (globally, or specifically for that property), or the obtained value is invalid, the user agent MAY attempt to determine the language. This specification does not mandate how such a language tag is created. The user agent might:
-						</p>
-						
+						<p>If a user agent requires the language and one is not available in the <abbr
+								title="information set">infoset</abbr> (globally, or specifically for that property), or
+							the obtained value is invalid, the user agent MAY attempt to determine the language. This
+							specification does not mandate how such a language tag is created. The user agent might:</p>
+
 						<ul>
 							<li>use the <a>non-empty</a> language declaration of the manifest;</li>
-							<li>use the first non-empty language declaration found in a resource in the <a>default reading order</a>;</li>
+							<li>use the first non-empty language declaration found in a resource in the <a>default
+									reading order</a>;</li>
 							<li>calculate the language using its own algorithm.</li>
 						</ul>
 
-						<p>
-							No default values are specified for the <a>language</a> or the default <a>base direction</a>.
-						</p>
+						<p> No default values are specified for the <a>language</a> or the default <a>base
+							direction</a>. </p>
 
 					</section>
 
@@ -1342,7 +1351,8 @@
 					<section id="language-and-dir-manifest">
 						<h5>Manifest Expression</h5>
 
-						<p>As this infoset item refers to several aspects of setting language and direction, these are treated separately. </p>
+						<p>As this infoset item refers to several aspects of setting language and direction, these are
+							treated separately. </p>
 
 						<section id="manifest-default-language-and-dir">
 							<h6>Global Language and Direction</h6>
@@ -1361,7 +1371,8 @@
 										<td>
 											<code>inLanguage</code>
 										</td>
-										<td>Default <a>language</a> for the <a>Web Publication</a> as well as the textual infoset values</td>
+										<td>Default <a>language</a> for the <a>Web Publication</a> as well as the
+											textual infoset values</td>
 										<td>language code as defined in&#160;[[!bcp47]]</td>
 										<td><a href="https://schema.org/inLanguage"><code>inLanguage</code></a></td>
 									</tr>
@@ -1371,25 +1382,29 @@
 										<td>
 											<code>inDirection</code>
 										</td>
-										<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the textual infoset values</td>
+										<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the
+											textual infoset values</td>
 										<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
 										<td>(None)</td>
 									</tr>
 								</tbody>
 							</table>
 
-							<p class=note>
-								If the author's intention is to use a manifest, or a manifest template, both as embedded manifest and as a separate resource, it is RECOMMENDED to set these properties explicitly to avoid interference of the containing <code>script</code> element in case of embedding.
-							</p>
+							<p class="note">If authors intend to use a manifest, or a manifest template, both as
+								embedded manifest and as a separate resource, they are strongly encouraged to set these
+								properties explicitly to avoid interference of the containing <code>script</code>
+								element in case of embedding.</p>
 
 						</section>
 
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
 
-							<p>
-								It is possible to set the language for any textual value in the manifest. This information MUST be set using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"><code>@value</code> and <code>@language</code> keywords</a> (instead of a simple string)&nbsp;[[!json-ld]]:
-							</p>
+							<p>It is possible to set the language for any textual value in the manifest. This
+								information MUST be set using the <a
+									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
+										><code>@value</code> and <code>@language</code> keywords</a> (instead of a
+								simple string)&#160;[[!json-ld]]: </p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -1405,15 +1420,14 @@
     }
 }
 </pre>
-							<p>
-								The value of the language tag MUST be set to a language code as defined in [[!bcp47]].
-							</p>
+							<p> The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. </p>
 
 							<p>It is <em>not</em> possible to set the direction explicitly for a value</p>
 
-							<p class=note>
-								Setting the direction for a natural text value is currently not possible in JSON-LD&nbsp;[[!json-ld]]. In case the JSON-LD community, as well as the schema.org community, introduces such a feature, future versions of this specification may extend the ability of Web Publication Manifests to include this possibility.
-							</p>
+							<p class="note"> Setting the direction for a natural text value is currently not possible in
+								JSON-LD&#160;[[!json-ld]]. In case the JSON-LD community, as well as the schema.org
+								community, introduces such a feature, future versions of this specification may extend
+								the ability of Web Publication Manifests to include this possibility. </p>
 						</section>
 					</section>
 				</section>
@@ -2883,7 +2897,7 @@
 				<h3><dfn>WebPublicationManifest</dfn> dictionary </h3>
 
 				<pre class="idl" data-include="webidl/manifest.webidl" data-include-format="text"></pre>
- 
+
 				<p>The <a>WebPublicationManifest</a> has the following members:</p>
 
 				<dl data-dfn-for="WebPublicationManifest">
@@ -3082,50 +3096,50 @@
 				<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
 			</section>
 		</section>
-
 		<section id="bidi-examples" class="appendix informative">
 			<h2>Examples for bidirectional texts</h2>
 
-			<p>(These examples were originally published in the [[activitystreams-core]] Recommendation.)</p> 
-			
-	        <table class="zebra">
-	          <tbody>
-	            <tr>
-	              <th>Text value</th>
-	              <th>Direction</th>
-	              <th>Method</th>
-	              <th>Displayed as</th>
-	            </tr>
-	            <tr>
-	              <td><code>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></code></td>
-	              <td>rtl</td>
-	              <td>First strong directional character</td>
-	              <td>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></td>	              
-	            </tr>
-	            <tr>
-	              <td>
-	                <code>The document is titled, "\u2067פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>\u2069"</code>
-	              </td>
-	              <td>ltr</td>
-	              <td>First strong directional character</td>
-	              <td>The document is titled, "&#x2067פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>&#x2069"</span></td>
-	            </tr>
-	            <tr>
-	              <td><code>\u200FHTML היא שפת סימון</code></td>
-	              <td>rtl</td>
-	              <td>Bidi Control Character</td>
-	              <td><code>&#x200FHTML היא שפת סימון</code></td>
-	            </tr>
-	            <tr>
-	              <td><code>\u200E'سلام' is hello in Persian</code></td>
-	              <td>ltr</td>
-	              <td>Bidi Control Character</td>
-	              <td><code>&#x200E'سلام' is hello in Persian</code></td>
-	            </tr>
-	          </tbody>
-	        </table>
-		</section>
+			<p>(These examples were originally published in the [[activitystreams-core]] Recommendation.)</p>
 
+			<table class="zebra">
+				<tbody>
+					<tr>
+						<th>Text value</th>
+						<th>Direction</th>
+						<th>Method</th>
+						<th>Displayed as</th>
+					</tr>
+					<tr>
+						<td><code>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></code></td>
+						<td>rtl</td>
+						<td>First strong directional character</td>
+						<td>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></td>
+					</tr>
+					<tr>
+						<td>
+							<code>The document is titled, "\u2067פעילות הבינאום, <abbr title="World Wide Web Consortium"
+									>W3C</abbr>\u2069"</code>
+						</td>
+						<td>ltr</td>
+						<td>First strong directional character</td>
+						<td>The document is titled, "&#x2067;פעילות הבינאום, <abbr title="World Wide Web Consortium"
+								>W3C</abbr>&#x2069;"</td>
+					</tr>
+					<tr>
+						<td><code>\u200FHTML היא שפת סימון</code></td>
+						<td>rtl</td>
+						<td>Bidi Control Character</td>
+						<td><code>&#x200F;HTML היא שפת סימון</code></td>
+					</tr>
+					<tr>
+						<td><code>\u200E'سلام' is hello in Persian</code></td>
+						<td>ltr</td>
+						<td>Bidi Control Character</td>
+						<td><code>&#x200E;'سلام' is hello in Persian</code></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
 
