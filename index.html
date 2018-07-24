@@ -459,6 +459,24 @@
 				</div>
 			</section>
 
+			<section>
+				<h3>Resolving URLs in Manifests</h3>
+
+				<p>
+					Manifests may contain <a href="https://url.spec.whatwg.org/#relative-url-string">relative URL strings</a>. To resolve such URLs into <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a>, a <a href="https://url.spec.whatwg.org/#concept-base-url">base URL</a> is necessary (see&nbsp;[[!url]]). This base URL for the manifest is:
+				</p>
+
+				<ul>
+					<li>in the case of an <a href="#manifest-embedding">embedded Manifest</a> this is the <a href="https://www.w3.org/TR/html/infrastructure.html#document-base-url">document base URL</a>&nbsp;[[!html]] of the <a>primary entry page</a> of the Web Publication;</li>
+					<li>in the case of a <a href='#wp-linking'>linked Manifest</a> this is URL of the manifest resource.</li>
+				</ul>
+
+				<p class=ednote>
+					For embedded manifests this means that relative URLs will be resolved against the URL of the primary entry page, <em>unless</em> the latter includes, e.g., a <code>&lt;base&gt;</code> element in the header. See&nbsp;[[html]] for further details.
+				</p>
+
+			</section>
+
 			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
