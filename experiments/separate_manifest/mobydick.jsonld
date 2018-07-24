@@ -69,7 +69,7 @@
         "name": "Table of Contents"
     },{
         "@type" : "PublicationLink",
-        "rel": "https://www.w3.org/ns/wp#cover-page",
+        "rel": "https://www.w3.org/ns/wp#cover",
         "url": "images/cover.jpg",
         "encodingFormat": "image/jpeg"
     },{
