@@ -1255,19 +1255,36 @@
 					<h4>Language and Base Direction</h4>
 
 					<p>
-						Each natural language property value in the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a href="#creators">creators</a>) is <a href="https://w3c.github.io/string-meta/#dom-localizable">Localizable</a>&#160;[[string-meta]]. This means it is possible to assign: 
+						The <a>Web Publication</a> has a natural language value (English, French, Chinese…), as well as a natural base direction of writing (left-to-right, right-to-left). The <abbr title="information set"><a>infoset</a></abbr> has entries to set these values, which can influence, e.g., the behavior of a user agent.
 					</p>
 
+					<p class=note>
+						A user agent may, for example, choose to place pop-ups for table of contents on the right hand side of its window, rather than on the left hand side, for publications whose natural base direction is right-to-left.
+					</p>
+
+					<p>
+						Furthermore, each natural language property value in the <a>Web Publication's</a> <abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#title">title</a>, <a href="#creators">creators</a>) must also hold similar information: these values are <a href="https://w3c.github.io/string-meta/#dom-localizable">Localizable</a>&#160;[[string-meta]]. 
+					</p>
+
+					<p>
+						This means the <abbr title="information set"><a>infoset</a></abbr> must have entries to set:
+					</p>
+
+
 					<ul>
-						<li>the natural <dfn>language</dfn>&thinsp;;</li>
-						<li>the <dfn>base direction</dfn> (the display direction for the value).</li>
+						<li>the natural <dfn>language</dfn>, and </li>
+						<li>the <dfn>base direction</dfn> (the display direction for the value)</li>
 					</ul>
+
+					<p>of the <a>Web Publication</a>; these values also apply to the natural language property values of the <abbr title="information set"><a>infoset</a></abbr>.</p>
+
+
 					
 					<section id="language-and-dir-infoset">
 						<h5>Infoset Requirements</h5>
 
 						<p>
-							The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global language and the base direction declarations. The natural language MUST be a tag that conforms to&nbsp;[[!bcp47]], while the base language direction MUST have one of the following values:
+							The Web Publication's <abbr title="information set">infoset</abbr> MAY contain global language and the base direction declarations valid for the Web Publication. The natural language MUST be a tag that conforms to&nbsp;[[!bcp47]], while the base language direction MUST have one of the following values:
 						</p>
 						
 						<ul>
@@ -1277,12 +1294,9 @@
 						</ul>
 
 						<p>
-							When specified, these properties are used as defaults for textual values in the <abbr title="information set">infoset</abbr>. They also specify the language and the base direction for the <a>Web Publication</a> itself.
+							When specified, these properties are also used as defaults for textual values in the <abbr title="information set">infoset</abbr>. 
 						</p>
 
-						<p class=note>
-							The language and base direction set for the Web Publication may influence, for example, user interface features for the publication used by the user agent.
-						</p>
 
 						<p class=note>
 							It is important to differentiate between the language <em>for the publication</em> as opposed to the language and the base direction for individual resources. If such a resource is, e.g., in HTML, it is possible to set, e.g., the language for that resource individually, which will override the global setting for the publication as a whole. 
@@ -1293,7 +1307,7 @@
 						</p>
 
 						<p>
-							User agents, when using Web Publication manifests with bidirectional text (i.e., if the <a>base direction</a> is set) should identify the base direction of any given natural language value by scanning the text for the first strong directional character. Once the base direction has been identified, user agents must determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp[[!bidi]]. This may necessitate wrapping additional control characters or markup around the string prior to display, in order to apply the base direction. (See <a href="#bidi-examples"></a>.)
+							User agents, when using Web Publication manifests with bidirectional text should identify the base direction of any given natural language value by scanning the text for the first strong directional character. Once the base direction has been identified, user agents must determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp[[!bidi]]. This may necessitate wrapping additional control characters or markup around the string prior to display, in order to apply the base direction. (See <a href="#bidi-examples"></a>.)
 						</p>
 
 						<p class=issue>
@@ -1343,7 +1357,7 @@
 										<td>
 											<code>inLanguage</code>
 										</td>
-										<td>Default <a>language</a> for textual values as well as for the <a>Web Publication</a></td>
+										<td>Default <a>language</a> for the <a>Web Publication</a> as well as the textual infoset values</td>
 										<td>language code as defined in&#160;[[!bcp47]]</td>
 										<td><a href="https://schema.org/inLanguage"><code>inLanguage</code></a></td>
 									</tr>
@@ -1353,7 +1367,7 @@
 										<td>
 											<code>inDirection</code>
 										</td>
-										<td>Default <a>base direction</a> for textual values as well as for the <a>Web Publication</a></td>
+										<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the textual infoset values</td>
 										<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
 										<td>(None)</td>
 									</tr>
@@ -1361,7 +1375,7 @@
 							</table>
 
 							<p class=note>
-								If the author's intention is to use a manifest, or a manifest template, both as embedded manifest and as a separate resource, it is RECOMMENDED to use set these properties explicitly to avoid interference of the containing <code>link</code> element in case of embedding.
+								If the author's intention is to use a manifest, or a manifest template, both as embedded manifest and as a separate resource, it is RECOMMENDED to set these properties explicitly to avoid interference of the containing <code>script</code> element in case of embedding.
 							</p>
 
 						</section>
