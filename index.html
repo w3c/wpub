@@ -1318,6 +1318,10 @@
 							If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a <code>script</code> element, and the manifest does not set the global language and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"><code>lang</code></a> and the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a> attributes, valid for the <code>script</code> element (see [[!html]]), are used as the global <a>language</a> and <a>base direction</a>, respectively.
 						</p>
 
+						<p class=issue>
+							It is to be discussed whether this last paragraph, i.e., inheriting values from <code>script</code>, should be kept.
+						</p>
+
 						<p>
 							If a user agent requires the language and one is not available in the <abbr title="information set">infoset</abbr> (globally, or specifically for that property), or the obtained value is invalid, the user agent MAY attempt to determine the language. This specification does not mandate how such a language tag is created. The user agent might:
 						</p>
