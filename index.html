@@ -3069,37 +3069,40 @@
 			<h2>Examples for bidirectional texts</h2>
 
 			<p>(These examples were originally published in the [[activitystreams-core]] Recommendation.)</p> 
-
+			
 	        <table class="zebra">
 	          <tbody>
 	            <tr>
-	              <th>Value</th>
+	              <th>Text value</th>
 	              <th>Direction</th>
 	              <th>Method</th>
+	              <th>Displayed as</th>
 	            </tr>
 	            <tr>
-	              <td><code>"פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>"</code></td>
-	              <td>Right-to-Left</td>
+	              <td><code>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></code></td>
+	              <td>rtl</td>
 	              <td>First strong directional character</td>
+	              <td>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></td>	              
 	            </tr>
 	            <tr>
 	              <td>
-	                <code>
-	              "The document was titled, '\u2067פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>\u2069'"
-	            </code>
+	                <code>The document is titled, "\u2067פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>\u2069"</code>
 	              </td>
-	              <td>Left-to-Right</td>
+	              <td>ltr</td>
 	              <td>First strong directional character</td>
+	              <td>The document is titled, "&#x2067פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>&#x2069"</span></td>
 	            </tr>
 	            <tr>
-	              <td><code>"\u200FHTML היא שפת סימון"</code></td>
-	              <td>Right-to-Left</td>
+	              <td><code>\u200FHTML היא שפת סימון</code></td>
+	              <td>rtl</td>
 	              <td>Bidi Control Character</td>
+	              <td><code>&#x200FHTML היא שפת סימון</code></td>
 	            </tr>
 	            <tr>
-	              <td><code>"\u200E'سلام' is hello in Persian."</code></td>
-	              <td>Left-to-Right</td>
+	              <td><code>\u200E'سلام' is hello in Persian</code></td>
+	              <td>ltr</td>
 	              <td>Bidi Control Character</td>
+	              <td><code>&#x200E'سلام' is hello in Persian</code></td>
 	            </tr>
 	          </tbody>
 	        </table>
