@@ -96,6 +96,8 @@
 			<p>This draft provides a preliminary outline of a Web Publication. Many details are under active
 				consideration within the Publishing Working Group and are subject to change. The most prominent known
 				issues have been identified in this document and links provided to comment on them.</p>
+
+			<p>The work the past few month has been focused on sections <a href="#wp-construction"></a> and <a href="#wp-properties"></a>, which include the definition of a <a>manifest</a> making use of terms in <a href="https://schema.org">schema.org</a>. Later sections, in particular <a href="#wp-features"></a> and the corresponding <a href="#webidl"></a> are out of sync with this version. Subsequent drafts will focus on updating those sections.</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -305,9 +307,6 @@
 						secure <code>https</code> scheme as its default. This specification requires the use
 							<code>https</code> when referencing Schema.org in the manifest.</p>
 
-					<p>In some cases, the context MAY be extended by additional, local information. For example, see <a
-							href="#language-and-dir-manifest"></a>. </p>
-
 				</section>
 
 				<section id="manifest-pub-types">
@@ -357,10 +356,10 @@
 				<section id="manifest-relative-urls">
 					<h4>Relative URLs</h4>
 
-					<p><a href="https://url.spec.whatwg.org/#relative-url-string">Relative URL strings</a> MAY be used
-						in the manifest. These URLs are resolved into <a
-							href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a> using a <a
-							href="https://url.spec.whatwg.org/#concept-base-url">base URL</a> (see&#160;[[!url]]).</p>
+					<p>
+
+						<a href="https://url.spec.whatwg.org/#relative-url-string">Relative URL strings</a> MAY be used in the manifest. These URLs are resolved into <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a> using a <a href="https://url.spec.whatwg.org/#concept-base-url">base URL</a>&nbsp;[[!url]].
+						</p>
 
 					<p>The base URL for relative URLs is determined as follows:</p>
 
@@ -547,14 +546,12 @@
 
 
 				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
-					are are not mentioned in this specification &#8212; Web Publication authors can use any of these
+					are not mentioned in this specification &#8212; Web Publication authors can use any of these
 					properties. This document defines only the minimal set of infoset items, and their mapping to
 					Schema.org when appropriate. </p>
 
 				<p class="ednote">There are discussion on whether a best practices document would be created, referring
 					to more schema.org terms. If so, it should be linked from here. </p>
-
-				<p class="issue" data-number="235"></p>
 			</section>
 
 			<section id="wp-properties-req">
@@ -581,7 +578,7 @@
 							<li><a href="#canonical-identifier">canonical identifier</a></li>
 							<li><a href="#cover">cover</a></li>
 							<li><a href="#creators">creators</a></li>
-							<li><a href="#language-and-dir">language</a></li>
+							<li><a href="#language-and-dir">language and base direction</a></li>
 							<li><a href="#links">links</a></li>
 							<li><a href="#last-modification-date">last modification date</a></li>
 							<li><a href="#publication-date">publication date</a></li>
@@ -612,7 +609,7 @@
 						resource.</li>
 				</ol>
 
-				<pre class="example" title="Resource list includes one link using a string value ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
+				<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
 {
     &#8230;
     "resources" : [
@@ -622,7 +619,7 @@
             "url"             : "test-utf8.csv",
             "encodingFormat"  : "text/csv",
             "name"            : "Test Results",
-            "description"     : "CSV file containing the full data set used in this research."
+            "description"     : "CSV file containing the full data set used."
         },
         {
             "@type"           : "PublicationLink",
@@ -711,6 +708,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<p class="issue" data-number="235"></p>
 				</section>
 			</section>
 
@@ -741,9 +739,10 @@
 							<li>accessibilitySummary</li>
 						</ul>
 
-						<p class="note">More detailed descriptions of these properties, as well as the possible values,
+						<p>The more detailed descriptions of these properties, as well as the possible values,
 							are described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas
 								Wiki site</a>.</p>
+
 					</section>
 
 					<section id="accessibility-manifest">
@@ -901,10 +900,9 @@
 						<p>If the document is not a Web Publication resource, user agents SHOULD load the first document
 							in the <a>default reading order</a> when initiating the Web Publication.</p>
 
-						<p class="note">To improve the usability of Web Publications, particularly in user agents that
-							do not support Web Publications, include navigation aids in the referenced document that
-							facilitate consumption of the content, (e.g., provide a table of contents or a link to
-							one).</p>
+						<p class="note">
+							To improve the usability of Web Publications, particularly in user agents that do not support Web Publications, authors are encouraged to include navigation aids in the referenced document that facilitate consumption of the content, (e.g., provide a table of contents or a link to one).
+						</p>
 
 						<div class="note">The Web Publication's address can also be used as value for an identifier link
 							relation&#160;[[link-relation]].</div>
@@ -956,7 +954,7 @@
 						the Web Publication.</p>
 
 					<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
-						specification. The actual uniqueness achievable depends on such factors as the conventions of
+						specification. The actual achievable uniqueness depends on such factors as the conventions of
 						the identifier scheme used and the degree of control over assignment of identifiers.</p>
 
 					<p>The canonical identifier is intended to provide a measure of permanence above and beyond the Web
@@ -1045,8 +1043,10 @@
 				<section id="creators">
 					<h4>Creators</h4>
 
-					<p>A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
-							Publication</a>.</p>
+					<p>
+						A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web Publication</a>. There are represented by <a href="https://schema.org/Person"><code>Person</code></a> and <a href="https://schema.org/Ortanization"><code>Organization</code></a> objects, respectively.
+					</p>
+
 
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1474,7 +1474,7 @@
 									<td>Last modification date of the publication.</td>
 									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
 											href="https://schema.org/DateTime"><code>DateTime</code></a>
-										value&#160;[[!schema.org]], both expressed in ISO 8601 date, or Date Time
+										value&#160;[[!schema.org]], both expressed in ISO 8601 Date, or Date Time
 										formats, respectively [[iso8601]].</td>
 									<td>
 										<a href="https://schema.org/dateModified"><code>dateModified</code></a>
@@ -1533,7 +1533,7 @@
 									<td>Creation date of the publication.</td>
 									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
 											href="https://schema.org/DateTime"><code>DateTime</code></a>, both expressed
-										in ISO 8601 date, or Date Time formats, respectively [[!iso8601]].</td>
+										in ISO 8601 Date, or Date Time formats, respectively [[!iso8601]].</td>
 									<td>
 										<a href="https://schema.org/datePublished"><code>datePublished</code></a>
 									</td>
@@ -1718,7 +1718,7 @@
 							reports with machine-processable metadata, such as provided in Schema.org [[schema.org]], is
 							also RECOMMENDED.</p>
 
-						<p class="ednote">Machine-readable accessibility metadata may be recommended in whatever format
+						<p class="note">Machine-readable accessibility metadata may be recommended in whatever format
 							is used to externalize publication metadata (e.g., to ensure availability for search).
 							Depending how this externalizing is done, adding machine-processable accessibility metadata
 							to such a record could take precedence over, or complement, the accessibility record.</p>
@@ -1930,22 +1930,31 @@
 
 						<p>User agents MUST compute the <code>table-of-contents</code> as follows:</p>
 
-						<ul>
-							<li>If a resource in either the <a href="#default-reading-order">default reading order</a>
-								or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
-								value of <code>contents</code>&#160;[[!iana-link-relations]], use the <code>url</code>
-								value of the specified resource as the link leading to the table of contents.</li>
-							<li>If the <a>primary entry page</a> contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], use
-								that element as the table of contents.</li>
-						</ul>
-
-						<p>If neither of the above cases results in a link to the table of contents, the Web Publication
-							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
+						<ol>
+							<li>Identify the table of content resource:
+								<ul>
+									<li>
+										If a resource in either the <a href="#default-reading-order">default reading order</a>
+										or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
+										value including <code>contents</code>&#160;[[!iana-link-relations]], the corresponding <code>url</code> value identifies the table of content resource. If there are more than one such resources, the user agent MUST use the first one (beginning with the <a href="#default-reading-order">default reading order</a>).
+									</li> 
+									<li>
+										Otherwise, the <a>primary entry page</a> is the table of content resource.
+									</li>
+								</ul>
+							</li>
+							<li>
+								If the HTML resource contains an HTML element with the <code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element as the table of contents.
+							</li>
+						</ol>
 
 						<p>If the table of contents resource contains more than one element identified by the
-								<code>role</code> "<code>doc-toc</code>", user agents MUST use the first element in
-							document order as the table of contents.</p>
+								<code>role</code> value "<code>doc-toc</code>", user agents MUST use the first element in
+							<a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&nbsp;[[!dom]] as the table of contents.</p>
+
+						<p>If this process does not result in a link to the table of contents, the Web Publication
+							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
+
 					</section>
 
 					<section id="table-of-contents-manifest">
