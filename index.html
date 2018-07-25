@@ -2450,6 +2450,9 @@
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
 
+				<p class="ednote">This section requires additional work now that we also allow JSON-LD embedded in
+					HTML.</p>
+
 				<p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining
 						a manifest</dfn> are given by the following algorithm. The algorithm, if successful, returns a
 						<a>processed manifest</a> and the <var>manifest URL</var>; otherwise, it terminates prematurely
@@ -2485,14 +2488,14 @@
 
 				<p class="note">See the <a href="#obtaining-manifest-diagram">diagram in the appendix</a> for a visual
 					representation of the algorithm.</p>
-
-				<p class="ednote">This section requires additional work now that we also allow JSON-LD embedded in
-					HTML.</p>
-
 			</section>
 
 			<section id="processing-manifest">
 				<h3>Processing the manifest</h3>
+
+				<p class="ednote">The new JSON-LD based approach will require additional processing from the client. Due
+					to the flexible nature of JSON-LD and schema.org, a simple conversion from JSON to WebIDL will not
+					be enough.</p>
 
 				<p>The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
 						manifest</dfn> are given by the following algorithm. The algorithm takes a <var>text</var>
@@ -2524,11 +2527,6 @@
 
 				<p class="note">See the <a href="#processing-manifest-diagram">diagram in the appendix</a> for a visual
 					representation of the algorithm.</p>
-
-				<p class="ednote">The new JSON-LD based approach will require additional processing from the client. Due
-					to the flexible nature of JSON-LD and schema.org, a simple conversion from JSON to WebIDL won't be
-					enough.</p>
-
 			</section>
 
 		</section>
@@ -2917,6 +2915,9 @@
 		</section>
 		<section id="webidl" class="appendix">
 			<h2>WebIDL</h2>
+
+			<p class="ednote">The WebIDL is not yet fully aligned with the infoset. This section will be updated in a
+				future release.</p>
 
 			<section id="webidl-intro" class="informative">
 				<h3>Introduction</h3>
