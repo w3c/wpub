@@ -518,6 +518,13 @@
 							and inherit their syntax and semantics. (The following property categories typically do not
 							have Schema.org equivalents, so are defined specifically for Web Publications.)</p>
 					</dd>
+					<dt><a href="#resource-categorization-properties">resource categorization</a></dt>
+					<dd>
+						<p>Resource categorization properties describe or identify common sets of resources, such as the
+								<a href="#resource-list">resource list</a> and <a href="#default-reading-order">default
+								reading order</a>. These properties refer to one or more external resources (images,
+							script files, separate metadata files, etc.).</p>
+					</dd>
 					<dt><a href="#informative-properties">informative properties</a></dt>
 					<dd>
 						<p>Informative properties identify resources that contain additional information about the Web
@@ -529,13 +536,6 @@
 						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
 								href="#cover">cover image</a> or the the location of the <a href="#table-of-contents"
 								>table of contents</a>.</p>
-					</dd>
-					<dt><a href="#resource-categorization-properties">resource categorization</a></dt>
-					<dd>
-						<p>Resource categorization properties describe or identify common sets of resources, such as the
-								<a href="#resource-list">resource list</a> and <a href="#default-reading-order">default
-								reading order</a>. These properties refer to one or more external resources (images,
-							script files, separate metadata files, etc.).</p>
 					</dd>
 				</dl>
 
@@ -1693,6 +1693,290 @@
 				</section>
 			</section>
 
+			<section id="resource-categorization-properties">
+				<h3>Resource Categorization Properties</h3>
+
+				<p><a>Web Publication</a> resources are specified via the <a>default reading order</a>, the <a>resource
+						list</a>, and the <a>links</a>, as defined in this section. These lists contain references to <a
+						href="#informative-properties">informative properties</a> like the <a href="#privacy-policy"
+						>privacy policy</a>, and <a href="#structural-properties">structural properties</a> like the
+						<a>table of contents</a>.</p>
+
+				<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST
+					NOT be repeated within a list.</p>
+
+				<section id="default-reading-order">
+					<h4>Default Reading Order</h4>
+
+					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
+							Publication</a> resources.</p>
+
+					<p>A user might follow alternative pathways through the content, but in the absence of such
+						interaction the default reading order defines the expected progression from one resource to the
+						next.</p>
+
+					<section id="default-reading-order-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The default reading order MUST include at least one resource.</p>
+
+						<p>The default reading order is specified directly in the manifest. However, if the reading
+							order consists of only a single resource, namely the <a>primary entry page</a> of the Web
+							Publication, the default reading order need not be specified.</p>
+					</section>
+
+					<section id="default-reading-order-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
+								<code>readingOrder</code> term, defined specifically for Web Publications.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>readingOrder</code>
+									</td>
+									<td></td>
+									<td>
+										<p>An array of:</p>
+										<ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"
+														><code>PublicationLink</code></a> object</li>
+										</ul>
+										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
+											fragment identifiers.</p>
+									</td>
+									<td>(None)</td>
+								</tr>
+							</tbody>
+						</table>
+						<pre class="example" title="Reading order expressed as a simple list of URL-s">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"    : "Book",
+    &#8230;
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [
+        "html/title.html",
+        "html/copyright.html",
+        "html/introduction.html",
+        "html/epigraph.html",
+        "html/c001.html",
+        &#8230;
+    ]
+}
+</pre>
+						<pre class="example" title="Reading order expressed as objects providing more information on items">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"    : "Book",
+    &#8230;
+    "url"      : "https://publisher.example.org/mobydick",
+    "name"     : "Moby Dick",
+    "readingOrder" : [{
+        "@type"          : "PublicationList",
+        "url"            : "html/title.html",
+        "encodingFormat" : "text/html",
+        "name"           : "Title page"
+    },{
+        "@type"          : "PublicationList",
+        "url"            : "html/copyright.html",
+        "encodingFormat" : "text/html",
+        "name"           : "Copyright page"
+    },{
+        &#8230;
+    }]
+}
+</pre>
+					</section>
+				</section>
+
+				<section id="resource-list">
+					<h4>Resource List</h4>
+
+					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
+						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds)
+						and that are not listed in the <a>default reading order</a>.</p>
+
+					<p class="note">The union of the resource list and default reading order represents the definitive
+						list of resources that belong to the Web Publication. All other resources are external to the
+						Web Publication.</p>
+
+					<section id="resource-list-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The completeness of the resource list will affect the usability of the Web Publication in
+							certain reading scenarios (e.g., the ability to read the Web Publication offline). For this
+							reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the Web
+							Publication's constituent resources beyond those listed in the <a>default reading
+							order</a>.</p>
+
+						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
+							third-party scripts that reference resources from deep within their source), but a user
+							agent SHOULD still be able to render a Web Publication even if some of these resources are
+							not identified as belonging to the Web Publication (e.g., when it is taken offline without
+							them).</p>
+
+						<div class="ednote"> The previous version of the draft included: <blockquote>
+								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
+									MUST treat the resource as external to the Web Publication (e.g., it might alert the
+									user before loading, open the resource in a new window, or unload the current Web
+									Publication and resume normal Web browsing).</p>
+							</blockquote>
+							<p>This was not decided on the Toronto F2F, and is still open.</p>
+						</div>
+						<p class=issue data-number=205></p>
+					</section>
+
+					<section id="resource-list-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
+								<code>resources</code> term, defined specifically for Web Publications. </p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>resources</code>
+									</td>
+									<td></td>
+									<td>
+										<p>An array of:</p>
+										<ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"
+														><code>PublicationLink</code></a> object</li>
+										</ul>
+										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
+											fragment identifiers.</p>
+									</td>
+									<td>(None)</td>
+								</tr>
+							</tbody>
+						</table>
+						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "CreativeWork",
+    &#8230;
+    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    &#8230;
+    "resources"  : [
+        "datatypes.html",
+        "datatypes.svg",
+        "datatypes.png",
+        "diff.html",
+        {
+            "@type"             : "PublicationLink",
+            "url"               : "test-utf8.csv",
+            "encodingFormat"    : "text/csv"
+        },{
+            "@type"             : "PublicationLink",
+            "url"               : "test-utf8-bom.csv",
+            "encodingFormat"    : "text/csv"
+        },{
+            &#8230;
+        }
+    ],
+    &#8230;
+}
+</pre>
+
+					</section>
+				</section>
+
+				<section id="links">
+					<h4>Links</h4>
+
+					<p>The <dfn>links</dfn> property enumerates <a href="#wp-resources">resources</a> that are
+						significant to a <a>Web Publication</a> but are <em>not</em> essential to the processing and
+						rendering of it (i.e., the content of the Web Publication remains readable even if the resources
+						are not available). Examples of linked resources might include:</p>
+
+					<ul>
+						<li>a privacy policy or license that a user agent might offer a link to from a shelf;</li>
+						<li>a metadata record that user agents could use to discover and display more information about
+							the Web Publication;</li>
+						<li>a dictionary of terms a user agent could process to provide enhanced language help;</li>
+						<li>large fonts files that enhance the appearance of the Web Publication but are not vital to
+							its rendering;</li>
+						<li>third-party scripts that are not intended for use when a Web Publication is taken offline or
+							packaged (e.g. tracking scripts).</li>
+					</ul>
+
+					<section id="links-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>The completeness of the <code>links</code> list might affect the usability of the Web
+							Publication in certain scenarios (e.g., a user agent might chose to omit these resources
+							when taking a publication offline, or they could be omitted when packaged version of the Web
+							Publication is created). For this reason, it is strongly RECOMMENDED to provide a
+							comprehensive list of all of the Web Publication's non-critical resources.</p>
+
+						<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource
+							(e.g., scripts, images, style sheets).</p>
+
+						<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
+								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
+								>resource list</a>.</p>
+					</section>
+
+					<section id="links-manifest">
+						<h5>Manifest Expression</h5>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code>links</code>
+									</td>
+									<td></td>
+									<td>
+										<p>An array of:</p>
+										<ul>
+											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>an instance of a <a href="#publication-link-def"
+														><code>PublicationLink</code></a> object</li>
+										</ul>
+										<p>The order in the array is <em>not significant</em>.</p>
+									</td>
+									<td>(None)</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</section>
+			</section>
+
 			<section id="informative-properties">
 				<h3>Informative Properties</h3>
 
@@ -2012,290 +2296,6 @@
     &#8230;
 &lt;/body&gt;
 </pre>
-					</section>
-				</section>
-			</section>
-
-			<section id="resource-categorization-properties">
-				<h3>Resource Categorization Properties</h3>
-
-				<p><a>Web Publication</a> resources are specified via the <a>default reading order</a>, the <a>resource
-						list</a>, and the <a>links</a>, as defined in this section. These lists contain references to <a
-						href="#informative-properties">informative properties</a> like the <a href="#privacy-policy"
-						>privacy policy</a>, and <a href="#structural-properties">structural properties</a> like the
-						<a>table of contents</a>.</p>
-
-				<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST
-					NOT be repeated within a list.</p>
-
-				<section id="default-reading-order">
-					<h4>Default Reading Order</h4>
-
-					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
-							Publication</a> resources.</p>
-
-					<p>A user might follow alternative pathways through the content, but in the absence of such
-						interaction the default reading order defines the expected progression from one resource to the
-						next.</p>
-
-					<section id="default-reading-order-infoset">
-						<h5>Infoset Requirements</h5>
-
-						<p>The default reading order MUST include at least one resource.</p>
-
-						<p>The default reading order is specified directly in the manifest. However, if the reading
-							order consists of only a single resource, namely the <a>primary entry page</a> of the Web
-							Publication, the default reading order need not be specified.</p>
-					</section>
-
-					<section id="default-reading-order-manifest">
-						<h5>Manifest Expression</h5>
-
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
-								<code>readingOrder</code> term, defined specifically for Web Publications.</p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>readingOrder</code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
-											fragment identifiers.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-						<pre class="example" title="Reading order expressed as a simple list of URL-s">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
-    &#8230;
-    "url"      : "https://publisher.example.org/mobydick",
-    "name"     : "Moby Dick",
-    "readingOrder" : [
-        "html/title.html",
-        "html/copyright.html",
-        "html/introduction.html",
-        "html/epigraph.html",
-        "html/c001.html",
-        &#8230;
-    ]
-}
-</pre>
-						<pre class="example" title="Reading order expressed as objects providing more information on items">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
-    &#8230;
-    "url"      : "https://publisher.example.org/mobydick",
-    "name"     : "Moby Dick",
-    "readingOrder" : [{
-        "@type"          : "PublicationList",
-        "url"            : "html/title.html",
-        "encodingFormat" : "text/html",
-        "name"           : "Title page"
-    },{
-        "@type"          : "PublicationList",
-        "url"            : "html/copyright.html",
-        "encodingFormat" : "text/html",
-        "name"           : "Copyright page"
-    },{
-        &#8230;
-    }]
-}
-</pre>
-					</section>
-				</section>
-
-				<section id="resource-list">
-					<h4>Resource List</h4>
-
-					<p>The <dfn>resource list</dfn> enumerates all <a href="#wp-resources">resources</a> that are used
-						in the processing and rendering of a <a>Web Publication</a> (i.e., that are within its bounds)
-						and that are not listed in the <a>default reading order</a>.</p>
-
-					<p class="note">The union of the resource list and default reading order represents the definitive
-						list of resources that belong to the Web Publication. All other resources are external to the
-						Web Publication.</p>
-
-					<section id="resource-list-infoset">
-						<h5>Infoset Requirements</h5>
-
-						<p>The completeness of the resource list will affect the usability of the Web Publication in
-							certain reading scenarios (e.g., the ability to read the Web Publication offline). For this
-							reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the Web
-							Publication's constituent resources beyond those listed in the <a>default reading
-							order</a>.</p>
-
-						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
-							third-party scripts that reference resources from deep within their source), but a user
-							agent SHOULD still be able to render a Web Publication even if some of these resources are
-							not identified as belonging to the Web Publication (e.g., when it is taken offline without
-							them).</p>
-
-						<div class="ednote"> The previous version of the draft included: <blockquote>
-								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
-									MUST treat the resource as external to the Web Publication (e.g., it might alert the
-									user before loading, open the resource in a new window, or unload the current Web
-									Publication and resume normal Web browsing).</p>
-							</blockquote>
-							<p>This was not decided on the Toronto F2F, and is still open.</p>
-						</div>
-						<p class=issue data-number=205></p>
-					</section>
-
-					<section id="resource-list-manifest">
-						<h5>Manifest Expression</h5>
-
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
-								<code>resources</code> term, defined specifically for Web Publications. </p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>resources</code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
-											fragment identifiers.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "CreativeWork",
-    &#8230;
-    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
-    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    &#8230;
-    "resources"  : [
-        "datatypes.html",
-        "datatypes.svg",
-        "datatypes.png",
-        "diff.html",
-        {
-            "@type"             : "PublicationLink",
-            "url"               : "test-utf8.csv",
-            "encodingFormat"    : "text/csv"
-        },{
-            "@type"             : "PublicationLink",
-            "url"               : "test-utf8-bom.csv",
-            "encodingFormat"    : "text/csv"
-        },{
-            &#8230;
-        }
-    ],
-    &#8230;
-}
-</pre>
-
-					</section>
-				</section>
-
-				<section id="links">
-					<h4>Links</h4>
-
-					<p>The <dfn>links</dfn> property enumerates <a href="#wp-resources">resources</a> that are
-						significant to a <a>Web Publication</a> but are <em>not</em> essential to the processing and
-						rendering of it (i.e., the content of the Web Publication remains readable even if the resources
-						are not available). Examples of linked resources might include:</p>
-
-					<ul>
-						<li>a privacy policy or license that a user agent might offer a link to from a shelf;</li>
-						<li>a metadata record that user agents could use to discover and display more information about
-							the Web Publication;</li>
-						<li>a dictionary of terms a user agent could process to provide enhanced language help;</li>
-						<li>large fonts files that enhance the appearance of the Web Publication but are not vital to
-							its rendering;</li>
-						<li>third-party scripts that are not intended for use when a Web Publication is taken offline or
-							packaged (e.g. tracking scripts).</li>
-					</ul>
-
-					<section id="links-infoset">
-						<h5>Infoset Requirements</h5>
-
-						<p>The completeness of the <code>links</code> list might affect the usability of the Web
-							Publication in certain scenarios (e.g., a user agent might chose to omit these resources
-							when taking a publication offline, or they could be omitted when packaged version of the Web
-							Publication is created). For this reason, it is strongly RECOMMENDED to provide a
-							comprehensive list of all of the Web Publication's non-critical resources.</p>
-
-						<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource
-							(e.g., scripts, images, style sheets).</p>
-
-						<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
-								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
-								>resource list</a>.</p>
-					</section>
-
-					<section id="links-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>links</code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>not significant</em>.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
 					</section>
 				</section>
 			</section>
