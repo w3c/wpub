@@ -1299,7 +1299,6 @@
 						<p>When specified, these properties are also used as defaults for textual values in the <abbr
 								title="information set">infoset</abbr>.</p>
 
-
 						<p class="note">It is important to differentiate the language <em>of the publication</em> from
 							the language and the base direction of the individual resources that compose it. If such
 							resources are, for example, in HTML, the language and direction need to be set in those
@@ -1318,14 +1317,10 @@
 						<p class="issue"> This section, in particular the features related to text directions, must be
 							reviewed by I18N experts. </p>
 
-						<p>If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a
-								<code>script</code> element, and the manifest does not set the global language and/or
-							the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <a
-								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
-									><code>lang</code></a> and the <a
-								href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
-							attributes of the <code>script</code> element are used as the global <a>language</a> and
-								<a>base direction</a>, respectively (see [[!html]]).</p>
+						<p>
+
+							If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a <code>script</code> element, and the manifest does not set the global language and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the <code>lang</code> and the <code>dir</code> attributes of the <code>script</code> element are used as the global <a>language</a> and <a>base direction</a>, respectively (see the details on handling the <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"><code>lang</code></a> and <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a> attributes in&nbsp;[[!html]]).
+							</p>
 
 						<p class="issue">It is to be discussed whether this last paragraph, i.e., inheriting values from
 								<code>script</code>, should be kept.</p>
@@ -1422,12 +1417,12 @@
 </pre>
 							<p> The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. </p>
 
-							<p>It is <em>not</em> possible to set the direction explicitly for a value</p>
+							<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
 
 							<p class="note"> Setting the direction for a natural text value is currently not possible in
 								JSON-LD&#160;[[!json-ld]]. In case the JSON-LD community, as well as the schema.org
 								community, introduces such a feature, future versions of this specification may extend
-								the ability of Web Publication Manifests to include this possibility. </p>
+								the ability of Web Publication Manifests to include this. </p>
 						</section>
 					</section>
 				</section>
