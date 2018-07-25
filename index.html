@@ -2219,7 +2219,7 @@
 									<li>
 										If a resource in either the <a href="#default-reading-order">default reading order</a>
 										or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code>
-										value including <code>contents</code>&#160;[[!iana-link-relations]], the corresponding <code>url</code> value identifies the table of content resource. If there is more than one such resource, the user agent MUST use the first one (beginning with the <a href="#default-reading-order">default reading order</a>).
+										value including <code>contents</code>&#160;[[!iana-link-relations]], the corresponding <code>url</code> value identifies the table of content resource.
 									</li> 
 									<li>
 										Otherwise, the <a>primary entry page</a> is the table of content resource.
@@ -2227,13 +2227,16 @@
 								</ul>
 							</li>
 							<li>
-								If the HTML resource contains an HTML element with the <code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element as the table of contents.
+								If the table of content resource contains an HTML element with the <code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element as the table of contents.
 							</li>
 						</ol>
 
-						<p>If the table of contents resource contains more than one element identified by the
-								<code>role</code> value "<code>doc-toc</code>", user agents MUST use the first element in
-							<a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&nbsp;[[!dom]] as the table of contents.</p>
+						<p>If identifying the Table of Content is ambiguous (e.g., several table of content resources are identified, or several elements with a <code>role</code> value <code>doc-toc</code> is found within the table of content resource), the user agent MAY choose among them. This specification does not mandate how this choice is made. The user agent might:</p>
+
+						<ul>
+							<li>choose the first table of content resource by some heuristics</li>
+							<li>choose the first table of content element within the same resource in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&nbsp;[[!dom]]</li>
+						</ul>
 
 						<p>If this process does not result in a link to the table of contents, the Web Publication
 							does not have a table of contents and this property MUST NOT be included in the infoset.</p>
