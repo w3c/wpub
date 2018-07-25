@@ -46,7 +46,7 @@ table.zebra td {
 table.zebra th {
     font-weight: bold;
     text-align: center;
-    background-color: NavyBlue !important;
+    background-color: rgb(0,0,128) !important;
     font-size: 110%;
     background: hsl(180, 30%, 50%);
     color: #fff;
