@@ -66,3 +66,11 @@ table.zebra tr:nth-child(even) {
 
 table.zebra th{border-bottom:1px solid #bbb;padding:.2em 1em;}
 table.zebra td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+
+.example {
+    font-size: .8em;
+}
+.note, .ednote, .issue {
+    font-size: .9em;
+}
+
