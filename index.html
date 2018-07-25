@@ -3099,46 +3099,48 @@
 		<section id="bidi-examples" class="appendix informative">
 			<h2>Examples for bidirectional texts</h2>
 
-			<p>(These examples were originally published in the [[activitystreams-core]] Recommendation.)</p>
+			<p>(These examples were originally published in the Activity Streams Recommendation&nbsp;[[activitystreams-core]].)</p>
 
-			<table class="zebra">
-				<tbody>
-					<tr>
-						<th>Text value</th>
-						<th>Direction</th>
-						<th>Method</th>
-						<th>Displayed as</th>
-					</tr>
-					<tr>
-						<td><code>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></code></td>
-						<td>rtl</td>
-						<td>First strong directional character</td>
-						<td>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></td>
-					</tr>
-					<tr>
-						<td>
-							<code>The document is titled, "\u2067פעילות הבינאום, <abbr title="World Wide Web Consortium"
-									>W3C</abbr>\u2069"</code>
-						</td>
-						<td>ltr</td>
-						<td>First strong directional character</td>
-						<td>The document is titled, "&#x2067;פעילות הבינאום, <abbr title="World Wide Web Consortium"
-								>W3C</abbr>&#x2069;"</td>
-					</tr>
-					<tr>
-						<td><code>\u200FHTML היא שפת סימון</code></td>
-						<td>rtl</td>
-						<td>Bidi Control Character</td>
-						<td><code>&#x200F;HTML היא שפת סימון</code></td>
-					</tr>
-					<tr>
-						<td><code>\u200E'سلام' is hello in Persian</code></td>
-						<td>ltr</td>
-						<td>Bidi Control Character</td>
-						<td><code>&#x200E;'سلام' is hello in Persian</code></td>
-					</tr>
-				</tbody>
-			</table>
+	        <table class="zebra">
+	          <tbody>
+	            <tr>
+	              <th>Character order in memory</th>
+	              <th>Dir</th>
+	              <th>Method</th>
+	              <th>Expected display</th>
+	            </tr>
+	                        
+	            <tr>
+	              <td><code><bdo>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
+	              <td>rtl</td>
+	              <td>First strong directional character</td>
+	              <td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi></td>	              
+	            </tr>
+	                      
+	            <tr>
+	              <td>
+	                <code><bdo>The document is titled, "&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
+	              </td>
+	              <td>ltr</td>
+	              <td>First strong directional character</td>
+	              <td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi>"</span></td>
+	            </tr>
+	                      
+	            <tr>
+	              <td><code><bdo>&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
+	              <td>rtl</td>
+	              <td>Bidi Control Character</td>
+	              <td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
+	            </tr>
+
+	            <tr>
+	              <td><code><bdo>&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo></code></td>
+	              <td>ltr</td>
+	              <td>Bidi Control Character</td>
+	              <td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
+	            </tr>
+	          </tbody>
+	        </table>
 		</section>
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
