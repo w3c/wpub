@@ -65,7 +65,7 @@
 
 			<p>The work the past few month has been focused on sections <a href="#wp-construction"></a> and <a
 					href="#wp-properties"></a>, which include the definition of a <a>manifest</a> making use of terms in
-					<a href="https://schema.org">schema.org</a>. Later sections, in particular <a href="#wp-features"
+					<a href="https://schema.org">schema.org</a>. Later sections, in particular <a href="#wp-lifecycle"
 				></a> and the corresponding <a href="#webidl"></a> are out of sync with this version. Subsequent drafts
 				will focus on updating those sections.</p>
 		</section>
@@ -3141,58 +3141,47 @@
 			<p>(These examples were originally published in the Activity Streams
 				Recommendation&#160;[[activitystreams-core]].)</p>
 
-			<table class="zebra">
-				<tbody>
-					<tr>
-						<th>Character order in memory</th>
-						<th>Dir</th>
-						<th>Method</th>
-						<th>Expected display</th>
-					</tr>
+	        <table class="zebra">
+	          <tbody>
+	            <tr>
+	              <th>Character order in memory</th>
+	              <th>Direction</th>
+	              <th>Method</th>
+	              <th>Expected display</th>
+	            </tr>
+	                        
+	            <tr>
+	              <td><code><bdo>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
+	              <td>rtl</td>
+	              <td>First strong directional character</td>
+	              <td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi></td>	              
+	            </tr>
+	            
+	            <tr>
+	              <td>
+	                <code><bdo>The document is titled, "&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
+	              </td>
+	              <td>ltr</td>
+	              <td>First strong directional character</td>
+	              <td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi>"</span></td>
+	            </tr>
+	            
+	            
+	            <tr>
+	              <td><code><bdo>&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
+	              <td>rtl</td>
+	              <td>Bidi Control Character</td>
+	              <td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
+	            </tr>
 
-					<tr>
-						<td><code><bdo dir="rtl">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr
-										title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
-						<td>rtl</td>
-						<td>First strong directional character</td>
-						<td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr
-									title="World Wide Web Consortium">W3C</abbr></bdi></td>
-					</tr>
-
-					<tr>
-						<td>
-							<code><bdo dir="ltr">The document is titled,
-									"&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr
-										title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
-						</td>
-						<td>ltr</td>
-						<td>First strong directional character</td>
-						<td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr
-									title="World Wide Web Consortium">W3C</abbr></bdi>"</td>
-					</tr>
-
-					<tr>
-						<td><code><bdo dir="rtl">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-									&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
-						<td>rtl</td>
-						<td>Bidi Control Character</td>
-						<td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-								&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
-					</tr>
-
-					<tr>
-						<td><code><bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in
-									Persian</bdo></code></td>
-						<td>ltr</td>
-						<td>Bidi Control Character</td>
-						<td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
-					</tr>
-				</tbody>
-			</table>
+	            <tr>
+	              <td><code><bdo>&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo></code></td>
+	              <td>ltr</td>
+	              <td>Bidi Control Character</td>
+	              <td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
+	            </tr>
+	          </tbody>
+	        </table>
 		</section>
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
