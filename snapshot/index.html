@@ -524,7 +524,7 @@ table.exceptions table {
 		
 		<link href="common/css/common.css" rel="stylesheet" type="text/css">
 		
-	<style id="respec-mainstyle">/*****************************************************************
+	<style>.pkt_added {text-decoration:none !important;}</style><style></style><style id="respec-mainstyle">/*****************************************************************
  * ReSpec 3 CSS
  * Robin Berjon - http://berjon.com/
  *****************************************************************/
@@ -801,12 +801,12 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-strong {
   font-weight: bold;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WD"><link rel="canonical" href="https://www.w3.org/TR/wpub/"><script id="initialUserConfig" type="application/json">{
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED"><link rel="canonical" href="https://www.w3.org/TR/wpub/"><script id="initialUserConfig" type="application/json">{
   "postProcess": [
     null
   ],
   "wg": "Publishing Working Group",
-  "specStatus": "WD",
+  "specStatus": "ED",
   "shortName": "wpub",
   "previousPublishDate": "2018-03-15",
   "previousMaturity": "WD",
@@ -961,9 +961,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "id": "bibtex"
     }
   },
-  "publishDate": "2018-07-26",
   "publishISODate": "2018-07-26T00:00:00.000Z",
-  "generatedSubtitle": "Working Draft 26 July 2018"
+  "generatedSubtitle": "Editor's Draft 26 July 2018"
 }</script><meta name="description" content="This specification defines a collection of information that describes the structure of Web Publications
 				so that user agents can provide user experiences tailored to reading publications, such as sequential
 				navigation and offline reading. This information includes the default reading order, a list of
@@ -974,15 +973,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   </a>
   <h1 id="title" class="title p-name">Web Publications</h1>
   
-  <h2 id="w3c-working-draft-26-july-2018"><abbr title="World Wide Web Consortium">W3C</abbr> Working Draft <time class="dt-published" datetime="2018-07-26">26 July 2018</time></h2>
+  <h2 id="w3c-editor-s-draft-26-july-2018"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2018-07-26">26 July 2018</time></h2>
   <dl>
-    <dt>This version:</dt><dd><a class="u-url" href="https://www.w3.org/TR/2018/WD-wpub-20180726/">https://www.w3.org/TR/2018/WD-wpub-20180726/</a></dd><dt>Latest published version:</dt><dd><a href="https://www.w3.org/TR/wpub/">https://www.w3.org/TR/wpub/</a></dd>
+    <dt>This version:</dt><dd><a class="u-url" href="https://w3c.github.io/wpub/">https://w3c.github.io/wpub/</a></dd><dt>Latest published version:</dt><dd><a href="https://www.w3.org/TR/wpub/">https://www.w3.org/TR/wpub/</a></dd>
     <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/wpub/">https://w3c.github.io/wpub/</a></dd>
     
     
     
     
-    <dt>Previous version:</dt><dd><a href="https://www.w3.org/TR/2018/WD-wpub-20180315/">https://www.w3.org/TR/2018/WD-wpub-20180315/</a></dd>
+    
     
     <dt>Editors:</dt>
     <dd class="p-author h-card vcard" data-editor-id="51655"><span class="p-name fn">Matt Garrish</span> (<a class="p-org org h-org h-card" href="http://www.daisy.org">DAISY Consortium</a>)</dd><dd class="p-author h-card vcard" data-editor-id="7382"><a class="u-url url p-name fn" href="https://www.w3.org/People/Ivan/">Ivan Herman</a> (<a class="p-org org h-org h-card" href="https://www.w3.org"><abbr title="World Wide Web Consortium">W3C</abbr></a>) <span class="orcid"><a href="https://orcid.org/0000-0003-0782-2704"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.gif" alt="orcid logo"></a></span></dd>
@@ -1030,8 +1029,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				issues have been identified in this document and links provided to comment on them.</p><p>The work the past few month has been focused on sections <a href="#wp-construction" class="sec-ref"><span class="secno">3.</span> <span class="sec-title">Web Publication Construction</span></a> and <a href="#wp-properties" class="sec-ref"><span class="secno">4.</span> <span class="sec-title">Web Publication Properties</span></a>, which include the definition of a <a href="#dfn-manifests" class="internalDFN" data-link-type="dfn">manifest</a> making use of terms in
 					<a href="https://schema.org">schema.org</a>. Later sections, in particular <a href="#wp-lifecycle" class="sec-ref"><span class="secno">5.</span> <span class="sec-title">Web Publication Lifecycle</span></a> and the corresponding <a href="#webidl" class="sec-ref"><span class="secno">A.</span> <span class="sec-title">WebIDL</span></a> are out of sync with this version. Subsequent drafts
 				will focus on updating those sections.</p><p>
-          This document was published by the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing Working Group</a> as a Working Draft.
-          This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+          This document was published by the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing Working Group</a> as an Editor's Draft.
+          
           
             Comments regarding this document are welcome. Please send them to
             <a href="mailto:public-publ-wg@w3.org">public-publ-wg@w3.org</a>
@@ -1042,7 +1041,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
           
           
         </p><p>
-            Publication as a Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
             Membership. This is a draft document and may be updated, replaced or obsoleted by other
             documents at any time. It is inappropriate to cite this document as other than work in
             progress.
@@ -2900,8 +2899,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 						<p>Refer to <a href="#privacy" class="sec-ref"><span class="secno">9.</span> <span class="sec-title">Privacy</span></a> for more information about privacy considerations in Web
 							Publications.</p>
-
-						<div class="issue" id="issue-container-number-203"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="6"><a href="https://github.com/w3c/wpub/issues/203"><span>Issue 203</span></a><span style="text-transform: none">: Info Set for privacy</span></div><p><a href="https://w3c.github.io/wpub/#wp-privacy" rel="nofollow">https://w3c.github.io/wpub/#wp-privacy</a> needs more clarity, and not be so general.  Most of the privacy policy collection and enforcement is upstream from the document markup, except where the markup explicitly collects data.</p></div>
 					</section>
 
 					<section id="privacy-policy-manifest">
@@ -2941,7 +2938,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 					<p>The <dfn data-dfn-type="dfn" id="dfn-cover">cover</dfn> is a resource that user agents can use to present the <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>
 						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
 
-					<div class="issue" id="issue-container-number-261"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="5"><a href="https://github.com/w3c/wpub/issues/261"><span>Issue 261</span></a><span style="text-transform: none">: use of "cover image"</span></div><p class="">The working group has not reached consensus on whether the cover
+					<div class="issue" id="issue-container-number-261"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="5"><a href="https://github.com/w3c/wpub/issues/261"><span>Issue 261</span></a><span style="text-transform: none">: use of "cover image"</span></div><p class="">The working group has not reached consensus on whether the cover
 						should be any resource or should be limited to images.</p></div>
 
 					<section id="cover-infoset">
@@ -3370,7 +3367,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 				agent may/should/must provide. The list is subject to addition, modification and removal as the
 				enhancements get discussed in more detail.</p></div>
 
-			<div class="issue" id="issue-container-number-143"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="3"><a href="https://github.com/w3c/wpub/issues/143"><span>Issue 143</span></a><span style="text-transform: none">: What should be in the spec for affordances?<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p>Before starting a discussion on the individual <a href="https://github.com/w3c/wpub/issues?q=is%3Aissue+is%3Aopen+label%3Atopic%3Aaffordances">affordances' issues</a>, the WG should have a consensus on <em>what</em> exactly is to be defined for each of those.</p></div>
+			<div class="issue" id="issue-container-number-143"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="3"><a href="https://github.com/w3c/wpub/issues/143"><span>Issue 143</span></a><span style="text-transform: none">: What should be in the spec for affordances?<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p>Before starting a discussion on the individual <a href="https://github.com/w3c/wpub/issues?q=is%3Aissue+is%3Aopen+label%3Atopic%3Aaffordances">affordances' issues</a>, the WG should have a consensus on <em>what</em> exactly is to be defined for each of those.</p></div>
 
 			<section id="feature-publication-mode">
 				<h3 id="x6-1-switch-to-publication-mode"><span class="secno">6.1 </span>Switch to publication mode</h3>
@@ -3458,7 +3455,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 							user's preference, which is very hard to balance.</p>
 					</div></div>
 
-					<div class="issue" id="issue-container-number-138"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="5"><a href="https://github.com/w3c/wpub/issues/138"><span>Issue 138</span></a><span style="text-transform: none">: WP affords personalization<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#personalized" rel="nofollow">2.1.11 Personalization</a><br>
+					<div class="issue" id="issue-container-number-138"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="5"><a href="https://github.com/w3c/wpub/issues/138"><span>Issue 138</span></a><span style="text-transform: none">: WP affords personalization<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#personalized" rel="nofollow">2.1.11 Personalization</a><br>
 The user must have the possibility to personalize his or her reading experience.</p>
 <p>Picking up on <a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="253335552" data-permission-text="Issue title is private" data-url="https://github.com/w3c/wpub/issues/52" href="https://github.com/w3c/wpub/issues/52">#52</a></p></div>
 				</section>
@@ -3478,7 +3475,7 @@ The user must have the possibility to personalize his or her reading experience.
 								tag</a>(see&nbsp;[<cite><a class="bibref" href="#bib-css-device-adapt">css-device-adapt</a></cite>]), or possibly through an extension of <a href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a>
 							(see&nbsp;[<cite><a class="bibref" href="#bib-css-page-3">css-page-3</a></cite>]). This should be discussed with the relevant working groups (<a href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a href="https://whatwg.org/">WHATWG</a>).</p>
 					</div></div>
-					<div class="issue" id="issue-container-number-137"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="5"><a href="https://github.com/w3c/wpub/issues/137"><span>Issue 137</span></a><span style="text-transform: none">: WP affords "paging" through a publication<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#pagination" rel="nofollow">2.1.10 Pagination</a><br>
+					<div class="issue" id="issue-container-number-137"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="5"><a href="https://github.com/w3c/wpub/issues/137"><span>Issue 137</span></a><span style="text-transform: none">: WP affords "paging" through a publication<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#pagination" rel="nofollow">2.1.10 Pagination</a><br>
 It should be possible to see the Web Publication in a “paginated” view.<br>
 picking up on <a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="253335552" data-permission-text="Issue title is private" data-url="https://github.com/w3c/wpub/issues/52" href="https://github.com/w3c/wpub/issues/52">#52</a><br>
 See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">https://w3c.github.io/wpub/#aff-presentation</a></p></div>
@@ -3519,7 +3516,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 							Publication.</p>
 					</div></div>
 
-					<div class="issue" id="issue-container-number-137-0"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="5"><a href="https://github.com/w3c/wpub/issues/137"><span>Issue 137</span></a><span style="text-transform: none">: WP affords "paging" through a publication<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#pagination" rel="nofollow">2.1.10 Pagination</a><br>
+					<div class="issue" id="issue-container-number-137-0"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="5"><a href="https://github.com/w3c/wpub/issues/137"><span>Issue 137</span></a><span style="text-transform: none">: WP affords "paging" through a publication<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a></span></div><p><a href="https://www.w3.org/TR/pwp-ucr/#pagination" rel="nofollow">2.1.10 Pagination</a><br>
 It should be possible to see the Web Publication in a “paginated” view.<br>
 picking up on <a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="253335552" data-permission-text="Issue title is private" data-url="https://github.com/w3c/wpub/issues/52" href="https://github.com/w3c/wpub/issues/52">#52</a><br>
 See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">https://w3c.github.io/wpub/#aff-presentation</a></p></div>
@@ -3530,7 +3527,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 			<section id="feature-navigation">
 				<h3 id="x6-3-navigation"><span class="secno">6.3 </span>Navigation</h3>
 
-				<div class="issue" id="issue-container-number-86"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><a href="https://github.com/w3c/wpub/issues/86"><span>Issue 86</span></a><span style="text-transform: none">: Accessibility requirements for navigation<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaccessibility%22" style="background-color: rgb(194, 224, 198);">topic:accessibility</a></span></div><p>The following wiki describes accessibility requirements for navigation from user perspective, and provides clarifications for some related concepts discussed in the group.<br>
+				<div class="issue" id="issue-container-number-86"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><a href="https://github.com/w3c/wpub/issues/86"><span>Issue 86</span></a><span style="text-transform: none">: Accessibility requirements for navigation<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaccessibility%22" style="background-color: rgb(194, 224, 198);">topic:accessibility</a></span></div><p>The following wiki describes accessibility requirements for navigation from user perspective, and provides clarifications for some related concepts discussed in the group.<br>
 <a href="https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP">https://github.com/w3c/publ-a11y/wiki/Description-of-Accessibility-Requirements-for-WP</a></p></div>
 
 				<section id="feature-reading-order">
@@ -3550,8 +3547,8 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 					<p>User agents <em class="rfc2119" title="MUST">MUST</em> provide the ability to move forward and backward in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading
 							order</a> of a <a href="#dfn-web-publications" class="internalDFN" data-link-type="dfn">Web Publication</a>.</p>
 
-					<div class="issue" id="issue-container-number-144"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="5"><a href="https://github.com/w3c/wpub/issues/144"><span>Issue 144</span></a><span style="text-transform: none">: WP affords moving forward and backward<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents must provide an affordance for moving forward and backward in the default reading order of a Web Publication</p></div>
-					<div class="issue" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-14" aria-level="5"><a href="https://github.com/w3c/wpub/issues/38"><span>Issue 38</span></a><span style="text-transform: none">: What does "Reading Order" mean in the context of a Web Publication?<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>Is it merely the action of some supposed "next" and "previous" interface elements?</p>
+					<div class="issue" id="issue-container-number-144"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="5"><a href="https://github.com/w3c/wpub/issues/144"><span>Issue 144</span></a><span style="text-transform: none">: WP affords moving forward and backward<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents must provide an affordance for moving forward and backward in the default reading order of a Web Publication</p></div>
+					<div class="issue" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="5"><a href="https://github.com/w3c/wpub/issues/38"><span>Issue 38</span></a><span style="text-transform: none">: What does "Reading Order" mean in the context of a Web Publication?<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>Is it merely the action of some supposed "next" and "previous" interface elements?</p>
 <p>Is it required to be publication-wide? Or can it be contextual (choose-your-own-adventure)?</p>
 <p>If it's contextual, must there only be one "next"?</p>
 <p>This relates to musings on <a class="issue-link js-issue-link" data-error-text="Failed to load issue title" data-id="250943853" data-permission-text="Issue title is private" data-url="https://github.com/w3c/wpub/issues/36" href="https://github.com/w3c/wpub/issues/36">#36</a>, but I think has value all on its own.</p>
@@ -3575,12 +3572,12 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 						<li>start reading the publication from the first resource in the <a href="#dfn-default-reading-order" class="internalDFN" data-link-type="dfn">default reading
 							order</a>.</li>
 					</ul>
-					<div class="issue" id="issue-container-number-145"><div role="heading" class="issue-title marker" id="h-issue-15" aria-level="5"><a href="https://github.com/w3c/wpub/issues/145"><span>Issue 145</span></a><span style="text-transform: none">: WP affords saving and retrieve progression<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance that saves the reading progression in the publication and return the user to that location the next time that she opens the publication again.</p></div>
+					<div class="issue" id="issue-container-number-145"><div role="heading" class="issue-title marker" id="h-issue-14" aria-level="5"><a href="https://github.com/w3c/wpub/issues/145"><span>Issue 145</span></a><span style="text-transform: none">: WP affords saving and retrieve progression<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance that saves the reading progression in the publication and return the user to that location the next time that she opens the publication again.</p></div>
 				</section>
 
 				<section id="feature-toc">
 					<h4 id="x6-3-3-table-of-contents"><span class="secno">6.3.3 </span>Table of Contents</h4>
-					<div class="issue" id="issue-container-number-146"><div role="heading" class="issue-title marker" id="h-issue-16" aria-level="5"><a href="https://github.com/w3c/wpub/issues/146"><span>Issue 146</span></a><span style="text-transform: none">: WP provides a TOC without leaving the resource<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance for accessing the table of contents without leaving the resource they are currently viewing.</p></div>
+					<div class="issue" id="issue-container-number-146"><div role="heading" class="issue-title marker" id="h-issue-15" aria-level="5"><a href="https://github.com/w3c/wpub/issues/146"><span>Issue 146</span></a><span style="text-transform: none">: WP provides a TOC without leaving the resource<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance for accessing the table of contents without leaving the resource they are currently viewing.</p></div>
 
 					<section id="short-description">
 						<h5 id="x6-3-3-1-short-description"><span class="secno">6.3.3.1 </span>Short description</h5>
@@ -3617,7 +3614,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 			<section id="feature-offline-access">
 				<h3 id="x6-4-offline-access"><span class="secno">6.4 </span>Offline Access</h3>
 
-				<div class="issue" id="issue-container-number-141"><div role="heading" class="issue-title marker" id="h-issue-17" aria-level="4"><a href="https://github.com/w3c/wpub/issues/141"><span>Issue 141</span></a><span style="text-transform: none">: WP affords offline reading capabilities.<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aoffline+access%22" style="background-color: rgb(254, 242, 192);">topic:offline access</a></span></div><p>A WP can be read in a browser offline with no change in fidelity from the online experience</p></div>
+				<div class="issue" id="issue-container-number-141"><div role="heading" class="issue-title marker" id="h-issue-16" aria-level="4"><a href="https://github.com/w3c/wpub/issues/141"><span>Issue 141</span></a><span style="text-transform: none">: WP affords offline reading capabilities.<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aoffline+access%22" style="background-color: rgb(254, 242, 192);">topic:offline access</a></span></div><p>A WP can be read in a browser offline with no change in fidelity from the online experience</p></div>
 			</section>
 
 			<section id="feature-search">
@@ -3630,7 +3627,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 			<section id="feature-reading-state">
 				<h3 id="x6-6-reading-state"><span class="secno">6.6 </span>Reading State</h3>
 
-				<div class="issue" id="issue-container-number-145-0"><div role="heading" class="issue-title marker" id="h-issue-18" aria-level="4"><a href="https://github.com/w3c/wpub/issues/145"><span>Issue 145</span></a><span style="text-transform: none">: WP affords saving and retrieve progression<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance that saves the reading progression in the publication and return the user to that location the next time that she opens the publication again.</p></div>
+				<div class="issue" id="issue-container-number-145-0"><div role="heading" class="issue-title marker" id="h-issue-17" aria-level="4"><a href="https://github.com/w3c/wpub/issues/145"><span>Issue 145</span></a><span style="text-transform: none">: WP affords saving and retrieve progression<a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Aaffordances%22" style="background-color: rgb(249, 194, 224);">topic:affordances</a><a class="respec-gh-label respec-label-light" href="https://github.com/w3c/wpub//issues/?q=is%3Aissue+is%3Aopen+label%3A%22topic%3Anavigation%22" style="background-color: rgb(254, 242, 192);">topic:navigation</a></span></div><p>User agents should provide an affordance that saves the reading progression in the publication and return the user to that location the next time that she opens the publication again.</p></div>
 
 				<section id="short-description-0">
 					<h4 id="x6-6-1-short-description"><span class="secno">6.6.1 </span>Short description</h4>
@@ -4128,7 +4125,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 	            </tr>
 	                        
 	            <tr>
-	              <td><code><bdo>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
+	              <td><code><bdo dir="ltr">פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
 	              <td>rtl</td>
 	              <td>First strong directional character</td>
 	              <td style="width: 50%"><bdi>פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr></bdi></td>	              
@@ -4136,7 +4133,7 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 	            
 	            <tr>
 	              <td>
-	                <code><bdo>The document is titled, "&amp;#x2067;פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
+	                <code><bdo dir="ltr">The document is titled, "&amp;#x2067;פעילות הבינאום, <abbr title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
 	              </td>
 	              <td>ltr</td>
 	              <td>First strong directional character</td>
@@ -4145,14 +4142,14 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
 	            
 	            
 	            <tr>
-	              <td><code><bdo>&amp;#x200F;<abbr title="Hypertext Markup Language">HTML</abbr> היא שפת סימון</bdo></code></td>
+	              <td><code><bdo dir="ltr">&amp;#x200F;<abbr title="Hypertext Markup Language">HTML</abbr> היא שפת סימון</bdo></code></td>
 	              <td>rtl</td>
 	              <td>Bidi Control Character</td>
 	              <td><code dir="rtl"><abbr title="Hypertext Markup Language">HTML</abbr> היא שפת סימון</code></td>
 	            </tr>
 
 	            <tr>
-	              <td><code><bdo>&amp;#x200E;'سلام' is hello in Persian</bdo></code></td>
+	              <td><code><bdo dir="ltr">&amp;#x200E;'سلام' is hello in Persian</bdo></code></td>
 	              <td>ltr</td>
 	              <td>Bidi Control Character</td>
 	              <td><code>'<bdi>سلام</bdi>' is hello in Persian</code></td>
@@ -4311,6 +4308,9 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
         <li>David Wood (ConsenSys)</li>
         <li>Richard Wright (EDRLab)</li>
         <li>Jeff Xu (Rakuten,Inc.)</li>
+        <li>Evan Yamanishi (W.W. Norton)</li>
+        <li>Maurice York (University of Michigan Library)</li>
+        <li>Mohamed Zergaoui (INNOVIMAX)</li> 
     </ul>
 
     <p>The Working Group would also like to thank the members of the
