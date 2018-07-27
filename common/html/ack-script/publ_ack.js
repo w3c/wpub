@@ -4,30 +4,34 @@
  *
  * To run this script:
  *
- * - use npm to install the node-fetch library
+ * - use npm to install the node-fetch and underscore libraries
  * - get an API key (see https://w3c.github.io/w3c-api/) and fill the value int "api_key"
  * - if you want to use this script using local data (eg, in your local github clone)
  *      - check the "local_ack" below to set a localhost URL 
  * - if you want to use this script using remote data
  *      - make sure the localhost variable is set to false
  * 
- * That is it. The data that is downloaded from localhost or from github is the list of the people
- * who should be called out separately in the acknowledgment section. Note structure in the list can also 
+ * That is it. The extra data downloaded from localhost or from github is the list of the people
+ * who should be called out separately in the acknowledgment section. Note that the structure in that list can also 
  * have an "affiliation" member to be set separately; that may be useful if you want to acknowledge the contribution
- * of a person who is not member of the WG any more (ie, the affiliation will not be filled automatically)
+ * of a person who is not member of the WG any more (ie, the affiliation will not be filled automatically).
+ *
+ * Otherwise the data is downloaded via the W3C API. Be patient: if the group is large, at some point it sends out a large number of
+ * HTTP requests to get the data of all people...
  * 
  * You can adapt it to other WG-s: the various strings and the value of publ_wg must be changed
  * 
  */
 
 const apicore    = "https://api.w3.org";
-const api_key    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+const api_key    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 const local_ack  = "http://localhost:8001/LocalData/github/wpub/common/html/ack-script/separate_acks.json";
 const gh_ack     = "https://github.com/w3c/wpub/tree/master/common/html/ack-script/separate_acks.json"
 const localhost  = true
 
 const publ_wg    = "100074";
 const fetch      = require('node-fetch');
+const _          = require('underscore');
 
 
 //====================================== HTML snippets ==================================
@@ -45,6 +49,14 @@ const html_middle = `
     <p>Additionally, the following people were members of the Working Group at the time of publication:</p>
 
     <ul class="ack">
+`
+
+const html_past = `
+    </ul>
+    <p>The following people were members of the Working Group in the past:</p>
+
+    <ul class="ack">
+
 `
 
 const html_end = `
@@ -85,13 +97,11 @@ async function getAck(local = localhost) {
  *
  * @param {string} url: the URL that should be used to retrieve data
  * @param {string} key: the W3C API Key to authorize API calls
- * @param {boolean} page: should that be page 2
  * @returns: a Promise with the json representation of the fetched data
  *
  */
-async function getData(url, key, page = false) {
-    let finalUrl =  (page) ? `${url}?page=2&apikey=${key}` : `${url}?apikey=${key}`;
-    let response =  await fetch(finalUrl);
+async function getData(url, key) {
+    let response =  await fetch(`${url}apikey=${key}`);
     if( response.ok ) {
         return response.json();
     } else {
@@ -108,12 +118,121 @@ async function getData(url, key, page = false) {
  * @returns: a Promise with an object of the form {name, affiliation}
  */
 async function getUserData(user_url, key) {
-    let user_info        = await getData(user_url, key);
-    let affiliation_info = await getData(user_info._links.affiliations.href, key); 
-    return {
-        name:        user_info.name,
-        affiliation: affiliation_info._links.affiliations[0].title
+    let user_info = undefined;
+    let affiliation_info = undefined;
+    try {
+        user_info        = await getData(`${user_url}?`, key);
+        affiliation_info = await getData(`${user_info._links.affiliations.href}?`, key);
+        let affiliations = affiliation_info._links.affiliations;
+        return {
+            name:        user_info.name,
+            affiliation: (affiliations) ? affiliations[0].title : "No affiliation"
+        }        
+    } catch(err) {
+        console.log(`??? ${user_info.name} ${user_url}`);
+        console.log(`??? ${JSON.stringify(affiliation_info,null,4)} ${user_url}`);
+        throw new Error(err);
     }
+}
+
+/**
+ * Get a list of users.
+ * 
+ * @param {string} groupid: Group identification number
+ * @param {string} key: the W3C API Key to authorize API calls
+ * @param {boolean} former: whether this should include the former members, too
+ */
+async function getUsers(groupid, key, former) {
+    let user_infos;
+
+    // Set up the URL-s for the first and the second pages to be retrieved.
+    let api_url1 = (former)
+                        ? `${apicore}/groups/${groupid}/users?former=true&`
+                        : `${apicore}/groups/${groupid}/users?`;
+    let api_url2  = `${api_url1}page=2&`;
+
+    // Get the data. To speed up, spawn to requests and run them in parallel
+    let [user_infos1, user_infos2] = await Promise.all([getData(api_url1, key), getData(api_url2, key)])
+
+    // Extract the URL-s identifying each user. The result is an array of URL-s
+    let user_urls = user_infos1._links.users.map((info) => info.href);
+    user_urls     = user_urls.concat(user_infos2._links.users.map((info) => info.href));
+    return user_urls;
+}
+
+
+/**
+ * Clean up the member lists. This means:
+ * - Remove duplicates within each list; this may mean that the same person got onto the list twice
+ *   with different affiliations. This should not happen, but it does:-(
+ * - Remove names from the "all" list that are also on the "current" list, ie, to get a clean list
+ *   of former members
+ * - Filter out both lists v.a.v. the special ack list, enriching the latter with affiliation on the fly
+ *
+ * @param {Array} separate_acks: list of people to be acknowledged separately
+ * @param {Array} current_members: list of current WG members
+ * @param {Array} all_members: list of past and present members
+ * @return the three lists in a three-tuple 
+ */
+function clean_up(separate_acks, current_members, all_members) {
+    let clean_list = (members) => {
+        return _.chain(members)
+                .map( (member, index, list) => {
+                    // Repeated values means that two consecutive entries have the same name
+                    let next = list[index+1];
+                    if (next !== undefined && next.name === member.name) {
+                        if (member.affiliation !== undefined) {
+                            if (next.affiliation !== undefined) {
+                                member.affiliation = `${member.affiliation}, ${next.affiliation}`
+                            }
+                        } else {
+                            if (next.affiliation !== undefined) {
+                                member.affiliation = next.affiliation;
+                            }
+                        }
+                        next.remove = true;
+                    }
+
+                    // A rare case that also happens
+                    if (member.affiliation === undefined) {
+                        member.affiliation = "No affiliation";
+                    }
+                    return member;
+                })
+                .filter((member) => member.remove === undefined)
+                .value();
+    };
+
+    let combine_separate = (members) => {
+        return _.chain(members)
+                .map( (member) => {
+                    let special = separate_acks.find((special) => special.name === member.name)
+                    if (special) {
+                        // This is a special person...
+                        special.affiliation = member.affiliation;
+                        member.remove = true;
+                    } 
+                    return member
+                })
+                .filter((member) => member.remove === undefined)
+                .value();
+    }
+
+    // Basic cleanup of the lists
+    let cleaned_current = clean_list(current_members);
+
+
+    // Filter the "all" list by removing the current members and then clean it
+    let cleaned_all = clean_list(_.filter(all_members, (past_m) => {
+            return _.find(cleaned_current, (current_m) => current_m.name === past_m.name) === undefined;
+        })
+    );
+
+    // Remove the persons appearing on the special list
+    cleaned_current = combine_separate(cleaned_current);
+    cleaned_all = combine_separate(cleaned_all);
+
+    return [separate_acks, cleaned_current, cleaned_all];
 }
 
 
@@ -127,41 +246,29 @@ async function getUserData(user_url, key) {
  * @param {string} key: the W3C API Key to authorize API calls
  */
 async function main(groupid, key) {
+    const generate_list = (members) => {
+        return members.map( (person) => `        <li>${person.name} (${person.affiliation})</li>`).join("\n")
+    };
+
     try {
-        // Get the list of special acknowledgments
+        // Get the list of special acknowledgments' persons
         let separate_acks = await getAck();
 
-        // Get the group-specific structure for all the users
-        let user_infos  = await getData(`${apicore}/groups/${groupid}/users`, key);
-
-        // Extract the URL-s identifying each user. The result is an array of URL-s
-        let user_urls  = user_infos._links.users.map((info) => info.href);
-
-        // Repeat the exercise above with page 2
-        user_infos  = await getData(`${apicore}/groups/${groupid}/users`, key, page = true);
-        user_urls   = user_urls.concat(user_infos._links.users.map((info) => info.href));
+        // Get the list of current and all WG members' URLs. Let that be done in parallel for former included and not included...
+        let [current_user_urls, all_user_urls] = await Promise.all([
+            getUsers(groupid, key, former = false), 
+            getUsers(groupid, key, former = true)
+        ]);
 
         // Get hold of all the names and affiliations.
-        // Note the 'Promise.all' construction, which means that, potentially, the data for the users are fetched in parallel
-        let user_data = await Promise.all(user_urls.map((user) => getUserData(user, key)));
+        let [current_user_data, all_user_data] = await Promise.all([
+                await Promise.all(current_user_urls.map((user) => getUserData(user, key))),
+                await Promise.all(all_user_urls.map((user) => getUserData(user, key)))
+            ]);
 
-        // Filter out the special acknowledgment people, extending the relevant entries in the special table with the affiliation
-        let member_data =  user_data.filter( (user) => {
-            let special = separate_acks.find( (ack) => ack.name === user.name )
-            if (special === undefined) {
-                // this is not a special person...
-                return true
-            } else {
-                special.affiliation = special.chair ? `${user.affiliation}; co-chair` : `${user.affiliation}`;
-                return false
-            }
-        })
+        let [final_separate_acks, final_current, final_past] = clean_up(separate_acks, current_user_data, all_user_data);
+        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_past + generate_list(final_past) + html_end)        
 
-        // Turn each item into a HTML <li> element
-        let special_items = separate_acks.map((user) => `        <li>${user.name} (${user.affiliation})</li>`);
-        let user_items = member_data.map((user) => `        <li>${user.name} (${user.affiliation})</li>`)
-        // That's it, folks!
-        console.log(html_start + special_items.join("\n") + html_middle + user_items.join("\n") + html_end)        
     } catch(err) {
         console.error(`Something is wrong... ${err}`)
     }
