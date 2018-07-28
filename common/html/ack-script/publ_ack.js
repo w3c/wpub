@@ -267,7 +267,8 @@ async function main(groupid, key) {
             ]);
 
         let [final_separate_acks, final_current, final_past] = clean_up(separate_acks, current_user_data, all_user_data);
-        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_past + generate_list(final_past) + html_end)        
+//        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_past + generate_list(final_past) + html_end)        
+        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_end)        
 
     } catch(err) {
         console.error(`Something is wrong... ${err}`)
