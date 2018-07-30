@@ -2914,9 +2914,6 @@
 		<section id="webidl" class="appendix">
 			<h2>WebIDL</h2>
 
-			<p class="ednote">The WebIDL is not yet fully aligned with the infoset. This section will be updated in a
-				future release.</p>
-
 			<section id="webidl-intro" class="informative">
 				<h3>Introduction</h3>
 
@@ -2935,7 +2932,7 @@
 
 				<pre class="idl" data-include="webidl/manifest.webidl" data-include-format="text"></pre>
 
-				<p>The <a>WebPublicationManifest</a> has the following members:</p>
+				<p>The <a><code>WebPublicationManifest</code></a> has the following members:</p>
 
 				<dl data-dfn-for="WebPublicationManifest">
 					<dt>
@@ -3043,11 +3040,11 @@
 					<dt>
 						<dfn>inLanguage</dfn>
 					</dt>
-					<dd>Contains the default value the <a>language</a>.</dd>
+					<dd>Contains the default <a>language</a> of the publication.&nbsp;[[bcp47]]</dd>
 					<dt>
 						<dfn>inDirection</dfn>
 					</dt>
-					<dd>Contains the default value for <a>base direction</a>.</dd>
+					<dd>Contains the default <a>base direction</a> of the publication.</dd>
 
 					<dt>
 						<dfn>dateModified</dfn>
@@ -3067,8 +3064,7 @@
 					<dt>
 						<dfn>name</dfn>
 					</dt>
-					<dd>Contains the <a href="#wptitle">title</a>.</dd>
-
+					<dd>Contains one or more <a href="#wptitle">title(s)</a> for the publication.</dd>
 
 					<dt>
 						<dfn>readingOrder</dfn>
@@ -3089,34 +3085,34 @@
 						<dfn>accessibilityReport</dfn>
 					</dt>
 
-					<dd>Contains the URL reference to the <a href="#accessibility-report">accessibility report</a>.</dd>
+					<dd>Contains the URL reference to the <a href="#accessibility-report">accessibility report</a>.&nbsp;[[!url]]</dd>
 
 					<dt>
 						<dfn>privacyPolicy</dfn>
 					</dt>
 
-					<dd>Contains the URL reference to the <a href="#privacy-policy">privacy policy</a>.</dd>
+					<dd>Contains the URL reference to the <a href="#privacy-policy">privacy policy</a>.&nbsp;[[!url]]</dd>
 
 					<dt>
 						<dfn>cover</dfn>
 					</dt>
 
-					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.</dd>
+					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.&nbsp;[[!url]]</dd>
 
 					<dt>
 						<dfn>toc</dfn>
 					</dt>
-					<dd>Contains the URL reference to the <a>table of contents</a>.</dd>
+					<dd>Contains the URL reference to the <a>table of contents</a>.&nbsp;[[!url]]</dd>
 				</dl>
 			</section>
 
 			<section id="contributor-idl">
-				<h3><code>Person</code> and <code>Organization</code> members</h3>
+				<h3><dfn>Person</dfn> and <dfn>Organization</dfn> members</h3>
 
-				<p>These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> class, reflectively. The WebIDL definitions only contain the minimal information that are considered for the Web Publication Manifest.</p>
+				<p>These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> classes, respectively. The WebIDL definitions only contain the minimal information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as defined by schema.org.</p>
 
 
-				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a href="#dom-webpublicationmanifest-author">author</a>, etc., members are each a sequence of <dfn>Person</dfn> or <dfn>Organization</dfn> dictionaries with the following members:</p>
+				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a href="#dom-webpublicationmanifest-author">author</a>, etc., members are each a sequence of <a><code>Person</code></a> or <a><code>Organization</code></a> dictionaries with the following members:</p>
 
 				<pre class="idl" data-include="webidl/person.webidl" data-include-format="text">
                 </pre>
@@ -3129,12 +3125,12 @@
 					<dt>
 						<dfn>id</dfn>
 					</dt>
-					<dd>Contains a canonical identifier of the person as a URL.</dd>
+					<dd>Contains a canonical identifier of the person as a URL.&nbsp;[[!url]]</dd>
 
 					<dt>
 						<dfn>url</dfn>
 					</dt>
-					<dd>Contains an address for the person in the form of a URL.</dd>
+					<dd>Contains an address for the person in the form of a URL.&nbsp;[[!url]]</dd>
 				</dl>
 
 				<pre class="idl" data-include="webidl/organization.webidl" data-include-format="text">
@@ -3147,12 +3143,12 @@
 					<dt>
 						<dfn>id</dfn>
 					</dt>
-					<dd>Contains a canonical identifier of the organization as a URL.</dd>
+					<dd>Contains a canonical identifier of the organization as a URL.&nbsp;[[url]]</dd>
 
 					<dt>
 						<dfn>url</dfn>
 					</dt>
-					<dd>Contains an address for the organization in the form of a URL.</dd>
+					<dd>Contains an address for the organization in the form of a URL.&nbsp;[[url]]</dd>
 				</dl>
 
 
@@ -3163,10 +3159,10 @@
 
 				<pre class="idl" data-include="webidl/localizable_string.webidl" data-include-format="text"></pre>
 
-				<p>When the <code>lang</code> is specified in <a>LocalizableString</a>, this value
-					overrides the default language specified in <a>WebPublicationManifest</a>.</p>
+				<p>When the <code>lang</code> is specified in <a><code>LocalizableString</code></a>, this value
+					overrides the default language specified in <a><code>WebPublicationManifest</code></a>.</p>
 
-				<p><a>LocalizableString</a> has the following members:</p>
+				<p><a><code>LocalizableString</code></a> has the following members:</p>
 
 				<dl data-dfn-for="LocalizableString">
 					<dt>
@@ -3176,7 +3172,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the <a href="#language-and-dir">language</a>.</dd>
+					<dd>Contains the <a href="#language-and-dir">language</a> value.&nbsp;[[bcp47]]</dd>
 				</dl>
 			</section>
 
@@ -3185,7 +3181,7 @@
 
 				<pre class="idl" data-include="webidl/publication_link.webidl" data-include-format="text"></pre>
 
-				<p>The PublicationLink dictionary contains the following members:</p>
+				<p>The <a><code>PublicationLink</code></a> dictionary contains the following members:</p>
 
 				<dl data-dfn-for="PublicationLink">
 					<dt>
@@ -3214,11 +3210,11 @@
 			</section>
 
 			<section id="textdirection-idl">
-				<h3><code>TextDirection</code> enum </h3>
+				<h3><dfn>TextDirection</dfn> enum </h3>
 
 				<pre class="idl" data-include="webidl/text_direction.webidl" data-include-format="text"></pre>
 
-				<p>The <dfn>TextDirection</dfn> enum can contain the following values:</p>
+				<p>The <a><code>TextDirection</code></a> enum can contain the following values:</p>
 				<dl data-dfn-for="TextDirection">
 					<dt>
 						<dfn>ltr</dfn>
@@ -3236,11 +3232,11 @@
 			</section>
 
 			<section id="textdirection-idl">
-				<h3><code>ProgressionDirection</code> enum </h3>
+				<h3><dfn>ProgressionDirection</dfn> enum </h3>
 
 				<pre class="idl" data-include="webidl/progression_direction.webidl" data-include-format="text"></pre>
 
-				<p>The <dfn>ProgressionDirection</dfn> enum can contain the following values:</p>
+				<p>The <a><code>ProgressionDirection</code></a> enum can contain the following values:</p>
 				<dl data-dfn-for="ProgressionDirection">
 					<dt>
 						<dfn>ltr</dfn>
@@ -3252,8 +3248,6 @@
 					<dd>Right-to-left text.</dd>
 				</dl>
 			</section>
-
-
 
 		</section>
 		<section id="app-manifest-examples" class="appendix informative">
