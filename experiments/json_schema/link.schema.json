@@ -11,10 +11,10 @@
       "type": "string"
     },
     "title": {
-      "type": "string"
+      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
     },
     "description": {
-      "type": "string"
+      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
     },
     "rel": {
       "type": ["string", "array"],

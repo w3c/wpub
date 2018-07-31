@@ -12,6 +12,9 @@
       "type": "string",
       "format": "uri"
     },
+    "name": {
+      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
+    },
     "dateModified": {
       "type": "string",
       "anyOf": [
