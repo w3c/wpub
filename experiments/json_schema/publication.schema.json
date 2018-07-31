@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "https://w3c.github.io/wpub/experiments/json_schema/publication.schema.json",
+  "title": "Web Publication Manifest",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "@id": {
+      "type": "string",
+      "format": "uri"
+    },
+    "dateModified": {
+      "type": "string",
+      "anyOf": [
+        {"format": "date"},
+        {"format": "date-time"}
+      ]
+    },
+    "datePublished": {
+      "type": "string",
+      "anyOf": [
+        {"format": "date"},
+        {"format": "date-time"}
+      ]
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+      }
+    },
+    "readingOrder": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+          }
+        ]
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["url", "readingOrder"],
+}
