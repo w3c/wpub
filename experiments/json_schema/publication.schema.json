@@ -83,5 +83,5 @@
       }
     }
   },
-  "required": ["url", "readingOrder"],
+  "required": ["url"]
 }
