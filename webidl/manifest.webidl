@@ -39,8 +39,8 @@ dictionary WebPublicationManifest {
              sequence<PublicationLink>          resources;
              sequence<PublicationLink>          links;
 
-             DOMString                          accessibilityReport;
-             DOMString                          privacyPolicy;
-             sequence<DOMString>                cover;
+             PublicationLink                    accessibilityReport;
+             PublicationLink                    privacyPolicy;
+             sequence<PublicationLink>          cover;
              DOMString                          toc;
 };
