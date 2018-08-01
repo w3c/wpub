@@ -40,7 +40,7 @@ dictionary WebPublicationManifest {
              sequence<PublicationLink>          links;
 
              DOMString                          accessibilityReport;
-             DOMString                           privacyPolicy;
+             DOMString                          privacyPolicy;
              sequence<DOMString>                cover;
              DOMString                          toc;
 };
