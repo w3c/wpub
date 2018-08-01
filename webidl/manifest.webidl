@@ -2,13 +2,13 @@ dictionary WebPublicationManifest {
     required DOMString                          url;
     required DOMString                          type;
 
-             DOMString                          accessMode;
-             DOMString                          accessModeSufficient;
+             sequence<DOMString>                accessMode;
+             sequence<DOMString>                accessModeSufficient;
              DOMString                          accessibilityAPI;
-             DOMString                          accessibilityControl;
-             DOMString                          accessibilityFeature;
-             DOMString                          accessibilityHazard;
-             DOMString                          accessibilitySummary;
+             sequence<DOMString>                accessibilityControl;
+             sequence<DOMString>                accessibilityFeature;
+             sequence<DOMString>                accessibilityHazard;
+             LocalizableString                  accessibilitySummary;
 
              DOMString                          id;
 
