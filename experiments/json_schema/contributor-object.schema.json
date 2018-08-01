@@ -14,8 +14,10 @@
     "@type": {
       "type": ["string", "array"],
       "items": {
-        "type": "string"
-      }
+        "type": "string",
+        "enum": ["Person", "Organization"]
+      },
+      "enum": ["Person", "Organization"]
     }
   },
   "required": ["name"]
