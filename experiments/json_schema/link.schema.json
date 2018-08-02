@@ -10,7 +10,7 @@
     "encodingFormat": {
       "type": "string"
     },
-    "title": {
+    "name": {
       "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
     },
     "description": {
