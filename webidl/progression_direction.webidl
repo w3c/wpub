@@ -1,0 +1,4 @@
+enum ProgressionDirection {
+	"ltr",
+	"rtl"
+};

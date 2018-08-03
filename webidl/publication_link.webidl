@@ -1,7 +1,7 @@
 dictionary PublicationLink {
-    required DOMString                  url;
-             DOMString                  encodingFormat;
-             DOMString                  name;
-             sequence<DOMString>        rel;
-             sequence<PublicationLink>  children;
+    required DOMString           url;
+             DOMString           encodingFormat;
+             LocalizableString   name;
+             LocalizableString   description;
+             sequence<DOMString> rel;
 };

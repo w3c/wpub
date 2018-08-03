@@ -1215,7 +1215,7 @@
     },{
         "@type" : "Person",
         "name" : "Ivan Herman",
-        "url"  : "https://www.w3.org/People/Ivan/"
+        "@id"  : "https://www.w3.org/People/Ivan/"
     }],
     "editor"    : [{
         "@type" : "Person",
@@ -1227,7 +1227,7 @@
     "publisher" : {
         "@type" : "Organization",
         "name" : "World Wide Web Consortium",
-        "url"  : "https://www.w3.org/"
+        "@id"  : "https://www.w3.org/"
     }
     &#8230;
 }
@@ -1651,8 +1651,8 @@
 									<td>
 										<code>name</code>
 									</td>
-									<td>Human-readable name of the Web Publication.</td>
-									<td>Text.</td>
+									<td>Human-readable title of the Web Publication.</td>
+									<td>One or more text items for the title.</td>
 									<td>
 										<a href="https://schema.org/name"><code>name</code></a>
 									</td>
@@ -2914,9 +2914,6 @@
 		<section id="webidl" class="appendix">
 			<h2>WebIDL</h2>
 
-			<p class="ednote">The WebIDL is not yet fully aligned with the infoset. This section will be updated in a
-				future release.</p>
-
 			<section id="webidl-intro" class="informative">
 				<h3>Introduction</h3>
 
@@ -2935,7 +2932,7 @@
 
 				<pre class="idl" data-include="webidl/manifest.webidl" data-include-format="text"></pre>
 
-				<p>The <a>WebPublicationManifest</a> has the following members:</p>
+				<p>The <a><code>WebPublicationManifest</code></a> has the following members:</p>
 
 				<dl data-dfn-for="WebPublicationManifest">
 					<dt>
@@ -2943,29 +2940,112 @@
 					</dt>
 					<dd>Contains the <a href="#address">address</a>. Required.</dd>
 					<dt>
-						<dfn>lang</dfn>
+						<dfn>type</dfn>
 					</dt>
-					<dd>Contains the default value <a href="#language-and-dir">language</a>.</dd>
+					<dd>Contains the <a href="#manifest-pub-types">publication type</a>; the value is the name of the relevant schema.org type. Required.</dd>
+
 					<dt>
-						<dfn>direction</dfn>
+						<dfn>accessMode</dfn>
 					</dt>
-					<dd>Contains the default value for <a>base direction</a>.</dd>
+					<dd>Contains the value of the <a href="#accessibility">accessMode</a> property.</dd>
+
 					<dt>
-						<dfn>readingProgression</dfn>
+						<dfn>accessModeSufficient</dfn>
 					</dt>
-					<dd>Contains the value for the <a>reading progression direction</a>.</dd>
+					<dd>Contains the value of the <a href="#accessibility">accessModeSufficient</a> property.</dd>
+
 					<dt>
-						<dfn>name</dfn>
+						<dfn>accessibilityAPI</dfn>
 					</dt>
-					<dd>Contains the <a href="#wptitle">title</a>.</dd>
+					<dd>Contains the value of the <a href="#accessibility">accessibilityAPI</a> property.</dd>
+
+					<dt>
+						<dfn>accessibilityControl</dfn>
+					</dt>
+					<dd>Contains the value of the <a href="#accessibility">accessibilityControl</a> property.</dd>
+
+					<dt>
+						<dfn>accessibilityFeature</dfn>
+					</dt>
+					<dd>Contains the value of the <a href="#accessibility">accessibilityFeature</a> property.</dd>
+
+					<dt>
+						<dfn>accessibilityHazard</dfn>
+					</dt>
+					<dd>Contains the value of the <a href="#accessibility">accessibilityHazard</a> property.</dd>
+
+
+					<dt>
+						<dfn>accessibilitySummary</dfn>
+					</dt>
+					<dd>Contains the value of the <a href="#accessibility">accessibilitySummary</a> property.</dd>
+
 					<dt>
 						<dfn>id</dfn>
 					</dt>
 					<dd>Contains the <a>canonical identifier</a>.</dd>
+
+
 					<dt>
-						<dfn>authors</dfn>
+						<dfn>artist</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">artists</a>.</dd>
+
+					<dt>
+						<dfn>author</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">authors</a>.</dd>
+					<dt>
+						<dfn>colorist</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">colorists</a>.</dd>
+					<dt>
+						<dfn>contributor</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">contributors</a>.</dd>
+					<dt>
+						<dfn>creator</dfn>
 					</dt>
 					<dd>Contains one or more <a href="#creators">creators</a>.</dd>
+					<dt>
+						<dfn>editor</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">editors</a>.</dd>
+					<dt>
+						<dfn>illustrator</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">illustrators</a>.</dd>
+					<dt>
+						<dfn>letterer</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">letterers</a>.</dd>
+
+					<dt>
+						<dfn>penciler</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">pencilers</a>.</dd>
+					<dt>
+						<dfn>publisher</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">publisher</a>.</dd>
+					<dt>
+						<dfn>readby</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">readers</a>.</dd>
+					<dt>
+						<dfn>translator</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#creators">translators</a>.</dd>
+
+					<dt>
+						<dfn>inLanguage</dfn>
+					</dt>
+					<dd>Contains the default <a>language</a> of the publication.&nbsp;[[bcp47]]</dd>
+					<dt>
+						<dfn>inDirection</dfn>
+					</dt>
+					<dd>Contains the default <a>base direction</a> of the publication.</dd>
+
 					<dt>
 						<dfn>dateModified</dfn>
 					</dt>
@@ -2974,66 +3054,115 @@
 						<dfn>datePublished</dfn>
 					</dt>
 					<dd>Contains the <a>publication date</a>.</dd>
+
 					<dt>
-						<dfn>links</dfn>
+						<dfn>readingProgression</dfn>
 					</dt>
-					<dd>Contains links to external resources.</dd>
+
+					<dd>Contains the value for the <a>reading progression direction</a>.</dd>
+
+					<dt>
+						<dfn>name</dfn>
+					</dt>
+					<dd>Contains one or more <a href="#wptitle">title(s)</a> for the publication.</dd>
+
 					<dt>
 						<dfn>readingOrder</dfn>
 					</dt>
 					<dd>Contains the <a>default reading order</a>.</dd>
+
 					<dt>
 						<dfn>resources</dfn>
 					</dt>
 					<dd>Contains the <a>resource list</a>.</dd>
+
+					<dt>
+						<dfn>links</dfn>
+					</dt>
+					<dd>Contains <a href="#links">links to external resources</a>.</dd>
+
+					<dt>
+						<dfn>accessibilityReport</dfn>
+					</dt>
+
+					<dd>Contains the URL reference to the <a href="#accessibility-report">accessibility report</a>.&nbsp;[[!url]]</dd>
+
+					<dt>
+						<dfn>privacyPolicy</dfn>
+					</dt>
+
+					<dd>Contains the URL reference to the <a href="#privacy-policy">privacy policy</a>.&nbsp;[[!url]]</dd>
+
+					<dt>
+						<dfn>cover</dfn>
+					</dt>
+
+					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.&nbsp;[[!url]]</dd>
+
 					<dt>
 						<dfn>toc</dfn>
 					</dt>
-					<dd>Contains the <a>table of contents</a>.</dd>
+					<dd>Contains the URL reference to the <a>table of contents</a>.&nbsp;[[!url]]</dd>
 				</dl>
 			</section>
 
 			<section id="contributor-idl">
-				<h3><code>authors</code> member </h3>
+				<h3><dfn>Person</dfn> and <dfn>Organization</dfn> members</h3>
 
-				<p class="ednote">The <a href="#creators">current infoset for creators</a> is not fully defined; this
-					dictionary might be further improved once there is agreement on how they should be handled.</p>
+				<p>These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> classes, respectively. The WebIDL definitions only contain the minimal information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as defined by schema.org.</p>
 
-				<pre class="idl" data-include="webidl/contributor.webidl" data-include-format="text">
+
+				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a href="#dom-webpublicationmanifest-author">author</a>, etc., members are each a sequence of <a><code>Person</code></a> or <a><code>Organization</code></a> dictionaries with the following members:</p>
+
+				<pre class="idl" data-include="webidl/person.webidl" data-include-format="text">
                 </pre>
 
-				<p>The <code>author</code> member is a sequence of <dfn>Contributor</dfn> dictionaries where each
-					dictionary has the following members:</p>
-
-				<dl data-dfn-for="Contributor">
+				<dl data-dfn-for="Person">
 					<dt>
 						<dfn>name</dfn>
 					</dt>
-					<dd>Contains one or more localizable string for the contributor's name.</dd>
+					<dd>Contains one or more localizable strings for the contributor's name.</dd>
 					<dt>
 						<dfn>id</dfn>
 					</dt>
-					<dd>Contains a canonical identifier for the contributor.</dd>
+					<dd>Contains a canonical identifier of the person as a URL.&nbsp;[[!url]]</dd>
+
+					<dt>
+						<dfn>url</dfn>
+					</dt>
+					<dd>Contains an address for the person in the form of a URL.&nbsp;[[!url]]</dd>
 				</dl>
+
+				<pre class="idl" data-include="webidl/organization.webidl" data-include-format="text">
+                </pre>
+				<dl data-dfn-for="Organization">
+					<dt>
+						<dfn>name</dfn>
+					</dt>
+					<dd>Contains one or more localizable strings for the organization's name.</dd>
+					<dt>
+						<dfn>id</dfn>
+					</dt>
+					<dd>Contains a canonical identifier of the organization as a URL.&nbsp;[[url]]</dd>
+
+					<dt>
+						<dfn>url</dfn>
+					</dt>
+					<dd>Contains an address for the organization in the form of a URL.&nbsp;[[url]]</dd>
+				</dl>
+
+
 			</section>
 
 			<section id="localizable-idl">
 				<h3><dfn>LocalizableString</dfn> dictionary</h3>
 
-				<p class="ednote">This definition includes a slightly tweaked version of the i18n recommendation that
-					also includes a string value in addition to a language and a direction.</p>
-
-				<p>Some metadata in the <abbr title="information set"><a>infoset</a></abbr> have strong requirements for
-					internationalization. For those members, this specification relies on the <a
-						href="https://w3c.github.io/string-meta/#bestPractices">best practices established by the i18n
-						WG</a> and on the <a>LocalizableString</a> dictionary.</p>
-
 				<pre class="idl" data-include="webidl/localizable_string.webidl" data-include-format="text"></pre>
 
-				<p>When <code>lang</code> or <code>dir</code> are specified in <a>LocalizableString</a>, these values
-					override the default language and base direction specificed in <a>WebPublicationManifest</a>.</p>
+				<p>When the <code>lang</code> is specified in <a><code>LocalizableString</code></a>, this value
+					overrides the default language specified in <a><code>WebPublicationManifest</code></a>.</p>
 
-				<p><a>LocalizableString</a> has the following members:</p>
+				<p><a><code>LocalizableString</code></a> has the following members:</p>
 
 				<dl data-dfn-for="LocalizableString">
 					<dt>
@@ -3043,11 +3172,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the <a href="#language-and-dir">language</a>.</dd>
-					<dt>
-						<dfn>dir</dfn>
-					</dt>
-					<dd>Contains the <a>base direction</a>.</dd>
+					<dd>Contains the <a href="#language-and-dir">language</a> value.&nbsp;[[bcp47]]</dd>
 				</dl>
 			</section>
 
@@ -3056,7 +3181,7 @@
 
 				<pre class="idl" data-include="webidl/publication_link.webidl" data-include-format="text"></pre>
 
-				<p>The PublicationLink dictionary contains the following members:</p>
+				<p>The <a><code>PublicationLink</code></a> dictionary contains the following members:</p>
 
 				<dl data-dfn-for="PublicationLink">
 					<dt>
@@ -3072,24 +3197,24 @@
 					</dt>
 					<dd>Text label for the linked resource.</dd>
 					<dt>
+						<dfn>description</dfn>
+					</dt>
+					<dd>Description of the linked resource.</dd>
+					<dt>
 						<dfn>rel</dfn>
 					</dt>
 					<dd>Contains one or more relations based on the IANA link
 						registry.&#160;[[!iana-link-relations]]</dd>
-					<dt>
-						<dfn>children</dfn>
-					</dt>
-					<dd>Contains one or more child resources for the current resource.</dd>
 				</dl>
 
 			</section>
 
 			<section id="textdirection-idl">
-				<h3><code>TextDirection</code> enum </h3>
+				<h3><dfn>TextDirection</dfn> enum </h3>
 
 				<pre class="idl" data-include="webidl/text_direction.webidl" data-include-format="text"></pre>
 
-				<p>The <dfn>TextDirection</dfn> enum can contain the following values:</p>
+				<p>The <a><code>TextDirection</code></a> enum can contain the following values:</p>
 				<dl data-dfn-for="TextDirection">
 					<dt>
 						<dfn>ltr</dfn>
@@ -3103,6 +3228,24 @@
 						<dfn>auto</dfn>
 					</dt>
 					<dd>Determined by the user agent.</dd>
+				</dl>
+			</section>
+
+			<section id="textdirection-idl">
+				<h3><dfn>ProgressionDirection</dfn> enum </h3>
+
+				<pre class="idl" data-include="webidl/progression_direction.webidl" data-include-format="text"></pre>
+
+				<p>The <a><code>ProgressionDirection</code></a> enum can contain the following values:</p>
+				<dl data-dfn-for="ProgressionDirection">
+					<dt>
+						<dfn>ltr</dfn>
+					</dt>
+					<dd>Left-to-right text.</dd>
+					<dt>
+						<dfn>rtl</dfn>
+					</dt>
+					<dd>Right-to-left text.</dd>
 				</dl>
 			</section>
 
