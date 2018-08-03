@@ -35,7 +35,7 @@ dictionary WebPublicationManifest {
 
              sequence<LocalizableString>        name;
 
-             sequence<PublicationLink>          readingOrder;
+   required  sequence<PublicationLink>          readingOrder;
              sequence<PublicationLink>          resources;
              sequence<PublicationLink>          links;
 
