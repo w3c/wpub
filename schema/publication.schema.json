@@ -108,8 +108,12 @@
       "uniqueItems": true
     },
     "accessibilityAPI": {
-      "type": "string",
-      "enum": ["AndroidAccessibility", "ARIA", "ATK", "AT-SPI", "BlackberryAccessibility", "iAccessible2", "iOSAccessibility", "JavaAccessibility", "MacOSXAccessibility", "MSAA", "UIAutomation"]
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["AndroidAccessibility", "ARIA", "ATK", "AT-SPI", "BlackberryAccessibility", "iAccessible2", "iOSAccessibility", "JavaAccessibility", "MacOSXAccessibility", "MSAA", "UIAutomation"]
+      },
+      "uniqueItems": true
     },
     "accessibilityControl": {
       "type": "array",
