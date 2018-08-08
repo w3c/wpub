@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "id": "https://w3c.github.io/wpub/experiments/json_schema/publication.schema.json",
+  "id": "https://w3c.github.io/wpub/schema/publication.schema.json",
   "title": "Web Publication Manifest",
   "type": "object",
   "properties": {
@@ -13,43 +13,43 @@
       "format": "uri"
     },
     "name": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/localizable.schema.json"
     },
     "artist": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "author": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "colorist": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "contributor": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "creator": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "editor": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "illustrator": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "letterer": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "penciler": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "publisher": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "readBy": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "translator": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/contributor.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
     "dateModified": {
       "type": "string",
@@ -140,7 +140,7 @@
       "uniqueItems": true
     },
     "accessibilitySummary": {
-      "$ref": "https://w3c.github.io/wpub/experiments/json_schema/localizable.schema.json"
+      "$ref": "https://w3c.github.io/wpub/schema/localizable.schema.json"
     },
     "links": {
       "type": "array",
@@ -150,7 +150,7 @@
             "type": "string"
           },
           {
-            "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+            "$ref": "https://w3c.github.io/wpub/schema/link.schema.json"
           }
         ]
       },
@@ -164,7 +164,7 @@
             "type": "string"
           },
           {
-            "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+            "$ref": "https://w3c.github.io/wpub/schema/link.schema.json"
           }
         ]
       },
@@ -178,7 +178,7 @@
             "type": "string"
           },
           {
-            "$ref": "https://w3c.github.io/wpub/experiments/json_schema/link.schema.json"
+            "$ref": "https://w3c.github.io/wpub/schema/link.schema.json"
           }
         ]
       },
