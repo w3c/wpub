@@ -4,7 +4,7 @@ dictionary WebPublicationManifest {
 
              sequence<DOMString>                accessMode;
              sequence<DOMString>                accessModeSufficient;
-             DOMString                          accessibilityAPI;
+             sequence<DOMString>                accessibilityAPI;
              sequence<DOMString>                accessibilityControl;
              sequence<DOMString>                accessibilityFeature;
              sequence<DOMString>                accessibilityHazard;
