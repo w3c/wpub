@@ -307,6 +307,25 @@
     &#8230;
 }
 </pre>
+
+					<p>Each schema.org type defines a set of properties that are valid for use with it. To ensure that
+						the manifest can be validated and processed by schema.org aware processors, the manifest SHOULD
+						contain only the properties associated with the selected type.</p>
+
+					<p>If properties from more than one type are needed, the manifest MAY include multiple type
+						declarations.</p>
+
+					<pre class="example" title="A Web Publication that combines properties from both Book and VisualArtwork.">
+{
+    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+    "@type"    : ["Book", "VisualArtwork"],
+    &#8230;
+}
+</pre>
+
+					<p>User agents SHOULD NOT fail to process manifests that are not valid to their declared schema.org
+						type(s).</p>
+
 					<p class="note">Refer to the Schema.org site for the complete <a
 							href="https://schema.org/CreativeWork">list of <code>CreativeWork</code> subtypes</a>.</p>
 				</section>
@@ -516,10 +535,16 @@
 					infoset or manifest).</p>
 
 
-				<p class="note">Schema.org includes a large number of properties that, though relevant for publishing,
-					are not mentioned in this specification &#8212; Web Publication authors can use any of these
-					properties. This document defines only the minimal set of infoset items, and their mapping to
-					Schema.org when appropriate. </p>
+				<div class="note">
+					<p>Each manifest item drawn from schema.org identifies the property it maps to and includes its
+						defining type in parentheses. Properties are often available in many types, however, as a result
+						of the schema.org inheritance model. Refer to each property definition for more detailed
+						information about where it is valid to use.</p>
+
+					<p>Schema.org additionally includes a large number of properties that, though relevant for
+						publishing, are not mentioned in this specification &#8212; Web Publication authors can use any
+						of these properties. This document defines only the minimal set of infoset items.</p>
+				</div>
 
 				<p class="ednote">There are discussion on whether a best practices document would be created, referring
 					to more schema.org terms. If so, it should be linked from here. </p>
@@ -739,8 +764,8 @@
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
-										<a href="https://meta.schema.org/accessMode"><code>accessMode</code></a>
-									</td>
+										<a href="https://meta.schema.org/accessMode"><code>accessMode</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -753,35 +778,35 @@
 											>Expected values</a>. </td>
 									<td>
 										<a href="https://meta.schema.org/accessModeSufficient"
-												><code>accessModeSufficient</code></a>
-									</td>
+												><code>accessModeSufficient</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
 										<code>accessibilityAPI</code>
 									</td>
-									<td> Indicates that the resource is compatible with the referenced accessibility
-										API-s. </td>
+									<td>Indicates that the resource is compatible with the referenced accessibility
+										APIs. </td>
 									<td> Text. <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
 										<a href="https://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
-									</td>
+											(<a href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
 										<code>accessibilityControl</code>
 									</td>
-									<td> Identifies input methods that are sufficient to fully control the described
+									<td>Identifies input methods that are sufficient to fully control the described
 										resource. </td>
 									<td> Text. <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
 										<a href="https://meta.schema.org/accessibilityControl"
-												><code>accessibilityControl</code></a>
-									</td>
+												><code>accessibilityControl</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -794,8 +819,8 @@
 											>Expected values</a>. </td>
 									<td>
 										<a href="https://meta.schema.org/accessibilityFeature"
-												><code>accessibilityFeature</code></a>
-									</td>
+												><code>accessibilityFeature</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -808,8 +833,8 @@
 											>Expected values</a>. </td>
 									<td>
 										<a href="https://meta.schema.org/accessibilityHazard"
-												><code>accessibilityHazard</code></a>
-									</td>
+												><code>accessibilityHazard</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -823,8 +848,8 @@
 									<td>Text.</td>
 									<td>
 										<a href="https://meta.schema.org/accessibilitySummary"
-												><code>accessibilitySummary</code></a>
-									</td>
+												><code>accessibilitySummary</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -900,8 +925,8 @@
 									<td>URL of the primary entry page.</td>
 									<td>A URL [[!url]].</td>
 									<td>
-										<a href="https://schema.org/url"><code>url</code></a>
-									</td>
+										<a href="https://schema.org/url"><code>url</code></a> (<a
+											href="https://www.schema.org/Thing">Thing</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1064,8 +1089,8 @@
 										digital line art.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://bib.schema.org/artist"><code>artist</code></a>
-									</td>
+										<a href="https://bib.schema.org/artist"><code>artist</code></a> (<a
+											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1075,8 +1100,8 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
-										<a href="https://schema.org/author"><code>author</code></a>
-									</td>
+										<a href="https://schema.org/author"><code>author</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1085,8 +1110,8 @@
 									<td>The individual who adds color to inked drawings.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://bib.schema.org/colorist"><code>colorist</code></a>
-									</td>
+										<a href="https://bib.schema.org/colorist"><code>colorist</code></a> (<a
+											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1097,8 +1122,8 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
-										<a href="https://schema.org/contributor"><code>contributor</code></a>
-									</td>
+										<a href="https://schema.org/contributor"><code>contributor</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1108,8 +1133,8 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
-										<a href="https://schema.org/creator"><code>creator</code></a>
-									</td>
+										<a href="https://schema.org/creator"><code>creator</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1118,8 +1143,8 @@
 									<td>The editor of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://schema.org/editor"><code>editor</code></a>
-									</td>
+										<a href="https://schema.org/editor"><code>editor</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1128,8 +1153,18 @@
 									<td>The illustrator of the publication.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://schema.org/illustrator"><code>illustrator</code></a>
+										<a href="https://schema.org/illustrator"><code>illustrator</code></a> (<a
+											href="https://www.schema.org/Book">Book</a>) </td>
+								</tr>
+								<tr>
+									<td>
+										<code>inker</code>
 									</td>
+									<td>The individual who traces over the pencil drawings in ink.</td>
+									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+									<td>
+										<a href="https://schema.org/inker"><code>inker</code></a> (<a
+											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1139,8 +1174,8 @@
 										to artwork.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://bib.schema.org/letterer"><code>letterer</code></a>
-									</td>
+										<a href="https://bib.schema.org/letterer"><code>letterer</code></a> (<a
+											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1149,8 +1184,8 @@
 									<td>The individual who draws the primary narrative artwork.</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
 									<td>
-										<a href="https://bib.schema.org/penciler"><code>penciler</code></a>
-									</td>
+										<a href="https://bib.schema.org/penciler"><code>penciler</code></a> (<a
+											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1160,8 +1195,8 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>.</td>
 									<td>
-										<a href="https://schema.org/publisher"><code>publisher</code></a>
-									</td>
+										<a href="https://schema.org/publisher"><code>publisher</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1170,8 +1205,8 @@
 									<td>A person who reads (performs) the publication (for audiobooks).</td>
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
 									<td>
-										<a href="https://bib.schema.org/readBy"><code>readBy</code></a>
-									</td>
+										<a href="https://bib.schema.org/readBy"><code>readBy</code></a> (<a
+											href="https://bib.schema.org/Audiobook">Audiobook</a>) </td>
 								</tr>
 								<tr>
 									<td>
@@ -1181,8 +1216,8 @@
 									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> or <a
 											href="https://schema.org/Organization"><code>Organization</code></a>. </td>
 									<td>
-										<a href="https://bib.schema.org/translator"><code>translator</code></a>
-									</td>
+										<a href="https://bib.schema.org/translator"><code>translator</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1359,7 +1394,9 @@
 										<td>Default <a>language</a> for the <a>Web Publication</a> as well as the
 											textual infoset values</td>
 										<td>language code as defined in&#160;[[!bcp47]]</td>
-										<td><a href="https://schema.org/inLanguage"><code>inLanguage</code></a></td>
+										<td>
+											<a href="https://schema.org/inLanguage"><code>inLanguage</code></a> (<a
+												href="https://www.schema.org/Property">Property</a>) </td>
 									</tr>
 								</tbody>
 								<tbody>
@@ -1456,8 +1493,8 @@
 										value&#160;[[!schema.org]], both expressed in ISO 8601 Date, or Date Time
 										formats, respectively [[iso8601]].</td>
 									<td>
-										<a href="https://schema.org/dateModified"><code>dateModified</code></a>
-									</td>
+										<a href="https://schema.org/dateModified"><code>dateModified</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1514,8 +1551,8 @@
 											href="https://schema.org/DateTime"><code>DateTime</code></a>, both expressed
 										in ISO 8601 Date, or Date Time formats, respectively [[!iso8601]].</td>
 									<td>
-										<a href="https://schema.org/datePublished"><code>datePublished</code></a>
-									</td>
+										<a href="https://schema.org/datePublished"><code>datePublished</code></a> (<a
+											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1654,8 +1691,8 @@
 									<td>Human-readable title of the Web Publication.</td>
 									<td>One or more text items for the title.</td>
 									<td>
-										<a href="https://schema.org/name"><code>name</code></a>
-									</td>
+										<a href="https://schema.org/name"><code>name</code></a> (<a
+											href="https://www.schema.org/Thing">Thing</a>) </td>
 								</tr>
 							</tbody>
 						</table>
@@ -1739,7 +1776,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<pre class="example" title="Reading order expressed as a simple list of URL-s">
+						<pre class="example" title="Reading order expressed as a simple list of URLs">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
@@ -2942,7 +2979,8 @@
 					<dt>
 						<dfn>type</dfn>
 					</dt>
-					<dd>Contains the <a href="#manifest-pub-types">publication type</a>; the value is the name of the relevant schema.org type. Required.</dd>
+					<dd>Contains the <a href="#manifest-pub-types">publication type</a>; the value is the name of the
+						relevant schema.org type. Required.</dd>
 
 					<dt>
 						<dfn>accessMode</dfn>
@@ -3038,7 +3076,7 @@
 					<dt>
 						<dfn>inLanguage</dfn>
 					</dt>
-					<dd>Contains the default <a>language</a> of the publication.&nbsp;[[bcp47]]</dd>
+					<dd>Contains the default <a>language</a> of the publication.&#160;[[bcp47]]</dd>
 					<dt>
 						<dfn>inDirection</dfn>
 					</dt>
@@ -3083,34 +3121,43 @@
 						<dfn>accessibilityReport</dfn>
 					</dt>
 
-					<dd>Contains the URL reference to the <a href="#accessibility-report">accessibility report</a>.&nbsp;[[!url]]</dd>
+					<dd>Contains the URL reference to the <a href="#accessibility-report">accessibility
+						report</a>.&#160;[[!url]]</dd>
 
 					<dt>
 						<dfn>privacyPolicy</dfn>
 					</dt>
 
-					<dd>Contains the URL reference to the <a href="#privacy-policy">privacy policy</a>.&nbsp;[[!url]]</dd>
+					<dd>Contains the URL reference to the <a href="#privacy-policy">privacy
+						policy</a>.&#160;[[!url]]</dd>
 
 					<dt>
 						<dfn>cover</dfn>
 					</dt>
 
-					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.&nbsp;[[!url]]</dd>
+					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.&#160;[[!url]]</dd>
 
 					<dt>
 						<dfn>toc</dfn>
 					</dt>
-					<dd>Contains the URL reference to the <a>table of contents</a>.&nbsp;[[!url]]</dd>
+					<dd>Contains the URL reference to the <a>table of contents</a>.&#160;[[!url]]</dd>
 				</dl>
 			</section>
 
 			<section id="contributor-idl">
 				<h3><dfn>Person</dfn> and <dfn>Organization</dfn> members</h3>
 
-				<p>These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> classes, respectively. The WebIDL definitions only contain the minimal information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as defined by schema.org.</p>
+				<p>These definitions reflect the basic information derived from the schema.org <a
+						href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization"
+						>Organization</a> classes, respectively. The WebIDL definitions only contain the minimal
+					information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as
+					defined by schema.org.</p>
 
 
-				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a href="#dom-webpublicationmanifest-author">author</a>, etc., members are each a sequence of <a><code>Person</code></a> or <a><code>Organization</code></a> dictionaries with the following members:</p>
+				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a
+						href="#dom-webpublicationmanifest-author">author</a>, etc., members are each a sequence of
+							<a><code>Person</code></a> or <a><code>Organization</code></a> dictionaries with the
+					following members:</p>
 
 				<pre class="idl" data-include="webidl/person.webidl" data-include-format="text">
                 </pre>
@@ -3123,12 +3170,12 @@
 					<dt>
 						<dfn>id</dfn>
 					</dt>
-					<dd>Contains a canonical identifier of the person as a URL.&nbsp;[[!url]]</dd>
+					<dd>Contains a canonical identifier of the person as a URL.&#160;[[!url]]</dd>
 
 					<dt>
 						<dfn>url</dfn>
 					</dt>
-					<dd>Contains an address for the person in the form of a URL.&nbsp;[[!url]]</dd>
+					<dd>Contains an address for the person in the form of a URL.&#160;[[!url]]</dd>
 				</dl>
 
 				<pre class="idl" data-include="webidl/organization.webidl" data-include-format="text">
@@ -3141,12 +3188,12 @@
 					<dt>
 						<dfn>id</dfn>
 					</dt>
-					<dd>Contains a canonical identifier of the organization as a URL.&nbsp;[[url]]</dd>
+					<dd>Contains a canonical identifier of the organization as a URL.&#160;[[url]]</dd>
 
 					<dt>
 						<dfn>url</dfn>
 					</dt>
-					<dd>Contains an address for the organization in the form of a URL.&nbsp;[[url]]</dd>
+					<dd>Contains an address for the organization in the form of a URL.&#160;[[url]]</dd>
 				</dl>
 
 
@@ -3170,7 +3217,7 @@
 					<dt>
 						<dfn>lang</dfn>
 					</dt>
-					<dd>Contains the <a href="#language-and-dir">language</a> value.&nbsp;[[bcp47]]</dd>
+					<dd>Contains the <a href="#language-and-dir">language</a> value.&#160;[[bcp47]]</dd>
 				</dl>
 			</section>
 
@@ -3229,7 +3276,7 @@
 				</dl>
 			</section>
 
-			<section id="textdirection-idl">
+			<section id="progressiondirection-idl">
 				<h3><dfn>ProgressionDirection</dfn> enum </h3>
 
 				<pre class="idl" data-include="webidl/progression_direction.webidl" data-include-format="text"></pre>
@@ -3280,47 +3327,56 @@
 			<p>(These examples were originally published in the Activity Streams
 				Recommendation&#160;[[activitystreams-core]].)</p>
 
-	        <table class="zebra">
-	          <tbody>
-	            <tr>
-	              <th>Character order in memory</th>
-	              <th>Direction</th>
-	              <th>Method</th>
-	              <th>Expected display</th>
-	            </tr>
-	                        
-	            <tr>
-	              <td><code><bdo dir="ltr">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdo></code></td>
-	              <td>rtl</td>
-	              <td>First strong directional character</td>
-	              <td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi></td>	              
-	            </tr>
-	            
-	            <tr>
-	              <td>
-	                <code><bdo dir="ltr">The document is titled, "&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C&amp;#x2069;"</bdo></code>
-	              </td>
-	              <td>ltr</td>
-	              <td>First strong directional character</td>
-	              <td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi>"</span></td>
-	            </tr>
-	            
-	            
-	            <tr>
-	              <td><code><bdo dir="ltr">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
-	              <td>rtl</td>
-	              <td>Bidi Control Character</td>
-	              <td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
-	            </tr>
+			<table class="zebra">
+				<tbody>
+					<tr>
+						<th>Character order in memory</th>
+						<th>Direction</th>
+						<th>Method</th>
+						<th>Expected display</th>
+					</tr>
 
-	            <tr>
-	              <td><code><bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo></code></td>
-	              <td>ltr</td>
-	              <td>Bidi Control Character</td>
-	              <td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
-	            </tr>
-	          </tbody>
-	        </table>
+					<tr>
+						<td><code><bdo dir="ltr">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdo></code></td>
+						<td>rtl</td>
+						<td>First strong directional character</td>
+						<td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi></td>
+					</tr>
+
+					<tr>
+						<td>
+							<code><bdo dir="ltr">The document is titled,
+									"&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;,
+								W3C&amp;#x2069;"</bdo></code>
+						</td>
+						<td>ltr</td>
+						<td>First strong directional character</td>
+						<td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi>"</td>
+					</tr>
+
+
+					<tr>
+						<td><code><bdo dir="ltr">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
+									&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
+						<td>rtl</td>
+						<td>Bidi Control Character</td>
+						<td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
+								&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
+					</tr>
+
+					<tr>
+						<td><code><bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in
+									Persian</bdo></code></td>
+						<td>ltr</td>
+						<td>Bidi Control Character</td>
+						<td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
