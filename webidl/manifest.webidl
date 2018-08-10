@@ -3,7 +3,7 @@ dictionary WebPublicationManifest {
     required DOMString                          type;
 
              sequence<DOMString>                accessMode;
-             sequence<DOMString>                accessModeSufficient;
+             sequence<sequence<DOMString>>      accessModeSufficient;
              sequence<DOMString>                accessibilityAPI;
              sequence<DOMString>                accessibilityControl;
              sequence<DOMString>                accessibilityFeature;
