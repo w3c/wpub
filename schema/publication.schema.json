@@ -36,6 +36,9 @@
     "illustrator": {
       "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
+    "inker": {
+      "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
+    },
     "letterer": {
       "$ref": "https://w3c.github.io/wpub/schema/contributor.schema.json"
     },
