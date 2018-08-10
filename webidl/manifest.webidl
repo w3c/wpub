@@ -19,6 +19,7 @@ dictionary WebPublicationManifest {
              sequence<(Person or Organization)> creator;
              sequence<Person>                   editor;
              sequence<Person>                   illustrator;
+             sequence<Person>                   inker;
              sequence<Person>                   letterer;
              sequence<Person>                   penciler;
              sequence<(Person or Organization)> publisher;
