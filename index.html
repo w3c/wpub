@@ -1930,30 +1930,32 @@
 				<section id="links">
 					<h4>Links</h4>
 
-					<p>The <dfn>links</dfn> property enumerates <a href="#wp-resources">resources</a> that are
-						significant to a <a>Web Publication</a> but are <em>not</em> essential to the processing and
-						rendering of it (i.e., the content of the Web Publication remains readable even if the resources
-						are not available). Examples of linked resources might include:</p>
+					<p>The <dfn>links</dfn> property provides a list of <a href="#wp-resources">resources</a> that are
+							<em>not</em> required for the processing and rendering of a Web Publication (i.e., the
+						content of the Web Publication remains unaffected even if these resources are not available).
+						Linked resources are typically made available to user agents to augment or enhance the
+						processing or rendering of it, such as:</p>
 
 					<ul>
-						<li>a privacy policy or license that a user agent might offer a link to from a shelf;</li>
-						<li>a metadata record that user agents could use to discover and display more information about
+						<li>a privacy policy or license that the user agent can offer a link to from a shelf;</li>
+						<li>a metadata record that the user agent can use to discover and display more information about
 							the Web Publication;</li>
-						<li>a dictionary of terms a user agent could process to provide enhanced language help;</li>
-						<li>large fonts files that enhance the appearance of the Web Publication but are not vital to
-							its rendering;</li>
+						<li>a dictionary of terms the user agent can process to provide enhanced language help;</li>
+					</ul>
+
+					<p>The <code>links</code> property can also be used to identify resources that are used in the
+						online rendering of a Web Publication, but that are not essential to include with it when it is
+						taken offline or packaged (e.g., to minimize the size). These include:</p>
+
+					<ul>
+						<li>large font files that enhance the appearance of the Web Publication but are not vital to its
+							display (i.e., a fallback font will suffice);</li>
 						<li>third-party scripts that are not intended for use when a Web Publication is taken offline or
-							packaged (e.g. tracking scripts).</li>
+							packaged (e.g., tracking scripts).</li>
 					</ul>
 
 					<section id="links-infoset">
 						<h5>Infoset Requirements</h5>
-
-						<p>The completeness of the <code>links</code> list might affect the usability of the Web
-							Publication in certain scenarios (e.g., a user agent might chose to omit these resources
-							when taking a publication offline, or they could be omitted when packaged version of the Web
-							Publication is created). For this reason, it is strongly RECOMMENDED to provide a
-							comprehensive list of all of the Web Publication's non-critical resources.</p>
 
 						<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource
 							(e.g., scripts, images, style sheets).</p>
@@ -1961,6 +1963,9 @@
 						<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
 								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
 								>resource list</a>.</p>
+
+						<p>User agents MAY ignore linked resources, and are not required to take them offline with a Web
+							Publication. These resources SHOULD NOT be included when packaging a Web Publication.</p>
 					</section>
 
 					<section id="links-manifest">
