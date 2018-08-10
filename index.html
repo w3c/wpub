@@ -1771,7 +1771,7 @@
 														><code>PublicationLink</code></a> object</li>
 										</ul>
 										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
-											fragment identifiers.</p>
+											fragment identifiers. Non-HTML resources SHOULD be expressed as <code>PublicationLink</code> objects with their <code>encodingFormat</code> values set.</p>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -1844,7 +1844,7 @@
 							agent SHOULD still be able to render a Web Publication even if some of these resources are
 							not identified as belonging to the Web Publication (e.g., when it is taken offline without
 							them).</p>
-
+						
 						<div class="ednote"> The previous version of the draft included: <blockquote>
 								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
 									MUST treat the resource as external to the Web Publication (e.g., it might alert the
@@ -1885,7 +1885,8 @@
 														><code>PublicationLink</code></a> object</li>
 										</ul>
 										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
-											fragment identifiers.</p>
+											fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code> objects with their <code>encodingFormat</code> values set.</p>
+										</p>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -1984,7 +1985,7 @@
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
 										</ul>
-										<p>The order in the array is <em>not significant</em>.</p>
+										<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use <code>PublicationLink</code> objects with their <code>encodingFormat</code> and <code>rel</code> values set.</p>
 									</td>
 									<td>(None)</td>
 								</tr>
