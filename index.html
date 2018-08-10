@@ -2253,7 +2253,11 @@
 
 						<p>If this process does not result in a link to the table of contents, the Web Publication does
 							not have a table of contents and this property MUST NOT be included in the infoset.</p>
-
+						
+						<p class="issue" data-number="291">Depending on the resolution to this issue, the infoset might
+							contain a separate entry for a machine-processable table of contents, restrictions could
+							be placed on the HTML structure of the referenced table of contents, or parsing rules
+							for extracting a table of contents could be added.</p>
 					</section>
 
 					<section id="table-of-contents-manifest">
@@ -3145,7 +3149,7 @@
 					<dt>
 						<dfn>toc</dfn>
 					</dt>
-					<dd>Contains the URL reference to the <a>table of contents</a>.&#160;[[!url]]</dd>
+					<dd>The HTML Element containing the <a>table of contents</a>.&nbsp;[[!url]]</dd>
 				</dl>
 			</section>
 
