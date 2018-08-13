@@ -279,38 +279,53 @@
 
 				</section>
 
-				<section id="arrays-and-single-values">
-					<h4>Arrays and Single Values</h4>
+				<section id="manifest-values">
+					<h4>Values</h4>
 
-					<p>A number of properties, defined in <a href="#wp-properties"></a>, can have one or more values. As a general rule, these values can be expressed as JSON&nbsp;[[!json]]] arrays. However, when the property value is an array with a single element, the array syntax can be omitted. This means that the following:</p>
+					<section id="arrays-and-single-values">
+						<h5>Arrays and Single Values</h5>
 
-					<pre class="example" title="Using a direct singleton value instead of an array">
+						<p>Various manifest properties can have one or more values. As a general rule, these values can
+							be expressed as [[!json]]&#160; arrays. When the property value is an array with a single
+							element, however, the array syntax can be omitted.</p>
+
+						<aside class="example" title="Using a text string instead of an array">
+							<p>As a Web Publication typically contains many resources, this declaration of a single resource:</p>
+							
+							<pre>
 {
     "resources" : "datatypes.svg",
     &#8230;
 }</pre>
-					<p>is equivalent to:</p>
-
-					<pre class="example" title="Using a direct singleton value instead of an array">
+							<p>is equivalent to the array:</p>
+							
+							<pre>
 {
     "resources" : ["datatypes.svg"],
     &#8230;
 }</pre>
-				</section>
+						</aside>
+					</section>
 
-				<section id="strings-vs-objects">
-					<h4>Text Values or Objects</h4>
+					<section id="strings-vs-objects">
+						<h5>Text Values or Objects</h5>
 
-					<p>The value of number of properties, defined in <a href="#wp-properties"></a>, are (JSON) objects. Although the usage of objects is usually RECOMMENDED, it is also acceptable to use simple strings that are interpreted as objects depending on the context. The exact mapping of text values to objects is part of the property or object definitions. This means that the following:</p>
+						<p>Various manifest properties are expected to be expressed as [[!json]]&#160;objects. Although
+							the use of objects is usually RECOMMENDED, it is also acceptable to use string values that
+							are interpreted as objects depending on the context. The exact mapping of text values to
+							objects is part of the property or object definitions.</p>
 
-					<pre class="example" title="Using a simple text instead of a full Person object.">
+						<aside class="example" title="Using a text string instead of a Person object.">
+							<p>The following author name is expressed as a text string:</p>
+							
+							<pre>
 {
     "author" : "Herman Melville",
     &#8230;
 }</pre>
-				<p>is, in the context of <a href="#creators">creators</a>, equivalent to:</p>
+							<p>but, in the context of <a href="#creators">creators</a>, equivalent to:</p>
 
-				<pre class="example" title="Using a full Person object.">
+							<pre>
 {
     "author" : {
         "@type" : "Person"
@@ -318,8 +333,131 @@
     },
     &#8230;
 }</pre>
-				<p>(See <a href="#creators"></a> for further details.)</p>
+							<p>(See <a href="#creators"></a> for further details.)</p>
+						</aside>
+					</section>
 
+					<section id="link-values">
+						<h5>Link Values</h5>
+
+						<p>With the exception of the <a href="#descriptive-properties">descriptive properties</a>, the
+							Web Publication properties typically link to one or more resources. When a property requires
+							a link value, the link MUST be expressed in one of the following two ways:</p>
+
+						<ol>
+							<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]];
+								or</li>
+							<li>as an instance of a <a href="#publication-link-def"><code>PublicationLink</code>
+									object</a> that can be used to express the URL, the media type, and other
+								characteristics of the target resource.</li>
+						</ol>
+
+						<p>In other words, a single string value is a shorthand for a <code>PublicationLink</code>
+							object whose <code>url</code> property is set that string value. (See also <a
+								href="#strings-vs-objects"></a>.)</p>
+
+						<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
+{
+    &#8230;
+    "resources" : [
+        "datatypes.svg",
+        {
+            "@type"           : "PublicationLink",
+            "url"             : "test-utf8.csv",
+            "encodingFormat"  : "text/csv",
+            "name"            : "Test Results",
+            "description"     : "CSV file containing the full data set used."
+        },
+        {
+            "@type"           : "PublicationLink",
+            "url"             : "terminology.html",
+            "encodingFormat"  : "text/html",
+            "rel"             : "glossary"
+        }
+    ]
+}
+</pre>
+
+						<section id="publicationLink">
+							<h6><code>PublicationLink</code> Definition</h6>
+
+							<p id="publication-link-def">This specification defines a new type for links called
+									<code>PublicationLink</code>. It consists of the following properties:</p>
+
+							<table class="zebra">
+								<thead>
+									<tr>
+										<th>Term</th>
+										<th>Description</th>
+										<th>Required Value</th>
+										<th>[[!schema.org]] Mapping</th>
+										<th>Optionality</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<code>url</code>
+										</td>
+										<td>Location of the resource.</td>
+										<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type
+											for additional restrictions.</td>
+										<td>
+											<a href="https://schema.org/url"><code>url</code></a>
+										</td>
+										<td>REQUIRED</td>
+									</tr>
+									<tr>
+										<td>
+											<code>encodingFormat</code>
+										</td>
+										<td>Media type of the resource (e.g., <code>text/html</code>).</td>
+										<td>MIME Media Type&#160;[[!rfc2046]].</td>
+										<td>
+											<a href="https://schema.org/encodingFormat"><code>encodingFormat</code></a>
+										</td>
+										<td>OPTIONAL</td>
+									</tr>
+									<tr>
+										<td>
+											<code>name</code>
+										</td>
+										<td>Name of the item.</td>
+										<td>Text.</td>
+										<td>
+											<a href="https://schema.org/name"><code>name</code></a>
+										</td>
+										<td>OPTIONAL</td>
+									</tr>
+									<tr>
+										<td>
+											<code>description</code>
+										</td>
+										<td>Description of the item.</td>
+										<td>Text.</td>
+										<td>
+											<a href="https://schema.org/description"><code>description</code></a>
+										</td>
+										<td>OPTIONAL</td>
+									</tr>
+									<tr>
+										<td>
+											<code>rel</code>
+										</td>
+										<td>The relationship of the resource to the Web Publication.</td>
+										<td>
+											<p>One or more relations. The values are either the relevant relationship
+												terms of the IANA link registry&#160;[[!iana-link-relations]], or
+												specially-defined URLs if no suitable link registry item exists.</p>
+										</td>
+										<td>(None)</td>
+										<td>OPTIONAL</td>
+									</tr>
+								</tbody>
+							</table>
+							<p class="issue" data-number="235"></p>
+						</section>
+					</section>
 				</section>
 
 				<section id="manifest-pub-types">
@@ -528,7 +666,7 @@
 					contents.</p>
 
 				<p class="issue" data-number="276"></p>
-				<p class=issue data-number=291>Do we need a more detailed definition for the HTML TOC format?</p>
+				<p class="issue" data-number="291">Do we need a more detailed definition for the HTML TOC format?</p>
 			</section>
 		</section>
 		<section id="wp-properties">
@@ -633,125 +771,6 @@
 				<p>As the infoset properties do not all have to be serialized in the manifest, the requirements for the
 					manifest will differ in some cases. Refer to each property's definition to determine whether it is
 					required in the manifest or can be compiled from other information.</p>
-			</section>
-
-			<section id="properties-linked">
-				<h3>Link Values</h3>
-
-				<p>With the exception of the <a href="#descriptive-properties">descriptive properties</a>, the Web
-					Publication properties typically link to one or more resources. When a property requires a link
-					value, the link MUST be expressed in one of the following two ways:</p>
-
-				<ol>
-					<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]]; or</li>
-					<li>as an instance of a <a href="#publication-link-def"><code>PublicationLink</code> object</a> that
-						can be used to express the URL, the media type, and other characteristics of the target
-						resource.</li>
-				</ol>
-
-				<p>In other words, a single string value is a shorthand for a <code>PublicationLink</code> object whose <code>url</code> property is set that string value. (See also <a href="#strings-vs-objects"></a>.)</p>
-
-				<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
-{
-    &#8230;
-    "resources" : [
-        "datatypes.svg",
-        {
-            "@type"           : "PublicationLink",
-            "url"             : "test-utf8.csv",
-            "encodingFormat"  : "text/csv",
-            "name"            : "Test Results",
-            "description"     : "CSV file containing the full data set used."
-        },
-        {
-            "@type"           : "PublicationLink",
-            "url"             : "terminology.html",
-            "encodingFormat"  : "text/html",
-            "rel"             : "glossary"
-        }
-    ]
-}
-</pre>
-
-				<section id="publicationLink">
-					<h2><code>PublicationLink</code> Definition</h2>
-
-					<p id="publication-link-def">This specification defines a new type for links called
-							<code>PublicationLink</code>. It consists of the following properties:</p>
-
-					<table class="zebra">
-						<thead>
-							<tr>
-								<th>Term</th>
-								<th>Description</th>
-								<th>Required Value</th>
-								<th>[[!schema.org]] Mapping</th>
-								<th>Optionality</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<code>url</code>
-								</td>
-								<td>Location of the resource.</td>
-								<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type for
-									additional restrictions.</td>
-								<td>
-									<a href="https://schema.org/url"><code>url</code></a>
-								</td>
-								<td>REQUIRED</td>
-							</tr>
-							<tr>
-								<td>
-									<code>encodingFormat</code>
-								</td>
-								<td>Media type of the resource (e.g., <code>text/html</code>).</td>
-								<td>MIME Media Type&#160;[[!rfc2046]].</td>
-								<td>
-									<a href="https://schema.org/encodingFormat"><code>encodingFormat</code></a>
-								</td>
-								<td>OPTIONAL</td>
-							</tr>
-							<tr>
-								<td>
-									<code>name</code>
-								</td>
-								<td>Name of the item.</td>
-								<td>Text.</td>
-								<td>
-									<a href="https://schema.org/name"><code>name</code></a>
-								</td>
-								<td>OPTIONAL</td>
-							</tr>
-							<tr>
-								<td>
-									<code>description</code>
-								</td>
-								<td>Description of the item.</td>
-								<td>Text.</td>
-								<td>
-									<a href="https://schema.org/description"><code>description</code></a>
-								</td>
-								<td>OPTIONAL</td>
-							</tr>
-							<tr>
-								<td>
-									<code>rel</code>
-								</td>
-								<td>The relationship of the resource to the Web Publication.</td>
-								<td>
-									<p>One or more relations. The values are either the relevant relationship terms of
-										the IANA link registry&#160;[[!iana-link-relations]], or specially-defined URLs
-										if no suitable link registry item exists.</p>
-								</td>
-								<td>(None)</td>
-								<td>OPTIONAL</td>
-							</tr>
-						</tbody>
-					</table>
-					<p class="issue" data-number="235"></p>
-				</section>
 			</section>
 
 			<section id="descriptive-properties">
@@ -1088,15 +1107,20 @@
 					<h4>Creators</h4>
 
 
-					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web Publication</a>. Creators are represented in one of the following two ways:</p>
+					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
+							Publication</a>. Creators are represented in one of the following two ways:</p>
 
 					<ol>
 						<li>as a string encoding the name of a Person; or</li>
-						<li>as an instance of a <a href="https://schema.org/Person" ><code>Person</code></a> and <a href="https://schema.org/Organization" ><code>Organization</code> objects, respectively.</a>
+						<li>as an instance of a <a href="https://schema.org/Person"><code>Person</code></a> and <a
+								href="https://schema.org/Organization"><code>Organization</code> objects,
+								respectively.</a>
 						</li>
 					</ol>
 
-					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose <code>name</code> property is set to that string value. (See also <a href="#strings-vs-objects"></a>.)</p>
+					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose
+							<code>name</code> property is set to that string value. (See also <a
+							href="#strings-vs-objects"></a>.)</p>
 
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1479,9 +1503,11 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
 
-							<p>
-								It is possible to set the language for any textual value in the manifest. This information MUST be set using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization" ><code>@value</code> and <code>@language</code> keywords</a> (instead of a simple string)&#160;[[!json-ld]]: 
-							</p>
+							<p> It is possible to set the language for any textual value in the manifest. This
+								information MUST be set using the <a
+									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
+										><code>@value</code> and <code>@language</code> keywords</a> (instead of a
+								simple string)&#160;[[!json-ld]]: </p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -1499,7 +1525,11 @@
 </pre>
 							<p> The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. </p>
 
-							<p>When used in a context of localizable texts, a simple string value is a shorthand for the object with the <code>@value</code> set to the string value, and the language set to the value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a> property, if applicable, and unset otherwise. In other words, the previous example is equivalent to:</p>
+							<p>When used in a context of localizable texts, a simple string value is a shorthand for the
+								object with the <code>@value</code> set to the string value, and the language set to the
+								value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a>
+								property, if applicable, and unset otherwise. In other words, the previous example is
+								equivalent to:</p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -1511,7 +1541,7 @@
 }
 </pre>
 							<p>(See also <a href="#strings-vs-objects"></a>.)</p>
-									
+
 							<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
 
 							<p class="note"> Setting the direction for a natural text value is currently not possible in
@@ -1838,7 +1868,9 @@
 														><code>PublicationLink</code></a> object</li>
 										</ul>
 										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
-											fragment identifiers. Non-HTML resources SHOULD be expressed as <code>PublicationLink</code> objects with their <code>encodingFormat</code> values set.</p>
+											fragment identifiers. Non-HTML resources SHOULD be expressed as
+												<code>PublicationLink</code> objects with their
+												<code>encodingFormat</code> values set.</p>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -1911,7 +1943,7 @@
 							agent SHOULD still be able to render a Web Publication even if some of these resources are
 							not identified as belonging to the Web Publication (e.g., when it is taken offline without
 							them).</p>
-						
+
 						<div class="ednote"> The previous version of the draft included: <blockquote>
 								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
 									MUST treat the resource as external to the Web Publication (e.g., it might alert the
@@ -1952,8 +1984,8 @@
 														><code>PublicationLink</code></a> object</li>
 										</ul>
 										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
-											fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code> objects with their <code>encodingFormat</code> values set.</p>
-										</p>
+											fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code>
+											objects with their <code>encodingFormat</code> values set.</p>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -2057,7 +2089,9 @@
 											<li>an instance of a <a href="#publication-link-def"
 														><code>PublicationLink</code></a> object</li>
 										</ul>
-										<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use <code>PublicationLink</code> objects with their <code>encodingFormat</code> and <code>rel</code> values set.</p>
+										<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use
+												<code>PublicationLink</code> objects with their
+												<code>encodingFormat</code> and <code>rel</code> values set.</p>
 									</td>
 									<td>(None)</td>
 								</tr>
