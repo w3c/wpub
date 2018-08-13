@@ -2067,8 +2067,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 					<ol>
 						<li>as a string encoding the name of a Person; or</li>
 						<li>as an instance of a <a href="https://schema.org/Person"><code>Person</code></a> and <a href="https://schema.org/Organization"><code>Organization</code></a> objects,
-								respectively.
-						</li>
+							respectively. </li>
 					</ol>
 
 					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose
@@ -3564,12 +3563,12 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 					<li>Let <var>json</var> be the result of <a href="https://tc39.github.io/ecma262/#sec-json.parse">parsing</a>
 						<var>text</var>. If <a href="https://tc39.github.io/ecma262/#sec-json.parse">parsing</a> throws an error: <ol>
 							<li>Issue a developer warning with any details pertaining to the <abbr title="JavaScript Object Notation">JSON</abbr> parsing error. </li>
-							<li>Set <var>json</var> to be the result of <a href="https://tc39.github.io/ecma262/#sec-15.12.2">parsing</a> the string <code>"{}"</code>. </li>
+							<li>Set <var>json</var> to be the result of <a href="https://tc39.github.io/ecma262/#sec-24.5.1">parsing</a> the string <code>"{}"</code>. </li>
 						</ol>
 					</li>
 					<li>If Type(<var>json</var>) is not <code>Object</code>: <ol>
 							<li>Issue a developer warning that the manifest needs to be an object. </li>
-							<li>Set <var>json</var> to be the result of <a href="https://tc39.github.io/ecma262/#sec-15.12.2">parsing</a> the string <code>"{}"</code>. </li>
+							<li>Set <var>json</var> to be the result of <a href="https://tc39.github.io/ecma262/#sec-24.5.1">parsing</a> the string <code>"{}"</code>. </li>
 						</ol>
 					</li>
 					<li>Extension point: process any proprietary and/or other supported members at this point in the
@@ -4004,8 +4003,8 @@ See also <a href="https://w3c.github.io/wpub/#aff-presentation" rel="nofollow">h
              <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-localizablestring" class="internalDFN" data-link-type="dfn"><code>LocalizableString</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-name" class="internalDFN" data-link-type="dfn"><code>name</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-readingorder" data-idl="" data-title="readingOrder" data-dfn-for="webpublicationmanifest">
 
    required<span class="idlMemberType">  <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-readingorder" class="internalDFN" data-link-type="dfn"><code>readingOrder</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-resources" data-idl="" data-title="resources" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
-             <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-resources" class="internalDFN" data-link-type="dfn"><code>resources</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-links" data-idl="" data-title="links" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
-             <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-links" class="internalDFN" data-link-type="dfn"><code>links</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-accessibilityreport" data-idl="" data-title="accessibilityReport" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
+             <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-resources" class="internalDFN" data-link-type="dfn"><code>resources</code></a></span> = <span class="idlMemberValue">[]</span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-links" data-idl="" data-title="links" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
+             <a href="https://heycam.github.io/webidl/#idl-sequence">sequence</a>&lt;<a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a>&gt;</span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-links" class="internalDFN" data-link-type="dfn"><code>links</code></a></span> = <span class="idlMemberValue">[]</span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-accessibilityreport" data-idl="" data-title="accessibilityReport" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
 
              <a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-accessibilityreport" class="internalDFN" data-link-type="dfn"><code>accessibilityReport</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-privacypolicy" data-idl="" data-title="privacyPolicy" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
              <a data-link-for="" href="#dom-publicationlink" class="internalDFN" data-link-type="dfn"><code>PublicationLink</code></a></span> <span class="idlMemberName"><a data-no-default="" data-link-for="webpublicationmanifest" data-lt="" href="#dom-webpublicationmanifest-privacypolicy" class="internalDFN" data-link-type="dfn"><code>privacyPolicy</code></a></span>;</span><span class="idlMember" id="idl-def-webpublicationmanifest-cover" data-idl="" data-title="cover" data-dfn-for="webpublicationmanifest"><span class="idlMemberType">
