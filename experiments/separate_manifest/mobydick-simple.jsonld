@@ -32,7 +32,7 @@
         },{
             "@type": "PublicationLink",
             "url": "html/toc.html",
-            "rel": "contents",
+            "rel": "contents"
         },{
             "@type": "PublicationLink",
             "url": "fonts/STIXGeneral.otf",

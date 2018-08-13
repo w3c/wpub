@@ -12,38 +12,30 @@
         "url"                   : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
         "copyrightYear"         : "2015",
         "copyrightHolder"       : "World Wide Web Consortium",    
-        "creator"               : [
-            {
-                "@type"         : "Person",
-                "name"          : "Jeni Tennison"
-            },
-            {
-                "@type"         : "Person",
-                "name"          : "Gregg Kellogg"
-            },
-            {
-                "@type"         : "Person",
-                "name"          : "Ivan Herman"
-            }
-        ],
-         "publisher" : {
+        "creator"               : ["Jeni Tennison", "Gregg Kellogg", Ivan Herman"],
+        "publisher" : {
             "@type" : "Organization",
             "name" : "World Wide Web Consortium",
             "@id"  : "https://www.w3.org/"
         },
-       "datePublished"         : "2015-12-17",
+        "datePublished"         : "2015-12-17",
         "resources"             : [
             "datatypes.html",
             "datatypes.svg",
             "datatypes.png",
             "diff.html",
-            "test-utf8.csv",
-            "test-utf8-bom.csv",
-            "test-utf16.csv",
-            "test-utf16-bom.csv",
-            "test.xls",
-            "test.xlsx"
-        ]
+            {
+                "@type"          : "StructuredValue",
+                "url"            : "test-utf8.csv",
+                "encodingFormat" : "text/csv"
+
+            },
+            {
+                "@type"          : "StructuredValue",
+                "url"            : "test.xlsx",
+                "encodingFormat" : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            }
+        ],
     }
     </script>
 </head>
