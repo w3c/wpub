@@ -1115,8 +1115,7 @@
 						<li>as a string encoding the name of a Person; or</li>
 						<li>as an instance of a <a href="https://schema.org/Person"><code>Person</code></a> and <a
 								href="https://schema.org/Organization"><code>Organization</code></a> objects,
-								respectively.
-						</li>
+							respectively. </li>
 					</ol>
 
 					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose
@@ -2656,13 +2655,13 @@
 					<li>Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
 						<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error: <ol>
 							<li>Issue a developer warning with any details pertaining to the JSON parsing error. </li>
-							<li>Set <var>json</var> to be the result of <a data-cite="!ecmascript#sec-15.12.2"
+							<li>Set <var>json</var> to be the result of <a data-cite="!ecmascript#sec-24.5.1"
 									>parsing</a> the string <code>"{}"</code>. </li>
 						</ol>
 					</li>
 					<li>If Type(<var>json</var>) is not <code>Object</code>: <ol>
 							<li>Issue a developer warning that the manifest needs to be an object. </li>
-							<li>Set <var>json</var> to be the result of <a data-cite="!ecmascript#sec-15.12.2"
+							<li>Set <var>json</var> to be the result of <a data-cite="!ecmascript#sec-24.5.1"
 									>parsing</a> the string <code>"{}"</code>. </li>
 						</ol>
 					</li>
