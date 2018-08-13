@@ -279,6 +279,49 @@
 
 				</section>
 
+				<section id="arrays-and-single-values">
+					<h4>Arrays and Single Values</h4>
+
+					<p>A number of properties, defined in <a href="#wp-properties"></a>, can have one or more values. As a general rule, these values can be expressed as JSON&nbsp;[[!json]]] arrays. However, when the property value is an array with a single element, the array syntax can be omitted. This means that the following:</p>
+
+					<pre class="example" title="Using a direct singleton value instead of an array">
+{
+    "resources" : "datatypes.svg",
+    &#8230;
+}</pre>
+					<p>is equivalent to:</p>
+
+					<pre class="example" title="Using a direct singleton value instead of an array">
+{
+    "resources" : ["datatypes.svg"],
+    &#8230;
+}</pre>
+				</section>
+
+				<section id="strings-vs-objects">
+					<h4>Text Values or Objects</h4>
+
+					<p>The value of number of properties, defined in <a href="#wp-properties"></a>, are (JSON) objects. Although the usage of objects is usually RECOMMENDED, it is also acceptable to use simple strings that are interpreted as objects depending on the context. The exact mapping of text values to objects is part of the property or object definitions. This means that the following:</p>
+
+					<pre class="example" title="Using a simple text instead of a full Person object.">
+{
+    "author" : "Herman Melville",
+    &#8230;
+}</pre>
+				<p>is, in the context of <a href="#creators">creators</a>, equivalent to:</p>
+
+				<pre class="example" title="Using a full Person object.">
+{
+    "author" : {
+        "@type" : "Person"
+        "name"  : "Herman Melville"
+    },
+    &#8230;
+}</pre>
+				<p>(See <a href="#creators"></a> for further details.)</p>
+
+				</section>
+
 				<section id="manifest-pub-types">
 					<h4>Publication Types</h4>
 
@@ -419,8 +462,8 @@
 	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
 	{
-    "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    &#8230;
+        "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+        &#8230;
 	}
 	&lt;/script&gt;
 </pre>
@@ -606,6 +649,8 @@
 						resource.</li>
 				</ol>
 
+				<p>In other words, a single string value is a shorthand for a <code>PublicationLink</code> object whose <code>url</code> property is set that string value. (See also <a href="#strings-vs-objects"></a>.)</p>
+
 				<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
 {
     &#8230;
@@ -761,7 +806,7 @@
 									</td>
 									<td> The human sensory perceptual system or cognitive faculty through which a person
 										may process or perceive information. </td>
-									<td> Text. <a
+									<td> One or more text(s). <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -774,7 +819,7 @@
 									</td>
 									<td> A list of single or combined accessModes that are sufficient to understand all
 										the intellectual content of a resource. </td>
-									<td> Comma-separated values. <a
+									<td> One or more text comma-separated values. <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -788,7 +833,7 @@
 									</td>
 									<td>Indicates that the resource is compatible with the referenced accessibility
 										APIs. </td>
-									<td> Text. <a
+									<td>One or more text(s).<a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -801,7 +846,7 @@
 									</td>
 									<td>Identifies input methods that are sufficient to fully control the described
 										resource. </td>
-									<td> Text. <a
+									<td> One or more text(s). <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -815,7 +860,7 @@
 									</td>
 									<td> Content features of the resource, such as accessible media, alternatives and
 										supported enhancements for accessibility. </td>
-									<td> Text. <a
+									<td> One or more text(s). <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -829,7 +874,7 @@
 									</td>
 									<td> A characteristic of the described resource that is physiologically dangerous to
 										some users. </td>
-									<td> Text. <a
+									<td> One or more text(s).<a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -864,6 +909,7 @@
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "CreativeWork",
     &#8230;
+    "accessibilityAPI"      : "ARIA",
     "accessMode"            : ["textual", "visual"],
     "accessModeSufficient"  : ["textual"],
     &#8230;
@@ -1041,11 +1087,16 @@
 				<section id="creators">
 					<h4>Creators</h4>
 
-					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
-							Publication</a>. Creators are represented by <a href="https://schema.org/Person"
-								><code>Person</code></a> and <a href="https://schema.org/Organization"
-								><code>Organization</code></a> objects, respectively. </p>
 
+					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web Publication</a>. Creators are represented in one of the following two ways:</p>
+
+					<ol>
+						<li>as a string encoding the name of a Person; or</li>
+						<li>as an instance of a <a href="https://schema.org/Person" ><code>Person</code></a> and <a href="https://schema.org/Organization" ><code>Organization</code> objects, respectively.</a>
+						</li>
+					</ol>
+
+					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose <code>name</code> property is set to that string value. (See also <a href="#strings-vs-objects"></a>.)</p>
 
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1240,31 +1291,31 @@
     }
 }
 </pre>
-						<pre class="example" title="Separate listing of editors, authors, and publisher">
+						<pre class="example" title="Separate listing of editors, authors, and publisher, with some persons expressed as simple strings">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"      : "CreativeWork",
     &#8230;
     "@id"        : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    "author"     : [{
-        "@type" : "Person",
-        "name" : "Jeni Tennison",
-    },{
-        "@type" : "Person",
-        "name" : "Gregg Kellogg",
-    },{
-        "@type" : "Person",
-        "name" : "Ivan Herman",
-        "@id"  : "https://www.w3.org/People/Ivan/"
-    }],
-    "editor"    : [{
-        "@type" : "Person",
-        "name" : "Jeni Tennison",
-    },{
-        "@type" : "Person",
-        "name" : "Gregg Kellogg",
-    }],
+    "author"     : [
+        "Jeni Tennison",
+        {
+            "@type" : "Person",
+            "name" : "Gregg Kellogg",
+        },{
+            "@type" : "Person",
+            "name" : "Ivan Herman",
+            "@id"  : "https://www.w3.org/People/Ivan/"
+        }
+    ],
+    "editor"    : [
+        "Jeni Tennison",
+        {
+            "@type" : "Person",
+            "name" : "Gregg Kellogg",
+        }
+    ],
     "publisher" : {
         "@type" : "Organization",
         "name" : "World Wide Web Consortium",
@@ -1428,11 +1479,9 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
 
-							<p>It is possible to set the language for any textual value in the manifest. This
-								information MUST be set using the <a
-									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> keywords</a> (instead of a
-								simple string)&#160;[[!json-ld]]: </p>
+							<p>
+								It is possible to set the language for any textual value in the manifest. This information MUST be set using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization" ><code>@value</code> and <code>@language</code> keywords</a> (instead of a simple string)&#160;[[!json-ld]]: 
+							</p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -1450,6 +1499,19 @@
 </pre>
 							<p> The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. </p>
 
+							<p>When used in a context of localizable texts, a simple string value is a shorthand for the object with the <code>@value</code> set to the string value, and the language set to the value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a> property, if applicable, and unset otherwise. In other words, the previous example is equivalent to:</p>
+
+							<pre class="example" title="Setting the default language of an author name to French">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "@type"      : "Book",
+    "inLanguage" : "fr",
+    &#8230;
+    "author"     : "Marcel Proust",
+}
+</pre>
+							<p>(See also <a href="#strings-vs-objects"></a>.)</p>
+									
 							<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
 
 							<p class="note"> Setting the direction for a natural text value is currently not possible in
