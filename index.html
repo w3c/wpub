@@ -1503,13 +1503,11 @@
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
 
-							<p> It is possible to set the language for any textual value in the manifest. This
-								information MUST be set using the <a
-									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> keywords</a> (instead of a
-								simple string)&#160;[[!json-ld]]: </p>
+							<p> 
+								It is possible to set the language for any textual value in the manifest. This information MUST be set as a <dfn data-lt="localizable text">localizable string</dfn>, i.e., using the <a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"><code>@value</code> and <code>@language</code> keywords</a> (instead of a simple string)&#160;[[!json-ld]]: 
+							</p>
 
-							<pre class="example" title="Setting the default language of an author name to French">
+							<pre class="example" title="Setting the author name to French using a localizable string">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "@type"    : "Book",
@@ -1525,11 +1523,9 @@
 </pre>
 							<p> The value of the language tag MUST be set to a language code as defined in [[!bcp47]]. </p>
 
-							<p>When used in a context of localizable texts, a simple string value is a shorthand for the
-								object with the <code>@value</code> set to the string value, and the language set to the
-								value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a>
-								property, if applicable, and unset otherwise. In other words, the previous example is
-								equivalent to:</p>
+							<p>
+								When used in a context of localizable texts, a simple string value is a shorthand for a <a>localizable string</a>, with the <code>@value</code> set to the string value, and the language set to the value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a> property, if applicable, and unset otherwise. In other words, the previous example is equivalent to:
+							</p>
 
 							<pre class="example" title="Setting the default language of an author name to French">
 {
@@ -2558,19 +2554,28 @@
 					</li>
 			</ul>
 
-			<p>The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a <code>Person</code>).</p>
+			<p>
+				The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a <code>Person</code>).
+			</p>
 			<ol>
-				<li>(<a href="#wptitle"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"><code>title</code></a> HTML element&nbsp;[[!html]] using <code>document</code>. If that element exists, let <code>t</code> be its text content, and add to <code>manifest</code>:
+				<li>
+					(<a href="#wptitle"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"><code>title</code></a> HTML element&nbsp;[[!html]] using <code>document</code>. If that element exists, let <code>t</code> be its text content, and add to <code>manifest</code>:
 					<ul>
 						<li>if the language of <code>title</code> is explicitly <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to the value of <code>l</code>, then add <br/><code>"name": {"@value": t, "@language": l}</code><br/></li>
 						<li>or <br/><code>"name": t</code><br> otherwise</li>
 					</ul>
 				</li>
-				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code> and the value of <code>lang</code> is <em>not</em> <code>undefined</code>, add<br><code>"inLanguage": lang</code><br> to <code>manifest</code> </li>
-				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is <code>undefined</code> and the value of <code>dir</code> is <em>not</em> <code>undefined</code>, add<br><code>"inDirection": dir</code><br> to <code>manifest</code> </li>
-				<li>(<a href='#default-reading-order'></a>) if <code>manifest["readingOrder"]</code> is <code>undefined</code>, add<br><code>"readingOrder": [{"@type": "PublicationLink", "url": <a href="https://www.w3.org/TR/dom41/#concept-document-url">document.URL</a>}]</code><br>to the <code>manifest</code>
+				<li>
+					(<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code> and the value of <code>lang</code> is <em>not</em> <code>undefined</code>, add<br><code>"inLanguage": lang</code><br> to <code>manifest</code>
 				</li>
-				<li>(<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
+				<li>
+					(<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is <code>undefined</code> and the value of <code>dir</code> is <em>not</em> <code>undefined</code>, add<br><code>"inDirection": dir</code><br> to <code>manifest</code>
+				</li>
+				<li>
+					(<a href='#default-reading-order'></a>) if <code>manifest["readingOrder"]</code> is <code>undefined</code>, add<br><code>"readingOrder": [{"@type": "PublicationLink", "url": <a href="https://www.w3.org/TR/dom41/#concept-document-url">document.URL</a>}]</code><br>to the <code>manifest</code>
+				</li>
+				<li>
+					(<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
 					<ul>
 						<li><code>@type</code>; or</li>
 						<li>one of the <a href="#accessibility">accessibility</a> terms except for <code>accessibilitySummary</code>; or</li>
@@ -2581,9 +2586,14 @@
 					</ul>
 					is a single string or object <code>v</code>, then change the relevant term/value to<br><code>"term" : [v]</code>
 				</li>
-				<li>(<a href="#creators"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a single string, exchange that element of the array to<br><code>{"@type": "Person", "name": [v]}</code></li>
-				<li>(<a href="#link-values"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a single string, exchange that element of the array to<br><code>{"@type": "PublicationLink", "url": v}</code><br></li>
-				<li>(<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
+				<li>
+					(<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple string or <a>localizable string</a>, exchange that element of the array to<br><code>{"@type": "Person", "name": [v]}</code>
+				</li>
+				<li>
+					(<a href="#link-values"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a simple string, exchange that element of the array to<br><code>{"@type": "PublicationLink", "url": v}</code>
+				</li>
+				<li>
+					(<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
 					<ul>
 						<li><code>accessibilitySummary</code>; or</li>
 						<li><code>name</code>; or</li>
@@ -2595,7 +2605,8 @@
 						<li>otherwise<br><code>"term": {"@value": v}</code></li>
 					</ul>
 				</li>
-				<li>(<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
+				<li>
+					(<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
 					<ul>
 						<li><code>url</code>; or</li>
 						<li><code>@id</code></li>
