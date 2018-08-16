@@ -2562,12 +2562,14 @@
 			<ol>
 				<li>(<a href="#wptitle"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"><code>title</code></a> HTML element&nbsp;[[!html]] using <code>document</code>. If that element exists, let <code>t</code> be its text content, and add to <code>manifest</code>:
 					<ul>
-						<li>if the language of <code>title</code> is explicitly <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to the value of <code>l</code>, then add <br/><code>"name" : {"@value" : t, "@language" : l}</code><br/></li>
-						<li>or <br/><code>"name" : t</code><br> otherwise</li>
+						<li>if the language of <code>title</code> is explicitly <a href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to the value of <code>l</code>, then add <br/><code>"name": {"@value": t, "@language": l}</code><br/></li>
+						<li>or <br/><code>"name": t</code><br> otherwise</li>
 					</ul>
 				</li>
-				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code> and the value of <code>lang</code> is <em>not</em> <code>undefined</code>, add<br><code>"inLanguage" : lang</code><br> to <code>manifest</code> </li>
-				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is <code>undefined</code> and the value of <code>dir</code> is <em>not</em> <code>undefined</code>, add<br><code>"inDirection" : dir</code><br> to <code>manifest</code> </li>
+				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code> and the value of <code>lang</code> is <em>not</em> <code>undefined</code>, add<br><code>"inLanguage": lang</code><br> to <code>manifest</code> </li>
+				<li>(<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is <code>undefined</code> and the value of <code>dir</code> is <em>not</em> <code>undefined</code>, add<br><code>"inDirection": dir</code><br> to <code>manifest</code> </li>
+				<li>(<a href='#default-reading-order'></a>) if <code>manifest["readingOrder"]</code> is <code>undefined</code>, add<br><code>"readingOrder": [{"@type": "PublicationLink", "url": <a href="https://www.w3.org/TR/dom41/#concept-document-url">document.URL</a>}]</code><br>to the <code>manifest</code>
+				</li>
 				<li>(<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
 					<ul>
 						<li><code>@type</code>; or</li>
@@ -2579,8 +2581,8 @@
 					</ul>
 					is a single string or object <code>v</code>, then change the relevant term/value to<br><code>"term" : [v]</code>
 				</li>
-				<li>(<a href="#creators"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a single string, exchange that element of the array to<br><code>"term" : { "@type": "Person", "name" : [v]}</code></li>
-				<li>(<a href="#link-values"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a single string, exchange that element of the array to<br><code>"term" : { "@type": "PublicationLink", "url" : v}</code><br></li>
+				<li>(<a href="#creators"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a single string, exchange that element of the array to<br><code>{"@type": "Person", "name": [v]}</code></li>
+				<li>(<a href="#link-values"></a>) if one of values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a single string, exchange that element of the array to<br><code>{"@type": "PublicationLink", "url": v}</code><br></li>
 				<li>(<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
 					<ul>
 						<li><code>accessibilitySummary</code>; or</li>
@@ -2589,7 +2591,7 @@
 					</ul>
 					is a single string <code>v</code>, then change the relevant term/value to:
 					<ul>
-						<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code> then<br><code>"term" : { "@value": v,"@language": l</code></li>
+						<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code> then<br><code>"term": { "@value": v,"@language": l</code></li>
 						<li>otherwise<br><code>"term": {"@value": v}</code></li>
 					</ul>
 				</li>
@@ -2598,9 +2600,10 @@
 						<li><code>url</code>; or</li>
 						<li><code>@id</code></li>
 					</ul>
-					is a single string <code>u</code> which is <em>not</em> an <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&nbsp;[[!url]], then resolve this value (considered to be a relative URL) using the value of <code>base</code>, yielding the value of <code>au</code>, and replace the term/value pair by<br><code>"term" : au</code>
+					is a single string <code>u</code> which is <em>not</em> an <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&nbsp;[[!url]], then resolve this value (considered to be a relative URL) using the value of <code>base</code>, yielding the value of <code>au</code>, and replace the term/value pair by<br><code>"term": au</code>
 				</li>
 			</ol>
+			<p class=ednote>Depending on the outcome of <a href="https://github.com/w3c/wpub/issues/300">Issue #300</a> a separate rule should be added for <code>accessModeSufficient</code>.</p>
 		</section>
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
