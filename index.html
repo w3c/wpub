@@ -2587,10 +2587,10 @@
 					is a single string or object <code>v</code>, then change the relevant term/value to<br><code>"term" : [v]</code>
 				</li>
 				<li>
-					(<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple string or <a>localizable string</a>, exchange that element of the array to<br><code>{"@type": "Person", "name": [v]}</code>
+					(<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple string or <a>localizable string</a>, exchange that element of the array to<br><code>{"@type": ["Person"], "name": [v]}</code>
 				</li>
 				<li>
-					(<a href="#link-values"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a simple string, exchange that element of the array to<br><code>{"@type": "PublicationLink", "url": v}</code>
+					(<a href="#link-values"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code> array, where <code>term</code> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>, is a simple string, exchange that element of the array to<br><code>{"@type": ["PublicationLink"], "url": v}</code>
 				</li>
 				<li>
 					(<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of <code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code> is:
