@@ -1,13 +1,47 @@
 {
   "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-  "@type": "Audiobook",
+  "@type": ["Audiobook"],
   "@id": "https://librivox.org/flatland-a-romance-of-many-dimensions-by-edwin-abbott-abbott/",
   "url": "https://w3c.github.io/wpub/experiments/audiobook/",
-  "name": "Flatland: A Romance of Many Dimensions",
-  "author": "Edwin Abbott Abbott",
-  "readBy": "Ruth Golding",
-  "publisher": "Librivox",
-  "inLanguage": "en",
+  "name": [
+    {
+      "@value": "Flatland: A Romance of Many Dimensions",
+      "@language": "en"
+    }
+  ],
+  "author": [
+    {
+      "name": [
+        {
+          "@value": "Edwin Abbott Abbott",
+          "@language": "en"
+        }
+      ],
+      "type": "Person"
+    }
+  ],
+  "readBy": [
+    {
+      "name": [
+        {
+          "@value": "Ruth Golding",
+          "@language": "en"
+        }
+      ],
+      "type": "Person"
+    }
+  ],
+  "publisher": [
+    {
+      "name": [
+        {
+          "@value": "Librivox",
+          "@language": "en"
+        }
+      ],
+      "type": "Organization"
+    }
+  ],
   "dateModified": "2018-06-14T19:32:18Z",
   "datePublished": "2008-10-12",
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
