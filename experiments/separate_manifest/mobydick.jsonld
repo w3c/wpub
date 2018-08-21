@@ -1,96 +1,146 @@
 {
-    "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "@type": "Book",
+    "@context": [
+        "https://schema.org",
+        "https://www.w3.org/ns/wp-context"
+    ],
+    "@type": [
+        "Book"
+    ],
     "url": "https://publisher.example.org/mobydick",
-    "name": "Moby-Dick",
-    "author": {
-        "@type": "Person",
-        "name": "Herman Melville"
-    },
+    "name": [
+        {
+            "@value": "Moby-Dick",
+            "@language": "en"
+        }
+    ],
+    "author": [
+        {
+            "@type": [
+                "Person"
+            ],
+            "name": [
+                {
+                    "@value": "Herman Melville"
+                }
+            ]
+        }
+    ],
     "dateModified": "2018-02-10T17:00:00Z",
-
-    "readingOrder": [{
-        "@type" : "PublicationLink",
-        "url": "html/title.html",
-        "encodingFormat": "text/html",
-        "name": "Title Page"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/copyright.html",
-        "encodingFormat": "text/html",
-        "name": "Copyright"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/introduction.html",
-        "encodingFormat": "text/html",
-        "name": "Etymology"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/epigraph.html",
-        "encodingFormat": "text/html",
-        "name": "Extracts"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c001.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 1 - Loomings"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c002.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 2 - The Carpet-Bad"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c003.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 3 - The Spouter-Inn"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c004.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 4 - The Counterpane"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c005.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 5 - Breakfast"
-    },{
-        "@type" : "PublicationLink",
-        "url": "html/c006.html",
-        "encodingFormat": "text/html",
-        "name": "Chapter 6 - The Street"
-    }],
-
-    "resources": [{
-        "@type" : "PublicationLink",
-        "url": "html/toc.html",
-        "rel": "contents",
-        "encodingFormat": "text/html",
-        "name": "Table of Contents"
-    },{
-        "@type" : "PublicationLink",
-        "rel": "https://www.w3.org/ns/wp#cover",
-        "url": "images/cover.jpg",
-        "encodingFormat": "image/jpeg"
-    },{
-        "@type" : "PublicationLink",
-        "url": "css/mobydick.css",
-        "encodingFormat": "text/css"
-    },{
-        "@type" : "PublicationLink",
-        "url": "fonts/STIXGeneral.otf",
-        "encodingFormat": "application/vnd.ms-opentype"
-    },{
-        "@type" : "PublicationLink",
-        "url": "fonts/STIXGeneralBol.otf",
-        "encodingFormat": "application/vnd.ms-opentype"
-    },{
-        "@type" : "PublicationLink",
-        "url": "fonts/STIXGeneralBolIta.otf",
-        "encodingFormat": "application/vnd.ms-opentype"
-    },{
-        "@type" : "PublicationLink",
-        "url": "fonts/STIXGeneralItalic.otf",
-        "encodingFormat": "application/vnd.ms-opentype"
-    }]
+    "readingOrder": [
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/title.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/copyright.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/introduction.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/epigraph.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c001.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c002.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c003.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c004.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c005.html"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/c006.html"
+        }
+    ],
+    "resources": [
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//css/mobydick.css"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "rel": [
+                "https://www.w3.org/ns/wp#cover-page"
+            ],
+            "url": "https://publisher.example.org/mobydick//images/cover.jpg",
+            "encodingFormat": "image/jpeg"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//html/toc.html",
+            "rel": [
+                "contents"
+            ]
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//fonts/STIXGeneral.otf",
+            "encodingFormat": "application/vnd.ms-opentype"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBol.otf",
+            "encodingFormat": "application/vnd.ms-opentype"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBolIta.otf",
+            "encodingFormat": "application/vnd.ms-opentype"
+        },
+        {
+            "@type": [
+                "PublicationLink"
+            ],
+            "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralItalic.otf",
+            "encodingFormat": "application/vnd.ms-opentype"
+        }
+    ]
 }

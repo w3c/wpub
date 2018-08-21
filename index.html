@@ -2529,7 +2529,11 @@
 		<section id="canonical-manifest">
 			<h4>Canonical Manifest</h4>
 
-			<p>A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from the <a>primary entry page</a> are incorporated. The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following algorithm. The algorithm takes the following arguments:</p>
+			<p>A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from the <a>primary entry page</a> are incorporated.</p>
+
+			<p class=note>For all the examples in <a href="#wp-manifest-examples"></a> there is a link to the corresponding canonical manifest.</p>
+
+			<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following algorithm. The algorithm takes the following arguments:</p>
 
 			<ul>
 				<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
@@ -2614,7 +2618,6 @@
 					is a single string <code>u</code> which is <em>not</em> an <a href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&nbsp;[[!url]], then resolve this value (considered to be a relative URL) using the value of <code>base</code>, yielding the value of <code>au</code>, and replace the term/value pair by<br><code>"term": au</code>
 				</li>
 			</ol>
-			<p class=ednote>Depending on the outcome of <a href="https://github.com/w3c/wpub/issues/300">Issue #300</a> a separate rule should be added for <code>accessModeSufficient</code>.</p>
 		</section>
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
@@ -3497,30 +3500,25 @@
 			</section>
 
 		</section>
-		<section id="app-manifest-examples" class="appendix informative">
+		<section id="wp-manifest-examples" class="appendix informative">
 			<h2>Manifest Examples</h2>
 
 			<section>
-				<h3>Basic Book</h3>
-				<p>This is the simple version of a book manifest example. A somewhat more elaborate version for the same
-					publication is also <a
-						href="https://github.com/w3c/wpub/blob/master/experiments/separate_manifest/mobydick.jsonld"
-						>available</a> as an example.</p>
+				<h3>Simple Book</h3>
+				<p>A manifest for a simple book. The <a href="https://github.com/w3c/wpub/blob/master/experiments/separate_manifest/mobydick.jsonld">canonical version</a> of this manifest is also available.</p>
 				<pre class="example" data-include="experiments/separate_manifest/mobydick-simple.jsonld" data-include-format="text"></pre>
 			</section>
 
 			<section>
 				<h3>Single-Document Publication</h3>
-				<p>This is the simple version of an embedded manifest example. A more elaborate version for the same
-					document is also <a
-						href="https://github.com/w3c/wpub/blob/master/experiments/w3c_rec/full_version.html"
-						>available</a> as an example.</p>
+				<p>Example for an embedded manifest example. The <a href="https://github.com/w3c/wpub/blob/master/experiments/w3c_rec/simple-canonical.jsonld">canonical version</a> of the manifest is, as well as a <a href="ttps://github.com/w3c/wpub/blob/master/experiments/w3c_rec/full_version.html">more elaborate version</a> for the same document are also available.</p>
 				<pre class="example" data-include="experiments/w3c_rec/simple_version.html" data-include-format="text"></pre>
 			</section>
 
 			<section>
 				<h3>Audiobook</h3>
-				<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
+				<p>A manifest for an audiobook. The <a href="https://github.com/w3c/wpub/blob/master/experiments/audiobook/flatland-canonical.jsonld">canonical version</a> of this manifest is also available.</p>
+			<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
 			</section>
 		</section>
 		<section id="bidi-examples" class="appendix informative">
