@@ -48,12 +48,12 @@
 
   "resources": [
     {
-      "rel": "cover", 
+      "rel": ["cover"], 
       "url": "http://ia800704.us.archive.org/9/items/LibrivoxCdCoverArt12/Flatland_1109.jpg", 
       "encodingFormat": "image/jpeg"
     },
     {
-      "rel": "contents", 
+      "rel": ["contents"], 
       "url": "https://w3c.github.io/wpub/experiments/audiobook/toc.html", 
       "encodingFormat": "text/html"
     }
