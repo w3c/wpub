@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "id": "https://w3c.github.io/wpub/schema/contributor-object.schema.json",
+  "$id": "https://w3c.github.io/wpub/schema/contributor-object.schema.json",
   "title": "Contributor Object",
   "type": "object",
   "properties": {
     "name": {
-      "$ref": "https://w3c.github.io/wpub/schema/localizable.schema.json"
+      "$ref": "localizable.schema.json"
     },
     "@id": {
       "type": "string",

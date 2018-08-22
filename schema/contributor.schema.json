@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "id": "https://w3c.github.io/wpub/schema/contributor.schema.json",
+  "$id": "https://w3c.github.io/wpub/schema/contributor.schema.json",
   "title": "Contributor",
   "anyOf": [
     {
@@ -15,7 +15,7 @@
           },
           { 
             "type": "object",
-            "$ref": "https://w3c.github.io/wpub/schema/contributor-object.schema.json"
+            "$ref": "contributor-object.schema.json"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     {
       "type": "object",
-      "$ref": "https://w3c.github.io/wpub/schema/contributor-object.schema.json"
+      "$ref": "contributor-object.schema.json"
     }
   ]
 }

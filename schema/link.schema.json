@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "id": "https://w3c.github.io/wpub/schema/link.schema.json",
+  "$id": "https://w3c.github.io/wpub/schema/link.schema.json",
   "title": "Web Publication Links",
   "type": "object",
   "properties": {
@@ -11,10 +11,10 @@
       "type": "string"
     },
     "name": {
-      "$ref": "https://w3c.github.io/wpub/schema/localizable.schema.json"
+      "$ref": "localizable.schema.json"
     },
     "description": {
-      "$ref": "https://w3c.github.io/wpub/schema/localizable.schema.json"
+      "$ref": "localizable.schema.json"
     },
     "rel": {
       "type": ["string", "array"],
