@@ -3545,7 +3545,7 @@
 					<dt>
 						<dfn>type</dfn>
 					</dt>
-					<dd>Contains on or more <a href="#manifest-pub-types">publication type</a> strings; the value is the name of the relevant schema.org type. Required.</dd>
+					<dd>Contains one or more <a href="#manifest-pub-types">publication type</a> strings; the value is the name of the relevant schema.org type. Required.</dd>
 
 					<dt>
 						<dfn>accessMode</dfn>
@@ -3729,11 +3729,9 @@
 					These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> classes. The WebIDL definitions only contain the minimal information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as defined by schema.org.
 				</p>
 
-
 				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a
 						href="#dom-webpublicationmanifest-author">author</a>, etc., members are each
-					a sequence of <a><code>Contributor</code></a> dictionaries, whose <code>type</code> member
-					indicate whether the contributor is a <a href="https://schema.org/Person">Person</a> or an <a href="https://schema.org/Organization">Organization</a>. The members of this dictionary are:</p>
+					a sequence of <a><code>Contributor</code></a> dictionaries, each of whose <code>type</code> member indicates whether the contributor is a <a href="https://schema.org/Person">Person</a> or an <a href="https://schema.org/Organization">Organization</a>. The members of this dictionary are:</p>
 
 				<pre class="idl" data-include="webidl/contributor.webidl" data-include-format="text">
                 </pre>
