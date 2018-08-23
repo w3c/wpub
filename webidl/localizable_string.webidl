@@ -1,4 +1,4 @@
 dictionary LocalizableString {
-    required DOMString       value;
-             DOMString       lang;
+    required DOMString value;
+             DOMString language;
 };

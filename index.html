@@ -3545,8 +3545,7 @@
 					<dt>
 						<dfn>type</dfn>
 					</dt>
-					<dd>Contains the <a href="#manifest-pub-types">publication type</a>; the value
-						is the name of the relevant schema.org type. Required.</dd>
+					<dd>Contains on or more <a href="#manifest-pub-types">publication type</a> strings; the value is the name of the relevant schema.org type. Required.</dd>
 
 					<dt>
 						<dfn>accessMode</dfn>
@@ -3724,25 +3723,26 @@
 			</section>
 
 			<section id="contributor-idl">
-				<h3><dfn>Person</dfn> and <dfn>Organization</dfn> members</h3>
+				<h3><dfn>Contributor</dfn>  members</h3>
 
-				<p>These definitions reflect the basic information derived from the schema.org <a
-						href="https://schema.org/Person">Person</a> and <a
-						href="https://schema.org/Organization">Organization</a> classes,
-					respectively. The WebIDL definitions only contain the minimal information for
-					the <a>infoset</a>; user agents MAY interpret a wider range of properties, as
-					defined by schema.org.</p>
+				<p>
+					These definitions reflect the basic information derived from the schema.org <a href="https://schema.org/Person">Person</a> and <a href="https://schema.org/Organization">Organization</a> classes. The WebIDL definitions only contain the minimal information for the <a>infoset</a>; user agents MAY interpret a wider range of properties, as defined by schema.org.
+				</p>
 
 
 				<p>The <a href="#dom-webpublicationmanifest-artist">artist</a>, <a
 						href="#dom-webpublicationmanifest-author">author</a>, etc., members are each
-					a sequence of <a><code>Person</code></a> or <a><code>Organization</code></a>
-					dictionaries with the following members:</p>
+					a sequence of <a><code>Contributor</code></a> dictionaries, whose <code>type</code> member
+					indicate whether the contributor is a <a href="https://schema.org/Person">Person</a> or an <a href="https://schema.org/Organization">Organization</a>. The members of this dictionary are:</p>
 
-				<pre class="idl" data-include="webidl/person.webidl" data-include-format="text">
+				<pre class="idl" data-include="webidl/contributor.webidl" data-include-format="text">
                 </pre>
 
-				<dl data-dfn-for="Person">
+				<dl data-dfn-for="Contributor">
+					<dt>
+						<dfn>type</dfn>
+					</dt>
+					<dd>Contains one or more strings for the contributor's type. This sequence SHOULD include "Person" or "Contributor".</dd>
 					<dt>
 						<dfn>name</dfn>
 					</dt>
@@ -3757,28 +3757,6 @@
 					</dt>
 					<dd>Contains an address for the person in the form of a URL.&#160;[[!url]]</dd>
 				</dl>
-
-				<pre class="idl" data-include="webidl/organization.webidl" data-include-format="text">
-                </pre>
-				<dl data-dfn-for="Organization">
-					<dt>
-						<dfn>name</dfn>
-					</dt>
-					<dd>Contains one or more localizable strings for the organization's name.</dd>
-					<dt>
-						<dfn>id</dfn>
-					</dt>
-					<dd>Contains a canonical identifier of the organization as a
-						URL.&#160;[[url]]</dd>
-
-					<dt>
-						<dfn>url</dfn>
-					</dt>
-					<dd>Contains an address for the organization in the form of a
-						URL.&#160;[[url]]</dd>
-				</dl>
-
-
 			</section>
 
 			<section id="localizable-idl">
@@ -3798,7 +3776,7 @@
 					</dt>
 					<dd>Contains the localized string.</dd>
 					<dt>
-						<dfn>lang</dfn>
+						<dfn>language</dfn>
 					</dt>
 					<dd>Contains the <a href="#language-and-dir">language</a>
 						value.&#160;[[bcp47]]</dd>
