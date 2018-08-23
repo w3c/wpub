@@ -12,12 +12,22 @@
       "format": "uri"
     },
     "@type": {
-      "type": ["string", "array"],
-      "items": {
-        "type": "string",
-        "enum": ["Person", "Organization"]
-      },
-      "enum": ["Person", "Organization"]
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": ["Person", "Organization"]    
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "enum": ["Person", "Organization"]
+          } 
+        }
+      ]
+      
     }
   },
   "required": ["name"]

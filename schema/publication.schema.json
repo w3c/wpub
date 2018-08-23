@@ -4,6 +4,26 @@
   "title": "Web Publication Manifest",
   "type": "object",
   "properties": {
+    "@context": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "const": "https://schema.org"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://www.w3.org/ns/wp-context"
+          }
+        }
+      ],
+      "uniqueItems": true
+    },
     "url": {
       "type": "string",
       "format": "uri"
@@ -11,6 +31,13 @@
     "@id": {
       "type": "string",
       "format": "uri"
+    },
+    "@type": {
+      "type": ["string", "array"],
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
     },
     "name": {
       "$ref": "localizable.schema.json"
@@ -195,5 +222,5 @@
       "uniqueItems": true
     }
   },
-  "required": ["url"]
+  "required": ["@context", "url", "@type"]
 }
