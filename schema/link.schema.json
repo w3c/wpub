@@ -5,7 +5,8 @@
   "type": "object",
   "properties": {
     "url": {
-      "type": "string"
+      "type": "string",
+      "format": "uri-reference"
     },
     "encodingFormat": {
       "type": "string"
