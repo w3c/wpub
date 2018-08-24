@@ -3040,6 +3040,9 @@
 						Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> [[!webidl-1]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
 					</li>
 					<li>
+						Extension point: process any proprietary and/or other supported members at this point in the algorithm.
+					</li>
+					<li>
 						Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as raising warnings.
 						<ol>
 							<li>
