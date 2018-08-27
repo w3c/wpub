@@ -2861,7 +2861,7 @@
 				<li> (<a href="#default-reading-order"></a>) if
 						<code>manifest["readingOrder"]</code> is <code>undefined</code>,
 						add<br /><code>"readingOrder": [{"@type": "PublicationLink", "url": <a
-							href="https://www.w3.org/TR/dom41/#concept-document-url"
+							data-cite="!dom#concept-document-url"
 							>document.URL</a>}]</code><br />to the <code>manifest</code>
 				</li>
 				<li> (<a href="#arrays-and-single-values"></a>) if the value of
@@ -3046,25 +3046,25 @@
 						Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as raising warnings.
 						<ol>
 							<li>
-								Check whether the value of <var>manifest[url]</var> is a valid URL&nbsp;[[!url]]. If not, issue a warning.
+								Check whether the value of <var>manifest["url"]</var> is a valid URL&nbsp;[[!url]]. If not, issue a warning.
 							</li>
 							<li>
 								For all the terms defined in <a href="#accessibility"></a>, except for <code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check whether all tokens listed in <var>manifest[term]</var> are allowed (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail">list of expected values</a> for each of those terms). If the check fails, remove the token from the <var>manifest[term]</var> array and issue a warning.
 							</li>
 							<li>
-								For all values in <var>manifest[accessModeSufficient]</var> check whether all constituent tokens in the value, when considering the latter as a comma-separated list, is allowed (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail">list of expected values</a>). If the check fails, remove that token from the comma separated list and issue a warning; if, as a result, value becomes an empty string, remove the value from <var>manifest[accessModeSufficient]</var>.
+								For all values in <var>manifest["accessModeSufficient"]</var> check whether all constituent tokens in the value, when considering the latter as a comma-separated list, is allowed (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail">list of expected values</a>). If the check fails, remove that token from the comma separated list and issue a warning; if, as a result, value becomes an empty string, remove the value from <var>manifest["accessModeSufficient"]</var>.
 							</li>
 							<li>
-								For all the terms defined in <a href="#creators"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj[name]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning.
+								For all the terms defined in <a href="#creators"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning.
 							</li>
 							<li>
-								For all the terms defined in <a href="#resource-categorization-properties"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj[url]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. If yes, check whether <var>Obj[url]</var> is a valid URL&nbsp;[[!url]] and, if not, issue a warning.
+								For all the terms defined in <a href="#resource-categorization-properties"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. If yes, check whether <var>Obj["url"]</var> is a valid URL&nbsp;[[!url]] and, if not, issue a warning.
 							</li>
 							<li>
-								Check whether <var>manifest[datePublished]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
+								Check whether <var>manifest["datePublished"]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
 							</li>
 							<li>
-								Check whether <var>manifest[dateModified]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
+								Check whether <var>manifest["dateModified"]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
 							</li>
 						</ol>
 					</li>
@@ -3982,6 +3982,7 @@
 			</figure>
 
 		</section>
+		<section id='idl-index' class=appendix></section>
 		<section id="app-image-descriptions" class="appendix informative">
 			<h2>Image Descriptions</h2>
 
