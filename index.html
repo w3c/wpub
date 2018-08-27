@@ -2920,6 +2920,9 @@
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
 
+			<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the
+					appendix</a> for a visual representation of the algorithm.</p>
+
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
 
@@ -3020,9 +3023,6 @@
 					The algorithm does not describes how error and warning messages should be reported. This is implementation dependent.
 				</p>
 
-				<p class="note">See the <a href="#obtaining-manifest-diagram">diagram in the
-						appendix</a> for a visual representation of the algorithm.</p>
-				<p class=ednote>The diagrams are outdated!</p>
 			</section>
 
 			<section id="processing-manifest">
@@ -3072,10 +3072,6 @@
 						Return <var>manifest</var>.
 					</li>
 				</ol>
-
-				<p class="note">See the <a href="#processing-manifest-diagram">diagram in the
-						appendix</a> for a visual representation of the algorithm.</p>
-				<p class=ednote>The diagrams are out of date.</p>
 			</section>
 
 		</section>
@@ -3949,38 +3945,72 @@
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
 
-			<p>These diagrams provide a visual view of the lifecycle steps, as specified in <a
-					href="#wp-lifecycle"></a>.</p>
+			<p>These diagrams provide a visual view of the lifecycle steps, as specified in <a href="#wp-lifecycle"></a>.</p>
 
-			<figure id="obtaining-manifest-diagram">
-				<object data="images/lifecycle_obtain_manifest.svg" type="image/svg+xml"
-					aria-describedby="obtaining-manifest-diagram-alt">
-					<p id="obtaining-manifest-diagram-alt">Flowchart depicts how to obtain a
-						manifest.</p>
-				</object>
-				<figcaption>Obtain a manifest.<br />See the normative description of the algorithm
-					in <a href="#obtaining-manifest"></a>. Image available in <a
-						href="images/lifecycle_obtain_manifest.svg"
-						title="SVG image of the algorithm for obtaining a manifest">SVG</a> and <a
-						title="PNG image of the algorithm for obtaining a manifest"
-						href="images/lifecycle_obtain_manifest.png">PNG</a> formats. </figcaption>
-			</figure>
+			<section id="manifest-lifecycle-diagram">
+				<h3>Overview of the lifecyle algorithm</h3>
+				<figure>
+					<object data="images/manifest_lifecycle.svg" type="image/svg+xml"
+						aria-describedby="manifest-lifecycle-diagramd-escr">
+						<p id="manifest-lifecycle-diagram-descr">Overview of the lifecyle algorithm, depicting the main building blocks</p>
+					</object>
+					<figcaption>
+						Overview of the lifecyle algorithm, depicting the main building blocks.<br />See the normative description of the algorithm in <a href="#wp-lifecycle"></a>. Image available in <a href="images/manifest_lifecycle.svg" title="SVG image of the lifecycle algorithm overview">SVG</a> and <a title="PNG image of the lifecycle algorithm overview" href="images/manifest_lifecycle.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
 
-			<figure id="processing-manifest-diagram">
-				<object data="images/lifecycle_process_a_manifest.svg" type="image/svg+xml"
-					aria-describedby="processing-manifest-diagram-alt">
-					<p id="processing-manifest-diagram-alt">Flowchart depicts how to obtain a
-						manifest.</p>
-				</object>
-				<figcaption> Process a manifest. <br />See the normative description of the
-					algorithm in <a href="#processing-manifest"></a>. Image available in <a
-						href="images/lifecycle_process_a_manifest.svg"
-						title="SVG image of the algorithm for processing a manifest">SVG</a> and <a
-						title="PNG image of the algorithm for processing a manifest"
-						href="images/lifecycle_process_a_manifest.png">PNG</a> formats.
-				</figcaption>
-			</figure>
+			<section id="find-manifest-diagram">
+				<h3>Finding the manifest</h3>
+				<figure>
+					<object data="images/find_manifest.svg" type="image/svg+xml"
+						aria-describedby="find-manifest-diagram-descr">
+						<p id="find-manifest-diagram-descr">First major block in the lifecyle algorithm: find the manifest, either through an HTTP request or as part of a script elements</p>
+					</object>
+					<figcaption>
+						First major block in the lifecyle algorithm: find the manifest, either through an HTTP request or as part of a script elements.<br />See the normative description of the algorithm in <a href="#obtaining-manifest"></a>. Image available in <a href="images/find_manifest.svg" title="SVG image of the algorithm for finding the manifest">SVG</a> and <a title="PNG image of the algorithm for finding the manifest" href="images/find_manifest.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>		
+			</section>
 
+			<section id="canonicalize-manifest-diagram">
+				<h3>Manifest canonicalization</h3>
+				<figure>
+					<object data="images/canonicalize_manifest.svg" type="image/svg+xml"
+						aria-describedby="canonicalize-manifest-diagram-descr">
+						<p id="canonicalize-manifest-diagram-descr">Second major block in the lifecyle algorithm: create a canonical manifest</p>
+					</object>
+					<figcaption>
+						Second major block in the lifecyle algorithm: create a canonical manifest.<br />See the normative description of the algorithm in <a href="#canonical-manifest"></a>. Image available in <a href="images/canonicalize_manifest.svg" title="SVG image of the canonicalization algorithm">SVG</a> and <a title="PNG SVG image of the canonicalization algorithm" href="images/canonicalize_manifest.png">PNG</a> formats.
+					</figcaption>
+				</figure>
+			</section>
+
+			<section id="#convert-manifest-diagram">
+				<h3>Converting the manifest into a data structure</h3>
+				<figure>
+					<object data="images/convert_manifest.svg" type="image/svg+xml"
+						aria-describedby="convert-manifest-diagram-descr">
+						<p id="convert-manifest-diagram-descr">Third major block in the lifecyle algorithm: convert the manifest into a programming language dependent data structure that implements the WebIDL specification of the manifest.</p>
+					</object>
+					<figcaption>
+						Third major block in the lifecyle algorithm: convert the manifest into a programming language dependent data structure that implements the WebIDL specification of the manifest.<br />See the normative description of the algorithm in <a href="#processing-manifest"></a>. Image available in <a href="images/convert_manifest.svg" title="SVG image of converting the manifest into a data structure implementing the WebIDL representation">SVG</a> and <a title="PNG image of converting the manifest into a data structure implementing the WebIDL representation" href="images/convert_manifest.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
+
+			<section id="#clean-up-data-diagram">
+				<h3>Cleaning up the data</h3>
+				<figure>
+					<object data="images/clean_up_data.svg" type="image/svg+xml"
+						aria-describedby="convert-manifest-diagram-descr">
+						<p id="convert-manifest-diagram-descr">Fourth major block in the lifecyle algorithm: check and clean up data by possibly removing data that cannot be interpreted.</p>
+					</object>
+					<figcaption>
+						Fourth major block in the lifecyle algorithm: check and clean up data by possibly removing data that cannot be interpreted.<br />See the normative description of the algorithm in <a href="#processing-manifest"></a>. Image available in <a href="images/clean_up_data.svg" title="SVG image on cleaning up the final data">SVG</a> and <a title="PNG image on cleaning up the final data" href="images/clean_up_data.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
 		</section>
 		<section id='idl-index' class=appendix></section>
 		<section id="app-image-descriptions" class="appendix informative">
