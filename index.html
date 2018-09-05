@@ -60,7 +60,7 @@
 				publication-wide metadata.</p>
 		</section>
 		<section id="sotd">
-			<p>This draft provides a preliminary outline of a Web Publication. Many details are
+			<p>This draft provides a draft version of a Web Publication. Many details are
 				under active consideration within the Publishing Working Group and are subject to
 				change. The most prominent known issues have been identified in this document and
 				links provided to comment on them.</p>
@@ -68,9 +68,7 @@
 			<p>The work the past few month has been focused on sections <a href="#wp-construction"
 				></a> and <a href="#wp-properties"></a>, which include the definition of a
 					<a>manifest</a> making use of terms in <a href="https://schema.org"
-					>schema.org</a>. Later sections, in particular <a href="#wp-lifecycle"></a> (and
-				the corresponding diagrams) may be out of sync with this version. Subsequent drafts
-				will focus on updating those sections.</p>
+					>schema.org</a>, as well as the <a href="#wp-lifecycle">Lifecycle</a> and <a href="#webidl">WebIDL</a> sections.</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -2788,8 +2786,7 @@
 				></a>) have been removed, and all values that are possibly harnessed from the
 					<a>primary entry page</a> are incorporated.</p>
 
-			<p class="note">For all the examples in <a href="#wp-manifest-examples"></a> there is a
-				link to the corresponding canonical manifest.</p>
+			<p class="note">To help understanding the result of the algorithm, there is a link to the corresponding canonical manifests for all the examples in <a href="#wp-manifest-examples"></a> .</p>
 
 			<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given
 				by the following algorithm. The algorithm takes the following arguments:</p>
@@ -2797,10 +2794,6 @@
 			<ul>
 				<li>the <code>manifest</code> string, that represent the <a>manifest</a> in
 					JSON</li>
-				<li>the <code>document</code>
-					<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document
-						(DOM) Node</a>&#160;;[[!html]], representing the <a>primary entry
-					page</a></li>
 				<li>the <code>base</code> URL string, that represents the base URL for the manifest,
 					and has the value of: <ul>
 						<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri"
@@ -2810,25 +2803,10 @@
 						<li>the URL of the manifest otherwise</li>
 					</ul>
 				</li>
-				<li>the <code>lang</code> string represents the default language, and has the value
-					oft: <ul>
-						<li>is the value of the <a
-								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
-									><code>lang</code> value</a>&#160;[[!html]] for the
-								<code>script</code> element in the <a>primary entry page</a>, in
-							case the manifest is <a href="#manifest-embedding">embedded</a>; or </li>
-						<li><code>undefined</code> otherwise</li>
-					</ul>
-				</li>
-				<li>the <code>dir</code> string represents the base direction, and has the value
-					oft: <ul>
-						<li>is the value of the <a
-								href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
-									><code>dir</code> value</a>&#160;[[!html]] for the
-								<code>script</code> element in the <a>primary entry page</a>, in
-							case the manifest is <a href="#manifest-embedding">embedded</a>; or </li>
-						<li><code>undefined</code> otherwise</li>
-					</ul>
+				<li>the <code>document</code>
+					<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document
+						(DOM) Node</a>&#160;[[!html]], representing the <a>primary entry
+					page</a>
 				</li>
 			</ul>
 
@@ -2837,6 +2815,26 @@
 				label <code>"term"</code>, where <code>P</code> is either <code>manifest</code>, or
 				an object appearing within <code>manifest</code> (e.g., a <code>Person</code>). </p>
 			<ol>
+				<li>let <var>lang</var> string represent the default language, set to:
+					<ul>
+						<li>the value of the <a
+								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
+									><code>lang</code> value</a>&#160;[[!html]] for the
+								<code>script</code> element in the <a>primary entry page</a>, in
+							case the manifest is <a href="#manifest-embedding">embedded</a>; or </li>
+						<li><code>undefined</code> otherwise</li>
+					</ul>
+				</li>
+				<li>let <var>dir</var> string represents the base direction, set to: 
+					<ul>
+						<li>the value of the <a
+								href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
+									><code>dir</code> value</a>&#160;[[!html]] for the
+								<code>script</code> element in the <a>primary entry page</a>, in
+							case the manifest is <a href="#manifest-embedding">embedded</a>; or </li>
+						<li><code>undefined</code> otherwise</li>
+					</ul>
+				</li>
 				<li> (<a href="#wptitle"></a>) if <code>manifest["name"]</code> is
 						<code>undefined</code>, then locate the <a
 						href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
@@ -2851,19 +2849,19 @@
 					</ul>
 				</li>
 				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is
-						<code>undefined</code> and the value of <code>lang</code> is <em>not</em>
+						<code>undefined</code> and the value of <var>lang</var> is <em>not</em>
 					<code>undefined</code>, add<br /><code>"inLanguage": lang</code><br /> to
 						<code>manifest</code>
 				</li>
 				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is
-						<code>undefined</code> and the value of <code>dir</code> is <em>not</em>
+						<code>undefined</code> and the value of <var>dir</var> is <em>not</em>
 					<code>undefined</code>, add<br /><code>"inDirection": dir</code><br /> to
 						<code>manifest</code>
 				</li>
 				<li> (<a href="#default-reading-order"></a>) if
 						<code>manifest["readingOrder"]</code> is <code>undefined</code>,
 						add<br /><code>"readingOrder": [{"@type": "PublicationLink", "url": <a
-							href="https://www.w3.org/TR/dom41/#concept-document-url"
+							data-cite="!dom#concept-document-url"
 							>document.URL</a>}]</code><br />to the <code>manifest</code>
 				</li>
 				<li> (<a href="#arrays-and-single-values"></a>) if the value of
@@ -2918,167 +2916,166 @@
 						au</code>
 				</li>
 			</ol>
+			<p class="note">
+				See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm.
+			</p>
+
 		</section>
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
 
-			<div class="ednote">
-				<p>The publishing working group is currently evaluating the best approach for
-					implementing <a>Web Publications</a> in user agents. This note is intended to
-					provide an overview of where current thinking is at and what issues are under
-					consideration.</p>
-
-				<p>The development of Web Publications is not viewed as a separate forking of the
-					Web, but an enhancement layer that can be supported by user agents. To that end,
-					the primary constraints on any solution for Web Publications are that:</p>
-
-				<ul>
-					<li>the rendering of Web Publications must not interfere with the underlying Web
-						model and <abbr title="Application Programming Interfaces">APIs</abbr>
-						&#8212; all functionality and enhancements must be layered on top;</li>
-					<li>a Web Publication should not have to carry its own implementation code
-						&#8212; functionality is ideally provided by the user agent and/or
-						polyfill.</li>
-				</ul>
-
-				<p>While this specification will provide implementation flexibility for user agents,
-					there are still a number of areas that have been identified as potentially
-					needing to be detailed. These include:</p>
-
-				<ul>
-					<li>
-						<p>initialization expectations for a Web Publication:</p>
-						<ul>
-							<li>automatic initiation v. user prompts;</li>
-							<li>linked v. directly loaded manifests;</li>
-							<li>resources that belong to more than one Web Publication.</li>
-						</ul>
-					</li>
-					<li>
-						<p>the creation of a "publication state":</p>
-						<ul>
-							<li>persistence of publication information across page loads;</li>
-							<li>location and persistence of UI;</li>
-							<li>indications of supported features;</li>
-							<li>DOM issues such as persistence of numbering schemes.</li>
-						</ul>
-					</li>
-					<li>
-						<p>tracking the extent of a Web Publication:</p>
-						<ul>
-							<li>taking an entire publication offline;</li>
-							<li>enabling search across documents.</li>
-						</ul>
-					</li>
-					<li>
-						<p>establishing the bounds of a Web Publication:</p>
-						<ul>
-							<li>when to end the publication state;</li>
-							<li>document history traversal;</li>
-							<li>how to handle links outside the publication.</li>
-						</ul>
-					</li>
-					<li>updating of the <a>manifest</a>.</li>
-				</ul>
-
-				<p>The working group intends to flesh out the lifecycle in later revisions once it
-					is clearer what models are viable and what solutions can be standardized. Input
-					on the feasibility and challenges of these approaches is welcome at any
-					time.</p>
-			</div>
+			<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the
+					appendix</a> for a visual representation of the algorithm.</p>
 
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
 
-				<p class="ednote">This section requires additional work now that we also allow
-					JSON-LD embedded in HTML.</p>
-
-				<p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest"
-						>steps for obtaining a manifest</dfn> are given by the following algorithm.
-					The algorithm, if successful, returns a <a>processed manifest</a> and the
-						<var>manifest URL</var>; otherwise, it terminates prematurely and returns
-					nothing. In the case of nothing being returned, the user agent MUST ignore the
-					manifest declaration.</p>
+				<p>
+					The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest" >steps for obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest declaration.
+				</p>
 
 				<ol>
-					<li>From the <code>Document</code> of the top-level browsing context, let
-							<var>origin</var> be the <code>Document</code>'s origin, and
-							<var>manifest link</var> be the first <code>link</code> element in tree
-						order whose <code>rel</code> attribute contains the token
-							<code>publication</code>. </li>
-					<li>If <var>origin</var> is an [[!html]] opaque origin, terminate this
-						algorithm. </li>
-					<li>If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
-					<li>If <var>manifest link</var>'s <code>href</code> attribute's value is the
-						empty string, then abort these steps. </li>
-					<li>Let <var>manifest URL</var> be the result of parsing the value of the
-							<code>href</code> attribute, relative to the element's base URL. If
-						parsing fails, then abort these steps. </li>
-					<li>Let <var>request</var> be a new [[!fetch]] request, whose URL is
-							<var>manifest URL</var>, and whose context is the same as the browsing
-						context of the <code>Document</code>. </li>
-					<li>If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value
-						is '<code>use-credentials</code>', then set <var>request</var>'s credentials
-						to '<code>include</code>'. </li>
-					<li>Await the result of performing a fetch with <var>request</var>, letting
-							<var>response</var> be the result. </li>
-					<li>If <var>response</var> is a network error, terminate this algorithm. </li>
-					<li>Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
-							data-cite="!fetch#concept-request-body">body</a>. </li>
-					<li>Let <var>manifest</var> be the result of running <a>processing a
-							manifest</a> given <var>text</var>, <var>manifest URL</var>, and the URL
-						that represents the address of the top-level browsing context. </li>
-					<li>Return <var>manifest</var> and <var>manifest URL</var>. </li>
+					<li>
+						From the <code>Document</code> of the top-level browsing context of the <a>primary entry page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest link</var> be the first <code>link</code> element in tree order in <code>Document</code> whose <code>rel</code> attribute contains the <code>publication</code> token. 
+					</li>
+
+					<li>
+						If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. 
+					</li>
+
+					<li>
+						If <var>manifest link</var> is <code>null</code>, terminate this algorithm.
+					</li>
+
+					<li>
+						If <var>manifest link</var>'s <code>href</code> attribute's value is the
+						empty string, terminate this algorithm.
+					</li>
+
+					<li>
+						If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment">fragment</a> identifying an identifier <var>id</var> in <code>Document</code>:
+						<ol>
+							<li>
+								Let <var>embedded manifest script</var> be the first <code>script</code> element in tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose <code>type</code> attribute is equal to <code>application/ld+json</code>.
+							</li>
+
+							<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this algorithm.</li>
+
+							<li>
+								Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text content</a> of <var>embedded manifest script</var>
+							</li>
+							<li>
+								Let <var>manifest URL</var> be set to <var>origin</var>
+							</li>
+						</ol>
+					</li>
+					<li>Otherwise:
+						<ol>
+							<li>
+								Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code> attribute, relative to the element's base URL. If parsing fails, then abort these steps.
+							</li>
+							<li>
+								Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest URL</var>, and whose context is the same as the browsing context of the <code>Document</code>.
+							</li>
+							
+							<li>
+								If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is '<code>use-credentials</code>', then set <var>request</var>'s credentials to '<code>include</code>'. 
+							</li>
+
+							<li>
+								Await the result of performing a fetch with <var>request</var>, letting <var>response</var> be the result.
+							</li>
+							<li>
+								If <var>response</var> is a network error, terminate this algorithm.
+							</li>
+							<li>
+								Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a data-cite="!fetch#concept-request-body">body</a>.
+							</li>
+						</ol>
+					</li>
+
+					<li>
+						Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a> <var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error, terminate this algorithm. 
+					</li>
+
+					<li>
+						If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm.
+					</li>
+	
+					<li>
+						Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from <var>text</var>, using the values of <var>text</var>, <var>manifest URL</var>, and <code>Document</code> as input to the algorithm described in <a href="#canonical-manifest"></a>. 
+					</li>
+
+					<li>
+						Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web Publication Manifest, namely:
+						<ul>
+							<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
+							<li>The Publication type is set (see <a href='#manifest-pub-types'></a>)</li>
+							<li>The Publication address is set (see <a href="#address"></a>)</li>
+						</ul>
+						If any of these requirements is not fulfilled, terminate the algorithm.
+					</li>
+
+					<li>
+						Let <var>manifest</var> be the result of running <a>processing a manifest</a> given <var>canonical manifest</var>.
+					</li>
+
+					<li>Return <var>manifest</var>. </li>
 				</ol>
 
-				<p class="note">See the <a href="#obtaining-manifest-diagram">diagram in the
-						appendix</a> for a visual representation of the algorithm.</p>
+				<p class=note>
+					The algorithm does not describes how error and warning messages should be reported. This is implementation dependent.
+				</p>
+
 			</section>
 
 			<section id="processing-manifest">
 				<h3>Processing the manifest</h3>
-
-				<p class="ednote">The new JSON-LD based approach will require additional processing
-					from the client. Due to the flexible nature of JSON-LD and schema.org, a simple
-					conversion from JSON to WebIDL will not be enough.</p>
-
-				<p>The <dfn data-lt="processing the manifest|processing a manifest">steps for
-						processing a manifest</dfn> are given by the following algorithm. The
-					algorithm takes a <var>text</var> string as an argument, which represents a
-						<a>manifest</a>, and a <var>manifest URL</var>&#160;[[!url]], which
-					represents the location of the manifest, and a <var>document
-					URL</var>&#160;[[!url]]. The output from inputting a JSON document into this
-					algorithm is a <dfn>processed manifest</dfn>. </p>
+				
+				<p>
+					The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm. The algorithm takes a <var>text</var> string as an argument, which represents a <a>canonical manifest</a>. The output from inputting a JSON document into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that the data represented in <var>text</var> abides to the minimal requirements on the data, removing, if applicable, non-conformant data. 
+				</p>
 
 				<ol>
-					<li>Let <var>json</var> be the result of <a
-							data-cite="!ecmascript#sec-json.parse">parsing</a>
-						<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a>
-						throws an error: <ol>
-							<li>Issue a developer warning with any details pertaining to the JSON
-								parsing error. </li>
-							<li>Set <var>json</var> to be the result of <a
-									data-cite="!ecmascript#sec-24.5.1">parsing</a> the string
-									<code>"{}"</code>. </li>
+					<li>
+						Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a> <var>text</var>
+					</li>
+					<li>
+						Let <var>manifest</var> be the result of <a href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> [[!webidl-1]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+					</li>
+					<li>
+						Extension point: process any proprietary and/or other supported members at this point in the algorithm.
+					</li>
+					<li>
+						Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as raising warnings.
+						<ol>
+							<li>
+								Check whether the value of <var>manifest["url"]</var> is a valid URL&nbsp;[[!url]]. If not, issue a warning.
+							</li>
+							<li>
+								For all the terms defined in <a href="#accessibility"></a>, except for <code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check whether all tokens listed in <var>manifest[term]</var> are allowed (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail">list of expected values</a> for each of those terms). If the check fails, remove the token from the <var>manifest[term]</var> array and issue a warning.
+							</li>
+							<li>
+								For all values in <var>manifest["accessModeSufficient"]</var> check whether all constituent tokens in the value, when considering the latter as a comma-separated list, is allowed (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail">list of expected values</a>). If the check fails, remove that token from the comma separated list and issue a warning; if, as a result, value becomes an empty string, remove the value from <var>manifest["accessModeSufficient"]</var>.
+							</li>
+							<li>
+								For all the terms defined in <a href="#creators"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning.
+							</li>
+							<li>
+								For all the terms defined in <a href="#resource-categorization-properties"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. If yes, check whether <var>Obj["url"]</var> is a valid URL&nbsp;[[!url]] and, if not, issue a warning.
+							</li>
+							<li>
+								Check whether <var>manifest["datePublished"]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
+							</li>
+							<li>
+								Check whether <var>manifest["dateModified"]</var> is a valid date or date-time, per&nbsp;[[iso8601]]. If the check fails, issue a warning.
+							</li>
 						</ol>
 					</li>
-					<li>If Type(<var>json</var>) is not <code>Object</code>: <ol>
-							<li>Issue a developer warning that the manifest needs to be an object. </li>
-							<li>Set <var>json</var> to be the result of <a
-									data-cite="!ecmascript#sec-24.5.1">parsing</a> the string
-									<code>"{}"</code>. </li>
-						</ol>
-					</li>
-					<li>Extension point: process any proprietary and/or other supported members at
-						this point in the algorithm. </li>
-					<li>Let <var>manifest</var> be the result of <a
-							href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a>
-						[[!webidl-1]] <var>json</var> to a <a>WebPublicationManifest</a> dictionary.
+					<li>
+						Return <var>manifest</var>.
 					</li>
 				</ol>
-
-				<p class="note">See the <a href="#processing-manifest-diagram">diagram in the
-						appendix</a> for a visual representation of the algorithm.</p>
 			</section>
 
 		</section>
@@ -3952,39 +3949,74 @@
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
 
-			<p>These diagrams provide a visual view of the lifecycle steps, as specified in <a
-					href="#wp-lifecycle"></a>.</p>
+			<p>These diagrams provide a visual view of the lifecycle steps, as specified in <a href="#wp-lifecycle"></a>.</p>
 
-			<figure id="obtaining-manifest-diagram">
-				<object data="images/lifecycle_obtain_manifest.svg" type="image/svg+xml"
-					aria-describedby="obtaining-manifest-diagram-alt">
-					<p id="obtaining-manifest-diagram-alt">Flowchart depicts how to obtain a
-						manifest.</p>
-				</object>
-				<figcaption>Obtain a manifest.<br />See the normative description of the algorithm
-					in <a href="#obtaining-manifest"></a>. Image available in <a
-						href="images/lifecycle_obtain_manifest.svg"
-						title="SVG image of the algorithm for obtaining a manifest">SVG</a> and <a
-						title="PNG image of the algorithm for obtaining a manifest"
-						href="images/lifecycle_obtain_manifest.png">PNG</a> formats. </figcaption>
-			</figure>
+			<section id="manifest-lifecycle-diagram">
+				<h3>Overview of the lifecyle algorithm</h3>
+				<figure>
+					<object data="images/manifest_lifecycle.svg" type="image/svg+xml"
+						aria-describedby="manifest-lifecycle-diagramd-escr">
+						<p id="manifest-lifecycle-diagram-descr">Overview of the lifecyle algorithm, depicting the main building blocks</p>
+					</object>
+					<figcaption>
+						Overview of the lifecyle algorithm, depicting the main building blocks.<br />See the normative description of the algorithm in <a href="#wp-lifecycle"></a>. Image available in <a href="images/manifest_lifecycle.svg" title="SVG image of the lifecycle algorithm overview">SVG</a> and <a title="PNG image of the lifecycle algorithm overview" href="images/manifest_lifecycle.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
 
-			<figure id="processing-manifest-diagram">
-				<object data="images/lifecycle_process_a_manifest.svg" type="image/svg+xml"
-					aria-describedby="processing-manifest-diagram-alt">
-					<p id="processing-manifest-diagram-alt">Flowchart depicts how to obtain a
-						manifest.</p>
-				</object>
-				<figcaption> Process a manifest. <br />See the normative description of the
-					algorithm in <a href="#processing-manifest"></a>. Image available in <a
-						href="images/lifecycle_process_a_manifest.svg"
-						title="SVG image of the algorithm for processing a manifest">SVG</a> and <a
-						title="PNG image of the algorithm for processing a manifest"
-						href="images/lifecycle_process_a_manifest.png">PNG</a> formats.
-				</figcaption>
-			</figure>
+			<section id="find-manifest-diagram">
+				<h3>Finding the manifest</h3>
+				<figure>
+					<object data="images/find_manifest.svg" type="image/svg+xml"
+						aria-describedby="find-manifest-diagram-descr">
+						<p id="find-manifest-diagram-descr">First major block in the lifecyle algorithm: find the manifest, either through an HTTP request or as part of a script elements</p>
+					</object>
+					<figcaption>
+						First major block in the lifecyle algorithm: find the manifest, either through an HTTP request or as part of a script elements.<br />See the normative description of the algorithm in <a href="#obtaining-manifest"></a>. Image available in <a href="images/find_manifest.svg" title="SVG image of the algorithm for finding the manifest">SVG</a> and <a title="PNG image of the algorithm for finding the manifest" href="images/find_manifest.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>		
+			</section>
 
+			<section id="canonicalize-manifest-diagram">
+				<h3>Manifest canonicalization</h3>
+				<figure>
+					<object data="images/canonicalize_manifest.svg" type="image/svg+xml"
+						aria-describedby="canonicalize-manifest-diagram-descr">
+						<p id="canonicalize-manifest-diagram-descr">Second major block in the lifecyle algorithm: create a canonical manifest</p>
+					</object>
+					<figcaption>
+						Second major block in the lifecyle algorithm: create a canonical manifest.<br />See the normative description of the algorithm in <a href="#canonical-manifest"></a>. Image available in <a href="images/canonicalize_manifest.svg" title="SVG image of the canonicalization algorithm">SVG</a> and <a title="PNG SVG image of the canonicalization algorithm" href="images/canonicalize_manifest.png">PNG</a> formats.
+					</figcaption>
+				</figure>
+			</section>
+
+			<section id="#convert-manifest-diagram">
+				<h3>Converting the manifest into a data structure</h3>
+				<figure>
+					<object data="images/convert_manifest.svg" type="image/svg+xml"
+						aria-describedby="convert-manifest-diagram-descr">
+						<p id="convert-manifest-diagram-descr">Third major block in the lifecyle algorithm: convert the manifest into a programming language dependent data structure that implements the WebIDL specification of the manifest.</p>
+					</object>
+					<figcaption>
+						Third major block in the lifecyle algorithm: convert the manifest into a programming language dependent data structure that implements the WebIDL specification of the manifest.<br />See the normative description of the algorithm in <a href="#processing-manifest"></a>. Image available in <a href="images/convert_manifest.svg" title="SVG image of converting the manifest into a data structure implementing the WebIDL representation">SVG</a> and <a title="PNG image of converting the manifest into a data structure implementing the WebIDL representation" href="images/convert_manifest.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
+
+			<section id="#clean-up-data-diagram">
+				<h3>Cleaning up the data</h3>
+				<figure>
+					<object data="images/clean_up_data.svg" type="image/svg+xml"
+						aria-describedby="convert-manifest-diagram-descr">
+						<p id="convert-manifest-diagram-descr">Fourth major block in the lifecyle algorithm: check and clean up data by possibly removing data that cannot be interpreted.</p>
+					</object>
+					<figcaption>
+						Fourth major block in the lifecyle algorithm: check and clean up data by possibly removing data that cannot be interpreted.<br />See the normative description of the algorithm in <a href="#processing-manifest"></a>. Image available in <a href="images/clean_up_data.svg" title="SVG image on cleaning up the final data">SVG</a> and <a title="PNG image on cleaning up the final data" href="images/clean_up_data.png">PNG</a> formats. 	
+					</figcaption>
+				</figure>
+			</section>
 		</section>
+		<section id='idl-index' class=appendix></section>
 		<section id="app-image-descriptions" class="appendix informative">
 			<h2>Image Descriptions</h2>
 
