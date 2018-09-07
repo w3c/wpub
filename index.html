@@ -1919,12 +1919,17 @@
 					<section id="title-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The title is specified by the <a href="#title-manifest">manifest
-								expression</a>, when present. If not included in the manifest, user
-							agents MAY use the value of the <a
-								href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-									><code>title</code> element</a>&#160;[[!html]] of the Web
-							Publication’s <a>primary entry page</a> (if present) .</p>
+						<p>
+							The title is specified by the <a href="#title-manifest">manifest expression</a>, when present. If not included in the manifest:
+						</p>
+
+						<ul>
+							<li>
+								<em>if</em> the manifest is <a href="#manifest-embedding">embedded</a> then user agents MUST use the value of the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element" ><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary entry page</a> (if present and not empty);</li>
+							<li>
+								<em>otherwise</em> user agents MAY use the value of the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element" ><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary entry page</a> (if present and not empty). 
+							</li>
+						</ul>
 
 						<p class="note">Relying on the <code>title</code> element could be
 							semantically problematic if the Web Publication consists of several HTML
@@ -2831,16 +2836,17 @@
 					</ul>
 				</li>
 				<li> (<a href="#wptitle"></a>) if <code>manifest["name"]</code> is
-						<code>undefined</code>, then locate the <a
+						<code>undefined</code> and the manifest is <a href="#manifest-embedding">embedded</a>	
+						then locate the <a
 						href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
 							><code>title</code></a> HTML element&#160;[[!html]] using
-						<code>document</code>. If that element exists, let <code>t</code> be its
-					text content, and add to <code>manifest</code>: <ul>
+						<code>document</code>. If that element exists and is not empty, let <code>t</code> be its
+					text content and: <ul>
 						<li>if the language of <code>title</code> is explicitly <a
 								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
 								>set</a> to the value of <code>l</code>, then add
 								<br /><code>"name": {"@value": t, "@language": l}</code><br /></li>
-						<li>or <br /><code>"name": t</code><br /> otherwise</li>
+						<li>or otherwise <br /><code>"name": t</code><br />to <code>manifest</code></li>
 					</ul>
 				</li>
 				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is

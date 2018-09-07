@@ -2,3 +2,4 @@ all: WP-diagram.png clean_up_data.png find_manifest.png canonicalize_manifest.pn
 
 %.png : %.svg
 	svgConvert -w 800 $<
+	cp $< $(basename $<).png ../snapshot/images
