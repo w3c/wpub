@@ -691,14 +691,6 @@
 						<a href="#wp-linking">links to the manifest</a>. This page is referred to as
 					the <dfn>primary entry page</dfn> of the Web Publication.</p>
 
-				<p> The manifest may be <a href="#manifest-embedding">embedded</a> into the
-						<a>primary entry page</a>; in this case the link element MUST use a relative
-					URL to refer to the manifest. </p>
-
-				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference
-					to the manifest MUST NOT appear as part of the <a
-						href="#resource-categorization-properties"></a>. </p>
-
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web
 					Publication MAY include references to resources of any media type, both in the
 						<a>default reading order</a> and as dependencies of other resources.</p>
@@ -2009,6 +2001,9 @@
 
 				<p>Note that a particular resource's URL MUST NOT appear in more than one of these
 					lists, and a URL MUST NOT be repeated within a list.</p>
+
+				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference
+					to the manifest MUST NOT appear within these lists. </p>
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
