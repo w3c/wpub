@@ -1,20 +1,20 @@
 {
   "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-  "@type": ["Audiobook"],
-  "@id": "https://librivox.org/flatland-a-romance-of-many-dimensions-by-edwin-abbott-abbott/",
+  "type": ["Audiobook"],
+  "id": "https://librivox.org/flatland-a-romance-of-many-dimensions-by-edwin-abbott-abbott/",
   "url": "https://w3c.github.io/wpub/experiments/audiobook/",
   "name": [
     {
-      "@value": "Flatland: A Romance of Many Dimensions",
-      "@language": "en"
+      "value": "Flatland: A Romance of Many Dimensions",
+      "language": "en"
     }
   ],
   "author": [
     {
       "name": [
         {
-          "@value": "Edwin Abbott Abbott",
-          "@language": "en"
+          "value": "Edwin Abbott Abbott",
+          "language": "en"
         }
       ],
       "type": "Person"
@@ -24,8 +24,8 @@
     {
       "name": [
         {
-          "@value": "Ruth Golding",
-          "@language": "en"
+          "value": "Ruth Golding",
+          "language": "en"
         }
       ],
       "type": "Person"
@@ -35,8 +35,8 @@
     {
       "name": [
         {
-          "@value": "Librivox",
-          "@language": "en"
+          "value": "Librivox",
+          "language": "en"
         }
       ],
       "type": "Organization"
@@ -65,8 +65,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 1, Sections 1 - 3",
-          "@language": "en"
+          "value": "Part 1, Sections 1 - 3",
+          "language": "en"
         }
       ]
     },
@@ -75,8 +75,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 1, Sections 4 - 5",
-          "@language": "en"
+          "value": "Part 1, Sections 4 - 5",
+          "language": "en"
         }
       ]
     }, 
@@ -85,8 +85,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 1, Sections 6 - 7",
-          "@language": "en"
+          "value": "Part 1, Sections 6 - 7",
+          "language": "en"
         }
       ]
     }, 
@@ -95,8 +95,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 1, Sections 8 - 10",
-          "@language": "en"
+          "value": "Part 1, Sections 8 - 10",
+          "language": "en"
         }
       ]
     }, 
@@ -105,8 +105,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 1, Sections 11 - 12",
-          "@language": "en"
+          "value": "Part 1, Sections 11 - 12",
+          "language": "en"
         }
       ]
     }, 
@@ -115,8 +115,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 2, Sections 13 - 14",
-          "@language": "en"
+          "value": "Part 2, Sections 13 - 14",
+          "language": "en"
         }
       ]
     }, 
@@ -125,8 +125,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 2, Sections 15 - 17",
-          "@language": "en"
+          "value": "Part 2, Sections 15 - 17",
+          "language": "en"
         }
       ]
     }, 
@@ -135,8 +135,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 2, Sections 18 - 20",
-          "@language": "en"
+          "value": "Part 2, Sections 18 - 20",
+          "language": "en"
         }
       ]
     }, 
@@ -145,8 +145,8 @@
       "encodingFormat": "audio/mpeg", 
       "name": [
         {
-          "@value": "Part 2, Sections 21 - 22",
-          "@language": "en"
+          "value": "Part 2, Sections 21 - 22",
+          "language": "en"
         }
       ]
     }

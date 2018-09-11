@@ -74,17 +74,17 @@ function create_wp(config) {
     // =====================================================================
     let manifest = {
         "@context"             : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-        "@type"                : "CreativeWork",
+        "type"                 : "TechArticle",
         "accessMode"           : ["textual", "visual"],
         "accessModeSufficient" : ["textual"],
 
         "resources"            : [{
-            "@type"           : "PublicationLink",
+            "type"            : "PublicationLink",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/logos/W3C",
             "encodingFormat"  : "image/svg+xml",
             "description"     : "W3C Logo"           
         },{
-            "@type"           : "PublicationLink",
+            "type"            : "PublicationLink",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/base.css",
             "rel"             : "stylesheet",
             "encodingFormat"  : "tex/css",
@@ -92,17 +92,17 @@ function create_wp(config) {
         }],
 
         "links"                : [{
-            "@type"          : "PublicationLink",
+            "type"           : "PublicationLink",
             "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
             "encodingFormat" : "text/html",
             "rel"            : "privacy-policy"
         },{
-            "@type"          : "PublicationLink",
+            "type"           : "PublicationLink",
             "url"            : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
             "encodingFormat" : "text/html",
             "rel"            : "license describedby"
         },{
-            "@type"          : "PublicationLink",
+            "type"           : "PublicationLink",
             "url"            : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
             "encodingFormat" : "text/html",
             "rel"            : "copyright"
@@ -126,12 +126,12 @@ function create_wp(config) {
         if(config[key] !== undefined) {
         	// Create an array for all the Persons in the same category...
             manifest[person_keys_mapping[key]] = config[key].map( (person) => {
-                retval = { "@type": "Person" };
+                retval = { "type" : "Person" };
                 retval.name = person.name;
                 if( person.url !== undefined ) {
                     retval.id = person.url
                 }
-                retval.affiliation = { "@type" : "Organization", "name" : person.company }
+                retval.affiliation = { "type"  : "Organization", "name" : person.company }
                 if( person.companyURL !== undefined ) {
                     retval.affiliation.url = person.companyURL
                 }
@@ -186,7 +186,7 @@ function create_wp(config) {
 
 	if( styleFile !== undefined ) {
 		manifest.resources.push({
-	        "@type"           : "PublicationLink",
+	        "type"            : "PublicationLink",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
 	        "rel"             : "stylesheet",
 	        "encodingFormat"  : "tex/css",
@@ -196,7 +196,7 @@ function create_wp(config) {
    
 	if( logoFile !== undefined ) {
 		manifest.resources.push({
-	        "@type"           : "PublicationLink",
+	        "type"            : "PublicationLink",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${logoFile}`,
 	        "encodingFormat"  : `${logoFormat}`,
 	        "description"     : "Sidebar logo reflecting the status of the document"                   	
@@ -205,7 +205,7 @@ function create_wp(config) {
 
 	if( watermark !== undefined ) {
 		manifest.resources.push({
-	        "@type"           : "PublicationLink",
+	        "type"            : "PublicationLink",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${watermark}`,
 	        "encodingFormat"  : "image/png",
 	        "description"     : "Background watermark reflecting the status of the document"                   	
@@ -215,7 +215,7 @@ function create_wp(config) {
     // If the ORCID extension is used, the ORCID logo should also be added to the list of resources
     if( document.querySelector("span.orcid") ) {
         manifest.resources.push({
-            "@type"           : "PublicationLink",
+            "type"            : "PublicationLink",
             "url"             : "https://orcid.org/sites/default/files/images/orcid_16x16.gif",
             "encodingFormat"  : "image/gif",
             "description"     : "ORCID logo"                    
@@ -235,7 +235,7 @@ function create_wp(config) {
     		let href= element.getAttribute("data");
     		if( href && is_relative(href) ) {
     			let retval = {
-    				"@type"  : "PublicationLink",
+    				"type"   : "PublicationLink",
     				"url"    : `${href}`,    				
     			}
     			let type = element.getAttribute("type");
@@ -249,7 +249,7 @@ function create_wp(config) {
     		let href= element.getAttribute("src");
     		if( href && is_relative(href) ) {
     			let retval = {
-    				"@type"  : "PublicationLink",
+    				"type"   : "PublicationLink",
     				"url"    : `${href}`    				
     			}
     			let type = image_type(href);
@@ -267,7 +267,7 @@ function create_wp(config) {
     		let href= element.getAttribute("href");
     		if( href && is_relative(href) ) {
     			let retval = {
-    				"@type"  : "PublicationLink",
+    				"type"   : "PublicationLink",
     				"url"    : `${href}`    				
     			}
                 let type = element.getAttribute("type");
@@ -286,7 +286,7 @@ function create_wp(config) {
                 let href= element.getAttribute("src");
                 if( href && is_relative(href) ) {
                     let retval = {
-                        "@type"  : "PublicationLink",
+                        "type"   : "PublicationLink",
                         "url"    : `${href}`                    
                     }
                     if( href.endsWith(".js") ) {

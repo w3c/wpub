@@ -3,24 +3,24 @@
         "https://schema.org",
         "https://www.w3.org/ns/wp-context"
     ],
-    "@type": [
+    "type": [
         "Book"
     ],
     "url": "https://publisher.example.org/mobydick",
     "name": [
         {
-            "@value": "Moby-Dick",
-            "@language": "en"
+            "value": "Moby-Dick",
+            "language": "en"
         }
     ],
     "author": [
         {
-            "@type": [
+            "type": [
                 "Person"
             ],
             "name": [
                 {
-                    "@value": "Herman Melville"
+                    "value": "Herman Melville"
                 }
             ]
         }
@@ -28,61 +28,61 @@
     "dateModified": "2018-02-10T17:00:00Z",
     "readingOrder": [
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/title.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/copyright.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/introduction.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/epigraph.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c001.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c002.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c003.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c004.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c005.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/c006.html"
@@ -90,13 +90,13 @@
     ],
     "resources": [
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//css/mobydick.css"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "rel": [
@@ -106,7 +106,7 @@
             "encodingFormat": "image/jpeg"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//html/toc.html",
@@ -115,28 +115,28 @@
             ]
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneral.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBol.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBolIta.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralItalic.otf",
