@@ -7,11 +7,11 @@
     "name": {
       "$ref": "localizable.schema.json"
     },
-    "@id": {
+    "id": {
       "type": "string",
       "format": "uri"
     },
-    "@type": {
+    "type": {
       "anyOf": [
         {
           "type": "string",
