@@ -222,5 +222,5 @@
       "uniqueItems": true
     }
   },
-  "required": ["@context", "url", "@type"]
+  "required": ["@context", "url", "type"]
 }
