@@ -367,8 +367,8 @@
 							<pre>
 {
     "author" : {
-        "@type" : "Person"
-        "name"  : "Herman Melville"
+        "type" : "Person"
+        "name" : "Herman Melville"
     },
     &#8230;
 }</pre>
@@ -404,14 +404,14 @@
     "resources" : [
         "datatypes.svg",
         {
-            "@type"           : "PublicationLink",
+            "type"            : "PublicationLink",
             "url"             : "test-utf8.csv",
             "encodingFormat"  : "text/csv",
             "name"            : "Test Results",
             "description"     : "CSV file containing the full data set used."
         },
         {
-            "@type"           : "PublicationLink",
+            "type"            : "PublicationLink",
             "url"             : "terminology.html",
             "encodingFormat"  : "text/html",
             "rel"             : "glossary"
@@ -513,28 +513,26 @@
 					<h4>Publication Types</h4>
 
 					<p> The Web Publication Manifest MUST include a <dfn>Publication Type</dfn>
-						using the <code>@type</code> keyword&#160;[[!json-ld]]. The type MAY be
+						using the <code>type</code> term&#160;[[!json-ld]]. The type MAY be
 						mapped onto the <a href="https://schema.org/CreativeWork"
 								><code>CreativeWork</code></a> type&#160;[[!schema.org]].</p>
 
 					<pre class="example" title="Setting a Web Publication's type to CreativeWork.">
 {
     "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "@type"    : "CreativeWork"
+    "type"     : "CreativeWork"
     &#8230;
 }
 </pre>
 
-					<p>Schema.org also includes a number of more specific types, all subtypes of
-							<code>CreativeWork</code>, such as <a href="https://schema.org/Article"
-							>Article</a>, <a href="https://schema.org/Book">Book</a>, and <a
-							href="https://schema.org/Course">Course</a>. These MAY be used instead
-						of <code>CreativeWork</code>. </p>
+					<p>
+						Schema.org also includes a number of more specific types, all subtypes of <code>CreativeWork</code>, such as <a href="https://schema.org/Article"><code>Article</code></a>, <a href="https://schema.org/Book"><code>Book</code></a>, <a href="https://schema.org/TechArticle"><code>TechArticle</code></a>, or <a href="https://schema.org/Course"><code>Course</code></a>. These MAY be used instead of (or in addition to) <code>CreativeWork</code>.		
+					</p>
 
 					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
     "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book"
+    "type"     : "Book"
     &#8230;
 }
 </pre>
@@ -550,7 +548,7 @@
 					<pre class="example" title="A Web Publication that combines properties from both Book and VisualArtwork.">
 {
     "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "@type"    : ["Book", "VisualArtwork"],
+    "type"     : ["Book", "VisualArtwork"],
     &#8230;
 }
 </pre>
@@ -1013,7 +1011,7 @@
 						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "CreativeWork",
+    "type"     : "CreativeWork",
     &#8230;
     "accessibilityAPI"      : "ARIA",
     "accessMode"            : ["textual", "visual"],
@@ -1092,7 +1090,7 @@
 						<pre class="example" title="Setting the address of the main entry page">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     &#8230;
@@ -1134,14 +1132,6 @@
 							MUST NOT attempt to construct a canonical identifier from any other
 							identifiers provided in the manifest.</p>
 
-						<p class="note">The canonical identifier can be used as the target of a
-							"canonical" link&#160;[[rfc6596]] (e.g., a <code>link</code>
-							element&#160;[[html]] whose <code>rel</code> attribute has the value
-								<code>canonical</code> or an <abbr
-								title="Hypertext Transfer Protocol">HTTP</abbr>
-							<code>Link</code> header field&#160;[[rfc5988]] similarly
-							identified).</p>
-
 						<p class="issue" data-number="58">Is a canonical identifier necessary to
 							call out explicitly in the <abbr title="information set">infoset</abbr>,
 							or can it be handled by other metadata.</p>
@@ -1162,7 +1152,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<code>@id</code>
+										<code>id</code>
 									</td>
 									<td>Preferred version of the Web Publication.</td>
 									<td>A URL [[!url]].</td>
@@ -1180,9 +1170,9 @@
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "CreativeWork",
+    "type"     : "TechArticle",
     &#8230;
-    "@id"      : "http://www.w3.org/TR/tabular-data-model/",
+    "id"       : "http://www.w3.org/TR/tabular-data-model/",
     "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     &#8230;
 }
@@ -1191,7 +1181,7 @@
 						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "isbn"     : "9780123456789",
     "url"      : "https://publisher.example.org/mobydick",
@@ -1445,11 +1435,11 @@
 						<pre class="example" title="Author of a book">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "author"   : {
-        "@type" : "Person",
+        "type"  : "Person",
         "name"  : "Herman Melville"
     }
 }
@@ -1457,32 +1447,32 @@
 						<pre class="example" title="Separate listing of editors, authors, and publisher, with some persons expressed as simple strings">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "CreativeWork",
+    "type"       : "TechArticle",
     &#8230;
-    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "author"     : [
         "Jeni Tennison",
         {
-            "@type" : "Person",
+            "type"  : "Person",
             "name" : "Gregg Kellogg",
         },{
-            "@type" : "Person",
+            "type"  : "Person",
             "name" : "Ivan Herman",
-            "@id"  : "https://www.w3.org/People/Ivan/"
+            "id"   : "https://www.w3.org/People/Ivan/"
         }
     ],
     "editor"    : [
         "Jeni Tennison",
         {
-            "@type" : "Person",
+            "type"  : "Person",
             "name" : "Gregg Kellogg",
         }
     ],
     "publisher" : {
-        "@type" : "Organization",
+        "type"  : "Organization",
         "name" : "World Wide Web Consortium",
-        "@id"  : "https://www.w3.org/"
+        "id"   : "https://www.w3.org/"
     }
     &#8230;
 }
@@ -1665,19 +1655,19 @@
 									data-lt="localizable text">localizable string</dfn>, i.e., using
 								the <a
 									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>@value</code> and <code>@language</code> keywords</a>
+										><code>value</code> and <code>language</code> terms</a>
 								(instead of a simple string)&#160;[[!json-ld]]: </p>
 
 							<pre class="example" title="Setting the author name to French using a localizable string">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "author" : {
-        "@type" : "Person",
+        "type"  : "Person",
         "name" : {
-            "@value" : "Marcel Proust",
-            "@language" : "fr"
+            "value"    : "Marcel Proust",
+            "language" : "fr"
         }
     }
 }
@@ -1687,7 +1677,7 @@
 
 							<p> When used in a context of localizable texts, a simple string value
 								is a shorthand for a <a>localizable string</a>, with the
-									<code>@value</code> set to the string value, and the language
+									<code>value</code> set to the string value, and the language
 								set to the value of the <a href="#manifest-default-language-and-dir"
 										><code>inLanguage</code></a> property, if applicable, and
 								unset otherwise. In other words, the previous example is equivalent
@@ -1696,7 +1686,7 @@
 							<pre class="example" title="Setting the default language of an author name to French">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     "inLanguage" : "fr",
     &#8230;
     "author"     : "Marcel Proust",
@@ -1766,12 +1756,12 @@
 							</tbody>
 						</table>
 
-						<pre class="example" title="Las modification date of the publication">
+						<pre class="example" title="Last modification date of the publication">
 {
     "@context"     : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"        : "CreativeWork",
+    "type"         : "TechArticle",
     &#8230;
-    "@id"          : "http://www.w3.org/TR/tabular-data-model/",
+    "id"           : "http://www.w3.org/TR/tabular-data-model/",
     "url"          : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "dateModified" : "2015-12-17",
     &#8230;
@@ -1832,9 +1822,9 @@
 						<pre class="example" title="Creation and modification date of the publication">
 {
     "@context"      : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"         : "CreativeWork",
+    "type"          : "TechArticle",
     &#8230;
-    "@id"           : "http://www.w3.org/TR/tabular-data-model/",
+    "id"            : "http://www.w3.org/TR/tabular-data-model/",
     "url"           : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "datePublished" : "2015-12-17",
     "dateModified"  : "2016-01-30",
@@ -1902,7 +1892,7 @@
 						<pre class="example" title="Reading progression set explicitl to ltr">
 {
     "@context"           : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"              : "Book",
+    "type"               : "Book",
     &#8230;
     "url"                : "https://publisher.example.org/mobydick",
     "readingProgression" : "ltr"
@@ -1978,7 +1968,7 @@
 						<pre class="example" title="Title of the book set explicitly">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick"
@@ -2069,7 +2059,7 @@
 						<pre class="example" title="Reading order expressed as a simple list of URLs">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
@@ -2086,17 +2076,17 @@
 						<pre class="example" title="Reading order expressed as objects providing more information on items">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"    : "Book",
+    "type"     : "Book",
     &#8230;
     "url"      : "https://publisher.example.org/mobydick",
     "name"     : "Moby Dick",
     "readingOrder" : [{
-        "@type"          : "PublicationList",
+        "type"           : "PublicationList",
         "url"            : "html/title.html",
         "encodingFormat" : "text/html",
         "name"           : "Title page"
     },{
-        "@type"          : "PublicationList",
+        "type"           : "PublicationList",
         "url"            : "html/copyright.html",
         "encodingFormat" : "text/html",
         "name"           : "Copyright page"
@@ -2191,9 +2181,9 @@
 						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "CreativeWork",
+    "type"       : "TechArticle",
     &#8230;
-    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     &#8230;
     "resources"  : [
@@ -2202,11 +2192,11 @@
         "datatypes.png",
         "diff.html",
         {
-            "@type"             : "PublicationLink",
+            "type"              : "PublicationLink",
             "url"               : "test-utf8.csv",
             "encodingFormat"    : "text/csv"
         },{
-            "@type"             : "PublicationLink",
+            "type"              : "PublicationLink",
             "url"               : "test-utf8-bom.csv",
             "encodingFormat"    : "text/csv"
         },{
@@ -2350,12 +2340,12 @@
 						<pre class="example" title="Link to an accessibility report">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "links"  : [{
-        "@type"       : "PublicationLink",
+        "type"        : "PublicationLink",
         "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
         "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
     },{
@@ -2407,13 +2397,13 @@
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "CreativeWork",
+    "type"       : "TechArticle",
     &#8230;
-    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     &#8230;
     "links"  : [{
-        "@type"          : "PublicationLink",
+        "type"           : "PublicationLink",
         "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
         "encodingFormat" : "text/html",
         "rel"            : "privacy-policy"
@@ -2477,12 +2467,12 @@
 						<pre class="example" title="Cover HTML page">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/donquixote",
     "name"       : "Don Quixote",
     "resources"  : [{
-        "@type"          : "PublicationLink",
+        "type"           : "PublicationLink",
         "url"            : "cover.html",
         "encodingFormat" : "text/html"
         "rel"            : "https://www.w3.org/ns/wp#cover"
@@ -2496,12 +2486,12 @@
 						<pre class="example" title="Cover image with title and description">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "resources"  : [{
-        "@type"          : "PublicationLink",
+        "type"           : "PublicationLink",
         "url"            : "whale-image.jpg",
         "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover",
@@ -2517,17 +2507,17 @@
 						<pre class="example" title="Cover image in JPEG and SVG formats">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/donquixote",
     "name"       : "Gulliver's Travels",
     "resources"  : [{
-        "@type"          : "PublicationLink",
+        "type"           : "PublicationLink",
         "url"            : "lilliput.jpg",
         "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover"
     },{
-        "@type"          : "PublicationLink",
+        "type"           : "PublicationLink",
         "url"            : "lilliput.svg",
         "encodingFormat" : "image/svg+xml",
         "rel"            : "https://www.w3.org/ns/wp#cover"
@@ -2617,12 +2607,12 @@
 						<pre class="example" title="Table of content identified in another resource of the Web Publication">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "resources"  : [{
-        "@type"      : "PublicationLink",
+        "type"       : "PublicationLink",
         "url"        : "toc_file.html",
         "rel"        : "contents"
     },{
@@ -2638,9 +2628,9 @@
     &lt;script type="application/ld+json"&gt;
     {
         "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        "@type"           : "CreativeWork",
+        "type"            : "TechArticle",
         &#8230;
-        "@id"             : "http://www.w3.org/TR/tabular-data-model/",
+        "id"              : "http://www.w3.org/TR/tabular-data-model/",
         "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
         &#8230;
     }
@@ -2706,12 +2696,12 @@
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "Book",
+    "type"       : "Book",
     &#8230;
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "links"  : [{
-        "@type"           : "PublicationLink",
+        "type"            : "PublicationLink",
         "url"             : "https://www.publisher.example.org/mobydick-onix.xml",
         "encodingFormat"  : "application/onix+xml",
         "rel"             : "describedby"
@@ -2741,9 +2731,9 @@
 					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
     "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"           : "CreativeWork",
+    "type"            : "TechArticle",
     &#8230;
-    "@id"             : "http://www.w3.org/TR/tabular-data-model/",
+    "id"              : "http://www.w3.org/TR/tabular-data-model/",
     "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "copyrightYear"   : "2015",
     "copyrightHolder" : "World Wide Web Consortium",    
@@ -2754,11 +2744,11 @@
 					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "@type"      : "CreativeWork",
+    "type"       : "CreativeWork",
     &#8230;
-    "@id"        : "http://www.w3.org/TR/tabular-data-model/",
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    "dc:subject" : ["Document Structures","Resource Description Framework (RDF)"]
+    "dc:subject" : ["Web data description languages","Data integration","Data Exchange"]
     &#8230;
 }
 </pre>
@@ -2839,7 +2829,7 @@
 						<li>if the language of <code>title</code> is explicitly <a
 								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
 								>set</a> to the value of <code>l</code>, then add
-								<br /><code>"name": {"@value": t, "@language": l}</code><br /></li>
+								<br /><code>"name": {"value": t, "language": l}</code><br /></li>
 						<li>or <br /><code>"name": t</code><br /> otherwise</li>
 					</ul>
 				</li>
@@ -2855,14 +2845,14 @@
 				</li>
 				<li> (<a href="#default-reading-order"></a>) if
 						<code>manifest["readingOrder"]</code> is <code>undefined</code>,
-						add<br /><code>"readingOrder": [{"@type": "PublicationLink", "url": <a
+						add<br /><code>"readingOrder": [{"type" : "PublicationLink", "url": <a
 							data-cite="!dom#concept-document-url"
 							>document.URL</a>}]</code><br />to the <code>manifest</code>
 				</li>
 				<li> (<a href="#arrays-and-single-values"></a>) if the value of
 						<code>P["term"]</code>, where <code>P</code> is any object in
 						<code>manifest</code> (including itself) and <code>term</code> is: <ul>
-						<li><code>@type</code>; or</li>
+						<li><code>type</code>; or</li>
 						<li>one of the <a href="#accessibility">accessibility</a> terms except for
 								<code>accessibilitySummary</code>; or</li>
 						<li>one of the <a href="#creators">creator</a> terms; or</li>
@@ -2876,14 +2866,14 @@
 				<li> (<a href="#creators"></a>) if one of the values <code>v</code> in the
 						<code>manifest["term"]</code> array, where <code>term</code> is one of the
 						<a href="#creators">creator</a> terms, is a simple string or <a>localizable
-						string</a>, exchange that element of the array to<br /><code>{"@type":
+						string</a>, exchange that element of the array to<br /><code>{"type" :
 						["Person"], "name": [v]}</code>
 				</li>
 				<li> (<a href="#link-values"></a>) if one of the values <code>v</code> in the
 						<code>manifest["term"]</code> array, where <code>term</code> is one of the
 						<a href="#resource-categorization-properties">resource categorization
 						properties</a>, is a simple string, exchange that element of the array
-						to<br /><code>{"@type": ["PublicationLink"], "url": v}</code>
+						to<br /><code>{"type" : ["PublicationLink"], "url": v}</code>
 				</li>
 				<li> (<a href="#strings-vs-objects"></a>) if the value, or one of the values in case
 					of an array, of <code>P["term"]</code>, where <code>P</code> is any object in
@@ -2893,16 +2883,16 @@
 						<li><code>description</code></li>
 					</ul> is a single string <code>v</code>, then change the relevant term/value to: <ul>
 						<li>if <code>manifest[inLanguage]</code> is set to the value of
-								<code>l</code> then<br /><code>"term": { "@value": v,"@language":
-								l</code></li>
-						<li>otherwise<br /><code>"term": {"@value": v}</code></li>
+								<code>l</code> then<br /><code>"term": { "value": v,"language":
+								l }</code></li>
+						<li>otherwise<br /><code>"term": {"value": v}</code></li>
 					</ul>
 				</li>
 				<li> (<a href="#manifest-relative-urls"></a>) if the value of
 					<code>P["term"]</code>, where <code>P</code> is any object in
 						<code>manifest</code> (including itself) and <code>term</code> is: <ul>
 						<li><code>url</code>; or</li>
-						<li><code>@id</code></li>
+						<li><code>id</code></li>
 					</ul> is a single string <code>u</code> which is <em>not</em> an <a
 						href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL
 						string</a>&#160;[[!url]], then resolve this value (considered to be a

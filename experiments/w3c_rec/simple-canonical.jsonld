@@ -1,99 +1,99 @@
 {
-    "@context": [
+    "@context": [ 
         "https://schema.org",
         "https://www.w3.org/ns/wp-context"
     ],
-    "@type": [
-        "CreativeWork"
+    "type": [
+        "TechArticle"
     ],
-    "@id": "http://www.w3.org/TR/tabular-data-model/",
+    "id": "http://www.w3.org/TR/tabular-data-model/",
     "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     "copyrightYear": "2015",
     "copyrightHolder": "World Wide Web Consortium",
     "creator": [
         {
-            "@type": [
+            "type": [
                 "Person"
             ],
             "name": [
                 {
-                    "@value": "Jeni Tennison",
-                    "@language": "en-US"
+                    "value": "Jeni Tennison",
+                    "language": "en-US"
                 }
             ]
         },
         {
-            "@type": [
+            "type": [
                 "Person"
             ],
             "name": [
                 {
-                    "@value": "Gregg Kellogg",
-                    "@language": "en-US"
+                    "value": "Gregg Kellogg",
+                    "language": "en-US"
                 }
             ]
         },
         {
-            "@type": [
+            "type": [
                 "Person"
             ],
             "name": [
                 {
-                    "@value": "Ivan Herman",
-                    "@language": "en-US"
+                    "value": "Ivan Herman",
+                    "language": "en-US"
                 }
             ]
         }
     ],
     "publisher": [
         {
-            "@type": [
+            "type": [
                 "Organization"
             ],
             "name": [
                 {
-                    "@value": "World Wide Web Consortium",
-                    "@language": "en-US"
+                    "value": "World Wide Web Consortium",
+                    "language": "en-US"
                 }
             ],
-            "@id": "https://www.w3.org/"
+            "id": "https://www.w3.org/"
         }
     ],
     "datePublished": "2015-12-17",
     "resources": [
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.html"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.svg"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.png"
         },
         {
-            "@type": [
+            "type": [
                 "PublicationLink"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/diff.html"
         },
         {
-            "@type": [
+            "type": [
                 "StructuredValue"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/test-utf8.csv",
             "encodingFormat": "text/csv"
         },
         {
-            "@type": [
+            "type": [
                 "StructuredValue"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/test.xlsx",
@@ -102,15 +102,15 @@
     ],
     "name": [
         {
-            "@value": "Model for Tabular Data and Metadata on the Web",
-            "@language": "en-US"
+            "value": "Model for Tabular Data and Metadata on the Web",
+            "language": "en-US"
         }
     ],
     "inLanguage": "en-US",
     "readingOrder": [
         {
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/entry_with_script.html",
-            "@type": [
+            "type": [
                 "PublicationLink"
             ]
         }

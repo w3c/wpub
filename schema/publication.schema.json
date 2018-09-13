@@ -28,11 +28,11 @@
       "type": "string",
       "format": "uri"
     },
-    "@id": {
+    "id": {
       "type": "string",
       "format": "uri"
     },
-    "@type": {
+    "type": {
       "type": ["string", "array"],
       "items": {
         "type": "string"
@@ -222,5 +222,5 @@
       "uniqueItems": true
     }
   },
-  "required": ["@context", "url", "@type"]
+  "required": ["@context", "url", "type"]
 }
