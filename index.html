@@ -556,11 +556,10 @@
 			<section id="manifest-embedding">
 				<h3>Embedding a Manifest</h3>
 
-				<p>A manifest can be embedded within an HTML document using the <a
+				<p>When opting to embed the manifest, it MUST be included in the <a href="#wp-primary-entry-page"
+						>primary entry page</a> using the <a
 						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a>&#160;[[!html]].</p>
-
-				<p>When embedding a manifest, the <code>type</code> attribute of the containing <code>script</code>
+							><code>script</code> element</a>&#160;[[!html]]. The <code>type</code> attribute of this
 					element MUST be set to <code>application/ld+json</code>.</p>
 
 				<p>Additionally, the <code>script</code> element MUST include a unique identifier in an <code>id</code>
@@ -626,8 +625,8 @@
 				<h2>Resources</h2>
 
 				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
-						>HTML</abbr> document&#160;[[!html]] that <a href="#wp-linking">links to the manifest</a>. This
-					page is referred to as the <dfn>primary entry page</dfn> of the Web Publication.</p>
+						>HTML</abbr> document&#160;[[!html]] &#8212; the <a href="#wp-entry-page">primary entry
+					page</a>.</p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -638,21 +637,59 @@
 					ensure a more consistent reading experience for users regardless of their preferred user agent.</p>
 			</section>
 
+			<section id="wp-primary-entry-page">
+				<h3>Primary Entry Page</h3>
+
+				<p>The <dfn>primary entry page</dfn> is a key [[!HTML]] document required of every Web Publication. It
+					represents the preferred starting <a href="#wp-resource">resource</a> for discovery of the Web
+					Publication and enables discovery of the <a>manifest</a>.</p>
+
+				<p>Although any resource can link to the Web Publication manifest, the primary entry page typically
+					introduces the publication and provides access to the content. It might contain all the content, in
+					the case of a single-page Web Publication, or provide navigational aids to begin reading a
+					multi-document Web Publication. To facilitate the user ease of consumption, the primary entry page
+					SHOULD contain the <a href="#wp-table-of-contents">table of contents</a>.</p>
+
+				<p>It is not required that the primary entry page be included in the <a href="default-reading-order"
+						>default reading order</a>, nor that it be the first document listed when it is included. This
+					specification leaves the exact nature of the document intentionally underspecified to provide
+					flexibility for different approaches (e.g., the primary entry page could be a marketing document for
+					the Web Publication instead of a specific page of content). If a default reading order is not
+					provided, however, the primary entry page will be used as the default entry.</p>
+
+				<p>To ensure discovery of the manifest, the primary entry page MUST either:</p>
+
+				<ul>
+					<li><a href="#wp-linking">link to the manifest</a>; or</li>
+					<li><a href="#manifest-embedding">embed the manifest</a>.</li>
+				</ul>
+
+				<p>Note that the primary entry page is the only resource that can contain the Web Publication's manifest
+					when it is embedded.</p>
+
+				<p>The address of the primary entry page is also the <a>canonical identifier</a> for the Web Publication
+					(i.e., it serves as the unique identifier for the Web Publication).</p>
+
+				<p>In certain cases where information has been omitted from the manifest, user agents will sometimes use
+					the primary entry page as a fallback source of information (see <a href="#language-and-dir">language
+						and base direction</a> and <a href="#title">title</a>).</p>
+			</section>
+
 			<section id="wp-table-of-contents">
 				<h3>Table of Contents</h3>
 
 				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
 					the major sections of the Web Publication.</p>
 
-				<p>The table of contents is expressed via an HTML element in one of the <a href="#wp-resources"
-						>resources</a> (typically a <code>nav</code> element&#160;[[!html]]). This element MUST be
+				<p>The table of contents is expressed via an HTML element (typically a <code>nav</code>
+					element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be
 					identified by the <code>role</code> attribute&#160;[[!html]] value
 					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so
 					designated.</p>
 
-				<p>The table of contents SHOULD be located in the <a>primary entry page</a> of the Web Publication. If
-					not, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a> that
-					contains the structure.</p>
+				<p>If the table of contents is not located in the <a href="#wp-primary-entry-page">primary entry
+						page</a>, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a>
+					that contains the structure.</p>
 
 				<p>There are no requirements on the table of contents itself, except that, when specified, it MUST
 					include a link to at least one <a href="#wp-resources">resource</a>.</p>
