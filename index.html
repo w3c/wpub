@@ -678,7 +678,7 @@
 				<dl>
 					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
 					<dd>
-						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#wptitle"
+						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#wp-title"
 								>title</a>, <a href="#creators">creator</a>, and <a href="#language-and-dir"
 								>language</a>. These properties are primarily drawn from <a href="https://schema.org"
 								>Schema.org</a> and its <a href="https://schema.org/docs/schemas.html">hosted
@@ -759,7 +759,7 @@
 							<li><a href="#reading-progression-direction">reading progression direction</a></li>
 							<li><a href="#resource-list">resource list</a></li>
 							<li><a href="#table-of-contents">table of contents</a></li>
-							<li><a href="#wptitle">title</a></li>
+							<li><a href="#wp-title">title</a></li>
 						</ul>
 					</dd>
 				</dl>
@@ -767,6 +767,161 @@
 				<p>As the infoset properties do not all have to be serialized in the manifest, the requirements for the
 					manifest will differ in some cases. Refer to each property's definition to determine whether it is
 					required in the manifest or can be compiled from other information.</p>
+			</section>
+
+			<section id="wp-properties-mapping" class="informative">
+				<h3>Quick Reference</h3>
+
+				<p>The way that properties are expressed in the manifest and infoset often differs from how they are
+					referred to using natural language. The following table provides a mapping between property names
+					and the sections where they are explained to help clarify the differing nomenclature:</p>
+
+				<table class="zebra">
+					<thead>
+						<tr>
+							<th>Property Name</th>
+							<th>Defined In</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>accessMode</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessModeSufficient</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessibilityAPI</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessibilityControl</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessibilityFeature</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessibilityHazard</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>accessibilitySummary</code></td>
+							<td><a href="#accessibility">Accessibility</a></td>
+						</tr>
+						<tr>
+							<td><code>artist</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>author</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>contents</code></td>
+							<td><a href="#table-of-contents">Table of Contents</a></td>
+						</tr>
+						<tr>
+							<td><code>contributor</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>creator</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>dateModified</code></td>
+							<td><a href="#last-modification-date">Last Modification Date</a></td>
+						</tr>
+						<tr>
+							<td><code>datePublished</code></td>
+							<td><a href="publication-date">Publication Date</a></td>
+						</tr>
+						<tr>
+							<td><code>editor</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>https://www.w3.org/ns/wp#accessibility-report</code></td>
+							<td><a href="#accessibility-report">Accessibility Report</a></td>
+						</tr>
+						<tr>
+							<td><code>https://www.w3.org/ns/wp#cover</code></td>
+							<td><a href="#cover">Cover</a></td>
+						</tr>
+						<tr>
+							<td><code>id</code></td>
+							<td><a href="#canonical-identifier">Canonical Identifier</a></td>
+						</tr>
+						<tr>
+							<td><code>illustrator</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>inDirection</code></td>
+							<td><a href="#language-and-dir">Direction</a></td>
+						</tr>
+						<tr>
+							<td><code>inker</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>inLanguage</code></td>
+							<td><a href="#language-and-dir">Language</a></td>
+						</tr>
+						<tr>
+							<td><code>letterer</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>link</code></td>
+							<td><a href="#links">Links</a></td>
+						</tr>
+						<tr>
+							<td><code>name</code></td>
+							<td><a href="#wp-title">Title</a></td>
+						</tr>
+						<tr>
+							<td><code>penciler</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>privacy-policy</code></td>
+							<td><a href="#privacy-policy">Privacy Policy</a></td>
+						</tr>
+						<tr>
+							<td><code>publisher</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>readBy</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>readingOrder</code></td>
+							<td><a href="#default-reading-order">Default Reading Order</a></td>
+						</tr>
+						<tr>
+							<td><code>readingProgression</code></td>
+							<td><a href="#reading-progression-direction">Reading Progression Direction</a></td>
+						</tr>
+						<tr>
+							<td><code>resourceList</code></td>
+							<td><a href="#resource-list">Resource List</a></td>
+						</tr>
+						<tr>
+							<td><code>translator</code></td>
+							<td><a href="#creators">Creators</a></td>
+						</tr>
+						<tr>
+							<td><code>url</code></td>
+							<td><a href="#address">Address</a></td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 
 			<section id="descriptive-properties">
@@ -781,25 +936,25 @@
 						as those provided in [[WCAG20]]. (For linking to a detailed accessibility report, see <a
 							href="#accessibility-report"></a>.)</p>
 
+					<p>The following are categorized as accessibility properties:</p>
+
+					<ul>
+						<li><code>accessMode</code></li>
+						<li><code>accessModeSufficient</code></li>
+						<li><code>accessibilityAPI</code></li>
+						<li><code>accessibilityControl</code></li>
+						<li><code>accessibilityFeature</code></li>
+						<li><code>accessibilityHazard</code></li>
+						<li><code>accessibilitySummary</code></li>
+					</ul>
+
+					<p>The more detailed descriptions of these properties, as well as the possible values, are described
+						on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.</p>
+
 					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The following infoset items are categorized as accessibility properties:</p>
-
-						<ul>
-							<li>accessMode</li>
-							<li>accessModeSufficient</li>
-							<li>accessibilityAPI</li>
-							<li>accessibilityControl</li>
-							<li>accessibilityFeature</li>
-							<li>accessibilityHazard</li>
-							<li>accessibilitySummary</li>
-						</ul>
-
-						<p>The more detailed descriptions of these properties, as well as the possible values, are
-							described on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki
-								site</a>.</p>
-
+						<p>TBD</p>
 					</section>
 
 					<section id="accessibility-manifest">
@@ -939,7 +1094,8 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
-						represents the <a>primary entry page</a> for the Web Publication.</p>
+						represents the <a>primary entry page</a> for the Web Publication. It is expressed using the
+							<code>url</code> property.</p>
 
 					<section id="address-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1010,7 +1166,7 @@
 
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
-						the Web Publication.</p>
+						the Web Publication. It is expressed using the <code>id</code> property.</p>
 
 					<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
 						specification. The actual achievable uniqueness depends on such factors as the conventions of
@@ -1096,7 +1252,6 @@
 				<section id="creators">
 					<h4>Creators</h4>
 
-
 					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
 							Publication</a>. Creators are represented in one of the following two ways:</p>
 
@@ -1111,27 +1266,27 @@
 							<code>name</code> property is set to that string value. (See also <a
 							href="#strings-vs-objects"></a>.)</p>
 
+					<p>The following properties are categorized as creators:</p>
+
+					<ul>
+						<li><code>artist</code></li>
+						<li><code>author</code></li>
+						<li><code>contributor</code></li>
+						<li><code>creator</code></li>
+						<li><code>editor</code></li>
+						<li><code>illustrator</code></li>
+						<li><code>inker</code></li>
+						<li><code>letterer</code></li>
+						<li><code>penciler</code></li>
+						<li><code>publisher</code></li>
+						<li><code>readBy</code></li>
+						<li><code>translator</code></li>
+					</ul>
+
 					<section id="wp-creator-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>The following infoset items are categorized as creators:</p>
-
-						<ul>
-							<li>artist</li>
-							<li>author</li>
-							<li>contributor</li>
-							<li>creator</li>
-							<li>editor</li>
-							<li>illustrator</li>
-							<li>inker</li>
-							<li>letterer</li>
-							<li>penciler</li>
-							<li>publisher</li>
-							<li>readBy</li>
-							<li>translator</li>
-						</ul>
-
-						<p>A Web Publication MAY have more than one of each of these types of creators.</p>
+						<p>The infoset MAY include more than one of each type of creator.</p>
 					</section>
 
 					<section id="wp-creator-manifest">
@@ -1344,14 +1499,14 @@
 					<h4>Language and Base Direction</h4>
 
 					<p>The <a>Web Publication</a> has a natural language value (e.g., English, French, Chinese), as well
-						as a natural base writing direction (left-to-right or right-to-left). The <abbr
-							title="information set"><a>infoset</a></abbr> has entries to set these values, which can
-						influence, for example, the behavior of a user agent (e.g., it might place a pop-up for a table
-						of contents on the right hand side for publications whose natural base direction is
-						right-to-left).</p>
+						as a natural base writing direction (the display direction, either left-to-right or
+						right-to-left). The <abbr title="information set"><a>infoset</a></abbr> has entries to set these
+						values, which can influence, for example, the behavior of a user agent (e.g., it might place a
+						pop-up for a table of contents on the right hand side for publications whose natural base
+						direction is right-to-left).</p>
 
 					<p>Similarly, each natural language property value in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wptitle">title</a>, <a
+						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wp-title">title</a>, <a
 							href="#creators">creators</a>) is <a
 							href="https://w3c.github.io/string-meta/#dom-localizable"
 						>localizable</a>&#160;[[string-meta]], meaning that the same information is available for
@@ -1361,11 +1516,12 @@
 
 					<ul>
 						<li>the natural <dfn>language</dfn>, and </li>
-						<li>the <dfn>base direction</dfn> (the display direction for the value)</li>
+						<li>the <dfn>base direction</dfn></li>
 					</ul>
 
-					<p>of both the <a>Web Publication</a> and the natural language properties values of the <abbr
-							title="information set"><a>infoset</a></abbr>.</p>
+					<p>of both the <a>Web Publication</a> (<code>inLanguage</code> and <code>inDirection</code>) and the
+						natural language properties values of the <abbr title="information set"
+						><a>infoset</a></abbr>.</p>
 
 
 					<section id="language-and-dir-infoset">
@@ -1547,7 +1703,8 @@
 
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
 						updated (i.e., whenever changes were last made to any of the resources of the Web Publication,
-						including the <a>manifest</a>).</p>
+						including the <a>manifest</a>). It is expressed using the <code>dateModified</code>
+						property.</p>
 
 					<section id="last-modification-date-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1607,7 +1764,8 @@
 
 					<p>The <dfn>publication date</dfn> is the date on which the <a>Web Publication</a> was originally
 						published. It represents a static event in the lifecycle of a Web Publication and allows
-						subsequent revisions to be identified and compared.</p>
+						subsequent revisions to be identified and compared. It is expressed using the
+							<code>datePublished</code> property.</p>
 
 					<section id="publication-date-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1663,7 +1821,8 @@
 					<h4>Reading Progression Direction</h4>
 
 					<p>The <dfn data-lt="reading progression direction">reading progression</dfn> establishes the
-						reading direction from one resource to the next within a <a>Web Publication</a>.</p>
+						reading direction from one resource to the next within a <a>Web Publication</a>. It is expressed
+						using the <code>readingDirection</code> property.</p>
 
 					<section id="reading-progression-direction-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1724,10 +1883,11 @@
 					</section>
 				</section>
 
-				<section id="wptitle">
+				<section id="wp-title">
 					<h4>Title</h4>
 
-					<p>The title provides the human-readable name of the <a>Web Publication</a>.</p>
+					<p>The title provides the human-readable name of the <a>Web Publication</a>. It is expressed using
+						the <code>name</code> property.</p>
 
 					<section id="title-infoset">
 						<h5>Infoset Requirements</h5>
@@ -1816,7 +1976,7 @@
 					<h4>Default Reading Order</h4>
 
 					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
-							Publication</a> resources.</p>
+							Publication</a> resources. It is expressed using the <code>readingOrder</code> property.</p>
 
 					<p>A user might follow alternative pathways through the content, but in the absence of such
 						interaction the default reading order defines the expected progression from one resource to the
@@ -1916,7 +2076,8 @@
 
 					<p>The <dfn>resource list</dfn> enumerates any additional <a href="#wp-resources">resources</a> used
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
-							<a>default reading order</a>.</p>
+							<a>default reading order</a>. It is expressed using the <code>resourceList</code>
+						property.</p>
 
 					<p class="note">The union of the resource list and default reading order represents the definitive
 						list of resources that belong to the Web Publication. All other resources are external to the
@@ -2019,11 +2180,13 @@
 				<section id="links">
 					<h4>Links</h4>
 
-					<p>The <dfn>links</dfn> property provides a list of <a href="#wp-resources">resources</a> that are
-							<em>not</em> required for the processing and rendering of a Web Publication (i.e., the
-						content of the Web Publication remains unaffected even if these resources are not available).
-						Linked resources are typically made available to user agents to augment or enhance the
-						processing or rendering of it, such as:</p>
+					<p><dfn>Links</dfn> provide a list of <a href="#wp-resources">resources</a> that are <em>not</em>
+						required for the processing and rendering of a Web Publication (i.e., the content of the Web
+						Publication remains unaffected even if these resources are not available). They are expressed
+						using the <code>link</code> property.</p>
+
+					<p>Linked resources are typically made available to user agents to augment or enhance the processing
+						or rendering of it, such as:</p>
 
 					<ul>
 						<li>a privacy policy or license that the user agent can offer a link to from a shelf;</li>
@@ -2032,9 +2195,9 @@
 						<li>a dictionary of terms the user agent can process to provide enhanced language help;</li>
 					</ul>
 
-					<p>The <code>links</code> property can also be used to identify resources that are used in the
-						online rendering of a Web Publication, but that are not essential to include with it when it is
-						taken offline or packaged (e.g., to minimize the size). These include:</p>
+					<p>Links can also be used to identify resources that are used in the online rendering of a Web
+						Publication, but that are not essential to include with it when it is taken offline or packaged
+						(e.g., to minimize the size). These include:</p>
 
 					<ul>
 						<li>large font files that enhance the appearance of the Web Publication but are not vital to its
@@ -2106,6 +2269,9 @@
 						provided in [[WCAG21]], and are an important source of information in determining the usability
 						of a Web Publication.</p>
 
+					<p>An accessibility report is identified using the
+							<code>https://www.w3.org/ns/wp#accessibility-report</code> link relationship.</p>
+
 					<section id="accessibility-report-infoset">
 						<h5>Infoset Requirements</h5>
 
@@ -2159,6 +2325,8 @@
 						an important part of publishing <a>Web Publications</a>. Even if no information is collected,
 						such a declaration increases the trust users have in the content.</p>
 
+					<p>A privacy policy is identified using the <code>privacy-policy</code> link relationship.</p>
+
 					<section id="privacy-policy-infoset">
 						<h5>Infoset Requirements</h5>
 
@@ -2211,7 +2379,8 @@
 					<h4>Cover</h4>
 
 					<p>The <dfn>cover</dfn> is a resource that user agents can use to present the <a>Web Publication</a>
-						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
+						(e.g., in a library or bookshelf, or when initially loading the Web Publication). It is
+						identified by the <code>https://www.w3.org/ns/wp#cover</code> link relationship.</p>
 
 					<p class="issue" data-number="261">The working group has not reached consensus on whether the cover
 						should be any resource or should be limited to images.</p>
@@ -2316,7 +2485,8 @@
 					<h4>Table of Contents</h4>
 
 					<p>The <dfn>table of contents</dfn> property identifies the resource that contains the Web
-						Publication's <a href="#wp-table-of-contents">table of contents</a>.</p>
+						Publication's <a href="#wp-table-of-contents">table of contents</a>. It is identified by the
+							<code>contents</code> link relationship.</p>
 
 					<section id="table-of-contents-infoset">
 						<h5>Infoset Requirements</h5>
@@ -2576,7 +2746,7 @@
 						<li><code>undefined</code> otherwise</li>
 					</ul>
 				</li>
-				<li> (<a href="#wptitle"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
+				<li> (<a href="#wp-title"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
 					the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
 						><code>title</code></a> HTML element&#160;[[!html]] using <code>document</code>. If that element
 					exists, let <code>t</code> be its text content, and add to <code>manifest</code>: <ul>
@@ -3340,7 +3510,7 @@
 					<dt>
 						<dfn>name</dfn>
 					</dt>
-					<dd>Contains one or more <a href="#wptitle">title(s)</a> for the publication.</dd>
+					<dd>Contains one or more <a href="#wp-title">title(s)</a> for the publication.</dd>
 
 					<dt>
 						<dfn>readingOrder</dfn>
