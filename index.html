@@ -991,7 +991,10 @@
 					<section id="accessibility-infoset">
 						<h5>Infoset Requirements</h5>
 
-						<p>TBD</p>
+						<p>Values SHOULD be drawn from the <a
+								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">preferred
+								vocabulary</a> for each accessibility property, but user agents MUST NOT omit values
+							from the infoset that are not included in the lists.</p>
 					</section>
 
 					<section id="accessibility-manifest">
@@ -1026,7 +1029,7 @@
 									</td>
 									<td> A list of single or combined accessModes that are sufficient to understand all
 										the intellectual content of a resource. </td>
-									<td> One or more texts, each a comma-separated list of terms. <a
+									<td> One or more <a href="https://schema.org/ItemList">ItemList</a>. <a
 											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
 											>Expected values</a>. </td>
 									<td>
@@ -1111,14 +1114,23 @@
 								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
 							information expressed by these properties.</p>
 
-						<pre class="example" title="Example for accessiblity metadata of a purely textual document">
+						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "CreativeWork",
     &#8230;
     "accessibilityAPI"      : "ARIA",
     "accessMode"            : ["textual", "visual"],
-    "accessModeSufficient"  : ["textual"],
+    "accessModeSufficient"  : [
+        {
+            type="ItemList",
+            "itemListElement": ["textual", "visual"]
+        },
+        {
+            type="ItemList",
+            "itemListElement": ["textual"]
+        }
+    ],
     &#8230;
 }
 </pre>
@@ -2974,21 +2986,19 @@
 						algorithm. </li>
 					<li> Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as
 						raising warnings. <ol>
-							<li> Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If
-								not, issue a warning. </li>
-							<li> For all the terms defined in <a href="#accessibility"></a>, except for
+							<li>Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If
+								not, issue a warning.</li>
+							<li>For all the terms defined in <a href="#accessibility"></a>, except for
 									<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
-								whether all tokens listed in <var>manifest[term]</var> are allowed (see the <a
-									href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-									>list of expected values</a> for each of those terms). If the check fails, remove
-								the token from the <var>manifest[term]</var> array and issue a warning. </li>
-							<li> For all values in <var>manifest["accessModeSufficient"]</var> check whether all
-								constituent tokens in the value, when considering the latter as a comma-separated list,
-								is allowed (see the <a
-									href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-									>list of expected values</a>). If the check fails, remove that token from the comma
-								separated list and issue a warning; if, as a result, value becomes an empty string,
-								remove the value from <var>manifest["accessModeSufficient"]</var>. </li>
+								whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
+								vocabulary (see the <a
+									href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+									expected values</a> for each). Issue a warning for each unrecognized value.</li>
+							<li>For all values in <var>manifest["accessModeSufficient"]</var>, check whether each token
+								in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is defined in
+								the preferred vocabulary (see the <a
+									href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+									expected values</a>). Issue a warning for each unrecognized value.</li>
 							<li> For all the terms defined in <a href="#creators"></a>, check whether every object
 									<var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not,
 								remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. </li>
