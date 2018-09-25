@@ -216,7 +216,7 @@ function create_wp(config) {
     if( document.querySelector("span.orcid") ) {
         manifest.resources.push({
             "type"            : "PublicationLink",
-            "url"             : "https://orcid.org/sites/default/files/images/orcid_16x16.gif",
+            "url"             : "images/orcid.gif",
             "encodingFormat"  : "image/gif",
             "description"     : "ORCID logo"                    
         })              
