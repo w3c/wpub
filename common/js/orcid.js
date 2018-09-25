@@ -38,7 +38,7 @@ function show_orcid(config) {
 				let a    = document.createElement('a');
 				let img  = document.createElement('img');
 
-				img.setAttribute('src','https://orcid.org/sites/default/files/images/orcid_16x16.gif');
+				img.setAttribute('src','images/orcid.gif');
 				img.setAttribute('alt','orcid logo');
 
 				a.setAttribute('href', `https://orcid.org/${orcidId}`);
