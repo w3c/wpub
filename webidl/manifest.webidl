@@ -43,5 +43,6 @@ dictionary WebPublicationManifest {
              PublicationLink              accessibilityReport;
              PublicationLink              privacyPolicy;
              sequence<PublicationLink>    cover;
+             HTMLElement                  pagelist;
              HTMLElement                  toc;
 };
