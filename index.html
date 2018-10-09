@@ -85,7 +85,7 @@
 					into a single contiguous work.</p>
 
 				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest
-					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[!html]]), or the manifest can
+					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can
 					be loaded directly by a compatible user agent.</p>
 
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored
@@ -228,7 +228,7 @@
 
 				<p>A <a>manifest</a>, on the other hand, is a serialization of an <abbr title="information set"
 							><a>infoset</a></abbr> created by the author of a <a>Web Publication</a>. The manifest is
-					expressed using the JSON-LD&#160;[[!json-ld]] format &#8212; a variant of JSON&#160;[[ecma-404]] for
+					expressed using the JSON-LD&#160;[[json-ld]] format &#8212; a variant of JSON&#160;[[ecma-404]] for
 					expressing linked data. The manifest can be created as a standalone resource or it can be embedded
 					within an HTML document.</p>
 
@@ -625,8 +625,7 @@
 				<h2>Resources</h2>
 
 				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
-						>HTML</abbr> document&#160;[[!html]] &#8212; the <a href="#wp-entry-page">primary entry
-					page</a>.</p>
+						>HTML</abbr> document&#160;[[!html]]&#8212;the <a>primary entry page</a>.</p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -641,7 +640,7 @@
 				<h3>Primary Entry Page</h3>
 
 				<p>The <dfn>primary entry page</dfn> is a key [[!HTML]] document required of every Web Publication. It
-					represents the preferred starting <a href="#wp-resource">resource</a> for discovery of the Web
+					represents the preferred starting <a href="#wp-resources">resource</a> for discovery of the Web
 					Publication and enables discovery of the <a>manifest</a>.</p>
 
 				<p>Although any resource can link to the Web Publication manifest, the primary entry page typically
@@ -1740,7 +1739,7 @@
 							<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
 
 							<p class="note"> Setting the direction for a natural text value is currently not possible in
-								JSON-LD&#160;[[!json-ld]]. In case the JSON-LD community, as well as the schema.org
+								JSON-LD&#160;[[json-ld]]. In case the JSON-LD community, as well as the schema.org
 								community, introduces such a feature, future versions of this specification may extend
 								the ability of Web Publication Manifests to include this. </p>
 						</section>
@@ -3337,7 +3336,7 @@
 			<h3>Web Publication Locators</h3>
 
 			<p class="ednote"> The document referred from this section, i.e., Web Annotation Extensions for Web
-				Publications&#160;[[!wpub-ann]], has been recently renamed. Its previous was "Locators for Web
+				Publications&#160;[[wpub-ann]], has been recently renamed. Its previous was "Locators for Web
 				Publication". The terminology used in this section has to be realigned with the name change. </p>
 
 			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
@@ -3351,7 +3350,7 @@
 				belongs. A traditional fragment identifier cannot satisfy this requirement, since only the <abbr
 					title="Uniform Resource Locator">URL</abbr> of the constituent resource containing the location or
 				content fragment of interest is expressed. The Web Annotation Extensions for Web
-				Publications&#160;[[!wpub-ann]] document, based on the Web Annotation Model&#160;[[!annotation-model]],
+				Publications&#160;[[wpub-ann]] document, based on the Web Annotation Model&#160;[[annotation-model]],
 				addresses this issue by providing the means to express both the <abbr title="Uniform Resource Locator"
 					>URL</abbr> of the resource and the <abbr title="Uniform Resource Locator">URL</abbr> of the Web
 				Publication.</p>
