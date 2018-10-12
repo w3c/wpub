@@ -680,11 +680,9 @@
 				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
 					the major sections of the Web Publication.</p>
 
-				<p>The table of contents is expressed via an HTML element (typically a <code>nav</code>
-					element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be
-					identified by the <code>role</code> attribute&#160;[[!html]] value
-					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so
-					designated.</p>
+				<p>
+					The table of contents is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the <code>role</code> attribute&#160;[[!html]] value "<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with that <code>role</code> value.
+				</p>
 
 				<p>If the table of contents is not located in the <a href="#wp-primary-entry-page">primary entry
 						page</a>, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a>
@@ -704,10 +702,12 @@
 			<section id="wp-pagelist">
 				<h3>Pagelist</h3>
 
-				<p>The pagelist is a list of links that provide navigation to positions in the content that correspond to the locations of page boundaries present in a print source being represented by the Web Publication. Pagelist is important for Web Publications with print equivalent, however it may also be used for Web Publications which do not have print equivalent, for making the navigation more convenient.</p>
+				<p>
+					The pagelist is a list of links that provides navigation to static page demarcation points within the content. These locations allow users, for example, to coordinate access into the content. The exact nature of these locations is left to content creators to define. They usually correspond to pages of a print document which is the source of the digital publication, but might be a purely digital creation added for the sake of easing navigation.
+				</p>
 
 				<p>
-					The pagelist is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the <code>role</code> attribute&#160;[[!html]] value "<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so designated.
+					The pagelist is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the <code>role</code> attribute&#160;[[!html]] value "<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with that <code>role</code> value.
 				</p>
 
 				<p>
