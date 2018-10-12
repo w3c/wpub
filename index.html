@@ -85,8 +85,8 @@
 					into a single contiguous work.</p>
 
 				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest
-					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can
-					be loaded directly by a compatible user agent.</p>
+					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can be
+					loaded directly by a compatible user agent.</p>
 
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored
 					specifically for their unique reading needs.</p>
@@ -578,8 +578,12 @@
 			<section id="wp-linking">
 				<h2>Linking to a Manifest</h2>
 
-				<p>Resources SHOULD provide a link to the manifest of the Web Publication to which they belong to enable
-					discovery. Links MUST take one or both of the following forms:</p>
+				<p>With the exception of the <a>primary entry page</a>, linking a resource to its Web Publication
+					manifest is OPTIONAL. Including a link is encouraged whenever possible, however, as it allows user
+					agents to immediately ascertain that a resource belongs to a Web Publication, regardless of how the
+					user reaches the resource.</p>
+
+				<p>Links to a Web Publication manifest MUST take one or both of the following forms:</p>
 
 				<ul>
 					<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code> parameter
@@ -656,15 +660,10 @@
 					the Web Publication instead of a specific page of content). If a default reading order is not
 					provided, however, the primary entry page will be used as the default entry.</p>
 
-				<p>To ensure discovery of the manifest, the primary entry page MUST either:</p>
-
-				<ul>
-					<li><a href="#wp-linking">link to the manifest</a>; or</li>
-					<li><a href="#manifest-embedding">embed the manifest</a>.</li>
-				</ul>
-
-				<p>Note that the primary entry page is the only resource that can contain the Web Publication's manifest
-					when it is embedded.</p>
+				<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest MAY be
+						embedded</a>. To ensure discovery of the manifest, the primary entry page MUST provide a <a
+						href="#wp-linking">link to the manifest</a>, regardless of whether the manifest is embedded
+					within the page or external to it.</p>
 
 				<p>The address of the primary entry page is also the <a>canonical identifier</a> for the Web Publication
 					(i.e., it serves as the unique identifier for the Web Publication).</p>
