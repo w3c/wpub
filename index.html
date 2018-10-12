@@ -85,8 +85,8 @@
 					into a single contiguous work.</p>
 
 				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest
-					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can
-					be loaded directly by a compatible user agent.</p>
+					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can be
+					loaded directly by a compatible user agent.</p>
 
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored
 					specifically for their unique reading needs.</p>
@@ -680,9 +680,12 @@
 				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
 					the major sections of the Web Publication.</p>
 
-				<p>
-					The table of contents is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the <code>role</code> attribute&#160;[[!html]] value "<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with that <code>role</code> value <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]].
-				</p>
+				<p> The table of contents is expressed via an HTML element (typically a <code>nav</code>
+					element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be
+					identified by the <code>role</code> attribute&#160;[[!html]] value
+					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with
+					that <code>role</code> value in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
+						tree order</a>&#160;[[!dom]]. </p>
 
 				<p>If the table of contents is not located in the <a href="#wp-primary-entry-page">primary entry
 						page</a>, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a>
@@ -702,25 +705,27 @@
 			<section id="wp-pagelist">
 				<h3>Pagelist</h3>
 
-				<p>
-					The pagelist is a list of links that provides navigation to static page demarcation points within the content. These locations allow users, for example, to coordinate access into the content. The exact nature of these locations is left to content creators to define. They usually correspond to pages of a print document which is the source of the digital publication, but might be a purely digital creation added for the sake of easing navigation.
-				</p>
+				<p> The pagelist is a list of links that provides navigation to static page demarcation points within
+					the content. These locations allow users, for example, to coordinate access into the content. The
+					exact nature of these locations is left to content creators to define. They usually correspond to
+					pages of a print document which is the source of the digital publication, but might be a purely
+					digital creation added for the sake of easing navigation. </p>
 
-				<p>
-					The pagelist is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the <code>role</code> attribute&#160;[[!html]] value "<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with that <code>role</code> value <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]].
-				</p>
+				<p> The pagelist is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]])
+					in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
+						<code>role</code> attribute&#160;[[!html]] value
+					"<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document
+					with that <code>role</code> value <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
+						tree order</a>&#160;[[!dom]]. </p>
 
-				<p>
-					If the pagelist is not located in the <a href="#wp-primary-entry-page">primary entry page</a>, the manifest SHOULD <a href="#pagelist-manifest">identify the resource</a> that contains the structure.
-				</p>
+				<p> If the pagelist is not located in the <a href="#wp-primary-entry-page">primary entry page</a>, the
+					manifest SHOULD <a href="#pagelist-manifest">identify the resource</a> that contains the structure. </p>
 
-				<p>
-					There are no requirements on the pagelist itself, except that, when specified, it MUST include a link to at least one <a href="#wp-resources">resource</a>.
-				</p>
+				<p> There are no requirements on the pagelist itself, except that, when specified, it MUST include a
+					link to at least one <a href="#wp-resources">resource</a>. </p>
 
-				<p>
-					Refer to the <a href="#pagelist">pagelist property definition</a> for more information on how to identify in the infoset and manifest which resource contains the pagelist.
-				</p>
+				<p> Refer to the <a href="#pagelist">pagelist property definition</a> for more information on how to
+					identify in the infoset and manifest which resource contains the pagelist. </p>
 			</section>
 		</section>
 		<section id="wp-properties">
@@ -760,8 +765,8 @@
 					<dt><a href="#structural-properties">structural properties</a></dt>
 					<dd>
 						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
-								href="#cover">cover image</a>, or the location of the <a href="#table-of-contents"
-								>table of contents</a> or the <a href="#pagelist">pagelist</a>.</p>
+								href="#cover">cover image</a>, or the location of the <a href="#table-of-contents">table
+								of contents</a> or the <a href="#pagelist">pagelist</a>.</p>
 					</dd>
 				</dl>
 
@@ -912,8 +917,8 @@
 							<td><a href="#cover">Cover</a></td>
 						</tr>
 						<tr>
-								<td><code>https://www.w3.org/ns/wp#pagelist</code></td>
-								<td><a href="#pagelist">Pagelist</a></td>
+							<td><code>https://www.w3.org/ns/wp#pagelist</code></td>
+							<td><a href="#pagelist">Pagelist</a></td>
 						</tr>
 						<tr>
 							<td><code>id</code></td>
@@ -2570,17 +2575,24 @@
 
 						<ol>
 							<li>Identify the table of content resource: <ul>
-									<li>
-										If a resource in either the <a href="#default-reading-order">default reading order</a> or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code> value including <code>contents</code>&#160;[[!iana-link-relations]], the corresponding <code>url</code> value identifies the table of content resource. If there are several such resources, the first one MUST be used, with the <a href="#default-reading-order">default reading order</a> taking precedence over <a href="#resource-list">resource-list</a>.
-									</li>
-									<li>
-										Otherwise, the <a>primary entry page</a> is the table of content resource.
+									<li> If a resource in either the <a href="#default-reading-order">default reading
+											order</a> or <a href="#resource-list">resource-list</a> is identified with a
+											<code>rel</code> value including
+										<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
+											<code>url</code> value identifies the table of content resource. If there
+										are several such resources, the first one MUST be used, with the <a
+											href="#default-reading-order">default reading order</a> taking precedence
+										over <a href="#resource-list">resource-list</a>. </li>
+									<li> Otherwise, the <a>primary entry page</a> is the table of content resource.
 									</li>
 								</ul>
 							</li>
-							<li>
-								If the table of content resource contains an HTML element with the <code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element as the table of contents. If there are several such HTML elements the user agent MUST use the first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]].
-						</li>
+							<li> If the table of content resource contains an HTML element with the
+								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
+								user agent MUST use that element as the table of contents. If there are several such
+								HTML elements the user agent MUST use the first in <a
+									href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+								order</a>&#160;[[!dom]]. </li>
 						</ol>
 
 						<p>If this process does not result in a link to the table of contents, the Web Publication does
@@ -2650,57 +2662,62 @@
 </pre>
 					</section>
 				</section>
-			<section id="pagelist">
-				<h3>Pagelist</h3>
-				<p>
-					The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a href="#wp-pagelist">pagelist</a>. It is identified by the <code>https://www.w3.org/ns/wp#pageslist</code> link relationship.
-				</p>
+				<section id="pagelist">
+					<h3>Pagelist</h3>
+					<p> The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
+							href="#wp-pagelist">pagelist</a>. It is identified by the
+							<code>https://www.w3.org/ns/wp#pageslist</code> link relationship. </p>
 
-				<section id="pagelist-infoset">
-					<h5>Infoset Requirements</h5>
+					<section id="pagelist-infoset">
+						<h5>Infoset Requirements</h5>
 
-					<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
+						<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
 
-					<ol>
-						<li>Identify the pagelist resource: <ul>
-								<li>
-									If a resource in either the <a href="#default-reading-order">default reading order</a> or <a href="#resource-list">resource-list</a> is identified with a <code>rel</code> value including <code>https://www.w3.org/ns/wp#pageslist</code>, the corresponding <code>url</code> value identifies the pagelist resource. If there are several such resources, the first one MUST be used, with the <a href="#default-reading-order">default reading order</a> taking precedence over <a href="#resource-list">resource-list</a>.
-								</li>
-								<li>
-									Otherwise, the <a>primary entry page</a> is the pagelist resource.
-								</li>
-							</ul>
-						</li>
-						<li>
-							If the pagelist resource contains an HTML element with the <code>role</code>&#160;[[!html]] value <code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element as the pagelist.  If there are several such HTML elements the user agent MUST use the first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]].
-						</li>
-					</ol>
+						<ol>
+							<li>Identify the pagelist resource: <ul>
+									<li> If a resource in either the <a href="#default-reading-order">default reading
+											order</a> or <a href="#resource-list">resource-list</a> is identified with a
+											<code>rel</code> value including
+											<code>https://www.w3.org/ns/wp#pageslist</code>, the corresponding
+											<code>url</code> value identifies the pagelist resource. If there are
+										several such resources, the first one MUST be used, with the <a
+											href="#default-reading-order">default reading order</a> taking precedence
+										over <a href="#resource-list">resource-list</a>. </li>
+									<li> Otherwise, the <a>primary entry page</a> is the pagelist resource. </li>
+								</ul>
+							</li>
+							<li> If the pagelist resource contains an HTML element with the
+								<code>role</code>&#160;[[!html]] value
+								<code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element
+								as the pagelist. If there are several such HTML elements the user agent MUST use the
+								first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+									order</a>&#160;[[!dom]]. </li>
+						</ol>
 
-					<p>If this process does not result in a link to the pagelist, the Web Publication does
-						not have a pagelist and this property MUST NOT be included in the infoset.</p>
+						<p>If this process does not result in a link to the pagelist, the Web Publication does not have
+							a pagelist and this property MUST NOT be included in the infoset.</p>
 
-					<p class="ednote">
-						The Working Group will attempt to define the <code>pagelist</code> term by IANA, to avoid using a URL.
-					</p>
+						<p class="ednote"> The Working Group will attempt to define the <code>pagelist</code> term by
+							IANA, to avoid using a URL. </p>
 
-				</section>
+					</section>
 
-				<section id="pagelist-manifest">
-					<h5>Manifest Expression</h5>
+					<section id="pagelist-manifest">
+						<h5>Manifest Expression</h5>
 
-					<p>
-						If present in the manifest, the pagelist MUST be expressed as a <a href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term MUST NOT include a fragment identifier.
-					</p>
+						<p> If present in the manifest, the pagelist MUST be expressed as a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
+								<code>url</code> term MUST NOT include a fragment identifier. </p>
 
-					<p>
-						The <code>rel</code> value of the <a href="#publication-link-def" ><code>PublicationLink</code></a> MUST include the <code>https://www.w3.org/ns/wp#pagelist</code> identifier.
-					</p>
+						<p> The <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the
+								<code>https://www.w3.org/ns/wp#pagelist</code> identifier. </p>
 
-					<p>
-						The link to the pagelist MAY be specified in either the <a href="#default-reading-order">default reading order</a> or <a href="#resource-list" >resource-list</a>, but MUST NOT be specified in both.
-					</p>
+						<p> The link to the pagelist MAY be specified in either the <a href="#default-reading-order"
+								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
+							be specified in both. </p>
 
-					<pre class="example" title="Pagelist identified in another resource of the Web Publication">
+						<pre class="example" title="Pagelist identified in another resource of the Web Publication">
 {
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
@@ -2717,49 +2734,49 @@
 &#8230;
 }
 </pre>
+					</section>
 				</section>
 			</section>
-		</section>
 
-		<section id="extensibility">
-			<h3>Extensibility</h3>
+			<section id="extensibility">
+				<h3>Extensibility</h3>
 
-			<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-				properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
-				extended in the following ways:</p>
+				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
+					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
+					extended in the following ways:</p>
 
-			<ol>
-				<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
-				<li>through the inclusion of <a href="#extensibility-manifest-properties">additional properties in
-						the manifest</a>;</li>
-			</ol>
+				<ol>
+					<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
+					<li>through the inclusion of <a href="#extensibility-manifest-properties">additional properties in
+							the manifest</a>;</li>
+				</ol>
 
-			<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
+				<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
 
-			<p>This specification does not define how such additional properties are compiled, stored or exposed by
-				user agents in their internal representation of the infoset. A user agent MAY ignore some or all
-				extended properties.</p>
+				<p>This specification does not define how such additional properties are compiled, stored or exposed by
+					user agents in their internal representation of the infoset. A user agent MAY ignore some or all
+					extended properties.</p>
 
-			<section id="extensibility-linked-records">
-				<h5>Linked records</h5>
+				<section id="extensibility-linked-records">
+					<h5>Linked records</h5>
 
-				<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
-					BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
-							><code>PublicationLink</code></a> object, where:</p>
-				<ul>
-					<li> the <code>rel</code> value of the <a href="#publication-link-def"
-								><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by
-						IANA or by other organizations; if the link record contains descriptive metadata it MUST
-						include the <code>describedby</code> (IANA) identifier; </li>
-					<li>the value of the <code>encodingFormat</code> in the link MUST use the MIME media
-						type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
-				</ul>
+					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
+						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
+								><code>PublicationLink</code></a> object, where:</p>
+					<ul>
+						<li> the <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by
+							IANA or by other organizations; if the link record contains descriptive metadata it MUST
+							include the <code>describedby</code> (IANA) identifier; </li>
+						<li>the value of the <code>encodingFormat</code> in the link MUST use the MIME media
+							type&#160;[[!rfc2046]] defined for that particular type of record, if applicable.</li>
+					</ul>
 
-				<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
-					part of the Web Publication (i.e., are needed for more than just infoset extensibility).
-					Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
+					<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
+						part of the Web Publication (i.e., are needed for more than just infoset extensibility).
+						Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
 
-				<pre class="example" title="Link to external ONIX for Books Metadata file">
+					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
@@ -2777,21 +2794,21 @@
 &#8230;
 }
 </pre>
-				<p class="ednote">The <code>application/onix+xml</code> MIME type has not yet been registered by
-					IANA at the time of writing this document, and is included in the example for illustrative
-					purposes only. </p>
-			</section>
+					<p class="ednote">The <code>application/onix+xml</code> MIME type has not yet been registered by
+						IANA at the time of writing this document, and is included in the example for illustrative
+						purposes only. </p>
+				</section>
 
-			<section id="extensibility-manifest-properties">
-				<h5>Additional Properties in the Manifest</h5>
+				<section id="extensibility-manifest-properties">
+					<h5>Additional Properties in the Manifest</h5>
 
-				<p>Additional properties can be included directly in the manifest. It is RECOMMENDED that these
-					properties be taken from public schemes like [[schema.org]] or [[dcterms]] and use values from
-					controlled vocabularies whenever possible. Proprietary terms MAY be used, but it is RECOMMENDED
-					that such terms be included using <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact
-						IRIs</a>&#160;[[!json-ld]], with prefixes defined as part of the context.</p>
+					<p>Additional properties can be included directly in the manifest. It is RECOMMENDED that these
+						properties be taken from public schemes like [[schema.org]] or [[dcterms]] and use values from
+						controlled vocabularies whenever possible. Proprietary terms MAY be used, but it is RECOMMENDED
+						that such terms be included using <a href="https://www.w3.org/TR/json-ld/#compact-iris">Compact
+							IRIs</a>&#160;[[!json-ld]], with prefixes defined as part of the context.</p>
 
-				<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
+					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
 "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"            : "TechArticle",
@@ -2804,7 +2821,7 @@
 }
 </pre>
 
-				<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
+					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
 {
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "CreativeWork",
@@ -2815,289 +2832,289 @@
 &#8230;
 }
 </pre>
-				<p class="note"> A prefix definition <code>dc</code> for [[dcterms]] is included in the context file
-					of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is
-					true for a number of other public vocabularies; see the <a
-						href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
-					details. </p>
+					<p class="note"> A prefix definition <code>dc</code> for [[dcterms]] is included in the context file
+						of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is
+						true for a number of other public vocabularies; see the <a
+							href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
+						details. </p>
 
+				</section>
 			</section>
 		</section>
-	</section>
-	<section id="canonical-manifest">
-		<h4>Canonical Manifest</h4>
+		<section id="canonical-manifest">
+			<h4>Canonical Manifest</h4>
 
-		<p>A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication
-				Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all
-			possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a
-				href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from
-			the <a>primary entry page</a> are incorporated.</p>
+			<p>A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication
+					Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all
+				possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a
+					href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from
+				the <a>primary entry page</a> are incorporated.</p>
 
-		<p class="note">To help understanding the result of the algorithm, there is a link to the corresponding
-			canonical manifests for all the examples in <a href="#wp-manifest-examples"></a> .</p>
+			<p class="note">To help understanding the result of the algorithm, there is a link to the corresponding
+				canonical manifests for all the examples in <a href="#wp-manifest-examples"></a> .</p>
 
-		<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following
-			algorithm. The algorithm takes the following arguments:</p>
+			<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following
+				algorithm. The algorithm takes the following arguments:</p>
 
-		<ul>
-			<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
-			<li>the <code>base</code> URL string, that represents the base URL for the manifest, and has the value
-				of: <ul>
-					<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri">baseURI</a>&#160;[[!dom]] value of
-						the <code>script element</code> in the <a>primary entry page</a>, in case the manifest is <a
-							href="#manifest-embedding">embedded</a>; or</li>
-					<li>the URL of the manifest otherwise</li>
-				</ul>
-			</li>
-			<li>the <code>document</code>
-				<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document (DOM)
-				Node</a>&#160;[[!html]], representing the <a>primary entry page</a>
-			</li>
-		</ul>
+			<ul>
+				<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
+				<li>the <code>base</code> URL string, that represents the base URL for the manifest, and has the value
+					of: <ul>
+						<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri">baseURI</a>&#160;[[!dom]] value of
+							the <code>script element</code> in the <a>primary entry page</a>, in case the manifest is <a
+								href="#manifest-embedding">embedded</a>; or</li>
+						<li>the URL of the manifest otherwise</li>
+					</ul>
+				</li>
+				<li>the <code>document</code>
+					<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document (DOM)
+					Node</a>&#160;[[!html]], representing the <a>primary entry page</a>
+				</li>
+			</ul>
 
-		<p> The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers
-			to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is
-			either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a
-				<code>Person</code>). </p>
-		<ol>
-			<li>let <var>lang</var> string represent the default language, set to: <ul>
-					<li>the value of the <a
-							href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
-								><code>lang</code> value</a>&#160;[[!html]] for the <code>script</code> element in
-						the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
-							>embedded</a>; or </li>
-					<li><code>undefined</code> otherwise</li>
-				</ul>
-			</li>
-			<li>let <var>dir</var> string represents the base direction, set to: <ul>
-					<li>the value of the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
-								><code>dir</code> value</a>&#160;[[!html]] for the <code>script</code> element in
-						the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
-							>embedded</a>; or </li>
-					<li><code>undefined</code> otherwise</li>
-				</ul>
-			</li>
-			<li> (<a href="#wp-title"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
-				the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-					><code>title</code></a> HTML element&#160;[[!html]] using <code>document</code>. If that element
-				exists, let <code>t</code> be its text content, and add to <code>manifest</code>: <ul>
-					<li>if the language of <code>title</code> is explicitly <a
-							href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to
-						the value of <code>l</code>, then add <br /><code>"name": {"value": t, "language":
-						l}</code><br /></li>
-					<li>or <br /><code>"name": t</code><br /> otherwise</li>
-				</ul>
-			</li>
-			<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code>
-				and the value of <var>lang</var> is <em>not</em>
-				<code>undefined</code>, add<br /><code>"inLanguage": lang</code><br /> to <code>manifest</code>
-			</li>
-			<li> (<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is
-					<code>undefined</code> and the value of <var>dir</var> is <em>not</em>
-				<code>undefined</code>, add<br /><code>"inDirection": dir</code><br /> to <code>manifest</code>
-			</li>
-			<li> (<a href="#default-reading-order"></a>) if <code>manifest["readingOrder"]</code> is
-					<code>undefined</code>, add<br /><code>"readingOrder": [{"type" : "PublicationLink", "url": <a
-						data-cite="!dom#concept-document-url">document.URL</a>}]</code><br />to the
-					<code>manifest</code>
-			</li>
-			<li> (<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where
-					<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
-				is: <ul>
-					<li><code>type</code>; or</li>
-					<li>one of the <a href="#accessibility">accessibility</a> terms except for
-							<code>accessibilitySummary</code>; or</li>
-					<li>one of the <a href="#creators">creator</a> terms; or</li>
-					<li><code>name</code>; or</li>
-					<li>one of the <a href="#resource-categorization-properties">resource categorization
-							properties</a>; or</li>
-					<li><code>rel</code></li>
-				</ul> is a single string or object <code>v</code>, then change the relevant term/value
-					to<br /><code>"term" : [v]</code>
-			</li>
-			<li> (<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code>
-				array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple
-				string or <a>localizable string</a>, exchange that element of the array to<br /><code>{"type" :
-					["Person"], "name": [v]}</code>
-			</li>
-			<li> (<a href="#link-values"></a>) if one of the values <code>v</code> in the
-					<code>manifest["term"]</code> array, where <code>term</code> is one of the <a
-					href="#resource-categorization-properties">resource categorization properties</a>, is a simple
-				string, exchange that element of the array to<br /><code>{"type" : ["PublicationLink"], "url":
-					v}</code>
-			</li>
-			<li> (<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of
-					<code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including
-				itself) and <code>term</code> is: <ul>
-					<li><code>accessibilitySummary</code>; or</li>
-					<li><code>name</code>; or</li>
-					<li><code>description</code></li>
-				</ul> is a single string <code>v</code>, then change the relevant term/value to: <ul>
-					<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code>
-							then<br /><code>"term": { "value": v,"language": l }</code></li>
-					<li>otherwise<br /><code>"term": {"value": v}</code></li>
-				</ul>
-			</li>
-			<li> (<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where
-					<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
-				is: <ul>
-					<li><code>url</code>; or</li>
-					<li><code>id</code></li>
-				</ul> is a single string <code>u</code> which is <em>not</em> an <a
-					href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&#160;[[!url]],
-				then resolve this value (considered to be a relative URL) using the value of <code>base</code>,
-				yielding the value of <code>au</code>, and replace the term/value pair by<br /><code>"term":
-					au</code>
-			</li>
-		</ol>
-		<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual
-			representation of the algorithm. </p>
-
-	</section>
-	<section id="wp-lifecycle">
-		<h2>Web Publication Lifecycle</h2>
-
-		<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
-			representation of the algorithm.</p>
-
-		<section id="obtaining-manifest">
-			<h3>Obtaining a manifest</h3>
-
-			<p> The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
-					obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
-				following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
-				it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
-				MUST ignore the manifest declaration. </p>
-
+			<p> The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers
+				to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is
+				either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a
+					<code>Person</code>). </p>
 			<ol>
-				<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
-						page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest
-						link</var> be the first <code>link</code> element in tree order in <code>Document</code>
-					whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
-
-				<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
-
-				<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
-
-				<li> If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
-					terminate this algorithm. </li>
-
-				<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it
-					points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment"
-						>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>: <ol>
-						<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
-							tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
-								<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
-
-						<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
-							algorithm.</li>
-
-						<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
-								content</a> of <var>embedded manifest script</var>
-						</li>
-						<li> Let <var>manifest URL</var> be set to <var>origin</var>
-						</li>
-					</ol>
+				<li>let <var>lang</var> string represent the default language, set to: <ul>
+						<li>the value of the <a
+								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
+									><code>lang</code> value</a>&#160;[[!html]] for the <code>script</code> element in
+							the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
+								>embedded</a>; or </li>
+						<li><code>undefined</code> otherwise</li>
+					</ul>
 				</li>
-				<li>Otherwise: <ol>
-						<li> Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
-							attribute, relative to the element's base URL. If parsing fails, then abort these steps. </li>
-						<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
-								URL</var>, and whose context is the same as the browsing context of the
-								<code>Document</code>. </li>
-
-						<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
-								'<code>use-credentials</code>', then set <var>request</var>'s credentials to
-								'<code>include</code>'. </li>
-
-						<li> Await the result of performing a fetch with <var>request</var>, letting
-								<var>response</var> be the result. </li>
-						<li> If <var>response</var> is a network error, terminate this algorithm. </li>
-						<li> Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
-								data-cite="!fetch#concept-request-body">body</a>. </li>
-					</ol>
+				<li>let <var>dir</var> string represents the base direction, set to: <ul>
+						<li>the value of the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
+									><code>dir</code> value</a>&#160;[[!html]] for the <code>script</code> element in
+							the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
+								>embedded</a>; or </li>
+						<li><code>undefined</code> otherwise</li>
+					</ul>
 				</li>
-
-				<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
-					<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
-					terminate this algorithm. </li>
-
-				<li> If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
-
-				<li> Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
-					<var>text</var>, using the values of <var>text</var>, <var>manifest URL</var>, and
-						<code>Document</code> as input to the algorithm described in <a href="#canonical-manifest"
-					></a>. </li>
-
-				<li> Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web
-					Publication Manifest, namely: <ul>
-						<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
-						<li>The Publication type is set (see <a href="#manifest-pub-types"></a>)</li>
-						<li>The Publication address is set (see <a href="#address"></a>)</li>
-					</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
-
-				<li> Let <var>manifest</var> be the result of running <a>processing a manifest</a> given
-						<var>canonical manifest</var>. </li>
-
-				<li>Return <var>manifest</var>. </li>
+				<li> (<a href="#wp-title"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
+					the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
+						><code>title</code></a> HTML element&#160;[[!html]] using <code>document</code>. If that element
+					exists, let <code>t</code> be its text content, and add to <code>manifest</code>: <ul>
+						<li>if the language of <code>title</code> is explicitly <a
+								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to
+							the value of <code>l</code>, then add <br /><code>"name": {"value": t, "language":
+							l}</code><br /></li>
+						<li>or <br /><code>"name": t</code><br /> otherwise</li>
+					</ul>
+				</li>
+				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code>
+					and the value of <var>lang</var> is <em>not</em>
+					<code>undefined</code>, add<br /><code>"inLanguage": lang</code><br /> to <code>manifest</code>
+				</li>
+				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is
+						<code>undefined</code> and the value of <var>dir</var> is <em>not</em>
+					<code>undefined</code>, add<br /><code>"inDirection": dir</code><br /> to <code>manifest</code>
+				</li>
+				<li> (<a href="#default-reading-order"></a>) if <code>manifest["readingOrder"]</code> is
+						<code>undefined</code>, add<br /><code>"readingOrder": [{"type" : "PublicationLink", "url": <a
+							data-cite="!dom#concept-document-url">document.URL</a>}]</code><br />to the
+						<code>manifest</code>
+				</li>
+				<li> (<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where
+						<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
+					is: <ul>
+						<li><code>type</code>; or</li>
+						<li>one of the <a href="#accessibility">accessibility</a> terms except for
+								<code>accessibilitySummary</code>; or</li>
+						<li>one of the <a href="#creators">creator</a> terms; or</li>
+						<li><code>name</code>; or</li>
+						<li>one of the <a href="#resource-categorization-properties">resource categorization
+								properties</a>; or</li>
+						<li><code>rel</code></li>
+					</ul> is a single string or object <code>v</code>, then change the relevant term/value
+						to<br /><code>"term" : [v]</code>
+				</li>
+				<li> (<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code>
+					array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple
+					string or <a>localizable string</a>, exchange that element of the array to<br /><code>{"type" :
+						["Person"], "name": [v]}</code>
+				</li>
+				<li> (<a href="#link-values"></a>) if one of the values <code>v</code> in the
+						<code>manifest["term"]</code> array, where <code>term</code> is one of the <a
+						href="#resource-categorization-properties">resource categorization properties</a>, is a simple
+					string, exchange that element of the array to<br /><code>{"type" : ["PublicationLink"], "url":
+						v}</code>
+				</li>
+				<li> (<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of
+						<code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including
+					itself) and <code>term</code> is: <ul>
+						<li><code>accessibilitySummary</code>; or</li>
+						<li><code>name</code>; or</li>
+						<li><code>description</code></li>
+					</ul> is a single string <code>v</code>, then change the relevant term/value to: <ul>
+						<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code>
+								then<br /><code>"term": { "value": v,"language": l }</code></li>
+						<li>otherwise<br /><code>"term": {"value": v}</code></li>
+					</ul>
+				</li>
+				<li> (<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where
+						<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
+					is: <ul>
+						<li><code>url</code>; or</li>
+						<li><code>id</code></li>
+					</ul> is a single string <code>u</code> which is <em>not</em> an <a
+						href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&#160;[[!url]],
+					then resolve this value (considered to be a relative URL) using the value of <code>base</code>,
+					yielding the value of <code>au</code>, and replace the term/value pair by<br /><code>"term":
+						au</code>
+				</li>
 			</ol>
-
-			<p class="note"> The algorithm does not describes how error and warning messages should be reported.
-				This is implementation dependent. </p>
+			<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual
+				representation of the algorithm. </p>
 
 		</section>
+		<section id="wp-lifecycle">
+			<h2>Web Publication Lifecycle</h2>
 
-		<section id="processing-manifest">
-			<h3>Processing the manifest</h3>
+			<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
+				representation of the algorithm.</p>
 
-			<p> The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
-					manifest</dfn> are given by the following algorithm. The algorithm takes a <var>text</var>
-				string as an argument, which represents a <a>canonical manifest</a>. The output from inputting a
-				JSON document into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is
-				to ensure that the data represented in <var>text</var> abides to the minimal requirements on the
-				data, removing, if applicable, non-conformant data. </p>
+			<section id="obtaining-manifest">
+				<h3>Obtaining a manifest</h3>
 
-			<ol>
-				<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
-					<var>text</var>
-				</li>
-				<li> Let <var>manifest</var> be the result of <a
-						href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> [[!webidl-1]]
-						<var>json</var> to a <a>WebPublicationManifest</a> dictionary. </li>
-				<li> Extension point: process any proprietary and/or other supported members at this point in the
-					algorithm. </li>
-				<li> Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as
-					raising warnings. <ol>
-						<li>Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If
-							not, issue a warning.</li>
-						<li>For all the terms defined in <a href="#accessibility"></a>, except for
-								<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
-							whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
-							vocabulary (see the <a
-								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-								expected values</a> for each). Issue a warning for each unrecognized value.</li>
-						<li>For all values in <var>manifest["accessModeSufficient"]</var>, check whether each token
-							in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is defined in
-							the preferred vocabulary (see the <a
-								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-								expected values</a>). Issue a warning for each unrecognized value.</li>
-						<li> For all the terms defined in <a href="#creators"></a>, check whether every object
-								<var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not,
-							remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. </li>
-						<li> For all the terms defined in <a href="#resource-categorization-properties"></a>, check
-							whether every object <var>Obj</var> in <var>manifest[term]</var> has
-								<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from
-								<var>manifest[term]</var> array and issue a warning. If yes, check whether
-								<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
-						<li> Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
-							per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
-						<li> Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
-							per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
-					</ol>
-				</li>
-				<li> Return <var>manifest</var>. </li>
-			</ol>
-		</section>
+				<p> The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
+						obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
+					following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
+					it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
+					MUST ignore the manifest declaration. </p>
+
+				<ol>
+					<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
+							page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest
+							link</var> be the first <code>link</code> element in tree order in <code>Document</code>
+						whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
+
+					<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
+						terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it
+						points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment"
+							>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>: <ol>
+							<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
+								tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
+									<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
+
+							<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
+								algorithm.</li>
+
+							<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
+									content</a> of <var>embedded manifest script</var>
+							</li>
+							<li> Let <var>manifest URL</var> be set to <var>origin</var>
+							</li>
+						</ol>
+					</li>
+					<li>Otherwise: <ol>
+							<li> Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
+								attribute, relative to the element's base URL. If parsing fails, then abort these steps. </li>
+							<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
+									URL</var>, and whose context is the same as the browsing context of the
+									<code>Document</code>. </li>
+
+							<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
+									'<code>use-credentials</code>', then set <var>request</var>'s credentials to
+									'<code>include</code>'. </li>
+
+							<li> Await the result of performing a fetch with <var>request</var>, letting
+									<var>response</var> be the result. </li>
+							<li> If <var>response</var> is a network error, terminate this algorithm. </li>
+							<li> Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
+									data-cite="!fetch#concept-request-body">body</a>. </li>
+						</ol>
+					</li>
+
+					<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
+						<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
+						terminate this algorithm. </li>
+
+					<li> If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
+
+					<li> Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
+						<var>text</var>, using the values of <var>text</var>, <var>manifest URL</var>, and
+							<code>Document</code> as input to the algorithm described in <a href="#canonical-manifest"
+						></a>. </li>
+
+					<li> Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web
+						Publication Manifest, namely: <ul>
+							<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
+							<li>The Publication type is set (see <a href="#manifest-pub-types"></a>)</li>
+							<li>The Publication address is set (see <a href="#address"></a>)</li>
+						</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
+
+					<li> Let <var>manifest</var> be the result of running <a>processing a manifest</a> given
+							<var>canonical manifest</var>. </li>
+
+					<li>Return <var>manifest</var>. </li>
+				</ol>
+
+				<p class="note"> The algorithm does not describes how error and warning messages should be reported.
+					This is implementation dependent. </p>
+
+			</section>
+
+			<section id="processing-manifest">
+				<h3>Processing the manifest</h3>
+
+				<p> The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
+						manifest</dfn> are given by the following algorithm. The algorithm takes a <var>text</var>
+					string as an argument, which represents a <a>canonical manifest</a>. The output from inputting a
+					JSON document into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is
+					to ensure that the data represented in <var>text</var> abides to the minimal requirements on the
+					data, removing, if applicable, non-conformant data. </p>
+
+				<ol>
+					<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
+						<var>text</var>
+					</li>
+					<li> Let <var>manifest</var> be the result of <a
+							href="https://www.w3.org/TR/WebIDL-1/#es-dictionary">converting</a> [[!webidl-1]]
+							<var>json</var> to a <a>WebPublicationManifest</a> dictionary. </li>
+					<li> Extension point: process any proprietary and/or other supported members at this point in the
+						algorithm. </li>
+					<li> Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as
+						raising warnings. <ol>
+							<li>Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If
+								not, issue a warning.</li>
+							<li>For all the terms defined in <a href="#accessibility"></a>, except for
+									<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
+								whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
+								vocabulary (see the <a
+									href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+									expected values</a> for each). Issue a warning for each unrecognized value.</li>
+							<li>For all values in <var>manifest["accessModeSufficient"]</var>, check whether each token
+								in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is defined in
+								the preferred vocabulary (see the <a
+									href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+									expected values</a>). Issue a warning for each unrecognized value.</li>
+							<li> For all the terms defined in <a href="#creators"></a>, check whether every object
+									<var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not,
+								remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. </li>
+							<li> For all the terms defined in <a href="#resource-categorization-properties"></a>, check
+								whether every object <var>Obj</var> in <var>manifest[term]</var> has
+									<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from
+									<var>manifest[term]</var> array and issue a warning. If yes, check whether
+									<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
+							<li> Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
+								per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+							<li> Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
+								per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+						</ol>
+					</li>
+					<li> Return <var>manifest</var>. </li>
+				</ol>
+			</section>
 
 		</section>
 		<section id="wp-features">
@@ -3678,7 +3695,7 @@
 
 					<dt>
 						<dfn>pagelist</dfn>
-						</dt>
+					</dt>
 					<dd>The HTML Element containing the <a>pagelist</a>.&#160;[[!url]]</dd>
 					<dt>
 						<dfn>toc</dfn>
