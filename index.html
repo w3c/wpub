@@ -679,11 +679,12 @@
 				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
 					the major sections of the Web Publication.</p>
 
-				<p>The table of contents is expressed via an HTML element (typically a <code>nav</code>
+				<p> The table of contents is expressed via an HTML element (typically a <code>nav</code>
 					element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be
 					identified by the <code>role</code> attribute&#160;[[!html]] value
-					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document so
-					designated.</p>
+					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with
+					that <code>role</code> value in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
+						tree order</a>&#160;[[!dom]]. </p>
 
 				<p>If the table of contents is not located in the <a href="#wp-primary-entry-page">primary entry
 						page</a>, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a>
@@ -698,6 +699,32 @@
 
 				<p class="issue" data-number="276"></p>
 				<p class="issue" data-number="291">Do we need a more detailed definition for the HTML TOC format?</p>
+			</section>
+
+			<section id="wp-pagelist">
+				<h3>Pagelist</h3>
+
+				<p> The pagelist is a list of links that provides navigation to static page demarcation points within
+					the content. These locations allow users, for example, to coordinate access into the content. The
+					exact nature of these locations is left to content creators to define. They usually correspond to
+					pages of a print document which is the source of the digital publication, but might be a purely
+					digital creation added for the sake of easing navigation. </p>
+
+				<p> The pagelist is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]])
+					in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
+						<code>role</code> attribute&#160;[[!html]] value
+					"<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document
+					with that <code>role</code> value <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
+						tree order</a>&#160;[[!dom]]. </p>
+
+				<p> If the pagelist is not located in the <a href="#wp-primary-entry-page">primary entry page</a>, the
+					manifest SHOULD <a href="#pagelist-manifest">identify the resource</a> that contains the structure. </p>
+
+				<p> There are no requirements on the pagelist itself, except that, when specified, it MUST include a
+					link to at least one <a href="#wp-resources">resource</a>. </p>
+
+				<p> Refer to the <a href="#pagelist">pagelist property definition</a> for more information on how to
+					identify in the infoset and manifest which resource contains the pagelist. </p>
 			</section>
 		</section>
 		<section id="wp-properties">
@@ -737,8 +764,8 @@
 					<dt><a href="#structural-properties">structural properties</a></dt>
 					<dd>
 						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
-								href="#cover">cover image</a> or the the location of the <a href="#table-of-contents"
-								>table of contents</a>.</p>
+								href="#cover">cover image</a>, or the location of the <a href="#table-of-contents">table
+								of contents</a> or the <a href="#pagelist">pagelist</a>.</p>
 					</dd>
 				</dl>
 
@@ -794,6 +821,7 @@
 							<li><a href="#reading-progression-direction">reading progression direction</a></li>
 							<li><a href="#resource-list">resource list</a></li>
 							<li><a href="#table-of-contents">table of contents</a></li>
+							<li><a href="#pagelist">pagelist</a></li>
 							<li><a href="#wp-title">title</a></li>
 						</ul>
 					</dd>
@@ -886,6 +914,10 @@
 						<tr>
 							<td><code>https://www.w3.org/ns/wp#cover</code></td>
 							<td><a href="#cover">Cover</a></td>
+						</tr>
+						<tr>
+							<td><code>https://www.w3.org/ns/wp#pagelist</code></td>
+							<td><a href="#pagelist">Pagelist</a></td>
 						</tr>
 						<tr>
 							<td><code>id</code></td>
@@ -2546,27 +2578,21 @@
 											order</a> or <a href="#resource-list">resource-list</a> is identified with a
 											<code>rel</code> value including
 										<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
-											<code>url</code> value identifies the table of content resource. </li>
+											<code>url</code> value identifies the table of content resource. If there
+										are several such resources, the first one MUST be used, with the <a
+											href="#default-reading-order">default reading order</a> taking precedence
+										over <a href="#resource-list">resource-list</a>. </li>
 									<li> Otherwise, the <a>primary entry page</a> is the table of content resource.
 									</li>
 								</ul>
 							</li>
 							<li> If the table of content resource contains an HTML element with the
 								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
-								user agent MUST use that element as the table of contents. </li>
-						</ol>
-
-						<p>If identifying the Table of Content is ambiguous (e.g., several table of content resources
-							are identified, or several elements with a <code>role</code> value <code>doc-toc</code> is
-							found within the table of content resource), the user agent MAY choose among them. This
-							specification does not mandate how this choice is made. The user agent might:</p>
-
-						<ul>
-							<li>choose the first table of content resource by some heuristics</li>
-							<li>choose the first table of content element within the same resource in <a
+								user agent MUST use that element as the table of contents. If there are several such
+								HTML elements the user agent MUST use the first in <a
 									href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
-								order</a>&#160;[[!dom]]</li>
-						</ul>
+								order</a>&#160;[[!dom]]. </li>
+						</ol>
 
 						<p>If this process does not result in a link to the table of contents, the Web Publication does
 							not have a table of contents and this property MUST NOT be included in the infoset.</p>
@@ -2635,6 +2661,80 @@
 </pre>
 					</section>
 				</section>
+				<section id="pagelist">
+					<h3>Pagelist</h3>
+					<p> The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
+							href="#wp-pagelist">pagelist</a>. It is identified by the
+							<code>https://www.w3.org/ns/wp#pageslist</code> link relationship. </p>
+
+					<section id="pagelist-infoset">
+						<h5>Infoset Requirements</h5>
+
+						<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
+
+						<ol>
+							<li>Identify the pagelist resource: <ul>
+									<li> If a resource in either the <a href="#default-reading-order">default reading
+											order</a> or <a href="#resource-list">resource-list</a> is identified with a
+											<code>rel</code> value including
+											<code>https://www.w3.org/ns/wp#pageslist</code>, the corresponding
+											<code>url</code> value identifies the pagelist resource. If there are
+										several such resources, the first one MUST be used, with the <a
+											href="#default-reading-order">default reading order</a> taking precedence
+										over <a href="#resource-list">resource-list</a>. </li>
+									<li> Otherwise, the <a>primary entry page</a> is the pagelist resource. </li>
+								</ul>
+							</li>
+							<li> If the pagelist resource contains an HTML element with the
+								<code>role</code>&#160;[[!html]] value
+								<code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element
+								as the pagelist. If there are several such HTML elements the user agent MUST use the
+								first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+									order</a>&#160;[[!dom]]. </li>
+						</ol>
+
+						<p>If this process does not result in a link to the pagelist, the Web Publication does not have
+							a pagelist and this property MUST NOT be included in the infoset.</p>
+
+						<p class="ednote"> The Working Group will attempt to define the <code>pagelist</code> term by
+							IANA, to avoid using a URL. </p>
+
+					</section>
+
+					<section id="pagelist-manifest">
+						<h5>Manifest Expression</h5>
+
+						<p> If present in the manifest, the pagelist MUST be expressed as a <a
+								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
+								<code>url</code> term MUST NOT include a fragment identifier. </p>
+
+						<p> The <code>rel</code> value of the <a href="#publication-link-def"
+									><code>PublicationLink</code></a> MUST include the
+								<code>https://www.w3.org/ns/wp#pagelist</code> identifier. </p>
+
+						<p> The link to the pagelist MAY be specified in either the <a href="#default-reading-order"
+								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
+							be specified in both. </p>
+
+						<pre class="example" title="Pagelist identified in another resource of the Web Publication">
+{
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+&#8230;
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"resources"  : [{
+	"type"       : "PublicationLink",
+	"url"        : "toc_file.html",
+	"rel"        : "https://www.w3.org/ns/wp#pageslist"
+},{
+	&#8230;
+}],
+&#8230;
+}
+</pre>
+					</section>
+				</section>
 			</section>
 
 			<section id="extensibility">
@@ -2677,20 +2777,20 @@
 
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "links"  : [{
-        "type"            : "PublicationLink",
-        "url"             : "https://www.publisher.example.org/mobydick-onix.xml",
-        "encodingFormat"  : "application/onix+xml",
-        "rel"             : "describedby"
-    },{
-        &#8230;
-    }],
-    &#8230;
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+&#8230;
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "PublicationLink",
+	"url"             : "https://www.publisher.example.org/mobydick-onix.xml",
+	"encodingFormat"  : "application/onix+xml",
+	"rel"             : "describedby"
+},{
+	&#8230;
+}],
+&#8230;
 }
 </pre>
 					<p class="ednote">The <code>application/onix+xml</code> MIME type has not yet been registered by
@@ -2709,26 +2809,26 @@
 
 					<pre class="example" title="Usage of the schema.org 'copyrightYear' and 'copyrightHolder' terms, as an extension to the basic data">
 {
-    "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"            : "TechArticle",
-    &#8230;
-    "id"              : "http://www.w3.org/TR/tabular-data-model/",
-    "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    "copyrightYear"   : "2015",
-    "copyrightHolder" : "World Wide Web Consortium",    
-    &#8230;
+"@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"            : "TechArticle",
+&#8230;
+"id"              : "http://www.w3.org/TR/tabular-data-model/",
+"url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+"copyrightYear"   : "2015",
+"copyrightHolder" : "World Wide Web Consortium",    
+&#8230;
 }
 </pre>
 
 					<pre class="example" title="Usage of the Dublin Core 'subject' with the 2012 ACM Classification terms, as an extension to the basic data">
 {
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "CreativeWork",
-    &#8230;
-    "id"         : "http://www.w3.org/TR/tabular-data-model/",
-    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    "dc:subject" : ["Web data description languages","Data integration","Data Exchange"]
-    &#8230;
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "CreativeWork",
+&#8230;
+"id"         : "http://www.w3.org/TR/tabular-data-model/",
+"url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+"dc:subject" : ["Web data description languages","Data integration","Data Exchange"]
+&#8230;
 }
 </pre>
 					<p class="note"> A prefix definition <code>dc</code> for [[dcterms]] is included in the context file
@@ -3592,6 +3692,10 @@
 
 					<dd>Contains the URL reference(s) to one or more <a href="#cover">cover(s)</a>.&#160;[[!url]]</dd>
 
+					<dt>
+						<dfn>pagelist</dfn>
+					</dt>
+					<dd>The HTML Element containing the <a>pagelist</a>.&#160;[[!url]]</dd>
 					<dt>
 						<dfn>toc</dfn>
 					</dt>
