@@ -2983,7 +2983,7 @@
 						obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
 					following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
 					it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
-					MUST ignore the manifest declaration. </p>
+					MUST ignore the manifest declaration.</p>
 
 				<ol>
 					<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
@@ -2991,7 +2991,7 @@
 							link</var> be the first <code>link</code> element in tree order in <code>Document</code>
 						whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
 
-					<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
+					<li> If the <code>Document</code> is sandboxed (e.g. a cross-origin document in an iframe&nbsp;[[!html]], terminate the algorithm.</li>
 
 					<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
 
