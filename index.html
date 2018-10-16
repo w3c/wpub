@@ -3308,7 +3308,7 @@
 					<li>Otherwise: <ol>
 							<li> Let <var>manifest URL</var> be the result of parsing the value of
 								the <code>href</code> attribute, relative to the element's base URL.
-								If parsing fails, then abort these steps. </li>
+								If parsing fails, then terminate this algorithm. </li>
 							<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is
 									<var>manifest URL</var>, and whose context is the same as the
 								browsing context of the <code>Document</code>. </li>
