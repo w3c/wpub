@@ -1027,7 +1027,7 @@ partial dictionary WebPublicationManifest {
 							<td><a href="#reading-progression-direction">Reading Progression Direction</a></td>
 						</tr>
 						<tr>
-							<td><code>resourceList</code></td>
+							<td><code>resources</code></td>
 							<td><a href="#resource-list">Resource List</a></td>
 						</tr>
 						<tr>
@@ -2342,8 +2342,7 @@ partial dictionary WebPublicationManifest {
 
 					<p>The <dfn>resource list</dfn> enumerates any additional <a href="#wp-resources">resources</a> used
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
-							<a>default reading order</a>. It is expressed using the <code>resourceList</code>
-						property.</p>
+							<a>default reading order</a>. It is expressed using the <code>resources</code> property.</p>
 
 					<p class="note">The union of the resource list and default reading order represents the definitive
 						list of resources that belong to the Web Publication. All other resources are external to the
@@ -2780,7 +2779,7 @@ partial dictionary WebPublicationManifest {
 
 					<p> The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
 							href="#wp-pagelist">page list</a>. It is identified by the
-							<code>https://www.w3.org/ns/wp#pageslist</code> link relationship. </p>
+							<code>https://www.w3.org/ns/wp#pagelist</code> link relationship. </p>
 
 					<section id="page-list-infoset">
 						<h5>Infoset Requirements</h5>
@@ -2792,7 +2791,7 @@ partial dictionary WebPublicationManifest {
 									<li> If a resource in either the <a href="#default-reading-order">default reading
 											order</a> or <a href="#resource-list">resource-list</a> is identified with a
 											<code>rel</code> value including
-											<code>https://www.w3.org/ns/wp#pageslist</code>, the corresponding
+											<code>https://www.w3.org/ns/wp#pagelist</code>, the corresponding
 											<code>url</code> value identifies the page list resource. If there are
 										several such resources, the first one MUST be used, with the <a
 											href="#default-reading-order">default reading order</a> taking precedence
@@ -2842,7 +2841,7 @@ partial dictionary WebPublicationManifest {
 "resources"  : [{
 	"type"       : "PublicationLink",
 	"url"        : "toc_file.html",
-	"rel"        : "https://www.w3.org/ns/wp#pageslist"
+	"rel"        : "https://www.w3.org/ns/wp#pagelist"
 },{
 	&#8230;
 }],
