@@ -417,15 +417,6 @@ dictionary WebPublicationManifest {
 						<section id="publicationLink">
 							<h6><code>PublicationLink</code> Definition</h6>
 
-							<pre class="idl">
-dictionary PublicationLink {
-    required DOMString           url;
-             DOMString           encodingFormat;
-             sequence&lt;LocalizableString>   name;
-             LocalizableString   description;
-             sequence&lt;DOMString> rel;
-};</pre>
-
 							<p id="publication-link-def">This specification defines a new type for links called
 										<code><dfn>PublicationLink</dfn></code>. It consists of the following
 								properties:</p>
@@ -501,6 +492,15 @@ dictionary PublicationLink {
 									</tr>
 								</tbody>
 							</table>
+
+							<pre class="idl">
+dictionary PublicationLink {
+    required DOMString           url;
+             DOMString           encodingFormat;
+             sequence&lt;LocalizableString>   name;
+             LocalizableString   description;
+             sequence&lt;DOMString> rel;
+};</pre>
 							<p class="issue" data-number="235"></p>
 						</section>
 					</section>
@@ -508,11 +508,6 @@ dictionary PublicationLink {
 
 				<section id="manifest-pub-types">
 					<h4>Publication Types</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    required sequence&lt;DOMString&gt; type;
-};</pre>
 
 					<p> The Web Publication Manifest MUST include a <dfn>Publication Type</dfn> using the <code
 							data-dfn-for="WebPublicationManifest"><dfn>type</dfn></code> term&#160;[[!json-ld]]. The
@@ -562,6 +557,11 @@ partial dictionary WebPublicationManifest {
 
 					<p class="note">Refer to the Schema.org site for the complete <a
 							href="https://schema.org/CreativeWork">list of <code>CreativeWork</code> subtypes</a>.</p>
+
+					<pre class="idl">
+partial dictionary WebPublicationManifest {
+    required sequence&lt;DOMString&gt; type;
+};</pre>
 				</section>
 
 				<section id="manifest-properties">
@@ -1048,17 +1048,6 @@ partial dictionary WebPublicationManifest {
 				<section id="accessibility">
 					<h4>Accessibility</h4>
 
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;DOMString> accessMode;
-    sequence&lt;DOMString> accessModeSufficient;
-    sequence&lt;DOMString> accessibilityAPI;
-    sequence&lt;DOMString> accessibilityControl;
-    sequence&lt;DOMString> accessibilityFeature;
-    sequence&lt;DOMString> accessibilityHazard;
-    LocalizableString      accessibilitySummary;
-};</pre>
-
 					<p>The accessibility properties provides information about the suitability of a <a>Web
 							Publication</a> for consumption by users with varying preferred reading modalities. These
 						properties typically supplement an evaluation against established accessibility criteria, such
@@ -1210,7 +1199,18 @@ partial dictionary WebPublicationManifest {
 						<p>Note that the author MAY also provide a reference to a more detailed <a
 								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
 							information expressed by these properties.</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;DOMString> accessMode;
+    sequence&lt;DOMString> accessModeSufficient;
+    sequence&lt;DOMString> accessibilityAPI;
+    sequence&lt;DOMString> accessibilityControl;
+    sequence&lt;DOMString> accessibilityFeature;
+    sequence&lt;DOMString> accessibilityHazard;
+    LocalizableString      accessibilitySummary;
+};</pre>
+						
 						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1237,11 +1237,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="address">
 					<h4>Address</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    required DOMString url;
-};</pre>
 
 					<p>A <a>Web Publication's</a>
 						<dfn>address</dfn> is a <abbr title="Uniform Resource Locator">URL</abbr>&#160;[[!url]] that
@@ -1300,6 +1295,11 @@ partial dictionary WebPublicationManifest {
 							</tbody>
 						</table>
 
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    required DOMString url;
+};</pre>
+
 						<pre class="example" title="Setting the address of the main entry page">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1314,11 +1314,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="canonical-identifier">
 					<h4>Canonical Identifier</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    DOMString id;
-};</pre>
 
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
@@ -1379,7 +1374,12 @@ partial dictionary WebPublicationManifest {
 							additional types of identifiers for the Web Publication using the <a
 								href="https://schema.org/identifier"><code>identifier</code>
 							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    DOMString id;
+};</pre>
+						
 						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1407,31 +1407,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="creators">
 					<h4>Creators</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;CreatorInfo> artist;
-    sequence&lt;CreatorInfo> author;
-    sequence&lt;CreatorInfo> colorist;
-    sequence&lt;CreatorInfo> contributor;
-    sequence&lt;CreatorInfo> creator;
-    sequence&lt;CreatorInfo> editor;
-    sequence&lt;CreatorInfo> illustrator;
-    sequence&lt;CreatorInfo> inker;
-    sequence&lt;CreatorInfo> letterer;
-    sequence&lt;CreatorInfo> penciler;
-    sequence&lt;CreatorInfo> publisher;
-    sequence&lt;CreatorInfo> readBy;
-    sequence&lt;CreatorInfo> translator;
-};
-
-
-dictionary CreatorInfo {
-             sequence&lt;DOMString>         type;                     
-    required sequence&lt;LocalizableString> name;
-             DOMString                      id;
-             DOMString                      url;
-};</pre>
 
 					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
 							Publication</a>. Creators are represented in one of the following two ways:</p>
@@ -1657,6 +1632,31 @@ dictionary CreatorInfo {
 							</tbody>
 						</table>
 
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;CreatorInfo> artist;
+    sequence&lt;CreatorInfo> author;
+    sequence&lt;CreatorInfo> colorist;
+    sequence&lt;CreatorInfo> contributor;
+    sequence&lt;CreatorInfo> creator;
+    sequence&lt;CreatorInfo> editor;
+    sequence&lt;CreatorInfo> illustrator;
+    sequence&lt;CreatorInfo> inker;
+    sequence&lt;CreatorInfo> letterer;
+    sequence&lt;CreatorInfo> penciler;
+    sequence&lt;CreatorInfo> publisher;
+    sequence&lt;CreatorInfo> readBy;
+    sequence&lt;CreatorInfo> translator;
+};
+
+
+dictionary CreatorInfo {
+             sequence&lt;DOMString>         type;                     
+    required sequence&lt;LocalizableString> name;
+             DOMString                      id;
+             DOMString                      url;
+};</pre>
+
 						<pre class="example" title="Author of a book">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1707,18 +1707,6 @@ dictionary CreatorInfo {
 
 				<section id="language-and-dir">
 					<h4>Language and Base Direction</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    DOMString     inLanguage;
-    TextDirection inDirection;
-};
-
-enum TextDirection {
-    "ltr",
-    "rtl",
-    "auto"
-};</pre>
 
 					<p>The <a>Web Publication</a> has a natural language value (e.g., English, French, Chinese), as well
 						as a natural base writing direction (the display direction, either left-to-right or
@@ -1865,17 +1853,23 @@ enum TextDirection {
 								embedded manifest and as a separate resource, they are strongly encouraged to set these
 								properties explicitly to avoid interference of the containing <code>script</code>
 								element in case of embedding.</p>
+							
+							<pre class="idl">
+partial dictionary WebPublicationManifest {
+    DOMString     inLanguage;
+    TextDirection inDirection;
+};
 
+enum TextDirection {
+    "ltr",
+    "rtl",
+    "auto"
+};</pre>
+							
 						</section>
 
 						<section id="manifest-specific-language-and-dir">
 							<h6>Item-specific Language</h6>
-
-							<pre class="idl">
-dictionary LocalizableString {
-    required DOMString value;
-             DOMString language;
-};</pre>
 
 							<p> It is possible to set the language for any textual value in the manifest. This
 								information MUST be set as a <dfn data-lt="LocalizableString">localizable string</dfn>,
@@ -1925,17 +1919,18 @@ dictionary LocalizableString {
 								JSON-LD&#160;[[json-ld]]. In case the JSON-LD community, as well as the schema.org
 								community, introduces such a feature, future versions of this specification may extend
 								the ability of Web Publication Manifests to include this. </p>
+
+							<pre class="idl">
+dictionary LocalizableString {
+    required DOMString value;
+             DOMString language;
+};</pre>
 						</section>
 					</section>
 				</section>
 
 				<section id="last-modification-date">
 					<h4>Last Modification Date</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    DOMString dateModified;
-};</pre>
 
 					<p>The <dfn>last modification date</dfn> is the date when the <a>Web Publication</a> was last
 						updated (i.e., whenever changes were last made to any of the resources of the Web Publication,
@@ -1980,6 +1975,11 @@ partial dictionary WebPublicationManifest {
 							</tbody>
 						</table>
 
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    DOMString dateModified;
+};</pre>
+
 						<pre class="example" title="Last modification date of the publication">
 {
     "@context"     : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1997,11 +1997,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="publication-date">
 					<h4>Publication Date</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    DOMString datePublished;
-};</pre>
 
 					<p>The <dfn>publication date</dfn> is the date on which the <a>Web Publication</a> was originally
 						published. It represents a static event in the lifecycle of a Web Publication and allows
@@ -2043,6 +2038,12 @@ partial dictionary WebPublicationManifest {
 								</tr>
 							</tbody>
 						</table>
+
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    DOMString datePublished;
+};</pre>
+
 						<pre class="example" title="Creation and modification date of the publication">
 {
     "@context"      : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2060,16 +2061,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="reading-progression-direction">
 					<h4>Reading Progression Direction</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    ProgressionDirection readingProgression = "ltr";
-};
-
-enum ProgressionDirection {
-	"ltr",
-	"rtl"
-};</pre>
 
 					<p>The <dfn data-lt="ProgressionDirection">reading progression</dfn> establishes the reading
 						direction from one resource to the next within a <a>Web Publication</a>. It is expressed using
@@ -2120,8 +2111,19 @@ enum ProgressionDirection {
 							</tbody>
 						</table>
 
-						<p>If this value is not set, its default value is <code>ltr</code>.</p>
+						<p>If the <code>readingProgression</code> is not set, user agents MUST use the default value is
+								<code>ltr</code>.</p>
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    ProgressionDirection readingProgression = "ltr";
+};
 
+enum ProgressionDirection {
+	"ltr",
+	"rtl"
+};</pre>
+						
 						<pre class="example" title="Reading progression set explicitl to ltr">
 {
     "@context"           : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2136,11 +2138,6 @@ enum ProgressionDirection {
 
 				<section id="wp-title">
 					<h4>Title</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;LocalizableString> name;
-};</pre>
 
 					<p>The title provides the human-readable name of the <a>Web Publication</a>. It is expressed using
 						the <code>name</code> property.</p>
@@ -2200,6 +2197,12 @@ partial dictionary WebPublicationManifest {
 								</tr>
 							</tbody>
 						</table>
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;LocalizableString> name;
+};</pre>
+						
 						<pre class="example" title="Title of the book set explicitly">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2230,11 +2233,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-   required sequence&lt;PublicationLink> readingOrder;
-};</pre>
 
 					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
 							Publication</a> resources. It is expressed using the <code>readingOrder</code> property.</p>
@@ -2290,6 +2288,12 @@ partial dictionary WebPublicationManifest {
 								</tr>
 							</tbody>
 						</table>
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+   required sequence&lt;PublicationLink> readingOrder;
+};</pre>
+						
 						<pre class="example" title="Reading order expressed as a simple list of URLs">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2334,11 +2338,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="resource-list">
 					<h4>Resource List</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> resources = [];
-};</pre>
 
 					<p>The <dfn>resource list</dfn> enumerates any additional <a href="#wp-resources">resources</a> used
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
@@ -2410,6 +2409,12 @@ partial dictionary WebPublicationManifest {
 								</tr>
 							</tbody>
 						</table>
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;PublicationLink> resources = [];
+};</pre>
+						
 						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2444,11 +2449,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="links">
 					<h4>Links</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> links = [];
-};</pre>
 
 					<p><dfn>Links</dfn> provide a list of <a href="#wp-resources">resources</a> that are <em>not</em>
 						required for the processing and rendering of a Web Publication (i.e., the content of the Web
@@ -2523,6 +2523,12 @@ partial dictionary WebPublicationManifest {
 								</tr>
 							</tbody>
 						</table>
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;PublicationLink> links = [];
+};</pre>
+						
 					</section>
 				</section>
 			</section>
@@ -2532,11 +2538,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="accessibility-report">
 					<h4>Accessibility Report</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    PublicationLink accessibilityReport;
-};</pre>
 
 					<p>An accessibility report provides information about the suitability of a <a>Web Publication</a>
 						for consumption by users with varying preferred reading modalities. These reports typically
@@ -2571,7 +2572,12 @@ partial dictionary WebPublicationManifest {
 
 						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
 							term with IANA, to avoid using a URL.</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    PublicationLink accessibilityReport;
+};</pre>
+						
 						<pre class="example" title="Link to an accessibility report">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2594,11 +2600,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="privacy-policy">
 					<h4>Privacy Policy</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    PublicationLink privacyPolicy;
-};</pre>
 
 					<p>Users often have the legal right to know and control what information is collected about them,
 						how such information is stored and for how long, whether it is personally identifiable, and how
@@ -2630,7 +2631,12 @@ partial dictionary WebPublicationManifest {
 								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
 							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
 							the <code>privacy-policy</code> identifier&#160;[[!iana-link-relations]].</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    PublicationLink privacyPolicy;
+};</pre>
+						
 						<pre class="example" title="Privacy policy expressed as an external link">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2659,11 +2665,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="cover">
 					<h4>Cover</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> cover;
-};</pre>
 
 					<p>The <dfn>cover</dfn> is a resource that user agents can use to present the <a>Web Publication</a>
 						(e.g., in a library or bookshelf, or when initially loading the Web Publication). It is
@@ -2702,7 +2703,12 @@ partial dictionary WebPublicationManifest {
 
 						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
 							to avoid using a URL.</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    sequence&lt;PublicationLink> cover;
+};</pre>
+						
 						<pre class="example" title="Cover HTML page">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2772,12 +2778,7 @@ partial dictionary WebPublicationManifest {
 				<section id="page-list">
 					<h3>Page List</h3>
 
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    HTMLElement pagelist;
-};</pre>
-
-					<p> The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
+					<p>The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
 							href="#wp-pagelist">page list</a>. It is identified by the
 							<code>https://www.w3.org/ns/wp#pagelist</code> link relationship. </p>
 
@@ -2830,7 +2831,12 @@ partial dictionary WebPublicationManifest {
 						<p> The link to the page list MAY be specified in either the <a href="#default-reading-order"
 								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
 							be specified in both. </p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    HTMLElement pagelist;
+};</pre>
+						
 						<pre class="example" title="Pagelist identified in another resource of the Web Publication">
 {
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2853,11 +2859,6 @@ partial dictionary WebPublicationManifest {
 
 				<section id="table-of-contents">
 					<h4>Table of Contents</h4>
-
-					<pre class="idl">
-partial dictionary WebPublicationManifest {
-    HTMLElement toc;
-};</pre>
 
 					<p>The table of contents property identifies the resource that contains the Web Publication's <a
 							href="#wp-table-of-contents">table of contents</a>. It is identified by the
@@ -2914,7 +2915,12 @@ partial dictionary WebPublicationManifest {
 						<p>The link to the table of contents MAY be specified in either the <a
 								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
 								>resource-list</a>, but MUST NOT be specified in both.</p>
-
+						
+						<pre class="idl">
+partial dictionary WebPublicationManifest {
+    HTMLElement toc;
+};</pre>
+						
 						<pre class="example" title="Table of content identified in another resource of the Web Publication">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
