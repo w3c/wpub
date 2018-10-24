@@ -2343,9 +2343,11 @@ partial dictionary WebPublicationManifest {
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
 							<a>default reading order</a>. It is expressed using the <code>resources</code> property.</p>
 
-					<p class="note">The union of the resource list and default reading order represents the definitive
-						list of resources that belong to the Web Publication. All other resources are external to the
-						Web Publication.</p>
+					<p>
+						The union of the resource list and default reading order represents the definitive
+						list of resources that belong to the Web Publication and defines the bounds of the publication. All other resources are external to the
+						Web Publication.
+					</p>
 
 					<section id="resource-list-infoset">
 						<h5>Infoset Requirements</h5>
@@ -2361,16 +2363,6 @@ partial dictionary WebPublicationManifest {
 							agent SHOULD still be able to render a Web Publication even if some of these resources are
 							not identified as belonging to the Web Publication (e.g., when it is taken offline without
 							them).</p>
-
-						<div class="ednote"> The previous version of the draft included: <blockquote>
-								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
-									MUST treat the resource as external to the Web Publication (e.g., it might alert the
-									user before loading, open the resource in a new window, or unload the current Web
-									Publication and resume normal Web browsing).</p>
-							</blockquote>
-							<p>This was not decided on the Toronto F2F, and is still open.</p>
-						</div>
-						<p class="issue" data-number="205"></p>
 					</section>
 
 					<section id="resource-list-manifest">
