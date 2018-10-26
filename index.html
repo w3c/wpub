@@ -255,9 +255,9 @@
 
 					<p>To ensure interoperability when exposing the infoset items, this specification defines an
 						abstract representation of the data structures using the Web Interface Definition Language
-						(WebIDL) [[webidl-1]] which expresses the expected name, datatype, and possible restrictions
-						for each member of the manifest expressed in the infoset. (A WebIDL representation
-						can be mapped onto ECMAScript, C, or other programming languages.)</p>
+						(WebIDL) [[webidl-1]] which expresses the expected name, datatype, and possible restrictions for
+						each member of the manifest expressed in the infoset. (A WebIDL representation can be mapped
+						onto ECMAScript, C, or other programming languages.)</p>
 				</section>
 
 				<section id="webidl-wpm">
@@ -674,6 +674,22 @@ partial dictionary WebPublicationManifest {
 					absence of a preference by user agent implementers, selection of the first manifest listed is
 					suggested as a default.</p>
 
+			</section>
+
+			<section id="wp-bounds">
+				<h2>Web Publication Bounds</h2>
+
+				<p>A Web Publication consists of a finite set of <a href="#wp-resources">resources</a> that represent
+					its content. This extent is known as its bounds and is defined within its manifest &#8212; it is
+					obtained from the union of resources listed in the <a href="#default-reading-order">default reading
+						order</a> and <a href="#resource-list">resource list</a>.</p>
+
+				<p>To determine whether a resource is within the bounds of a Web Publication, user agents MUST compare
+					the absolute URL of a resource to the absolute URLs of the resources obtained from the union. If the
+					resource is identified in the enumeration, it is within the bounds of the Web Publication. All other
+					resources are external to the Web Publication.</p>
+
+				<p>Resources within the bounds of a Web Publication do not have to share the same domain.</p>
 			</section>
 
 			<section id="wp-resources">
@@ -2343,10 +2359,6 @@ partial dictionary WebPublicationManifest {
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
 							<a>default reading order</a>. It is expressed using the <code>resources</code> property.</p>
 
-					<p class="note">The union of the resource list and default reading order represents the definitive
-						list of resources that belong to the Web Publication. All other resources are external to the
-						Web Publication.</p>
-
 					<section id="resource-list-infoset">
 						<h5>Infoset Requirements</h5>
 
@@ -2361,16 +2373,6 @@ partial dictionary WebPublicationManifest {
 							agent SHOULD still be able to render a Web Publication even if some of these resources are
 							not identified as belonging to the Web Publication (e.g., when it is taken offline without
 							them).</p>
-
-						<div class="ednote"> The previous version of the draft included: <blockquote>
-								<p>If a user agent encounters a resource that it cannot locate in the resource list, it
-									MUST treat the resource as external to the Web Publication (e.g., it might alert the
-									user before loading, open the resource in a new window, or unload the current Web
-									Publication and resume normal Web browsing).</p>
-							</blockquote>
-							<p>This was not decided on the Toronto F2F, and is still open.</p>
-						</div>
-						<p class="issue" data-number="205"></p>
 					</section>
 
 					<section id="resource-list-manifest">
