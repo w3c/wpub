@@ -3071,142 +3071,136 @@ partial dictionary WebPublicationManifest {
 				</section>
 			</section>
 		</section>
-		<section id="canonical-manifest">
-			<h4>Canonical Manifest</h4>
-
-			<p>A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication
-					Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all
-				possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a
-					href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from
-				the <a>primary entry page</a> are incorporated.</p>
-
-			<p class="note">To help understanding the result of the algorithm, there is a link to the corresponding
-				canonical manifests for all the examples in <a href="#app-manifest-examples"></a> .</p>
-
-			<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following
-				algorithm. The algorithm takes the following arguments:</p>
-
-			<ul>
-				<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
-				<li>the <code>base</code> URL string, that represents the base URL for the manifest, and has the value
-					of: <ul>
-						<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri">baseURI</a>&#160;[[!dom]] value of
-							the <code>script element</code> in the <a>primary entry page</a>, in case the manifest is <a
-								href="#manifest-embedding">embedded</a>; or</li>
-						<li>the URL of the manifest otherwise</li>
-					</ul>
-				</li>
-				<li>the <code>document</code>
-					<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document (DOM)
-					Node</a>&#160;[[!html]], representing the <a>primary entry page</a>
-				</li>
-			</ul>
-
-			<p> The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers
-				to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is
-				either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a
-					<code>Person</code>). </p>
-			<ol>
-				<li>let <var>lang</var> string represent the default language, set to: <ul>
-						<li>the value of the <a
-								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
-									><code>lang</code> value</a>&#160;[[!html]] for the <code>script</code> element in
-							the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
-								>embedded</a>; or </li>
-						<li><code>undefined</code> otherwise</li>
-					</ul>
-				</li>
-				<li>let <var>dir</var> string represents the base direction, set to: <ul>
-						<li>the value of the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
-									><code>dir</code> value</a>&#160;[[!html]] for the <code>script</code> element in
-							the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
-								>embedded</a>; or </li>
-						<li><code>undefined</code> otherwise</li>
-					</ul>
-				</li>
-				<li> (<a href="#wp-title"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
-					the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-						><code>title</code></a> HTML element&#160;[[!html]] using <code>document</code>. If that element
-					exists, let <code>t</code> be its text content, and add to <code>manifest</code>: <ul>
-						<li>if the language of <code>title</code> is explicitly <a
-								href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to
-							the value of <code>l</code>, then add <br /><code>"name": {"value": t, "language":
-							l}</code><br /></li>
-						<li>or <br /><code>"name": t</code><br /> otherwise</li>
-					</ul>
-				</li>
-				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code>
-					and the value of <var>lang</var> is <em>not</em>
-					<code>undefined</code>, add<br /><code>"inLanguage": lang</code><br /> to <code>manifest</code>
-				</li>
-				<li> (<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is
-						<code>undefined</code> and the value of <var>dir</var> is <em>not</em>
-					<code>undefined</code>, add<br /><code>"inDirection": dir</code><br /> to <code>manifest</code>
-				</li>
-				<li> (<a href="#default-reading-order"></a>) if <code>manifest["readingOrder"]</code> is
-						<code>undefined</code>, add<br /><code>"readingOrder": [{"type" : "PublicationLink", "url": <a
-							data-cite="!dom#concept-document-url">document.URL</a>}]</code><br />to the
-						<code>manifest</code>
-				</li>
-				<li> (<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where
-						<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
-					is: <ul>
-						<li><code>type</code>; or</li>
-						<li>one of the <a href="#accessibility">accessibility</a> terms except for
-								<code>accessibilitySummary</code>; or</li>
-						<li>one of the <a href="#creators">creator</a> terms; or</li>
-						<li><code>name</code>; or</li>
-						<li>one of the <a href="#resource-categorization-properties">resource categorization
-								properties</a>; or</li>
-						<li><code>rel</code></li>
-					</ul> is a single string or object <code>v</code>, then change the relevant term/value
-						to<br /><code>"term" : [v]</code>
-				</li>
-				<li> (<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code>
-					array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple
-					string or <a>localizable string</a>, exchange that element of the array to<br /><code>{"type" :
-						["Person"], "name": [v]}</code>
-				</li>
-				<li> (<a href="#link-values"></a>) if one of the values <code>v</code> in the
-						<code>manifest["term"]</code> array, where <code>term</code> is one of the <a
-						href="#resource-categorization-properties">resource categorization properties</a>, is a simple
-					string, exchange that element of the array to<br /><code>{"type" : ["PublicationLink"], "url":
-						v}</code>
-				</li>
-				<li> (<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of
-						<code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including
-					itself) and <code>term</code> is: <ul>
-						<li><code>accessibilitySummary</code>; or</li>
-						<li><code>name</code>; or</li>
-						<li><code>description</code></li>
-					</ul> is a single string <code>v</code>, then change the relevant term/value to: <ul>
-						<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code>
-								then<br /><code>"term": { "value": v,"language": l }</code></li>
-						<li>otherwise<br /><code>"term": {"value": v}</code></li>
-					</ul>
-				</li>
-				<li> (<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where
-						<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
-					is: <ul>
-						<li><code>url</code>; or</li>
-						<li><code>id</code></li>
-					</ul> is a single string <code>u</code> which is <em>not</em> an <a
-						href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&#160;[[!url]],
-					then resolve this value (considered to be a relative URL) using the value of <code>base</code>,
-					yielding the value of <code>au</code>, and replace the term/value pair by<br /><code>"term":
-						au</code>
-				</li>
-			</ol>
-			<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual
-				representation of the algorithm. </p>
-
-		</section>
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
 
 			<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
-				representation of the algorithm.</p>
-
+				representation of the lifecycle algorithm.</p>
+			<section id="canonical-manifest">
+				<h4>Canonical Manifest</h4>
+	
+				<p>
+					A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from the <a>primary entry page</a> are incorporated. Using a Canonical Manifest when <a href="#processing-manifest">processing the manifest</a> makes those processing steps, as well as the transformation of the manifest to programming language structures, clearer. Converting the Manifest into its canonical form is done when the manifest is <a href="#obtaining-manifest">obtained</a>. 
+				</p>
+		
+				<p>
+					The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following algorithm. The algorithm takes the following arguments:</p>
+				<ul>
+					<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
+					<li>the <code>base</code> URL string, that represents the base URL for the manifest, and has the value
+						of: <ul>
+							<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri">baseURI</a>&#160;[[!dom]] value of
+								the <code>script element</code> in the <a>primary entry page</a>, in case the manifest is <a
+									href="#manifest-embedding">embedded</a>; or</li>
+							<li>the URL of the manifest otherwise</li>
+						</ul>
+					</li>
+					<li>the <code>document</code>
+						<a href="https://www.w3.org/TR/html/dom.html#elementdef-document">HTML Document (DOM)
+						Node</a>&#160;[[!html]], representing the <a>primary entry page</a>
+					</li>
+				</ul>
+	
+				<p> The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers
+					to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is
+					either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a
+						<code>Person</code>). </p>
+				<ol>
+					<li>let <var>lang</var> string represent the default language, set to: <ul>
+							<li>the value of the <a
+									href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
+										><code>lang</code> value</a>&#160;[[!html]] for the <code>script</code> element in
+								the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
+									>embedded</a>; or </li>
+							<li><code>undefined</code> otherwise</li>
+						</ul>
+					</li>
+					<li>let <var>dir</var> string represents the base direction, set to: <ul>
+							<li>the value of the <a href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"
+										><code>dir</code> value</a>&#160;[[!html]] for the <code>script</code> element in
+								the <a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
+									>embedded</a>; or </li>
+							<li><code>undefined</code> otherwise</li>
+						</ul>
+					</li>
+					<li> (<a href="#wp-title"></a>) if <code>manifest["name"]</code> is <code>undefined</code>, then locate
+						the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
+							><code>title</code></a> HTML element&#160;[[!html]] using <code>document</code>. If that element
+						exists, let <code>t</code> be its text content, and add to <code>manifest</code>: <ul>
+							<li>if the language of <code>title</code> is explicitly <a
+									href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes">set</a> to
+								the value of <code>l</code>, then add <br /><code>"name": {"value": t, "language":
+								l}</code><br /></li>
+							<li>or <br /><code>"name": t</code><br /> otherwise</li>
+						</ul>
+					</li>
+					<li> (<a href="#language-and-dir"></a>) if <code>manifest["inLanguage"]</code> is <code>undefined</code>
+						and the value of <var>lang</var> is <em>not</em>
+						<code>undefined</code>, add<br /><code>"inLanguage": lang</code><br /> to <code>manifest</code>
+					</li>
+					<li> (<a href="#language-and-dir"></a>) if <code>manifest["inDirection"]</code> is
+							<code>undefined</code> and the value of <var>dir</var> is <em>not</em>
+						<code>undefined</code>, add<br /><code>"inDirection": dir</code><br /> to <code>manifest</code>
+					</li>
+					<li> (<a href="#default-reading-order"></a>) if <code>manifest["readingOrder"]</code> is
+							<code>undefined</code>, add<br /><code>"readingOrder": [{"type" : "PublicationLink", "url": <a
+								data-cite="!dom#concept-document-url">document.URL</a>}]</code><br />to the
+							<code>manifest</code>
+					</li>
+					<li> (<a href="#arrays-and-single-values"></a>) if the value of <code>P["term"]</code>, where
+							<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
+						is: <ul>
+							<li><code>type</code>; or</li>
+							<li>one of the <a href="#accessibility">accessibility</a> terms except for
+									<code>accessibilitySummary</code>; or</li>
+							<li>one of the <a href="#creators">creator</a> terms; or</li>
+							<li><code>name</code>; or</li>
+							<li>one of the <a href="#resource-categorization-properties">resource categorization
+									properties</a>; or</li>
+							<li><code>rel</code></li>
+						</ul> is a single string or object <code>v</code>, then change the relevant term/value
+							to<br /><code>"term" : [v]</code>
+					</li>
+					<li> (<a href="#creators"></a>) if one of the values <code>v</code> in the <code>manifest["term"]</code>
+						array, where <code>term</code> is one of the <a href="#creators">creator</a> terms, is a simple
+						string or <a>localizable string</a>, exchange that element of the array to<br /><code>{"type" :
+							["Person"], "name": [v]}</code>
+					</li>
+					<li> (<a href="#link-values"></a>) if one of the values <code>v</code> in the
+							<code>manifest["term"]</code> array, where <code>term</code> is one of the <a
+							href="#resource-categorization-properties">resource categorization properties</a>, is a simple
+						string, exchange that element of the array to<br /><code>{"type" : ["PublicationLink"], "url":
+							v}</code>
+					</li>
+					<li> (<a href="#strings-vs-objects"></a>) if the value, or one of the values in case of an array, of
+							<code>P["term"]</code>, where <code>P</code> is any object in <code>manifest</code> (including
+						itself) and <code>term</code> is: <ul>
+							<li><code>accessibilitySummary</code>; or</li>
+							<li><code>name</code>; or</li>
+							<li><code>description</code></li>
+						</ul> is a single string <code>v</code>, then change the relevant term/value to: <ul>
+							<li>if <code>manifest[inLanguage]</code> is set to the value of <code>l</code>
+									then<br /><code>"term": { "value": v,"language": l }</code></li>
+							<li>otherwise<br /><code>"term": {"value": v}</code></li>
+						</ul>
+					</li>
+					<li> (<a href="#manifest-relative-urls"></a>) if the value of <code>P["term"]</code>, where
+							<code>P</code> is any object in <code>manifest</code> (including itself) and <code>term</code>
+						is: <ul>
+							<li><code>url</code>; or</li>
+							<li><code>id</code></li>
+						</ul> is a single string <code>u</code> which is <em>not</em> an <a
+							href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL string</a>&#160;[[!url]],
+						then resolve this value (considered to be a relative URL) using the value of <code>base</code>,
+						yielding the value of <code>au</code>, and replace the term/value pair by<br /><code>"term":
+							au</code>
+					</li>
+				</ol>
+				<p class="note">
+					See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm. Also, To help understanding the result of the algorithm, there is a link to the corresponding canonical manifests for all the examples in <a href="#app-manifest-examples"></a>. 
+				</p>
+			</section>
+		
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
 
