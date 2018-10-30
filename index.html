@@ -3074,10 +3074,99 @@ partial dictionary WebPublicationManifest {
 		<section id="wp-lifecycle">
 			<h2>Web Publication Lifecycle</h2>
 
-			<p class="note">See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
-				representation of the lifecycle algorithm.</p>
+			<p class="note">
+				See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual representation of the lifecycle algorithm.
+			</p>
+		
+			<section id="obtaining-manifest">
+				<h3>Obtaining a manifest</h3>
+
+				<p> The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
+						obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
+					following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
+					it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
+					MUST ignore the manifest declaration. </p>
+
+				<ol>
+					<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
+							page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest
+							link</var> be the first <code>link</code> element in tree order in <code>Document</code>
+						whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
+
+					<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
+						terminate this algorithm. </li>
+
+					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it
+						points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment"
+							>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>: <ol>
+							<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
+								tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
+									<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
+
+							<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
+								algorithm.</li>
+
+							<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
+									content</a> of <var>embedded manifest script</var>
+							</li>
+							<li> Let <var>manifest URL</var> be set to <var>origin</var>
+							</li>
+						</ol>
+					</li>
+					<li>Otherwise: <ol>
+							<li> Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
+								attribute, relative to the element's base URL. If parsing fails, then abort these steps. </li>
+							<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
+									URL</var>, and whose context is the same as the browsing context of the
+									<code>Document</code>. </li>
+
+							<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
+									'<code>use-credentials</code>', then set <var>request</var>'s credentials to
+									'<code>include</code>'. </li>
+
+							<li> Await the result of performing a fetch with <var>request</var>, letting
+									<var>response</var> be the result. </li>
+							<li> If <var>response</var> is a network error, terminate this algorithm. </li>
+							<li> Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
+									data-cite="!fetch#concept-request-body">body</a>. </li>
+						</ol>
+					</li>
+
+					<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
+						<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
+						terminate this algorithm. </li>
+
+					<li> If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
+
+					<li> Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
+						<var>json</var>, using the values of <var>json</var>, <var>manifest URL</var>, and
+							<code>Document</code> as input to the algorithm described in <a href="#canonical-manifest"
+						></a>. </li>
+
+					<li> Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web
+						Publication Manifest, namely: <ul>
+							<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
+							<li>The Publication type is set (see <a href="#manifest-pub-types"></a>)</li>
+							<li>The Publication address is set (see <a href="#address"></a>)</li>
+						</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
+
+					<li> Let <var>manifest</var> be the result of running <a>processing a manifest</a> given
+							<var>canonical manifest</var>. </li>
+
+					<li>Return <var>manifest</var>. </li>
+				</ol>
+
+				<p class="note"> The algorithm does not describes how error and warning messages should be reported.
+					This is implementation dependent. </p>
+
+			</section>
+
 			<section id="canonical-manifest">
-				<h4>Canonical Manifest</h4>
+				<h4>Generating a Canonical Manifest</h4>
 	
 				<p>
 					A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where all possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or <a href="#strings-vs-objects"></a>) have been removed, and all values that are possibly harnessed from the <a>primary entry page</a> are incorporated. Using a Canonical Manifest when <a href="#processing-manifest">processing the manifest</a> makes those processing steps, as well as the transformation of the manifest to programming language structures, clearer. Converting the Manifest into its canonical form is done when the manifest is <a href="#obtaining-manifest">obtained</a>. 
@@ -3086,7 +3175,7 @@ partial dictionary WebPublicationManifest {
 				<p>
 					The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following algorithm. The algorithm takes the following arguments:</p>
 				<ul>
-					<li>the <code>manifest</code> string, that represent the <a>manifest</a> in JSON</li>
+					<li>the <code>manifest</code> the JSON object that represent the <a>manifest</a></li>
 					<li>the <code>base</code> URL string, that represents the base URL for the manifest, and has the value
 						of: <ul>
 							<li>the <a href="https://www.w3.org/TR/dom/#dom-node-baseuri">baseURI</a>&#160;[[!dom]] value of
@@ -3101,10 +3190,9 @@ partial dictionary WebPublicationManifest {
 					</li>
 				</ul>
 	
-				<p> The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers
-					to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is
-					either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a
-						<code>Person</code>). </p>
+				<p>
+					The steps of the algorithm are described below. As an abuse of notation, <code>P["term"]</code> refers to the value in the object <code>P</code> for the label <code>"term"</code>, where <code>P</code> is either <code>manifest</code>, or an object appearing within <code>manifest</code> (e.g., a <code>Person</code>).
+				</p>
 				<ol>
 					<li>let <var>lang</var> string represent the default language, set to: <ul>
 							<li>the value of the <a
@@ -3195,97 +3283,13 @@ partial dictionary WebPublicationManifest {
 						yielding the value of <code>au</code>, and replace the term/value pair by<br /><code>"term":
 							au</code>
 					</li>
+					<li>
+						Return the (transformed) <code>manifest</code>.
+					</li>
 				</ol>
 				<p class="note">
-					See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm. Also, To help understanding the result of the algorithm, there is a link to the corresponding canonical manifests for all the examples in <a href="#app-manifest-examples"></a>. 
+					See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a visual representation of the algorithm. Also, to help understanding the result of the algorithm, there is a link to the corresponding canonical manifests for all the examples in <a href="#app-manifest-examples"></a>. 
 				</p>
-			</section>
-		
-			<section id="obtaining-manifest">
-				<h3>Obtaining a manifest</h3>
-
-				<p> The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
-						obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
-					following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
-					it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
-					MUST ignore the manifest declaration. </p>
-
-				<ol>
-					<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
-							page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest
-							link</var> be the first <code>link</code> element in tree order in <code>Document</code>
-						whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
-
-					<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
-
-					<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
-
-					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
-						terminate this algorithm. </li>
-
-					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it
-						points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment"
-							>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>: <ol>
-							<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
-								tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
-									<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
-
-							<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
-								algorithm.</li>
-
-							<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
-									content</a> of <var>embedded manifest script</var>
-							</li>
-							<li> Let <var>manifest URL</var> be set to <var>origin</var>
-							</li>
-						</ol>
-					</li>
-					<li>Otherwise: <ol>
-							<li> Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
-								attribute, relative to the element's base URL. If parsing fails, then abort these steps. </li>
-							<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
-									URL</var>, and whose context is the same as the browsing context of the
-									<code>Document</code>. </li>
-
-							<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
-									'<code>use-credentials</code>', then set <var>request</var>'s credentials to
-									'<code>include</code>'. </li>
-
-							<li> Await the result of performing a fetch with <var>request</var>, letting
-									<var>response</var> be the result. </li>
-							<li> If <var>response</var> is a network error, terminate this algorithm. </li>
-							<li> Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
-									data-cite="!fetch#concept-request-body">body</a>. </li>
-						</ol>
-					</li>
-
-					<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
-						<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
-						terminate this algorithm. </li>
-
-					<li> If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
-
-					<li> Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
-						<var>text</var>, using the values of <var>text</var>, <var>manifest URL</var>, and
-							<code>Document</code> as input to the algorithm described in <a href="#canonical-manifest"
-						></a>. </li>
-
-					<li> Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web
-						Publication Manifest, namely: <ul>
-							<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
-							<li>The Publication type is set (see <a href="#manifest-pub-types"></a>)</li>
-							<li>The Publication address is set (see <a href="#address"></a>)</li>
-						</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
-
-					<li> Let <var>manifest</var> be the result of running <a>processing a manifest</a> given
-							<var>canonical manifest</var>. </li>
-
-					<li>Return <var>manifest</var>. </li>
-				</ol>
-
-				<p class="note"> The algorithm does not describes how error and warning messages should be reported.
-					This is implementation dependent. </p>
-
 			</section>
 
 			<section id="processing-manifest">
