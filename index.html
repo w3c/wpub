@@ -61,9 +61,9 @@
 	<body>
 		<section id="abstract">
 			<p>This specification defines a collection of information that describes the structure of Web Publications
-				so that user agents can provide user experiences tailored to reading publications, such as sequential
-				navigation and offline reading. This information includes the default reading order, a list of
-				resources, and publication-wide metadata.</p>
+				so that user agents can provide user experiences specially tailored to reading publications, such as
+				sequential navigation and offline reading. This information includes the default reading order, a list
+				of resources, and publication-wide metadata.</p>
 		</section>
 		<section id="sotd">
 			<p>This draft provides a draft version of a Web Publication. Many details are under active consideration
@@ -74,6 +74,11 @@
 					href="#wp-properties"></a>, which include the definition of a <a>manifest</a> making use of terms in
 					<a href="https://schema.org">schema.org</a>, as well as the <a href="#wp-lifecycle">Lifecycle</a>
 				and <a href="#webidl">WebIDL</a> sections.</p>
+
+			<p>Significant to this draft is the removal of the Information Set (<em>infoset</em>) &#8212; the final data
+				model produced from the processing of manifest properties. This draft instead relies on the <a
+					href="#canonical-manifest">canonical manifest</a> to express this model, as it already encompasses
+				the final JSON-compliant data set that user agents are expected to produce.</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -100,8 +105,8 @@
 
 				<figure id="WP-diagram">
 					<object data="images/WP-diagram.svg" type="image/svg+xml" aria-describedby="wp-diagram-alt">
-						<p id="wp-diagram-alt">Flowchart depicts the resources of a Web Publication, their attachment to
-							a manifest, and its relationship to the infoset.</p>
+						<p id="wp-diagram-alt">Flowchart depicts the resources of a Web Publication and their attachment
+							to a manifest.</p>
 					</object>
 					<figcaption>Simplified Diagram of the Structure of Web Publications. <br />A <a
 							href="#WP-diagram-descr">description of the structure diagram</a> is available in the
@@ -216,82 +221,95 @@
 					criteria:</p>
 
 				<ul>
-					<li>it is capable of generating a conforming <a href="#wp-properties"><abbr title="information set"
-								>infoset</abbr></a> for a Web Publication.</li>
+					<li>it is capable of <a href="#obtaining-manifest">obtaining a conforming manifest</a> for a Web
+						Publication.</li>
 				</ul>
 			</section>
 		</section>
 		<section id="wp-construction">
 			<h2>Web Publication Construction</h2>
 
-			<section id="wp-infoset-manifest" class="informative">
-				<h3>Infoset and Manifest</h3>
+			<section id="wp-manifest">
+				<h3>Manifest</h3>
 
-				<p>A <a>Web Publication</a> is defined by a set of items known as its <dfn data-lt="infoset">information
-						set</dfn> (<abbr title="information set">infoset</abbr>). The <abbr title="information set"
-						>infoset</abbr> is both abstract and concrete. It is abstract in the sense that it represents a
-					set of information that a user agent has to compile about the Web Publication, but it also becomes
-					concrete when the user agent creates an internal representation of that information.</p>
+				<section id="manifest-authored-canonical">
+					<h4>Authored and Canonical Manifests</h4>
 
-				<p>A <a>manifest</a>, on the other hand, is a serialization of an <abbr title="information set"
-							><a>infoset</a></abbr> created by the author of a <a>Web Publication</a>. The manifest is
-					expressed using the JSON-LD&#160;[[json-ld]] format &#8212; a variant of JSON&#160;[[ecma-404]] for
-					expressing linked data. The manifest can be created as a standalone resource or it can be embedded
-					within an HTML document.</p>
+					<p>A Web Publication is described by its <a>manifest</a>, which provides a set of properties
+						expressed using the JSON-LD&#160;[[json-ld]] format (a variant of JSON&#160;[[ecma-404]] for
+						linked data).</p>
 
-				<p>Although the <abbr title="information set">infoset</abbr> is primarily compiled from a Web
-					Publication's <a>manifest</a>, some information is obtained outside the manifest. The table of
-					contents, for example, may be referenced from the manifest but is serialized in an HTML
-					document.</p>
+					<p>The manifest is expressed in one of two forms depending on the state of the Web Publication:</p>
 
-				<p>This specification describes the requirements for creating both the infoset and manifest. This
-					section, in particular, details how to create a manifest, and <a href="#wp-properties">the next</a>
-					lists the various properties common to infosets and manifests.</p>
-			</section>
+					<dl>
+						<dt><dfn data-lt="authored web publication manifest">Authored Manifest</dfn></dt>
+						<dd>
+							<p>The Authored Web Publication Manifest, as its name suggests, is the serialization of the
+								manifest that the author provides with their Web Publication.</p>
+						</dd>
 
-			<section id="webidl">
-				<h4>WebIDL</h4>
+						<dt><dfn data-lt="canonical manifest|canonical web publication manifest">Canonical
+								Manifest</dfn></dt>
+						<dd>
+							<p>The Canonical Web Publication Manifest is a version of the Web Publication
+									<a>Manifest</a> created by user agents when they <a href="#obtaining-manifest"
+									>obtain the authored manifest</a> and remove all possible ambiguities and
+								incorporate any missing values that can be inferred from another source.</p>
+						</dd>
+					</dl>
 
-				<section id="webidl-intro" class="informative">
-					<h4>Explanation</h4>
+					<p>This specification describes the requirements for creating both authored and canonical manifests.
+						This section, in particular, details how to create the authored manifest, while <a
+							href="#wp-properties"></a> provides the various property definitions. These definitions
+						include the rules user agents uses to supplement the canonical manifest. The algorithm for
+						transforming an <a>Authored Manifest</a> into a <a>Canonical Manifest</a> is described in the
+						separate section <a href="#canonical-manifest"></a>.</p>
 
-					<p>Although a Web Publication manifest is authored as [[json-ld]], user agents process this
-						information into an internal data structure representing the <a>infoset</a> in order to utilize
-						the properties. The exact manner in which this processing occurs, and how the data is used
-						internally, is user agent-dependent.</p>
-
-					<p>To ensure interoperability when exposing the infoset items, this specification defines an
-						abstract representation of the data structures using the Web Interface Definition Language
-						(WebIDL) [[webidl-1]] which expresses the expected name, datatype, and possible restrictions for
-						each member of the manifest expressed in the infoset. (A WebIDL representation can be mapped
-						onto ECMAScript, C, or other programming languages.)</p>
 				</section>
 
-				<section id="webidl-wpm">
-					<h3>The <dfn><code>WebPublicationManifest</code></dfn> Dictionary</h3>
+				<section id="webidl">
+					<h4>WebIDL</h4>
 
-					<pre class="idl" id="wpm">
+					<section id="webidl-intro" class="informative">
+						<h5>Explanation</h5>
+
+						<p>Although a Web Publication manifest is authored as [[json-ld]], a user agent processes this
+							information into an internal data structure in order to utilize the properties. The exact
+							manner in which this processing occurs, and how the data is used internally, is user
+							agent-dependent.</p>
+
+						<p>To ensure interoperability when exposing the items, this specification defines an abstract
+							representation of the data structures using the Web Interface Definition Language (WebIDL)
+							[[webidl-1]]. The WebIDL definitions express the expected names, datatypes, and possible
+							restrictions for each member of the manifest. (A WebIDL representation can be mapped onto
+							ECMAScript, C, or other programming languages.)</p>
+
+						<p class="note">Authors of Web Publications are encouraged to review these definitions, but they
+							are not necessary to understand.</p>
+					</section>
+
+					<section id="webidl-wpm">
+						<h5>The <dfn><code>WebPublicationManifest</code></dfn> Dictionary</h5>
+
+						<pre class="idl" id="wpm">
 dictionary WebPublicationManifest {
 	
 };</pre>
 
-					<p>The <code>WebPublicationManifest</code> dictionary is the [[!webidl-1]] representation of the
-						collection of Web Publication manifest properties. WebIDL definitions are also included at the
-						beginning of each property that belongs to the dictionary &#8212; these represent the members of
-						the <code>WebPublicationManifest</code> dictionary.</p>
+						<p>The <code>WebPublicationManifest</code> dictionary is the [[!webidl-1]] representation of the
+							collection of Web Publication manifest properties. WebIDL definitions are also provided at
+							the end of each property that belongs to the dictionary &#8212; these represent the members
+							of the <code>WebPublicationManifest</code> dictionary.</p>
 
-					<p class="note">Refer to <a href="#idl-index"></a> for a complete listing of the
-							<code>WebPublicationManifest</code> dictionary.</p>
+						<p class="note">Refer to <a href="#idl-index"></a> for a complete listing of the
+								<code>WebPublicationManifest</code> dictionary.</p>
+					</section>
 				</section>
-			</section>
-
-			<section id="wp-manifest">
-				<h3>Creating a Manifest</h3>
 
 				<section id="manifest-context">
 					<h4>Manifest Contexts</h4>
 
-					<p> A Web Publication Manifest MUST start by setting the JSON-LD context [[!json-ld]]. The context
+					<p>A Web Publication Manifest MUST start by setting the JSON-LD context [[!json-ld]]. The context
 						has the following two major components:</p>
 
 					<ul>
@@ -306,10 +324,9 @@ dictionary WebPublicationManifest {
 }
 </pre>
 
-					<p>The Web Publication context file MAY add features to the properties defined in Schema.org (e.g.,
+					<p>The Web Publication context document adds features to the properties defined in Schema.org (e.g.,
 						the requirement for the <a href="https://schema.org/creator">creator</a> property to be order
 						preserving).</p>
-
 
 					<p class="ednote">As part of the continuous contacts with Schema.org the additional features defined
 						in the Web Publication context file could migrate to the core Schema.org vocabulary.</p>
@@ -318,7 +335,6 @@ dictionary WebPublicationManifest {
 							href="https://schema.org/docs/faq.html#19">the vocabulary is being migrated</a> to use the
 						secure <code>https</code> scheme as its default. This specification requires the use
 							<code>https</code> when referencing Schema.org in the manifest.</p>
-
 				</section>
 
 				<section id="manifest-values">
@@ -328,8 +344,8 @@ dictionary WebPublicationManifest {
 						<h5>Arrays and Single Values</h5>
 
 						<p>Various manifest properties can have one or more values. As a general rule, these values can
-							be expressed as [[!json]]&#160; arrays. When the property value is an array with a single
-							element, however, the array syntax can be omitted.</p>
+							be expressed as [[!json]]&#160;arrays. When the property value is an array with a single
+							element, however, the array syntax MAY be omitted.</p>
 
 						<aside class="example" title="Using a text string instead of an array">
 							<p>As a Web Publication typically contains many resources, this declaration of a single
@@ -383,9 +399,9 @@ dictionary WebPublicationManifest {
 					<section id="link-values">
 						<h5>Link Values</h5>
 
-						<p>With the exception of the <a href="#descriptive-properties">descriptive properties</a>, the
-							Web Publication properties typically link to one or more resources. When a property requires
-							a link value, the link MUST be expressed in one of the following two ways:</p>
+						<p>With the exception of the <a href="#descriptive-properties">descriptive properties</a>, Web
+							Publication properties typically link to one or more resources. When a property requires a
+							link value, the link MUST be expressed in one of the following two ways:</p>
 
 						<ol>
 							<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]];
@@ -516,10 +532,10 @@ dictionary PublicationLink {
 				<section id="manifest-pub-types">
 					<h4>Publication Types</h4>
 
-					<p> The Web Publication Manifest MUST include a <dfn>Publication Type</dfn> using the <code
+					<p>The Web Publication Manifest MUST include a <dfn>Publication Type</dfn> using the <code
 							data-dfn-for="WebPublicationManifest"><dfn>type</dfn></code> term&#160;[[!json-ld]]. The
-						type MAY be mapped onto the <a href="https://schema.org/CreativeWork"
-							><code>CreativeWork</code></a> type&#160;[[!schema.org]].</p>
+						type MAY be mapped onto <a href="https://schema.org/CreativeWork"
+						><code>CreativeWork</code></a>&#160;[[!schema.org]].</p>
 
 					<pre class="example" title="Setting a Web Publication's type to CreativeWork.">
 {
@@ -529,12 +545,12 @@ dictionary PublicationLink {
 }
 </pre>
 
-					<p> Schema.org also includes a number of more specific types, all subtypes of
-							<code>CreativeWork</code>, such as <a href="https://schema.org/Article"
-							><code>Article</code></a>, <a href="https://schema.org/Book"><code>Book</code></a>, <a
-							href="https://schema.org/TechArticle"><code>TechArticle</code></a>, or <a
-							href="https://schema.org/Course"><code>Course</code></a>. These MAY be used instead of (or
-						in addition to) <code>CreativeWork</code>. </p>
+					<p>Schema.org also includes a number of more specific subtypes of <code>CreativeWork</code>, such as
+							<a href="https://schema.org/Article"><code>Article</code></a>, <a
+							href="https://schema.org/Book"><code>Book</code></a>, <a
+							href="https://schema.org/TechArticle"><code>TechArticle</code></a>, and <a
+							href="https://schema.org/Course"><code>Course</code></a>. These MAY be used instead of, or
+						in addition to, <code>CreativeWork</code>.</p>
 
 					<pre class="example" title="Setting a Web Publication's type to Book.">
 {
@@ -544,8 +560,8 @@ dictionary PublicationLink {
 }
 </pre>
 
-					<p>Each schema.org type defines a set of properties that are valid for use with it. To ensure that
-						the manifest can be validated and processed by schema.org aware processors, the manifest SHOULD
+					<p>Each Schema.org type defines a set of properties that are valid for use with it. To ensure that
+						the manifest can be validated and processed by Schema.org aware processors, the manifest SHOULD
 						contain only the properties associated with the selected type.</p>
 
 					<p>If properties from more than one type are needed, the manifest MAY include multiple type
@@ -559,7 +575,7 @@ dictionary PublicationLink {
 }
 </pre>
 
-					<p>User agents SHOULD NOT fail to process manifests that are not valid to their declared schema.org
+					<p>User agents SHOULD NOT fail to process manifests that are not valid to their declared Schema.org
 						type(s).</p>
 
 					<p class="note">Refer to the Schema.org site for the complete <a
@@ -578,9 +594,9 @@ partial dictionary WebPublicationManifest {
 							href="#wp-properties"></a>.</p>
 
 					<p class="note">Although authors only have to understand the serialization requirements for manifest
-						terms, they are encouraged to read through the infoset definitions for each property, as well.
-						The infoset definitions describe, in some cases, how items are compiled in the absence of
-						explicit information in the manifest.</p>
+						terms, they are encouraged to read through the full definitions for each property. The
+						definitions describe, in some cases, how items are compiled into the <a>Canonical Manifest</a>
+						the absence of explicit information.</p>
 				</section>
 
 				<section id="manifest-relative-urls">
@@ -588,77 +604,81 @@ partial dictionary WebPublicationManifest {
 
 					<p>
 						<a href="https://url.spec.whatwg.org/#relative-url-string">Relative URL strings</a> MAY be used
-						in the manifest. These URLs are resolved into <a
+						in the manifest. These URLs are resolved to <a
 							href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a> using a <a
-							href="https://url.spec.whatwg.org/#concept-base-url">base URL</a>&#160;[[!url]]. </p>
+							href="https://url.spec.whatwg.org/#concept-base-url">base URL</a>&#160;[[!url]].</p>
 
 					<p>The base URL for relative URLs is determined as follows:</p>
 
 					<ul>
-						<li>In the case of an <a href="#manifest-embedding">embedded manifest</a>, it is the <a
-								href="https://www.w3.org/TR/html/infrastructure.html#document-base-url">document base
-								URL</a>&#160;[[!html]] of the <a>primary entry page</a> of the Web Publication;</li>
-						<li>In the case of a <a href="#wp-linking">linked manifest</a>, it is URL of the manifest
-							resource.</li>
+						<li>In the case of an <a href="#manifest-embedding">embedded manifest</a>, the base URL is the
+								<a data-cite="!html#the-base-element">document base URL</a>&#160;[[!html]] of the
+								<a>primary entry page</a> of the Web Publication;</li>
+						<li>In the case of a <a href="#manifest-linking">linked manifest</a>, the base URL is URL of the
+							manifest resource.</li>
 					</ul>
 
-					<p>For embedded manifests, this means that relative URLs are resolved against the URL of the primary
+					<p>By consequence, relative URLs in embedded manifests are resolved against the URL of the primary
 						entry page <em>unless</em> the page declares a base direction (i.e., in a <a
-							href="https://www.w3.org/TR/html/document-metadata.html#the-base-element"
-								><code>&lt;base&gt;</code> element</a> in its header or via an <a
-							href="https://www.w3.org/TR/html/dom.html#the-xmlbase-attribute-xml-only"
-								><code>xml:base</code> attribute</a>&#160;[[html]]).</p>
+							data-cite="!html#the-base-element"><code>&lt;base&gt;</code> element</a> in its header).</p>
+
+					<p class="issue">The usage (or not) of the <code>&lt;base&gt;</code> element for embedded manifests
+						is currently the subject of several issues in the <a href="https://www.w3.org/2018/json-ld-wg/"
+							>JSON-LD Working Group</a> Working Group: <a
+							href="https://github.com/w3c/json-ld-syntax/issues/22">JSON-LD #22</a>, <a
+							href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>, and, ultimately, <a
+							href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>.</p>
+
 				</section>
-			</section>
 
-			<section id="manifest-embedding">
-				<h3>Embedding a Manifest</h3>
+				<section id="manifest-embedding">
+					<h3>Embedding</h3>
 
-				<p>When opting to embed the manifest, it MUST be included in the <a href="#wp-primary-entry-page"
-						>primary entry page</a> using the <a
-						href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-							><code>script</code> element</a>&#160;[[!html]]. The <code>type</code> attribute of this
-					element MUST be set to <code>application/ld+json</code>.</p>
+					<p>A manifest MAY be embedded only in the <a href="#wp-primary-entry-page">primary entry page</a>.
+						In this case, the manifest MUST be included in a <a
+							href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
+								><code>script</code> element</a>&#160;[[!html]] whose <code>type</code> attribute is set
+						to <code>application/ld+json</code>.</p>
 
-				<p>Additionally, the <code>script</code> element MUST include a unique identifier in an <code>id</code>
-					attribute&#160;[[!html]]. This identifier ensures that the manifest <a href="#wp-linking">can be
-						referenced</a>.</p>
+					<p>Additionally, the <code>script</code> element MUST include a unique identifier in an
+							<code>id</code> attribute&#160;[[!html]]. This identifier ensures that the manifest <a
+							href="#manifest-linking">can be referenced</a>.</p>
 
-				<pre class="example" title="A Web Publication Manifest included in an HTML document">
+					<pre class="example" title="A Web Publication Manifest included in an HTML document">
 &lt;script id="example_manifest" type="application/ld+json"&gt;
    {
       &#8230;
    }
 &lt;/script&gt;
 </pre>
-			</section>
+				</section>
 
-			<section id="wp-linking">
-				<h2>Linking to a Manifest</h2>
+				<section id="manifest-linking">
+					<h2>Linking To</h2>
 
-				<p>With the exception of the <a>primary entry page</a>, linking a resource to its Web Publication
-					manifest is OPTIONAL. Including a link is encouraged whenever possible, however, as it allows user
-					agents to immediately ascertain that a resource belongs to a Web Publication, regardless of how the
-					user reaches the resource.</p>
+					<p>With the exception of the <a>primary entry page</a>, linking a resource to its Web Publication
+						manifest is OPTIONAL. Including a link is encouraged whenever possible, however, as it allows
+						user agents to immediately ascertain that a resource belongs to a Web Publication regardless of
+						how the user reaches the resource.</p>
 
-				<p>Links to a Web Publication manifest MUST take one or both of the following forms:</p>
+					<p>Links to a Web Publication manifest MUST take one or both of the following forms:</p>
 
-				<ul>
-					<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code> parameter
-							set to the value "<code>publication</code>".</p>
-						<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
-					</li>
-					<li><p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
-							value "<code>publication</code>".</p>
-						<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
-					</li>
-				</ul>
+					<ul>
+						<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code>
+								parameter set to the value "<code>publication</code>".</p>
+							<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
+						</li>
+						<li><p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
+								value "<code>publication</code>".</p>
+							<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
+						</li>
+					</ul>
 
-				<p>When a manifest is embedded within an HTML document, the link MUST include a fragment identifier that
-					references the <code>script</code> element that contains the manifest (see <a
-						href="#manifest-embedding"></a>). </p>
+					<p>When a manifest is embedded within an HTML document, the link MUST include a fragment identifier
+						that references the <code>script</code> element that contains the manifest (see <a
+							href="#manifest-embedding"></a>).</p>
 
-				<pre class="example" title="Link to a manifest within the same HTML resource">
+					<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
 	&#8230;
 	&lt;script id="example_manifest" type="application/ld+json"&gt;
@@ -669,18 +689,20 @@ partial dictionary WebPublicationManifest {
 	&lt;/script&gt;
 </pre>
 
-				<p class="issue" data-number="132">The exact value of <code>rel</code> is still to be agreed upon and
-					should be registered by IANA.</p>
+					<p class="issue" data-number="132">The exact value of <code>rel</code> is still to be agreed upon
+						and should be registered by IANA.</p>
 
-				<p class="ednote">The following details might be moved to the lifecycle section in a future draft.</p>
+					<p class="ednote">The following details might be moved to the lifecycle section in a future
+						draft.</p>
 
-				<p>When a resource links to multiple manifests, a user agent MAY choose to present one or more
-					alternatives to the end user, or choose a single alternative on its own. The user agent MAY choose
-					to present any manifest based upon information that it possesses, even one that is not explicitly
-					listed as a parent (e.g., based upon information it calculates or acquires out of band). In the
-					absence of a preference by user agent implementers, selection of the first manifest listed is
-					suggested as a default.</p>
+					<p>When a resource links to multiple manifests, a user agent MAY choose to present one or more
+						alternatives to the end user, or choose a single alternative on its own. The user agent MAY
+						choose to present any manifest based upon information that it possesses, even one that is not
+						explicitly listed as a parent (e.g., based upon information it calculates or acquires out of
+						band). In the absence of a preference by user agent implementers, selection of the first
+						manifest listed is suggested as a default.</p>
 
+				</section>
 			</section>
 
 			<section id="wp-bounds">
@@ -702,8 +724,8 @@ partial dictionary WebPublicationManifest {
 			<section id="wp-resources">
 				<h2>Resources</h2>
 
-				<p>A <a>Web Publication</a> MUST include at least one <abbr title="Hypertext Markup Language"
-						>HTML</abbr> document&#160;[[!html]]&#8212;the <a>primary entry page</a>.</p>
+				<p>A <a>Web Publication</a> MUST include at least one HTML document&#160;[[!html]]&#8212;the <a>primary
+						entry page</a>.</p>
 
 				<p>There are no restrictions on a Web Publication beyond this requirement. The Web Publication MAY
 					include references to resources of any media type, both in the <a>default reading order</a> and as
@@ -734,10 +756,10 @@ partial dictionary WebPublicationManifest {
 					the Web Publication instead of a specific page of content). If a default reading order is not
 					provided, however, the primary entry page will be used as the default entry.</p>
 
-				<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest MAY be
+				<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest can be
 						embedded</a>. To ensure discovery of the manifest, the primary entry page MUST provide a <a
-						href="#wp-linking">link to the manifest</a>, regardless of whether the manifest is embedded
-					within the page or external to it.</p>
+						href="#manifest-linking">link to the manifest</a>, regardless of whether the manifest is
+					embedded within the page or external to it.</p>
 
 				<p>The address of the primary entry page is also the <a>canonical identifier</a> for the Web Publication
 					(i.e., it serves as the unique identifier for the Web Publication).</p>
@@ -753,23 +775,23 @@ partial dictionary WebPublicationManifest {
 				<p>The table of contents provides a hierarchical list of links that reflects the structural outline of
 					the major sections of the Web Publication.</p>
 
-				<p> The table of contents is expressed via an HTML element (typically a <code>nav</code>
-					element&#160;[[!html]]) in one of the <a href="#wp-resources">resources</a>. This element MUST be
-					identified by the <code>role</code> attribute&#160;[[!html]] value
-					"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document with
-					that <code>role</code> value in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
-						tree order</a>&#160;[[!dom]]. </p>
+				<p>The table of contents is expressed via an [[!html]]&#160;element (typically a <a
+						href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code> element</a>) in
+					one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
+						<code>role</code> attribute&#160;[[!html]] value "<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]],
+					and MUST be the first element in the document &#8212; in <a
+						href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]]
+					&#8212; with that <code>role</code> value.</p>
 
 				<p>If the table of contents is not located in the <a href="#wp-primary-entry-page">primary entry
-						page</a>, the manifest SHOULD <a href="#table-of-contents-manifest">identify the resource</a>
-					that contains the structure.</p>
+						page</a>, the manifest SHOULD <a href="#table-of-contents">identify the resource</a> that
+					contains the structure.</p>
 
 				<p>There are no requirements on the table of contents itself, except that, when specified, it MUST
 					include a link to at least one <a href="#wp-resources">resource</a>.</p>
 
 				<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
-					information on how to identify in the infoset and manifest which resource contains the table of
-					contents.</p>
+					information on how to identify which resource contains the table of contents.</p>
 
 				<p class="issue" data-number="276"></p>
 				<p class="issue" data-number="291">Do we need a more detailed definition for the HTML TOC format?</p>
@@ -778,27 +800,28 @@ partial dictionary WebPublicationManifest {
 			<section id="wp-pagelist">
 				<h3>Page List</h3>
 
-				<p> The page list is a list of links that provides navigation to static page demarcation points within
-					the content. These locations allow users, for example, to coordinate access into the content. The
+				<p>The page list is a list of links that provides navigation to static page demarcation points within
+					the content. These locations allow users to coordinate access into the content, for example. The
 					exact nature of these locations is left to content creators to define. They usually correspond to
 					pages of a print document which is the source of the digital publication, but might be a purely
-					digital creation added for the sake of easing navigation. </p>
+					digital creation added to ease navigation.</p>
 
-				<p> The page list is expressed via an HTML element (typically a <code>nav</code> element&#160;[[!html]])
-					in one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
+				<p>The page list is expressed via an [[!html]] element (typically a <a
+						href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code> element</a>) in
+					one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
 						<code>role</code> attribute&#160;[[!html]] value
 					"<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document
-					with that <code>role</code> value <a href="https://dom.spec.whatwg.org/#concept-tree-order">document
-						tree order</a>&#160;[[!dom]]. </p>
+					&#8212; in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+					order</a>&#160;[[!dom]] &#8212; with that <code>role</code> value.</p>
 
-				<p> If the page list is not located in the <a href="#wp-primary-entry-page">primary entry page</a>, the
-					manifest SHOULD <a href="#page-list-manifest">identify the resource</a> that contains the structure. </p>
+				<p>If the page list is not located in the <a href="#wp-primary-entry-page">primary entry page</a>, the
+					manifest SHOULD <a href="#page-list">identify the resource</a> that contains the structure.</p>
 
-				<p> There are no requirements on the page list itself, except that, when specified, it MUST include a
-					link to at least one <a href="#wp-resources">resource</a>. </p>
+				<p>There are no requirements on the page list itself, except that, when specified, it MUST include a
+					link to at least one <a href="#wp-resources">resource</a>.</p>
 
-				<p> Refer to the <a href="#page-list"><code>pagelist</code> property definition</a> for more information
-					on how to identify in the infoset and manifest which resource contains the page list. </p>
+				<p>Refer to the <a href="#page-list"><code>pagelist</code> property definition</a> for more information
+					on how to identify which resource contains the page list.</p>
 			</section>
 		</section>
 		<section id="wp-properties">
@@ -807,9 +830,9 @@ partial dictionary WebPublicationManifest {
 			<section id="properties-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>Both the Web Publication infoset and manifest are defined by a common set of properties that describe
-					the basic information a user agent requires to process and render a Web Publication. These
-					properties are categorized as followed:</p>
+				<p>The Web Publication manifest is defined by a set of properties that describe the basic information a
+					user agent requires to process and render a Web Publication. These properties are categorized as
+					followed:</p>
 
 				<dl>
 					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
@@ -826,28 +849,26 @@ partial dictionary WebPublicationManifest {
 					<dd>
 						<p>Resource categorization properties describe or identify common sets of resources, such as the
 								<a href="#resource-list">resource list</a> and <a href="#default-reading-order">default
-								reading order</a>. These properties refer to one or more external resources (images,
-							script files, separate metadata files, etc.).</p>
+								reading order</a>. These properties refer to one or more resources, such as HTML
+							documents, images, script files, and separate metadata files.</p>
 					</dd>
 					<dt><a href="#informative-properties">informative properties</a></dt>
 					<dd>
 						<p>Informative properties identify resources that contain additional information about the Web
-							Publication, such as its <a href="#privacy-policy">privacy policy</a> or an <a
+							Publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
 								href="#accessibility-report">accessibility report</a>.</p>
 					</dd>
 					<dt><a href="#structural-properties">structural properties</a></dt>
 					<dd>
 						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
-								href="#cover">cover image</a>, or the location of the <a href="#table-of-contents">table
-								of contents</a> or the <a href="#page-list">pagelist</a>.</p>
+								href="#cover">cover image</a>, <a href="#table-of-contents">table of contents</a>, and
+								<a href="#page-list">page list</a>.</p>
 					</dd>
 				</dl>
 
-
 				<p class="note">The categorization of properties is done to simplify comprehension of their purpose; the
 					groupings have no relevance outside this specification (i.e., the groupings do not exist in the
-					infoset or manifest).</p>
-
+					manifest).</p>
 
 				<div class="note">
 					<p>Each manifest item drawn from schema.org identifies the property it maps to and includes its
@@ -857,18 +878,17 @@ partial dictionary WebPublicationManifest {
 
 					<p>Schema.org additionally includes a large number of properties that, though relevant for
 						publishing, are not mentioned in this specification &#8212; Web Publication authors can use any
-						of these properties. This document defines only the minimal set of infoset items.</p>
+						of these properties. This document defines only the minimal set of manifest items.</p>
 				</div>
 
 				<p class="ednote">There are discussion on whether a best practices document would be created, referring
-					to more schema.org terms. If so, it should be linked from here. </p>
+					to more schema.org terms. If so, it should be linked from here.</p>
 			</section>
 
 			<section id="wp-properties-req">
 				<h3>Requirements</h3>
 
-				<p>The requirements for the expression of Web Publication properties are defined by the <abbr
-						title="information set"><a>infoset</a></abbr> as follows:</p>
+				<p>The requirements for the expression of Web Publication properties are defined as follows:</p>
 
 				<dl>
 					<dt>REQUIRED:</dt>
@@ -901,17 +921,17 @@ partial dictionary WebPublicationManifest {
 					</dd>
 				</dl>
 
-				<p>As the infoset properties do not all have to be serialized in the manifest, the requirements for the
-					manifest will differ in some cases. Refer to each property's definition to determine whether it is
-					required in the manifest or can be compiled from other information.</p>
+				<p>These properties do not all have to be serialized in the <a>authored manifest</a>. Refer to each
+					property's definition to determine whether it is required in the manifest or can be compiled into
+					the <a>canonical manifest</a> from other information.</p>
 			</section>
 
 			<section id="wp-properties-mapping" class="informative">
 				<h3>Quick Reference</h3>
 
-				<p>The way that properties are expressed in the manifest and infoset often differs from how they are
-					referred to using natural language. The following table provides a mapping between property names
-					and the sections where they are explained to help clarify the differing nomenclature:</p>
+				<p>The way that properties are expressed in the manifest often differs from how they are referred to
+					using natural language. The following table provides a mapping between property names and the
+					sections where they are explained to help clarify the differing nomenclature:</p>
 
 				<table class="zebra">
 					<thead>
@@ -1077,153 +1097,130 @@ partial dictionary WebPublicationManifest {
 						as those provided in [[WCAG20]]. (For linking to a detailed accessibility report, see <a
 							href="#accessibility-report"></a>.)</p>
 
-					<p>The following are categorized as accessibility properties:</p>
+					<p>The following properties are categorized as accessibility properties:</p>
 
-					<ul>
-						<li><code>accessMode</code></li>
-						<li><code>accessModeSufficient</code></li>
-						<li><code>accessibilityAPI</code></li>
-						<li><code>accessibilityControl</code></li>
-						<li><code>accessibilityFeature</code></li>
-						<li><code>accessibilityHazard</code></li>
-						<li><code>accessibilitySummary</code></li>
-					</ul>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessMode</dfn></code>
+								</td>
+								<td> The human sensory perceptual system or cognitive faculty through which a person may
+									process or perceive information. </td>
+								<td> One or more text(s). <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://meta.schema.org/accessMode"><code>accessMode</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessModeSufficient</dfn></code>
+								</td>
+								<td> A list of single or combined accessModes that are sufficient to understand all the
+									intellectual content of a resource. </td>
+								<td> One or more <a href="https://schema.org/ItemList">ItemList</a>. <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://meta.schema.org/accessModeSufficient"
+											><code>accessModeSufficient</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityAPI</dfn></code>
+								</td>
+								<td>Indicates that the resource is compatible with the referenced accessibility APIs. </td>
+								<td>One or more text(s).<a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityControl</dfn></code>
+								</td>
+								<td>Identifies input methods that are sufficient to fully control the described
+									resource. </td>
+								<td> One or more text(s). <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://meta.schema.org/accessibilityControl"
+											><code>accessibilityControl</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityFeature</dfn></code>
+								</td>
+								<td> Content features of the resource, such as accessible media, alternatives and
+									supported enhancements for accessibility. </td>
+								<td> One or more text(s). <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://meta.schema.org/accessibilityFeature"
+											><code>accessibilityFeature</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityHazard</dfn></code>
+								</td>
+								<td> A characteristic of the described resource that is physiologically dangerous to
+									some users. </td>
+								<td> One or more text(s).<a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
+										>Expected values</a>. </td>
+								<td>
+									<a href="https://meta.schema.org/accessibilityHazard"
+											><code>accessibilityHazard</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilitySummary</dfn></code>
+								</td>
+								<td>A human-readable summary of specific accessibility features or deficiencies,
+									consistent with the other accessibility metadata but expressing subtleties such as
+									“short descriptions are present but long descriptions will be needed for non-visual
+									users” or “short descriptions are present and no long descriptions are needed.” </td>
+								<td>Text.</td>
+								<td>
+									<a href="https://meta.schema.org/accessibilitySummary"
+											><code>accessibilitySummary</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-					<p>The more detailed descriptions of these properties, as well as the possible values, are described
-						on the <a href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.</p>
+					<p>Detailed descriptions of these properties are available on the <a
+							href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.</p>
 
-					<section id="accessibility-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>Values SHOULD be drawn from the <a
+							href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">preferred
+							vocabulary</a> for each accessibility property, but user agents MUST NOT omit values from
+						that are not included in the lists when <a href="#canonical-manifest">generating the canonical
+							manifest</a>.</p>
 
-						<p>Values SHOULD be drawn from the <a
-								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">preferred
-								vocabulary</a> for each accessibility property, but user agents MUST NOT omit values
-							from the infoset that are not included in the lists.</p>
-					</section>
+					<p class="note">The author can also provide a reference to a detailed <a
+							href="#accessibility-report">Accessibility Report</a> if more information is needed than can
+						be expressed by these properties.</p>
 
-					<section id="accessibility-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>accessMode</dfn></code>
-									</td>
-									<td> The human sensory perceptual system or cognitive faculty through which a person
-										may process or perceive information. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://meta.schema.org/accessMode"><code>accessMode</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"
-											><dfn>accessModeSufficient</dfn></code>
-									</td>
-									<td> A list of single or combined accessModes that are sufficient to understand all
-										the intellectual content of a resource. </td>
-									<td> One or more <a href="https://schema.org/ItemList">ItemList</a>. <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://meta.schema.org/accessModeSufficient"
-												><code>accessModeSufficient</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityAPI</dfn></code>
-									</td>
-									<td>Indicates that the resource is compatible with the referenced accessibility
-										APIs. </td>
-									<td>One or more text(s).<a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
-											(<a href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"
-											><dfn>accessibilityControl</dfn></code>
-									</td>
-									<td>Identifies input methods that are sufficient to fully control the described
-										resource. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://meta.schema.org/accessibilityControl"
-												><code>accessibilityControl</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"
-											><dfn>accessibilityFeature</dfn></code>
-									</td>
-									<td> Content features of the resource, such as accessible media, alternatives and
-										supported enhancements for accessibility. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://meta.schema.org/accessibilityFeature"
-												><code>accessibilityFeature</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"
-											><dfn>accessibilityHazard</dfn></code>
-									</td>
-									<td> A characteristic of the described resource that is physiologically dangerous to
-										some users. </td>
-									<td> One or more text(s).<a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
-									<td>
-										<a href="https://meta.schema.org/accessibilityHazard"
-												><code>accessibilityHazard</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"
-											><dfn>accessibilitySummary</dfn></code>
-									</td>
-									<td>A human-readable summary of specific accessibility features or deficiencies,
-										consistent with the other accessibility metadata but expressing subtleties such
-										as “short descriptions are present but long descriptions will be needed for
-										non-visual users” or “short descriptions are present and no long descriptions
-										are needed.” </td>
-									<td>Text.</td>
-									<td>
-										<a href="https://meta.schema.org/accessibilitySummary"
-												><code>accessibilitySummary</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p>Note that the author MAY also provide a reference to a more detailed <a
-								href="#accessibility-report-manifest">Accessibility Report</a>, beyond the accessibility
-							information expressed by these properties.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;DOMString> accessMode;
     sequence&lt;DOMString> accessModeSufficient;
@@ -1234,7 +1231,7 @@ partial dictionary WebPublicationManifest {
     LocalizableString      accessibilitySummary;
 };</pre>
 
-						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
+					<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "CreativeWork",
@@ -1255,7 +1252,6 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-					</section>
 				</section>
 
 				<section id="address">
@@ -1266,64 +1262,57 @@ partial dictionary WebPublicationManifest {
 						represents the <a>primary entry page</a> for the Web Publication. It is expressed using the
 							<code>url</code> property.</p>
 
-					<section id="address-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>url</dfn></code>
+								</td>
+								<td>URL of the primary entry page.</td>
+								<td>A URL [[!url]].</td>
+								<td>
+									<a href="https://schema.org/url"><code>url</code></a> (<a
+										href="https://www.schema.org/Thing">Thing</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>If the address does not resolve to an <abbr title="Hypertext Markup Language">HTML</abbr>
-							document&#160;[[!html]], user agents SHOULD NOT provide access to it to users. A Web
-							Publication MAY have more than one address, but all the addresses MUST resolve to the same
-							document.</p>
+					<p>If the address does not resolve to an <abbr title="Hypertext Markup Language">HTML</abbr>
+						document&#160;[[!html]], user agents SHOULD NOT provide access to the resource to users. A Web
+						Publication MAY have more than one address, but all the addresses MUST resolve to the same
+						document.</p>
 
-						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
-							including one that is not listed in the <a>default reading order</a>. This document MUST
-							include a <a href="#wp-linking">link to the manifest</a> to ensure a bidirectional linking
-							relationship (i.e., that user agents can also locate the manifest from the document at the
-							address).</p>
+					<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
+						including one that is not listed in the <a>default reading order</a>. This document MUST include
+						a <a href="#manifest-linking">link to the manifest</a> to ensure a bidirectional linking
+						relationship (i.e., that user agents can also locate the manifest from the document at the
+						address).</p>
 
-						<p>If the document is not a Web Publication resource, user agents SHOULD load the first document
-							in the <a>default reading order</a> when initiating the Web Publication.</p>
+					<p>If the document is not a Web Publication resource, user agents SHOULD load the first document in
+						the <a>default reading order</a> when initiating the Web Publication.</p>
 
-						<p class="note"> To improve the usability of Web Publications, particularly in user agents that
-							do not support Web Publications, authors are encouraged to include navigation aids in the
-							referenced document that facilitate consumption of the content, (e.g., provide a table of
-							contents or a link to one). </p>
+					<p class="note"> To improve the usability of Web Publications, particularly in user agents that do
+						not support Web Publications, authors are encouraged to include navigation aids in the
+						referenced document that facilitate consumption of the content, (e.g., provide a table of
+						contents or a link to one).</p>
 
-						<div class="note">The Web Publication's address can also be used as value for an identifier link
-							relation&#160;[[link-relation]].</div>
-					</section>
+					<div class="note">The Web Publication's address can also be used as value for an identifier link
+						relation&#160;[[link-relation]].</div>
 
-					<section id="address-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>url</dfn></code>
-									</td>
-									<td>URL of the primary entry page.</td>
-									<td>A URL [[!url]].</td>
-									<td>
-										<a href="https://schema.org/url"><code>url</code></a> (<a
-											href="https://www.schema.org/Thing">Thing</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     required DOMString url;
 };</pre>
 
-						<pre class="example" title="Setting the address of the main entry page">
+					<pre class="example" title="Setting the address of the main entry page">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -1332,7 +1321,6 @@ partial dictionary WebPublicationManifest {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="canonical-identifier">
@@ -1341,6 +1329,27 @@ partial dictionary WebPublicationManifest {
 					<p>A <a>Web Publication's</a>
 						<dfn>canonical identifier</dfn> is a unique identifier that resolves to the preferred version of
 						the Web Publication. It is expressed using the <code>id</code> property.</p>
+
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>id</dfn></code>
+								</td>
+								<td>Preferred version of the Web Publication.</td>
+								<td>A URL [[!url]].</td>
+								<td>(None)</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
 						specification. The actual achievable uniqueness depends on such factors as the conventions of
@@ -1355,55 +1364,23 @@ partial dictionary WebPublicationManifest {
 						intended to provide a means of identifying instances of the same Web Publication hosted at
 						different URLs.</p>
 
-					<section id="canonical-identifier-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
+						does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
+						identifier from any other identifiers provided in the manifest for the canonical manifest.</p>
 
-						<p>The canonical identifier MUST be a URL&#160;[[!url]].</p>
+					<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly, or can
+						it be handled by other metadata.</p>
 
-						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
-							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
-							identifier from any other identifiers provided in the manifest.</p>
+					<p>The specification of the canonical identifier MAY be complemented by the inclusion of additional
+						types of identifiers for the Web Publication using the <a href="https://schema.org/identifier"
+								><code>identifier</code> property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
-						<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly in
-							the <abbr title="information set">infoset</abbr>, or can it be handled by other
-							metadata.</p>
-					</section>
-
-					<section id="canonical-identifier-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>id</dfn></code>
-									</td>
-									<td>Preferred version of the Web Publication.</td>
-									<td>A URL [[!url]].</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
-							additional types of identifiers for the Web Publication using the <a
-								href="https://schema.org/identifier"><code>identifier</code>
-							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     DOMString id;
 };</pre>
 
-						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
+					<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "TechArticle",
@@ -1414,7 +1391,7 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
+					<pre class="example" title="Example for setting both the ISBN and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -1425,237 +1402,212 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-					</section>
 				</section>
 
 				<section id="creators">
 					<h4>Creators</h4>
 
-					<p> A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
-							Publication</a>. Creators are represented in one of the following two ways:</p>
-
-					<ol>
-						<li>as a string encoding the name of a Person; or</li>
-						<li>as an instance of a <a href="https://schema.org/Person"><code>Person</code></a> and <a
-								href="https://schema.org/Organization"><code>Organization</code></a> objects,
-							respectively. </li>
-					</ol>
-
-					<p>In other words, a single string value is a shorthand for a <code>Person</code> object whose
-							<code>name</code> property is set to that string value. (See also <a
-							href="#strings-vs-objects"></a>.)</p>
+					<p>A <dfn>creator</dfn> is an individual or entity responsible for the creation of the <a>Web
+							Publication</a>.</p>
 
 					<p>The following properties are categorized as creators:</p>
 
-					<ul>
-						<li><code>artist</code></li>
-						<li><code>author</code></li>
-						<li><code>contributor</code></li>
-						<li><code>creator</code></li>
-						<li><code>editor</code></li>
-						<li><code>illustrator</code></li>
-						<li><code>inker</code></li>
-						<li><code>letterer</code></li>
-						<li><code>penciler</code></li>
-						<li><code>publisher</code></li>
-						<li><code>readBy</code></li>
-						<li><code>translator</code></li>
-					</ul>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>artist</dfn></code>
+								</td>
+								<td>The primary artist for the publication, in a medium other than pencils or digital
+									line art.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://bib.schema.org/artist"><code>artist</code></a> (<a
+										href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>author</dfn></code>
+								</td>
+								<td>The author of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
+										href="https://schema.org/Organization"><code>Organization</code></a>.</td>
+								<td>
+									<a href="https://schema.org/author"><code>author</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>colorist</dfn></code>
+								</td>
+								<td>The individual who adds color to inked drawings.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://bib.schema.org/colorist"><code>colorist</code></a> (<a
+										href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>contributor</dfn></code>
+								</td>
+								<td>Contributor whose role does not fit to one of the other roles in this table.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
+										href="https://schema.org/Organization"><code>Organization</code></a>.</td>
+								<td>
+									<a href="https://schema.org/contributor"><code>contributor</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>creator</dfn></code>
+								</td>
+								<td>The creator of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
+										href="https://schema.org/Organization"><code>Organization</code></a>.</td>
+								<td>
+									<a href="https://schema.org/creator"><code>creator</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>editor</dfn></code>
+								</td>
+								<td>The editor of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://schema.org/editor"><code>editor</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>illustrator</dfn></code>
+								</td>
+								<td>The illustrator of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://schema.org/illustrator"><code>illustrator</code></a> (<a
+										href="https://www.schema.org/Book">Book</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>inker</dfn></code>
+								</td>
+								<td>The individual who traces over the pencil drawings in ink.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://schema.org/inker"><code>inker</code></a> (<a
+										href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>letterer</dfn></code>
+								</td>
+								<td>The individual who adds lettering, including speech balloons and sound effects, to
+									artwork.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://bib.schema.org/letterer"><code>letterer</code></a> (<a
+										href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>penciler</dfn></code>
+								</td>
+								<td>The individual who draws the primary narrative artwork.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
+								<td>
+									<a href="https://bib.schema.org/penciler"><code>penciler</code></a> (<a
+										href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>publisher</dfn></code>
+								</td>
+								<td>The publisher of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
+										href="https://schema.org/Organization"><code>Organization</code></a>.</td>
+								<td>
+									<a href="https://schema.org/publisher"><code>publisher</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>readBy</dfn></code>
+								</td>
+								<td>A person who reads (performs) the publication (for audiobooks).</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
+								<td>
+									<a href="https://bib.schema.org/readBy"><code>readBy</code></a> (<a
+										href="https://bib.schema.org/Audiobook">Audiobook</a>) </td>
+							</tr>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>translator</dfn></code>
+								</td>
+								<td>The translator of the publication.</td>
+								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
+										href="https://schema.org/Organization"><code>Organization</code></a>. </td>
+								<td>
+									<a href="https://bib.schema.org/translator"><code>translator</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-					<section id="wp-creator-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>Creators are represented in one of the following two ways:</p>
 
-						<p>When compiling each set of <dfn data-lt="CreatorInfo">creator information</dfn> from a
-							[[!schema.org]] <a href="https://schema.org/Person"><code>Person</code></a> or <a
-								href="https://schema.org/Organization"><code>Organization</code></a> type, user agents
-							MUST retain the following information when available:</p>
+					<ol>
+						<li>as a string encoding the name of a <a href="https://schema.org/Person"
+								><code>Person</code></a> [[!schema.org]]; or</li>
+						<li>as an instance of a <a href="https://schema.org/Person"><code>Person</code></a> or <a
+								href="https://schema.org/Organization"><code>Organization</code></a>
+							[[!schema.org]].</li>
+					</ol>
 
-						<dl data-dfn-for="CreatorInfo">
-							<dt>
-								<dfn>type</dfn>
-							</dt>
-							<dd>One or more strings that identifies the type of creator. This sequence SHOULD include
-								"Person" or "Organization".</dd>
-							<dt>
-								<dfn>name</dfn>
-							</dt>
-							<dd>One or more localizable strings for the name of the creator.</dd>
-							<dt>
-								<dfn>id</dfn>
-							</dt>
-							<dd>A canonical identifier of the creator as a URL.&#160;[[!url]]</dd>
+					<p>In other words, a single string value is a shorthand for a [[!schema.org]] <code>Person</code>
+						whose <code>name</code> property is set to that string value. (See also <a
+							href="#strings-vs-objects"></a>.)</p>
 
-							<dt>
-								<dfn>url</dfn>
-							</dt>
-							<dd>An address for the creator in the form of a URL.&#160;[[!url]]</dd>
-						</dl>
+					<p>When compiling each set of <dfn data-lt="CreatorInfo">creator information</dfn> from a
+						[[!schema.org]] <a href="https://schema.org/Person"><code>Person</code></a> or <a
+							href="https://schema.org/Organization"><code>Organization</code></a> type, user agents MUST
+						retain the following information when available:</p>
 
-						<p>Note that user agents MAY interpret a wider range of creator properties defined by schema.org
-							than the ones in the preceding list.</p>
+					<dl data-dfn-for="CreatorInfo">
+						<dt>
+							<dfn>type</dfn>
+						</dt>
+						<dd>One or more strings that identifies the type of creator. This sequence SHOULD include
+							"Person" or "Organization".</dd>
+						<dt>
+							<dfn>name</dfn>
+						</dt>
+						<dd>One or more localizable strings for the name of the creator.</dd>
+						<dt>
+							<dfn>id</dfn>
+						</dt>
+						<dd>A canonical identifier of the creator as a URL.&#160;[[!url]]</dd>
 
-						<p>The infoset MAY include more than one of each type of creator.</p>
-					</section>
+						<dt>
+							<dfn>url</dfn>
+						</dt>
+						<dd>An address for the creator in the form of a URL.&#160;[[!url]]</dd>
+					</dl>
 
-					<section id="wp-creator-manifest">
-						<h5>Manifest Expression</h5>
+					<p>Note that user agents MAY interpret a wider range of creator properties defined by Schema.org
+						than the ones in the preceding list.</p>
 
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>artist</dfn></code>
-									</td>
-									<td>The primary artist for the publication, in a medium other than pencils or
-										digital line art.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://bib.schema.org/artist"><code>artist</code></a> (<a
-											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>author</dfn></code>
-									</td>
-									<td>The author of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or
-											<a href="https://schema.org/Organization"
-										><code>Organization</code></a>.</td>
-									<td>
-										<a href="https://schema.org/author"><code>author</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>colorist</dfn></code>
-									</td>
-									<td>The individual who adds color to inked drawings.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://bib.schema.org/colorist"><code>colorist</code></a> (<a
-											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>contributor</dfn></code>
-									</td>
-									<td>Contributor whose role does not fit to one of the other roles in this
-										table.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or
-											<a href="https://schema.org/Organization"
-										><code>Organization</code></a>.</td>
-									<td>
-										<a href="https://schema.org/contributor"><code>contributor</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>creator</dfn></code>
-									</td>
-									<td>The creator of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or
-											<a href="https://schema.org/Organization"
-										><code>Organization</code></a>.</td>
-									<td>
-										<a href="https://schema.org/creator"><code>creator</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>editor</dfn></code>
-									</td>
-									<td>The editor of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://schema.org/editor"><code>editor</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>illustrator</dfn></code>
-									</td>
-									<td>The illustrator of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://schema.org/illustrator"><code>illustrator</code></a> (<a
-											href="https://www.schema.org/Book">Book</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>inker</dfn></code>
-									</td>
-									<td>The individual who traces over the pencil drawings in ink.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://schema.org/inker"><code>inker</code></a> (<a
-											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>letterer</dfn></code>
-									</td>
-									<td>The individual who adds lettering, including speech balloons and sound effects,
-										to artwork.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://bib.schema.org/letterer"><code>letterer</code></a> (<a
-											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>penciler</dfn></code>
-									</td>
-									<td>The individual who draws the primary narrative artwork.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
-									<td>
-										<a href="https://bib.schema.org/penciler"><code>penciler</code></a> (<a
-											href="https://www.schema.org/VisualArtwork">VisualArtwork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>publisher</dfn></code>
-									</td>
-									<td>The publisher of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or
-											<a href="https://schema.org/Organization"
-										><code>Organization</code></a>.</td>
-									<td>
-										<a href="https://schema.org/publisher"><code>publisher</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>readBy</dfn></code>
-									</td>
-									<td>A person who reads (performs) the publication (for audiobooks).</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
-									<td>
-										<a href="https://bib.schema.org/readBy"><code>readBy</code></a> (<a
-											href="https://bib.schema.org/Audiobook">Audiobook</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>translator</dfn></code>
-									</td>
-									<td>The translator of the publication.</td>
-									<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or
-											<a href="https://schema.org/Organization"><code>Organization</code></a>. </td>
-									<td>
-										<a href="https://bib.schema.org/translator"><code>translator</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-							</tbody>
-						</table>
+					<p>The manifest MAY include more than one of each type of creator.</p>
 
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;CreatorInfo> artist;
     sequence&lt;CreatorInfo> author;
@@ -1680,7 +1632,7 @@ dictionary CreatorInfo {
              DOMString                      url;
 };</pre>
 
-						<pre class="example" title="Author of a book">
+					<pre class="example" title="Author of a book">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -1692,7 +1644,7 @@ dictionary CreatorInfo {
     }
 }
 </pre>
-						<pre class="example" title="Separate listing of editors, authors, and publisher, with some persons expressed as simple strings">
+					<pre class="example" title="Separate listing of editors, authors, and publisher, with some persons expressed as simple strings">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "TechArticle",
@@ -1725,7 +1677,6 @@ dictionary CreatorInfo {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="language-and-dir">
@@ -1733,37 +1684,89 @@ dictionary CreatorInfo {
 
 					<p>The <a>Web Publication</a> has a natural language value (e.g., English, French, Chinese), as well
 						as a natural base writing direction (the display direction, either left-to-right or
-						right-to-left). The <abbr title="information set"><a>infoset</a></abbr> has entries to set these
-						values, which can influence, for example, the behavior of a user agent (e.g., it might place a
-						pop-up for a table of contents on the right hand side for publications whose natural base
-						direction is right-to-left).</p>
+						right-to-left). The manifest has entries to set these values, which can influence, for example,
+						the behavior of a user agent (e.g., it might place a pop-up for a table of contents on the right
+						hand side for publications whose natural base direction is right-to-left).</p>
 
-					<p>Similarly, each natural language property value in the <a>Web Publication's</a>
-						<abbr title="information set"><a>infoset</a></abbr> (e.g., <a href="#wp-title">title</a>, <a
-							href="#creators">creators</a>) is <a
+					<p>Similarly, each natural language property value in the <a>Web Publication's</a> manifest (e.g.,
+							<a href="#wp-title">title</a>, <a href="#creators">creators</a>) is <a
 							href="https://w3c.github.io/string-meta/#dom-localizable"
 						>localizable</a>&#160;[[string-meta]], meaning that the same information is available for
 						each.</p>
 
-					<p>As a result, the <abbr title="information set"><a>infoset</a></abbr> has entries to set:</p>
+					<p>As a result, the manifest has entries to set:</p>
 
 					<ul>
 						<li>the natural <dfn>language</dfn>, and </li>
 						<li>the <dfn>base direction</dfn></li>
 					</ul>
 
-					<p>of both the <a>Web Publication</a> (<code>inLanguage</code> and <code>inDirection</code>) and the
-						natural language properties values of the <abbr title="information set"
-						><a>infoset</a></abbr>.</p>
+					<p>of both the <a href="#manifest-default-language-and-dir">Web Publication</a> and the <a
+							href="manifest-specific-language-and-dir">natural language properties values</a> of the
+						manifest.</p>
 
+					<p>If a user agent requires the language and one is not available in the authored manifest (either
+						globally or specifically for that property), or the obtained value is invalid, the user agent
+						MAY attempt to determine the language when <a href="#canonical-manifest">generating the
+							canonical manifest</a>. This specification does not mandate how such a language tag is
+						created. The user agent might:</p>
 
-					<section id="language-and-dir-infoset">
-						<h5>Infoset Requirements</h5>
+					<ul>
+						<li>use the <a>non-empty</a> language declaration of the manifest;</li>
+						<li>use the first non-empty language declaration found in a resource in the <a>default reading
+								order</a>;</li>
+						<li>calculate the language using its own algorithm.</li>
+					</ul>
 
-						<p>The <abbr title="information set">infoset</abbr> MAY contain global language and base
-							direction declarations for the Web Publication. The natural language MUST be a tag that
-							conforms to&#160;[[!bcp47]], while the <dfn data-lt="TextDirection">base language
-								direction</dfn> MUST have one of the following values:</p>
+					<p>No default values are specified for the <a>language</a> or the default <a>base direction</a>.</p>
+
+					<p class="issue"> This section, in particular the features related to text directions, must be
+						reviewed by I18N experts.</p>
+
+					<section id="manifest-default-language-and-dir">
+						<h6>Global Language and Direction</h6>
+
+						<p>The manifest MAY include global language and base direction declarations for the Web
+							Publication using the following properties.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="WebPublicationManifest"><dfn>inLanguage</dfn></code>
+									</td>
+									<td>Default <a>language</a> for the <a>Web Publication</a> as well as the textual
+										manifest values</td>
+									<td>language code as defined in&#160;[[!bcp47]]</td>
+									<td>
+										<a href="https://schema.org/inLanguage"><code>inLanguage</code></a> (<a
+											href="https://www.schema.org/Property">Property</a>) </td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="WebPublicationManifest"><dfn>inDirection</dfn></code>
+									</td>
+									<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the
+										textual manifest values</td>
+									<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
+									<td>(None)</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>The natural language MUST be a tag that conforms to&#160;[[!bcp47]], while the <dfn
+								data-lt="TextDirection">base language direction</dfn> MUST have one of the following
+							values:</p>
 
 						<ul data-dfn-for="TextDirection">
 							<li><code><dfn>ltr</dfn></code>: indicates that the textual values are explicitly
@@ -1775,26 +1778,16 @@ dictionary CreatorInfo {
 								directionality.</li>
 						</ul>
 
-						<p>When specified, these properties are also used as defaults for textual values in the <abbr
-								title="information set">infoset</abbr>.</p>
+						<p>When specified, these properties are also used as defaults for textual values in the
+							manifest.</p>
 
 						<p class="note">It is important to differentiate the language <em>of the publication</em> from
 							the language and the base direction of the individual resources that compose it. If such
 							resources are, for example, in HTML, the language and direction need to be set in those
 							resources, too. The language and base direction of the publication are not inherited.</p>
 
-						<p>The global language information MAY be overridden by individual values.</p>
-
-						<p>When using Web Publication manifests with bidirectional text, user agents SHOULD identify the
-							base direction of any given natural language value by scanning the text for the first strong
-							directional character. Once the base direction has been identified, user agents MUST
-							determine the appropriate rendering and display of natural language values according to the
-							Unicode Bidirectional Algorithm&#160;[[!bidi]]. This could require wrapping additional
-							control characters or markup around the string prior to display, in order to apply the base
-							direction. (See <a href="#app-bidi-examples"></a>.) </p>
-
-						<p class="issue"> This section, in particular the features related to text directions, must be
-							reviewed by I18N experts. </p>
+						<p>The global language information MAY be overridden by <a
+								href="#manifest-specific-language-and-dir">individual values</a>.</p>
 
 						<p>If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page via a
 								<code>script</code> element, and the manifest does not set the global language and/or
@@ -1810,74 +1803,12 @@ dictionary CreatorInfo {
 						<p class="issue">It is to be discussed whether this last paragraph, i.e., inheriting values from
 								<code>script</code>, should be kept.</p>
 
-						<p>If a user agent requires the language and one is not available in the <abbr
-								title="information set">infoset</abbr> (globally, or specifically for that property), or
-							the obtained value is invalid, the user agent MAY attempt to determine the language. This
-							specification does not mandate how such a language tag is created. The user agent might:</p>
+						<p class="note">If authors intend to use a manifest, or a manifest template, both as embedded
+							manifest and as a separate resource, they are strongly encouraged to set these properties
+							explicitly to avoid interference of the containing <code>script</code> element in case of
+							embedding.</p>
 
-						<ul>
-							<li>use the <a>non-empty</a> language declaration of the manifest;</li>
-							<li>use the first non-empty language declaration found in a resource in the <a>default
-									reading order</a>;</li>
-							<li>calculate the language using its own algorithm.</li>
-						</ul>
-
-						<p> No default values are specified for the <a>language</a> or the default <a>base
-							direction</a>. </p>
-
-					</section>
-
-
-					<section id="language-and-dir-manifest">
-						<h5>Manifest Expression</h5>
-
-						<p>As this infoset item refers to several aspects of setting language and direction, these are
-							treated separately. </p>
-
-						<section id="manifest-default-language-and-dir">
-							<h6>Global Language and Direction</h6>
-
-							<table class="zebra">
-								<thead>
-									<tr>
-										<th>Term</th>
-										<th>Description</th>
-										<th>Required Value</th>
-										<th>[[!schema.org]] Mapping</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<code data-dfn-for="WebPublicationManifest"><dfn>inLanguage</dfn></code>
-										</td>
-										<td>Default <a>language</a> for the <a>Web Publication</a> as well as the
-											textual infoset values</td>
-										<td>language code as defined in&#160;[[!bcp47]]</td>
-										<td>
-											<a href="https://schema.org/inLanguage"><code>inLanguage</code></a> (<a
-												href="https://www.schema.org/Property">Property</a>) </td>
-									</tr>
-								</tbody>
-								<tbody>
-									<tr>
-										<td>
-											<code data-dfn-for="WebPublicationManifest"><dfn>inDirection</dfn></code>
-										</td>
-										<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the
-											textual infoset values</td>
-										<td><code>ltr</code>, <code>rtl</code>, or <code>auto</code></td>
-										<td>(None)</td>
-									</tr>
-								</tbody>
-							</table>
-
-							<p class="note">If authors intend to use a manifest, or a manifest template, both as
-								embedded manifest and as a separate resource, they are strongly encouraged to set these
-								properties explicitly to avoid interference of the containing <code>script</code>
-								element in case of embedding.</p>
-
-							<pre class="idl">
+						<pre class="idl">
 partial dictionary WebPublicationManifest {
     DOMString     inLanguage;
     TextDirection inDirection;
@@ -1889,19 +1820,18 @@ enum TextDirection {
     "auto"
 };</pre>
 
-						</section>
+					</section>
 
-						<section id="manifest-specific-language-and-dir">
-							<h6>Item-specific Language</h6>
+					<section id="manifest-specific-language-and-dir">
+						<h6>Item-specific Language</h6>
 
-							<p> It is possible to set the language for any textual value in the manifest. This
-								information MUST be set as a <dfn data-lt="LocalizableString">localizable string</dfn>,
-								i.e., using the <a
-									href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
-										><code>value</code> and <code>language</code> terms</a> (instead of a simple
-								string)&#160;[[!json-ld]]: </p>
+						<p>It is possible to set the language for any textual value in the manifest. This information
+							MUST be set as a <dfn data-lt="LocalizableString">localizable string</dfn>, i.e., using the
+								<a href="https://www.w3.org/TR/2014/REC-json-ld-20140116/#string-internationalization"
+									><code>value</code> and <code>language</code> terms</a> (instead of a simple
+							string)&#160;[[!json-ld]]:</p>
 
-							<pre class="example" title="Setting the author name to French using a localizable string">
+						<pre class="example" title="Setting the author name to French using a localizable string">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -1915,17 +1845,16 @@ enum TextDirection {
     }
 }
 </pre>
-							<p> The value of the <code data-dfn-for="LocalizableString"><dfn>language</dfn></code> MUST
-								be set to a language code as defined in [[!bcp47]]. </p>
+						<p>The value of the <code data-dfn-for="LocalizableString"><dfn>language</dfn></code> MUST be
+							set to a language code as defined in [[!bcp47]].</p>
 
-							<p> When used in a context of localizable texts, a simple string value is a shorthand for a
-									<a>localizable string</a>, with the <code data-dfn-for="LocalizableString"
-										><dfn>value</dfn></code> set to the string value, and the language set to the
-								value of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a>
-								property, if applicable, and unset otherwise. In other words, the previous example is
-								equivalent to: </p>
+						<p>When used in a context of localizable texts, a simple string value is a shorthand for a
+								<a>localizable string</a>, with the <code data-dfn-for="LocalizableString"
+									><dfn>value</dfn></code> set to the string value, and the language set to the value
+							of the <a href="#manifest-default-language-and-dir"><code>inLanguage</code></a> property, if
+							applicable, and unset otherwise. In other words, the previous example is equivalent to:</p>
 
-							<pre class="example" title="Setting the default language of an author name to French">
+						<pre class="example" title="Setting the default language of an author name to French">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -1934,21 +1863,28 @@ enum TextDirection {
     "author"     : "Marcel Proust",
 }
 </pre>
-							<p>(See also <a href="#strings-vs-objects"></a>.)</p>
+						<p>(See also <a href="#strings-vs-objects"></a>.)</p>
 
-							<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
+						<p>It is <em>not</em> possible to set the direction explicitly for a value.</p>
 
-							<p class="note"> Setting the direction for a natural text value is currently not possible in
-								JSON-LD&#160;[[json-ld]]. In case the JSON-LD community, as well as the schema.org
-								community, introduces such a feature, future versions of this specification may extend
-								the ability of Web Publication Manifests to include this. </p>
+						<p class="note"> Setting the direction for a natural text value is currently not possible in
+							JSON-LD&#160;[[json-ld]]. In case the JSON-LD community, as well as the schema.org
+							community, introduces such a feature, future versions of this specification may extend the
+							ability of Web Publication Manifests to include this.</p>
 
-							<pre class="idl">
+						<p>When using Web Publication manifests with bidirectional text, user agents SHOULD identify the
+							base direction of any given natural language value by scanning the text for the first strong
+							directional character. Once the base direction has been identified, user agents MUST
+							determine the appropriate rendering and display of natural language values according to the
+							Unicode Bidirectional Algorithm&#160;[[!bidi]]. This could require wrapping additional
+							control characters or markup around the string prior to display, in order to apply the base
+							direction. (See <a href="#app-bidi-examples"></a>.)</p>
+
+						<pre class="idl">
 dictionary LocalizableString {
     required DOMString value;
              DOMString language;
 };</pre>
-						</section>
 					</section>
 				</section>
 
@@ -1960,50 +1896,43 @@ dictionary LocalizableString {
 						including the <a>manifest</a>). It is expressed using the <code>dateModified</code>
 						property.</p>
 
-					<section id="last-modification-date-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>dateModified</dfn></code>
+								</td>
+								<td>Last modification date of the publication.</td>
+								<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
+										href="https://schema.org/DateTime"><code>DateTime</code></a>
+									value&#160;[[!schema.org]], both expressed in ISO 8601 Date, or Date Time formats,
+									respectively [[iso8601]].</td>
+								<td>
+									<a href="https://schema.org/dateModified"><code>dateModified</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The last modification date does not necessarily reflect all changes to the Web Publication
-							(e.g., third-party content could change without the author being aware). User agents SHOULD
-							check the last modification date of individual resources to determine if they have changed
-							and need updating.</p>
-					</section>
+					<p>The last modification date does not necessarily reflect all changes to the Web Publication (e.g.,
+						third-party content could change without the author being aware). User agents SHOULD check the
+						last modification date of individual resources to determine if they have changed and need
+						updating.</p>
 
-					<section id="last-modification-date-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>dateModified</dfn></code>
-									</td>
-									<td>Last modification date of the publication.</td>
-									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
-											href="https://schema.org/DateTime"><code>DateTime</code></a>
-										value&#160;[[!schema.org]], both expressed in ISO 8601 Date, or Date Time
-										formats, respectively [[iso8601]].</td>
-									<td>
-										<a href="https://schema.org/dateModified"><code>dateModified</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     DOMString dateModified;
 };</pre>
 
-						<pre class="example" title="Last modification date of the publication">
+					<pre class="example" title="Last modification date of the publication">
 {
     "@context"     : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"         : "TechArticle",
@@ -2015,7 +1944,6 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-					</section>
 				</section>
 
 				<section id="publication-date">
@@ -2026,48 +1954,41 @@ partial dictionary WebPublicationManifest {
 						subsequent revisions to be identified and compared. It is expressed using the
 							<code>datePublished</code> property.</p>
 
-					<section id="publication-date-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>datePublished</dfn></code>
+								</td>
+								<td>Creation date of the publication.</td>
+								<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
+										href="https://schema.org/DateTime"><code>DateTime</code></a>, both expressed in
+									ISO 8601 Date, or Date Time formats, respectively [[!iso8601]].</td>
+								<td>
+									<a href="https://schema.org/datePublished"><code>datePublished</code></a> (<a
+										href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The exact moment of publication is intentionally left open to interpretation: it could be
-							when the Web Publication is first made available online or could be a point in time before
-							publication when the Web Publication is considered final.</p>
-					</section>
+					<p>The exact moment of publication is intentionally left open to interpretation: it could be when
+						the Web Publication is first made available online or could be a point in time before
+						publication when the Web Publication is considered final.</p>
 
-					<section id="publication-date-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>datePublished</dfn></code>
-									</td>
-									<td>Creation date of the publication.</td>
-									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
-											href="https://schema.org/DateTime"><code>DateTime</code></a>, both expressed
-										in ISO 8601 Date, or Date Time formats, respectively [[!iso8601]].</td>
-									<td>
-										<a href="https://schema.org/datePublished"><code>datePublished</code></a> (<a
-											href="https://www.schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     DOMString datePublished;
 };</pre>
 
-						<pre class="example" title="Creation and modification date of the publication">
+					<pre class="example" title="Creation and modification date of the publication">
 {
     "@context"      : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"          : "TechArticle",
@@ -2079,7 +2000,6 @@ partial dictionary WebPublicationManifest {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="reading-progression-direction">
@@ -2089,55 +2009,47 @@ partial dictionary WebPublicationManifest {
 						direction from one resource to the next within a <a>Web Publication</a>. It is expressed using
 						the <code>readingDirection</code> property.</p>
 
-					<section id="reading-progression-direction-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>readingProgression</dfn></code>
+								</td>
+								<td>Reading direction from one resource to the other.</td>
+								<td><code>ltr</code> or <code>rtl</code></td>
+								<td>(None)</td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The value of this property may be:</p>
+					<p>The value of this property MUST be either:</p>
 
-						<ul data-dfn-for="ProgressionDirection">
-							<li><code><dfn>ltr</dfn></code>: left-to-right;</li>
-							<li><code><dfn>rtl</dfn></code>: right-to-left.</li>
-						</ul>
+					<ul data-dfn-for="ProgressionDirection">
+						<li><code><dfn>ltr</dfn></code>: left-to-right;</li>
+						<li><code><dfn>rtl</dfn></code>: right-to-left.</li>
+					</ul>
 
-						<p>The default value is <code>ltr</code>.</p>
+					<p>The default value is <code>ltr</code>.</p>
 
-						<p>This infoset item has <em>no effect</em> on the rendering of the individual primary
-							resources; it is only relevant for the progression direction from one resource to the
-							other.</p>
+					<p>This property has <em>no effect</em> on the rendering of the individual primary resources; it is
+						only relevant for the progression direction from one resource to the other.</p>
 
-						<p class="note">The reading progression of a <a>Web Publication</a> is used to adapt such
-							publication level interactions as menu position, swap direction, defining tap zones to lead
-							the user to the next and previous pages, touch gestures, etc.</p>
-					</section>
+					<p class="note">The reading progression of a <a>Web Publication</a> is used to adapt such
+						publication level interactions as menu position, swap direction, defining tap zones to lead the
+						user to the next and previous pages, touch gestures, etc.</p>
 
-					<section id="reading-progression-direction-manifest">
-						<h5>Manifest Expression</h5>
+					<p>If the <code>readingProgression</code> is not set, user agents MUST use the default value
+							<code>ltr</code> when generating the canonical manifest.</p>
 
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>readingProgression</dfn></code>
-									</td>
-									<td>Reading direction from one resource to the other.</td>
-									<td><code>ltr</code> or <code>rtl</code></td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p>If the <code>readingProgression</code> is not set, user agents MUST use the default value is
-								<code>ltr</code>.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     ProgressionDirection readingProgression = "ltr";
 };
@@ -2147,7 +2059,7 @@ enum ProgressionDirection {
 	"rtl"
 };</pre>
 
-						<pre class="example" title="Reading progression set explicitl to ltr">
+					<pre class="example" title="Reading progression set explicitl to ltr">
 {
     "@context"           : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"               : "Book",
@@ -2156,7 +2068,6 @@ enum ProgressionDirection {
     "readingProgression" : "ltr"
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="wp-title">
@@ -2165,68 +2076,58 @@ enum ProgressionDirection {
 					<p>The title provides the human-readable name of the <a>Web Publication</a>. It is expressed using
 						the <code>name</code> property.</p>
 
-					<section id="title-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>name</dfn></code>
+								</td>
+								<td>Human-readable title of the Web Publication.</td>
+								<td>One or more text items for the title.</td>
+								<td>
+									<a href="https://schema.org/name"><code>name</code></a> (<a
+										href="https://www.schema.org/Thing">Thing</a>) </td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The title is specified by the <a href="#title-manifest">manifest expression</a>, when
-							present. If not included in the manifest, user agents MAY use the value of the <a
-								href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-									><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary
-								entry page</a> (if present) .</p>
+					<p>The title is specified by the <a href="#wp-title">manifest expression</a>, when present. If not
+						included in the manifest, user agents MAY use the value of the <a
+							href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
+								><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary entry
+							page</a> (if present) when generating the canonical manifest.</p>
 
-						<p class="note">Relying on the <code>title</code> element could be semantically problematic if
-							the Web Publication consists of several HTML resources (e.g., one per chapter of a book),
-							because the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-								>HTML definition</a> defines this element as "metadata" for the enclosing HTML document,
-							not for a collection of resources. Using this element is, on the other hand, preferred in
-							the case of a publication consisting of a single HTML document (e.g., a scholarly journal
-							article).</p>
+					<p class="note">Relying on the <code>title</code> element could be semantically problematic if the
+						Web Publication consists of several HTML resources (e.g., one per chapter of a book), because
+						the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element">HTML
+							definition</a> defines this element as "metadata" for the enclosing HTML document, not for a
+						collection of resources. Using this element is, on the other hand, preferred in the case of a
+						publication consisting of a single HTML document (e.g., a scholarly journal article).</p>
 
-						<p>When specified in the <abbr title="information set"><a>infoset</a></abbr>, the title MUST be
-								<a>non-empty</a>.</p>
+					<p>When specified in the manifest, the title MUST be <a>non-empty</a>.</p>
 
-						<p>If a user agent requires a title and one is not available in the <abbr
-								title="information set">infoset</abbr>, it MAY create one (e.g., provide a
-							language-specific placeholder title or use the <abbr title="Uniform Resource Locator"
-								>URL</abbr> of the manifest).</p>
+					<p>If a user agent requires a title and one is not available in the manifest, it MAY create one
+						(e.g., provide a language-specific placeholder title or use the <abbr
+							title="Uniform Resource Locator">URL</abbr> of the manifest).</p>
 
-						<p class="note">A user agent is not expected to produce a <a
-								href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
-							title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
-					</section>
+					<p class="note">A user agent is not expected to produce a <a
+							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
+						title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
 
-					<section id="title-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>name</dfn></code>
-									</td>
-									<td>Human-readable title of the Web Publication.</td>
-									<td>One or more text items for the title.</td>
-									<td>
-										<a href="https://schema.org/name"><code>name</code></a> (<a
-											href="https://www.schema.org/Thing">Thing</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;LocalizableString> name;
 };</pre>
 
-						<pre class="example" title="Title of the book set explicitly">
+					<pre class="example" title="Title of the book set explicitly">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -2235,7 +2136,6 @@ partial dictionary WebPublicationManifest {
     "name"     : "Moby Dick"
 }
 </pre>
-					</section>
 				</section>
 			</section>
 
@@ -2251,73 +2151,66 @@ partial dictionary WebPublicationManifest {
 				<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL MUST
 					NOT be repeated within a list.</p>
 
-				<p> The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST
-					NOT appear within these lists. </p>
+				<p>The manifest itself MUST NOT include a reference to itself, i.e., the reference to the manifest MUST
+					NOT appear within these lists.</p>
 
 				<section id="default-reading-order">
 					<h4>Default Reading Order</h4>
 
 					<p>The <dfn>default reading order</dfn> is a specific progression through a set of <a>Web
-							Publication</a> resources. It is expressed using the <code>readingOrder</code> property.</p>
+							Publication</a> resources. A user might follow alternative pathways through the content, but
+						in the absence of such interaction the default reading order defines the expected progression
+						from one resource to the next.</p>
 
-					<p>A user might follow alternative pathways through the content, but in the absence of such
-						interaction the default reading order defines the expected progression from one resource to the
-						next.</p>
+					<p>The default reading order is expressed using the <code>readingOrder</code> property.</p>
 
-					<section id="default-reading-order-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>readingOrder</dfn></code>
+								</td>
+								<td></td>
+								<td>
+									<p>An array of:</p>
+									<ul>
+										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+										<li>an instance of a <a href="#publication-link-def"
+													><code>PublicationLink</code></a> object</li>
+									</ul>
+									<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
+										fragment identifiers. Non-HTML resources SHOULD be expressed as
+											<code>PublicationLink</code> objects with their <code>encodingFormat</code>
+										values set.</p>
+								</td>
+								<td>(None)</td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The default reading order MUST include at least one resource.</p>
+					<p>The default reading order MUST include at least one resource.</p>
 
-						<p>The default reading order is specified directly in the manifest, but MAY be omitted when it
-							only consists of the <a>primary entry page</a>. When the default reading order is absent,
-							user agents MUST include an entry for the primary entry page when compiling the infoset.</p>
-					</section>
+					<p>The default reading order is specified directly in the manifest, but MAY be omitted when it only
+						consists of the <a>primary entry page</a>. When the default reading order is absent, user agents
+						MUST include an entry for the primary entry page when compiling the canonical manifest.</p>
 
-					<section id="default-reading-order-manifest">
-						<h5>Manifest Expression</h5>
+					<p>If present in the Web Publication Manifest, this item MUST be mapped on the
+							<code>readingOrder</code> term, defined specifically for Web Publications.</p>
 
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
-								<code>readingOrder</code> term, defined specifically for Web Publications.</p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>readingOrder</dfn></code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
-											fragment identifiers. Non-HTML resources SHOULD be expressed as
-												<code>PublicationLink</code> objects with their
-												<code>encodingFormat</code> values set.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
    required sequence&lt;PublicationLink> readingOrder;
 };</pre>
 
-						<pre class="example" title="Reading order expressed as a simple list of URLs">
+					<pre class="example" title="Reading order expressed as a simple list of URLs">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -2334,7 +2227,7 @@ partial dictionary WebPublicationManifest {
     ]
 }
 </pre>
-						<pre class="example" title="Reading order expressed as objects providing more information on items">
+					<pre class="example" title="Reading order expressed as objects providing more information on items">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -2356,7 +2249,6 @@ partial dictionary WebPublicationManifest {
     }]
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="resource-list">
@@ -2366,65 +2258,54 @@ partial dictionary WebPublicationManifest {
 						in the processing and rendering of a <a>Web Publication</a> that are not already listed in the
 							<a>default reading order</a>. It is expressed using the <code>resources</code> property.</p>
 
-					<section id="resource-list-infoset">
-						<h5>Infoset Requirements</h5>
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>resources</dfn></code>
+								</td>
+								<td></td>
+								<td>
+									<p>An array of:</p>
+									<ul>
+										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+										<li>an instance of a <a href="#publication-link-def"
+													><code>PublicationLink</code></a> object</li>
+									</ul>
+									<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
+										fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code>
+										objects with their <code>encodingFormat</code> values set.</p>
+								</td>
+								<td>(None)</td>
+							</tr>
+						</tbody>
+					</table>
 
-						<p>The completeness of the resource list will affect the usability of the Web Publication in
-							certain reading scenarios (e.g., the ability to read the Web Publication offline). For this
-							reason, it is strongly RECOMMENDED to provide a comprehensive list of all of the Web
-							Publication's constituent resources beyond those listed in the <a>default reading
-							order</a>.</p>
+					<p>The completeness of the resource list will affect the usability of the Web Publication in certain
+						reading scenarios (e.g., the ability to read the Web Publication offline). For this reason, it
+						is strongly RECOMMENDED to provide a comprehensive list of all of the Web Publication's
+						constituent resources beyond those listed in the <a>default reading order</a>.</p>
 
-						<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
-							third-party scripts that reference resources from deep within their source), but a user
-							agent SHOULD still be able to render a Web Publication even if some of these resources are
-							not identified as belonging to the Web Publication (e.g., when it is taken offline without
-							them).</p>
-					</section>
+					<p>In some cases, a comprehensive list of these resources might not be easily achieved (e.g.,
+						third-party scripts that reference resources from deep within their source), but a user agent
+						SHOULD still be able to render a Web Publication even if some of these resources are not
+						identified as belonging to the Web Publication (e.g., when it is taken offline without
+						them).</p>
 
-					<section id="resource-list-manifest">
-						<h5>Manifest Expression</h5>
-
-						<p>If present in the Web Publication Manifest, this item MUST be mapped on the
-								<code>resources</code> term, defined specifically for Web Publications. </p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>resources</dfn></code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
-											fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code>
-											objects with their <code>encodingFormat</code> values set.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;PublicationLink> resources = [];
 };</pre>
 
-						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
+					<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "TechArticle",
@@ -2453,7 +2334,6 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-					</section>
 				</section>
 
 				<section id="links">
@@ -2462,7 +2342,38 @@ partial dictionary WebPublicationManifest {
 					<p><dfn>Links</dfn> provide a list of <a href="#wp-resources">resources</a> that are <em>not</em>
 						required for the processing and rendering of a Web Publication (i.e., the content of the Web
 						Publication remains unaffected even if these resources are not available). They are expressed
-						using the <code>link</code> property.</p>
+						using the <code>links</code> property.</p>
+
+					<table class="zebra">
+						<thead>
+							<tr>
+								<th>Term</th>
+								<th>Description</th>
+								<th>Required Value</th>
+								<th>[[!schema.org]] Mapping</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code data-dfn-for="WebPublicationManifest"><dfn>links</dfn></code>
+								</td>
+								<td></td>
+								<td>
+									<p>An array of:</p>
+									<ul>
+										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+										<li>an instance of a <a href="#publication-link-def"
+													><code>PublicationLink</code></a> object</li>
+									</ul>
+									<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use
+											<code>PublicationLink</code> objects with their <code>encodingFormat</code>
+										and <code>rel</code> values set.</p>
+								</td>
+								<td>(None)</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<p>Linked resources are typically made available to user agents to augment or enhance the processing
 						or rendering of it, such as:</p>
@@ -2485,60 +2396,21 @@ partial dictionary WebPublicationManifest {
 							packaged (e.g., tracking scripts).</li>
 					</ul>
 
-					<section id="links-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource (e.g.,
+						scripts, images, style sheets).</p>
 
-						<p>The <code>links</code> list SHOULD include resources necessary to render a linked resource
-							(e.g., scripts, images, style sheets).</p>
+					<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
+							href="#default-reading-order">default reading order</a> or <a href="#resource-list">resource
+							list</a>.</p>
 
-						<p>Resources listed in the <code>links</code> list MUST NOT be listed in the <a
-								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
-								>resource list</a>.</p>
+					<p>User agents MAY ignore linked resources, and are not required to take them offline with a Web
+						Publication. These resources SHOULD NOT be included when packaging a Web Publication.</p>
 
-						<p>User agents MAY ignore linked resources, and are not required to take them offline with a Web
-							Publication. These resources SHOULD NOT be included when packaging a Web Publication.</p>
-					</section>
-
-					<section id="links-manifest">
-						<h5>Manifest Expression</h5>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>links</dfn></code>
-									</td>
-									<td></td>
-									<td>
-										<p>An array of:</p>
-										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
-											<li>an instance of a <a href="#publication-link-def"
-														><code>PublicationLink</code></a> object</li>
-										</ul>
-										<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use
-												<code>PublicationLink</code> objects with their
-												<code>encodingFormat</code> and <code>rel</code> values set.</p>
-									</td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;PublicationLink> links = [];
 };</pre>
 
-					</section>
 				</section>
 			</section>
 
@@ -2557,37 +2429,29 @@ partial dictionary WebPublicationManifest {
 					<p>An accessibility report is identified using the
 							<code>https://www.w3.org/ns/wp#accessibility-report</code> link relationship.</p>
 
-					<section id="accessibility-report-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>The manifest SHOULD include a link to an accessibility report when one is available for a Web
+						Publication. It is RECOMMENDED that the report be included as a resource of the Web
+						Publication.</p>
 
-						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a link to an
-							accessibility report when one is available for a Web Publication. It is RECOMMENDED that the
-							report be included as a resource of the Web Publication.</p>
+					<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format, such
+						as [[!html]]. Augmenting these reports with machine-processable metadata, such as provided in
+						Schema.org [[!schema.org]], is also RECOMMENDED.</p>
 
-						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
-							such as <abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]]. Augmenting these
-							reports with machine-processable metadata, such as provided in Schema.org [[schema.org]], is
-							also RECOMMENDED.</p>
-					</section>
+					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
+								data-lt="accessibilityReport">accessibility report</dfn></span> MUST be expressed as a
+							<a href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value
+						of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+							<code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
 
-					<section id="accessibility-report-manifest">
-						<h5>Manifest Expression</h5>
+					<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
+						term with IANA, to avoid using a URL.</p>
 
-						<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
-									data-lt="accessibilityReport">accessibility report</dfn></span> MUST be expressed as
-							a <a href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
-							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
-							the <code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
-							term with IANA, to avoid using a URL.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     PublicationLink accessibilityReport;
 };</pre>
 
-						<pre class="example" title="Link to an accessibility report">
+					<pre class="example" title="Link to an accessibility report">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -2604,7 +2468,6 @@ partial dictionary WebPublicationManifest {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="privacy-policy">
@@ -2618,35 +2481,27 @@ partial dictionary WebPublicationManifest {
 
 					<p>A privacy policy is identified using the <code>privacy-policy</code> link relationship.</p>
 
-					<section id="privacy-policy-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>A link to a privacy policy can be included in the manifest. It is RECOMMENDED that the privacy
+						policy be included as a resource of the Web Publication.</p>
 
-						<p>A link to a privacy policy can be included in the <abbr title="information set"
-									><a>infoset</a></abbr>. It is RECOMMENDED that the privacy policy be included as a
-							resource of the Web Publication.</p>
+					<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as <abbr
+							title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
 
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
+					<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
+						Publications.</p>
 
-						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in Web
-							Publications.</p>
-					</section>
+					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
+								data-lt="privacyPolicy">privacy policy</dfn></span> MUST be expressed as a <a
+							href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value of
+						the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+							<code>privacy-policy</code> identifier&#160;[[!iana-link-relations]].</p>
 
-					<section id="privacy-policy-manifest">
-						<h4>Manifest Expression</h4>
-
-						<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
-									data-lt="privacyPolicy">privacy policy</dfn></span> MUST be expressed as a <a
-								href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code>
-							value of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include
-							the <code>privacy-policy</code> identifier&#160;[[!iana-link-relations]].</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     PublicationLink privacyPolicy;
 };</pre>
 
-						<pre class="example" title="Privacy policy expressed as an external link">
+					<pre class="example" title="Privacy policy expressed as an external link">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "TechArticle",
@@ -2665,7 +2520,6 @@ partial dictionary WebPublicationManifest {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 			</section>
 
@@ -2676,49 +2530,42 @@ partial dictionary WebPublicationManifest {
 					<h4>Cover</h4>
 
 					<p>The <dfn>cover</dfn> is a resource that user agents can use to present the <a>Web Publication</a>
-						(e.g., in a library or bookshelf, or when initially loading the Web Publication). It is
-						identified by the <code>https://www.w3.org/ns/wp#cover</code> link relationship.</p>
+						(e.g., in a library or bookshelf, or when initially loading the Web Publication).</p>
+
+					<p>The cover is identified by the <code>https://www.w3.org/ns/wp#cover</code> link relationship.</p>
 
 					<p class="issue" data-number="261">The working group has not reached consensus on whether the cover
 						should be any resource or should be limited to images.</p>
 
-					<section id="cover-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>The manfiest SHOULD include a reference to a cover.</p>
 
-						<p>The <abbr title="information set"><a>infoset</a></abbr> SHOULD include a reference to a
-							cover.</p>
+					<p>More than one cover MAY be referenced from the manifest (e.g., to provide alternative formats and
+						sizes for different device screens). If multiple covers are specified, each instance MUST define
+						at least one unique property to allow user agents to determine its usability (e.g., a different
+						format, height, width or relationship).</p>
 
-						<p>More than one cover MAY be referenced from the infoset (e.g., to provide alternative formats
-							and sizes for different device screens). If multiple covers are specified, each instance
-							MUST define at least one unique property to allow user agents to determine its usability
-							(e.g., a different format, height, width or relationship).</p>
-					</section>
+					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn data-lt="cover"
+								>cover</dfn></span> MUST be expressed as a <a href="#publication-link-def"
+								><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term MUST
+						NOT include a fragment identifier.</p>
 
-					<section id="cover-manifest">
-						<h5>Manifest Expression</h5>
+					<p>The <code>rel</code> value of the <a href="#publication-link-def"
+							><code>PublicationLink</code></a> MUST include the
+							<code>https://www.w3.org/ns/wp#cover</code> identifier.</p>
 
-						<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
-									data-lt="cover">cover</dfn></span> MUST be expressed as a <a
-								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
-								<code>url</code> term MUST NOT include a fragment identifier.</p>
+					<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD be
+						provided. User agents can use these properties to provide alternative text and descriptions when
+						necessary for accessibility.</p>
 
-						<p>The <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the
-								<code>https://www.w3.org/ns/wp#cover</code> identifier.</p>
+					<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA, to
+						avoid using a URL.</p>
 
-						<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD
-							be provided. User agents can use these properties to provide alternative text and
-							descriptions when necessary for accessibility.</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
-							to avoid using a URL.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     sequence&lt;PublicationLink> cover;
 };</pre>
 
-						<pre class="example" title="Cover HTML page">
+					<pre class="example" title="Cover HTML page">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -2737,7 +2584,7 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-						<pre class="example" title="Cover image with title and description">
+					<pre class="example" title="Cover image with title and description">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -2749,7 +2596,7 @@ partial dictionary WebPublicationManifest {
         "url"            : "whale-image.jpg",
         "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover",
-        "name"           : "Moby Dick attacking hunters",
+        "title"          : "Moby Dick attacking hunters",
         "description"    : "A white whale is seen surfacing from the water to attack a small whaling boat"
     },{
         &#8230;
@@ -2758,7 +2605,7 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-						<pre class="example" title="Cover image in JPEG and SVG formats">
+					<pre class="example" title="Cover image in JPEG and SVG formats">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -2781,72 +2628,64 @@ partial dictionary WebPublicationManifest {
     &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="page-list">
 					<h3>Page List</h3>
 
 					<p>The <dfn>pagelist</dfn> property identifies the resource that contains the Web Publication's <a
-							href="#wp-pagelist">page list</a>. It is identified by the
-							<code>https://www.w3.org/ns/wp#pagelist</code> link relationship. </p>
+							href="#wp-pagelist">page list</a>.</p>
 
-					<section id="page-list-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>The page list is identified by the <code>https://www.w3.org/ns/wp#pagelist</code> link
+						relationship.</p>
 
-						<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
+					<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
 
-						<ol>
-							<li>Identify the page list resource: <ul>
-									<li> If a resource in either the <a href="#default-reading-order">default reading
-											order</a> or <a href="#resource-list">resource-list</a> is identified with a
-											<code>rel</code> value including
-											<code>https://www.w3.org/ns/wp#pagelist</code>, the corresponding
-											<code>url</code> value identifies the page list resource. If there are
-										several such resources, the first one MUST be used, with the <a
-											href="#default-reading-order">default reading order</a> taking precedence
-										over <a href="#resource-list">resource-list</a>. </li>
-									<li> Otherwise, the <a>primary entry page</a> is the page list resource. </li>
-								</ul>
-							</li>
-							<li> If the page list resource contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value
-								<code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element
-								as the page list. If there are several such HTML elements the user agent MUST use the
-								first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
-									order</a>&#160;[[!dom]]. </li>
-						</ol>
+					<ol>
+						<li>Identify the page list resource: <ul>
+								<li> If a resource in either the <a href="#default-reading-order">default reading
+										order</a> or <a href="#resource-list">resource-list</a> is identified with a
+										<code>rel</code> value including <code>https://www.w3.org/ns/wp#pagelist</code>,
+									the corresponding <code>url</code> value identifies the page list resource. If there
+									are several such resources, the first one MUST be used, with the <a
+										href="#default-reading-order">default reading order</a> taking precedence over
+										<a href="#resource-list">resource-list</a>. </li>
+								<li> Otherwise, the <a>primary entry page</a> is the page list resource. </li>
+							</ul>
+						</li>
+						<li> If the page list resource contains an HTML element with the
+							<code>role</code>&#160;[[!html]] value <code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]],
+							the user agent MUST use that element as the page list. If there are several such HTML
+							elements the user agent MUST use the first in <a
+								href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+							order</a>&#160;[[!dom]]. </li>
+					</ol>
 
-						<p>If this process does not result in a link to the page list, the Web Publication does not have
-							a page list and this property MUST NOT be included in the infoset.</p>
+					<p>If this process does not result in a link to the page list, the Web Publication does not have a
+						page list and this property MUST NOT be included in the canonical manifest.</p>
 
-						<p class="ednote"> The Working Group will attempt to define the <code>pagelist</code> term by
-							IANA, to avoid using a URL. </p>
+					<p class="ednote">The Working Group will attempt to define the <code>pagelist</code> term by IANA,
+						to avoid using a URL.</p>
 
-					</section>
+					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
+								data-lt="pagelist">page list</dfn></span> MUST be expressed as a <a
+							href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
+							<code>url</code> term MUST NOT include a fragment identifier.</p>
 
-					<section id="page-list-manifest">
-						<h5>Manifest Expression</h5>
+					<p>The <code>rel</code> value of the <a href="#publication-link-def"
+							><code>PublicationLink</code></a> MUST include the
+							<code>https://www.w3.org/ns/wp#pagelist</code> identifier.</p>
 
-						<p> If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
-									data-lt="pagelist">page list</dfn></span> MUST be expressed as a <a
-								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
-								<code>url</code> term MUST NOT include a fragment identifier. </p>
+					<p>The link to the page list MAY be specified in either the <a href="#default-reading-order">default
+							reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT be specified
+						in both.</p>
 
-						<p> The <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the
-								<code>https://www.w3.org/ns/wp#pagelist</code> identifier. </p>
-
-						<p> The link to the page list MAY be specified in either the <a href="#default-reading-order"
-								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
-							be specified in both. </p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     HTMLElement pagelist;
 };</pre>
 
-						<pre class="example" title="Pagelist identified in another resource of the Web Publication">
+					<pre class="example" title="Pagelist identified in another resource of the Web Publication">
 {
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
@@ -2863,74 +2702,66 @@ partial dictionary WebPublicationManifest {
 &#8230;
 }
 </pre>
-					</section>
 				</section>
 
 				<section id="table-of-contents">
 					<h4>Table of Contents</h4>
 
 					<p>The table of contents property identifies the resource that contains the Web Publication's <a
-							href="#wp-table-of-contents">table of contents</a>. It is identified by the
-							<code>contents</code> link relationship.</p>
+							href="#wp-table-of-contents">table of contents</a>.</p>
 
-					<section id="table-of-contents-infoset">
-						<h5>Infoset Requirements</h5>
+					<p>The table of contents is identified by the <code>contents</code> link relationship.</p>
 
-						<p>User agents MUST compute the <code>toc</code> as follows:</p>
+					<p>User agents MUST compute the <code>toc</code> as follows:</p>
 
-						<ol>
-							<li>Identify the table of contents resource: <ul>
-									<li> If a resource in either the <a href="#default-reading-order">default reading
-											order</a> or <a href="#resource-list">resource-list</a> is identified with a
-											<code>rel</code> value including
-										<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
-											<code>url</code> value identifies the table of contents resource. If there
-										are several such resources, the first one MUST be used, with the <a
-											href="#default-reading-order">default reading order</a> taking precedence
-										over <a href="#resource-list">resource-list</a>. </li>
-									<li> Otherwise, the <a>primary entry page</a> is the table of contents resource.
-									</li>
-								</ul>
-							</li>
-							<li> If the table of contents resource contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
-								user agent MUST use that element as the table of contents. If there are several such
-								HTML elements the user agent MUST use the first in <a
-									href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
-								order</a>&#160;[[!dom]]. </li>
-						</ol>
+					<ol>
+						<li>Identify the table of contents resource: <ul>
+								<li> If a resource in either the <a href="#default-reading-order">default reading
+										order</a> or <a href="#resource-list">resource-list</a> is identified with a
+										<code>rel</code> value including
+									<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
+										<code>url</code> value identifies the table of contents resource. If there are
+									several such resources, the first one MUST be used, with the <a
+										href="#default-reading-order">default reading order</a> taking precedence over
+										<a href="#resource-list">resource-list</a>. </li>
+								<li> Otherwise, the <a>primary entry page</a> is the table of contents resource. </li>
+							</ul>
+						</li>
+						<li> If the table of contents resource contains an HTML element with the
+							<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
+							user agent MUST use that element as the table of contents. If there are several such HTML
+							elements the user agent MUST use the first in <a
+								href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+							order</a>&#160;[[!dom]]. </li>
+					</ol>
 
-						<p>If this process does not result in a link to the table of contents, the Web Publication does
-							not have a table of contents and this property MUST NOT be included in the infoset.</p>
+					<p>If this process does not result in a link to the table of contents, the Web Publication does not
+						have a table of contents and this property MUST NOT be included in the canonical manifest.</p>
 
-						<p class="issue" data-number="291">Depending on the resolution to this issue, the infoset might
-							contain a separate entry for a machine-processable table of contents, restrictions could be
-							placed on the HTML structure of the referenced table of contents, or parsing rules for
-							extracting a table of contents could be added.</p>
-					</section>
+					<p class="issue" data-number="291">Depending on the resolution to this issue, the manifest might
+						contain a separate entry for a machine-processable table of contents, restrictions could be
+						placed on the HTML structure of the referenced table of contents, or parsing rules for
+						extracting a table of contents could be added.</p>
 
-					<section id="table-of-contents-manifest">
-						<h5>Manifest Expression</h5>
+					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn data-lt="toc"
+								>table of contents</dfn></span> MUST be expressed as a <a href="#publication-link-def"
+								><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term MUST
+						NOT include a fragment identifier.</p>
 
-						<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
-									data-lt="toc">table of contents</dfn></span> MUST be expressed as a <a
-								href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
-								<code>url</code> term MUST NOT include a fragment identifier.</p>
+					<p>The <code>rel</code> value of the <a href="#publication-link-def"
+							><code>PublicationLink</code></a> MUST include the <code>contents</code>
+						identifier&#160;[[!iana-link-relations]].</p>
 
-						<p>The <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> MUST include the <code>contents</code>
-							identifier&#160;[[!iana-link-relations]].</p>
+					<p>The link to the table of contents MAY be specified in either the <a href="#default-reading-order"
+							>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT be
+						specified in both.</p>
 
-						<p>The link to the table of contents MAY be specified in either the <a
-								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
-								>resource-list</a>, but MUST NOT be specified in both.</p>
-
-						<pre class="idl">
+					<pre class="idl">
 partial dictionary WebPublicationManifest {
     HTMLElement toc;
 };</pre>
 
-						<pre class="example" title="Table of content identified in another resource of the Web Publication">
+					<pre class="example" title="Table of content identified in another resource of the Web Publication">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"       : "Book",
@@ -2948,7 +2779,7 @@ partial dictionary WebPublicationManifest {
 }
 </pre>
 
-						<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
+					<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
 &lt;head&gt;
     &#8230;
     &lt;script type="application/ld+json"&gt;
@@ -2971,16 +2802,14 @@ partial dictionary WebPublicationManifest {
     &#8230;
 &lt;/body&gt;
 </pre>
-					</section>
 				</section>
 			</section>
 
 			<section id="extensibility">
 				<h3>Extensibility</h3>
 
-				<p>The <abbr title="information set"><a>infoset</a></abbr> is designed to provide a basic set of
-					properties for use by user agents in presenting and rendering a <a>Web Publication</a>, but MAY be
-					extended in the following ways:</p>
+				<p>The manifest is designed to provide a basic set of properties for use by user agents in presenting
+					and rendering a <a>Web Publication</a>, but MAY be extended in the following ways:</p>
 
 				<ol>
 					<li>by the provision of <a href="#extensibility-linked-records">linked metadata records</a>.</li>
@@ -2988,10 +2817,10 @@ partial dictionary WebPublicationManifest {
 							the manifest</a>;</li>
 				</ol>
 
-				<p>Although both methods are valid, the use of linked records to extend the infoset is RECOMMENDED.</p>
+				<p>Although both methods are valid, the use of linked records is RECOMMENDED.</p>
 
 				<p>This specification does not define how such additional properties are compiled, stored or exposed by
-					user agents in their internal representation of the infoset. A user agent MAY ignore some or all
+					user agents in their internal representation of the manifest. A user agent MAY ignore some or all
 					extended properties.</p>
 
 				<section id="extensibility-linked-records">
@@ -3010,7 +2839,7 @@ partial dictionary WebPublicationManifest {
 					</ul>
 
 					<p>Linked records MUST be included in the <a href="#resource-list">resource list</a> when they are
-						part of the Web Publication (i.e., are needed for more than just infoset extensibility).
+						part of the Web Publication (i.e., are needed for more than just manifest extensibility).
 						Otherwise, they MUST be included in the <a href="#links">links list</a>.</p>
 
 					<pre class="example" title="Link to external ONIX for Books Metadata file">
@@ -3033,7 +2862,7 @@ partial dictionary WebPublicationManifest {
 </pre>
 					<p class="ednote">The <code>application/onix+xml</code> MIME type has not yet been registered by
 						IANA at the time of writing this document, and is included in the example for illustrative
-						purposes only. </p>
+						purposes only.</p>
 				</section>
 
 				<section id="extensibility-manifest-properties">
@@ -3073,7 +2902,7 @@ partial dictionary WebPublicationManifest {
 						of [[schema.org]]. This means that it is not necessary to add the prefix explicitly. The same is
 						true for a number of other public vocabularies; see the <a
 							href="https://schema.org/docs/jsonldcontext.json">schema.org context file</a> for further
-						details. </p>
+						details.</p>
 
 				</section>
 			</section>
@@ -3082,16 +2911,16 @@ partial dictionary WebPublicationManifest {
 			<h2>Web Publication Lifecycle</h2>
 
 			<p class="note"> See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
-				representation of the lifecycle algorithm. </p>
+				representation of the lifecycle algorithm.</p>
 
 			<section id="obtaining-manifest">
 				<h3>Obtaining a manifest</h3>
 
-				<p> The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
-						obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
-					following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise,
-					it terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
-					MUST ignore the manifest declaration. </p>
+				<p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for obtaining
+						a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the following
+					algorithm. The algorithm, if successful, returns a <a>processed manifest</a>; otherwise, it
+					terminates prematurely and returns nothing. In the case of nothing being returned, the user agent
+					MUST ignore the manifest declaration.</p>
 
 				<ol>
 					<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
@@ -3169,24 +2998,14 @@ partial dictionary WebPublicationManifest {
 				</ol>
 
 				<p class="note"> The algorithm does not describes how error and warning messages should be reported.
-					This is implementation dependent. </p>
+					This is implementation dependent.</p>
 
 			</section>
 
 			<section id="canonical-manifest">
 				<h4>Generating a Canonical Manifest</h4>
 
-				<p> A <dfn data-lt="canonical manifest|canonical web publication manifest">Canonical Web Publication
-						Manifest</dfn> (or Canonical Manifest) is a version of the Web Publication <a>Manifest</a> where
-					all possible ambiguities on property values (see, e.g., <a href="#arrays-and-single-values"></a> or
-						<a href="#strings-vs-objects"></a>) have been removed, and all values that are possibly
-					harnessed from the <a>primary entry page</a> are incorporated. Using a Canonical Manifest when <a
-						href="#processing-manifest">processing the manifest</a> makes those processing steps, as well as
-					the transformation of the manifest to programming language structures, clearer. Converting the
-					Manifest into its canonical form is done when the manifest is <a href="#obtaining-manifest"
-						>obtained</a>. </p>
-
-				<p> The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following
+				<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the following
 					algorithm. The algorithm takes the following arguments:</p>
 				<ul>
 					<li>the <var>manifest</var> the JSON object that represent the <a>manifest</a></li>
@@ -3197,11 +3016,11 @@ partial dictionary WebPublicationManifest {
 					</li>
 				</ul>
 
-				<p> The steps of the algorithm are described below. As an abuse of notation, <var>P["term"]</var> refers
+				<p>The steps of the algorithm are described below. As an abuse of notation, <var>P["term"]</var> refers
 					to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is
 					either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a
 						<var>Person</var>). The algorithm replaces or adds some terms to <var>manifest</var>; the
-					replacement terms are expressed in JSON syntax as <code class="json">{"term":"value"}</code>. </p>
+					replacement terms are expressed in JSON syntax as <code class="json">{"term":"value"}</code>.</p>
 				<ol>
 					<li>let <var>lang</var> string represent the default language, set to: <ul>
 							<li> the value of the <a data-cite="!html#the-lang-and-xml:lang-attributes"
@@ -3299,7 +3118,7 @@ partial dictionary WebPublicationManifest {
 				<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a
 					visual representation of the algorithm. Also, to help understanding the result of the algorithm,
 					there is a link to the corresponding canonical manifests for all the examples in <a
-						href="#app-manifest-examples"></a>. </p>
+						href="#app-manifest-examples"></a>.</p>
 				<div class="issue"> Some open issues, either in this working group or in the <a
 						href="https://www.w3.org/2018/json-ld-wg/">JSON-LD Working Group</a> may modify some of the
 					details above. These are: <ul>
@@ -3319,12 +3138,12 @@ partial dictionary WebPublicationManifest {
 			<section id="processing-manifest">
 				<h3>Processing the manifest</h3>
 
-				<p> The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
+				<p>The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
 						manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var>
 					object representing a <a>canonical manifest</a>. The output from inputting a JSON object into this
 					algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that the data
 					represented in <var>json</var> abides to the minimal requirements on the data, removing, if
-					applicable, non-conformant data. </p>
+					applicable, non-conformant data.</p>
 
 				<ol>
 					<li> Let <var>manifest object</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
@@ -3365,7 +3184,6 @@ partial dictionary WebPublicationManifest {
 					<li> Return <var>manifest object</var>. </li>
 				</ol>
 			</section>
-
 		</section>
 		<section id="wp-features">
 			<h2>User Agent Features</h2>
@@ -3385,10 +3203,9 @@ partial dictionary WebPublicationManifest {
 				<p>This feature has the following requirements:</p>
 
 				<ol>
-					<li>it MUST inform the user that the current resource is part of a <a>Web Publication</a></li>
-					<li>it SHOULD display the title of the Web Publication</li>
-					<li>it MAY display additional metadata from the <abbr title="information set"
-						><a>infoset</a></abbr></li>
+					<li>It MUST inform the user that the current resource is part of a <a>Web Publication</a>.</li>
+					<li>It SHOULD display the title of the Web Publication.</li>
+					<li>It MAY display additional metadata from the manifest.</li>
 				</ol>
 
 				<p><dfn>Publication mode</dfn> is a display mode implemented by the user agent that follows the
@@ -3597,21 +3414,21 @@ partial dictionary WebPublicationManifest {
 
 					<section>
 						<h5>Short description</h5>
-						<p> The user agent should provide access to the table of contents without leaving current
-							resource from anywhere in the publication. </p>
-						<p> For accessibility reasons, it is RECOMMENDED for User Agents to use a table of contents to
-							allow multiple ways for users to access content. </p>
+						<p>The user agent should provide access to the table of contents without leaving current
+							resource from anywhere in the publication.</p>
+						<p>For accessibility reasons, it is RECOMMENDED for User Agents to use a table of contents to
+							allow multiple ways for users to access content.</p>
 					</section>
 					<section>
 						<h5>Affordances</h5>
-						<p> The table of contents is a listed as a structural property in the infoset, see <a
+						<p>The table of contents is a listed as a structural property in the manifest, see <a
 								href="#table-of-contents"></a>
 						</p>
-						<p> The table of content is referred to in the Web Publication Manifest (see <a
-								href="#table-of-contents-manifest"></a>) and is expressed using an HTML element; see <a
-								href="#table-of-contents"></a> for further details. </p>
-						<p> User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
-							explicitly specified to create a table of contents. </p>
+						<p>The table of content is referred to in the Web Publication Manifest (see <a
+								href="#table-of-contents"></a>) and is expressed using an HTML element; see <a
+								href="#table-of-contents"></a> for further details.</p>
+						<p>User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
+							explicitly specified to create a table of contents.</p>
 					</section>
 					<section>
 						<h5>Use Case References</h5>
@@ -3650,35 +3467,35 @@ partial dictionary WebPublicationManifest {
 
 				<section>
 					<h5>Short description</h5>
-					<p> The user must be able to leave the Web Publication and return to it at the last position they
+					<p>The user must be able to leave the Web Publication and return to it at the last position they
 						left from. The User Agent must retain the reading position, based on the last known position of
 						the reader in the web publication. The position should be based on the reader's position in the
-						file, within the reading order. </p>
-					<p> The user agent may retain reading state if the web publication is revised. </p>
+						file, within the reading order.</p>
+					<p>The user agent may retain reading state if the web publication is revised.</p>
 				</section>
 				<section>
 					<h5>Affordances</h5>
-					<p> The navigation of the web publication should be defined in the <a>Default Reading Order</a>
-						required by the Information Set. </p>
-					<p> User Agents should not have to set the reading state in the following type of resources: </p>
+					<p>The navigation of the web publication should be defined in the required <a>Default Reading
+							Order</a>.</p>
+					<p>User Agents should not have to set the reading state in the following type of resources:</p>
 					<ul>
 						<li>External Links (i.e. a link to google.com)</li>
 						<li>Data references (i.e. a linked CSV file)</li>
 						<li>Multimedia content (i.e. a video)</li>
 					</ul>
 
-					<p> Reading state should only apply to content documents listed as being within the bounds of the
-						Web Publication. </p>
+					<p>Reading state should only apply to content documents listed as being within the bounds of the Web
+						Publication.</p>
 				</section>
 				<section>
 					<h5>Examples</h5>
-					<p> Example 1:<br /> Sarah is reading a long article on her way to work. She arrives before she has
+					<p>Example 1:<br /> Sarah is reading a long article on her way to work. She arrives before she has
 						finished, but wants to continue from the place she left off. The user agent should remember her
-						reading state for the next time she opens the publication. </p>
+						reading state for the next time she opens the publication.</p>
 
 					<h5>Testing</h5>
-					<p> If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the
-						reader, then reopens it, they should be returned to the last known reading state. </p>
+					<p>If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the
+						reader, then reopens it, they should be returned to the last known reading state.</p>
 				</section>
 			</section>
 		</section>
@@ -3687,7 +3504,7 @@ partial dictionary WebPublicationManifest {
 
 			<p class="ednote"> The document referred from this section, i.e., Web Annotation Extensions for Web
 				Publications&#160;[[wpub-ann]], has been recently renamed. Its previous was "Locators for Web
-				Publication". The terminology used in this section has to be realigned with the name change. </p>
+				Publication". The terminology used in this section has to be realigned with the name change.</p>
 
 			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
 					<a>Web Publications</a> (e.g., for address(es), bookmarks, and annotations). Locators traditionally
@@ -3729,15 +3546,14 @@ partial dictionary WebPublicationManifest {
 				way to identify and reference a location within a Web Publication (i.e., as distinct from identifying
 				and referencing a content fragment consisting of a span of characters or bytes). A Web Publication
 				Locator can be used to identify, retrieve and/or reference a fragment of a Web Publication that spans
-				multiple resources. </p>
+				multiple resources.</p>
 
 			<div class="note">
 				<p>In composing a Web Publication Locator, use the <a>canonical identifier</a> of the Web Publication in
 					preference to any alternative addresses. Such use facilitates the collation of Web Publication
 					Locators associated with a particular Web Publication. <abbr title="Uniform Resource Locators"
 						>URLs</abbr> of Web Publication resources appearing in a Web Publication Locator should match
-					the <abbr title="Uniform Resource Locators">URL</abbr> of the resource provided in the <abbr
-						title="information set"><a>infoset</a></abbr>.</p>
+					the <abbr title="Uniform Resource Locators">URL</abbr> of the resource provided in the manifest.</p>
 			</div>
 		</section>
 		<section id="security">
@@ -3934,19 +3750,18 @@ partial dictionary WebPublicationManifest {
 			<h2>Image Descriptions</h2>
 
 			<dl>
-				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">“Structure of Web Publications”
+				<dt id="WP-diagram-descr">Description for the <a href="#WP-diagram">"Structure of Web Publications"
 						diagram</a>:</dt>
 				<dd>A simplified diagram of the structure of a <a>Web Publication</a>. The Web Publication is broken
 					down into two elements. The first element is the actual contents (all the real things listed in the
-					manifest). This element is broken down into the CSS, the actual “things” such as the <abbr
+					manifest). This element is broken down into the CSS, the actual "things" such as the <abbr
 						title="Hypertext Markup Language">HTML</abbr> documents, audio, etc, and the images, fonts etc.
-					The actual “things” have an additional subset of items that includes the entry page to the
+					The actual "things" have an additional subset of items that includes the entry page to the
 					publication and all of the other documents. The second element is the Manifest (JSON). The manifest
-					is used to generate the <a href="#wp-infoset-manifest">Information Set (“Infoset”)</a>, which
-					consists of a list of all the “things” in the publication, the publication metadata, and the default
-					reading order of content. It is noted in the diagram that the entry page has to link to the
-					manifest. (<a role="doc-backlink" href="#WP-diagram">Return to the diagram</a> of Web
-					Publication.)</dd>
+					is used to generate the canonical manifest, which consists of a list of all the "things" in the
+					publication, the publication metadata, and the default reading order of content. It is noted in the
+					diagram that the entry page has to link to the manifest. (<a role="doc-backlink" href="#WP-diagram"
+						>Return to the diagram</a> of Web Publication.)</dd>
 			</dl>
 
 		</section>
