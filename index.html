@@ -245,7 +245,8 @@
 						<dt><dfn data-lt="authored web publication manifest">Authored Manifest</dfn></dt>
 						<dd>
 							<p>The Authored Web Publication Manifest, as its name suggests, is the serialization of the
-								manifest that the author provides with their Web Publication.</p>
+								manifest that the author provides with the Web Publication (note that the author does
+								not have to be human).</p>
 						</dd>
 
 						<dt><dfn data-lt="canonical manifest|canonical web publication manifest">Canonical
@@ -257,6 +258,10 @@
 								incorporate any missing values that can be inferred from another source.</p>
 						</dd>
 					</dl>
+
+					<p>It is possible that an authored manifest is the equivalent of the canonical manifest if there are
+						no ambiguities or missing information, but a canonical manifest only exists after a user agent
+						has inspected the authored manifest as part of the process of obtaining it.</p>
 
 					<p>This specification describes the requirements for creating both authored and canonical manifests.
 						This section, in particular, details how to create the authored manifest, while <a
@@ -624,10 +629,9 @@ partial dictionary WebPublicationManifest {
 
 					<p class="issue">The usage (or not) of the <code>&lt;base&gt;</code> element for embedded manifests
 						is currently the subject of several issues in the <a href="https://www.w3.org/2018/json-ld-wg/"
-							>JSON-LD Working Group</a>: <a
-							href="https://github.com/w3c/json-ld-syntax/issues/22">JSON-LD #22</a>, <a
-							href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>, and, ultimately, <a
-							href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>.</p>
+							>JSON-LD Working Group</a>: <a href="https://github.com/w3c/json-ld-syntax/issues/22"
+							>JSON-LD #22</a>, <a href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>,
+						and, ultimately, <a href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>.</p>
 
 				</section>
 
@@ -1720,7 +1724,8 @@ dictionary CreatorInfo {
 
 					<p>No default values are specified for the <a>language</a> or the default <a>base direction</a>.</p>
 
-					<p class="issue" data-number="354">Proposal for handling localizable texts (writeup of the F2F discussions)</p>
+					<p class="issue" data-number="354">Proposal for handling localizable texts (writeup of the F2F
+						discussions)</p>
 
 					<section id="manifest-default-language-and-dir">
 						<h6>Global Language and Direction</h6>
