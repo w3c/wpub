@@ -237,7 +237,7 @@
 					<p>The manifest is expressed in one of two forms depending on the state of the Web Publication:</p>
 
 					<dl>
-						<dt><dfn>Authored Manifest</dfn></dt>
+						<dt><dfn data-lt="authored web publication manifest">Authored Manifest</dfn></dt>
 						<dd>
 							<p>The Authored Web Publication Manifest, as its name suggests, is the serialization of the
 								manifest that the author provides with their Web Publication.</p>
@@ -246,17 +246,19 @@
 						<dt><dfn data-lt="canonical manifest|canonical web publication manifest">Canonical
 								Manifest</dfn></dt>
 						<dd>
-							<p>THe Canonical Web Publication Manifest is a version of the Web Publication
-									<a>Manifest</a> created by user agents when they <a href="#obtaining-manifest"
+							<p>The Canonical Web Publication Manifest is a version of an <a>Authored Web Publication
+									Manifest</a> typically created by user agents when they <a href="#obtaining-manifest"
 									>obtain the authored manifest</a> and remove all possible ambiguities and
 								incorporate any missing values that can be inferred from another source.</p>
+								
 						</dd>
 					</dl>
 
 					<p>This specification describes the requirements for creating both authored and canonical manifests.
 						This section, in particular, details how to create the authored manifest, while <a
 							href="#wp-properties"></a> provides the various property definitions. These definitions
-						include the rules user agents uses to supplement the canonical manifest.</p>
+						include the rules user agents uses to supplement the canonical manifest. The algorithm for transforming an <a>Authored Manifest</a> into a <a>Canonical Manifest</a> is described in the separate section <a href="#canonical-manifest"></a>.</p>
+
 				</section>
 
 				<section id="webidl">
@@ -603,7 +605,7 @@ partial dictionary WebPublicationManifest {
 
 					<ul>
 						<li>In the case of an <a href="#manifest-embedding">embedded manifest</a>, it is the <a
-								href="https://www.w3.org/TR/html/infrastructure.html#document-base-url">document base
+							data-cite="!html#the-base-element">document base
 								URL</a>&#160;[[!html]] of the <a>primary entry page</a> of the Web Publication;</li>
 						<li>In the case of a <a href="#manifest-linking">linked manifest</a>, it is URL of the manifest
 							resource.</li>
@@ -611,11 +613,14 @@ partial dictionary WebPublicationManifest {
 
 					<p>For embedded manifests, this means that relative URLs are resolved against the URL of the primary
 						entry page <em>unless</em> the page declares a base direction (i.e., in a <a
-							href="https://www.w3.org/TR/html/document-metadata.html#the-base-element"
-								><code>&lt;base&gt;</code> element</a> in its header or via an <a
-							href="https://www.w3.org/TR/html/dom.html#the-xmlbase-attribute-xml-only"
-								><code>xml:base</code> attribute</a>&#160;[[html]]).</p>
-				</section>
+							data-cite="!html#the-base-element"
+								><code>&lt;base&gt;</code> element</a> in its header).</p>
+
+					<p class="issue">The usage (or not) of the <code>&lt;base&gt;</code> element for embedded manifests is currently the subject of several issues in the <a href="https://www.w3.org/2018/json-ld-wg/">JSON-LD Working Group</a> Working Group: <a href="https://github.com/w3c/json-ld-syntax/issues/22">JSON-LD
+						#22</a>, <a href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>, and,
+					ultimately, <a href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>.</p>			
+
+					</section>
 
 				<section id="manifest-embedding">
 					<h3>Embedding</h3>
