@@ -596,7 +596,7 @@ partial dictionary WebPublicationManifest {
 					<p class="note">Although authors only have to understand the serialization requirements for manifest
 						terms, they are encouraged to read through the full definitions for each property. The
 						definitions describe, in some cases, how items are compiled into the <a>Canonical Manifest</a>
-						the absence of explicit information.</p>
+						in the absence of explicit information.</p>
 				</section>
 
 				<section id="manifest-relative-urls">
@@ -624,7 +624,7 @@ partial dictionary WebPublicationManifest {
 
 					<p class="issue">The usage (or not) of the <code>&lt;base&gt;</code> element for embedded manifests
 						is currently the subject of several issues in the <a href="https://www.w3.org/2018/json-ld-wg/"
-							>JSON-LD Working Group</a> Working Group: <a
+							>JSON-LD Working Group</a>: <a
 							href="https://github.com/w3c/json-ld-syntax/issues/22">JSON-LD #22</a>, <a
 							href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>, and, ultimately, <a
 							href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>.</p>
@@ -654,7 +654,7 @@ partial dictionary WebPublicationManifest {
 				</section>
 
 				<section id="manifest-linking">
-					<h2>Linking To</h2>
+					<h2>Linking To a Manifest</h2>
 
 					<p>With the exception of the <a>primary entry page</a>, linking a resource to its Web Publication
 						manifest is OPTIONAL. Including a link is encouraged whenever possible, however, as it allows
@@ -1720,8 +1720,7 @@ dictionary CreatorInfo {
 
 					<p>No default values are specified for the <a>language</a> or the default <a>base direction</a>.</p>
 
-					<p class="issue"> This section, in particular the features related to text directions, must be
-						reviewed by I18N experts.</p>
+					<p class="issue" data-number="354">Proposal for handling localizable texts (writeup of the F2F discussions)</p>
 
 					<section id="manifest-default-language-and-dir">
 						<h6>Global Language and Direction</h6>
