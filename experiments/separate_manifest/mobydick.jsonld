@@ -29,61 +29,61 @@
     "readingOrder": [
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/title.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/copyright.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/introduction.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/epigraph.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c001.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c002.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c003.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c004.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c005.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/c006.html"
         }
@@ -91,13 +91,13 @@
     "resources": [
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//css/mobydick.css"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "rel": [
                 "https://www.w3.org/ns/wp#cover-page"
@@ -107,7 +107,7 @@
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//html/toc.html",
             "rel": [
@@ -116,28 +116,28 @@
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneral.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBol.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralBolIta.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "https://publisher.example.org/mobydick//fonts/STIXGeneralItalic.otf",
             "encodingFormat": "application/vnd.ms-opentype"

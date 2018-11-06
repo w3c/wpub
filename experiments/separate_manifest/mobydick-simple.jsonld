@@ -21,28 +21,28 @@
     "resources": [
         "css/mobydick.css",
         {
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "rel": "https://www.w3.org/ns/wp#cover-page",
             "url": "images/cover.jpg",
             "encodingFormat": "image/jpeg"
         },{
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "url": "html/toc.html",
             "rel": "contents"
         },{
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "url": "fonts/STIXGeneral.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },{
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "url": "fonts/STIXGeneralBol.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },{
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "url": "fonts/STIXGeneralBolIta.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         },{
-            "type": "PublicationLink",
+            "type": "LinkedResource",
             "url": "fonts/STIXGeneralItalic.otf",
             "encodingFormat": "application/vnd.ms-opentype"
         }
