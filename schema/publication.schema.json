@@ -184,7 +184,8 @@
       "items": {
         "anyOf": [
           {
-            "type": "string"
+            "type": "string",
+            "format": "uri-reference" 
           },
           {
             "$ref": "link.schema.json"
@@ -198,7 +199,8 @@
       "items": {
         "anyOf": [
           {
-            "type": "string"
+            "type": "string",
+            "format": "uri-reference"
           },
           {
             "$ref": "link.schema.json"
@@ -212,7 +214,8 @@
       "items": {
         "anyOf": [
           {
-            "type": "string"
+            "type": "string",
+            "format": "uri-reference"
           },
           {
             "$ref": "link.schema.json"
