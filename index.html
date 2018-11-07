@@ -411,29 +411,29 @@ dictionary WebPublicationManifest {
 						<ol>
 							<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]];
 								or</li>
-							<li>as an instance of a <a href="#publication-link-def"><code>PublicationLink</code>
+							<li>as an instance of a <a href="#publication-link-def"><code>LinkedResource</code>
 									object</a> that can be used to express the URL, the media type, and other
 								characteristics of the target resource.</li>
 						</ol>
 
-						<p>In other words, a single string value is a shorthand for a <code>PublicationLink</code>
+						<p>In other words, a single string value is a shorthand for a <code>LinkedResource</code>
 							object whose <code>url</code> property is set to that string value. (See also <a
 								href="#strings-vs-objects"></a>.)</p>
 
-						<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a PublicationLink object">
+						<pre class="example" title="Resource list that includes one link using a relative URL as a string ('datatypes.svg') and two that display the various properties of the a LinkedResource object">
 {
     &#8230;
     "resources" : [
         "datatypes.svg",
         {
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "test-utf8.csv",
             "encodingFormat"  : "text/csv",
             "name"            : "Test Results",
             "description"     : "CSV file containing the full data set used."
         },
         {
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "terminology.html",
             "encodingFormat"  : "text/html",
             "rel"             : "glossary"
@@ -443,13 +443,13 @@ dictionary WebPublicationManifest {
 </pre>
 
 						<section id="publicationLink">
-							<h6><code>PublicationLink</code> Definition</h6>
+							<h6><code>LinkedResource</code> Definition</h6>
 
 							<p id="publication-link-def">This specification defines a new type for links called
-										<code><dfn>PublicationLink</dfn></code>. It consists of the following
+										<code><dfn>LinkedResource</dfn></code>. It consists of the following
 								properties:</p>
 
-							<table class="zebra" data-dfn-for="PublicationLink">
+							<table class="zebra" data-dfn-for="LinkedResource">
 								<thead>
 									<tr>
 										<th>Term</th>
@@ -522,14 +522,13 @@ dictionary WebPublicationManifest {
 							</table>
 
 							<pre class="idl">
-dictionary PublicationLink {
+dictionary LinkedResource {
     required DOMString           url;
              DOMString           encodingFormat;
              sequence&lt;LocalizableString>   name;
              LocalizableString   description;
              sequence&lt;DOMString> rel;
 };</pre>
-							<p class="issue" data-number="235"></p>
 						</section>
 					</section>
 				</section>
@@ -2188,11 +2187,11 @@ partial dictionary WebPublicationManifest {
 									<ul>
 										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 										<li>an instance of a <a href="#publication-link-def"
-													><code>PublicationLink</code></a> object</li>
+													><code>LinkedResource</code></a> object</li>
 									</ul>
 									<p>The order in the array is <em>significant</em>. The URLs MUST NOT include
 										fragment identifiers. Non-HTML resources SHOULD be expressed as
-											<code>PublicationLink</code> objects with their <code>encodingFormat</code>
+											<code>LinkedResource</code> objects with their <code>encodingFormat</code>
 										values set.</p>
 								</td>
 								<td>(None)</td>
@@ -2211,7 +2210,7 @@ partial dictionary WebPublicationManifest {
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-   required sequence&lt;PublicationLink> readingOrder;
+   required sequence&lt;LinkedResource> readingOrder;
 };</pre>
 
 					<pre class="example" title="Reading order expressed as a simple list of URLs">
@@ -2282,10 +2281,10 @@ partial dictionary WebPublicationManifest {
 									<ul>
 										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 										<li>an instance of a <a href="#publication-link-def"
-													><code>PublicationLink</code></a> object</li>
+													><code>LinkedResource</code></a> object</li>
 									</ul>
 									<p>The order in the array is <em>not significant</em>. The URLs MUST NOT include
-										fragment identifiers. It is RECOMMENDED to use <code>PublicationLink</code>
+										fragment identifiers. It is RECOMMENDED to use <code>LinkedResource</code>
 										objects with their <code>encodingFormat</code> values set.</p>
 								</td>
 								<td>(None)</td>
@@ -2306,7 +2305,7 @@ partial dictionary WebPublicationManifest {
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> resources = [];
+    sequence&lt;LinkedResource> resources = [];
 };</pre>
 
 					<pre class="example" title="Listing resources, some via a simple URL, some with more details">
@@ -2323,11 +2322,11 @@ partial dictionary WebPublicationManifest {
         "datatypes.png",
         "diff.html",
         {
-            "type"              : "PublicationLink",
+            "type"              : "LinkedResource",
             "url"               : "test-utf8.csv",
             "encodingFormat"    : "text/csv"
         },{
-            "type"              : "PublicationLink",
+            "type"              : "LinkedResource",
             "url"               : "test-utf8-bom.csv",
             "encodingFormat"    : "text/csv"
         },{
@@ -2368,10 +2367,10 @@ partial dictionary WebPublicationManifest {
 									<ul>
 										<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
 										<li>an instance of a <a href="#publication-link-def"
-													><code>PublicationLink</code></a> object</li>
+													><code>LinkedResource</code></a> object</li>
 									</ul>
 									<p>The order in the array is <em>not significant</em>. It is RECOMMENDED to use
-											<code>PublicationLink</code> objects with their <code>encodingFormat</code>
+											<code>LinkedResource</code> objects with their <code>encodingFormat</code>
 										and <code>rel</code> values set.</p>
 								</td>
 								<td>(None)</td>
@@ -2412,7 +2411,7 @@ partial dictionary WebPublicationManifest {
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> links = [];
+    sequence&lt;LinkedResource> links = [];
 };</pre>
 
 				</section>
@@ -2443,8 +2442,8 @@ partial dictionary WebPublicationManifest {
 
 					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
 								data-lt="accessibilityReport">accessibility report</dfn></span> MUST be expressed as a
-							<a href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value
-						of the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+							<a href="#publication-link-def"><code>LinkedResource</code></a>. The <code>rel</code> value
+						of the <a href="#publication-link-def"><code>LinkedResource</code></a> MUST include the
 							<code>https://www.w3.org/ns/wp#accessibility-report</code> identifier.</p>
 
 					<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
@@ -2452,7 +2451,7 @@ partial dictionary WebPublicationManifest {
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    PublicationLink accessibilityReport;
+    LinkedResource accessibilityReport;
 };</pre>
 
 					<pre class="example" title="Link to an accessibility report">
@@ -2463,7 +2462,7 @@ partial dictionary WebPublicationManifest {
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "links"  : [{
-        "type"        : "PublicationLink",
+        "type"        : "LinkedResource",
         "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
         "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
     },{
@@ -2496,13 +2495,13 @@ partial dictionary WebPublicationManifest {
 
 					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
 								data-lt="privacyPolicy">privacy policy</dfn></span> MUST be expressed as a <a
-							href="#publication-link-def"><code>PublicationLink</code></a>. The <code>rel</code> value of
-						the <a href="#publication-link-def"><code>PublicationLink</code></a> MUST include the
+							href="#publication-link-def"><code>LinkedResource</code></a>. The <code>rel</code> value of
+						the <a href="#publication-link-def"><code>LinkedResource</code></a> MUST include the
 							<code>privacy-policy</code> identifier&#160;[[!iana-link-relations]].</p>
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    PublicationLink privacyPolicy;
+    LinkedResource privacyPolicy;
 };</pre>
 
 					<pre class="example" title="Privacy policy expressed as an external link">
@@ -2514,7 +2513,7 @@ partial dictionary WebPublicationManifest {
     "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
     &#8230;
     "links"  : [{
-        "type"           : "PublicationLink",
+        "type"           : "LinkedResource",
         "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
         "encodingFormat" : "text/html",
         "rel"            : "privacy-policy"
@@ -2550,11 +2549,11 @@ partial dictionary WebPublicationManifest {
 
 					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn data-lt="cover"
 								>cover</dfn></span> MUST be expressed as a <a href="#publication-link-def"
-								><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term MUST
+								><code>LinkedResource</code></a>. The URL expressed in the <code>url</code> term MUST
 						NOT include a fragment identifier.</p>
 
 					<p>The <code>rel</code> value of the <a href="#publication-link-def"
-							><code>PublicationLink</code></a> MUST include the
+							><code>LinkedResource</code></a> MUST include the
 							<code>https://www.w3.org/ns/wp#cover</code> identifier.</p>
 
 					<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD be
@@ -2566,7 +2565,7 @@ partial dictionary WebPublicationManifest {
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    sequence&lt;PublicationLink> cover;
+    sequence&lt;LinkedResource> cover;
 };</pre>
 
 					<pre class="example" title="Cover HTML page">
@@ -2577,7 +2576,7 @@ partial dictionary WebPublicationManifest {
     "url"        : "https://publisher.example.org/donquixote",
     "name"       : "Don Quixote",
     "resources"  : [{
-        "type"           : "PublicationLink",
+        "type"           : "LinkedResource",
         "url"            : "cover.html",
         "encodingFormat" : "text/html"
         "rel"            : "https://www.w3.org/ns/wp#cover"
@@ -2596,7 +2595,7 @@ partial dictionary WebPublicationManifest {
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "resources"  : [{
-        "type"           : "PublicationLink",
+        "type"           : "LinkedResource",
         "url"            : "whale-image.jpg",
         "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover",
@@ -2617,12 +2616,12 @@ partial dictionary WebPublicationManifest {
     "url"        : "https://publisher.example.org/donquixote",
     "name"       : "Gulliver's Travels",
     "resources"  : [{
-        "type"           : "PublicationLink",
+        "type"           : "LinkedResource",
         "url"            : "lilliput.jpg",
         "encodingFormat" : "image/jpeg",
         "rel"            : "https://www.w3.org/ns/wp#cover"
     },{
-        "type"           : "PublicationLink",
+        "type"           : "LinkedResource",
         "url"            : "lilliput.svg",
         "encodingFormat" : "image/svg+xml",
         "rel"            : "https://www.w3.org/ns/wp#cover"
@@ -2673,11 +2672,11 @@ partial dictionary WebPublicationManifest {
 
 					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn
 								data-lt="pagelist">page list</dfn></span> MUST be expressed as a <a
-							href="#publication-link-def"><code>PublicationLink</code></a>. The URL expressed in the
+							href="#publication-link-def"><code>LinkedResource</code></a>. The URL expressed in the
 							<code>url</code> term MUST NOT include a fragment identifier.</p>
 
 					<p>The <code>rel</code> value of the <a href="#publication-link-def"
-							><code>PublicationLink</code></a> MUST include the
+							><code>LinkedResource</code></a> MUST include the
 							<code>https://www.w3.org/ns/wp#pagelist</code> identifier.</p>
 
 					<p>The link to the page list MAY be specified in either the <a href="#default-reading-order">default
@@ -2697,7 +2696,7 @@ partial dictionary WebPublicationManifest {
 "url"        : "https://publisher.example.org/mobydick",
 "name"       : "Moby Dick",
 "resources"  : [{
-	"type"       : "PublicationLink",
+	"type"       : "LinkedResource",
 	"url"        : "toc_file.html",
 	"rel"        : "https://www.w3.org/ns/wp#pagelist"
 },{
@@ -2749,11 +2748,11 @@ partial dictionary WebPublicationManifest {
 
 					<p>If present in the manifest, the <span data-dfn-for="WebPublicationManifest"><dfn data-lt="toc"
 								>table of contents</dfn></span> MUST be expressed as a <a href="#publication-link-def"
-								><code>PublicationLink</code></a>. The URL expressed in the <code>url</code> term MUST
+								><code>LinkedResource</code></a>. The URL expressed in the <code>url</code> term MUST
 						NOT include a fragment identifier.</p>
 
 					<p>The <code>rel</code> value of the <a href="#publication-link-def"
-							><code>PublicationLink</code></a> MUST include the <code>contents</code>
+							><code>LinkedResource</code></a> MUST include the <code>contents</code>
 						identifier&#160;[[!iana-link-relations]].</p>
 
 					<p>The link to the table of contents MAY be specified in either the <a href="#default-reading-order"
@@ -2773,7 +2772,7 @@ partial dictionary WebPublicationManifest {
     "url"        : "https://publisher.example.org/mobydick",
     "name"       : "Moby Dick",
     "resources"  : [{
-        "type"       : "PublicationLink",
+        "type"       : "LinkedResource",
         "url"        : "toc_file.html",
         "rel"        : "contents"
     },{
@@ -2832,10 +2831,10 @@ partial dictionary WebPublicationManifest {
 
 					<p>Extending the manifest through links to a record, such as an ONIX&#160;[[onix]] or
 						BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
-								><code>PublicationLink</code></a> object, where:</p>
+								><code>LinkedResource</code></a> object, where:</p>
 					<ul>
 						<li> the <code>rel</code> value of the <a href="#publication-link-def"
-									><code>PublicationLink</code></a> SHOULD include a relevant identifier defined by
+									><code>LinkedResource</code></a> SHOULD include a relevant identifier defined by
 							IANA or by other organizations; if the link record contains descriptive metadata it MUST
 							include the <code>describedby</code> (IANA) identifier; </li>
 						<li>the value of the <code>encodingFormat</code> in the link MUST use the MIME media
@@ -2854,7 +2853,7 @@ partial dictionary WebPublicationManifest {
 "url"        : "https://publisher.example.org/mobydick",
 "name"       : "Moby Dick",
 "links"  : [{
-	"type"            : "PublicationLink",
+	"type"            : "LinkedResource",
 	"url"             : "https://www.publisher.example.org/mobydick-onix.xml",
 	"encodingFormat"  : "application/onix+xml",
 	"rel"             : "describedby"
@@ -3067,7 +3066,7 @@ partial dictionary WebPublicationManifest {
 					<li> (<a href="#default-reading-order"></a>) if <var>manifest["readingOrder"]</var> is
 							<code>undefined</code>, let <var>u</var> be the value of <a
 							data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
-						<code class="json">"readingOrder": [{"type": ["PublicationLink"], "url": u}]</code><br /> to the
+						<code class="json">"readingOrder": [{"type": ["LinkedResource"], "url": u}]</code><br /> to the
 							<var>manifest</var>
 					</li>
 					<li> (<a href="#arrays-and-single-values"></a>) consider <var>P["term"]</var>, where <var>P</var> is
@@ -3092,7 +3091,7 @@ partial dictionary WebPublicationManifest {
 					<li> (<a href="#link-values"></a>) if the value <var>v</var> in a <var>manifest["term"]</var> array,
 						where <var>term</var> is one of the <a href="#resource-categorization-properties">resource
 							categorization properties</a>, is a simple string, exchange that element in the array to<br />
-						<code class="json">{"type": ["PublicationLink"], "url": v}</code>
+						<code class="json">{"type": ["LinkedResource"], "url": v}</code>
 						<br />Repeat this step for all possible values of <var>v</var>. </li>
 					<li> (<a href="#strings-vs-objects"></a>) let <var>v</var> be the value, or one of the values in
 						case of an array, of <var>P["term"]</var>, where <var>P</var> is any object in

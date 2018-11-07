@@ -63,38 +63,38 @@
     "resources": [
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.html"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.svg"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/datatypes.png"
         },
         {
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/diff.html"
         },
         {
             "type": [
-                "StructuredValue"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/test-utf8.csv",
             "encodingFormat": "text/csv"
         },
         {
             "type": [
-                "StructuredValue"
+                "LinkedResource"
             ],
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/test.xlsx",
             "encodingFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -111,7 +111,7 @@
         {
             "url": "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/entry_with_script.html",
             "type": [
-                "PublicationLink"
+                "LinkedResource"
             ]
         }
     ]
