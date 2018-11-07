@@ -899,6 +899,7 @@ partial dictionary WebPublicationManifest {
 						<ul>
 							<li><a href="#address">address</a></li>
 							<li><a href="#default-reading-order">default reading order</a></li>
+							<li><a href="#wp-title">title</a></li>
 						</ul>
 					</dd>
 					<dt>RECOMMENDED:</dt>
@@ -919,7 +920,6 @@ partial dictionary WebPublicationManifest {
 							<li><a href="#resource-list">resource list</a></li>
 							<li><a href="#table-of-contents">table of contents</a></li>
 							<li><a href="#page-list">page list</a></li>
-							<li><a href="#wp-title">title</a></li>
 						</ul>
 					</dd>
 				</dl>
@@ -2076,8 +2076,7 @@ enum ProgressionDirection {
 				<section id="wp-title">
 					<h4>Title</h4>
 
-					<p>The title provides the human-readable name of the <a>Web Publication</a>. It is expressed using
-						the <code>name</code> property.</p>
+					<p>The title provides the human-readable name of the <a>Web Publication</a>. It is expressed using the <code>name</code> property.</p>
 
 					<table class="zebra">
 						<thead>
@@ -2102,32 +2101,28 @@ enum ProgressionDirection {
 						</tbody>
 					</table>
 
-					<p>The title is specified by the <a href="#wp-title">manifest expression</a>, when present. If not
-						included in the manifest, user agents MAY use the value of the <a
-							href="https://www.w3.org/TR/html/document-metadata.html#the-title-element"
-								><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary entry
-							page</a> (if present) when generating the canonical manifest.</p>
-
-					<p class="note">Relying on the <code>title</code> element could be semantically problematic if the
-						Web Publication consists of several HTML resources (e.g., one per chapter of a book), because
-						the <a href="https://www.w3.org/TR/html/document-metadata.html#the-title-element">HTML
-							definition</a> defines this element as "metadata" for the enclosing HTML document, not for a
-						collection of resources. Using this element is, on the other hand, preferred in the case of a
-						publication consisting of a single HTML document (e.g., a scholarly journal article).</p>
+					<p>
+						The title is specified by the <a href="#wp-title">manifest expression</a>, when present. If not included in the <a>authored manifest</a>, the user agent MUST use the value of the <a data-cite="!html#the-title-element"><code>title</code> element</a>&#160;[[!html]] of the Web Publication’s <a>primary entry page</a>, if present, when generating the <a>canonical manifest</a>.
+					</p>
 
 					<p>When specified in the manifest, the title MUST be <a>non-empty</a>.</p>
 
-					<p>If a user agent requires a title and one is not available in the manifest, it MAY create one
-						(e.g., provide a language-specific placeholder title or use the <abbr
-							title="Uniform Resource Locator">URL</abbr> of the manifest).</p>
+					<p id="generate_title">
+						If the title not available neither in the <a>authored manifest</a> nor as a non-zero <a data-cite="!html#the-title-element"><code>title</code> element</a> in the <a>primary entry page</a>, the user agent MUST create one. This specification does not specify what heuristics the user agent should use; it can, for example, use a language-specific placeholder title, use the <abbr title="Uniform Resource Locator">URL</abbr> of the manifest or the primary entry page, or use the value of the <a href="#address">address</a> in the <a>authored manifest</a>.
+					</p>
+	
+					<p class="note">
+						Relying on the <code>title</code> element could be semantically problematic if the Web Publication consists of several HTML resources (e.g., one per chapter of a book), because the <a data-cite="!html#the-title-element">HTML definition</a> defines this element as "metadata" for the enclosing HTML document, not for a collection of resources. Using this element is, on the other hand, preferred in the case of a publication consisting of a single HTML document (e.g., a scholarly journal article).
+					</p>
 
 					<p class="note">A user agent is not expected to produce a <a
-							href="https://www.w3.org/TR/WCAG20/#navigation-mechanisms-title">meaningful
-						title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.</p>
+						data-cite="WCAG20#navigation-mechanisms-title">meaningful
+						title</a>&#160;[[wcag20]] for a Web Publication when one is not specified.
+					</p>
 
 					<pre class="idl">
 partial dictionary WebPublicationManifest {
-    sequence&lt;LocalizableString> name;
+    required sequence&lt;LocalizableString> name;
 };</pre>
 
 					<pre class="example" title="Title of the book set explicitly">
@@ -3042,16 +3037,16 @@ partial dictionary WebPublicationManifest {
 					</li>
 					<li> (<a href="#wp-title"></a>) if <var>manifest["name"]</var> is <code>undefined</code>, then
 						locate the <a data-cite="!html#the-title-element"><code>title</code></a> HTML element using
-							<var>document</var>. If that element exists, let <var>t</var> be its text content, and add
-						to <var>manifest</var>: <ul>
-							<li> if the language of <code>title</code> is explicitly <a
-									data-cite="!html#the-lang-and-xml:lang-attributes">set</a> to the value of
-									<var>l</var>, then add <br />
-								<code class="json">"name": {"value": t, "language": l}</code>
-							</li>
-							<li>or <br />
-								<code class="json">"name": t</code><br /> otherwise </li>
-						</ul>
+							<var>document</var>. If that element exists and is non-empty, let <var>t</var> be its text content, and add to <var>manifest</var>: 
+							<ul>
+								<li> if the language of <code>title</code> is explicitly <a
+										data-cite="!html#the-lang-and-xml:lang-attributes">set</a> to the value of
+										<var>l</var>, then add <br />
+									<code class="json">"name": [{"value": t, "language": l}]</code>
+								</li>
+								<li>or <br />
+									<code class="json">"name": [t]</code><br /> otherwise </li>
+							</ul>
 					</li>
 					<li> (<a href="#language-and-dir"></a>) if <var>manifest["inLanguage"]</var> is
 							<code>undefined</code> and the value of <var>lang</var> is <em>not</em>
@@ -3122,6 +3117,7 @@ partial dictionary WebPublicationManifest {
 					visual representation of the algorithm. Also, to help understanding the result of the algorithm,
 					there is a link to the corresponding canonical manifests for all the examples in <a
 						href="#app-manifest-examples"></a>.</p>
+
 				<div class="issue"> Some open issues, either in this working group or in the <a
 						href="https://www.w3.org/2018/json-ld-wg/">JSON-LD Working Group</a> may modify some of the
 					details above. These are: <ul>
@@ -3130,10 +3126,6 @@ partial dictionary WebPublicationManifest {
 							this section) depend on <a href="https://github.com/w3c/json-ld-syntax/issues/22">JSON-LD
 								#22</a>, <a href="https://github.com/w3c/json-ld-syntax/issues/57">JSON-LD #57</a>, and,
 							ultimately, <a href="https://github.com/w3ctag/design-reviews/issues/312">TAG #312</a>. </li>
-						<li> The reuse of the <code>title</code> element of the primary entry page (step (3) in this
-							section) depends on <a href="https://github.com/w3c/wpub/pull/331">#331</a> and <a
-								href="https://github.com/w3c/wpub/pull/325">#325</a>
-						</li>
 					</ul>
 				</div>
 			</section>
@@ -3173,7 +3165,10 @@ partial dictionary WebPublicationManifest {
 									<var>Obj</var> in <var>manifest object[term]</var> has <var>Obj["name"]</var> set.
 								If not, remove <var>Obj</var> from <var>manifest object[term]</var> array and issue a
 								warning. </li>
-							<li> For all the terms defined in <a href="#resource-categorization-properties"></a>, check
+								<li>
+									Check whether the value of <var>manifest object["name"]</var> is not empty. If it is, generate a value (see the <a href="#generate_title">separate note for details</a>) and issue a warning.
+								</li>
+								<li> For all the terms defined in <a href="#resource-categorization-properties"></a>, check
 								whether every object <var>Obj</var> in <var>manifest object[term]</var> has
 									<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest
 									object[term]</var> array and issue a warning. If yes, check whether
