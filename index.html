@@ -790,13 +790,14 @@ partial dictionary WebPublicationManifest {
 						page</a>, the manifest SHOULD <a href="#table-of-contents">identify the resource</a> that
 					contains the structure.</p>
 
-				<p>There are no requirements on the table of contents itself, except that, when specified, it MUST
-					include a link to at least one <a href="#wp-resources">resource</a>.</p>
+				<p>
+					When specified, the table of content MUST include a link to at least one <a href="#wp-resources">resource</a>,
+					and all links MUST refer to <a href="#wp-resources">resources</a> within the <a href="#wp-bounds">publication bounds</a>. 
+				</p>
 
 				<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
 					information on how to identify which resource contains the table of contents.</p>
 
-				<p class="issue" data-number="276"></p>
 				<p class="issue" data-number="291">Do we need a more detailed definition for the HTML TOC format?</p>
 			</section>
 
