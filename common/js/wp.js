@@ -50,7 +50,6 @@ function create_wp(config) {
 	    })
 	};
 
-
     // There are minor differences between the terms used in the respec config file and the ones in schema.org...
     let person_keys_mapping = {
         "editors"  : "editor",
@@ -74,35 +73,35 @@ function create_wp(config) {
     // =====================================================================
     let manifest = {
         "@context"             : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-        "type"                 : "TechArticle",
-        "accessMode"           : ["textual", "visual"],
+        "type"                : "TechArticle",
+        "accessMode"           : ["textual", "diagramOnVisual"],
         "accessModeSufficient" : ["textual"],
 
         "resources"            : [{
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/logos/W3C",
             "encodingFormat"  : "image/svg+xml",
             "description"     : "W3C Logo"           
         },{
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/base.css",
             "rel"             : "stylesheet",
-            "encodingFormat"  : "tex/css",
+            "encodingFormat"  : "text/css",
             "description"     : "Generic CSS file for W3C TR documents"                   	
         }],
 
         "links"                : [{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
             "encodingFormat" : "text/html",
             "rel"            : "privacy-policy"
         },{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
             "encodingFormat" : "text/html",
             "rel"            : "license describedby"
         },{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
             "encodingFormat" : "text/html",
             "rel"            : "copyright"
@@ -186,17 +185,17 @@ function create_wp(config) {
 
 	if( styleFile !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
 	        "rel"             : "stylesheet",
-	        "encodingFormat"  : "tex/css",
+	        "encodingFormat"  : "text/css",
 	        "description"     : "CSS file depending on the status of the document"                   	
 		})		
 	}
    
 	if( logoFile !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${logoFile}`,
 	        "encodingFormat"  : `${logoFormat}`,
 	        "description"     : "Sidebar logo reflecting the status of the document"                   	
@@ -205,7 +204,7 @@ function create_wp(config) {
 
 	if( watermark !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${watermark}`,
 	        "encodingFormat"  : "image/png",
 	        "description"     : "Background watermark reflecting the status of the document"                   	
@@ -215,7 +214,7 @@ function create_wp(config) {
     // If the ORCID extension is used, the ORCID logo should also be added to the list of resources
     if( document.querySelector("span.orcid") ) {
         manifest.resources.push({
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "images/orcid.gif",
             "encodingFormat"  : "image/gif",
             "description"     : "ORCID logo"                    
@@ -226,79 +225,86 @@ function create_wp(config) {
     // Add the dynamic parts that are requested/expected for a full boundary
     // =====================================================================
 
-    if( FULL_BOUNDARY ) {
-    	// Current strategy: collect
-    	// - all <a> elements with a relative URL in their href
-    	// - all <img> elements with a relative URL in their src
-    	// - all <object> elements with a relative URL in their data
-    	document.querySelectorAll("object").forEach((element) => {
-    		let href= element.getAttribute("data");
-    		if( href && is_relative(href) ) {
-    			let retval = {
-    				"type"   : "PublicationLink",
-    				"url"    : `${href}`,    				
-    			}
-    			let type = element.getAttribute("type");
-    			if( type ) {
-    				retval.encodingFormat = type
-    			}
-    			manifest.resources.push(retval);
-    		}
-    	});
-    	document.querySelectorAll("img").forEach((element) => {
-    		let href= element.getAttribute("src");
-    		if( href && is_relative(href) ) {
-    			let retval = {
-    				"type"   : "PublicationLink",
-    				"url"    : `${href}`    				
-    			}
-    			let type = image_type(href);
-    			if( type ) {
-    				retval.encodingFormat = type;
-    			}
-    			let alt = element.getAttribute("alt");
-    			if( alt ) {
-    				retval.description = alt;
-    			}
-    			manifest.resources.push(retval);
-    		}
-    	});
-    	document.querySelectorAll("a").forEach((element) => {
-    		let href= element.getAttribute("href");
-    		if( href && is_relative(href) ) {
-    			let retval = {
-    				"type"   : "PublicationLink",
-    				"url"    : `${href}`    				
-    			}
-                let type = element.getAttribute("type");
-                if( type ) {
-                    retval.encodingFormat = type
-                }
-                let rel = element.getAttribute("rel");
-                if( type ) {
-                    retval.rel = rel
-                }
-    			manifest.resources.push(retval);
-    		}
-    	});
-        document.querySelectorAll("script").forEach((element) => {
-            if( element.getAttribute("class") !== "remove" ) {
-                let href= element.getAttribute("src");
-                if( href && is_relative(href) ) {
-                    let retval = {
-                        "type"   : "PublicationLink",
-                        "url"    : `${href}`                    
-                    }
-                    if( href.endsWith(".js") ) {
-                        retval.encodingFormat = "application/Javascript"
-                    }
-                    manifest.resources.push(retval);
-                }                
+    // Current strategy: collect
+    // - all <a> elements with a relative URL in their href
+    // - all <img> elements with a relative URL in their src
+    // - all <object> elements with a relative URL in their data
+    document.querySelectorAll("object").forEach((element) => {
+        let href= element.getAttribute("data");
+        if( href && is_relative(href) ) {
+            let retval = {
+                "type"   : "LinkedResource",
+                "url"    : `${href}`,    				
             }
-        });
+            let type = element.getAttribute("type") || image_type(href);
+            if( type ) {
+                retval.encodingFormat = type
+            }
+            manifest.resources.push(retval);
+        }
+    });
+    document.querySelectorAll("img").forEach((element) => {
+        let href= element.getAttribute("src");
+        if( href && is_relative(href) ) {
+            let retval = {
+                "type"   : "LinkedResource",
+                "url"    : `${href}`    				
+            }
+            let type = image_type(href);
+            if( type ) {
+                retval.encodingFormat = type;
+            }
+            let alt = element.getAttribute("alt");
+            if( alt ) {
+                retval.description = alt;
+            }
+            manifest.resources.push(retval);
+        }
+    });
+    document.querySelectorAll("a").forEach((element) => {
+        let href= element.getAttribute("href");
+        if( href && is_relative(href) ) {
+            let retval = {
+                "type"   : "LinkedResource",
+                "url"    : `${href}`    				
+            }
+            let type = element.getAttribute("type") || image_type(href);
+            if( type ) {
+                retval.encodingFormat = type
+            }
+            let rel = element.getAttribute("rel");
+            if( rel ) {
+                retval.rel = rel
+            }
+            let descr = element.getAttribute("title");
+            if( descr ) {
+                retval.description = descr;
+            }
+            manifest.resources.push(retval);
+        }
+    });
+    document.querySelectorAll("script").forEach((element) => {
+        if( element.getAttribute("class") !== "remove" ) {
+            let href= element.getAttribute("src");
+            if( href && is_relative(href) ) {
+                let retval = {
+                    "type"   : "LinkedResource",
+                    "url"    : `${href}`                    
+                }
+                if( href.endsWith(".js") ) {
+                    retval.encodingFormat = "application/Javascript"
+                } else {
+                    let type = element.getAttribute("type");
+                    if( type ) {
+                        manifest.encodingFormat = type;
+                    }
+                }
+                manifest.resources.push(retval);
+            }                
+        }
+    });
 
-    	manifest.resources = uniq(manifest.resources);
-    }
+    manifest.resources = uniq(manifest.resources);
 
     // =====================================================================
     // Add the link to the manifest as well as the manifest itself (in JSON)
