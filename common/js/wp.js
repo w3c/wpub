@@ -78,12 +78,12 @@ function create_wp(config) {
         "accessModeSufficient" : ["textual"],
 
         "resources"            : [{
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/logos/W3C",
             "encodingFormat"  : "image/svg+xml",
             "description"     : "W3C Logo"           
         },{
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/base.css",
             "rel"             : "stylesheet",
             "encodingFormat"  : "tex/css",
@@ -91,17 +91,17 @@ function create_wp(config) {
         }],
 
         "links"                : [{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
             "encodingFormat" : "text/html",
             "rel"            : "privacy-policy"
         },{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document",
             "encodingFormat" : "text/html",
             "rel"            : "license describedby"
         },{
-            "type"           : "PublicationLink",
+            "type"           : "LinkedResource",
             "url"            : "http://www.w3.org/Consortium/Legal/ipr-notice#Copyright",
             "encodingFormat" : "text/html",
             "rel"            : "copyright"
@@ -185,7 +185,7 @@ function create_wp(config) {
 
 	if( styleFile !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
 	        "rel"             : "stylesheet",
 	        "encodingFormat"  : "tex/css",
@@ -195,7 +195,7 @@ function create_wp(config) {
    
 	if( logoFile !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${logoFile}`,
 	        "encodingFormat"  : `${logoFormat}`,
 	        "description"     : "Sidebar logo reflecting the status of the document"                   	
@@ -204,7 +204,7 @@ function create_wp(config) {
 
 	if( watermark !== undefined ) {
 		manifest.resources.push({
-	        "type"            : "PublicationLink",
+	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/logos/${watermark}`,
 	        "encodingFormat"  : "image/png",
 	        "description"     : "Background watermark reflecting the status of the document"                   	
@@ -214,7 +214,7 @@ function create_wp(config) {
     // If the ORCID extension is used, the ORCID logo should also be added to the list of resources
     if( document.querySelector("span.orcid") ) {
         manifest.resources.push({
-            "type"            : "PublicationLink",
+            "type"            : "LinkedResource",
             "url"             : "images/orcid.gif",
             "encodingFormat"  : "image/gif",
             "description"     : "ORCID logo"                    
@@ -233,7 +233,7 @@ function create_wp(config) {
         let href= element.getAttribute("data");
         if( href && is_relative(href) ) {
             let retval = {
-                "type"   : "PublicationLink",
+                "type"   : "LinkedResource",
                 "url"    : `${href}`,    				
             }
             let type = element.getAttribute("type");
@@ -247,7 +247,7 @@ function create_wp(config) {
         let href= element.getAttribute("src");
         if( href && is_relative(href) ) {
             let retval = {
-                "type"   : "PublicationLink",
+                "type"   : "LinkedResource",
                 "url"    : `${href}`    				
             }
             let type = image_type(href);
@@ -265,7 +265,7 @@ function create_wp(config) {
         let href= element.getAttribute("href");
         if( href && is_relative(href) ) {
             let retval = {
-                "type"   : "PublicationLink",
+                "type"   : "LinkedResource",
                 "url"    : `${href}`    				
             }
             let type = element.getAttribute("type");
@@ -284,7 +284,7 @@ function create_wp(config) {
             let href= element.getAttribute("src");
             if( href && is_relative(href) ) {
                 let retval = {
-                    "type"   : "PublicationLink",
+                    "type"   : "LinkedResource",
                     "url"    : `${href}`                    
                 }
                 if( href.endsWith(".js") ) {
