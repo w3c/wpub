@@ -236,7 +236,7 @@ function create_wp(config) {
                 "type"   : "LinkedResource",
                 "url"    : `${href}`,    				
             }
-            let type = element.getAttribute("type");
+            let type = element.getAttribute("type") || image_type(href);
             if( type ) {
                 retval.encodingFormat = type
             }
@@ -268,13 +268,17 @@ function create_wp(config) {
                 "type"   : "LinkedResource",
                 "url"    : `${href}`    				
             }
-            let type = element.getAttribute("type");
+            let type = element.getAttribute("type") || image_type(href);
             if( type ) {
                 retval.encodingFormat = type
             }
             let rel = element.getAttribute("rel");
-            if( type ) {
+            if( rel ) {
                 retval.rel = rel
+            }
+            let descr = element.getAttribute("title");
+            if( descr ) {
+                retval.description = descr;
             }
             manifest.resources.push(retval);
         }
@@ -289,6 +293,11 @@ function create_wp(config) {
                 }
                 if( href.endsWith(".js") ) {
                     retval.encodingFormat = "application/Javascript"
+                } else {
+                    let type = element.getAttribute("type");
+                    if( type ) {
+                        manifest.encodingFormat = type;
+                    }
                 }
                 manifest.resources.push(retval);
             }                
