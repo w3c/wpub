@@ -86,7 +86,7 @@ function create_wp(config) {
             "type"            : "LinkedResource",
             "url"             : "https://www.w3.org/StyleSheets/TR/2016/base.css",
             "rel"             : "stylesheet",
-            "encodingFormat"  : "tex/css",
+            "encodingFormat"  : "text/css",
             "description"     : "Generic CSS file for W3C TR documents"                   	
         }],
 
@@ -188,7 +188,7 @@ function create_wp(config) {
 	        "type"            : "LinkedResource",
 	        "url"             : `https://www.w3.org/StyleSheets/TR/2016/${styleFile}`,
 	        "rel"             : "stylesheet",
-	        "encodingFormat"  : "tex/css",
+	        "encodingFormat"  : "text/css",
 	        "description"     : "CSS file depending on the status of the document"                   	
 		})		
 	}
