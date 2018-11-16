@@ -1,0 +1,134 @@
+{
+  "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+  "type": "Audiobook",
+  "id": "https://librivox.org/flatland-a-romance-of-many-dimensions-by-edwin-abbott-abbott/",
+  "url": "https://w3c.github.io/wpub/experiments/audiobook/",
+  "name": "Flatland: A Romance of Many Dimensions",
+  "author": "Edwin Abbott Abbott",
+  "readBy": "Ruth Golding",
+  "publisher": "Librivox",
+  "inLanguage": "en",
+  "dateModified": "2018-06-14T19:32:18Z",
+  "datePublished": "2008-10-12",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+
+  "resources": [
+    {"rel": "cover", "url": "http://ia800704.us.archive.org/9/items/LibrivoxCdCoverArt12/Flatland_1109.jpg", "encodingFormat": "image/jpeg"},
+    {"rel": "contents", "url": "toc.html", "encodingFormat": "text/html"}
+  ],
+
+  "readingOrder": [
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 1, Sections 1 - 3"},
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_2_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 1, Sections 4 - 5"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_3_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 1, Sections 6 - 7"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 1, Sections 8 - 10"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_5_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 1, Sections 11 - 12"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 2, Sections 13 - 14"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 2, Sections 15 - 17"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 2, Sections 18 - 20"}, 
+    {"url": "http://www.archive.org/download/flatland_rg_librivox/flatland_9_abbott.mp3", "encodingFormat": "audio/mpeg", "name": "Part 2, Sections 21 - 22"}
+  ],
+
+  "toc": [
+    {
+      "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3#t=71",
+      "name": "Part 1 - This World",
+      "children": [
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3#t=80",
+          "name": "Section 1 - Of the Nature of Flatland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3#t=415",
+          "name": "Section 2 - Of the Climate and Houses in Flatland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3#t=789",
+          "name": "Section 3 - Concerning the Inhabitants of Flatland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_2_abbott.mp3#t=18",
+          "name": "Section 4 - Concerning the Women"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_2_abbott.mp3#t=882",
+          "name": "Section 5 - Of our Methods of Recognizing one another"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_3_abbott.mp3#t=17",
+          "name": "Section 6 - Of Recognition by Sight"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_3_abbott.mp3#t=948",
+          "name": "Section 7 - Concerning Irregular Figures"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3#t=17",
+          "name": "Section 8 - Of the Ancient Practice of Painting"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3#t=465",
+          "name": "Section 9 - Of the Universal Colour Bill"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3#t=1124",
+          "name": "Section 10 - Of the Suppression of the Chromatic Sedition"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_5_abbott.mp3#t=17",
+          "name": "Section 11 - Concerning our Priests"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_5_abbott.mp3#t=452",
+          "name": "Section 12 - Of the Doctrine of our Priests"
+        }
+      ]
+    },
+    {
+      "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3#t=17",
+      "name": "Part 2 - Other Worlds",
+      "children": [
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3#t=25",
+          "name": "Section 13 - How I had a Vision of Lineland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3#t=802",
+          "name": "Section 14 - How I vainly tried to explain the nature of Flatland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3#t=564",
+          "name": "Section 15 - Concerning a Stranger from Spaceland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3#t=564",
+          "name": "Section 16 - How the Stranger vainly endeavoured to reveal to me in words the mysteries of Spaceland"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3#t=1728",
+          "name": "Section 17 - How the Sphere, having in vain tried words, resorted to deeds"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3#t=16",
+          "name": "Section 18 - How I came to Spaceland, and what I saw there"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3#t=981",
+          "name": "Section 19 - How, though the Sphere shewed me other mysteries of Spaceland, I still desire more; and what came of it"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3#t=2098",
+          "name": "Section 20 - How the Sphere encouraged me in a Vision"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_9_abbott.mp3#t=18",
+          "name": "Section 21 - How I tried to teach the Theory of Three Dimensions to my Grandson, and with what success"
+        },
+        {
+          "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_9_abbott.mp3#t=455",
+          "name": "Section 22 - How I then tried to diffuse the Theory of Three Dimensions by other means, and of the result"
+        }
+      ]
+    }
+  ]
+}
