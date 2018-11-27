@@ -222,3 +222,6 @@ Reading something that takes a day or a week rather than a few minutes influence
 
 - it should be possible to search the entire publication
 
+## Acknowledgments
+
+The initial draft was written by Dave Cramer. 
