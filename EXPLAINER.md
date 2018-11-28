@@ -103,7 +103,7 @@ Here's a simple example of a web publication manifest, for a tiny version of *Mo
 
 ```
 
-Note that `readingOrder` defines the sequence of primary resources that form the publication. `resources` enumerates all the other resources that are required to render the publication. 
+Note that `readingOrder` defines the sequence of primary resources that form the publication. `resources` enumerates all the other resources that are required to render the publication. We also can point to an HTML table of contents using `rel=contents`.
 
 ## Design choices
 
