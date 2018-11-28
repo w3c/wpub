@@ -24,7 +24,7 @@ Thus the goal of web publications is to make these features ("affordances") avai
 
 - Provide a mechanism for defining an ordering of the resources in a publication
 
-- Describe the affordances needed for reading publications on the web
+- Describe the affordances needed for reading publications on the web. Note that publications may take many forms, from journals to educational texts to novels. 
 
  
  
