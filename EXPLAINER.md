@@ -18,8 +18,8 @@ Thus the goal of web publications is to make these features ("affordances") avai
  
 - Provide a mechanism for defining a collection of web resources as a publication
 
- - The resources may be images (comics/manga) or audio files (audiobooks)
- 
+ - The resources may be images (comics/manga), audio files (audiobooks), or even data files which would not be rendered.
+  
 - Provide a mechanism for ascribing descriptive metadata to a collection of web resources.
 
 - Provide a mechanism for defining an ordering of the resources in a publication
