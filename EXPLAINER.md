@@ -182,10 +182,6 @@ The Web Publication Manifest appears to be very similar to the Web Application M
 3. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
 
 
-But note that the [TAG has spoken](https://github.com/w3c/wpub/issues/32#issuecomment-362273649) in favor of using WAM. 
-
-
-
 ## The User Experience
 
 Reading something that takes a day or a week rather than a few minutes influences what sort of user experience works for the reader. We have a formal [use cases and requirements document](https://w3c.github.io/dpub-pwp-ucr/) in addition to lots of actual experience from ebook reading systems. Browsers have implemented "reading modes" to address some of these requirements. 
