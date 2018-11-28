@@ -142,7 +142,7 @@ The key questions are [1] identifying the "bounds" of the publication, [2] defin
 
 ```
 
-The web publications spec has essentially adopted EPUB's approach, with an explicit list of resources. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. 
+The web publications spec has essentially adopted EPUB's approach, with an explicit list of resources. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group considered things like `scope` and URL patterns, but felt that an explicit list was simpler. 
 
 ### 2. Sequence of primary resources
 
