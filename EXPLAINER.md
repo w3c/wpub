@@ -177,7 +177,7 @@ The Web Publication Manifest appears to be very similar to the Web Application M
 
 1. WP use cases are orthogonal to those of WAM. Nothing is stopping a creator of a web publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
 
-2. The web application manifest spec is not designed to be extensible. 
+2. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
 
 3. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
 
