@@ -11,7 +11,7 @@ Two things make web publications different from the “ordinary” web we know a
 
 More importantly, users have a set of expectations about how such content should be presented in order to make it easy to read and understand. Users need to personalize the presentation, using the font and font size that make it easiest for them to read. They want it to be easy to go to the next chapter without interrupting the reading experience by hunting for a link to click. They might need a high- or low-contrast version of the content. They want to read while offline.
 
-Thus the goal of web publications is to make these features ("affordances") available to readers. We hope that someday browsers will provide these features, but in the meantime we have to use scripting. That's OK, because we'll learn a lot from trying, and that will help the spec get better.
+Thus the goal of web publications is to make these features ("affordances") available to readers. We hope that someday browsers will provide these features, but in the meantime we have to use scripting and polyfills. That's OK, because we'll learn a lot from trying, and that will help the spec get better.
 
 ## Goals
 
