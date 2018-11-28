@@ -218,6 +218,10 @@ Reading something that takes a day or a week rather than a few minutes influence
 
 - it should be possible to search the entire publication
 
+## Unanswered questions
+
+1. Addressability. A publication needs a permanent URL, and it should be possible to craft a URL to point anywhere within a publication. 
+
 ## Acknowledgments
 
-The initial draft was written by Dave Cramer. 
+The initial draft was written by Dave Cramer. Thanks to Ivan Herman and Tzviya Siegman for helpful feedback. 
