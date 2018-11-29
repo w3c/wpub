@@ -38,7 +38,7 @@ Thus the goal of web publications is to make these features ("affordances") avai
  
 ## Basic design
 
-A web publication must have an <i>entry page</i>, which the HTML document returned by the URL of the publication. This page must have either a link to the manifest (`<link rel="publication" href="manifest.json">`, or an [embedded](https://github.com/w3c/wpub/issues/327) manifest. 
+A web publication must have an *entry page*, which the HTML document returned by the URL of the publication. This page must have either a link to the manifest (`<link rel="publication" href="manifest.json">`, or an [embedded](https://github.com/w3c/wpub/issues/327) manifest. 
 
 A “manifest” is a list of the passengers or cargo on a ship. For web publications, a manifest lists the constituents of the publication—all the HTML files, stylesheets, images, scripts, etc.—needed to create the whole. It further describes the sequence of primary resources, so that we know that chapter-02.html comes after chapter-01.html. In EPUB we called this list the "spine"; for web publications it's now the `readingOrder`. 
 
@@ -106,11 +106,6 @@ Here's a simple example of a web publication manifest, for a tiny version of *Mo
 Note that `readingOrder` defines the sequence of primary resources that form the publication. `resources` enumerates all the other resources that are required to render the publication. We also can point to an HTML table of contents using `rel=contents`.
 
 ## Design choices
-
-The unanswered question:
-
-> is the goal of this group to make a new packaging format for specialist book reading software and devices, or is it to obtain first class support for missing book-related features in the web platform as a whole?
-
 
 
 The key questions are [1] identifying the "bounds" of the publication, [2] defining the ordering of the primary resources, and [3] figuring out how to express metadata for the publication as a whole. 
@@ -220,7 +215,27 @@ Reading something that takes a day or a week rather than a few minutes influence
 
 ## Unanswered questions
 
-1. Addressability. A publication needs a permanent URL, and it should be possible to craft a URL to point anywhere within a publication. 
+
+### Architecture
+
+Andrew Betts, then on the TAG, [commented](https://github.com/w3c/wpub/issues/32#issuecomment-362273649):
+
+> It seems to us on the TAG that the Readium manifest format is very unlikely to be considered for support by implementors of general purpose web browsers. Therefore, the question seems to be: is the goal of this group to make a new packaging format for specialist book reading software and devices, or is it to obtain first class support for missing book-related features in the web platform as a whole? If the latter, then it is an order of magnitude more likely to be achieved by building atop existing platform features - notably Web App Manifest and service worker, than creating a separate but similar concept.
+
+The working group has spent much of its time on a high-level data model, rather than identifying low-level primitives that would allow us to more easily build publications on the web. For good or for bad, what we are actually building can be described as unpackaged EPUB with the OPF serialized as JSON-LD. 
+
+Is this a good thing or a bad thing? We seem to be far from the approach recommended by the [Extensible Web Manifesto](https://extensiblewebmanifesto.org). 
+
+
+
+### Addressability
+
+A publication needs a permanent URL, and it should be possible to craft a URL to point anywhere within a publication. 
+
+
+### Packaging
+
+The working group has not yet formally addressed the issue of packaging, although it is central to many publishing use cases. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort. 
 
 ## Acknowledgments
 
