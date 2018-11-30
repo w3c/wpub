@@ -161,7 +161,7 @@ Once again, web publications use an explicit list outside of the content itself,
 
 - With transclusion, one could define metadata in the parent file to apply to the whole.
 
-Web publication metadata is expressed in the manifest, using a vocabulary largely taken from schema.org. 
+Web publication metadata is expressed in the manifest using the schema.org vocabulary, with some extensions. The metadata is serialized as JSON-LD, one of the three syntaxes accepted by schema.org (the others being microdata and RDFa). JSON-LD has also the advantage of being easy to use for both client and server side processing.
 
 
 
