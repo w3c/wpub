@@ -7,11 +7,14 @@ Audiobooks have grown massively in popularity in the last few years despite bein
 * Improved mobile networks (3G, 4G LTE)
 * Improved mobile storage capacity
 * Widespread use of wifi
+
 When previously audiobook users would need several CDs to listen to their audiobook, they can now stream, download, and listen to their chosen content anywhere and time they choose. Audiobooks, like ebooks, are now in their pockets on demand. 
 
-The main difference between ebooks and audiobooks currently is their level of of specification. EPUB has existed in one form or another for almost 20 years, audiobooks still does not have a common specification. A mature ebooks industry co-opted audiobooks to make them work within the same contexts, but the lack of specification has made this process arduous for user agents and by extension, users. 
+The main difference between ebooks and audiobooks currently is their level of specification. EPUB has existed in one form or another for almost 20 years, audiobooks still does not have a common specification. A mature ebooks industry co-opted audiobooks to make them work within the same contexts, but the lack of specification has made this process arduous for user agents and by extension, users. 
 
-It is in the interest of users that we push to create a single specification for audiobooks. 
+A clear specification is in the interests of the publisher->distributor (B2B) relationship as well, as currently without a specification the industry has developed different processes by distributor/platform. This puts pressure on the creators to conform to different specifications, and on distributors to communicate these differences. Failures in this process can result in delayed releases, poor user experiences, and frustration for both creators and distributors. 
+
+It is in the interest of users, creators, and distributors that we push to create a single specification for audiobooks. 
 ## Goals
 * Create a specification for the audiobook format that is usable on both the web and in packaged contexts
 * Create a specification that supports all of the major use cases of audio
@@ -29,6 +32,7 @@ The Audiobooks Task Force has identified the definition of an essential audioboo
 * A format where the user can always find their position
 * A format where the user knows how long is remaining in the chapter/section/audiobook
 * A format that can be streamed, offlined, and downloaded
+* A format with clear metadata supported for user libraries (title, author, narrator, cover, duration, etc.)
 
 ## Considered Alternatives
 
