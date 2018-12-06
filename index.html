@@ -3899,7 +3899,7 @@ partial dictionary WebPublicationManifest {
 												<code>name</code> to <code>null</code>.</p>
 									</li>
 									<li>
-										<p>if <em>current toc branch</em> is not <code>null</code>:</p>
+										<p>If <em>current toc branch</em> is not <code>null</code>:</p>
 										<ol>
 											<li>If the <code>entries</code> property of <em>current toc branch</em> is
 													<code>null</code> or a non-empty array, exit the element and
@@ -3935,11 +3935,8 @@ partial dictionary WebPublicationManifest {
 
 							<li>
 								<p><strong>When exiting a <a>list element</a>:</strong></p>
-								<p>Run these steps:</p>
-								<ol>
-									<li>If the stack is not empty, pop the top object off the stack and set <em>current
-											toc branch</em> to it.</li>
-								</ol>
+								<p>If the stack is not empty, pop the top object off the stack and set <em>current toc
+										branch</em> to it.</p>
 								<details>
 									<summary>Explanation</summary>
 									<p>This resets <em>current toc branch</em> back to the parent object after all of
