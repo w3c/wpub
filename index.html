@@ -3952,8 +3952,9 @@ partial dictionary WebPublicationManifest {
 								<ol>
 									<li>Set <em>current toc branch</em> to a new object.</li>
 
-									<li>Create <code>name</code> and <code>url</code> properties for the object and set
-										them to empty strings.</li>
+									<li>Create <code>name</code>, <code>url</code>, <code>type</code>, and
+											<code>rel</code> properties for the object and set them to empty
+										strings.</li>
 
 									<li>Create an <code>entries</code> property for the object and set it to an empty
 										array.</li>
@@ -3968,6 +3969,8 @@ partial dictionary WebPublicationManifest {
 {
    "name": '',
    "url": '',
+   "type": '',
+   "rel": '',
    "entries": []
 }</pre>
 									</aside>
@@ -4029,21 +4032,29 @@ partial dictionary WebPublicationManifest {
 										<pre>{
    "name": "Section 1",
    "url": "http://example.com/contents.html#s1",
+   "type": "text/html",
+   "rel": null,
    "entries": []
 },
 {
    "name": "Section 1.1",
    "url": "http://example.com/contents.html#s1.1",
+   "type": "text/html",
+   "rel": null,
    "entries": null
 }</pre>
 										<p>Then only the following single object remains after merging:</p>
 										<pre>{
    "name": "Section 1",
    "url": "http://example.com/contents.html#s1",
+   "type": "text/html",
+   "rel": null,
    "entries": [
       {
          "name": "Section 1.1",
          "url": "http://example.com/contents.html#s1.1",
+         "type": "text/html",
+         "rel": null,
          "entries": null
       }
    ]
@@ -4078,6 +4089,16 @@ partial dictionary WebPublicationManifest {
 													<a>resource list</a>, set the <code>url</code> property of
 													<em>current toc branch</em> to the value. Otherwise, set the
 												property to <code>null</code>.</li>
+											<li>If the element has a <code>type</code> attribute, and the value of the
+												attribute is not an empty string after trimming leading and trailing
+												white space, set the <code>type</code> property of <em>current toc
+													branch</em> to its value. Otherwise, set the property to
+													<code>null</code>.</li>
+											<li>If the element has a <code>rel</code> attribute, and the value of the
+												attribute is not an empty string after trimming leading and trailing
+												white space, set the <code>rel</code> property of <em>current toc
+													branch</em> to its value. Otherwise, set the property to
+													<code>null</code>.</li>
 										</ol>
 										<p>Exit the element and continue processing with the next element.</p>
 									</li>
@@ -4093,6 +4114,17 @@ partial dictionary WebPublicationManifest {
 										that it resolve to a resource that belongs to the publication to meet the
 										requirements of this specification. If not, the branch is retained but the entry
 										will not be linkable.</p>
+									<p>Additional information about the target of the link &#8212; the type of resource
+										and its relationship &#8212; is also retained.</p>
+									<aside class="example" title="Visualization of a link to an SVG image">
+										<pre>{
+   "name": "In the Beginning",
+   "url": "http://example.com/page1.svg",
+   "type": "image/svg",
+   "rel": null,
+   "entries": []
+},</pre>
+									</aside>
 								</details>
 							</li>
 

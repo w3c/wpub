@@ -159,6 +159,8 @@
 							var new_branch = new Object();
 								new_branch.name = '';
 								new_branch.url = '';
+								new_branch.type = '';
+								new_branch.rel = '';
 								new_branch.entries = new Array();
 							
 							current_toc_branch = new_branch;
@@ -168,9 +170,17 @@
 						else if (lc_element == 'a') {
 							if (current_toc_branch !== null) {
 								if (current_toc_branch.name === '') {
+									
 									var label = node.textContent.trim();
 									current_toc_branch.name = (label !== '') ? label : null;
-									current_toc_branch.url = node.href ? node.getAttribute('href') : null;
+									
+									current_toc_branch.url = node.hasAttribute('href') ? node.getAttribute('href') : null;
+									
+									var type = node.hasAttribute('type') ? node.getAttribute('type').trim() : null;
+									current_toc_branch.type = type ? type : null;
+									
+									var rel = node.hasAttribute('rel') ? node.getAttribute('rel').trim() : null;
+									current_toc_branch.rel = rel ? rel : null;
 								}
 							}
 							return false;
