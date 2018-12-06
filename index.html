@@ -3777,60 +3777,371 @@ partial dictionary WebPublicationManifest {
 			<section id="app-toc-ua">
 				<h3>User Agent Processing</h3>
 
-				<p>The expected structure of the machine-readable table of contents is defined such that a hierarchical
-					tree of links can be extracted from it. The root list within the <code>nav</code> element represents
-					the root of the tree, and each list item is either a branch (if it contains a sub-list) or a leaf
-					(if it contains only a link). The following algorithm describes how to construct this tree. (It does
-					not define how the extracted table of contents is presented to users.)</p>
+				<p>This section defines an algorithm for extracting a table of contents from a <code>nav</code> element.
+					It is defined in terms of a walk over the nodes of a DOM tree, in <a
+						href="https://www.w3.org/TR/html/infrastructure.html#tree-order">tree order</a>, with each node
+					being visited when it is <em>entered</em> and when it is <em>exited</em> during the walk. Each time
+					a node is visited, it can be seen as triggering an <em>enter</em> or <em>exit</em> event.</p>
 
-				<p>Note that due to the flexibility that HTML markup provides authors, the HTML table of contents might
-					contain additional elements not described in this section (e.g., <code>div</code> elements used for
-					styling, or supplementary content). These elements MUST be ignored. In addition, the flexibility of
-					HTML markup also means that some inspection might be required to find the referenced elements.</p>
+				<p class="note">For illustrative purposes, the examples in this section show the structure of the table
+					of contents as JavaScript objects. User agents can process and internalize the resulting structure
+					in whatever language and form is appropriate.</p>
+
+				<p>For the purposes of this algorithm, a <dfn>list element</dfn> is defined as either an [[!html]] <a
+						href="https://www.w3.org/TR/html/grouping-content.html#the-ol-element"><code>ol</code></a> or <a
+						href="https://www.w3.org/TR/html/grouping-content.html#the-ul-element"><code>ul</code></a>
+					element.</p>
+
+				<p>The following algorithm MUST be applied to a walk of a DOM subtree rooted at the first
+						<code>nav</code> element in document order with the <code>role</code> attribute value
+						<code>doc-toc</code>. All explanations are <em>informative</em>.</p>
 
 				<ol>
-					<li>Locate the first instance of a <code>nav</code> element with the <code>role</code> attribute
-						value <code>doc-toc</code>. Any subsequent instances MUST be ignored, even if the first does not
-						produce a usable table of contents.</li>
-					<li>If needed, a title for the table of contents MAY be obtained from the first descendant instance
-						of <a href="https://www.w3.org/TR/html/dom.html#heading-content">heading content</a>.</li>
-					<li>Locate the first descendant list element (<code>ol</code> or <code>ul</code>) of the
-							<code>nav</code> element. This list is used to produce the hierarchical tree of links. Any
-						subsequent lists MUST be ignored.</li>
 					<li>
-						<p>Process each list item (<code>li</code>) into a branch or leaf node as follows:</p>
-						<ul>
-							<li>If the list item contains a descendant list (<code>ol</code> or <code>ul</code>), create
-								a branch node; otherwise, create a leaf node.</li>
-							<li>Locate the first descendant <code>a</code> element that is not the descendant of a
-								nested list. If no element is found, discard the node and continue processing with the
-								next list item.</li>
+						<p>Let <em>toc</em> be a object that represents the table of contents and initialize it as
+							follows:</p>
+						<ol>
+							<li>Create a <code>name</code> property for <em>toc</em> that represents the title of the
+								table of contents and set to an empty string.</li>
+
+							<li>Create an <code>entries</code> property for <em>toc</em> that represents all the
+								branches of the table of contents and set to an empty array.</li>
+						</ol>
+						<details>
+							<summary>Explanation</summary>
+							<p>This step initializes the <em>toc</em> object that will store the title and the branches
+								of the table of contents.</p>
+							<aside class="example" title="Visualization of the default toc object">
+								<pre>
+{
+   "name": '',
+   "entries": []
+}</pre>
+							</aside>
+						</details>
+					</li>
+
+					<li>
+						<p>Initialize a stack.</p>
+						<details>
+							<summary>Explanation</summary>
+							<p>The stack is used to hold branches that are not yet complete. As a new sub-branch is
+								encountered, the parent gets pushed onto the stack so it can be retrieved later.</p>
+						</details>
+					</li>
+
+					<li>
+						<p>Let <em>current toc branch</em> be a variable set to <code>null</code>.</p>
+						<details>
+							<summary>Explanation</summary>
+							<p><em>current toc branch</em> is used to hold the object that represents the branch of the
+								table of contents that is currently being processed.</p>
+						</details>
+					</li>
+
+					<li>
+						<p>Walk over the DOM in <a href="https://www.w3.org/TR/html/infrastructure.html#tree-order">tree
+								order</a>, starting with the <code>nav</code> element the table of contents is being
+							built from, and trigger the first relevant step below for each element as the walk enters
+							and exits it.</p>
+						<ol>
 							<li>
-								<p>Create the text label for the node as follows:</p>
-								<ul>
-									<li>If the <code>a</code> element has an <code>aria-label</code> attribute, use the
-										value of the attribute as the label.</li>
-									<li>Otherwise, use the <a href="https://www.w3.org/TR/domcore/#dom-node-textcontent"
-											>text content</a> [[!DOM4]] of the element as the label.</li>
-								</ul>
+								<p><strong>When entering a <a
+											href="https://www.w3.org/TR/html/dom.html#heading-content-2">heading
+											content</a> element:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>If the stack is empty, and the <code>name</code> property of <em>toc</em> is an
+										empty string, calculate the <a
+											href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+											>accessible name</a> [[!accname-1.1]] of the element. If the resulting value
+										is not an empty string after trimming all leading and trailing whitespace, set
+										the <code>name</code> property of <em>toc</em> to the value. Otherwise, set the
+											<code>name</code> property to <code>null</code>.</li>
+									<li>Exit the element and continue processing with the next element.</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>This step identifies the heading for the table of contents. A heading is only
+										processed if the value of the <em>toc</em>
+										<code>name</code> property is an empty string (i.e., no headings have yet been
+										encountered).</p>
+									<aside class="example" title="Visualization of the toc object with a heading">
+										<pre>
+{
+   "name": "Contents",
+   "entries": []
+}</pre>
+									</aside>
+									<p>If the <code>name</code> is not an empty string, or is <code>null</code>, then a
+										previous heading has already been encountered or content has been encountered
+										that indicates the <code>nav</code> element does not have a heading (e.g., a
+										list has already been processed, since the heading would not follow the list of
+										links).</p>
+									<aside class="example" title="Visualization of the toc object without a heading">
+										<pre>
+{
+   "name": null,
+   "entries": []
+}</pre>
+										<p>If a heading is not provided, the user agent will have to provide one, if
+											necessary, when making use of the table of contents.</p>
+									</aside>
+								</details>
 							</li>
-							<li>If the <code>a</code> item has an <code>href</code> attribute, and the destination of
-								IRI contained in the attribute is a resource in the <a>default reading order</a> or
-									<code>resource list</code>, store the IRI. Otherwise, the node is not linkable and
-								no IRI is associated with it.</li>
-							<li>If the list item is a branch, its child nodes are created by processing the first
-								descendant list in the same manner. This process continues until there are no more
-								branch nodes.</li>
-						</ul>
+
+							<li>
+								<p><strong>When entering a <a>list element</a>:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>
+										<p>If the <code>name</code> property of <em>toc</em> is an empty string, set
+												<code>name</code> to <code>null</code>.</p>
+									</li>
+									<li>
+										<p>if <em>current toc branch</em> is not <code>null</code>:</p>
+										<ol>
+											<li>If the <code>entries</code> property of <em>current toc branch</em> is
+													<code>null</code> or a non-empty array, exit the element and
+												continue processing with the next element.</li>
+											<li>Otherwise, push the object in <em>current toc branch</em> onto the stack
+												and set <em>current toc branch</em> to <code>null</code>.</li>
+										</ol>
+									</li>
+									<li>
+										<p>Otherwise, if the stack is empty:</p>
+										<ol>
+											<li>If the <code>entries</code> property of <em>toc</em> is
+													<code>null</code> or a non-empty array, exit the element and
+												continue processing with the next element.</li>
+											<li>Otherwise, do nothing.</li>
+										</ol>
+									</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>This algorithm does not process multiple lists in a single branch or at the root
+										of the <code>nav</code> element, so if a list has already been encountered (the
+											<code>entries</code> property contains one or more branches or is set to
+											<code>null</code>), this list is skipped.</p>
+									<p>If a list is encountered and the table of contents (<code>toc</code>) still does
+										not have a name (i.e., no heading element has been encountered), the table of
+										contents is assumed to not have a heading (i.e., the heading for the table of
+										contents cannot appear after the first list of entries). The value of the
+											<code>name</code> property is changed from an empty string to
+											<code>null</code> as no further headings encountered apply, either.</p>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>When exiting a <a>list element</a>:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>If the stack is not empty, pop the top object off the stack and set <em>current
+											toc branch</em> to it.</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>This resets <em>current toc branch</em> back to the parent object after all of
+										its child branches have been processed.</p>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>When entering a <a
+											href="https://www.w3.org/TR/html/grouping-content.html#the-li-element">list
+											item</a> element:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>Set <em>current toc branch</em> to a new object.</li>
+
+									<li>Create <code>name</code> and <code>url</code> properties for the object and set
+										them to empty strings.</li>
+
+									<li>Create an <code>entries</code> property for the object and set it to an empty
+										array.</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>Each list item represents a possible new branch in the table of contents, so
+										whenever one is encountered a new blank object is created in <em>current toc
+											branch</em>.</p>
+									<aside class="example" title="Visualization of a new branch object">
+										<pre>
+{
+   "name": '',
+   "url": '',
+   "entries": []
+}</pre>
+									</aside>
+									<p>This object gets populated with information as a descendant <code>a</code>
+										element and list are encountered.</p>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>When exiting a <a
+											href="https://www.w3.org/TR/html/grouping-content.html#the-li-element">list
+											item</a> element:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>
+										<p>If <code>entries</code> property of <em>current toc branch</em> contains an
+											empty array, set its value to <code>null</code>.</p>
+									</li>
+									<li>
+										<p>If the stack contains one or more entries:</p>
+										<ol>
+											<li>If the <code>entries</code> property of <em>current toc branch</em>
+												contains a non-empty array, and its <code>name</code> property is an
+												empty string, set its <code>name</code> to null;</li>
+											<li>If the <code>entries</code> property of <em>current toc branch</em>
+												contains an empty array, and its <code>name</code> property is an empty
+												string, set <em>current toc branch</em> to null and exit this processing
+												step.</li>
+										</ol>
+										<p>Add <em>current toc branch</em> to the array in the <code>entries</code>
+											property of the object at the top of the stack.</p>
+									</li>
+									<li>
+										<p>Otherwise, add the object in <em>current toc branch</em> to the
+												<code>entries</code> array of <em>toc</em>.</p>
+									</li>
+
+									<li>
+										<p>Set <em>current toc branch</em> to <code>null</code>.</p>
+									</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>Exiting a list item indicates that processing of the current branch is complete.
+										Before adding this branch to its parent's <code>entries</code> array, the branch
+										needs to be tested to see if it has a name and/or any sub-branches. If it does
+										not have a name but has sub-branches, the branch is kept (the user agent will
+										have to supply a name later, if needed). If it does not have a name or any
+										branches, it is invalid and is discarded.</p>
+									<p>To determine where to merge the branch, the stack is checked. If there are no
+										objects in the stack, it is added into the <code>entries</code> property of the
+										root <em>toc</em> object (i.e., it is a top-level branch). Otherwise, it gets
+										added into the <code>entries</code> property of the object immediately preceding
+										it in the stack.</p>
+									<p>As a final step, <em>current toc branch</em> is reset back to
+										<code>null</code>.</p>
+									<aside class="example" title="Visualization of a branch merge">
+										<p>If the following two objects are in <em>current toc branch</em></p>
+										<pre>{
+   "name": "Section 1",
+   "url": "http://example.com/contents.html#s1",
+   "entries": []
+},
+{
+   "name": "Section 1.1",
+   "url": "http://example.com/contents.html#s1.1",
+   "entries": null
+}</pre>
+										<p>Then only the following single object remains after merging:</p>
+										<pre>{
+   "name": "Section 1",
+   "url": "http://example.com/contents.html#s1",
+   "entries": [
+      {
+         "name": "Section 1.1",
+         "url": "http://example.com/contents.html#s1.1",
+         "entries": null
+      }
+   ]
+}</pre>
+									</aside>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>When entering an <a
+											href="https://www.w3.org/TR/html/textlevel-semantics.html#the-a-element"
+											>anchor</a> element and <em>current toc branch</em> is not
+										<code>null</code>:</strong></p>
+								<p>Run these steps:</p>
+								<ol>
+									<li>
+										<p>If the <code>name</code> property of <em>current toc branch</em> is not an
+											empty string, do nothing.</p>
+									</li>
+									<li>
+										<p>Otherwise:</p>
+										<ol>
+											<li>Calculate the <a
+													href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+													>accessible name</a> [[!accname-1.1]] for the element. If the
+												resulting value is a non-empty string after trimming leading and
+												trailing white space, set the <code>name</code> property of <em>current
+													toc branch</em> to the resulting value. Otherwise, set the property
+												to <code>null</code>.</li>
+											<li>If the element has an <code>href</code> attribute and the IRI in the
+												attribute resolves to a resource in the <a>default reading order</a> or
+													<a>resource list</a>, set the <code>url</code> property of
+													<em>current toc branch</em> to the value. Otherwise, set the
+												property to <code>null</code>.</li>
+										</ol>
+										<p>Exit the element and continue processing with the next element.</p>
+									</li>
+								</ol>
+								<details>
+									<summary>Explanation</summary>
+									<p>This step processes anchor tags to obtain values for the <code>name</code> and
+											<code>url</code> properties of a branch.</p>
+									<p>If the name of the current branch is already defined, then processing of this
+										element is terminated (i.e., to avoid processing multiple links for a single
+										branch).</p>
+									<p>In addition to having an <code>href</code> attribute specified, it is necessary
+										that it resolve to a resource that belongs to the publication to meet the
+										requirements of this specification. If not, the branch is retained but the entry
+										will not be linkable.</p>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>When entering a <a
+											href="https://www.w3.org/TR/html/dom.html#sectioning-content-2">sectioning
+											content</a> element, a <a
+											href="https://www.w3.org/TR/html/sections.html#sectioning-roots">sectioning
+											root</a> element, or an element with a <a
+											href="https://www.w3.org/TR/html/editing.html#element-attrdef-global-hidden"
+											>hidden</a> attribute:</strong></p>
+								<p>Exit the element and continue processing with the next element.</p>
+								<details>
+									<summary>Explanation</summary>
+									<p>As sectioning and sectioning root elements can define their own outlines,
+										descending into them poses problems for generating the table of contents (i.e.,
+										they may contain content that is not directly related). As a result, they are
+										skipped over when encountered to prevent their child content from being
+										processed.</p>
+								</details>
+							</li>
+
+							<li>
+								<p><strong>Otherwise: do nothing.</strong></p>
+								<details>
+									<summary>Explanation</summary>
+									<p>For all other elements, this steps allows their descendant elements to continue
+										to be processed.</p>
+								</details>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<p>After completing the DOM walk, if the <em>entries</em> property of <em>toc</em> contains a
+							non-empty array, <em>toc</em> represents the machine-processed table of contents.</p>
+						<p>Otherwise, the Web Publication does not have a table of contents that can be used for machine
+							rendering purposes.</p>
+						<details>
+							<summary>Explanation</summary>
+							<p>If the <code>entries</code> array in the root <em>toc</em> object does not contain any
+								branches (either because no list was found in the <code>nav</code> element or the list
+								did not contain any conforming list items), then the algorithm did not produce a usable
+								table of contents.</p>
+						</details>
 					</li>
 				</ol>
-
-				<p>If the table of contents <code>nav</code> uses a different content model, processing of it to obtain
-					a hierarchy of links is OPTIONAL. In such cases, the user agent MAY simply extract all
-						<code>a</code> elements and process them into a tree with only a single level of leaf nodes.</p>
-
-				<p>If a user agent is unable to obtain a set of one or more links from the table of contents
-						<code>nav</code>, the Web Publication does not have a table of contents.</p>
 			</section>
 		</section>
 		<section id="app-manifest-examples" class="appendix informative">
