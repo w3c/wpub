@@ -27,7 +27,6 @@ Thus the goal of web publications is to make these features ("affordances") avai
 - Describe the affordances needed for reading publications on the web. Note that publications may take many forms, from journals to educational texts to novels. 
 
  
- 
 ## Non-goals
 
  - Issues of layout, such as pagination or achieving effects similar to EPUB's fixed layout. 
