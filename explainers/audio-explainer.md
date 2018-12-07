@@ -38,7 +38,7 @@ The Audiobooks Task Force has identified the definition of an essential audioboo
 There were several considered alternatives:
 * [DAISY Talking Books](http://www.daisy.org/daisypedia/daisy-digital-talking-book)
 * [x-playlist](https://github.com/heff/x-playlist)
-* Extending EPUB3 OPF and OCF to allow media links in the <spine>
+* Extending EPUB3 OPF and OCF to allow media links in the `<spine>`
 
 ## References and Acknowledgements
 ### Experiments:
