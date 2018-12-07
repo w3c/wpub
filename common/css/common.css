@@ -66,3 +66,9 @@ table.zebra tr:nth-child(even) {
 
 table.zebra th{border-bottom:1px solid #bbb;padding:.2em 1em;}
 table.zebra td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+
+details {
+	background-color: rgb(245,245,245);
+	border-left: 0.3em solid rgb(200,200,200);
+	padding: 0.3em;
+}
