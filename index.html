@@ -2908,7 +2908,8 @@ partial dictionary WebPublicationManifest {
 
 					<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e., it
 						points to <var>origin</var> and it has a non-null <a data-cite="!fetch#concept-url-fragment"
-							>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>: <ol>
+							>fragment</a> identifying an identifier <var>id</var> in <code>Document</code>:
+						<ol>
 							<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
 								tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
 									<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
@@ -2924,6 +2925,10 @@ partial dictionary WebPublicationManifest {
 							<li> Let <var>base</var> be the value of <a data-cite="!dom/#dom-node-baseuri">baseURI</a>
 								of the <code>script element</code>. </li>
 						</ol>
+						<details>
+							<summary>Explanation</summary>
+							<p>This branch is in use when the manifest is embedded in the primary entry page. The algorithm locates the <code>script</code> element and extract the manifest itself. The document's URL or, if set by the author, the value of a possible <code>base</code> element will be used to turn relative URLs into absolute ones.</p>
+						</details>
 					</li>
 					<li>Otherwise: <ol>
 							<li> Let <var>manifest URL</var> be the result of parsing the value of the <code>href</code>
@@ -2943,6 +2948,10 @@ partial dictionary WebPublicationManifest {
 									data-cite="!fetch#concept-request-body">body</a>. </li>
 							<li> Let <var>base</var> be the value of <var>manifest URL</var>. </li>
 						</ol>
+						<details>
+							<summary>Explanation</summary>
+							<p>This branch is in use when the manifest is in a separate file. It performs the standard operations to retrieve the manifest from the Web; the URL of the manifest file will be used to turn relative URLs into absolute ones.
+						</details>
 					</li>
 
 					<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
