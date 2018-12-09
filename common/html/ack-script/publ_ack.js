@@ -7,24 +7,24 @@
  * - use npm to install the node-fetch and underscore libraries
  * - get an API key (see https://w3c.github.io/w3c-api/) and fill the value int "api_key"
  * - if you want to use this script using local data (eg, in your local github clone)
- *      - check the "local_ack" below to set a localhost URL 
+ *      - check the "local_ack" below to set a localhost URL
  * - if you want to use this script using remote data
  *      - make sure the localhost variable is set to false
- * 
+ *
  * That is it. The extra data downloaded from localhost or from github is the list of the people
- * who should be called out separately in the acknowledgment section. Note that the structure in that list can also 
+ * who should be called out separately in the acknowledgment section. Note that the structure in that list can also
  * have an "affiliation" member to be set separately; that may be useful if you want to acknowledge the contribution
  * of a person who is not member of the WG any more (ie, the affiliation will not be filled automatically).
  *
  * Otherwise the data is downloaded via the W3C API. Be patient: if the group is large, at some point it sends out a large number of
  * HTTP requests to get the data of all people...
- * 
+ *
  * You can adapt it to other WG-s: the various strings and the value of publ_wg must be changed
- * 
+ *
  */
 
 const apicore    = "https://api.w3.org";
-const api_key    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+const api_key    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 const local_ack  = "http://localhost:8001/LocalData/github/wpub/common/html/ack-script/separate_acks.json";
 const gh_ack     = "https://github.com/w3c/wpub/tree/master/common/html/ack-script/separate_acks.json"
 const localhost  = true
@@ -39,13 +39,13 @@ const html_start = `<section id="ack" class="appendix informative">
     <h2>Acknowledgements</h2>
     <p>The editors would like to specially thank the following individuals for making significant
         contributions to the authoring and editing of this specification:</p>
-    
+
     <ul class="ack">
 `
 
 const html_middle = `
     </ul>
-    
+
     <p>Additionally, the following people were members of the Working Group at the time of publication:</p>
 
     <ul class="ack">
@@ -112,7 +112,7 @@ async function getData(url, key) {
 
 /**
  * Get the data of one user
- * 
+ *
  * @param {string} user_url: the URL identifying the user in the W3C API system
  * @param {string} key: the W3C API Key to authorize API calls
  * @returns: a Promise with an object of the form {name, affiliation}
@@ -127,7 +127,7 @@ async function getUserData(user_url, key) {
         return {
             name:        user_info.name,
             affiliation: (affiliations) ? affiliations[0].title : "No affiliation"
-        }        
+        }
     } catch(err) {
         console.log(`??? ${user_info.name} ${user_url}`);
         console.log(`??? ${JSON.stringify(affiliation_info,null,4)} ${user_url}`);
@@ -137,7 +137,7 @@ async function getUserData(user_url, key) {
 
 /**
  * Get a list of users.
- * 
+ *
  * @param {string} groupid: Group identification number
  * @param {string} key: the W3C API Key to authorize API calls
  * @param {boolean} former: whether this should include the former members, too
@@ -172,7 +172,7 @@ async function getUsers(groupid, key, former) {
  * @param {Array} separate_acks: list of people to be acknowledged separately
  * @param {Array} current_members: list of current WG members
  * @param {Array} all_members: list of past and present members
- * @return the three lists in a three-tuple 
+ * @return the three lists in a three-tuple
  */
 function clean_up(separate_acks, current_members, all_members) {
     let clean_list = (members) => {
@@ -211,7 +211,7 @@ function clean_up(separate_acks, current_members, all_members) {
                         // This is a special person...
                         special.affiliation = member.affiliation;
                         member.remove = true;
-                    } 
+                    }
                     return member
                 })
                 .filter((member) => member.remove === undefined)
@@ -220,7 +220,6 @@ function clean_up(separate_acks, current_members, all_members) {
 
     // Basic cleanup of the lists
     let cleaned_current = clean_list(current_members);
-
 
     // Filter the "all" list by removing the current members and then clean it
     let cleaned_all = clean_list(_.filter(all_members, (past_m) => {
@@ -237,17 +236,23 @@ function clean_up(separate_acks, current_members, all_members) {
 
 
 /**
- * The main entry point: 
+ * The main entry point:
  * - gets the group data based on the group id
  * - for each user the name and affiliation is gathered
  * - combines the result in an HTML structure
- * 
+ *
  * @param {string} groupid: Group identification number
  * @param {string} key: the W3C API Key to authorize API calls
  */
 async function main(groupid, key) {
     const generate_list = (members) => {
-        return members.map( (person) => `        <li>${person.name} (${person.affiliation})</li>`).join("\n")
+        return members.map( (person) => {
+            if (person.chair === true) {
+                return `        <li>${person.name} (${person.affiliation}, co-chair)</li>`
+            } else {
+                return `        <li>${person.name} (${person.affiliation})</li>`
+            }
+        }).join("\n")
     };
 
     try {
@@ -256,7 +261,7 @@ async function main(groupid, key) {
 
         // Get the list of current and all WG members' URLs. Let that be done in parallel for former included and not included...
         let [current_user_urls, all_user_urls] = await Promise.all([
-            getUsers(groupid, key, former = false), 
+            getUsers(groupid, key, former = false),
             getUsers(groupid, key, former = true)
         ]);
 
@@ -267,8 +272,8 @@ async function main(groupid, key) {
             ]);
 
         let [final_separate_acks, final_current, final_past] = clean_up(separate_acks, current_user_data, all_user_data);
-//        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_past + generate_list(final_past) + html_end)        
-        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_end)        
+//        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_past + generate_list(final_past) + html_end)
+        console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_end)
 
     } catch(err) {
         console.error(`Something is wrong... ${err}`)

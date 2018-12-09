@@ -22,11 +22,15 @@
 },{
     "name" : "Joshua Pyle"
 },{
+    "name" : "Wendy Reid",
+    "chair": true
+},{
     "name" : "Tzviya Siegman",
     "chair": true
 },{
     "name" : "Avneesh Singh"
 },{
-    "name" : "Benjamin Young",
-    "affiliation" : "Wiley"
+    "name" : "Benjamin Young"
+},{
+    "name" : "Jeff Xu"
 }]
