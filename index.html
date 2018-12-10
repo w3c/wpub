@@ -3833,13 +3833,13 @@ partial dictionary WebPublicationManifest {
 				<dl>
 					<dt>Table of Contents Title</dt>
 					<dd>
-						<p>Although a title for the table of contents is optional to include, to avoid having a user
-							agent generate a placeholder title when one is needed, it is advised to add a title. Titles
-							are specified using any of the [[html]] <a
+						<p>Although a title for the table of contents is optional, to avoid having a user agent generate
+							a placeholder title when one is needed, it is advised to add one. Titles are specified using
+							any of the [[html]] <a
 								href="https://www.w3.org/TR/html/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements"
 									><code>h1</code> through <code>h6</code> elements</a>. Note that only the first such
-							element encountered is recognized as the title. If a heading element is not encountered
-							before the list of links is encountered, user agents will assume that one has not been
+							element is recognized as the title. If a heading element is not found before the <a
+								href="#toc-list-links">list of links</a>, user agents will assume that one has not been
 							specified.</p>
 					</dd>
 					<dt id="toc-list-links">List of Links</dt>
@@ -3890,9 +3890,13 @@ partial dictionary WebPublicationManifest {
 								>sectioning root elements</a>. The reason they are ignored is because they can defined
 							their own outlines (i.e., they can represent embedded content that is self-contained and not
 							necessarily related to the structure of content links).</p>
-						<p>These elements can still be included in the <code>nav</code> element, but care has to be
-							taken not to embed important content within them (e.g., do not wrap a <code>section</code>
-							element around the list item that contains all the links into the content).</p>
+						<p>Any element that has its <a
+								href="https://www.w3.org/TR/html/editing.html#the-hidden-attribute"><code>hidden</code>
+								attribute</a> set is also skipped, since hidden elements are not intended to be directly
+							accessed by users.</p>
+						<p>Although these elements can be included in the <code>nav</code> element, care has to be taken
+							not to embed important content within them (e.g., do not wrap a <code>section</code> element
+							around the list item that contains all the links into the content).</p>
 					</dd>
 					<dt id="toc-ignored-elements">Ignored Elements</dt>
 					<dd>
