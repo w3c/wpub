@@ -41,7 +41,7 @@ There were several considered alternatives:
 
 #### [DAISY Talking Books](http://www.daisy.org/daisypedia/daisy-digital-talking-book)
 
-*editorial note: do we have input from DAISY on the current status of this?*
+*Editorial note: do we have input from DAISY on the current status of this?*
 
 #### HTML Custom Elements
 
@@ -53,7 +53,7 @@ The existing EPUB 3 specification could be changed to allow audio core media typ
 
 #### M4B
 
-M4B is an audiobook format based on the MPEG-4 Part 14 container specification. They can contain multiple audio files, a cover image, and metadata. Audio book providers such as Librevox often supply M4B to end users. They can be played in iTunes. 
+M4B is an audiobook format based on the [MPEG-4 Part 14](https://en.wikipedia.org/wiki/MPEG-4_Part_14) container specification. They can contain multiple audio files, a cover image, and metadata. Audio book providers such as Librevox often supply M4B to end users. They can be played in iTunes. 
 
 
 ## References and Acknowledgements
