@@ -35,10 +35,26 @@ The Audiobooks Task Force has identified the definition of an essential audioboo
 * A format with clear metadata supported for user libraries (title, author, narrator, cover, duration, etc.)
 
 ## Considered Alternatives
+
 There were several considered alternatives:
-* [DAISY Talking Books](http://www.daisy.org/daisypedia/daisy-digital-talking-book)
-* [x-playlist](https://github.com/heff/x-playlist)
-* Extending EPUB3 OPF and OCF to allow media links in the `<spine>`
+
+
+#### [DAISY Talking Books](http://www.daisy.org/daisypedia/daisy-digital-talking-book)
+
+*editorial note: do we have input from DAISY on the current status of this?*
+
+#### HTML Custom Elements
+
+HTML does have an `audio` element. It would be possible to have the Primary Entry Page of the Web Publication be an HTML page that contains `audio` elements for each constituent resource. Someone wrote a custom element called  [x-playlist](https://github.com/heff/x-playlist) that wrapped a sequence of audio elements, auto-playing them in order with no intervention. A member of the working group created a [sample audio book](https://dauwhe.github.io/html-first/flatland-custom-element/) using this approach.
+
+#### EPUB 3 Audio Books
+
+The existing EPUB 3 specification could be changed to allow audio core media types as spine items. We could then take advantage of EPUB's existing metadata and packaging features. 
+
+#### M4B
+
+M4B is an audiobook format based on the MPEG-4 Part 14 container specification. They can contain multiple audio files, a cover image, and metadata. Audio book providers such as Librevox often supply M4B to end users. They can be played in iTunes. 
+
 
 ## References and Acknowledgements
 ### Experiments:
