@@ -3817,122 +3817,93 @@ partial dictionary WebPublicationManifest {
 					preview).</p>
 			</section>
 
-			<section id="app-toc-html">
+			<section id="app-toc-html" class="informative">
 				<h3>HTML Structure</h3>
 
-				<p>To optimize the machine processing of an HTML table of contents by user agents, authors SHOULD adhere
-					to the following structuring guidelines.</p>
+				<p>The machine-readable table of contents is defined within an [[html]] <a
+						href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code> element</a>. As
+					described in <a href="#wp-table-of-contents"></a>, this <code>nav</code> element has to be both the
+					first element in the document and identifiable by a <code>role</code> attribute with the value
+						<code>doc-toc</code>.</p>
 
-				<p class="note">The following content model identifies the elements that are processed by user agents
-					and need to be included; it does not disallow the inclusion of other elements or content. Such
-					unspecified content is ignored by user agents, as described in <a href="#app-toc-ua"></a>.</p>
+				<p>Although the content model of the <code>nav</code> element is not restricted, there are rules that
+					have to be followed in order for a user agent to be able to extract the hierarchy of links. These
+					rules break down as follows:</p>
 
-				<dl class="elemdef">
-					<dt>Processed Content Model</dt>
+				<dl>
+					<dt>Table of Contents Title</dt>
 					<dd>
-						<dl class="variablelist">
-							<dt><a href="https://www.w3.org/TR/html/sections.html#the-nav-element"
-								><code>nav</code></a></dt>
-							<dd>
-								<p>A <code>role</code> attribute with the value <code>doc-toc</code> is REQUIRED</p>
-								<p>In this order:</p>
-								<ul class="nomark">
-									<li><a href="https://www.w3.org/TR/html/dom.html#heading-content"><code>HTML Heading
-												content</code></a>
-										<code>[0 or 1]</code></li>
-									<li>
-										<code>ol</code> or <code>ul</code>
-										<code>[exactly 1]</code>
-									</li>
-								</ul>
-							</dd>
-							<dt><a href="https://www.w3.org/TR/html/grouping-content.html#the-ol-element"
-										><code>ol</code></a> and <a
-									href="https://www.w3.org/TR/html/grouping-content.html#the-ul-element"
-										><code>ul</code></a></dt>
-							<dd>
-								<ul class="nomark">
-									<li>
-										<p>
-											<code>li</code>
-											<code>[1 or more]</code></p>
-									</li>
-								</ul>
-							</dd>
-							<dt><a href="https://www.w3.org/TR/html/grouping-content.html#the-li-element"
-										><code>li</code></a></dt>
-							<dd>
-								<p>In this order:</p>
-								<ul class="nomark">
-									<li>
-										<p><code>a</code>
-											<code>[exactly 1]</code></p>
-									</li>
-									<li>
-										<p>
-											<code>ol</code> or <code>ul</code>
-											<code>[0 or 1]</code></p>
-									</li>
-								</ul>
-							</dd>
-							<dt><a href="https://www.w3.org/TR/html/textlevel-semantics.html#the-a-element"
-										><code>a</code></a></dt>
-							<dd>
-								<p>In any order:</p>
-								<ul class="nomark">
-									<li>
-										<p>
-											<a href="https://www.w3.org/TR/html/dom.html#phrasing-content"><code>HTML
-													Phrasing content</code></a>
-											<code>[1 or more]</code></p>
-									</li>
-								</ul>
-							</dd>
-						</dl>
-						<p>Note that there are no restrictions on the attributes allowed on these elements.</p>
+						<p>Although a title for the table of contents is optional to include, to avoid having a user
+							agent generate a placeholder title when one is needed, it is advised to add a title. Titles
+							are specified using any of the [[html]] <a
+								href="https://www.w3.org/TR/html/sections.html#the-h1-h2-h3-h4-h5-and-h6-elements"
+									><code>h1</code> through <code>h6</code> elements</a>. Note that only the first such
+							element encountered is recognized as the title. If a heading element is not encountered
+							before the list of links is encountered, user agents will assume that one has not been
+							specified.</p>
+					</dd>
+					<dt id="toc-list-links">List of Links</dt>
+					<dd>
+						<p>The first [[html]] <a href="https://www.w3.org/TR/html/grouping-content.html#the-ol-element"
+									><code>ol</code></a> or <a
+								href="https://www.w3.org/TR/html/grouping-content.html#the-ul-element"
+								><code>ul</code></a> list element encountered in the <code>nav</code> element is assumed
+							to contain the list that defines the links into the content. This list will be found even if
+							it is nested inside of <a
+								href="https://www.w3.org/TR/html/grouping-content.html#the-div-element"
+								><code>div</code></a> elements, for example, as the algorithm <a
+								href="#toc-ignored-elements">ignores elements</a> that are not relevant to its
+							processing. The list cannot occur inside of any <a href="#toc-skipped-elements">skipped
+								elements</a>, however, since their internal contents are not evaluated.</p>
+						<p>If the <code>nav</code> element does not contain one of these elements, then user agents will
+							not register the Web Publication as containing a usable table of contents (e.g., a
+							machine-rendered option will not be available).</p>
+					</dd>
+					<dt id="toc-branches">Branches</dt>
+					<dd>
+						<p>If the table of contents is considered as a tree of links, then each list item (<a
+								href="https://www.w3.org/TR/html/grouping-content.html#the-li-element"><code>li</code>
+								element</a>) inside of the <a href="toc-list-links">list of links</a> represents one
+							branch. Each of these branches has to have a name and optional destination in order to be
+							presented to users, and this information is obtained from the first <a
+								href="https://www.w3.org/TR/html/textlevel-semantics.html#the-a-element"><code>a</code>
+								element</a> found within the list item, <a href="#toc-ignored-elements">wherever it is
+								nested</a> (again, excluding any <code>a</code> elements inside of <a
+								href="toc-skipped-elements">skipped elements</a>.)</p>
+						<p>The link destination for the branch is obtained from the <code>a</code> element's
+								<code>href</code> attribute, when specified. This attribute can be omitted if a link is
+							not available (e.g., in a preview) or not relevant (e.g., a grouping header). When providing
+							a link into the content, it is also possible to specify the relationship of the linked
+							document (in a <code>rel</code> attribute) and the media type of the linked resource (in a
+								<code>type</code> attribute).</p>
+						<p>After finding the <code>a</code> element that labels the branch, user agents will continue to
+							inspect the markup for another list element (i.e., sub-branches). If a list is found, it is
+							similarly processed to extract its links, and so on, until there are no more nested branches
+							left to process.</p>
+					</dd>
+					<dt id="toc-skipped-elements">Skipped Elements</dt>
+					<dd>
+						<p>A small set of elements are ignored when the parsing table of contents to avoid
+							misinterpretation. These are the [[html]] <a
+								href="https://www.w3.org/TR/html/dom.html#sectioning-content">sectioning content
+								elements</a> and <a href="https://www.w3.org/TR/html/sections.html#sectioning-roots"
+								>sectioning root elements</a>. The reason they are ignored is because they can defined
+							their own outlines (i.e., they can represent embedded content that is self-contained and not
+							necessarily related to the structure of content links).</p>
+						<p>These elements can still be included in the <code>nav</code> element, but care has to be
+							taken not to embed important content within them (e.g., do not wrap a <code>section</code>
+							element around the list item that contains all the links into the content).</p>
+					</dd>
+					<dt id="toc-ignored-elements">Ignored Elements</dt>
+					<dd>
+						<p>All elements that are not relevant to extracting the table of contents, and are not <a
+								href="#toc-skipped-elements">skipped</a>, are ignored. Unlike skipped elements, ignoring
+							means that user agents will continue to search inside them for relevant content, allowing
+							greater flexibility in terms of the tagging that can be used.</p>
 					</dd>
 				</dl>
 
-				<p>The content model of the <code>nav</code> element is interpreted as follows:</p>
-
-				<ul class="conformance-list">
-					<li>
-						<p>The first <code>ol</code> or <code>ul</code> descendant of the <code>nav</code> element
-							defines the set of table of contents links, and its child list item elements represent the
-							primary level of content navigation.</p>
-					</li>
-					<li>
-						<p>Each list item identifies a heading, structure or other item of interest. A child
-								<code>a</code> element identifies and/or describes the target location.</p>
-					</li>
-					<li>
-						<p>The <code>a</code> element MUST provide a non-zero length text label after concatenation of
-							all child content and application of white space normalization rules. If a meaningful label
-							cannot be constructed from the text content of the <code>a</code> element &#8212; for
-							example, because it contains non-textual elements or instances of <a
-								href="https://www.w3.org/TR/html/dom.html#embedded-content">HTML embedded content</a>
-							that do not provide intrinsic text alternatives &#8212; an <a
-								href="https://www.w3.org/TR/wai-aria/#aria-label"><code>aria-label</code> attribute</a>
-							[[!WAI-ARIA-1.1]] MUST be provided with an alternate text rendering of the link label.</p>
-					</li>
-					<li>
-						<p>The <code>a</code> element MAY omit an <code>href</code> attribute, in which case the element
-							represents an inactive link.</p>
-					</li>
-					<li>
-						<p>When the <code>href</code> attribute is present, the IRI reference provided in it MUST
-							resolve to a resource in the <a>default reading order</a> or <a>resource list</a>, or
-							fragment therein.</p>
-					</li>
-					<li>
-						<p>An <code>a</code> element MAY be followed by another list, in which case the list represents
-							a subsidiary content level (e.g., all the subsection headings of a section). Every such
-							sub-list MUST adhere to the content requirements defined in this section for constructing
-							the primary navigation list.</p>
-					</li>
-				</ul>
-
-				<section id="app-toc-html-examples" class="informative notoc">
+				<section id="app-toc-html-examples" class="informative">
 					<h4>Examples</h4>
 
 					<aside class="example" title="A basic multi-level table of contents.">
@@ -4103,7 +4074,8 @@ partial dictionary WebPublicationManifest {
 											>accessible name</a> [[!accname-1.1]] of the element. If the resulting value
 										is not an empty string after trimming all leading and trailing whitespace, set
 										the <code>name</code> property of <em>toc</em> to the value. Otherwise, set the
-											<code>name</code> property to <code>null</code>.</li>
+											<code>name</code> property either to a placeholder value or to
+											<code>null</code>.</li>
 									<li>Exit the element and continue processing with the next element.</li>
 								</ol>
 								<details>
@@ -4130,8 +4102,8 @@ partial dictionary WebPublicationManifest {
    "name": null,
    "entries": []
 }</pre>
-										<p>If a heading is not provided, the user agent will have to provide one, if
-											necessary, when making use of the table of contents.</p>
+										<p>If a heading is not specified, the user agent can provide its own for later
+											use.</p>
 									</aside>
 								</details>
 							</li>
@@ -4240,7 +4212,8 @@ partial dictionary WebPublicationManifest {
 										<ol>
 											<li>If the <code>entries</code> property of <em>current toc branch</em>
 												contains a non-empty array, and its <code>name</code> property is an
-												empty string, set its <code>name</code> to null;</li>
+												empty string, set its <code>name</code> to a placeholder value or
+													<code>null</code>;</li>
 											<li>If the <code>entries</code> property of <em>current toc branch</em>
 												contains an empty array, and its <code>name</code> property is an empty
 												string, set <em>current toc branch</em> to null and exit this processing
@@ -4263,9 +4236,9 @@ partial dictionary WebPublicationManifest {
 									<p>Exiting a list item indicates that processing of the current branch is complete.
 										Before adding this branch to its parent's <code>entries</code> array, the branch
 										needs to be tested to see if it has a name and/or any sub-branches. If it does
-										not have a name but has sub-branches, the branch is kept (the user agent will
-										have to supply a name later, if needed). If it does not have a name or any
-										branches, it is invalid and is discarded.</p>
+										not have a name but has sub-branches, the branch is kept. The user agent can
+										either supply a placeholder value of its own creation or set the value to null.
+										If it does not have a name or any branches, it is invalid and is discarded.</p>
 									<p>To determine where to merge the branch, the stack is checked. If there are no
 										objects in the stack, it is added into the <code>entries</code> property of the
 										root <em>toc</em> object (i.e., it is a top-level branch). Otherwise, it gets
