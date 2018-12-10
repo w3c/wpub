@@ -3043,7 +3043,7 @@ partial dictionary WebPublicationManifest {
 			                </ul>
 			                <details>
 			                    <summary>Explanation</summary>
-			                    <p>This step ensures that the <code>title</code> element's content in the primary entry page can be used, as a default, as the title of the publication. I.e.,</p>
+			                    <p>This step ensures that the <code>title</code> element's content in the primary entry page can be used, as a default, as the title of the publication. For example,</p>
 			                    <pre class="example">
 &lt;html&gt;
 &lt;head&gt;
@@ -3072,7 +3072,7 @@ partial dictionary WebPublicationManifest {
 			            <code class="json">"inLanguage": lang</code><br /> to <var>manifest</var>
 						<details>
 			                <summary>Explanation</summary>
-			                <p>This step ensures that the language explicitly set in the primary entry page is valid for an embedded manifest content. I.e.,</p>
+			                <p>This step ensures that the language explicitly set in the primary entry page is valid for an embedded manifest content. For example,</p>
 			                <pre class="example">
 &lt;html&gt;
 &lt;head&gt;
@@ -3100,7 +3100,7 @@ partial dictionary WebPublicationManifest {
 			            <code class="json">"inDirection": dir</code><br /> to <var>manifest</var>
 			            <details>
 			                <summary>Explanation</summary>
-			                <p>This step ensures that the base direction explicitly set in the primary entry page is valid for an embedded manifest content. I.e.,</p>
+			                <p>This step ensures that the base direction explicitly set in the primary entry page is valid for an embedded manifest content. For example,</p>
 			                <pre class="example">
 &lt;html&gt;
 &lt;head&gt;
@@ -3132,7 +3132,7 @@ partial dictionary WebPublicationManifest {
 						<details>
 							<summary>Explanation</summary>
 							<p>
-								In case the publication consists of the primary entry page as an only content, the default reading order can be ommited; it will consist, automatically, of that single resource.
+								If the publication consists only of the primary entry page, the default reading order can be omitted; it will consist, automatically, of that single resource.
 							</p>
 						</details>
 			        </li>
@@ -3152,7 +3152,7 @@ partial dictionary WebPublicationManifest {
 			            <br />Repeat this step for all possible values of <var>P["term"]</var>.
 			            <details>
 			                <summary>Explanation</summary>
-			                <p>A number of terms require their values to be arrays but, for the sake of convenience, authors are allowed to use a single value instead of a one element array. I.e.,</p>
+			                <p>A number of terms require their values to be arrays but, for the sake of convenience, authors are allowed to use a single value instead of a one element array. For example,</p>
 			                <pre class="example">
 {
     "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -3196,7 +3196,7 @@ partial dictionary WebPublicationManifest {
 			            <br />Repeat this step for all possible values of <var>v</var>.
 			            <details>
 			                <summary>Explanation</summary>
-			                <p>An author, editor, etc., should be explicitly designed as an object of type <code>Person</code> but, for the sake of convenience, authors are allowed to just give their name. I.e.,</p>
+			                <p>An author, editor, etc., should be explicitly designed as an object of type <code>Person</code> but, for the sake of convenience, authors are allowed to just give their name. For example,</p>
 			                <pre class="example">
 {
     "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -3226,7 +3226,7 @@ partial dictionary WebPublicationManifest {
 			            <br />Repeat this step for all possible values of <var>v</var>.
 			            <details>
 			                <summary>Explanation</summary>
-			                <p>Resource links should be explicitly designed as an object of type <code>LinkedResource</code> but, for the sake of convenience, authors are allowed to just give their absolute or relative URL. I.e.,</p>
+			                <p>Resource links should be explicitly designed as an object of type <code>LinkedResource</code> but, for the sake of convenience, authors are allowed to just give their absolute or relative URL. For example,</p>
 			                <pre class="example">
 {
     "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -3270,7 +3270,7 @@ partial dictionary WebPublicationManifest {
 
 			            <details>
 			                <summary>Explanation</summary>
-			                <p>Natural language text values should be explicitly designed as localizable string objects but, for the sake of convenience, authors are allowed to just use a simple string. I.e., if no language information has been provided (via <code>inLanguage</code>) in the manifest then</p>
+			                <p>Natural language text values should be explicitly designed as localizable string objects but, for the sake of convenience, authors are allowed to just use a simple string. I.e., if no language information has been provided (via <code>inLanguage</code>) in the manifest then, for example,</p>
 			                <pre class="example">
 {
     "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -3293,7 +3293,7 @@ partial dictionary WebPublicationManifest {
 }
 			                </pre>
 
-			                <p>If an explicit language has also been provided in the manifest, that language is also added to the localizable string object. I.e., </p>
+			                <p>If an explicit language has also been provided in the manifest, that language is also added to the localizable string object. For example,</p>
 			                <pre class="example">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
