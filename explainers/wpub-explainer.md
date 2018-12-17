@@ -29,7 +29,7 @@ Thus the goal of web publications is to make these features ("affordances") avai
  
 ## Non-goals
 
- - Issues of layout, such as pagination or achieving effects similar to EPUB's fixed layout. 
+ - Issues of layout, such as pagination or displaying different resources side-by-side.
  
  - Extending the DOM to include collections of document elements 
  
@@ -39,7 +39,7 @@ Thus the goal of web publications is to make these features ("affordances") avai
 
 A web publication must have an *entry page*, which the HTML document returned by the URL of the publication. This page must have either a link to the manifest (`<link rel="publication" href="manifest.json">`, or an [embedded](https://github.com/w3c/wpub/issues/327) manifest. 
 
-A “manifest” is a list of the passengers or cargo on a ship. For web publications, a manifest lists the constituents of the publication—all the HTML files, stylesheets, images, scripts, etc.—needed to create the whole. It further describes the sequence of primary resources, so that we know that chapter-02.html comes after chapter-01.html. In EPUB we called this list the "spine"; for web publications it's now the `readingOrder`. 
+The term “manifest” originally described a list of the passengers or cargo on a ship. For web publications, a manifest lists the constituents of the publication—all the HTML files, stylesheets, images, scripts, etc.—needed to create the whole. One list, called the `readingOrder`, describes the default sequence of primary resources, so that we know that `chapter-02.html` comes after `chapter-01.html`. Another list, called simply `resources`, lists all the other associated files. The union of `readingOrder` and `resources` defines the bounds of the publication. 
 
 The manifest is also the natural location for metadata that applies to the whole publication, rather than just one of the constituents. The metadata vocabulary is based on schema.org; the entire manifest is serialized as JSON-LD, as it is a syntax of choice for schema.org.
 
@@ -102,7 +102,7 @@ Here's a simple example of a web publication manifest, for a tiny version of *Mo
 
 ```
 
-Note that `readingOrder` defines the sequence of primary resources that form the publication. `resources` enumerates all the other resources that are required to render the publication. We also can point to an HTML table of contents using `rel=contents`.
+Note how we used `rel=contents` to identify that a particular resource is an HTML table of contents.
 
 ## Design choices
 
@@ -114,7 +114,7 @@ The key questions are [1] identifying the "bounds" of the publication, [2] defin
 
 - The [Web Application Manifest spec](https://w3c.github.io/manifest/) uses `scope` to define the extent of a web application. 
 
-- Every component of an EPUB publication must be listed in an XML package file.
+- Every component of an EPUB publication must be listed in a `manifest` element in an XML package file.
 
 - Web sites do not explicitly define their boundaries.
 
@@ -136,7 +136,7 @@ The key questions are [1] identifying the "bounds" of the publication, [2] defin
 
 ```
 
-The web publications spec has essentially adopted EPUB's approach, with an explicit list of resources. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group considered things like `scope` and URL patterns, but felt that an explicit list was simpler. 
+The web publications spec has chosen to use an explicit list of resources. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group considered things like `scope` and URL patterns, but felt that an explicit list was simpler. 
 
 ### 2. Sequence of primary resources
 
@@ -152,9 +152,10 @@ Once again, web publications use an explicit list outside of the content itself,
 
 ### 3. Metadata
 
+- There are many ways of embedding metadata in individual HTML files
+
 - EPUB includes metadata in the XML package file
 
-- There are many ways of embedding metadata in individual HTML files
 
 - Metadata about a web application can be expressed in the web application manifest file. 
 
@@ -238,4 +239,4 @@ The working group has not yet formally addressed the issue of packaging, althoug
 
 ## Acknowledgments
 
-The initial draft was written by Dave Cramer. Thanks to Ivan Herman and Tzviya Siegman for helpful feedback. 
+The initial draft was written by Dave Cramer. Thanks to Garth Conboy, Ivan Herman, Deborah Kaplan, Tzviya Siegman, and Avneesh Singh for valuable feedback. 
