@@ -226,8 +226,6 @@ The working group has spent much of its time on a high-level data model, rather 
 
 Is this a good thing or a bad thing? We seem to be far from the approach recommended by the [Extensible Web Manifesto](https://extensiblewebmanifesto.org). 
 
-Another TAG member asked if we were building a data model.
-
 
 
 ### Addressability
