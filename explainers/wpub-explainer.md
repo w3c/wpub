@@ -172,9 +172,11 @@ The Web Publication Manifest appears to be very similar to the Web Application M
 
 1. WP use cases are orthogonal to those of WAM. Nothing is stopping a creator of a web publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
 
-2. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
+2. A primary objective of web publications is to make publication metadata available for SEO. We feel that schema.org metadata is the best way to do this, but this implies using JSON-LD, which is not compatible with the syntax of WAM. 
 
-3. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
+3. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
+
+4. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
 
 
 ## The User Experience
