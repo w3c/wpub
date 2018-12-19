@@ -742,9 +742,10 @@ partial dictionary WebPublicationManifest {
 			<section id="wp-primary-entry-page">
 				<h3>Primary Entry Page</h3>
 
-				<p>The <dfn>primary entry page</dfn> is a key [[!HTML]] document required of every Web Publication. It
-					represents the preferred starting <a href="#wp-resources">resource</a> for discovery of the Web
-					Publication and enables discovery of the <a>manifest</a>.</p>
+				<p>The <dfn>primary entry page</dfn> represents the preferred starting <a href="#wp-resources"
+						>resource</a> for a Web Publication and enables discovery of its <a>manifest</a>. It is the
+					resource that is returned when accessing the Web Publication's <a>address</a>, and MUST be included
+					in either the <a>default reading order</a> or the <a>resource list</a>.</p>
 
 				<p>Although any resource can link to the Web Publication manifest, the primary entry page typically
 					introduces the publication and provides access to the content. It might contain all the content, in
@@ -755,9 +756,8 @@ partial dictionary WebPublicationManifest {
 				<p>It is not required that the primary entry page be included in the <a href="#default-reading-order"
 						>default reading order</a>, nor that it be the first document listed when it is included. This
 					specification leaves the exact nature of the document intentionally underspecified to provide
-					flexibility for different approaches (e.g., the primary entry page could be a marketing document for
-					the Web Publication instead of a specific page of content). If a default reading order is not
-					provided, however, the primary entry page will be used as the default entry.</p>
+					flexibility for different approaches. If a default reading order is not provided, however, user
+					agents will <a href="#no-reading-order">create one using the primary entry page</a>.</p>
 
 				<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest can be
 						embedded</a>. To ensure discovery of the manifest, the primary entry page MUST provide a <a
@@ -3127,9 +3127,9 @@ partial dictionary WebPublicationManifest {
 			                </pre>
 						</details>
 					</li>
-					<li> (<a href="#default-reading-order"></a>) if <var>manifest["readingOrder"]</var> is
-							<code>undefined</code>, let <var>u</var> be the value of <a
-							data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
+					<li id="no-reading-order"> (<a href="#default-reading-order"></a>) if
+							<var>manifest["readingOrder"]</var> is <code>undefined</code>, let <var>u</var> be the value
+						of <a data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
 						<code class="json">"readingOrder": [{"type": ["LinkedResource"], "url": u}]</code><br /> to the
 							<var>manifest</var>
 						<details>
