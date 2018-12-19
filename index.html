@@ -757,7 +757,7 @@ partial dictionary WebPublicationManifest {
 						>default reading order</a>, nor that it be the first document listed when it is included. This
 					specification leaves the exact nature of the document intentionally underspecified to provide
 					flexibility for different approaches. If a default reading order is not provided, however, user
-					agents will use the primary entry page as the default entry.</p>
+					agents will <a href="#no-reading-order">create one using the primary entry page</a>.</p>
 
 				<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest can be
 						embedded</a>. To ensure discovery of the manifest, the primary entry page MUST provide a <a
@@ -3127,9 +3127,9 @@ partial dictionary WebPublicationManifest {
 			                </pre>
 						</details>
 					</li>
-					<li> (<a href="#default-reading-order"></a>) if <var>manifest["readingOrder"]</var> is
-							<code>undefined</code>, let <var>u</var> be the value of <a
-							data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
+					<li id="no-reading-order"> (<a href="#default-reading-order"></a>) if
+							<var>manifest["readingOrder"]</var> is <code>undefined</code>, let <var>u</var> be the value
+						of <a data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
 						<code class="json">"readingOrder": [{"type": ["LinkedResource"], "url": u}]</code><br /> to the
 							<var>manifest</var>
 						<details>
