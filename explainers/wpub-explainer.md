@@ -107,18 +107,24 @@ Note how we used `rel=contents` to identify that a particular resource is an HTM
 ## Design choices
 
 
-The key questions are [1] identifying the "bounds" of the publication, [2] defining the ordering of the primary resources, and [3] figuring out how to express metadata for the publication as a whole. 
+The design of web publications has caused perhaps the greatest amount of discussion within the group, and centers around three key areas:
+
+1. how best to identify the "bounds" of the publication;
+2. how best to define the ordering of the primary resources; and
+3. how best to express metadata for the publication as a whole.
+
+This section outlines the current approaches that have been adopted in each of these areas, and lists alternative practices that have been discussed and/or influenced the decision-making process.
 
 
-### 1. What's part of the publication?
+### 1. What is part of the publication?
 
-- The [Web Application Manifest spec](https://w3c.github.io/manifest/) uses `scope` to define the extent of a web application. 
+The web publications working group has chosen to use an explicit list of resources in the manifest to identify the bounds, similar to how EPUB approaches the problem. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group has also considered the patterns described below, but currently believes an explicit list is the simpler choice.
 
-- Every component of an EPUB publication must be listed in a `manifest` element in an XML package file.
+- Using a `scope`, as was done in the [Web Application Manifest spec](https://w3c.github.io/manifest/).
 
-- Web sites do not explicitly define their boundaries.
+- Not explicitly define the boundaries, similar to how web sites function.
 
-- XML sometimes uses the idea of *transclusion*, where the contents of other documents can be incorporated into a parent document based on hypertext references. This concept can also be realized in HTML using iframes, HTML imports, custom elements, etc. The working group has shown no interest in this approach. 
+- Using the notion of *transclusion*, where the contents of other documents can be incorporated into a parent document based on hypertext references (e.g., through iframes, HTML imports, custom elements, etc.). For example:
 
 ```html
 <html>
@@ -136,33 +142,21 @@ The key questions are [1] identifying the "bounds" of the publication, [2] defin
 
 ```
 
-The web publications spec has chosen to use an explicit list of resources. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group considered things like `scope` and URL patterns, but felt that an explicit list was simpler. 
-
 ### 2. Sequence of primary resources
 
-- HTML can express ordering of resources via `rel=prev` and `rel=next`, but these do not have UI support from the browsers (with notably rare exceptions).
+Web publications use an explicit list in the manifest to define the reading sequence &#8212; via the `readingOrder` member &#8212; which is again similar to EPUB and its use of a `spine1` element. Other methods considered to achieve sequencing have included:
 
-- HTML can also express an ordered list of links with the `nav` element. 
+- `rel=prev` and `rel=next` in HTML, but these do not have UI support from the browsers (with notably rare exceptions) and are not available for most non-HTML media types.
 
-- Transclusion can also define an ordering of the transcluded components. 
+- identifying sequence via a list of links in a `nav` element (e.g., the table of contents), but not all resources may be listed in the table of contents
 
-- EPUB uses the `spine` element in the XML package file to determine a primary reading order.
-
-Once again, web publications use an explicit list outside of the content itself, via the `readingOrder` member of the manifest. 
+- the DOM order of transcluded documents
 
 ### 3. Metadata
 
-- There are many ways of embedding metadata in individual HTML files
+Web publication metadata is expressed in the manifest using the schema.org vocabulary, with some extensions. The metadata is serialized as JSON-LD, one of the three syntaxes accepted by schema.org (the others being microdata and RDFa). JSON-LD has also the advantage of being easy to use for both client and server side processing. As previously, this method is similar to the EPUB approach.
 
-- EPUB includes metadata in the XML package file
-
-
-- Metadata about a web application can be expressed in the web application manifest file. 
-
-- With transclusion, one could define metadata in the parent file to apply to the whole.
-
-Web publication metadata is expressed in the manifest using the schema.org vocabulary, with some extensions. The metadata is serialized as JSON-LD, one of the three syntaxes accepted by schema.org (the others being microdata and RDFa). JSON-LD has also the advantage of being easy to use for both client and server side processing.
-
+Alternatively, it is possible to embed metadata directly in the header and/or content of HTML files, which could include the parent of a set of transcluded files so that it applies to all the sub-documents.
 
 
 
