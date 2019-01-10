@@ -104,6 +104,11 @@ Here's a simple example of a web publication manifest, for a tiny version of *Mo
 
 Note how we used `rel=contents` to identify that a particular resource is an HTML table of contents.
 
+## Modularity
+
+The Group is working toward a WP model that is very slim, focusing almost exclusively on the metadata aspects of a Web Publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinees and scholarly publishing. 
+
+
 ## Design choices
 
 
