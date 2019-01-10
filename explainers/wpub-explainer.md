@@ -113,12 +113,16 @@ The design of web publications has caused perhaps the greatest amount of discuss
 2. how best to define the ordering of the primary resources; and
 3. how best to express metadata for the publication as a whole.
 
-This section outlines the current approaches that have been adopted in each of these areas, and lists alternative practices that have been discussed and/or influenced the decision-making process.
+This section outlines the current approaches that have been adopted in each of these areas, and lists alternative practices that have been discussed and/or influenced the decision-making process. The currently-adopted solutions may change as discussions evolve and external feedback is obtained.
 
 
 ### 1. What is part of the publication?
 
-The web publications working group has chosen to use an explicit list of resources in the manifest to identify the bounds, similar to how EPUB approaches the problem. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication. The group has also considered the patterns described below, but currently believes an explicit list is the simpler choice.
+The Web Publications Working Group has chosen to use an explicit list of resources in the manifest to identify the bounds. Anything that is not part of the `resources` or `readingOrder` manifest members is considered to be outside the web publication.
+
+Precedent for this design pattern can be found in EPUB, which includes a comprehensive listing of publication resources in the package document `manifest` element.
+
+The group has also considered the patterns described below, but currently believes an explicit list is the best choice in terms of simplicity and flexibility (e.g., incorporating resources from across the Web).
 
 - Using a `scope`, as was done in the [Web Application Manifest spec](https://w3c.github.io/manifest/).
 
@@ -142,9 +146,14 @@ The web publications working group has chosen to use an explicit list of resourc
 
 ```
 
+
 ### 2. Sequence of primary resources
 
-Web publications use an explicit list in the manifest to define the reading sequence &#8212; via the `readingOrder` member &#8212; which is again similar to EPUB and its use of a `spine1` element. Other methods considered to achieve sequencing have included:
+Web Publications use an explicit list in the manifest to define the reading sequence &#8212; via the `readingOrder` member.
+
+This design choice also has precedent in EPUB, which defines the order of content documents in the package document `spine` element.
+
+Other methods considered to achieve sequencing include:
 
 - `rel=prev` and `rel=next` in HTML, but these do not have UI support from the browsers (with notably rare exceptions) and are not available for most non-HTML media types.
 
@@ -152,25 +161,14 @@ Web publications use an explicit list in the manifest to define the reading sequ
 
 - the DOM order of transcluded documents
 
+
 ### 3. Metadata
 
-Web publication metadata is expressed in the manifest using the schema.org vocabulary, with some extensions. The metadata is serialized as JSON-LD, one of the three syntaxes accepted by schema.org (the others being microdata and RDFa). JSON-LD has also the advantage of being easy to use for both client and server side processing. As previously, this method is similar to the EPUB approach.
+Web Publication metadata is expressed in the manifest using the schema.org vocabulary, with some extensions. The metadata is serialized as JSON-LD, one of the three syntaxes promoted by schema.org and understood by search crawlers (the others being microdata and RDFa). JSON-LD has also the advantage of being easy to use for both client and server side processing.
 
-Alternatively, it is possible to embed metadata directly in the header and/or content of HTML files, which could include the parent of a set of transcluded files so that it applies to all the sub-documents.
+The encapsulation of metadata is not new or unique to Web Publications, so precedent can be found in EPUB, Web App Manifest, and other standards. Where Web Publications differs is in putting priority on conformance to schema.org, which makes the metadata more Web-friendly for a wider variety of processors.
 
-
-
-### Relationship to Web Application Manifest
-
-The Web Publication Manifest appears to be very similar to the Web Application Manifest. Both are JSON files that are linked to from HTML, and provide metadata about a composite resource. Several [arguments](https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest) [have](https://github.com/w3c/wpub/issues/32) been made against using WAM.
-
-1. WP use cases are orthogonal to those of WAM. Nothing is stopping a creator of a web publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
-
-2. A primary objective of web publications is to make publication metadata available for SEO. We feel that schema.org metadata is the best way to do this, but this implies using JSON-LD, which is not compatible with the syntax of WAM. 
-
-3. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
-
-4. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
+Embedding metadata directly in the header and/or content of HTML files has also been considered, but such a design presents greater complexity in terms of identifying and harvesting the information.
 
 
 ## The User Experience
@@ -218,10 +216,17 @@ Andrew Betts, then on the TAG, [commented](https://github.com/w3c/wpub/issues/32
 
 > It seems to us on the TAG that the Readium manifest format is very unlikely to be considered for support by implementors of general purpose web browsers. Therefore, the question seems to be: is the goal of this group to make a new packaging format for specialist book reading software and devices, or is it to obtain first class support for missing book-related features in the web platform as a whole? If the latter, then it is an order of magnitude more likely to be achieved by building atop existing platform features - notably Web App Manifest and service worker, than creating a separate but similar concept.
 
-The working group has spent much of its time on a high-level data model, rather than identifying low-level primitives that would allow us to more easily build publications on the web. For good or for bad, what we are actually building can be described as unpackaged EPUB with the OPF serialized as JSON-LD. 
+It is true that the Web Publication Manifest appears to be very similar to the Web Application Manifest &#8212; both are JSON files that are linked to from HTML, and both provide metadata about a composite resource. Several [arguments](https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest) [have](https://github.com/w3c/wpub/issues/32) been made against building on top of WAM, however:
 
-Is this a good thing or a bad thing? We seem to be far from the approach recommended by the [Extensible Web Manifesto](https://extensiblewebmanifesto.org). 
+1. WP use cases are orthogonal to those of WAM. Nothing is stopping a creator of a web publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
 
+2. A primary objective of web publications is to make publication metadata available for SEO. We feel that schema.org metadata is the best way to do this, but this implies using JSON-LD, which is not compatible with the syntax of WAM. 
+
+3. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
+
+4. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
+
+As a result, the working group has spent much of its time on a high-level data model, and work on identifying low-level primitives has been deferred.
 
 
 ### Addressability
