@@ -5,7 +5,7 @@
 
 Many types of publications consist of an ordered sequence of resources, which may be textual, audio, or images. The Publication Manifest defines a model for expressing this sequence of primary resources, as well as enumerating ancillary resources and providing metadata for the publication as a whole.
 
-We also define serializations of this model in JSON-LD (and YAML?), with a vocabulary largely based on schema.org. Initial work will focus on audio books, but we plan to extend the model to encompass web publications, digital sequential art such as comics, manga, and bandes desinees, and  possibly even EPUB. 
+We also define serializations of this model in JSON-LD, with a vocabulary largely based on schema.org. Initial work will focus on audio books, but we plan to extend the model to encompass web publications, digital sequential art such as comics, manga, and bandes desinees, scholarly publications, and educational publications. 
 
 ## Goals
 
@@ -99,7 +99,7 @@ Note how we used `rel=contents` to identify that a particular resource is an HTM
 
 ## Modularity
 
-The Group is working toward a model that is very slim, focusing almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
+Our goal is a model that is very slim, focused almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
 
 
 ## Design choices
@@ -168,6 +168,9 @@ The encapsulation of metadata is not new or unique to Web Publications, so prece
 
 Embedding metadata directly in the header and/or content of HTML files has also been considered, but such a design presents greater complexity in terms of identifying and harvesting the information.
 
+### A Note on Serialization
+
+Blackstone Audio has proposed using YAML for an [audiobooks manifest](https://github.com/blackstoneaudio/audiobook-spec). Alternate serializations might help with ease-of-authoring, or even allow EPUB's package file to be expressed as a publication manifest.
 
 ## The User Experience
 
