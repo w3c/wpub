@@ -7,7 +7,6 @@ Many types of publications consist of an ordered sequence of resources, which ma
 
 We also define serializations of this model in JSON-LD (and YAML?), with a vocabulary largely based on schema.org. Initial work will focus on audio books, but we plan to extend the model to encompass web publications, digital sequential art such as comics, manga, and bandes desinees, and  possibly even EPUB. 
 
-
 ## Goals
 
  
@@ -100,13 +99,13 @@ Note how we used `rel=contents` to identify that a particular resource is an HTM
 
 ## Modularity
 
-The Group is working toward a WP model that is very slim, focusing almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
+The Group is working toward a model that is very slim, focusing almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
 
 
 ## Design choices
 
 
-The design of Publication Manifests has caused perhaps the greatest amount of discussion within the group, and centers around three key areas:
+The design of publication manifests has caused perhaps the greatest amount of discussion within the group, and centers around three key areas:
 
 1. how best to identify the "bounds" of the publication;
 2. how best to define the ordering of the primary resources; and
@@ -175,8 +174,6 @@ Embedding metadata directly in the header and/or content of HTML files has also 
 Reading something that takes a day or a week rather than a few minutes influences what sort of user experience works for the reader. We have a formal [use cases and requirements document](https://w3c.github.io/dpub-pwp-ucr/) in addition to lots of actual experience from ebook reading systems. Browsers have implemented "reading modes" to address some of these requirements. 
 
 
-
-
 ## Unanswered questions
 
 
@@ -186,15 +183,15 @@ Andrew Betts, then on the TAG, [commented](https://github.com/w3c/wpub/issues/32
 
 > It seems to us on the TAG that the Readium manifest format is very unlikely to be considered for support by implementors of general purpose web browsers. Therefore, the question seems to be: is the goal of this group to make a new packaging format for specialist book reading software and devices, or is it to obtain first class support for missing book-related features in the web platform as a whole? If the latter, then it is an order of magnitude more likely to be achieved by building atop existing platform features - notably Web App Manifest and service worker, than creating a separate but similar concept.
 
-It is true that the Web Publication Manifest appears to be very similar to the Web Application Manifest &#8212; both are JSON files that are linked to from HTML, and both provide metadata about a composite resource. Several [arguments](https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest) [have](https://github.com/w3c/wpub/issues/32) been made against building on top of WAM, however:
+It is true that the Publication Manifest appears to be very similar to the Web Application Manifest &#8212; both are JSON files that are linked to from HTML, and both provide metadata about a composite resource. Several [arguments](https://github.com/w3c/wpub/wiki/Options-for-Processing-a-Manifest) [have](https://github.com/w3c/wpub/issues/32) been made against building on top of WAM, however:
 
-1. WP use cases are orthogonal to those of WAM. Nothing is stopping a creator of a web publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
+1. Publication use cases are orthogonal to those of WAM. Nothing is stopping a creator of a publication from also using a web application manifest, if the publication author desires for the publication to be installable, etc. 
 
 2. A primary objective of web publications is to make publication metadata available for SEO. We feel that schema.org metadata is the best way to do this, but this implies using JSON-LD, which is not compatible with the syntax of WAM. 
 
 3. There were concerns about the extensibility of web application manifest, especially with regards to the processing of new members. 
 
-4. Web publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
+4. Publications are fundamentally different from web apps, as the goal is for the user agent to provide the user interface. 
 
 As a result, the working group has spent much of its time on a high-level data model, and work on identifying low-level primitives has been deferred.
 
@@ -210,4 +207,4 @@ The working group has not yet formally addressed the issue of packaging, althoug
 
 ## Acknowledgments
 
-The initial draft was written by Dave Cramer, with additional text from Matt Garrish. Thanks to Garth Conboy, Ivan Herman, Deborah Kaplan, Tzviya Siegman, and Avneesh Singh for valuable feedback. 
+This explainer has been written by Dave Cramer and Matt Garrish. Thanks to Garth Conboy, Ivan Herman, Deborah Kaplan, Tzviya Siegman, and Avneesh Singh for valuable feedback. 
