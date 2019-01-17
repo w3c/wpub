@@ -71,15 +71,9 @@
 				within the Publishing Working Group and are subject to change. The most prominent known issues have been
 				identified in this document and links provided to comment on them.</p>
 
-			<p>The work the past few month has been focused on sections <a href="#wp-construction"></a> and <a
-					href="#wp-properties"></a>, which include the definition of a <a>manifest</a> making use of terms in
-					<a href="https://schema.org">schema.org</a>, as well as the <a href="#wp-lifecycle">Lifecycle</a>
-				and <a href="#webidl">WebIDL</a> sections.</p>
-
-			<p>Significant to this draft is the removal of the Information Set (<em>infoset</em>) &#8212; the final data
-				model produced from the processing of manifest properties. This draft instead relies on the <a
-					href="#canonical-manifest">canonical manifest</a> to express this model, as it already encompasses
-				the final JSON-compliant data set that user agents are expected to produce.</p>
+			<p>The most significant change to this draft is the tightening of its focus on the Web Publication manifest
+				and structure. Removed are the sections on affordances and Web Publication locators. Rendering details
+				are instead described in [[PWP-UCR]].</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -121,17 +115,19 @@
 			<section id="scope" class="informative">
 				<h3>Scope</h3>
 
-				<p>This specification only defines requirements for the production and rendering of valid <a>Web
-						Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
-					achieve its goal—that being to allow for a measure of boundedness on the Web without changing the
-					way that the Web itself operates.</p>
+				<p>This specification defines requirements for the production of <a>Web Publications</a>. It does not
+					attempt to constrain the nature of a Web Publication—any type of work that can be represented on the
+					Web constitutes a potential Web Publication. It is also designed to be adaptable to the needs of
+					specific areas of published, such as audiobook production, and encourages a modular approach for
+					creating specializations.</p>
+
+				<p>As much as possible, this specification leverages existing Open Web Platform technologies to achieve
+					its goal—that being to allow for a measure of boundedness on the Web without changing the way that
+					the Web itself operates.</p>
 
 				<p>Moreover, the specification is designed to adapt automatically to updates to Open Web Platform
 					technologies in order to ensure that Web Publications continue to interoperate seamlessly as the Web
 					evolves (e.g., by referencing the latest published versions instead of specific dated versions).</p>
-
-				<p>Further, this specification does not attempt to constrain the nature of a Web Publication: any type
-					of work that can be represented on the Web constitutes a potential Web Publication.</p>
 
 				<p>The specification is also intended to facilitate different user agent architectures for the
 					consumption of Web Publications. While a primary goal is that traditional Web user agents (browsers)
@@ -142,6 +138,10 @@
 					depending on the nature of the user agent and the expectations of the user (e.g., how to prompt to
 					initiate a Web Publication, or at what point or how much of a Web Publication to cache for offline
 					use).</p>
+
+				<p>This specification does not define how user agents are expected to render Web Publications. Details
+					about the types of afforances that user agents can provide to enhance the reading experience for
+					users are instead defined in [[PWP-UCR]].</p>
 			</section>
 
 			<section id="terminology">
