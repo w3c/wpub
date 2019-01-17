@@ -20,7 +20,7 @@ We also define serializations of this model in JSON-LD, with a vocabulary largel
  
 ## Non-goals
 
- - Describe the affordances needed for reading publications on the web. 
+ - Describe the affordances needed for reading publications on the web. (This is being done by PWG in a separate document.)
 
  - Issues of layout, such as pagination or displaying different resources side-by-side.
  
@@ -30,7 +30,7 @@ We also define serializations of this model in JSON-LD, with a vocabulary largel
  
 ## Basic design
 
-A Publication must have an *entry page*, which the HTML document returned by the URL of the publication. This page must have either a link to the manifest (`<link rel="publication" href="manifest.json">`, or an [embedded](https://github.com/w3c/wpub/issues/327) manifest. 
+A Publication must have an *entry page*, which is the HTML document found at the URL of the publication. This page must have either a link to the manifest (`<link rel="publication" href="manifest.json">`, or an [embedded](https://github.com/w3c/wpub/issues/327) manifest. 
 
 The term “manifest” originally described a list of the passengers or cargo on a ship. For publications, a manifest lists the constituents of the publication—all the HTML files, stylesheets, images, scripts, etc.—needed to create the whole. One list, called the `readingOrder`, describes the default sequence of primary resources, so that we know that `chapter-02.html` comes after `chapter-01.html`. Another list, called simply `resources`, lists all the other associated files. The union of `readingOrder` and `resources` defines the bounds of the publication. 
 
@@ -206,7 +206,7 @@ A publication needs a permanent URL, and it should be possible to craft a URL to
 
 ### Packaging
 
-The working group has not yet formally addressed the issue of packaging, although it is central to many publishing use cases. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort. 
+The working group has not yet formally addressed the issue of packaging, although it is central to many publishing use cases. The working group is writing a packaging spec (package format still to be decided) that is less ambitious than the Web Packaging work but allows for quick deployment. This packaging will be aimed at any module. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort.
 
 ## Acknowledgments
 
