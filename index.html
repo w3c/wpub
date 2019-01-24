@@ -15,6 +15,7 @@
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
+              subtitle: "Manifest and Structure",
               previousPublishDate: "2018-12-12",
   			  previousMaturity: "WD",
               edDraftURI: "https://w3c.github.io/wpub/",
@@ -70,15 +71,9 @@
 				within the Publishing Working Group and are subject to change. The most prominent known issues have been
 				identified in this document and links provided to comment on them.</p>
 
-			<p>The work the past few month has been focused on sections <a href="#wp-construction"></a> and <a
-					href="#wp-properties"></a>, which include the definition of a <a>manifest</a> making use of terms in
-					<a href="https://schema.org">schema.org</a>, as well as the <a href="#wp-lifecycle">Lifecycle</a>
-				and <a href="#webidl">WebIDL</a> sections.</p>
-
-			<p>Significant to this draft is the removal of the Information Set (<em>infoset</em>) &#8212; the final data
-				model produced from the processing of manifest properties. This draft instead relies on the <a
-					href="#canonical-manifest">canonical manifest</a> to express this model, as it already encompasses
-				the final JSON-compliant data set that user agents are expected to produce.</p>
+			<p>The most significant change to this draft is the tightening of its focus on the Web Publication manifest
+				and structure. Removed are the sections on affordances and Web Publication locators. Rendering details
+				are instead described in [[PWP-UCR]].</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -120,17 +115,19 @@
 			<section id="scope" class="informative">
 				<h3>Scope</h3>
 
-				<p>This specification only defines requirements for the production and rendering of valid <a>Web
-						Publications</a>. As much as possible, it leverages existing Open Web Platform technologies to
-					achieve its goal—that being to allow for a measure of boundedness on the Web without changing the
-					way that the Web itself operates.</p>
+				<p>This specification defines requirements for the production of <a>Web Publications</a>. It does not
+					attempt to constrain the nature of a Web Publication—any type of work that can be represented on the
+					Web constitutes a potential Web Publication. It is also designed to be adaptable to the needs of
+					specific areas of published, such as audiobook production, and encourages a modular approach for
+					creating specializations.</p>
+
+				<p>As much as possible, this specification leverages existing Open Web Platform technologies to achieve
+					its goal—that being to allow for a measure of boundedness on the Web without changing the way that
+					the Web itself operates.</p>
 
 				<p>Moreover, the specification is designed to adapt automatically to updates to Open Web Platform
 					technologies in order to ensure that Web Publications continue to interoperate seamlessly as the Web
 					evolves (e.g., by referencing the latest published versions instead of specific dated versions).</p>
-
-				<p>Further, this specification does not attempt to constrain the nature of a Web Publication: any type
-					of work that can be represented on the Web constitutes a potential Web Publication.</p>
 
 				<p>The specification is also intended to facilitate different user agent architectures for the
 					consumption of Web Publications. While a primary goal is that traditional Web user agents (browsers)
@@ -141,6 +138,10 @@
 					depending on the nature of the user agent and the expectations of the user (e.g., how to prompt to
 					initiate a Web Publication, or at what point or how much of a Web Publication to cache for offline
 					use).</p>
+
+				<p>This specification does not define how user agents are expected to render Web Publications. Details
+					about the types of afforances that user agents can provide to enhance the reading experience for
+					users are instead defined in [[PWP-UCR]].</p>
 			</section>
 
 			<section id="terminology">
@@ -1370,9 +1371,6 @@ partial dictionary WebPublicationManifest {
 						does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
 						identifier from any other identifiers provided in the manifest for the canonical manifest.</p>
 
-					<p class="issue" data-number="58">Is a canonical identifier necessary to call out explicitly, or can
-						it be handled by other metadata.</p>
-
 					<p>The specification of the canonical identifier MAY be complemented by the inclusion of additional
 						types of identifiers for the Web Publication using the <a href="https://schema.org/identifier"
 								><code>identifier</code> property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
@@ -2527,9 +2525,6 @@ partial dictionary WebPublicationManifest {
 
 					<p>The cover is identified by the <code>https://www.w3.org/ns/wp#cover</code> link relationship.</p>
 
-					<p class="issue" data-number="261">The working group has not reached consensus on whether the cover
-						should be any resource or should be limited to images.</p>
-
 					<p>The manfiest SHOULD include a reference to a cover.</p>
 
 					<p>More than one cover MAY be referenced from the manifest (e.g., to provide alternative formats and
@@ -3402,377 +3397,6 @@ partial dictionary WebPublicationManifest {
 					<li> Return <var>manifest object</var>. </li>
 				</ol>
 			</section>
-		</section>
-		<section id="wp-features">
-			<h2>User Agent Features</h2>
-
-			<p class="ednote">This section contains placeholders for possible reading enhancements/features the user
-				agent may/should/must provide. The list is subject to addition, modification and removal as the
-				enhancements get discussed in more detail.</p>
-
-			<p class="issue" data-number="143"></p>
-
-			<section id="feature-publication-mode">
-				<h3>Switch to publication mode</h3>
-
-				<p>When a user agent <a>obtains a manifest</a> it SHOULD provide the option to switch the display to
-						<a>publication mode</a>.</p>
-
-				<p>This feature has the following requirements:</p>
-
-				<ol>
-					<li>It MUST inform the user that the current resource is part of a <a>Web Publication</a>.</li>
-					<li>It SHOULD display the title of the Web Publication.</li>
-					<li>It MAY display additional metadata from the manifest.</li>
-				</ol>
-
-				<p><dfn>Publication mode</dfn> is a display mode implemented by the user agent that follows the
-					conventions listed in <a href="#feature-presentation">presentation</a> and <a
-						href="#feature-navigation">navigation</a>.</p>
-			</section>
-
-			<section id="feature-presentation">
-				<h3>Presentation</h3>
-
-				<section id="layout">
-					<h4>Layout</h4>
-
-					<p>The layout and rendering of <a>Web Publications</a> is governed by the same rules that apply to
-						all Web content: <abbr title="Hypertext Markup Language">HTML</abbr> documents are styled and
-						laid out according to the rules of <abbr title="Cascading Style Sheets">CSS</abbr>, SVG
-						documents are rendered as defined by that format, etc. This specification requires no particular
-						profile or subset of <abbr title="Cascading Style Sheets">CSS</abbr>, <abbr
-							title="Hypertext Markup Language">HTML</abbr>, or <abbr title="Scalable Vector Graphics"
-							>SVG</abbr> to be supported, other than the expectations set for these technologies by their
-						respective specifications.</p>
-
-					<div class="ednote">
-						<p>This specification intentionally avoids introducing any new layout features. Any shortcoming
-							of the Web platform in terms of layout needs to be addressed for the whole Web platform,
-							which means via <abbr title="Cascading Style Sheets">CSS</abbr>.</p>
-
-						<p>This working group will work with other relevant groups of the <abbr
-								title="World Wide Web Consortium">W3C</abbr> to address platform-wide limitations that
-							negatively impact <a>Web Publications</a>.</p>
-					</div>
-
-					<p>For the purposes of layout, each resource of a Web Publication is treated as a separate document.
-						User agents MUST NOT mix content from multiple resources in the same rendering (e.g., <a
-							href="https://www.w3.org/TR/CSS21/visuren.html#floats">CSS floats</a> or <a
-							href="https://www.w3.org/TR/CSS21/visuren.html#absolutely-positioned">absolutely positioned
-							elements</a> from one resource cannot intrude or overlap with content from an other
-						resource).</p>
-
-					<div class="note">
-						<p>Despite this general requirement that each resource should be treated as a separate document
-							for the purpose of layout, there are some places where <abbr title="Cascading Style Sheets"
-								>CSS</abbr> specifications should be amended to be able to deal more intelligently with
-							collections of resources like <a>Web Publications</a>.</p>
-
-						<p>One instance is the definition of <a
-								href="https://drafts.csswg.org/css-content/#cross-references">cross-references</a>,
-							which are currently restricted to work only within a single document. This restriction
-							should be relaxed to allow for cross-references between separate resources of a single Web
-							Publication.</p>
-
-						<p>Another related would be to allow <a
-								href="https://drafts.csswg.org/css-lists-3/#counter-properties">counters</a> to
-							accumulate across multiple resources of a single Web Publication (e.g., so that figures in
-							multiple sections may be numbered in a single sequence).</p>
-					</div>
-
-				</section>
-
-				<section id="feature-user-settings">
-					<h4>User Settings</h4>
-
-					<p>When a user agent renders a <a>Web Publication</a>, it SHOULD provide user settings to customize
-						the experience.</p>
-
-					<p>User settings MAY include:</p>
-
-					<ul>
-						<li>text size;</li>
-						<li>font family;</li>
-						<li>display mode (night, high contrast, etc.);</li>
-						<li>playback speed (for audio and video resources).</li>
-					</ul>
-
-					<p>This specification does not cover how user agents override author styles to offer user
-						settings.</p>
-
-					<div class="ednote">
-						<p>To provide user settings in their reader mode, browsers usually get rid of most of the author
-							styles. There is always a tension in reading environments between author styles and the
-							user's preference, which is very hard to balance.</p>
-					</div>
-
-					<p class="issue" data-number="138"></p>
-				</section>
-
-				<section id="scrolling-or-paginating" class="informative">
-					<h4>Scrolling or Paginating</h4>
-
-					<p>Publications have historically been presented via paged media, whereas Web pages almost always
-						scroll. As the preferences of individual readers vary, and as different types of publications
-						are better suited for one or the other, this specification encourages user agents to support
-						both, and to offer a choice to their users.</p>
-
-					<div class="ednote">
-						<p>It might be useful for authors to be able to specify a preference between scrolling and
-							pagination, even if a strict requirement is not possible. This should most likely be
-							addressed through an extension of <a
-								href="https://www.w3.org/TR/css-device-adapt-1/#atviewport-rule"
-								><code>@viewport</code></a> or of <a
-								href="https://drafts.csswg.org/css-device-adapt/#viewport-meta">the viewport meta
-								tag</a>(see&#160;[[css-device-adapt]]), or possibly through an extension of <a
-								href="https://drafts.csswg.org/css-page-3/#at-page-rule"><code>@page</code></a>
-							(see&#160;[[css-page-3]]). This should be discussed with the relevant working groups (<a
-								href="https://www.w3.org/Style/CSS/">CSSWG</a>, <a
-								href="https://www.w3.org/WebPlatform/WG/">WebPlatformWG</a>, <a
-								href="https://whatwg.org/">WHATWG</a>).</p>
-					</div>
-					<p class="issue" data-number="137"></p>
-				</section>
-
-				<section id="feature-pagination">
-					<h4>Paginated Layout</h4>
-
-					<p>When a user agent renders a <a>Web Publication</a> in a paginated layout, it MUST lay out each
-						document in the <a>default reading order</a> sequentially, with the last page of a resource
-						being followed by the first page of the subsequent one.</p>
-
-					<div class="ednote">
-						<p>To avoid blank pages, if a resource ends on a left page (resp. right page), the subsequent
-							one should start on a right page (resp. left page) even if the <a
-								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a>
-							(see&#160;[[css-page-3]]) would otherwise lead to it starting on the opposite page. It
-							should also be possible to use the <a
-								href="https://www.w3.org/TR/css-break-3/#propdef-break-before">break-before</a> property
-							(see&#160;[[!css-break-3]]) to force the content to resume on the opposite side if that was
-							desired by the author.</p>
-
-						<p>[[css-page-3]] needs to be amended to describe this exception to the general behavior when
-							dealing with collections of documents instead of individual documents.</p>
-					</div>
-
-
-					<div class="ednote">
-						<p>How is pagination supposed to work when subsequent resources have opposite <a
-								href="https://drafts.csswg.org/css-page-3/#progression">page progression</a> directions
-							(see&#160;[[css-page-3]]). For example, due to different a different writing mode? This is
-							not necessarily a problem from a layout point of view, as each page is independent, but from
-							an UI point of view. If swiping left means next page until the end of one chapter, and
-							starts meaning previous page in the next chapter because the language is switched from
-							English to Hebrew, this is going to be confusing.</p>
-					</div>
-
-					<div class="ednote">
-						<p>[[css-page-3]] needs to be amended so that <a
-								href="https://drafts.csswg.org/css-page-3/#page-based-counters">page counters</a> are
-							not automatically reset to at the beginning of each new resource belonging to the same Web
-							Publication.</p>
-					</div>
-
-					<p class="issue" data-number="137"></p>
-
-				</section>
-			</section>
-
-			<section id="feature-navigation">
-				<h3>Navigation</h3>
-
-				<p class="issue" data-number="86"></p>
-
-				<section id="feature-reading-order">
-					<h4>Reading Order</h4>
-
-					<p>Hyperlinks are the means by which multiple resources are linked together on the Web. When users
-						reach the end of one resource, they have to activate a hyperlink to move to the next resource in
-						the sequence. While this model of navigation is effective, it is also disruptive for immersive
-						reading &#8212; it forces users to disengage from the content and perform the actions necessary
-						to activate the links. It is also limited to media types that support hyperlinks.</p>
-
-					<p>The <a>default reading order</a> provides an enhancement to the hyperlink model, allowing the
-						user agent to automatically move the user to the next resource when a more natural action
-						occurs, like a swipe across the screen. It is similar conceptually and functionally to the
-							<code>link</code> element's <a href="https://www.w3.org/TR/html5/links.html#sec-link-types"
-								><code>next</code> and <code>prev</code> relationships</a>&#160;[[!html]].</p>
-
-					<p>User agents MUST provide the ability to move forward and backward in the <a>default reading
-							order</a> of a <a>Web Publication</a>.</p>
-
-					<p class="issue" data-number="144"></p>
-					<p class="issue" data-number="38"></p>
-				</section>
-
-				<section id="feature-progression">
-					<h4>Progression</h4>
-
-					<p>While reading a <a>Web Publication</a>, the user follows a natural progression within a resource
-						as well as between resources (following the <a>default reading order</a>).</p>
-
-					<p>User agents SHOULD provide the option to save this progression in the publication and returns the
-						user to their last location the next time they open the publication.</p>
-
-					<p>When the user agent <a>obtains a manifest</a> for the first time, it MAY also prompt the user
-						whether they would like to:</p>
-
-					<ul>
-						<li>continue reading the publication from their current location; or</li>
-						<li>start reading the publication from the first resource in the <a>default reading
-							order</a>.</li>
-					</ul>
-					<p class="issue" data-number="145"></p>
-				</section>
-
-				<section id="feature-toc">
-					<h4>Table of Contents</h4>
-					<p class="issue" data-number="146"></p>
-
-					<section>
-						<h5>Short description</h5>
-						<p>The user agent should provide access to the table of contents without leaving current
-							resource from anywhere in the publication.</p>
-						<p>For accessibility reasons, it is RECOMMENDED for User Agents to use a table of contents to
-							allow multiple ways for users to access content.</p>
-					</section>
-					<section>
-						<h5>Affordances</h5>
-						<p>The table of contents is a listed as a structural property in the manifest, see <a
-								href="#table-of-contents"></a>
-						</p>
-						<p>The table of content is referred to in the Web Publication Manifest (see <a
-								href="#table-of-contents"></a>) and is expressed using an HTML element; see <a
-								href="#table-of-contents"></a> for further details.</p>
-						<p>User agents MAY use the <a>default reading order</a> in the case a Table of Contents is not
-							explicitly specified to create a table of contents.</p>
-					</section>
-					<section>
-						<h5>Use Case References</h5>
-
-						<dl>
-							<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_reading-order">Req. 12</a></dt>
-							<dd> “There should be a means to indicate the author’s preferred navigation structure among
-								the resources of a Web Publication. A user agent needs to know the sequence in which to
-								present components of a Web Publication to the user, including the starting point.” (See
-								[[pwp-ucr]]) </dd>
-							<dt><a href="https://www.w3.org/TR/pwp-ucr/#r_random-access">Req. 13</a></dt>
-							<dd> “Authors of a Web Publication should be able to provide the user agent with information
-								to access random parts of the publication” (See [[pwp-ucr]]) </dd>
-						</dl>
-					</section>
-				</section>
-			</section>
-
-			<section id="feature-offline-access">
-				<h3>Offline Access</h3>
-
-				<p class="issue" data-number="141"></p>
-			</section>
-
-			<section id="feature-search">
-				<h3>Search</h3>
-
-				<p class="ednote">Detail on inter-publication search across multiple resources will be included in a
-					future draft.</p>
-			</section>
-
-			<section id="feature-reading-state">
-				<h4>Reading State</h4>
-
-				<p class="issue" data-number="145"></p>
-
-				<section>
-					<h5>Short description</h5>
-					<p>The user must be able to leave the Web Publication and return to it at the last position they
-						left from. The User Agent must retain the reading position, based on the last known position of
-						the reader in the web publication. The position should be based on the reader's position in the
-						file, within the reading order.</p>
-					<p>The user agent may retain reading state if the web publication is revised.</p>
-				</section>
-				<section>
-					<h5>Affordances</h5>
-					<p>The navigation of the web publication should be defined in the required <a>Default Reading
-							Order</a>.</p>
-					<p>User Agents should not have to set the reading state in the following type of resources:</p>
-					<ul>
-						<li>External Links (i.e. a link to google.com)</li>
-						<li>Data references (i.e. a linked CSV file)</li>
-						<li>Multimedia content (i.e. a video)</li>
-					</ul>
-
-					<p>Reading state should only apply to content documents listed as being within the bounds of the Web
-						Publication.</p>
-				</section>
-				<section>
-					<h5>Examples</h5>
-					<p>Example 1:<br /> Sarah is reading a long article on her way to work. She arrives before she has
-						finished, but wants to continue from the place she left off. The user agent should remember her
-						reading state for the next time she opens the publication.</p>
-
-					<h5>Testing</h5>
-					<p>If a tester opens a web publication in a WP-aware UA, moves ahead in the publication, closes the
-						reader, then reopens it, they should be returned to the last known reading state.</p>
-				</section>
-			</section>
-		</section>
-		<section id="locators" class="informative">
-			<h3>Web Publication Locators</h3>
-
-			<p class="ednote"> The document referred from this section, i.e., Web Annotation Extensions for Web
-				Publications&#160;[[wpub-ann]], has been recently renamed. Its previous was "Locators for Web
-				Publication". The terminology used in this section has to be realigned with the name change.</p>
-
-			<p>Locators are used to identify, locate, retrieve, and/or reference locations and content fragments within
-					<a>Web Publications</a> (e.g., for address(es), bookmarks, and annotations). Locators traditionally
-				take the form of fragment identifiers&#160;[[rfc3986]], where the portion of a <abbr
-					title="Uniform Resource Locator">URL</abbr> preceded by a number sign character (<code>#</code>)
-				identifies a specific position within the referenced resource.</p>
-
-			<p>For some use cases, it is essential to identify and reference a <a>Web Publication</a> resource—or a
-				location in or a segment of a resource—in the scope or context of the Web Publication to which it
-				belongs. A traditional fragment identifier cannot satisfy this requirement, since only the <abbr
-					title="Uniform Resource Locator">URL</abbr> of the constituent resource containing the location or
-				content fragment of interest is expressed. The Web Annotation Extensions for Web
-				Publications&#160;[[wpub-ann]] document, based on the Web Annotation Model&#160;[[annotation-model]],
-				addresses this issue by providing the means to express both the <abbr title="Uniform Resource Locator"
-					>URL</abbr> of the resource and the <abbr title="Uniform Resource Locator">URL</abbr> of the Web
-				Publication.</p>
-
-			<p>Web Publication Locators also address the problem of referencing into a resource that was not authored
-				with such a need in mind. A fragment identifier can only reference elements with explicit identifiers
-				and locations with explicit anchor points. Web Publication Locators include a variety of selectors that
-				work with the general structures and content of a resource (e.g., text selectors, <abbr
-					title="Cascading Style Sheets">CSS</abbr> selectors).</p>
-
-			<p class="ednote">As Web Publication Locators currently rely on a <abbr title="JavaScript Object Notation"
-					>JSON</abbr>-based expression syntax, it is not yet clear how much of this syntax can be translated
-				to a fragment identifier. This may limit the usefulness beyond expressions that are also <abbr
-					title="JavaScript Object Notation">JSON</abbr>-based (e.g., outside of annotations or
-				bookmarks).</p>
-
-			<div class="ednote">
-				<p>Illustrate with example of an easy to understand Web Publication Locator, such as might be used in
-					annotating a simple Web Publication.</p>
-			</div>
-
-			<p>The semantics of Web Publication Locators are a mapping and extension of the Web Annotation Data
-				Model&#160;[[annotation-model]] and Vocabulary&#160;[[annotation-vocab]] for describing and referencing
-				a segment of a Web resource. As a result, Web Publication Locators provide the expressiveness needed for
-				a broad range of annotation and bookmarking use cases. Additionally, Web Publication Locators provide a
-				way to identify and reference a location within a Web Publication (i.e., as distinct from identifying
-				and referencing a content fragment consisting of a span of characters or bytes). A Web Publication
-				Locator can be used to identify, retrieve and/or reference a fragment of a Web Publication that spans
-				multiple resources.</p>
-
-			<div class="note">
-				<p>In composing a Web Publication Locator, use the <a>canonical identifier</a> of the Web Publication in
-					preference to any alternative addresses. Such use facilitates the collation of Web Publication
-					Locators associated with a particular Web Publication. <abbr title="Uniform Resource Locators"
-						>URLs</abbr> of Web Publication resources appearing in a Web Publication Locator should match
-					the <abbr title="Uniform Resource Locators">URL</abbr> of the resource provided in the manifest.</p>
-			</div>
 		</section>
 		<section id="security">
 			<h2>Security</h2>
