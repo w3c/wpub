@@ -10,7 +10,7 @@ Audiobooks have grown massively in popularity in the last few years despite bein
 
 When previously audiobook users would need several CDs to listen to their audiobook, they can now stream, download, and listen to their chosen content anywhere and time they choose. Audiobooks, like ebooks, are now in their pockets on demand. 
 
-The main difference between ebooks and audiobooks currently is their level of specification. EPUB has existed in one form or another for almost 20 years, audiobooks still does not have a common specification. A mature ebooks industry co-opted audiobooks to make them work within the same contexts, but the lack of specification has made this process arduous for user agents and by extension, users. 
+The main difference between ebooks and audiobooks currently is their level of specification. EPUB has existed in one form or another for almost 20 years, but audiobooks still does not have a common specification. A mature ebooks industry has co-opted audiobooks to make them work within the same contexts, but the lack of specification has made this process arduous for user agents and by extension, users. 
 
 An audiobooks spec would also help with B2B relationships. Today publishers have to deal with multiple non-standards, preparing files and metadata differently for each audiobook distributor. This results in duplicated effort, increases the chances of errors, and makes the supply chain less efficient.
 
@@ -33,6 +33,19 @@ The Audiobooks Task Force has identified the definition of an essential audioboo
 * A format where the user knows how long is remaining in the chapter/section/audiobook
 * A format that can be streamed, offlined, and downloaded
 * A format with clear metadata supported for user libraries (title, author, narrator, cover, duration, etc.)
+
+
+## How It Works
+
+The basic idea is simple: put all the audio files, a cover image, and some metadata in a folder, and zip the folder. 
+
+The tricky part is the metadata. We use the term "manifest" to describe the list of audio files, in order, that make up the book. The manifest also includes bibliographic metadata, and identifies special resources like a cover image or table of contents. To make all that information easily machine-readable, it's written in a format called JSON. We expect that there will be simple tools available to create this format. 
+
+The manifest format comes from the W3C's [Web Publication Manifest](https://w3c.github.io/wpub/) spec, which we hope will be used for many different types of publications.
+
+### Sample Folder
+
+![Folder structure of audiobook](https://github.com/w3c/wpub/tree/master/explainers/audiopub-folder.png)
 
 ## Considered Alternatives
 
