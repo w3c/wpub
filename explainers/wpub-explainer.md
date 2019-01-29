@@ -206,7 +206,7 @@ A publication needs a permanent URL, and it should be possible to craft a URL to
 
 ### Packaging
 
-The working group has not yet formally addressed the issue of packaging, although it is central to many publishing use cases. The working group is writing a packaging spec (package format still to be decided) that is less ambitious than the Web Packaging work but allows for quick deployment. This packaging will be aimed at any module. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort.
+The working group has decided to adopt a lightweight version of the [ISO standardization of Zip](https://www.iso.org/standard/60101.html), with some restrictions. We require a packaging standard that is easy to implement and ready for markey now. This packaging will be aimed at any module. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort for future us.
 
 ## Acknowledgments
 
