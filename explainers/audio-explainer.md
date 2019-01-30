@@ -37,9 +37,9 @@ The Audiobooks Task Force has identified the definition of an essential audioboo
 
 ## How It Works
 
-The basic idea is simple: put all the audio files, a cover image, and some metadata in a folder, and zip the folder. 
+The basic idea is simple: put all the audio files, a cover image, any supplemental material, and some metadata in a folder, and zip the folder. 
 
-The tricky part is the metadata. We use the term "manifest" to describe the list of audio files, in order, that make up the book. The manifest also includes bibliographic metadata, and identifies special resources like a cover image or table of contents. To make all that information easily machine-readable, it's written in a format called JSON. We expect that there will be simple tools available to create this format. 
+The tricky part is the metadata. We use the term "manifest" to describe the list of audio files, in order, that make up the book. The manifest also includes bibliographic metadata, and identifies special resources like a cover image or a table of contents. To make all that information easily machine-readable, it's written in a format called JSON. We expect that there will be simple tools available to create this format. 
 
 The manifest format comes from the W3C's [Web Publication Manifest](https://w3c.github.io/wpub/) spec, which we hope will be used for many different types of publications.
 
