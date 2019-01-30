@@ -10,7 +10,7 @@ Audiobooks have grown massively in popularity in the last few years despite bein
 
 When previously audiobook users would need several CDs to listen to their audiobook, they can now stream, download, and listen to their chosen content anywhere and time they choose. Audiobooks, like ebooks, are now in their pockets on demand. 
 
-The main difference between ebooks and audiobooks currently is their level of specification. EPUB has existed in one form or another for almost 20 years, but audiobooks still does not have a common specification. A mature ebooks industry has co-opted audiobooks to make them work within the same contexts, but the lack of specification has made this process arduous for user agents and by extension, users. 
+The main difference between ebooks and audiobooks currently is their level of specification. EPUB has existed in one form or another for almost 20 years, but audiobooks still do not have a common specification. A mature ebooks industry has co-opted audiobooks to make them work within the same contexts, but the lack of a specification has made this process arduous for user agents and by extension, users. 
 
 An audiobooks spec would also help with B2B relationships. Today publishers have to deal with multiple non-standards, preparing files and metadata differently for each audiobook distributor. This results in duplicated effort, increases the chances of errors, and makes the supply chain less efficient.
 
@@ -45,7 +45,7 @@ The manifest format comes from the W3C's [Web Publication Manifest](https://w3c.
 
 ### Sample Folder
 
-![Folder structure of audiobook](https://github.com/w3c/wpub/tree/master/explainers/audiopub-folder.png)
+![Folder structure of audiobook](audiopub-folder.png)
 
 ## Considered Alternatives
 
