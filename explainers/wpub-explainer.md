@@ -206,7 +206,7 @@ A publication needs a permanent URL, and it should be possible to craft a URL to
 
 ### Packaging
 
-The working group has decided to adopt a lightweight version of the [ISO standardization of Zip](https://www.iso.org/standard/60101.html), along with a well-known location for the manifest. We require a packaging standard that is easy to implement and ready for market now. This packaging will be aimed at any module. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort for future us.
+The working group has decided to adopt a lightweight version of the [ISO standardization of Zip](https://www.iso.org/standard/60101.html), along with a well-known location for the manifest. We require a packaging standard that is easy to implement and ready for market now. This packaging will be aimed at any module. We are carefully monitoring the [web packaging](https://github.com/WICG/webpackage) effort for future use.
 
 ## Acknowledgments
 
