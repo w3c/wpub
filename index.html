@@ -74,6 +74,10 @@
 			<p>The most significant change to this draft is the tightening of its focus on the Web Publication manifest
 				and structure. Removed are the sections on affordances and Web Publication locators. Rendering details
 				are instead described in [[PWP-UCR]].</p>
+
+			<p>The Publishing Working Group is actively producing proofs of concept of Web Publications and the
+				technologies required to process them. For a list of these activities, please refer to the <a
+					href="https://w3c.github.io/wpub/experiments/index.html">experiments page</a>.</p>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -156,7 +160,9 @@
 					>address</a>.</p>
 
 				<dl>
-					<dt><dfn data-lt="identifiers">Identifier</dfn></dt>
+					<dt>
+						<dfn data-lt="identifiers">Identifier</dfn>
+					</dt>
 					<dd>
 						<p>An identifier is metadata that can be used to refer to <a class="externalDFN"
 								href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
@@ -168,21 +174,27 @@
 							identifiers frequently used in publishing.</p>
 					</dd>
 
-					<dt><dfn data-lt="Manifests">Manifest</dfn></dt>
+					<dt>
+						<dfn data-lt="Manifests">Manifest</dfn>
+					</dt>
 					<dd>
 						<p>A manifest represents structured information about a <a>Web Publication</a>, such as
 							informative metadata, a <a href="#resource-list">list of all resources</a>, and a <a>default
 								reading order</a>.</p>
 					</dd>
 
-					<dt><dfn>Non-empty</dfn></dt>
+					<dt>
+						<dfn>Non-empty</dfn>
+					</dt>
 					<dd>
 						<p>For the purposes of this specification, non-empty is used to refer to an element, attribute
 							or property whose text content or value consists of one or more characters after whitespace
 							normalization, where whitespace normalization rules are defined per the host format.</p>
 					</dd>
 
-					<dt><dfn data-lt="URLs">URL</dfn></dt>
+					<dt>
+						<dfn data-lt="URLs">URL</dfn>
+					</dt>
 					<dd>
 						<p>The general term <abbr title="Uniform Resource Locator">URL</abbr> is defined by the URL
 							Standard&#160;[[!url]]. It is used as in other <abbr title="World Wide Web Consortium"
@@ -193,7 +205,9 @@
 								specification</a> for further details.</p>
 					</dd>
 
-					<dt><dfn data-lt="Web Publications|Web Publication's">Web Publication</dfn></dt>
+					<dt>
+						<dfn data-lt="Web Publications|Web Publication's">Web Publication</dfn>
+					</dt>
 					<dd>
 						<p>A Web Publication is a collection of one or more resources, organized together through a
 								<a>manifest</a> into a single logical work with a <a>default reading order</a>. The Web
@@ -243,15 +257,19 @@
 					<p>The manifest is expressed in one of two forms depending on the state of the Web Publication:</p>
 
 					<dl>
-						<dt><dfn data-lt="authored web publication manifest">Authored Manifest</dfn></dt>
+						<dt>
+							<dfn data-lt="authored web publication manifest">Authored Manifest</dfn>
+						</dt>
 						<dd>
 							<p>The Authored Web Publication Manifest, as its name suggests, is the serialization of the
 								manifest that the author provides with the Web Publication (note that the author does
 								not have to be human).</p>
 						</dd>
 
-						<dt><dfn data-lt="canonical manifest|canonical web publication manifest">Canonical
-								Manifest</dfn></dt>
+						<dt>
+							<dfn data-lt="canonical manifest|canonical web publication manifest">Canonical
+								Manifest</dfn>
+						</dt>
 						<dd>
 							<p>The Canonical Web Publication Manifest is a version of the Web Publication
 									<a>Manifest</a> created by user agents when they <a href="#obtaining-manifest"
@@ -463,52 +481,70 @@ dictionary WebPublicationManifest {
 								<tbody>
 									<tr>
 										<td>
-											<code><dfn>url</dfn></code>
+											<code>
+												<dfn>url</dfn>
+											</code>
 										</td>
 										<td>Location of the resource.</td>
 										<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type
 											for additional restrictions.</td>
 										<td>
-											<a href="https://schema.org/url"><code>url</code></a>
+											<a href="https://schema.org/url">
+												<code>url</code>
+											</a>
 										</td>
 										<td>REQUIRED</td>
 									</tr>
 									<tr>
 										<td>
-											<code><dfn>encodingFormat</dfn></code>
+											<code>
+												<dfn>encodingFormat</dfn>
+											</code>
 										</td>
 										<td>Media type of the resource (e.g., <code>text/html</code>).</td>
 										<td>MIME Media Type&#160;[[!rfc2046]].</td>
 										<td>
-											<a href="https://schema.org/encodingFormat"><code>encodingFormat</code></a>
+											<a href="https://schema.org/encodingFormat">
+												<code>encodingFormat</code>
+											</a>
 										</td>
 										<td>OPTIONAL</td>
 									</tr>
 									<tr>
 										<td>
-											<code><dfn>name</dfn></code>
+											<code>
+												<dfn>name</dfn>
+											</code>
 										</td>
 										<td>Name of the item.</td>
 										<td>One or more Text items.</td>
 										<td>
-											<a href="https://schema.org/name"><code>name</code></a>
+											<a href="https://schema.org/name">
+												<code>name</code>
+											</a>
 										</td>
 										<td>OPTIONAL</td>
 									</tr>
 									<tr>
 										<td>
-											<code><dfn>description</dfn></code>
+											<code>
+												<dfn>description</dfn>
+											</code>
 										</td>
 										<td>Description of the item.</td>
 										<td>Text.</td>
 										<td>
-											<a href="https://schema.org/description"><code>description</code></a>
+											<a href="https://schema.org/description">
+												<code>description</code>
+											</a>
 										</td>
 										<td>OPTIONAL</td>
 									</tr>
 									<tr>
 										<td>
-											<code><dfn>rel</dfn></code>
+											<code>
+												<dfn>rel</dfn>
+											</code>
 										</td>
 										<td>The relationship of the resource to the Web Publication.</td>
 										<td>
@@ -668,11 +704,13 @@ partial dictionary WebPublicationManifest {
 					<p>Links to a Web Publication manifest MUST take one or both of the following forms:</p>
 
 					<ul>
-						<li><p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code>
+						<li>
+							<p>An HTTP <code>Link</code> header field&#160;[[!rfc5988]] with its <code>rel</code>
 								parameter set to the value "<code>publication</code>".</p>
 							<pre class="example">Link: &lt;https://example.com/webpub/manifest>; rel=publication</pre>
 						</li>
-						<li><p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
+						<li>
+							<p>A <code>link</code> element&#160;[[!html]] with its <code>rel</code> attribute set to the
 								value "<code>publication</code>".</p>
 							<pre class="example">&lt;link href="https://example.com/webpub/manifest" rel="publication"/></pre>
 						</li>
@@ -838,7 +876,9 @@ partial dictionary WebPublicationManifest {
 					followed:</p>
 
 				<dl>
-					<dt><a href="#descriptive-properties">descriptive properties</a></dt>
+					<dt>
+						<a href="#descriptive-properties">descriptive properties</a>
+					</dt>
 					<dd>
 						<p>Descriptive properties describe aspects of a Web Publication, such as its <a href="#wp-title"
 								>title</a>, <a href="#creators">creator</a>, and <a href="#language-and-dir"
@@ -848,20 +888,26 @@ partial dictionary WebPublicationManifest {
 							and inherit their syntax and semantics. (The following property categories typically do not
 							have Schema.org equivalents, so are defined specifically for Web Publications.)</p>
 					</dd>
-					<dt><a href="#resource-categorization-properties">resource categorization</a></dt>
+					<dt>
+						<a href="#resource-categorization-properties">resource categorization</a>
+					</dt>
 					<dd>
 						<p>Resource categorization properties describe or identify common sets of resources, such as the
 								<a href="#resource-list">resource list</a> and <a href="#default-reading-order">default
 								reading order</a>. These properties refer to one or more resources, such as HTML
 							documents, images, script files, and separate metadata files.</p>
 					</dd>
-					<dt><a href="#informative-properties">informative properties</a></dt>
+					<dt>
+						<a href="#informative-properties">informative properties</a>
+					</dt>
 					<dd>
 						<p>Informative properties identify resources that contain additional information about the Web
 							Publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
 								href="#accessibility-report">accessibility report</a>.</p>
 					</dd>
-					<dt><a href="#structural-properties">structural properties</a></dt>
+					<dt>
+						<a href="#structural-properties">structural properties</a>
+					</dt>
 					<dd>
 						<p>Structural properties identify key meta structures of the Web Publication, such as the <a
 								href="#cover">cover image</a>, <a href="#table-of-contents">table of contents</a>, and
@@ -897,29 +943,65 @@ partial dictionary WebPublicationManifest {
 					<dt>REQUIRED:</dt>
 					<dd>
 						<ul>
-							<li><a href="#address">address</a></li>
-							<li><a href="#default-reading-order">default reading order</a></li>
-							<li><a href="#wp-title">title</a></li>
+							<li>
+								<a href="#address">address</a>
+							</li>
+							<li>
+								<a href="#default-reading-order">default reading order</a>
+							</li>
+							<li>
+								<a href="#wp-title">title</a>
+							</li>
 						</ul>
 					</dd>
 					<dt>RECOMMENDED:</dt>
 					<dd>
 						<ul>
-							<li><a href="#accessibility">accessibility</a></li>
-							<li><a href="#accessibility-report">accessibility report</a></li>
-							<li><a href="#language-and-dir">base direction</a></li>
-							<li><a href="#canonical-identifier">canonical identifier</a></li>
-							<li><a href="#cover">cover</a></li>
-							<li><a href="#creators">creators</a></li>
-							<li><a href="#language-and-dir">language and base direction</a></li>
-							<li><a href="#links">links</a></li>
-							<li><a href="#last-modification-date">last modification date</a></li>
-							<li><a href="#publication-date">publication date</a></li>
-							<li><a href="#privacy-policy">privacy policy</a></li>
-							<li><a href="#reading-progression-direction">reading progression direction</a></li>
-							<li><a href="#resource-list">resource list</a></li>
-							<li><a href="#table-of-contents">table of contents</a></li>
-							<li><a href="#page-list">page list</a></li>
+							<li>
+								<a href="#accessibility">accessibility</a>
+							</li>
+							<li>
+								<a href="#accessibility-report">accessibility report</a>
+							</li>
+							<li>
+								<a href="#language-and-dir">base direction</a>
+							</li>
+							<li>
+								<a href="#canonical-identifier">canonical identifier</a>
+							</li>
+							<li>
+								<a href="#cover">cover</a>
+							</li>
+							<li>
+								<a href="#creators">creators</a>
+							</li>
+							<li>
+								<a href="#language-and-dir">language and base direction</a>
+							</li>
+							<li>
+								<a href="#links">links</a>
+							</li>
+							<li>
+								<a href="#last-modification-date">last modification date</a>
+							</li>
+							<li>
+								<a href="#publication-date">publication date</a>
+							</li>
+							<li>
+								<a href="#privacy-policy">privacy policy</a>
+							</li>
+							<li>
+								<a href="#reading-progression-direction">reading progression direction</a>
+							</li>
+							<li>
+								<a href="#resource-list">resource list</a>
+							</li>
+							<li>
+								<a href="#table-of-contents">table of contents</a>
+							</li>
+							<li>
+								<a href="#page-list">page list</a>
+							</li>
 						</ul>
 					</dd>
 				</dl>
@@ -945,144 +1027,284 @@ partial dictionary WebPublicationManifest {
 					</thead>
 					<tbody>
 						<tr>
-							<td><code>accessMode</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessMode</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessModeSufficient</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessModeSufficient</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessibilityAPI</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessibilityAPI</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessibilityControl</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessibilityControl</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessibilityFeature</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessibilityFeature</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessibilityHazard</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessibilityHazard</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>accessibilitySummary</code></td>
-							<td><a href="#accessibility">Accessibility</a></td>
+							<td>
+								<code>accessibilitySummary</code>
+							</td>
+							<td>
+								<a href="#accessibility">Accessibility</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>artist</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>artist</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>author</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>author</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>contents</code></td>
-							<td><a href="#table-of-contents">Table of Contents</a></td>
+							<td>
+								<code>contents</code>
+							</td>
+							<td>
+								<a href="#table-of-contents">Table of Contents</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>contributor</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>contributor</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>creator</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>creator</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>dateModified</code></td>
-							<td><a href="#last-modification-date">Last Modification Date</a></td>
+							<td>
+								<code>dateModified</code>
+							</td>
+							<td>
+								<a href="#last-modification-date">Last Modification Date</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>datePublished</code></td>
-							<td><a href="#publication-date">Publication Date</a></td>
+							<td>
+								<code>datePublished</code>
+							</td>
+							<td>
+								<a href="#publication-date">Publication Date</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>editor</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>editor</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>https://www.w3.org/ns/wp#accessibility-report</code></td>
-							<td><a href="#accessibility-report">Accessibility Report</a></td>
+							<td>
+								<code>https://www.w3.org/ns/wp#accessibility-report</code>
+							</td>
+							<td>
+								<a href="#accessibility-report">Accessibility Report</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>https://www.w3.org/ns/wp#cover</code></td>
-							<td><a href="#cover">Cover</a></td>
+							<td>
+								<code>https://www.w3.org/ns/wp#cover</code>
+							</td>
+							<td>
+								<a href="#cover">Cover</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>https://www.w3.org/ns/wp#pagelist</code></td>
-							<td><a href="#page-list">Pagelist</a></td>
+							<td>
+								<code>https://www.w3.org/ns/wp#pagelist</code>
+							</td>
+							<td>
+								<a href="#page-list">Pagelist</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>id</code></td>
-							<td><a href="#canonical-identifier">Canonical Identifier</a></td>
+							<td>
+								<code>id</code>
+							</td>
+							<td>
+								<a href="#canonical-identifier">Canonical Identifier</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>illustrator</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>illustrator</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>inDirection</code></td>
-							<td><a href="#language-and-dir">Direction</a></td>
+							<td>
+								<code>inDirection</code>
+							</td>
+							<td>
+								<a href="#language-and-dir">Direction</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>inker</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>inker</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>inLanguage</code></td>
-							<td><a href="#language-and-dir">Language</a></td>
+							<td>
+								<code>inLanguage</code>
+							</td>
+							<td>
+								<a href="#language-and-dir">Language</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>letterer</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>letterer</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>link</code></td>
-							<td><a href="#links">Links</a></td>
+							<td>
+								<code>link</code>
+							</td>
+							<td>
+								<a href="#links">Links</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>name</code></td>
-							<td><a href="#wp-title">Title</a></td>
+							<td>
+								<code>name</code>
+							</td>
+							<td>
+								<a href="#wp-title">Title</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>penciler</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>penciler</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>privacy-policy</code></td>
-							<td><a href="#privacy-policy">Privacy Policy</a></td>
+							<td>
+								<code>privacy-policy</code>
+							</td>
+							<td>
+								<a href="#privacy-policy">Privacy Policy</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>publisher</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>publisher</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>readBy</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>readBy</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>readingOrder</code></td>
-							<td><a href="#default-reading-order">Default Reading Order</a></td>
+							<td>
+								<code>readingOrder</code>
+							</td>
+							<td>
+								<a href="#default-reading-order">Default Reading Order</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>readingProgression</code></td>
-							<td><a href="#reading-progression-direction">Reading Progression Direction</a></td>
+							<td>
+								<code>readingProgression</code>
+							</td>
+							<td>
+								<a href="#reading-progression-direction">Reading Progression Direction</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>resources</code></td>
-							<td><a href="#resource-list">Resource List</a></td>
+							<td>
+								<code>resources</code>
+							</td>
+							<td>
+								<a href="#resource-list">Resource List</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>translator</code></td>
-							<td><a href="#creators">Creators</a></td>
+							<td>
+								<code>translator</code>
+							</td>
+							<td>
+								<a href="#creators">Creators</a>
+							</td>
 						</tr>
 						<tr>
-							<td><code>url</code></td>
-							<td><a href="#address">Address</a></td>
+							<td>
+								<code>url</code>
+							</td>
+							<td>
+								<a href="#address">Address</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -1114,7 +1336,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessMode</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessMode</dfn>
+									</code>
 								</td>
 								<td> The human sensory perceptual system or cognitive faculty through which a person may
 									process or perceive information. </td>
@@ -1127,7 +1351,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessModeSufficient</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessModeSufficient</dfn>
+									</code>
 								</td>
 								<td> A list of single or combined accessModes that are sufficient to understand all the
 									intellectual content of a resource. </td>
@@ -1141,7 +1367,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityAPI</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessibilityAPI</dfn>
+									</code>
 								</td>
 								<td>Indicates that the resource is compatible with the referenced accessibility APIs. </td>
 								<td>One or more text(s).<a
@@ -1153,7 +1381,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityControl</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessibilityControl</dfn>
+									</code>
 								</td>
 								<td>Identifies input methods that are sufficient to fully control the described
 									resource. </td>
@@ -1167,7 +1397,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityFeature</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessibilityFeature</dfn>
+									</code>
 								</td>
 								<td> Content features of the resource, such as accessible media, alternatives and
 									supported enhancements for accessibility. </td>
@@ -1181,7 +1413,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilityHazard</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessibilityHazard</dfn>
+									</code>
 								</td>
 								<td> A characteristic of the described resource that is physiologically dangerous to
 									some users. </td>
@@ -1195,7 +1429,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>accessibilitySummary</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>accessibilitySummary</dfn>
+									</code>
 								</td>
 								<td>A human-readable summary of specific accessibility features or deficiencies,
 									consistent with the other accessibility metadata but expressing subtleties such as
@@ -1277,7 +1513,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>url</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>url</dfn>
+									</code>
 								</td>
 								<td>URL of the primary entry page.</td>
 								<td>A URL [[!url]].</td>
@@ -1345,7 +1583,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>id</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>id</dfn>
+									</code>
 								</td>
 								<td>Preferred version of the Web Publication.</td>
 								<td>A URL [[!url]].</td>
@@ -1424,7 +1664,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>artist</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>artist</dfn>
+									</code>
 								</td>
 								<td>The primary artist for the publication, in a medium other than pencils or digital
 									line art.</td>
@@ -1435,7 +1677,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>author</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>author</dfn>
+									</code>
 								</td>
 								<td>The author of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
@@ -1446,7 +1690,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>colorist</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>colorist</dfn>
+									</code>
 								</td>
 								<td>The individual who adds color to inked drawings.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
@@ -1456,7 +1702,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>contributor</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>contributor</dfn>
+									</code>
 								</td>
 								<td>Contributor whose role does not fit to one of the other roles in this table.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
@@ -1467,7 +1715,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>creator</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>creator</dfn>
+									</code>
 								</td>
 								<td>The creator of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
@@ -1478,7 +1728,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>editor</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>editor</dfn>
+									</code>
 								</td>
 								<td>The editor of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
@@ -1488,7 +1740,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>illustrator</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>illustrator</dfn>
+									</code>
 								</td>
 								<td>The illustrator of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
@@ -1498,7 +1752,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>inker</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>inker</dfn>
+									</code>
 								</td>
 								<td>The individual who traces over the pencil drawings in ink.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
@@ -1508,7 +1764,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>letterer</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>letterer</dfn>
+									</code>
 								</td>
 								<td>The individual who adds lettering, including speech balloons and sound effects, to
 									artwork.</td>
@@ -1519,7 +1777,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>penciler</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>penciler</dfn>
+									</code>
 								</td>
 								<td>The individual who draws the primary narrative artwork.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>.</td>
@@ -1529,7 +1789,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>publisher</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>publisher</dfn>
+									</code>
 								</td>
 								<td>The publisher of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
@@ -1540,7 +1802,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>readBy</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>readBy</dfn>
+									</code>
 								</td>
 								<td>A person who reads (performs) the publication (for audiobooks).</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a>. </td>
@@ -1550,7 +1814,9 @@ partial dictionary WebPublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>translator</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>translator</dfn>
+									</code>
 								</td>
 								<td>The translator of the publication.</td>
 								<td>One or more <a href="https://schema.org/Person"><code>Person</code></a> and/or <a
@@ -1741,7 +2007,9 @@ dictionary CreatorInfo {
 							<tbody>
 								<tr>
 									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>inLanguage</dfn></code>
+										<code data-dfn-for="WebPublicationManifest">
+											<dfn>inLanguage</dfn>
+										</code>
 									</td>
 									<td>Default <a>language</a> for the <a>Web Publication</a> as well as the textual
 										manifest values</td>
@@ -1754,7 +2022,9 @@ dictionary CreatorInfo {
 							<tbody>
 								<tr>
 									<td>
-										<code data-dfn-for="WebPublicationManifest"><dfn>inDirection</dfn></code>
+										<code data-dfn-for="WebPublicationManifest">
+											<dfn>inDirection</dfn>
+										</code>
 									</td>
 									<td>Default <a>base direction</a> for the <a>Web Publication</a> as well as the
 										textual manifest values</td>
@@ -1908,7 +2178,9 @@ dictionary LocalizableString {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>dateModified</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>dateModified</dfn>
+									</code>
 								</td>
 								<td>Last modification date of the publication.</td>
 								<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
@@ -1966,7 +2238,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>datePublished</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>datePublished</dfn>
+									</code>
 								</td>
 								<td>Creation date of the publication.</td>
 								<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
@@ -2021,7 +2295,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>readingProgression</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>readingProgression</dfn>
+									</code>
 								</td>
 								<td>Reading direction from one resource to the other.</td>
 								<td><code>ltr</code> or <code>rtl</code></td>
@@ -2088,7 +2364,9 @@ enum ProgressionDirection {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>name</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>name</dfn>
+									</code>
 								</td>
 								<td>Human-readable title of the Web Publication.</td>
 								<td>One or more text items for the title.</td>
@@ -2178,7 +2456,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>readingOrder</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>readingOrder</dfn>
+									</code>
 								</td>
 								<td></td>
 								<td>
@@ -2272,7 +2552,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>resources</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>resources</dfn>
+									</code>
 								</td>
 								<td></td>
 								<td>
@@ -2358,7 +2640,9 @@ partial dictionary WebPublicationManifest {
 						<tbody>
 							<tr>
 								<td>
-									<code data-dfn-for="WebPublicationManifest"><dfn>links</dfn></code>
+									<code data-dfn-for="WebPublicationManifest">
+										<dfn>links</dfn>
+									</code>
 								</td>
 								<td></td>
 								<td>
@@ -2907,9 +3191,7 @@ partial dictionary WebPublicationManifest {
 							<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
 								tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
 									<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
-
 							<li> If <var>embedded manifest script</var> is <code>null</code>, terminate this algorithm. </li>
-
 							<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
 									content</a> of <var>embedded manifest script</var>
 							</li>
@@ -2933,11 +3215,9 @@ partial dictionary WebPublicationManifest {
 							<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
 									URL</var>, and whose context is the same as the browsing context of the
 									<code>Document</code>. </li>
-
 							<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
 									'<code>use-credentials</code>', then set <var>request</var>'s credentials to
 									'<code>include</code>'. </li>
-
 							<li> Await the result of performing a fetch with <var>request</var>, letting
 									<var>response</var> be the result. </li>
 							<li> If <var>response</var> is a network error, terminate this algorithm. </li>
@@ -3690,9 +3970,11 @@ partial dictionary WebPublicationManifest {
 							and exits it.</p>
 						<ol>
 							<li>
-								<p><strong>When entering a <a
+								<p>
+									<strong>When entering a <a
 											href="https://www.w3.org/TR/html/dom.html#heading-content-2">heading
-											content</a> element:</strong></p>
+											content</a> element:</strong>
+								</p>
 								<p>Run these steps:</p>
 								<ol>
 									<li>If the stack is empty, and the <code>name</code> property of <em>toc</em> is an
@@ -3736,7 +4018,9 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When entering a <a>list element</a>:</strong></p>
+								<p>
+									<strong>When entering a <a>list element</a>:</strong>
+								</p>
 								<p>Run these steps:</p>
 								<ol>
 									<li>
@@ -3779,7 +4063,9 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When exiting a <a>list element</a>:</strong></p>
+								<p>
+									<strong>When exiting a <a>list element</a>:</strong>
+								</p>
 								<p>If the stack is not empty, pop the top object off the stack and set <em>current toc
 										branch</em> to it.</p>
 								<details>
@@ -3790,9 +4076,11 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When entering a <a
+								<p>
+									<strong>When entering a <a
 											href="https://www.w3.org/TR/html/grouping-content.html#the-li-element">list
-											item</a> element:</strong></p>
+											item</a> element:</strong>
+								</p>
 								<p>Run these steps:</p>
 								<ol>
 									<li>Set <em>current toc branch</em> to a new object.</li>
@@ -3825,9 +4113,11 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When exiting a <a
+								<p>
+									<strong>When exiting a <a
 											href="https://www.w3.org/TR/html/grouping-content.html#the-li-element">list
-											item</a> element:</strong></p>
+											item</a> element:</strong>
+								</p>
 								<p>Run these steps:</p>
 								<ol>
 									<li>
@@ -3910,10 +4200,12 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When entering an <a
+								<p>
+									<strong>When entering an <a
 											href="https://www.w3.org/TR/html/textlevel-semantics.html#the-a-element"
 											>anchor</a> element and <em>current toc branch</em> is not
-										<code>null</code>:</strong></p>
+										<code>null</code>:</strong>
+								</p>
 								<p>Run these steps:</p>
 								<ol>
 									<li>
@@ -3975,13 +4267,15 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>When entering a <a
+								<p>
+									<strong>When entering a <a
 											href="https://www.w3.org/TR/html/dom.html#sectioning-content-2">sectioning
 											content</a> element, a <a
 											href="https://www.w3.org/TR/html/sections.html#sectioning-roots">sectioning
 											root</a> element, or an element with a <a
 											href="https://www.w3.org/TR/html/editing.html#element-attrdef-global-hidden"
-											>hidden</a> attribute:</strong></p>
+											>hidden</a> attribute:</strong>
+								</p>
 								<p>Exit the element and continue processing with the next element.</p>
 								<details>
 									<summary>Explanation</summary>
@@ -3994,7 +4288,9 @@ partial dictionary WebPublicationManifest {
 							</li>
 
 							<li>
-								<p><strong>Otherwise: do nothing.</strong></p>
+								<p>
+									<strong>Otherwise: do nothing.</strong>
+								</p>
 								<details>
 									<summary>Explanation</summary>
 									<p>For all other elements, this steps allows their descendant elements to continue
@@ -4064,20 +4360,27 @@ partial dictionary WebPublicationManifest {
 					</tr>
 
 					<tr>
-						<td><code><bdo dir="ltr">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdo></code></td>
+						<td>
+							<code>
+								<bdo dir="ltr">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdo>
+							</code>
+						</td>
 						<td>rtl</td>
 						<td>First strong directional character</td>
-						<td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi></td>
+						<td style="width: 50%">
+							<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
+								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi>
+						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<code><bdo dir="ltr">The document is titled,
+							<code>
+								<bdo dir="ltr">The document is titled,
 									"&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;,
-								W3C&amp;#x2069;"</bdo></code>
+									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C&amp;#x2069;"</bdo>
+							</code>
 						</td>
 						<td>ltr</td>
 						<td>First strong directional character</td>
@@ -4087,20 +4390,31 @@ partial dictionary WebPublicationManifest {
 
 
 					<tr>
-						<td><code><bdo dir="ltr">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-									&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
+						<td>
+							<code>
+								<bdo dir="ltr">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
+									&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo>
+							</code>
+						</td>
 						<td>rtl</td>
 						<td>Bidi Control Character</td>
-						<td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-								&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
+						<td>
+							<code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
+								&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code>
+						</td>
 					</tr>
 
 					<tr>
-						<td><code><bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in
-									Persian</bdo></code></td>
+						<td>
+							<code>
+								<bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo>
+							</code>
+						</td>
 						<td>ltr</td>
 						<td>Bidi Control Character</td>
-						<td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
+						<td>
+							<code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code>
+						</td>
 					</tr>
 				</tbody>
 			</table>
