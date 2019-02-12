@@ -1,0 +1,17 @@
+# ECHIDNA configuration
+index.html
+common/css/common.css
+images/orcid.gif
+images/WP-diagram.svg
+images/WP-diagram.png
+images/canonicalize_manifest.png
+images/canonicalize_manifest.svg
+images/clean_up_data.png
+images/clean_up_data.svg
+images/convert_manifest.png
+images/convert_manifest.svg
+images/find_manifest.png
+images/find_manifest.svg
+images/manifest_lifecycle.png
+images/manifest_lifecycle.svg
+
