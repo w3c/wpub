@@ -1,4 +1,6 @@
 
+SNAPSHOT = ""
+
 if [ "$TRAVIS_BRANCH" != "publish_webpub"
       -a "$TRAVIS_BRANCH" != "publish_audiobook"
       -a "$TRAVIS_BRANCH" != "publish_pubmanifest" ]; then
@@ -8,15 +10,15 @@ fi
 
 
 if [ "$TRAVIS_BRANCH" = "publish_webpub" ]; then
-   URL="https://rawgit.com/w3c/wpub/webpub/snapshot/ECHIDNA"
+   SNAPSHOT=$URL+"webpub/snapshot/ECHIDNA"
 fi
 
 if [ "$TRAVIS_BRANCH" = "publish_audiobook" ]; then
-   URL="https://rawgit.com/w3c/wpub/audiobook/snapshot/ECHIDNA"
+   SNAPSHOT=$URL+"audiobook/snapshot/ECHIDNA"
 fi
 
 if [ "$TRAVIS_BRANCH" = "publish_pubmanifest" ]; then
-   URL="https://rawgit.com/w3c/wpub/pubmanifest/snapshot/ECHIDNA"
+   SNAPSHOT=$URL+"pubmanifest/snapshot/ECHIDNA"
 fi
 
-test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
+test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$SNAPSHOT" --data "decision=$DECISION" --data "token=$TOKEN"
