@@ -10,15 +10,15 @@ fi
 
 
 if [ "$TRAVIS_BRANCH" = "publish_webpub" ]; then
-   SNAPSHOT=$URL+"webpub/snapshot/ECHIDNA"
+   SNAPSHOT="webpub/snapshot/ECHIDNA"
 fi
 
 if [ "$TRAVIS_BRANCH" = "publish_audiobook" ]; then
-   SNAPSHOT=$URL+"audiobook/snapshot/ECHIDNA"
+   SNAPSHOT="audiobook/snapshot/ECHIDNA"
 fi
 
 if [ "$TRAVIS_BRANCH" = "publish_pubmanifest" ]; then
-   SNAPSHOT=$URL+"pubmanifest/snapshot/ECHIDNA"
+   SNAPSHOT="pubmanifest/snapshot/ECHIDNA"
 fi
 
-test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$SNAPSHOT" --data "decision=$DECISION" --data "token=$TOKEN"
+test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL$SNAPSHOT" --data "decision=$DECISION" --data "token=$TOKEN"
