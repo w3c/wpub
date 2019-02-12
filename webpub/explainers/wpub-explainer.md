@@ -99,7 +99,7 @@ Note how we used `rel=contents` to identify that a particular resource is an HTM
 
 ## Modularity
 
-Our goal is a model that is very slim, focused almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](./audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
+Our goal is a model that is very slim, focused almost exclusively on the metadata aspects of a publication. All information about affordances and behaviors will move to the [WP Use Cases and Requirements Documents](https://w3c.github.io/dpub-pwp-ucr/). Detailed information about specific types of publications will go into stand-alone modules as business needs arise. The first module will be audiobooks (see the [separate explainer](../audiobook/explainers/audio-explainer.md)). Future modules might include comics/manga/bandes dessinées and scholarly publishing. 
 
 
 ## Design choices
