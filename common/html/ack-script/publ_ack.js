@@ -25,14 +25,21 @@
 
 const apicore    = "https://api.w3.org";
 const api_key    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-const local_ack  = "http://localhost:8001/LocalData/github/wpub/common/html/ack-script/separate_acks.json";
-const gh_ack     = "https://github.com/w3c/wpub/tree/master/common/html/ack-script/separate_acks.json"
+const acks = {
+    wpub : {
+        local_ack  : "http://localhost:8001/LocalData/github/wpub/common/html/ack-script/separate_acks.json",
+        gh_ack     : "https://github.com/w3c/wpub/tree/master/common/html/ack-script/separate_acks.json"
+    },
+    pwpub : {
+        local_ack  : "http://localhost:8001/LocalData/github/pwpub/common/html/separate_acks.json",
+        gh_ack     : "https://github.com/w3c/pwpub/tree/master/common/html/separate_acks.json"
+    }
+}
 const localhost  = true
 
 const publ_wg    = "100074";
 const fetch      = require('node-fetch');
 const _          = require('underscore');
-
 
 //====================================== HTML snippets ==================================
 const html_start = `<section id="ack" class="appendix informative">
@@ -79,8 +86,9 @@ const html_end = `
  *
  */
 async function getAck(local = localhost) {
-    let finalUrl = (local) ? local_ack : gh_ack;
-    let response =  await fetch(finalUrl);
+    const key = (process.argv.length > 2 && process.argv[2] === 'pwpub') ? 'pwpub' : 'wpub';
+    const finalUrl = (local) ? acks[key].local_ack : acks[key].gh_ack;    
+    const response =  await fetch(finalUrl);
     if( response.ok ) {
         return response.json();
     } else {
@@ -101,7 +109,7 @@ async function getAck(local = localhost) {
  *
  */
 async function getData(url, key) {
-    let response =  await fetch(`${url}apikey=${key}`);
+    const response =  await fetch(`${url}apikey=${key}`);
     if( response.ok ) {
         return response.json();
     } else {
@@ -143,23 +151,20 @@ async function getUserData(user_url, key) {
  * @param {boolean} former: whether this should include the former members, too
  */
 async function getUsers(groupid, key, former) {
-    let user_infos;
-
     // Set up the URL-s for the first and the second pages to be retrieved.
-    let api_url1 = (former)
-                        ? `${apicore}/groups/${groupid}/users?former=true&`
-                        : `${apicore}/groups/${groupid}/users?`;
-    let api_url2  = `${api_url1}page=2&`;
+    const api_url1 = (former) ? `${apicore}/groups/${groupid}/users?former=true&` : `${apicore}/groups/${groupid}/users?`;
+    const api_url2 = `${api_url1}page=2&`;
 
     // Get the data. To speed up, spawn to requests and run them in parallel
-    let [user_infos1, user_infos2] = await Promise.all([getData(api_url1, key), getData(api_url2, key)])
+    const [user_infos1, user_infos2] = await Promise.all([getData(api_url1, key), getData(api_url2, key)])
 
     // Extract the URL-s identifying each user. The result is an array of URL-s
     let user_urls = user_infos1._links.users.map((info) => info.href);
-    user_urls     = user_urls.concat(user_infos2._links.users.map((info) => info.href));
+    if (user_infos2._links.users) {
+        user_urls = user_urls.concat(user_infos2._links.users.map((info) => info.href));
+    }
     return user_urls;
 }
-
 
 /**
  * Clean up the member lists. This means:
@@ -257,16 +262,16 @@ async function main(groupid, key) {
 
     try {
         // Get the list of special acknowledgments' persons
-        let separate_acks = await getAck();
+        const separate_acks = await getAck();
 
         // Get the list of current and all WG members' URLs. Let that be done in parallel for former included and not included...
-        let [current_user_urls, all_user_urls] = await Promise.all([
+        const [current_user_urls, all_user_urls] = await Promise.all([
             getUsers(groupid, key, former = false),
             getUsers(groupid, key, former = true)
         ]);
 
         // Get hold of all the names and affiliations.
-        let [current_user_data, all_user_data] = await Promise.all([
+        const [current_user_data, all_user_data] = await Promise.all([
                 await Promise.all(current_user_urls.map((user) => getUserData(user, key))),
                 await Promise.all(all_user_urls.map((user) => getUserData(user, key)))
             ]);
@@ -276,10 +281,9 @@ async function main(groupid, key) {
         console.log(html_start + generate_list(final_separate_acks) + html_middle + generate_list(final_current) + html_end)
 
     } catch(err) {
-        console.error(`Something is wrong... ${err}`)
+        console.error(`Something is wrong... ${err.toString()}`)
     }
 }
-
 
 // Run with the groupid of the Publishing WG
 main(publ_wg, api_key);
