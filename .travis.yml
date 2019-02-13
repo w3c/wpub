@@ -4,7 +4,6 @@ branches:
   only:
     - publish_webpub
     - publish_audiobook
-    - publish_pubmanifest
  
 env:
   global:
