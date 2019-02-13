@@ -3,11 +3,11 @@
 
 # Web Publications
 
-This is the repository of the W3C’s specification on Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/). The editors’ draft of the specification can also be [read directly](https://w3c.github.io/wpub/).
+This is the repository of the W3C’s specification on Web Publications, developed by the [Publishing Working Group](https://www.w3.org/publishing/groups/publ-wg/). The editors’ draft of the specification can also be [read directly](https://w3c.github.io/wpub/webpub/).
 
 ## Experiments
 
-The Working Group is actively developing various proofs of concept of Web Publications and tools that demonstrate how they can be processed. A [list of these experiments](https://w3c.github.io/wpub/experiments/index.html) is maintained in the `experiments` directory. See the next section for more information on how to contribute.
+The Working Group is actively developing various proofs of concept of Web Publications and tools that demonstrate how they can be processed. A [list of these experiments](https://w3c.github.io/wpub/webpub/experiments/index.html) is maintained in the `experiments` directory. See the next section for more information on how to contribute.
 
 ## Contributing to the Repository
 

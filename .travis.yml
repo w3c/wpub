@@ -2,16 +2,14 @@ language: node_js
  
 branches:
   only:
-    - publish_wd
+    - publish_webpub
+    - publish_audiobook
  
 env:
   global:
-    - URL="https://rawgit.com/w3c/wpub/publish_wd/snapshot/ECHIDNA"
+    - URL="https://cdn.staticaly.com/gh/w3c/wpub/"
     - DECISION="https://www.w3.org/publishing/groups/publ-wg/Meetings/Minutes/2017/2017-12-18-minutes#resolution2"
     - secure: "Xc7z+t4gii6AmuNa8B9XotyJUXrWPTKJqq79OwyMdAzQFV44bqXT193rn5kApMdbO8mi/I4XhogXy/8s0GHkRDqAl+RX6KNT6+k3GFxSpkX4DKJE7Y5YchzP6LWy+VpAeFAUCtpFMsowh7+VLoqlXB80mgG+IQze0mNM3pXy2rhGx6BrjEdAhZ8EoeaGu8mgW+aZkZjEXZWvRpyJNfAR7CIF+nZekZQKQkzZGOSDwcHPfO6287SV+C30xhmqVwpF9kuGbDR3I37WJu9fkTRwDRN/6xx8MpKNiRU4SXV8mN3gSkxcKwh02Ix4f9xX/lX3cIql3TWa/XeKCGlALKc+ZWbKi0Qi9ofd5HALQ31pbJdKX4fYx3sVcgBPQlShAG32unWtSuz9qUaUmoqOnLmy8U+RKw2k+fxYHq6DvlCBRsD5FSCUXp2YCpc296EVkvYkONgahRD0WSnyuZj34UK0qjugeGy6b0YikT6N+FUI2WSBVyWLS6PLEOPp92HzJWJ0gL4FXIBFLdbqJhnYR9p/c4IKoe7n0+aBAQG/QH/SnTRo/Z7rjWCC81lvQaTjweAzRBFSUK6rLLm3JFAdEOI+oZIJGmFX9Z4fU7KAE2jAiA+lpEslCjfe/p2FjzRBrTTrvzhhzsmP3q7nrrFs2+zsbUMuowqbG+0uEAJ8w81EDGI="
  
 script:
-  - echo "ok"
- 
-after_success:
-  - test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
+  - bash ./deploy.sh
