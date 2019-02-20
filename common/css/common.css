@@ -19,8 +19,8 @@ ul.flat {
 	padding-left: 0;
 }
 
-:not(div.head) dt,
-:not(div.head) dd {
+:not(div) > dl > dt,
+:not(div) > dl > dd {
 	padding-top: 0.5em;
 }
 
