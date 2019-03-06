@@ -995,11 +995,11 @@ dictionary LinkedResource {
 						<p>The base URL for relative URLs is determined as follows:</p>
 
 						<ul>
-							<li>In the case of an <a href="#manifest-embedding">embedded manifest</a>, the base URL is
-								the <a data-cite="!html#the-base-element">document base URL</a>&#160;[[!html]] of the
+							<li>In the case of an <a href="#wp-manifest-embedding">embedded manifest</a>, the base URL
+								is the <a data-cite="!html#the-base-element">document base URL</a>&#160;[[!html]] of the
 									<a>primary entry page</a> of the publication;</li>
-							<li>In the case of a <a href="#manifest-linking">linked manifest</a>, the base URL is URL of
-								the manifest resource.</li>
+							<li>In the case of a <a href="#wp-manifest-linking">linked manifest</a>, the base URL is URL
+								of the manifest resource.</li>
 						</ul>
 
 						<p>By consequence, relative URLs in embedded manifests are resolved against the URL of the
@@ -1622,12 +1622,12 @@ dictionary CreatorInfo {
 							<p>The global language information MAY be overridden by <a
 									href="#manifest-specific-language-and-dir">individual values</a>.</p>
 
-							<p>If the manifest is <a href="#manifest-embedding">embedded</a> in the primary entry page
-								via a <code>script</code> element, and the manifest does not set the global language
-								and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the
-									<code>lang</code> and the <code>dir</code> attributes of the <code>script</code>
-								element are used as the global <a>language</a> and <a>base direction</a>, respectively
-								(see the details on handling the <a
+							<p>If the manifest is <a href="#wp-manifest-embedding">embedded</a> in the primary entry
+								page via a <code>script</code> element, and the manifest does not set the global
+								language and/or the base direction (see <a href="#manifest-default-language-and-dir"
+								></a>), the <code>lang</code> and the <code>dir</code> attributes of the
+									<code>script</code> element are used as the global <a>language</a> and <a>base
+									direction</a>, respectively (see the details on handling the <a
 									href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
 										><code>lang</code></a> and <a
 									href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
@@ -2072,10 +2072,9 @@ partial dictionary PublicationManifest {
 					<section id="resource-list">
 						<h5>Resource List</h5>
 
-						<p>The <dfn>resource list</dfn> enumerates any additional <a href="#pub-resources">resources</a>
-							used in the processing and rendering of a <a>digital publication</a> that are not already
-							listed in the <a>default reading order</a>. It is expressed using the <code>resources</code>
-							property.</p>
+						<p>The <dfn>resource list</dfn> enumerates any additional resources used in the processing and
+							rendering of a <a>digital publication</a> that are not already listed in the <a>default
+								reading order</a>. It is expressed using the <code>resources</code> property.</p>
 
 						<table class="zebra">
 							<thead>
@@ -2159,10 +2158,9 @@ partial dictionary PublicationManifest {
 					<section id="links">
 						<h5>Links</h5>
 
-						<p>The <dfn><code>links</code></dfn> property provides a list of <a href="#pub-resources"
-								>resources</a> that are <em>not</em> required for the processing and rendering of a
-								<a>digital publication</a> (i.e., the content of the publication remains unaffected even
-							if these resources are not available).</p>
+						<p>The <dfn><code>links</code></dfn> property provides a list of resources that are <em>not</em>
+							required for the processing and rendering of a <a>digital publication</a> (i.e., the content
+							of the publication remains unaffected even if these resources are not available).</p>
 
 						<table class="zebra">
 							<thead>
@@ -2666,7 +2664,7 @@ partial dictionary PublicationManifest {
 
 				<ul>
 					<li>it has a <a>manifest</a> that conforms to <a href="#wp-manifest"></a>;</li>
-					<li>it adheres to the construction requirements defined in <a href="#pub-construction"></a>.</li>
+					<li>it adheres to the construction requirements defined in <a href="#wp-construction"></a>.</li>
 				</ul>
 
 				<p id="ua-conformance">A user agent conforms to this specification if it meets the following
@@ -2715,7 +2713,7 @@ partial dictionary PublicationManifest {
 				<section id="primary-entry-page">
 					<h4>Primary Entry Page</h4>
 
-					<p>The <dfn>primary entry page</dfn> represents the preferred starting <a href="#pub-resources"
+					<p>The <dfn>primary entry page</dfn> represents the preferred starting <a href="#wp-resources"
 							>resource</a> for a Web Publication and enables discovery of its <a>manifest</a>. It is the
 						resource that is returned when accessing the Web Publication's <a>address</a>, and MUST be
 						included in either the <a>default reading order</a> or the <a>resource list</a>.</p>
@@ -2733,10 +2731,10 @@ partial dictionary PublicationManifest {
 						reading order is not provided, however, user agents will <a href="#no-reading-order">create one
 							using the primary entry page</a>.</p>
 
-					<p>The primary entry page is the only resource in which <a href="#manifest-embedding">a manifest can
-							be embedded</a>. To ensure discovery of the manifest, the primary entry page MUST provide a
-							<a href="#manifest-linking">link to the manifest</a>, regardless of whether the manifest is
-						embedded within the page or external to it.</p>
+					<p>The primary entry page is the only resource in which <a href="#wp-manifest-embedding">a manifest
+							can be embedded</a>. To ensure discovery of the manifest, the primary entry page MUST
+						provide a <a href="#wp-manifest-linking">link to the manifest</a>, regardless of whether the
+						manifest is embedded within the page or external to it.</p>
 
 					<p>The address of the primary entry page is also the <a>canonical identifier</a> for the Web
 						Publication (i.e., it serves as its unique identifier).</p>
@@ -2754,7 +2752,7 @@ partial dictionary PublicationManifest {
 
 					<p>The table of contents is expressed via an [[!html]]&#160;element (typically a <a
 							href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code>
-						element</a>) in one of the <a href="#pub-resources">resources</a>. This element MUST be
+						element</a>) in one of the <a href="#wp-resources">resources</a>. This element MUST be
 						identified by the <code>role</code> attribute&#160;[[!html]] value
 						"<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the document —
 						in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
@@ -2764,9 +2762,9 @@ partial dictionary PublicationManifest {
 							page</a>, the manifest SHOULD <a href="#table-of-contents">identify the resource</a> that
 						contains the structure.</p>
 
-					<p> When specified, the table of content MUST include a link to at least one <a
-							href="#pub-resources">resource</a>, and all links SHOULD refer to <a href="#pub-resources"
-							>resources</a> within <a href="#pub-bounds">publication bounds</a>. </p>
+					<p> When specified, the table of content MUST include a link to at least one <a href="#wp-resources"
+							>resource</a>, and all links SHOULD refer to <a href="#wp-resources">resources</a> within <a
+							href="#wp-bounds">publication bounds</a>. </p>
 
 					<p>Refer to the <a href="#table-of-contents">table of contents property definition</a> for more
 						information on how to identify which resource contains the table of contents.</p>
@@ -2784,7 +2782,7 @@ partial dictionary PublicationManifest {
 
 					<p>The page list is expressed via an [[!html]] element (typically a <a
 							href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code>
-						element</a>) in one of the <a href="#pub-resources">resources</a>. This element MUST be
+						element</a>) in one of the <a href="#wp-resources">resources</a>. This element MUST be
 						identified by the <code>role</code> attribute&#160;[[!html]] value
 						"<code>doc-pagelist</code>"&#160;[[!dpub-aria-1.0]], and MUST be the first element in the
 						document — in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
@@ -2794,7 +2792,7 @@ partial dictionary PublicationManifest {
 						manifest SHOULD <a href="#page-list">identify the resource</a> that contains the structure.</p>
 
 					<p>There are no requirements on the page list itself, except that, when specified, it MUST include a
-						link to at least one <a href="#pub-resources">resource</a>.</p>
+						link to at least one <a href="#wp-resources">resource</a>.</p>
 
 					<p>Refer to the <a href="#page-list"><code>pagelist</code> property definition</a> for more
 						information on how to identify which resource contains the page list.</p>
@@ -2926,7 +2924,7 @@ partial dictionary PublicationManifest {
 
 						<p>The referenced document SHOULD be a resource of the Web Publication. It can be any resource,
 							including one that is not listed in the <a>default reading order</a>. This document MUST
-							include a <a href="#manifest-linking">link to the manifest</a> to ensure a bidirectional
+							include a <a href="#wp-manifest-linking">link to the manifest</a> to ensure a bidirectional
 							linking relationship (i.e., that user agents can also locate the manifest from the document
 							at the address).</p>
 
@@ -3221,7 +3219,7 @@ partial dictionary PublicationManifest {
 
 						<p>Additionally, the <code>script</code> element MUST include a unique identifier in an
 								<code>id</code> attribute&#160;[[!html]]. This identifier ensures that the manifest <a
-								href="#manifest-linking">can be referenced</a>.</p>
+								href="#wp-manifest-linking">can be referenced</a>.</p>
 
 						<pre class="example" title="A Web Publication Manifest included in an HTML document">
 &lt;script id="example_manifest" type="application/ld+json"&gt;
@@ -3257,7 +3255,7 @@ partial dictionary PublicationManifest {
 
 						<p>When a manifest is embedded within an HTML document, the link MUST include a fragment
 							identifier that references the <code>script</code> element that contains the manifest (see
-								<a href="#manifest-embedding"></a>).</p>
+								<a href="#wp-manifest-embedding"></a>).</p>
 
 						<pre class="example" title="Link to a manifest within the same HTML resource">
 	&lt;link href="#example_manifest" rel="publication"&gt;
@@ -3420,8 +3418,8 @@ partial dictionary PublicationManifest {
 						<li>let <var>lang</var> string represent the default language, set to: <ul>
 								<li> the value of the <a data-cite="!html#the-lang-and-xml:lang-attributes"
 											><code>lang</code> value</a> for the <code>script</code> element in the
-										<a>primary entry page</a>, in case the manifest is <a href="#manifest-embedding"
-										>embedded</a>; or </li>
+										<a>primary entry page</a>, in case the manifest is <a
+										href="#wp-manifest-embedding">embedded</a>; or </li>
 								<li><code>undefined</code> otherwise</li>
 							</ul>
 							<details>
@@ -3432,7 +3430,7 @@ partial dictionary PublicationManifest {
 						<li> let <var>dir</var> string represents the base direction, set to: <ul>
 								<li> the value of the <a data-cite="!html#the-dir-attribute"><code>dir</code> value</a>
 									for the <code>script</code> element in the <a>primary entry page</a>, in case the
-									manifest is <a href="#manifest-embedding">embedded</a>; or </li>
+									manifest is <a href="#wp-manifest-embedding">embedded</a>; or </li>
 								<li><code>undefined</code> otherwise</li>
 							</ul>
 							<details>
