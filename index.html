@@ -2632,9 +2632,11 @@ partial dictionary PublicationManifest {
 					that belong to the Web Publication and a default reading order, which is how it connects resources
 					into a single contiguous work.</p>
 
-				<p>A Web Publication is discoverable in one of two ways: resources either include a link to the manifest
-					(via an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]), or the manifest can be
-					loaded directly by a compatible user agent.</p>
+				<p>A Web Publication is discoverable via the presence of a link to the manifest in any of its resources
+					(i.e., by the use of an HTTP Link header or an HTML <code>link</code> element&#160;[[html]]). The
+					linked manifest is contained either directly within the resource containing the link (in a special
+					case called the <a href="#primary-entry-page">primary entry page</a>) or in a separate JSON-LD
+					document.</p>
 
 				<p>With the establishment of Web Publications, user agents can build new experiences tailored
 					specifically for their unique reading needs.</p>
