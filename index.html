@@ -1605,9 +1605,10 @@ dictionary CreatorInfo {
 									directionally set to left-to-right text;</li>
 								<li><code><dfn>rtl</dfn></code>: indicates that the textual values are explicitly
 									directionally set to right-to-left text;</li>
-								<li><code><dfn>auto</dfn></code> indicates that the textual values are explicitly directionally set
-									to the direction of the first character with a strong directionality, following the
-									rules of the Unicode Bidirectional Algorithm [[!bidi]].</li>
+								<li><code><dfn>auto</dfn></code> indicates that the textual values are explicitly
+									directionally set to the direction of the first character with a strong
+									directionality, following the rules of the Unicode Bidirectional Algorithm
+									[[!bidi]].</li>
 							</ul>
 
 							<p>When specified, these properties are also used as defaults for textual values in the
@@ -2736,14 +2737,13 @@ partial dictionary PublicationManifest {
 					<p>The primary entry page is the only resource in which <a href="#wp-manifest-embedding">a manifest
 							can be embedded</a>. </p>
 
-					<p>To ensure discovery of the manifest, the primary entry page MUST
-						provide a <a href="#wp-manifest-linking">link to the manifest</a>. The manifest MAY be external
-						to, and linked from, the primary entry page, but it is RECOMMENDED to 
-						<a href="#wp-manifest-embedding">embed</a> the manifest into the page instead.</p> 
+					<p>To ensure discovery of the manifest, the primary entry page MUST provide a <a
+							href="#wp-manifest-linking">link to the manifest</a>. It is RECOMMENDED to <a
+							href="#wp-manifest-embedding">embed</a> the manifest in the primary entry page, but the
+						manifest MAY be external to, and linked from, it.</p>
 
-					<p class=note>Search engines may process the metadata using schema.org vocabulary, and in JSON-LD format, 
-						only if it is embedded in the HTML page. This is a reason why embedding the manifest is the 
-						preferred option.</p>
+					<p class="note">Embedding is the preferred option as search engines will only process schema.org
+						metadata in JSON-LD format when it is embedded in an HTML page.</p>
 
 					<p>The address of the primary entry page is also the <a>canonical identifier</a> for the Web
 						Publication (i.e., it serves as its unique identifier).</p>
