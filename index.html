@@ -3774,53 +3774,47 @@ partial dictionary PublicationManifest {
 				<section id="processing-manifest">
 					<h4>Processing the manifest</h4>
 
-					<p>The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a
-							manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var>
-						object representing a <a>canonical manifest</a>. The output from inputting a JSON object into
-						this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that
-						the data represented in <var>json</var> abides to the minimal requirements on the data,
-						removing, if applicable, non-conformant data.</p>
+					<p>
+						The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var> object representing a <a>canonical manifest</a>. The output from inputting a JSON object into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the minimal requirements on the data, removing, if applicable, non-conformant data.
+					</p>
 
 					<ol>
-						<li> Let <var>manifest object</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
-								>converting</a>
-							<var>json</var> to a <a>PublicationManifest</a> dictionary. </li>
-						<li> Extension point: process any proprietary and/or other supported members at this point in
-							the algorithm. </li>
-						<li> Perform data cleanup operations on <var>manifest object</var>, possibly removing data, as
-							well as raising warnings. <ol>
-								<li>Check whether the value of <var>manifest object["url"]</var> is a valid
-									URL&#160;[[!url]]. If not, issue a warning.</li>
-								<li>For all the terms defined in <a href="#accessibility"></a>, except for
-										<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
-									whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
-									vocabulary (see the <a
-										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-										expected values</a> for each). Issue a warning for each unrecognized value.</li>
-								<li>For all values in <var>manifest object["accessModeSufficient"]</var>, check whether
-									each token in each <a href="https://schema.org/ItemList">ItemList</a>
-									[[!schema.org]] is defined in the preferred vocabulary (see the <a
-										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-										expected values</a>). Issue a warning for each unrecognized value.</li>
-								<li> For all the terms defined in <a href="#creators"></a>, check whether every object
-										<var>Obj</var> in <var>manifest object[term]</var> has <var>Obj["name"]</var>
-									set. If not, remove <var>Obj</var> from <var>manifest object[term]</var> array and
-									issue a warning. </li>
-								<li> Check whether the value of <var>manifest object["name"]</var> is not empty. If it
-									is, generate a value (see the <a href="#generate_title">separate note for
-										details</a>) and issue a warning. </li>
-								<li> For all the terms defined in <a href="#resource-categorization-properties"></a>,
-									check whether every object <var>Obj</var> in <var>manifest object[term]</var> has
-										<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest
-										object[term]</var> array and issue a warning. If yes, check whether
-										<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
-								<li> Check whether <var>manifest object["datePublished"]</var> is a valid date or
-									date-time, per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
-								<li> Check whether <var>manifest object["dateModified"]</var> is a valid date or
-									date-time, per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+						<li>
+							Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary" >converting</a> <var>json</var> to a <a>PublicationManifest</a> dictionary.
+						</li>
+						<li>
+							Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as raising warnings.
+							<ol>
+								<li>
+									Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If not, issue a warning.
+								</li>
+								<li>
+									For all the terms defined in <a href="#accessibility"></a>, except for <code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check whether all tokens listed in <var>manifest[term]</var> are defined in the preferred vocabulary (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of expected values</a> for each). Issue a warning for each unrecognized value.
+								</li>
+								<li>
+									For all values in <var>manifest["accessModeSufficient"]</var>, check whether each token in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is defined in the preferred vocabulary (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of expected values</a>). Issue a warning for all unrecognized values.
+								</li>
+								<li>
+									For all <var>term</var> defined as <a href="@@@" style="background-color: yellow">@@Person valued properties@@</a>, check whether the value object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning.
+								</li>
+								<li>
+									Check whether the value of <var>manifest["name"]</var> is not empty. If it is, generate a value (see the <a href="#generate_title">separate note for details</a>) and issue a warning.
+								</li>
+								<li>
+									For all  <var>term</var> defined in <a href="#resource-categorization-properties"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. If yes, check whether <var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning.
+								</li>
+								<li>
+									Check whether <var>manifest["datePublished"]</var> is a valid date or date-time, per&#160;[[iso8601]]. If the check fails, issue a warning.
+								</li>
+								<li>
+									Check whether <var>manifest["dateModified"]</var> is a valid date or date-time, per&#160;[[iso8601]]. If the check fails, issue a warning.
+								</li>
 							</ol>
 						</li>
-						<li> Return <var>manifest object</var>. </li>
+						<li>
+							Extension point: process any proprietary, <a>profile</a> specific, and/or other supported members at this point in the algorithm.
+						</li>
+						<li> Return <var>manifest</var>. </li>
 					</ol>
 				</section>
 			</section>
@@ -3859,15 +3853,18 @@ partial dictionary PublicationManifest {
 				<ul>
 					<li>It MUST adhere to the manifest format requirements defined in <a href="#manifest"></a>.</li>
 					<li>
-						The generic <a href="#canonical-manifest">canonicalization algorithm</a> MUST remain valid for the extended manifest. To achieve this, if new terms are added to the general <a href="#manifest"></a>, then:
+						The generic canonicalization steps described in <a href="#canonical-manifest"></a> MUST remain valid for the extended manifest. To achieve this, and if new terms are added to the general <a href="#manifest"></a>, then:
 						<ul>
 							<li>
-								The term SHOULD be categorized, if applicable, to one or more of the general term categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array valued@@</span>, <span style="background-color: yellow">@@Natural language valued@@</span>, etc.).
+								The term SHOULD be categorized, if applicable, to one or more of the general term categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array valued@@</span>, <span style="background-color: yellow">@@Natural language valued@@</span>, etc.). This means the relevant canonicalization steps will be automatically executed for those terms
 							</li>
 							<li>
-								If necessary, the profile MAY define its own canonicalization step, to be executed as the <a href="#canonicalization-extension-point">last step of the general algorithm</a>. Such an extra step MUST NOT invalidate the results of any of the steps defined for the <a href="#canonical-manifest">canonicalization algorithm</a> in general.
+								If necessary, the profile MAY define its own canonicalization step, to be executed as the <a href="#canonicalization-extension-point">last step of the general canonicalization algorithm</a>. Such an extra step MUST NOT invalidate the results of any of the steps defined for the <a href="#canonical-manifest">canonicalization algorithm</a> in general.
 							</li>
 						</ul>
+					</li>
+					<li>
+						If necessary, the profile MAY define its own manifest processing step, to be executed as part of the steps described in <a href="#processing-manifest"></a>
 					</li>
 				</ul>
 				<p class=ednote>
