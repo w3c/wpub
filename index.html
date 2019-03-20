@@ -3862,7 +3862,7 @@ partial dictionary PublicationManifest {
 						The generic <a href="#canonical-manifest">canonicalization algorithm</a> MUST remain valid for the extended manifest. To achieve this, if new terms are added to the general <a href="#manifest"></a>, then:
 						<ul>
 							<li>
-								The term SHOULD be categorized, if applicable, to one of the general term categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array valued@@</span>, <span style="background-color: yellow">@@Natural language valued@@</span>, etc.).
+								The term SHOULD be categorized, if applicable, to one or more of the general term categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array valued@@</span>, <span style="background-color: yellow">@@Natural language valued@@</span>, etc.).
 							</li>
 							<li>
 								If necessary, the profile MAY define its own canonicalization step, to be executed as the <a href="#canonicalization-extension-point">last step of the general algorithm</a>. Such an extra step MUST NOT invalidate the results of any of the steps defined for the <a href="#canonical-manifest">canonicalization algorithm</a> in general.
