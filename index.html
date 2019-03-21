@@ -3571,7 +3571,7 @@ partial dictionary PublicationManifest {
 						</li>
 
 						<li> 
-							(<a href="#arrays-and-single-values"></a>) for all values <var>v</var> of <var>P["term"]</var> that is a single string or an object, and where <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@array valued properties@@</a>:  change the relevant term/value pair to <br />
+							(<a href="#arrays-and-single-values"></a>) for each value <var>v</var> of <var>P["term"]</var> that is a single string or an object, and where <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@array valued properties@@</a>:  change the relevant term/value pair to <br />
 							<code class="json">"term": [v]</code>
 							
 							<details>
@@ -3616,7 +3616,7 @@ partial dictionary PublicationManifest {
 						</li>
 
 						<li>
-							(<a href="#creators"></a>) for all values <var>v</var> in a <var>manifest["term"]</var> array that is a simple string or a <a>localizable string</a>, and where <var>term</var> is is one of the <a href="@@@" style="background-color: yellow">@@Person valued properties@@</a>: exchange that element in the array to <br />
+							(<a href="#creators"></a>) for each value <var>v</var> in a <var>manifest["term"]</var> array that is a simple string or a <a>localizable string</a>, and where <var>term</var> is is one of the <a href="@@@" style="background-color: yellow">@@Person valued properties@@</a>: exchange that element in the array to <br />
 							<code class="json">{"type": ["Person"], "name": [v]}</code>
 							<details>
 								<summary>Explanation</summary>
@@ -3647,7 +3647,7 @@ partial dictionary PublicationManifest {
 						</li>
 
 						<li>
-							(<a href="#link-values"></a>) for all values <var>v</var> in a <var>manifest["term"]</var> array that is a simple string, and where <var>term</var> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>: exchange that element in the array to
+							(<a href="#link-values"></a>) for each value <var>v</var> in a <var>manifest["term"]</var> array that is a simple string, and where <var>term</var> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>: exchange that element in the array to
 							<br />
 							<code class="json">{"type": ["LinkedResource"], "url": v}</code>
 							<details>
@@ -3683,7 +3683,7 @@ partial dictionary PublicationManifest {
 							</details>
 						</li>
 						<li>
-							(<a href="#strings-vs-objects"></a>) for all values <var>v</var> of <var>P["term"]</var>, or in <var>P["term"]</var> in the case the latter is an array, that is a simple string, and <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@natural language valued properties@@</a>: change the relevant term/value to: 
+							(<a href="#strings-vs-objects"></a>) for each value <var>v</var> of <var>P["term"]</var>, or in <var>P["term"]</var> in the case the latter is an array, that is a simple string, and <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@natural language valued properties@@</a>: change the relevant term/value to: 
 							<ul>
 								<li>if <var>manifest[inLanguage]</var> is set to the value of <var>l</var> then<br />
 									<code class="json">"term": {"value": v,"language": l}</code>
@@ -3749,7 +3749,7 @@ partial dictionary PublicationManifest {
 						</li>
 
 						<li>
-							(<a href="#manifest-relative-urls"></a>) for all values <var>v</var> of <var>P["term"]</var> that is not an <a
+							(<a href="#manifest-relative-urls"></a>) for each value <var>v</var> of <var>P["term"]</var> that is not an <a
 							data-cite="!url/#absolute-url-string">absolute URL string</a>, and where <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@URL valued properties@@</a>: resolve this value, considered to be a relative URL, using the value of <var>base</var> and yielding the value of <var>au</var>, and replace the term/value pair by<br />
 							<code class="json">"term": au</code>
 							<details>
