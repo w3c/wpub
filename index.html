@@ -8,11 +8,12 @@
 		<script src="common/js/orcid.js" class="remove"></script>
 		<script src="common/js/wp.js" class="remove"></script>
 		<script src="common/js/parts.js" class="remove"></script>
+		<script src="common/js/clean_idl_index.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
-			  postProcess: [show_orcid, create_wp, denumber_parts],
+			  postProcess: [show_orcid, create_wp, denumber_parts, clean_idl_index],
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
@@ -975,11 +976,11 @@ partial dictionary PublicationManifest {
 
 							<pre class="idl">
 dictionary LinkedResource {
-    DOMString           url;
-    DOMString           encodingFormat;
-    sequence&lt;LocalizableString>   name;
-    LocalizableString   description;
-    sequence&lt;DOMString> rel;
+    DOMString			url;
+    DOMString			encodingFormat;
+    sequence&lt;LocalizableString>	name;
+    LocalizableString		description;
+    sequence&lt;DOMString>		rel;
 };</pre>
 						</section>
 					</section>
@@ -1176,7 +1177,7 @@ partial dictionary PublicationManifest {
     sequence&lt;DOMString> accessibilityControl;
     sequence&lt;DOMString> accessibilityFeature;
     sequence&lt;DOMString> accessibilityHazard;
-    LocalizableString      accessibilitySummary;
+    LocalizableString   accessibilitySummary;
 };</pre>
 
 						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
@@ -1457,8 +1458,8 @@ partial dictionary PublicationManifest {
 dictionary CreatorInfo {
              sequence&lt;DOMString>         type;
     required sequence&lt;LocalizableString> name;
-             DOMString                      id;
-             DOMString                      url;
+             DOMString                   id;
+             DOMString                   url;
 };</pre>
 
 						<pre class="example" title="Author of a book">
