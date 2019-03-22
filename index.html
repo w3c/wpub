@@ -277,7 +277,7 @@
 					</dt>
 					<dd>
 						<p>The Canonical Publication Manifest is a version of the manifest created by user agents when
-							they <a href="#obtaining-manifest">obtain the authored manifest</a> and remove all possible
+							they <a href="#processing-manifest">process the authored manifest</a> and remove all possible
 							ambiguities and incorporate any missing values that can be inferred from another source.</p>
 					</dd>
 				</dl>
@@ -2538,7 +2538,7 @@ partial dictionary PublicationManifest {
 							BibTeX&#160;[[bibtex]] file, MUST be expressed using a <a href="#publication-link-def"
 									><code>LinkedResource</code></a> object, where:</p>
 						<ul>
-							<li> the <code>rel</code> value of the <a href="#publication-link-def"
+							<li>the <code>rel</code> value of the <a href="#publication-link-def"
 										><code>LinkedResource</code></a> SHOULD include a relevant identifier defined by
 								IANA or by other organizations; if the link record contains descriptive metadata it MUST
 								include the <code>describedby</code> (IANA) identifier; </li>
@@ -2616,6 +2616,481 @@ partial dictionary PublicationManifest {
 					</section>
 				</section>
 			</section>
+
+			<section id="manifest-lifecycle">
+				<h3>Publication Manifest Lifecycle</h3>
+
+				<section id="processing-manifest">
+					<h4>Processing a manifest</h4>
+
+					<p>The <dfn data-lt="processing the manifest|processing a manifest|process a manifest">steps for
+							processing a manifest</dfn> are given by the following algorithm. The algorithm, if
+						successful, returns a <a>processed manifest</a>; otherwise, it terminates prematurely and
+						returns nothing. In the case of nothing being returned, the user agent MUST ignore the manifest
+						declaration.</p>
+
+					<ol>
+						<li>
+							<p>Let <var>text</var> be a UTF-8 string containing the manifest that is the result of:</p>
+							<ul>
+								<li>following the specific rules for obtaining a manifest defined by an application of
+									this format; or</li>
+								<li>reading the body of a manifest file provided as direct input to this algorithm.</li>
+							</ul>
+						</li>
+
+						<li>Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
+							<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
+							terminate this algorithm. </li>
+
+						<li>If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
+
+						<li>Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
+								<var>json</var>, using the values of <var>json</var>, <var>base</var>, and
+								<code>Document</code> as input to the algorithm described in <a
+								href="#canonical-manifest"></a>. </li>
+
+						<li>Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a
+							Publication Manifest, namely: <ul>
+								<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
+								<li>The Publication type is set (see <a href="#publication-types"></a>)</li>
+								<li>The Publication address is set (see <a href="#address"></a>)</li>
+							</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
+
+						<li>Let <var>processed manifest</var> be the result of running <a>processing a manifest</a>
+							given <var>canonical manifest</var>. </li>
+
+						<li>Return <var>processed manifest</var>. </li>
+					</ol>
+
+					<p class="note"> The algorithm does not describes how error and warning messages should be reported.
+						This is implementation dependent.</p>
+				</section>
+
+				<section id="canonical-manifest">
+					<h4>Generating the Canonical Manifest</h4>
+
+					<p>The steps to convert a Publication Manifest into a Canonical Manifest are given by the following
+						algorithm. The algorithm takes the following arguments:</p>
+					<ul>
+						<li>the <var>manifest</var>: the JSON object that represent the <a>manifest</a></li>
+						<li>the <var>base</var>: URL string, that represents the base URL for the manifest</li>
+						<li>the <var>document</var>: <a data-cite="!html#the-document-object">HTML Document (DOM)
+								Node</a>, representing the HTML document the manifest is embedded within (i.e., when it
+							is not a standalone document). </li>
+					</ul>
+
+					<p> The steps of the algorithm are described below. As an abuse of notation, <var>P["term"]</var>
+						refers to the value in the object <var>P</var> for the label <var>"term"</var>, where
+							<var>P</var> is either <var>manifest</var>, or an object appearing within
+							<var>manifest</var> (e.g., a <var>Person</var>). The algorithm replaces or adds some terms
+						to <var>manifest</var>; the replacement terms are expressed in JSON syntax as <code class="json"
+							>{"term":"value"}</code>. </p>
+
+					<ol>
+						<li>let <var>lang</var> string represent the default language, set to: <ul>
+								<li>the value of the <a data-cite="!html#the-lang-and-xml:lang-attributes"
+											><code>lang</code> value</a> for the <code>script</code> element in
+										<code>document</code> (when set); or </li>
+								<li><code>undefined</code> otherwise</li>
+							</ul>
+							<details>
+								<summary> Explanation </summary>
+								<p>This value is used in <a href="#can-set-lang">the step on language</a> below.</p>
+							</details>
+						</li>
+
+						<li>let <var>dir</var> string represents the base direction, set to: <ul>
+								<li>the value of the <a data-cite="!html#the-dir-attribute"><code>dir</code> value</a>
+									for the <code>script</code> element in <code>document</code> (when set); or </li>
+
+								<li><code>undefined</code> otherwise</li>
+							</ul>
+							<details>
+								<summary> Explanation </summary>
+								<p>This value is used in <a href="#can-set-dir">the step on base direction</a>
+									below.</p>
+							</details>
+						</li>
+
+						<li>(<a href="#pub-title"></a>) if <var>manifest["name"]</var> is <code>undefined</code>, then
+							locate the <a data-cite="!html#the-title-element"><code>title</code></a> HTML element using
+								<var>document</var>. If that element exists and is non-empty, let <var>t</var> be its
+							text content, and add to <var>manifest</var>: <ul>
+								<li>if the language of <code>title</code> is explicitly <a
+										data-cite="!html#the-lang-and-xml:lang-attributes">set</a> to the value of
+										<var>l</var>, then add <br />
+									<code class="json">"name": [{"value": t, "language": l}]</code>
+								</li>
+								<li>otherwise <br />
+									<code class="json">"name": [t]</code><br />
+								</li>
+							</ul>
+							<details>
+								<summary>Explanation</summary>
+								<p> This step ensures that the <code>title</code> element's content can be used, as a
+									default, as the title. For example, </p>
+								<pre class="example">
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Moby Dick&lt;/title&gt;
+    &#8230;
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+        &#8230;
+    }
+    &lt;/script&gt;
+			                    </pre>
+								<p>yields (unless the <code>name</code> is set explicitly in the manifest):</p>
+								<pre class="example">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"     : ["Moby Dick"],
+    &#8230;
+}
+			                    </pre>
+							</details>
+						</li>
+
+						<li id="can-set-lang"> (<a href="#language-and-dir"></a>) if <var>manifest["inLanguage"]</var>
+							is <code>undefined</code> and the value of <var>lang</var> is <em>not</em>
+							<code>undefined</code>, add<br />
+							<code class="json">"inLanguage": lang</code><br /> to <var>manifest</var>
+							<details>
+								<summary>Explanation</summary>
+								<p> This step ensures that the language explicitly set in the embedding document is
+									valid. For example, </p>
+								<pre class="example">
+&lt;html&gt;
+&lt;head&gt;
+    &#8230;
+    &lt;script type="application/ld+json" lang=ur&gt;
+    {
+        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+        &#8230;
+    }
+    &lt;/script&gt;
+			                </pre>
+								<p> yields (unless the language and the direction are set explicitly in the manifest): </p>
+								<pre class="example">
+{
+    "@context"    : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "inLanguage"  : "ur",
+    &#8230;
+}
+			                </pre>
+							</details>
+						</li>
+
+						<li id="can-set-dir"> (<a href="#language-and-dir"></a>) if <var>manifest["inDirection"]</var>
+							is <code>undefined</code> and the value of <var>dir</var> is <em>not</em>
+							<code>undefined</code>, add<br />
+							<code class="json">"inDirection": dir</code><br /> to <var>manifest</var>
+							<details>
+								<summary>Explanation</summary>
+								<p> This step ensures that the base direction explicitly set in the embedding document
+									is valid for an embedded manifest content. For example, </p>
+								<pre class="example">
+&lt;html&gt;
+&lt;head&gt;
+    &#8230;
+    &lt;script type="application/ld+json" dir=rtl lang=ur&gt;
+    {
+        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+        "inLanguage"  : "ur",
+        &#8230;
+    }
+    &lt;/script&gt;
+			                </pre>
+								<p>yields (unless the language and the direction are set explicitly in the
+									manifest):</p>
+								<pre class="example">
+{
+    "@context"    : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "inLanguage"  : "ur",
+    "inDirection" : "rtl"
+    &#8230;
+}
+			                </pre>
+							</details>
+						</li>
+
+						<li id="no-reading-order"> (<a href="#default-reading-order"></a>) if
+								<var>manifest["readingOrder"]</var> is <code>undefined</code>, let <var>u</var> be the
+							value of <a data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
+							<code class="json">"readingOrder": [{"type": ["LinkedResource"], "url": u}]</code><br /> to
+							the <var>manifest</var>
+							<details>
+								<summary>Explanation</summary>
+								<p> If the Digital Publication consists only of the embedding document, the default
+									reading order can be omitted; it will consist, automatically, of that single
+									resource. </p>
+							</details>
+						</li>
+
+						<li>(<a href="#arrays-and-single-values"></a>) for each value <var>v</var> of
+								<var>P["term"]</var> that is a single string or an object, and where <var>term</var> is
+							one of the <a href="@@@" style="background-color: yellow">@@array valued properties@@</a>:
+							change the relevant term/value pair to <br />
+							<code class="json">"term": [v]</code>
+							<details>
+								<summary>Explanation</summary>
+								<p>A number of terms require their values to be arrays but, for the sake of convenience,
+									authors are allowed to use a single value instead of a one element array. For
+									example,</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : "Moby Dick",
+    "author"    : "Herman Melville",
+    "resources" : [{
+        "type"           : "LinkedResource",
+        "rel"            : "https://www.w3.org/ns/wp#cover-page",
+        "url"            : "images/cover.jpg"
+        "encodingFormat" : "image/jpeg"
+    },
+        &#8230;
+    }],
+    &#8230;
+}
+			                </pre>
+								<p>yields:</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : ["Moby Dick"],
+    "author"    : ["Herman Melville"],
+    "resources" : [{
+        "type"           : ["LinkedResource"],
+        "rel"            : ["https://www.w3.org/ns/wp#cover-page"],
+        "url"            : "images/cover.jpg"
+        "encodingFormat" : "image/jpeg"
+    },
+        &#8230;
+    }],
+    &#8230;
+}
+			                    </pre>
+							</details>
+						</li>
+
+						<li>(<a href="#creators"></a>) for each value <var>v</var> in a <var>manifest["term"]</var>
+							array that is a simple string or a <a>localizable string</a>, and where <var>term</var> is
+							is one of the <a href="@@@" style="background-color: yellow">@@Person valued
+								properties@@</a>: exchange that element in the array to <br />
+							<code class="json">{"type": ["Person"], "name": [v]}</code>
+							<details>
+								<summary>Explanation</summary>
+								<p>An author, editor, etc., should be explicitly designed as an object of type
+										<code>Person</code> but, for the sake of convenience, authors are allowed to
+									just give their name. For example,</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : ["Moby Dick"],
+    "author"    : ["Herman Melville"],
+    &#8230;
+}
+			                </pre>
+								<p>yields:</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : ["Moby Dick"],
+    "author"    : [{
+        "type" : ["Person"],
+        "name" : "Herman Melville"
+    }],
+    &#8230;
+}
+			                </pre>
+							</details>
+						</li>
+
+						<li>(<a href="#link-values"></a>) for each value <var>v</var> in a <var>manifest["term"]</var>
+							array that is a simple string, and where <var>term</var> is one of the <a
+								href="#resource-categorization-properties">resource categorization properties</a>:
+							exchange that element in the array to <br />
+							<code class="json">{"type": ["LinkedResource"], "url": v}</code>
+							<details>
+								<summary>Explanation</summary>
+								<p>Resource links should be explicitly designed as an object of type
+										<code>LinkedResource</code> but, for the sake of convenience, authors are
+									allowed to just give their absolute or relative URL. For example,</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    &#8230;
+    "resources" : [
+        "css/mobydick.css",
+        &#8230;
+    ],
+    &#8230;
+}
+			                </pre>
+								<p>yields:</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    &#8230;
+    "resources" : [{
+        "type" : ["LinkedResource"],
+        "url"  : "css/mobydick.css"
+    },
+        &#8230;
+    ],
+    &#8230;
+}
+			                </pre>
+							</details>
+						</li>
+						<li>(<a href="#strings-vs-objects"></a>) for each value <var>v</var> of <var>P["term"]</var>, or
+							in <var>P["term"]</var> in the case the latter is an array, that is a simple string, and
+								<var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@natural
+								language valued properties@@</a>: change the relevant term/value to: <ul>
+								<li>if <var>manifest[inLanguage]</var> is set to the value of <var>l</var> then<br />
+									<code class="json">"term": {"value": v,"language": l}</code>
+								</li>
+								<li>otherwise<br />
+									<code class="json">"term": {"value": v}</code></li>
+							</ul>
+							<details>
+								<summary>Explanation</summary>
+								<p>Natural language text values should be explicitly designed as localizable string
+									objects but, for the sake of convenience, authors are allowed to just use a simple
+									string. I.e., if no language information has been provided (via
+										<code>inLanguage</code>) in the manifest then, for example,</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : ["Moby Dick"],
+    "author"    : ["Herman Melville"],
+    &#8230;
+}
+			                </pre>
+								<p>yields:</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "name"      : [{
+        "value" : "Moby Dick"
+    }],
+    "author"    : [{
+        "value" : "Herman Melville"
+    }],
+    &#8230;
+}
+			                </pre>
+								<p>If an explicit language has also been provided in the manifest, that language is also
+									added to the localizable string object. For example,</p>
+								<pre class="example">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "inLanguage" : "en",
+    "name"       : ["Moby Dick"],
+    "author"     : ["Herman Melville"],
+    &#8230;
+}
+			                </pre>
+								<p>yields:</p>
+								<pre class="example">
+{
+    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "inLanguage": "en",
+    "name"      : [{
+        "value"    : "Moby Dick",
+        "language" : "en"
+    }],
+    "author"    : [{
+        "value"    : "Herman Melville"
+        "language" : "en"
+    }],
+    &#8230;
+}
+			                </pre>
+							</details>
+						</li>
+
+						<li>(<a href="#manifest-relative-urls"></a>) for each value <var>v</var> of <var>P["term"]</var>
+							that is not an <a data-cite="!url/#absolute-url-string">absolute URL string</a>, and where
+								<var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@URL
+								valued properties@@</a>: resolve this value, considered to be a relative URL, using the
+							value of <var>base</var> and yielding the value of <var>au</var>, and replace the term/value
+							pair by<br />
+							<code class="json">"term": au</code>
+							<details>
+								<summary>Explanation</summary>
+								<p>All relative URLs in the Publication Manifest must be resolved against the base value
+									to yield absolute URLs.</p>
+							</details>
+						</li>
+
+						<li id="canonicalization-extension-point"> (<a href="#mod-compat"></a>, extension point) if a
+								<a>profile</a> defines its own canonicalization steps for profile specific terms, those
+							steps are executed at this point. </li>
+
+						<li>Return the (transformed) <code>manifest</code>. </li>
+					</ol>
+					<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a
+						visual representation of the algorithm. Also, to help understanding the result of the algorithm,
+						there is a link to the corresponding canonical manifests for all the examples in <a
+							href="#app-manifest-examples"></a>.</p>
+				</section>
+
+				<section id="normalize-manifest">
+					<h4>Normalizing the manifest</h4>
+
+					<p> The <dfn data-lt="normalizing the manifest|normalize a manifest">steps for normalizing a
+							manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var>
+						object representing a <a>canonical manifest</a>. The output from inputting a JSON object into
+						this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that
+						the data represented in <var>json</var> abides to the minimal requirements on the data,
+						removing, if applicable, non-conformant data. </p>
+
+					<ol>
+						<li>Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
+								>converting</a>
+							<var>json</var> to a <a>PublicationManifest</a> dictionary. </li>
+						<li>Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as
+							raising warnings. <ol>
+								<li>Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]].
+									If not, issue a warning. </li>
+								<li>For all the terms defined in <a href="#accessibility"></a>, except for
+										<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
+									whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
+									vocabulary (see the <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+										expected values</a> for each). Issue a warning for each unrecognized value. </li>
+								<li>For all values in <var>manifest["accessModeSufficient"]</var>, check whether each
+									token in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is
+									defined in the preferred vocabulary (see the <a
+										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
+										expected values</a>). Issue a warning for all unrecognized values. </li>
+								<li>For all <var>term</var> defined as <a href="@@@" style="background-color: yellow"
+										>@@Person valued properties@@</a>, check whether the value object <var>Obj</var>
+									in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not, remove
+										<var>Obj</var> from <var>manifest[term]</var> array and issue a warning. </li>
+								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
+									generate a value (see the <a href="#generate_title">separate note for details</a>)
+									and issue a warning. </li>
+								<li>For all <var>term</var> defined in <a href="#resource-categorization-properties"
+									></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has
+										<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from
+										<var>manifest[term]</var> array and issue a warning. If yes, check whether
+										<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
+								<li>Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
+									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
+									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+							</ol>
+						</li>
+						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
+							members at this point in the algorithm. </li>
+						<li>Return <var>manifest</var>. </li>
+					</ol>
+				</section>
+			</section>
 		</section>
 		<section id="webpub" class="part">
 			<h2>PART II: Web Publications</h2>
@@ -2674,7 +3149,7 @@ partial dictionary PublicationManifest {
 					criteria:</p>
 
 				<ul>
-					<li>it is capable of <a href="#obtaining-manifest">obtaining a conforming manifest</a> for a Web
+					<li>it is capable of <a href="#wp-manifest">processing a conforming manifest</a> for a Web
 						Publication.</li>
 				</ul>
 			</section>
@@ -3063,7 +3538,7 @@ partial dictionary PublicationManifest {
 
 						<ol>
 							<li>Identify the page list resource: <ul>
-									<li> If a resource in either the <a href="#default-reading-order">default reading
+									<li>If a resource in either the <a href="#default-reading-order">default reading
 											order</a> or <a href="#resource-list">resource-list</a> is identified with a
 											<code>rel</code> value including
 											<code>https://www.w3.org/ns/wp#pagelist</code>, the corresponding
@@ -3071,10 +3546,10 @@ partial dictionary PublicationManifest {
 										several such resources, the first one MUST be used, with the <a
 											href="#default-reading-order">default reading order</a> taking precedence
 										over <a href="#resource-list">resource-list</a>. </li>
-									<li> Otherwise, the <a>primary entry page</a> is the page list resource. </li>
+									<li>Otherwise, the <a>primary entry page</a> is the page list resource. </li>
 								</ul>
 							</li>
-							<li> If the page list resource contains an HTML element with the
+							<li>If the page list resource contains an HTML element with the
 								<code>role</code>&#160;[[!html]] value
 								<code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element
 								as the page list. If there are several such HTML elements the user agent MUST use the
@@ -3143,7 +3618,7 @@ partial dictionary PublicationManifest {
 
 						<ol>
 							<li>Identify the table of contents resource: <ul>
-									<li> If a resource in either the <a href="#default-reading-order">default reading
+									<li>If a resource in either the <a href="#default-reading-order">default reading
 											order</a> or <a href="#resource-list">resource-list</a> is identified with a
 											<code>rel</code> value including
 										<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
@@ -3151,11 +3626,11 @@ partial dictionary PublicationManifest {
 										are several such resources, the first one MUST be used, with the <a
 											href="#default-reading-order">default reading order</a> taking precedence
 										over <a href="#resource-list">resource-list</a>. </li>
-									<li> Otherwise, the <a>primary entry page</a> is the table of contents resource.
+									<li>Otherwise, the <a>primary entry page</a> is the table of contents resource.
 									</li>
 								</ul>
 							</li>
-							<li> If the table of contents resource contains an HTML element with the
+							<li>If the table of contents resource contains an HTML element with the
 								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
 								user agent MUST use that element as the table of contents. If there are several such
 								HTML elements the user agent MUST use the first in <a
@@ -3297,47 +3772,49 @@ partial dictionary PublicationManifest {
 			<section id="wp-lifecycle">
 				<h3>Web Publication Lifecycle</h3>
 
+				<p>The processing of the Web Publication manifest extends the lifecycle defined in <a
+						href="#manifest-lifecycle"></a> as described in this section.</p>
+
 				<p class="note"> See the <a href="#app-lifecycle-diagrams">diagrams in the appendix</a> for a visual
 					representation of the lifecycle algorithm.</p>
 
-				<section id="obtaining-manifest">
+				<section id="wp-obtaining-manifest">
 					<h4>Obtaining a manifest</h4>
 
 					<p>The <dfn data-lt="obtaining the manifest|obtaining a manifest|obtains a manifest">steps for
 							obtaining a manifest</dfn>, starting from the <a>primary entry page</a>, are given by the
-						following algorithm. The algorithm, if successful, returns a <a>processed manifest</a>;
-						otherwise, it terminates prematurely and returns nothing. In the case of nothing being returned,
-						the user agent MUST ignore the manifest declaration.</p>
+						following algorithm. The algorithm, if successful, returns a string containing the manifest for
+						use as input to the first step in the <a href="#processing-manifest">processing stage</a>.</p>
 
 					<ol>
-						<li> From the <code>Document</code> of the top-level browsing context of the <a>primary entry
+						<li>From the <code>Document</code> of the top-level browsing context of the <a>primary entry
 								page</a>, let <var>origin</var> be the <code>Document</code>'s origin, and <var>manifest
 								link</var> be the first <code>link</code> element in tree order in <code>Document</code>
 							whose <code>rel</code> attribute contains the <code>publication</code> token. </li>
 
-						<li> If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
+						<li>If <var>origin</var> is an [[!html]] opaque origin, terminate this algorithm. </li>
 
-						<li> If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
+						<li>If <var>manifest link</var> is <code>null</code>, terminate this algorithm. </li>
 
-						<li> If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
+						<li>If <var>manifest link</var>'s <code>href</code> attribute's value is the empty string,
 							terminate this algorithm. </li>
 
-						<li> If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e.,
+						<li>If <var>manifest link</var>'s <code>href</code> attribute's value is a relative URL, i.e.,
 							it points to <var>origin</var> and it has a non-null <a
 								data-cite="!url#concept-url-fragment">fragment</a> identifying an identifier
 								<var>id</var> in <code>Document</code>: <ol>
-								<li> Let <var>embedded manifest script</var> be the first <code>script</code> element in
+								<li>Let <var>embedded manifest script</var> be the first <code>script</code> element in
 									tree order, whose <code>id</code> attribute is equal to <var>id</var> and whose
 										<code>type</code> attribute is equal to <code>application/ld+json</code>. </li>
-								<li> If <var>embedded manifest script</var> is <code>null</code>, terminate this
+								<li>If <var>embedded manifest script</var> is <code>null</code>, terminate this
 									algorithm. </li>
-								<li> Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child
-										text content</a> of <var>embedded manifest script</var>
+								<li>Let <var>text</var> be the <a data-cite="!dom#concept-child-text-content">child text
+										content</a> of <var>embedded manifest script</var>
 								</li>
 								<!-- <li>
 								Let <var>manifest URL</var> be set to <var>origin</var>
 							</li> -->
-								<li> Let <var>base</var> be the value of <a data-cite="!dom/#dom-node-baseuri"
+								<li>Let <var>base</var> be the value of <a data-cite="!dom/#dom-node-baseuri"
 										>baseURI</a> of the <code>script element</code>. </li>
 							</ol>
 							<details>
@@ -3350,21 +3827,21 @@ partial dictionary PublicationManifest {
 							</details>
 						</li>
 						<li>Otherwise: <ol>
-								<li> Let <var>manifest URL</var> be the result of parsing the value of the
+								<li>Let <var>manifest URL</var> be the result of parsing the value of the
 										<code>href</code> attribute, relative to the element's base URL. If parsing
 									fails, then abort these steps. </li>
-								<li> Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
+								<li>Let <var>request</var> be a new [[!fetch]] request, whose URL is <var>manifest
 										URL</var>, and whose context is the same as the browsing context of the
 										<code>Document</code>. </li>
-								<li> If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
+								<li>If the <var>manifest link</var>'s <code>crossOrigin</code> attribute's value is
 										'<code>use-credentials</code>', then set <var>request</var>'s credentials to
 										'<code>include</code>'. </li>
-								<li> Await the result of performing a fetch with <var>request</var>, letting
+								<li>Await the result of performing a fetch with <var>request</var>, letting
 										<var>response</var> be the result. </li>
-								<li> If <var>response</var> is a network error, terminate this algorithm. </li>
-								<li> Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
+								<li>If <var>response</var> is a network error, terminate this algorithm. </li>
+								<li>Let <var>text</var> be the result of UTF-8 decoding <var>response</var>'s <a
 										data-cite="!fetch#concept-request-body">body</a>. </li>
-								<li> Let <var>base</var> be the value of <var>manifest URL</var>. </li>
+								<li>Let <var>base</var> be the value of <var>manifest URL</var>. </li>
 							</ol>
 							<details>
 								<summary>Explanation</summary>
@@ -3374,447 +3851,6 @@ partial dictionary PublicationManifest {
 							</details>
 						</li>
 
-						<li> Let <var>json</var> be the result of <a data-cite="!ecmascript#sec-json.parse">parsing</a>
-							<var>text</var>. If <a data-cite="!ecmascript#sec-json.parse">parsing</a> throws an error,
-							terminate this algorithm. </li>
-
-						<li> If Type(<var>json</var>) is not <code>Object</code>, terminate this algorithm. </li>
-
-						<li> Let <var>canonical manifest</var> be the <a>canonical manifest</a> derived from
-								<var>json</var>, using the values of <var>json</var>, <var>base</var>, and
-								<code>Document</code> as input to the algorithm described in <a
-								href="#canonical-manifest"></a>. </li>
-
-						<li> Check whether the <var>canonical manifest</var> fulfills the minimal requirements for a Web
-							Publication Manifest, namely: <ul>
-								<li>The JSON-LD context is set (see <a href="#manifest-context"></a>)</li>
-								<li>The Publication type is set (see <a href="#publication-types"></a>)</li>
-								<li>The Publication address is set (see <a href="#address"></a>)</li>
-							</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
-
-						<li> Let <var>processed manifest</var> be the result of running <a>processing a manifest</a>
-							given <var>canonical manifest</var>. </li>
-
-						<li>Return <var>processed manifest</var>. </li>
-					</ol>
-
-					<p class="note"> The algorithm does not describes how error and warning messages should be reported.
-						This is implementation dependent.</p>
-
-				</section>
-
-				<section id="canonical-manifest">
-					<h4>Generating the Canonical Manifest</h4>
-
-					<p>The steps to convert a Web Publication Manifest into a Canonical Manifest are given by the
-						following algorithm. The algorithm takes the following arguments:</p>
-					<ul>
-						<li>the <var>manifest</var>: the JSON object that represent the <a>manifest</a></li>
-						<li>the <var>base</var>: URL string, that represents the base URL for the manifest</li>
-						<li> the <var>document</var>: <a data-cite="!html#the-document-object">HTML Document (DOM) Node</a>, representing the <a>primary entry page</a>
-						</li>
-					</ul>
-
-					<p>
-						The steps of the algorithm are described below. As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>Person</var>). The algorithm replaces or adds some terms to <var>manifest</var>; the replacement terms are expressed in JSON syntax as <code class="json" >{"term":"value"}</code>.
-					</p>
-
-					<ol>
-						<li>
-							let <var>lang</var> string represent the default language, set to: 
-							<ul>
-								<li> 
-									the value of the <a data-cite="!html#the-lang-and-xml:lang-attributes"><code>lang</code> value</a> for the <code>script</code> element in the <a>primary entry page</a>, in case the manifest is <a href="#wp-manifest-embedding">embedded</a>; or 
-								</li>
-								<li><code>undefined</code> otherwise</li>
-							</ul>
-							<details>
-								<summary> Explanation </summary>
-								<p>This value is used in <a href="#can-set-lang">the step on language</a> below.</p>
-							</details>
-						</li>
-
-						<li>
-							let <var>dir</var> string represents the base direction, set to: 
-							<ul>
-								<li> 
-									the value of the <a data-cite="!html#the-dir-attribute"><code>dir</code> value</a> for the <code>script</code> element in the <a>primary entry page</a>, in case the manifest is <a href="#wp-manifest-embedding">embedded</a>; or 
-								</li>
-
-								<li><code>undefined</code> otherwise</li>
-							</ul>
-							<details>
-								<summary> Explanation </summary>
-								<p>This value is used in <a href="#can-set-dir">the step on base direction</a>
-									below.</p>
-							</details>
-						</li>
-
-						<li>
-							(<a href="#pub-title"></a>) if <var>manifest["name"]</var> is <code>undefined</code>, then
-							locate the <a data-cite="!html#the-title-element"><code>title</code></a> HTML element using
-								<var>document</var>. If that element exists and is non-empty, let <var>t</var> be its
-							text content, and add to <var>manifest</var>: 
-							<ul>
-								<li> if the language of <code>title</code> is explicitly <a data-cite="!html#the-lang-and-xml:lang-attributes">set</a> to the value of <var>l</var>, then add <br />
-									<code class="json">"name": [{"value": t, "language": l}]</code>
-								</li>
-								<li>otherwise <br />
-									<code class="json">"name": [t]</code><br />
-								</li>
-							</ul>
-							<details>
-								<summary>Explanation</summary>
-								<p>
-									This step ensures that the <code>title</code> element's content in the primary entry page can be used, as a default, as the title of the Web Publication. For example,
-								</p>
-								<pre class="example">
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Moby Dick&lt;/title&gt;
-    &#8230;
-    &lt;script type="application/ld+json"&gt;
-    {
-        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        &#8230;
-    }
-    &lt;/script&gt;
-			                    </pre>
-								<p>yields (unless the <code>name</code> is set explicitly in the manifest):</p>
-								<pre class="example">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"     : ["Moby Dick"],
-    &#8230;
-}
-			                    </pre>
-							</details>
-						</li>
-
-						<li id="can-set-lang">
-							(<a href="#language-and-dir"></a>) if <var>manifest["inLanguage"]</var> is <code>undefined</code> and the value of <var>lang</var> is <em>not</em> <code>undefined</code>, add<br />
-							<code class="json">"inLanguage": lang</code><br /> 
-							to <var>manifest</var>
-							<details>
-								<summary>Explanation</summary>
-								<p>
-									This step ensures that the language explicitly set in the primary entry page is valid for an embedded manifest content. For example,
-								</p>
-								<pre class="example">
-&lt;html&gt;
-&lt;head&gt;
-    &#8230;
-    &lt;script type="application/ld+json" lang=ur&gt;
-    {
-        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        &#8230;
-    }
-    &lt;/script&gt;
-			                </pre>
-								<p>
-									yields (unless the language and the direction are set explicitly in the manifest):
-								</p>
-								<pre class="example">
-{
-    "@context"    : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "inLanguage"  : "ur",
-    &#8230;
-}
-			                </pre>
-							</details>
-						</li>
-
-						<li id="can-set-dir">
-							(<a href="#language-and-dir"></a>) if <var>manifest["inDirection"]</var> is <code>undefined</code> and the value of <var>dir</var> is <em>not</em> <code>undefined</code>, add<br />
-							<code class="json">"inDirection": dir</code><br /> 
-							to <var>manifest</var>
-							<details>
-								<summary>Explanation</summary>
-								<p>
-									This step ensures that the base direction explicitly set in the primary entry page is valid for an embedded manifest content. For example,
-								</p>
-								<pre class="example">
-&lt;html&gt;
-&lt;head&gt;
-    &#8230;
-    &lt;script type="application/ld+json" dir=rtl lang=ur&gt;
-    {
-        "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        "inLanguage"  : "ur",
-        &#8230;
-    }
-    &lt;/script&gt;
-			                </pre>
-								<p>yields (unless the language and the direction are set explicitly in the
-									manifest):</p>
-								<pre class="example">
-{
-    "@context"    : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "inLanguage"  : "ur",
-    "inDirection" : "rtl"
-    &#8230;
-}
-			                </pre>
-							</details>
-						</li>
-
-						<li id="no-reading-order">
-							(<a href="#default-reading-order"></a>) if <var>manifest["readingOrder"]</var> is <code>undefined</code>, let <var>u</var> be the value of <a data-cite="!dom#concept-document-url">document.URL</a>, and add<br />
-							<code class="json">"readingOrder": [{"type": ["LinkedResource"], "url": u}]</code><br /> 
-							to the <var>manifest</var>
-							<details>
-								<summary>Explanation</summary>
-								<p>
-									If the Web Publication consists only of the primary entry page, the default reading order can be omitted; it will consist, automatically, of that single resource.
-								</p>
-							</details>
-						</li>
-
-						<li> 
-							(<a href="#arrays-and-single-values"></a>) for each value <var>v</var> of <var>P["term"]</var> that is a single string or an object, and where <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@array valued properties@@</a>:  change the relevant term/value pair to <br />
-							<code class="json">"term": [v]</code>
-							
-							<details>
-								<summary>Explanation</summary>
-								<p>A number of terms require their values to be arrays but, for the sake of convenience,
-									authors are allowed to use a single value instead of a one element array. For
-									example,</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : "Moby Dick",
-    "author"    : "Herman Melville",
-    "resources" : [{
-        "type"           : "LinkedResource",
-        "rel"            : "https://www.w3.org/ns/wp#cover-page",
-        "url"            : "images/cover.jpg"
-        "encodingFormat" : "image/jpeg"
-    },
-        &#8230;
-    }],
-    &#8230;
-}
-			                </pre>
-								<p>yields:</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : ["Moby Dick"],
-    "author"    : ["Herman Melville"],
-    "resources" : [{
-        "type"           : ["LinkedResource"],
-        "rel"            : ["https://www.w3.org/ns/wp#cover-page"],
-        "url"            : "images/cover.jpg"
-        "encodingFormat" : "image/jpeg"
-    },
-        &#8230;
-    }],
-    &#8230;
-}
-			                    </pre>
-							</details>
-						</li>
-
-						<li>
-							(<a href="#creators"></a>) for each value <var>v</var> in a <var>manifest["term"]</var> array that is a simple string or a <a>localizable string</a>, and where <var>term</var> is is one of the <a href="@@@" style="background-color: yellow">@@Person valued properties@@</a>: exchange that element in the array to <br />
-							<code class="json">{"type": ["Person"], "name": [v]}</code>
-							<details>
-								<summary>Explanation</summary>
-								<p>An author, editor, etc., should be explicitly designed as an object of type
-										<code>Person</code> but, for the sake of convenience, authors are allowed to
-									just give their name. For example,</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : ["Moby Dick"],
-    "author"    : ["Herman Melville"],
-    &#8230;
-}
-			                </pre>
-								<p>yields:</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : ["Moby Dick"],
-    "author"    : [{
-        "type" : ["Person"],
-        "name" : "Herman Melville"
-    }],
-    &#8230;
-}
-			                </pre>
-							</details>
-						</li>
-
-						<li>
-							(<a href="#link-values"></a>) for each value <var>v</var> in a <var>manifest["term"]</var> array that is a simple string, and where <var>term</var> is one of the <a href="#resource-categorization-properties">resource categorization properties</a>: exchange that element in the array to
-							<br />
-							<code class="json">{"type": ["LinkedResource"], "url": v}</code>
-							<details>
-								<summary>Explanation</summary>
-								<p>Resource links should be explicitly designed as an object of type
-										<code>LinkedResource</code> but, for the sake of convenience, authors are
-									allowed to just give their absolute or relative URL. For example,</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    &#8230;
-    "resources" : [
-        "css/mobydick.css",
-        &#8230;
-    ],
-    &#8230;
-}
-			                </pre>
-								<p>yields:</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    &#8230;
-    "resources" : [{
-        "type" : ["LinkedResource"],
-        "url"  : "css/mobydick.css"
-    },
-        &#8230;
-    ],
-    &#8230;
-}
-			                </pre>
-							</details>
-						</li>
-						<li>
-							(<a href="#strings-vs-objects"></a>) for each value <var>v</var> of <var>P["term"]</var>, or in <var>P["term"]</var> in the case the latter is an array, that is a simple string, and <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@natural language valued properties@@</a>: change the relevant term/value to: 
-							<ul>
-								<li>if <var>manifest[inLanguage]</var> is set to the value of <var>l</var> then<br />
-									<code class="json">"term": {"value": v,"language": l}</code>
-								</li>
-								<li>otherwise<br />
-									<code class="json">"term": {"value": v}</code></li>
-							</ul> 
-							<details>
-								<summary>Explanation</summary>
-								<p>Natural language text values should be explicitly designed as localizable string
-									objects but, for the sake of convenience, authors are allowed to just use a simple
-									string. I.e., if no language information has been provided (via
-										<code>inLanguage</code>) in the manifest then, for example,</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : ["Moby Dick"],
-    "author"    : ["Herman Melville"],
-    &#8230;
-}
-			                </pre>
-								<p>yields:</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "name"      : [{
-        "value" : "Moby Dick"
-    }],
-    "author"    : [{
-        "value" : "Herman Melville"
-    }],
-    &#8230;
-}
-			                </pre>
-								<p>If an explicit language has also been provided in the manifest, that language is also
-									added to the localizable string object. For example,</p>
-								<pre class="example">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "inLanguage" : "en",
-    "name"       : ["Moby Dick"],
-    "author"     : ["Herman Melville"],
-    &#8230;
-}
-			                </pre>
-								<p>yields:</p>
-								<pre class="example">
-{
-    "@context"  : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "inLanguage": "en",
-    "name"      : [{
-        "value"    : "Moby Dick",
-        "language" : "en"
-    }],
-    "author"    : [{
-        "value"    : "Herman Melville"
-        "language" : "en"
-    }],
-    &#8230;
-}
-			                </pre>
-							</details>
-						</li>
-
-						<li>
-							(<a href="#manifest-relative-urls"></a>) for each value <var>v</var> of <var>P["term"]</var> that is not an <a
-							data-cite="!url/#absolute-url-string">absolute URL string</a>, and where <var>term</var> is one of the <a href="@@@" style="background-color: yellow">@@URL valued properties@@</a>: resolve this value, considered to be a relative URL, using the value of <var>base</var> and yielding the value of <var>au</var>, and replace the term/value pair by<br />
-							<code class="json">"term": au</code>
-							<details>
-								<summary>Explanation</summary>
-								<p>All relative URLs in the Web Publication manifest must be resolved against the base
-									value to yield absolute URLs.</p>
-							</details>
-						</li>
-
-						<li id="canonicalization-extension-point">
-							(<a href="#mod-compat")></a>, extension point) if a <a>profile</a> defines its own canonicalization steps for profile specific terms, those steps are executed at this point.
-						</li>
-
-						<li> Return the (transformed) <code>manifest</code>. </li>
-					</ol>
-					<p class="note"> See the <a href="#canonicalize-manifest-diagram">diagram in the appendix</a> for a
-						visual representation of the algorithm. Also, to help understanding the result of the algorithm,
-						there is a link to the corresponding canonical manifests for all the examples in <a
-							href="#app-manifest-examples"></a>.</p>
-				</section>
-
-				<section id="processing-manifest">
-					<h4>Processing the manifest</h4>
-
-					<p>
-						The <dfn data-lt="processing the manifest|processing a manifest">steps for processing a manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var> object representing a <a>canonical manifest</a>. The output from inputting a JSON object into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the minimal requirements on the data, removing, if applicable, non-conformant data.
-					</p>
-
-					<ol>
-						<li>
-							Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary" >converting</a> <var>json</var> to a <a>PublicationManifest</a> dictionary.
-						</li>
-						<li>
-							Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well as raising warnings.
-							<ol>
-								<li>
-									Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]]. If not, issue a warning.
-								</li>
-								<li>
-									For all the terms defined in <a href="#accessibility"></a>, except for <code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check whether all tokens listed in <var>manifest[term]</var> are defined in the preferred vocabulary (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of expected values</a> for each). Issue a warning for each unrecognized value.
-								</li>
-								<li>
-									For all values in <var>manifest["accessModeSufficient"]</var>, check whether each token in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is defined in the preferred vocabulary (see the <a href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of expected values</a>). Issue a warning for all unrecognized values.
-								</li>
-								<li>
-									For all <var>term</var> defined as <a href="@@@" style="background-color: yellow">@@Person valued properties@@</a>, check whether the value object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["name"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning.
-								</li>
-								<li>
-									Check whether the value of <var>manifest["name"]</var> is not empty. If it is, generate a value (see the <a href="#generate_title">separate note for details</a>) and issue a warning.
-								</li>
-								<li>
-									For all  <var>term</var> defined in <a href="#resource-categorization-properties"></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has <var>Obj["url"]</var> set. If not, remove <var>Obj</var> from <var>manifest[term]</var> array and issue a warning. If yes, check whether <var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning.
-								</li>
-								<li>
-									Check whether <var>manifest["datePublished"]</var> is a valid date or date-time, per&#160;[[iso8601]]. If the check fails, issue a warning.
-								</li>
-								<li>
-									Check whether <var>manifest["dateModified"]</var> is a valid date or date-time, per&#160;[[iso8601]]. If the check fails, issue a warning.
-								</li>
-							</ol>
-						</li>
-						<li>
-							Extension point: process any proprietary, <a>profile</a> specific, and/or other supported members at this point in the algorithm.
-						</li>
-						<li> Return <var>manifest</var>. </li>
 					</ol>
 				</section>
 			</section>
@@ -3834,42 +3870,46 @@ partial dictionary PublicationManifest {
 		<section id="extensions" class="part">
 			<h2>PART III: Modular Extensions</h2>
 
-			<section id="mod-intro">
+			<section id="mod-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>
-					The first two parts of this specification define the cornerstones for developing additional <a>digital publication</a> formats that can be deployed to the Web. Various publishing communities (e.g., audio books, scholarly publications) MAY define extensions, also known as <dfn>profiles</dfn>, by <em>extending</em> the core <a href="#manifest"></a> with module specific terms and possibly adding new requirements.
-				</p>
+				<p> The first two parts of this specification define the cornerstones for developing additional
+						<a>digital publication</a> formats that can be deployed to the Web. Various publishing
+					communities (e.g., audio books, scholarly publications) MAY define extensions, also known as
+						<dfn>profiles</dfn>, by <em>extending</em> the core <a href="#manifest"></a> with module
+					specific terms and possibly adding new requirements. </p>
 
 			</section>
 
 			<section id="mod-compat">
 				<h3>Compatibility Requirements</h3>
 
-				<p>
-					In order for a <a>digital publication</a> format to be compatible with this specification, following conditions MUST be met:
-				</p>
+				<p> In order for a <a>digital publication</a> format to be compatible with this specification, following
+					conditions MUST be met: </p>
 
 				<ul>
 					<li>It MUST adhere to the manifest format requirements defined in <a href="#manifest"></a>.</li>
-					<li>
-						The generic canonicalization steps described in <a href="#canonical-manifest"></a> MUST remain valid for the extended manifest. To achieve this, and if new terms are added to the general <a href="#manifest"></a>, then:
-						<ul>
-							<li>
-								The term SHOULD be categorized, if applicable, to one or more of the general term categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array valued@@</span>, <span style="background-color: yellow">@@Natural language valued@@</span>, etc.). This means the relevant canonicalization steps will be automatically executed for those terms
-							</li>
-							<li>
-								If necessary, the profile MAY define its own canonicalization step, to be executed as the <a href="#canonicalization-extension-point">last step of the general canonicalization algorithm</a>. Such an extra step MUST NOT invalidate the results of any of the steps defined for the <a href="#canonical-manifest">canonicalization algorithm</a> in general.
-							</li>
+					<li>The generic canonicalization steps described in <a href="#canonical-manifest"></a> MUST remain
+						valid for the extended manifest. To achieve this, and if new terms are added to the general <a
+							href="#manifest"></a>, then: <ul>
+							<li>The term SHOULD be categorized, if applicable, to one or more of the general term
+								categories used in the algorithm (e.g., <span style="background-color: yellow">@@Array
+									valued@@</span>, <span style="background-color: yellow">@@Natural language
+									valued@@</span>, etc.). This means the relevant canonicalization steps will be
+								automatically executed for those terms </li>
+							<li>If necessary, the profile MAY define its own canonicalization step, to be executed as
+								the <a href="#canonicalization-extension-point">last step of the general
+									canonicalization algorithm</a>. Such an extra step MUST NOT invalidate the results
+								of any of the steps defined for the <a href="#canonical-manifest">canonicalization
+									algorithm</a> in general. </li>
 						</ul>
 					</li>
-					<li>
-						If necessary, the profile MAY define its own manifest processing step, to be executed as part of the steps described in <a href="#processing-manifest"></a>
+					<li>If necessary, the profile MAY define its own manifest processing step, to be executed as part of
+						the steps described in <a href="#processing-manifest"></a>
 					</li>
 				</ul>
-				<p class=ednote>
-					Adding an example of a term added by, e.g., the audiobook profile would be a good idea, when available.
-				</p>
+				<p class="ednote"> Adding an example of a term added by, e.g., the audiobook profile would be a good
+					idea, when available. </p>
 			</section>
 		</section>
 		<section id="app-toc-structure" class="appendix">
@@ -4635,7 +4675,7 @@ partial dictionary PublicationManifest {
 					</object>
 					<figcaption> First major block in the lifecyle algorithm: find the manifest, either through an HTTP
 						request or as part of a script elements.<br />See the normative description of the algorithm in
-							<a href="#obtaining-manifest"></a>. Image available in <a href="images/find_manifest.svg"
+							<a href="#processing-manifest"></a>. Image available in <a href="images/find_manifest.svg"
 							title="SVG image of the algorithm for finding the manifest">SVG</a> and <a
 							title="PNG image of the algorithm for finding the manifest" href="images/find_manifest.png"
 							>PNG</a> formats. </figcaption>
@@ -4650,10 +4690,11 @@ partial dictionary PublicationManifest {
 						<p id="canonicalize-manifest-diagram-descr">Second major block in the lifecyle algorithm: create
 							a canonical manifest (using the core manifest terms as examples)</p>
 					</object>
-					<figcaption> Second major block in the lifecyle algorithm: create a canonical manifest  (using the core manifest terms as examples).<br />See the normative description of the algorithm in <a href="#canonical-manifest"></a>. Image available in
-							<a href="images/canonicalize_manifest.svg"
-							title="SVG image of the canonicalization algorithm">SVG</a> and <a
-							title="PNG SVG image of the canonicalization algorithm"
+					<figcaption> Second major block in the lifecyle algorithm: create a canonical manifest (using the
+						core manifest terms as examples).<br />See the normative description of the algorithm in <a
+							href="#canonical-manifest"></a>. Image available in <a
+							href="images/canonicalize_manifest.svg" title="SVG image of the canonicalization algorithm"
+							>SVG</a> and <a title="PNG SVG image of the canonicalization algorithm"
 							href="images/canonicalize_manifest.png">PNG</a> formats. </figcaption>
 				</figure>
 			</section>
