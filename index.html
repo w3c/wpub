@@ -277,8 +277,9 @@
 					</dt>
 					<dd>
 						<p>The Canonical Publication Manifest is a version of the manifest created by user agents when
-							they <a href="#processing-manifest">process the authored manifest</a> and remove all possible
-							ambiguities and incorporate any missing values that can be inferred from another source.</p>
+							they <a href="#processing-manifest">process the authored manifest</a> and remove all
+							possible ambiguities and incorporate any missing values that can be inferred from another
+							source.</p>
 					</dd>
 				</dl>
 
@@ -2621,7 +2622,7 @@ partial dictionary PublicationManifest {
 				<h3>Publication Manifest Lifecycle</h3>
 
 				<section id="processing-manifest">
-					<h4>Processing a manifest</h4>
+					<h4>Processing a Manifest</h4>
 
 					<p>The <dfn data-lt="processing the manifest|processing a manifest|process a manifest">steps for
 							processing a manifest</dfn> are given by the following algorithm. The algorithm, if
@@ -2657,8 +2658,8 @@ partial dictionary PublicationManifest {
 								<li>The Publication address is set (see <a href="#address"></a>)</li>
 							</ul> If any of these requirements is not fulfilled, terminate the algorithm. </li>
 
-						<li>Let <var>processed manifest</var> be the result of running <a>processing a manifest</a>
-							given <var>canonical manifest</var>. </li>
+						<li>Let <var>processed manifest</var> be the result of <a>post-processing a canonical
+								manifest</a> given <var>canonical manifest</var>. </li>
 
 						<li>Return <var>processed manifest</var>. </li>
 					</ol>
@@ -3038,15 +3039,15 @@ partial dictionary PublicationManifest {
 							href="#app-manifest-examples"></a>.</p>
 				</section>
 
-				<section id="normalize-manifest">
-					<h4>Normalizing the manifest</h4>
+				<section id="post-processed-manifest">
+					<h4>Post-Processing the Canonical Manifest</h4>
 
-					<p> The <dfn data-lt="normalizing the manifest|normalize a manifest">steps for normalizing a
-							manifest</dfn> are given by the following algorithm. The algorithm takes a <var>json</var>
-						object representing a <a>canonical manifest</a>. The output from inputting a JSON object into
-						this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is to ensure that
-						the data represented in <var>json</var> abides to the minimal requirements on the data,
-						removing, if applicable, non-conformant data. </p>
+					<p> The <dfn data-lt="post-process the manifest|post-processing a manifest">steps for post-processing a
+							canonical manifest</dfn> are given by the following algorithm. The algorithm takes a
+							<var>json</var> object representing a <a>canonical manifest</a>. The output from inputting a
+						JSON object into this algorithm is a <dfn>processed manifest</dfn>. The goal of the algorithm is
+						to ensure that the data represented in <var>json</var> abides to the minimal requirements on the
+						data, removing, if applicable, non-conformant data. </p>
 
 					<ol>
 						<li>Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
