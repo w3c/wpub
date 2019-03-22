@@ -2621,6 +2621,28 @@ partial dictionary PublicationManifest {
 			<section id="manifest-lifecycle">
 				<h3>Publication Manifest Lifecycle</h3>
 
+				<section id="lifecycle-intro" class="informative">
+					<h4>Introduction</h4>
+
+					<p>This section describes the steps a user agent follows to process an <a>authored manifest</a> into
+						an internal representation of the data structure it contains.</p>
+
+					<p>The first step in this process is to obtain the manifest, the exact steps by which to do so are
+						typically defined by each <a>digital publication</a> format.</p>
+
+					<p>The process then involves generating a <a data-lt="canonical manifest">canonical form</a> of the
+						manifest, which is a representation that adds any missing data not explicitly authored (e.g.,
+						information could be gleaned from a containing HTML document if the manifest is embedded inside
+						a <code>script</code> tag).</p>
+
+					<p>After a canonical manifest is generated, the data is put through a final set of post-processing
+						steps to check its validity, ultimately resulting in a data structure that the user agent can
+						use.</p>
+					
+					<p>Within this process are various extension points that allow <a>digital publication</a> formats
+						to enhance the basic requirements for their own specialized needs and audiences.</p>
+				</section>
+
 				<section id="processing-manifest">
 					<h4>Processing a Manifest</h4>
 
