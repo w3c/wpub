@@ -8,11 +8,12 @@
 		<script src="common/js/orcid.js" class="remove"></script>
 		<script src="common/js/wp.js" class="remove"></script>
 		<script src="common/js/parts.js" class="remove"></script>
+		<script src="common/js/clean_idl_index.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
-			  postProcess: [show_orcid, create_wp, denumber_parts],
+			  postProcess: [show_orcid, create_wp, denumber_parts, clean_idl_index],
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
@@ -917,7 +918,7 @@ partial dictionary PublicationManifest {
 						</ul>
 
 						<p>By consequence, relative URLs in embedded manifests are resolved against the URL of the
-							primary entry page <em>unless</em> the page declares a base direction (i.e., in a <a
+							primary entry page <em>unless</em> the page declares a base URL (i.e., in a <a
 								data-cite="!html#the-base-element"><code>&lt;base&gt;</code> element</a> in its
 							header).</p>
 
@@ -1461,8 +1462,8 @@ partial dictionary PublicationManifest {
 dictionary CreatorInfo {
              sequence&lt;DOMString>         type;
     required sequence&lt;LocalizableString> name;
-             DOMString                      id;
-             DOMString                      url;
+             DOMString                   id;
+             DOMString                   url;
 };</pre>
 
 						<pre class="example" title="Author of a book">
