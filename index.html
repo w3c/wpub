@@ -1109,7 +1109,7 @@ partial dictionary PublicationManifest {
 										are needed.” </td>
 									<td>Text.</td>
 									<td>
-										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
+										<a href="#value-localizable-string">Localizable String</a>
 									</td>
 									<td>
 										<a href="https://schema.org/accessibilitySummary"
@@ -1140,7 +1140,7 @@ partial dictionary PublicationManifest {
     sequence&lt;DOMString> accessibilityControl;
     sequence&lt;DOMString> accessibilityFeature;
     sequence&lt;DOMString> accessibilityHazard;
-    LocalizableString      accessibilitySummary;
+    LocalizableString   accessibilitySummary;
 };</pre>
 
 						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
@@ -1955,7 +1955,8 @@ enum ProgressionDirection {
 									<td>Human-readable title of the publication.</td>
 									<td>One or more text items for the title.</td>
 									<td>
-										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
+										<a href="#value-array">Array</a> of <a href="#value-localizable-string"
+											>Localizable Strings</a>
 									</td>
 									<td>
 										<a href="https://schema.org/name"><code>name</code></a> (<a
