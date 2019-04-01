@@ -2047,7 +2047,7 @@ partial dictionary PublicationManifest {
 												<code>encodingFormat</code> values set.</p>
 									</td>
 									<td>
-										<a href="#value-array">Array</a> of <a href="#value-object-link">Links</a>
+										<a href="#value-array">Array</a> of <a href="#value-link">Links</a>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -2139,7 +2139,7 @@ partial dictionary PublicationManifest {
 											objects with their <code>encodingFormat</code> values set.</p>
 									</td>
 									<td>
-										<a href="#value-array">Array</a> of <a href="#value-object-link">Links</a>
+										<a href="#value-array">Array</a> of <a href="#value-link">Links</a>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -2229,7 +2229,7 @@ partial dictionary PublicationManifest {
 												<code>encodingFormat</code> and <code>rel</code> values set.</p>
 									</td>
 									<td>
-										<a href="#value-array">Array</a> of <a href="#value-object-link">Links</a>
+										<a href="#value-array">Array</a> of <a href="#value-link">Links</a>
 									</td>
 									<td>(None)</td>
 								</tr>
@@ -2971,7 +2971,7 @@ partial dictionary PublicationManifest {
 							</details>
 						</li>
 
-						<li>(<a href="#link-values"></a>) for each value <var>v</var> in a <var>manifest["term"]</var>
+						<li>(<a href="#value-link"></a>) for each value <var>v</var> in a <var>manifest["term"]</var>
 							array that is a simple string, and where <var>term</var> is one of the <a
 								href="#resource-categorization-properties">resource categorization properties</a>:
 							exchange that element in the array to <br />
@@ -3008,7 +3008,7 @@ partial dictionary PublicationManifest {
 			                </pre>
 							</details>
 						</li>
-						<li>(<a href="#value-object"></a>) for each value <var>v</var> of <var>P["term"]</var>, or in
+						<li>(<a href="#value-localizable-string"></a>) for each value <var>v</var> of <var>P["term"]</var>, or in
 								<var>P["term"]</var> in the case the latter is an array, that is a simple string, and
 								<var>term</var> expects a <a href="#value-localizable-string">localizable string</a>:
 							change the relevant term/value to: <ul>
@@ -3074,8 +3074,7 @@ partial dictionary PublicationManifest {
 			                </pre>
 							</details>
 						</li>
-
-						<li>(<a href="#manifest-relative-urls"></a>) for each value <var>v</var> of <var>P["term"]</var>
+						<li>(<a href="#value-url"></a>) for each value <var>v</var> of <var>P["term"]</var>
 							that is not an <a data-cite="!url/#absolute-url-string">absolute URL string</a>, and where
 								<var>term</var> expects a <a href="#value-url">URL</a>: resolve this value, considered
 							to be a relative URL, using the value of <var>base</var> and yielding the value of
