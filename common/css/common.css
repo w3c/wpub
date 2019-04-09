@@ -1,4 +1,18 @@
 
+section.part > h2 > span.secno {
+	display: none;
+} 
+
+a.suppress {
+	display: inline-block !important;
+	margin-left: -4rem !important;
+	margin-bottom: 0.5rem !important;
+}
+
+a.suppress > span.secno {
+	display: none;
+} 
+
 ul.ack > li,
 ul.flat > li {
     display: inline;
