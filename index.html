@@ -2895,7 +2895,7 @@ partial dictionary PublicationManifest {
 						</li>
 
 						<li>(<a href="#value-array"></a>) for each value <var>v</var> of <var>P["term"]</var> that is a
-							single string or an object, and where <var>term</var> expects an <a href="value-array"
+							single string or an object, and where <var>term</var> expects an <a href="#value-array"
 								>array</a>: change the relevant term/value pair to <br />
 							<code class="json">"term": [v]</code>
 							<details>
@@ -3578,7 +3578,7 @@ partial dictionary PublicationManifest {
 								property</a> in the following ways:</p>
 
 						<ul>
-							<li>The <a href="reading-order">default reading order</a> MAY be omitted when it only
+							<li>The <a href="default-reading-order">default reading order</a> MAY be omitted when it only
 								consists of the <a>primary entry page</a>. When the default reading order is absent,
 								user agents MUST include an entry for the primary entry page when compiling the
 								canonical manifest.</li>
@@ -3650,7 +3650,7 @@ partial dictionary PublicationManifest {
 								Manifest <code>title</code> property</a> in the following ways:</p>
 
 						<ul>
-							<li>If a <a href="pub-title">title</a> is not included in the <a>authored manifest</a>, the
+							<li>If a <a href="#pub-title">title</a> is not included in the <a>authored manifest</a>, the
 								user agent MUST use the value of the <a data-cite="!html#the-title-element"
 										><code>title</code> element</a>&#160;[[!html]] of the Web Publication's
 									<a>primary entry page</a>, if present, when generating the <a>canonical
