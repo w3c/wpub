@@ -3109,6 +3109,9 @@ partial dictionary PublicationManifest {
 						goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the
 						minimal requirements on the data, removing, if applicable, non-conformant data. </p>
 
+					<p>As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>).
+					</p>
+
 					<ol>
 						<li>Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
 								>converting</a>
@@ -3129,21 +3132,22 @@ partial dictionary PublicationManifest {
 										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
 										expected values</a>). Issue a warning for all unrecognized values. </li>
 								<li>For all <var>term</var> that expect <a href="#value-object-entity">entities</a>,
-									check whether the value object <var>Obj</var> in <var>manifest[term]</var> has
-										<var>Obj["name"]</var> set. If not, remove <var>Obj</var> from
+									check whether the value object <var>P</var> in <var>manifest[term]</var> has
+										<var>P["name"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. </li>
 								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
 									generate a value (see the <a href="#generate_title">separate note for details</a>)
 									and issue a warning. </li>
 								<li>For all <var>term</var> defined in <a href="#resource-categorization-properties"
-									></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has
-										<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from
+									></a>, check whether every object <var>P</var> in <var>manifest[term]</var> has
+										<var>P["url"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. If yes, check whether
-										<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
+										<var>P["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
 								<li>Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
 								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["duration"]</var> is set, check whether this value is a valid Normal Play Value&nbsp;[[iso8601]]. If the check fails, issue a warning.</li>
 							</ol>
 						</li>
 						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
@@ -4065,16 +4069,34 @@ partial dictionary PublicationManifest {
 						<td>(None)</td>
 						<td>OPTIONAL</td>
 					</tr>
+					<tr>
+						<td>
+							<code>
+								<dfn>duration</dfn>
+							</code>
+						</td>
+						<td>Length of a time-based media resource.</td>
+						<td>
+							A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>, expressed in ISO 8601 Time format [[!iso8601]].
+						</td>
+						<td>
+							<a href="https://schema.org/duration">
+								<code>duration</code>
+							</a>
+						</td>
+						<td>OPTIONAL</td>
+					</tr>
 				</tbody>
 			</table>
 
 			<pre class="idl">
 dictionary LinkedResource {
-    DOMString           url;
-    DOMString           encodingFormat;
-    sequence&lt;LocalizableString>   name;
-    LocalizableString   description;
-    sequence&lt;DOMString> rel;
+    DOMString                   url;
+    DOMString                   encodingFormat;
+    sequence&lt;LocalizableString> name;
+    LocalizableString           description;
+    sequence&lt;DOMString>         rel;
+    DOMString                   duration;
 };</pre>
 		</section>
 		<section id="app-toc-structure" class="appendix">
