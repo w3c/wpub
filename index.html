@@ -3147,7 +3147,7 @@ partial dictionary PublicationManifest {
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
 								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
-								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["duration"]</var> is set, check whether this value is a valid Normal Play Value&nbsp;[[iso8601]]. If the check fails, issue a warning.</li>
+								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["duration"]</var> is set, check whether this value is a valid Normal Play Time Value&nbsp;[[!rfc7826]]. If the check fails, issue a warning.</li>
 							</ol>
 						</li>
 						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
@@ -4077,7 +4077,7 @@ partial dictionary PublicationManifest {
 						</td>
 						<td>Length of a time-based media resource.</td>
 						<td>
-							A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>, expressed in ISO 8601 Time format [[!iso8601]].
+							A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>&nbsp;[[!rfc7826]], expressed in ISO 8601 Time format [[!iso8601]].
 						</td>
 						<td>
 							<a href="https://schema.org/duration">
