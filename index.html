@@ -17,7 +17,7 @@
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
-              previousPublishDate: "2019-01-30",
+              previousPublishDate: "2019-04-09",
   			  previousMaturity: "WD",
               edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
@@ -3008,10 +3008,10 @@ partial dictionary PublicationManifest {
 			                </pre>
 							</details>
 						</li>
-						<li>(<a href="#value-localizable-string"></a>) for each value <var>v</var> of <var>P["term"]</var>, or in
-								<var>P["term"]</var> in the case the latter is an array, that is a simple string, and
-								<var>term</var> expects a <a href="#value-localizable-string">localizable string</a>:
-							change the relevant term/value to: <ul>
+						<li>(<a href="#value-localizable-string"></a>) for each value <var>v</var> of
+								<var>P["term"]</var>, or in <var>P["term"]</var> in the case the latter is an array,
+							that is a simple string, and <var>term</var> expects a <a href="#value-localizable-string"
+								>localizable string</a>: change the relevant term/value to: <ul>
 								<li>if <var>manifest[inLanguage]</var> is set to the value of <var>l</var> then<br />
 									<code class="json">"term": {"value": v,"language": l}</code>
 								</li>
@@ -3074,8 +3074,8 @@ partial dictionary PublicationManifest {
 			                </pre>
 							</details>
 						</li>
-						<li>(<a href="#value-url"></a>) for each value <var>v</var> of <var>P["term"]</var>
-							that is not an <a data-cite="!url/#absolute-url-string">absolute URL string</a>, and where
+						<li>(<a href="#value-url"></a>) for each value <var>v</var> of <var>P["term"]</var> that is not
+							an <a data-cite="!url/#absolute-url-string">absolute URL string</a>, and where
 								<var>term</var> expects a <a href="#value-url">URL</a>: resolve this value, considered
 							to be a relative URL, using the value of <var>base</var> and yielding the value of
 								<var>au</var>, and replace the term/value pair by<br />
@@ -3578,9 +3578,9 @@ partial dictionary PublicationManifest {
 								property</a> in the following ways:</p>
 
 						<ul>
-							<li>The <a href="default-reading-order">default reading order</a> MAY be omitted when it only
-								consists of the <a>primary entry page</a>. When the default reading order is absent,
-								user agents MUST include an entry for the primary entry page when compiling the
+							<li>The <a href="default-reading-order">default reading order</a> MAY be omitted when it
+								only consists of the <a>primary entry page</a>. When the default reading order is
+								absent, user agents MUST include an entry for the primary entry page when compiling the
 								canonical manifest.</li>
 						</ul>
 					</section>
@@ -4875,8 +4875,9 @@ dictionary LinkedResource {
 					</object>
 					<figcaption> Third major block in the lifecyle algorithm: convert the manifest into a programming
 						language dependent data structure that implements the WebIDL specification of the
-						manifest.<br />See the normative description of the algorithm in <a href="#post-processed-manifest"
-						></a>. Image available in <a href="images/convert_manifest.svg"
+						manifest.<br />See the normative description of the algorithm in <a
+							href="#post-processed-manifest"></a>. Image available in <a
+							href="images/convert_manifest.svg"
 							title="SVG image of converting the manifest into a data structure implementing the WebIDL representation"
 							>SVG</a> and <a
 							title="PNG image of converting the manifest into a data structure implementing the WebIDL representation"
@@ -4894,9 +4895,9 @@ dictionary LinkedResource {
 					</object>
 					<figcaption> Fourth major block in the lifecyle algorithm: check and clean up data by possibly
 						removing data that cannot be interpreted.<br />See the normative description of the algorithm in
-							<a href="#post-processed-manifest"></a>. Image available in <a href="images/clean_up_data.svg"
-							title="SVG image on cleaning up the final data">SVG</a> and <a
-							title="PNG image on cleaning up the final data" href="images/clean_up_data.png">PNG</a>
+							<a href="#post-processed-manifest"></a>. Image available in <a
+							href="images/clean_up_data.svg" title="SVG image on cleaning up the final data">SVG</a> and
+							<a title="PNG image on cleaning up the final data" href="images/clean_up_data.png">PNG</a>
 						formats. </figcaption>
 				</figure>
 			</section>
