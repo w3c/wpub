@@ -10,6 +10,7 @@
   "inLanguage": "en",
   "dateModified": "2018-06-14T19:32:18Z",
   "datePublished": "2008-10-12",
+  "globalDuration": "15153",
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
 
   "resources": [
@@ -28,38 +29,47 @@
     {
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_1_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1371",
       "name": "Part 1, Sections 1 - 3"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_2_abbott.mp3",
       "encodingFormat": "audio/mpeg", 
+      "totalDuration": "1669",
       "name": "Part 1, Sections 4 - 5"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_3_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1506",
       "name": "Part 1, Sections 6 - 7"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_4_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1669",
       "name": "Part 1, Sections 8 - 10"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_5_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1506",
       "name": "Part 1, Sections 11 - 12"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_6_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1798",
       "name": "Part 2, Sections 13 - 14"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_7_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1225",
       "name": "Part 2, Sections 15 - 17"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_8_abbott.mp3",
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1371",
       "name": "Part 2, Sections 18 - 20"
     },{
       "url": "http://www.archive.org/download/flatland_rg_librivox/flatland_9_abbott.mp3", 
       "encodingFormat": "audio/mpeg",
+      "totalDuration": "1659",
       "name": "Part 2, Sections 21 - 22"
     }
   ]

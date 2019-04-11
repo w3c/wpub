@@ -559,6 +559,14 @@ partial dictionary PublicationManifest {
 								</td>
 							</tr>
 							<tr>
+									<td>
+										<code>accessibility-report</code>
+									</td>
+									<td>
+										<a href="#accessibility-report">Accessibility Report</a>
+									</td>
+							</tr>
+							<tr>
 								<td>
 									<code>accessibilitySummary</code>
 								</td>
@@ -600,6 +608,14 @@ partial dictionary PublicationManifest {
 							</tr>
 							<tr>
 								<td>
+									<code>cover</code>
+								</td>
+								<td>
+									<a href="#cover">Cover</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<code>creator</code>
 								</td>
 								<td>
@@ -632,26 +648,10 @@ partial dictionary PublicationManifest {
 							</tr>
 							<tr>
 								<td>
-									<code>https://www.w3.org/ns/wp#accessibility-report</code>
+									<code>globalDuration</code>
 								</td>
 								<td>
-									<a href="#accessibility-report">Accessibility Report</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>https://www.w3.org/ns/wp#cover</code>
-								</td>
-								<td>
-									<a href="#cover">Cover</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>https://www.w3.org/ns/wp#pagelist</code>
-								</td>
-								<td>
-									<a href="#page-list">Pagelist</a>
+									<a href="#global-duration">Global Duration</a>
 								</td>
 							</tr>
 							<tr>
@@ -708,6 +708,14 @@ partial dictionary PublicationManifest {
 								</td>
 								<td>
 									<a href="#pub-title">Title</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>pagelist</code>
+								</td>
+								<td>
+									<a href="#page-list">Pagelist</a>
 								</td>
 							</tr>
 							<tr>
@@ -1512,6 +1520,76 @@ dictionary CreatorInfo {
 }
 </pre>
 					</section>
+					<section id="global-duration">
+							<h5>Global Duration</h5>
+	
+							<p>
+								The <dfn>global duration</dfn> indicates the overall duration of a <em>time-based</em> <a>digital publication</a> (e.g., and audiobook, a book consisting of a series of video clips, etc.). It is expressed as a <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2">Normal Play Time</a>&nbsp;[[!rfc7826]] value.
+							</p>
+								
+							<table class="zebra">
+								<thead>
+									<tr>
+										<th>Term</th>
+										<th>Description</th>
+										<th>Required Value</th>
+										<th>Value Category</th>
+										<th>[[!schema.org]] Mapping</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+												<td>
+													<code data-dfn-for="PublicationManifest">
+														<dfn>globalDuration</dfn>
+													</code>
+												</td>
+												<td>Length of a time-based publication.</td>
+												<td>
+													A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>&nbsp;[[!rfc7826]].
+												</td>
+												<td>
+													<a href="#value-literal">Literal</a>
+												</td>
+												<td>
+													(None)
+												</td>
+										</tr>
+								</tbody>
+							</table>
+
+							<p>
+								Whereas the <a href="#dom-linkedresource-totalduration">total duration</a> property expresses the length of an individual time based resource and, as such, is supposed to be as precise as possible, the value of <a>global duration</a> may be considered a hint for the end user. User agents may choose to calculate the real duration of a, say, audio book not only by calculating the sum of the length of all constituent resources in a reading order, but also considering the gaps between playing those resources.
+							</p>
+
+							<pre class="idl">
+partial dictionary PublicationManifest {		
+    DOMString globalDuration;
+};</pre>
+	
+							<pre class="example" title="Global duration provided in the manifest (in seconds)">
+{
+    "@context"       : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+    "type"           : "Audiobook",
+    "id"             : "https://example.org/flatland-a-romance-of-many-dimensions/",
+    "url"            : "https://w3c.github.io/wpub/experiments/audiobook/",
+    "name"           : "Flatland: A Romance of Many Dimensions",
+    &#8230;		
+    "globalDuration" : "15153",
+    &#8230;
+}
+	</pre>
+
+					<p class=note>
+						The term <code>globalDuration</code> has a counterpart called <a href="https://schema.org/timeRequired"><code>timeRequired</code></a> in the schema.org vocabulary. However, the required value for that term is defined to be the duration value as defined by&nbsp;[[iso8601]]. The Working Group will explore whether it is possible to add Normal Play Time to the accepted values, in which case this specification may be changed to use the <code>timeRequired</code> term.
+					</p>
+
+					<p class="issue" data-number=420></p>
+
+					</section>
+	
+	
+
 
 					<section id="language-and-dir">
 						<h5>Language and Base Direction</h5>
@@ -1762,7 +1840,7 @@ dictionary LocalizableString {
 									<td>A <a href="https://schema.org/Date"><code>Date</code></a> or <a
 											href="https://schema.org/DateTime"><code>DateTime</code></a>
 										value&#160;[[!schema.org]], both expressed in ISO 8601 Date, or Date Time
-										formats, respectively [[iso8601]].</td>
+										formats, respectively [[!iso8601]].</td>
 									<td>
 										<a href="#value-literal">Literal</a>
 									</td>
@@ -2058,7 +2136,7 @@ partial dictionary PublicationManifest {
 
 						<pre class="idl">
 partial dictionary PublicationManifest {
-   required sequence&lt;LinkedResource> readingOrder;
+    required sequence&lt;LinkedResource> readingOrder;
 };</pre>
 
 						<pre class="example" title="Reading order expressed as a simple list of URLs">
@@ -3109,7 +3187,8 @@ partial dictionary PublicationManifest {
 						goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the
 						minimal requirements on the data, removing, if applicable, non-conformant data. </p>
 
-					<p>As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>).
+					<p>
+						As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>).
 					</p>
 
 					<ol>
@@ -3135,19 +3214,23 @@ partial dictionary PublicationManifest {
 									check whether the value object <var>P</var> in <var>manifest[term]</var> has
 										<var>P["name"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. </li>
-								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
-									generate a value (see the <a href="#generate_title">separate note for details</a>)
-									and issue a warning. </li>
 								<li>For all <var>term</var> defined in <a href="#resource-categorization-properties"
 									></a>, check whether every object <var>P</var> in <var>manifest[term]</var> has
 										<var>P["url"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. If yes, check whether
 										<var>P["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
+								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
+									generate a value (see the <a href="#generate_title">separate note for details</a>)
+									and issue a warning. </li>
 								<li>Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
 								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
 									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
-								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["duration"]</var> is set, check whether this value is a valid Normal Play Time Value&nbsp;[[!rfc7826]]. If the check fails, issue a warning.</li>
+								<li>Check whether <var>manifest["globalDuration"]</var> is a valid  Normal Play Time Value, per&nbsp;[[!rfc7826]]. 
+									If the check fails, issue a warning.</li>
+								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["totalDuration"]</var> is set, 
+									check whether this value is a valid Normal Play Time Value, per&nbsp;[[!rfc7826]]. 
+									If the check fails, issue a warning.</li>
 							</ol>
 						</li>
 						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
@@ -3399,6 +3482,9 @@ partial dictionary PublicationManifest {
 									</li>
 									<li>
 										<a href="#creators">creators</a>
+									</li>
+									<li>
+										<a href="#global-duration">global duration</a>
 									</li>
 									<li>
 										<a href="#language-and-dir">language and base direction</a>
@@ -4072,17 +4158,15 @@ partial dictionary PublicationManifest {
 					<tr>
 						<td>
 							<code>
-								<dfn>duration</dfn>
+								<dfn >totalDuration</dfn>
 							</code>
 						</td>
 						<td>Length of a time-based media resource.</td>
 						<td>
-							A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>&nbsp;[[!rfc7826]], expressed in ISO 8601 Time format [[!iso8601]].
+							A <a href="https://tools.ietf.org/html/rfc7826#section-4.4.2"><code>Normal Play Time</code></a>&nbsp;[[!rfc7826]].
 						</td>
 						<td>
-							<a href="https://schema.org/duration">
-								<code>duration</code>
-							</a>
+							(None)
 						</td>
 						<td>OPTIONAL</td>
 					</tr>
@@ -4096,8 +4180,12 @@ dictionary LinkedResource {
     sequence&lt;LocalizableString> name;
     LocalizableString           description;
     sequence&lt;DOMString>         rel;
-    DOMString                   duration;
+    DOMString                   totalDuration;
 };</pre>
+
+		<p class=note>
+			The term <code>totalDuration</code> has a counterpart called <a href="https://schema.org/duration"><code>duration</code></a> in the schema.org vocabulary. However, the required value for that term is defined to be the duration value as defined by&nbsp;[[!iso8601]]. The Working Group will explore whether it is possible to add Normal Play Time to the accepted values, in which case this specification may be changed to use the <code>duration</code> term.
+		</p>
 		</section>
 		<section id="app-toc-structure" class="appendix">
 			<h2>Machine-Processable Table of Contents</h2>
