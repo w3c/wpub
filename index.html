@@ -2049,7 +2049,7 @@ partial dictionary PublicationManifest {
 
 						<pre class="idl">
 partial dictionary PublicationManifest {
-   required sequence&lt;LinkedResource> readingOrder;
+    required sequence&lt;LinkedResource> readingOrder;
 };</pre>
 
 						<pre class="example" title="Reading order expressed as a simple list of URLs">
@@ -3436,6 +3436,7 @@ partial dictionary PublicationManifest {
 									<th>Term</th>
 									<th>Description</th>
 									<th>Required Value</th>
+									<th>Value Type</th>
 									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
@@ -3446,6 +3447,7 @@ partial dictionary PublicationManifest {
 									</td>
 									<td>URL of the primary entry page.</td>
 									<td>A URL [[!url]].</td>
+									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
 									<td>
 										<a href="https://schema.org/url"><code>url</code></a> (<a
 											href="https://schema.org/Thing">Thing</a>) </td>
@@ -3499,6 +3501,7 @@ partial dictionary PublicationManifest {
 									<th>Term</th>
 									<th>Description</th>
 									<th>Required Value</th>
+									<th>Value Type</th>
 									<th>[[!schema.org]] Mapping</th>
 								</tr>
 							</thead>
@@ -3509,6 +3512,7 @@ partial dictionary PublicationManifest {
 									</td>
 									<td>Preferred version of the publication.</td>
 									<td>A URL [[!url]].</td>
+									<td><a href="#value-url">URL</a></td>
 									<td>(None)</td>
 								</tr>
 							</tbody>
@@ -3975,8 +3979,8 @@ partial dictionary PublicationManifest {
 						<th>Term</th>
 						<th>Description</th>
 						<th>Required Value</th>
+						<th>Value Type</th>
 						<th>[[!schema.org]] Mapping</th>
-						<th>Optionality</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -3986,15 +3990,17 @@ partial dictionary PublicationManifest {
 								<dfn>url</dfn>
 							</code>
 						</td>
-						<td>Location of the resource.</td>
+						<td>Location of the resource. REQUIRED.</td>
 						<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type for additional
 							restrictions.</td>
+						<td>
+							<a href="#value-url">URL</a>
+						</td>
 						<td>
 							<a href="https://schema.org/url">
 								<code>url</code>
 							</a>
 						</td>
-						<td>REQUIRED</td>
 					</tr>
 					<tr>
 						<td>
@@ -4002,14 +4008,16 @@ partial dictionary PublicationManifest {
 								<dfn>encodingFormat</dfn>
 							</code>
 						</td>
-						<td>Media type of the resource (e.g., <code>text/html</code>).</td>
+						<td>Media type of the resource (e.g., <code>text/html</code>). OPTIONAL.</td>
 						<td>MIME Media Type&#160;[[!rfc2046]].</td>
+						<td>
+							<a href="#value-literal">Literal</a>
+						</td>
 						<td>
 							<a href="https://schema.org/encodingFormat">
 								<code>encodingFormat</code>
 							</a>
 						</td>
-						<td>OPTIONAL</td>
 					</tr>
 					<tr>
 						<td>
@@ -4017,14 +4025,17 @@ partial dictionary PublicationManifest {
 								<dfn>name</dfn>
 							</code>
 						</td>
-						<td>Name of the item.</td>
+						<td>Name of the item. OPTIONAL.</td>
 						<td>One or more Text items.</td>
+						<td>
+							<a href="#value-array">Array</a> of
+							<a href="#value-localizable-string">Localizable Strings</a>
+						</td>
 						<td>
 							<a href="https://schema.org/name">
 								<code>name</code>
 							</a>
 						</td>
-						<td>OPTIONAL</td>
 					</tr>
 					<tr>
 						<td>
@@ -4032,14 +4043,16 @@ partial dictionary PublicationManifest {
 								<dfn>description</dfn>
 							</code>
 						</td>
-						<td>Description of the item.</td>
+						<td>Description of the item. OPTIONAL.</td>
 						<td>Text.</td>
+						<td>
+							<a href="#value-localizable-string">Localizable String</a>
+						</td>
 						<td>
 							<a href="https://schema.org/description">
 								<code>description</code>
 							</a>
 						</td>
-						<td>OPTIONAL</td>
 					</tr>
 					<tr>
 						<td>
@@ -4047,25 +4060,28 @@ partial dictionary PublicationManifest {
 								<dfn>rel</dfn>
 							</code>
 						</td>
-						<td>The relationship of the resource to the publication.</td>
+						<td>The relationship of the resource to the publication. OPTIONAL.</td>
 						<td>
 							<p>One or more relations. The values are either the relevant relationship terms of the IANA
 								link registry&#160;[[!iana-link-relations]], or specially-defined URLs if no suitable
 								link registry item exists.</p>
 						</td>
+						<td>
+							<a href="#value-array">Array</a> of
+							<a href="#value-literal">Literals</a>
+						</td>
 						<td>(None)</td>
-						<td>OPTIONAL</td>
 					</tr>
 				</tbody>
 			</table>
 
 			<pre class="idl">
 dictionary LinkedResource {
-    DOMString           url;
-    DOMString           encodingFormat;
-    sequence&lt;LocalizableString>   name;
-    LocalizableString   description;
-    sequence&lt;DOMString> rel;
+    required DOMString           url;
+             DOMString           encodingFormat;
+             sequence&lt;LocalizableString>   name;
+             LocalizableString   description;
+             sequence&lt;DOMString> rel;
 };</pre>
 		</section>
 		<section id="app-toc-structure" class="appendix">
