@@ -787,7 +787,7 @@ partial dictionary PublicationManifest {
 						<h5>Literals</h5>
 
 						<p>Some <a href="#manifest-properties">manifest</a> properties expect a literal text string as
-							their value (i.e., one that is not language-dependent, such as a code value or date). These
+							their value &#8212; one that is not language-dependent, such as a code value or date. These
 							values are expressed as [[!json]] strings.</p>
 
 						<p>Literal values are not changed <a href="#canonical-manifest">during canonicalization of the
@@ -1517,11 +1517,12 @@ dictionary CreatorInfo {
 							table of contents on the right hand side for publications whose natural base direction is
 							right-to-left).</p>
 
-						<p>Similarly, each natural language property value in the publication's manifest (e.g., <a
-								href="#pub-title">title</a>, <a href="#creators">creators</a>) is <a
-								href="https://w3c.github.io/string-meta/#dom-localizable"
-							>localizable</a>&#160;[[string-meta]], meaning that the same information is available for
-							each.</p>
+						<p>Similarly, each natural language property value in the manifest (e.g., <a href="#pub-title"
+								>title</a>, <a href="#creators">creators</a>) is a <a href="#value-localizable-string"
+								>localizable string</a>.</p>
+
+						<p class="note">For more information about localized strings on the Web, refer to
+							[[string-meta]].</p>
 
 						<p>The natural language and base direction can be set for both the <a
 								href="#manifest-default-language-and-dir">publication</a> and the <a
@@ -4028,8 +4029,8 @@ partial dictionary PublicationManifest {
 						<td>Name of the item. OPTIONAL.</td>
 						<td>One or more Text items.</td>
 						<td>
-							<a href="#value-array">Array</a> of
-							<a href="#value-localizable-string">Localizable Strings</a>
+							<a href="#value-array">Array</a> of <a href="#value-localizable-string">Localizable
+								Strings</a>
 						</td>
 						<td>
 							<a href="https://schema.org/name">
@@ -4067,8 +4068,7 @@ partial dictionary PublicationManifest {
 								link registry item exists.</p>
 						</td>
 						<td>
-							<a href="#value-array">Array</a> of
-							<a href="#value-literal">Literals</a>
+							<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 						</td>
 						<td>(None)</td>
 					</tr>
