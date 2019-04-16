@@ -4097,6 +4097,16 @@ partial dictionary PublicationManifest {
 
 			<p>Although user agent support for the <code>integrity</code> property is OPTIONAL, user agents that support
 				cryptographic hashing comparisons using this property MUST do so in accordance with [[!sri]].</p>
+			
+			<aside class="example" title="A resource with a SHA-256 hashing of its content">
+				<pre>{
+    "type":           "LinkedResource",
+    "url":            "chapter1.html",
+    "encodingFormat": "text/html",
+    "name":           "Chapter 1 - Loomings",
+    "integrity":      "sha256-13AE04E21177BABEDFDE721577615A638341F963731EA936BBB8C3862F57CDFC"
+}</pre>
+			</aside>
 
 			<pre class="idl">
 dictionary LinkedResource {
