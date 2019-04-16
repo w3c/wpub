@@ -558,12 +558,12 @@ partial dictionary PublicationManifest {
 								</td>
 							</tr>
 							<tr>
-									<td>
-										<code>accessibility-report</code>
-									</td>
-									<td>
-										<a href="#accessibility-report">Accessibility Report</a>
-									</td>
+								<td>
+									<code>accessibility-report</code>
+								</td>
+								<td>
+									<a href="#accessibility-report">Accessibility Report</a>
+								</td>
 							</tr>
 							<tr>
 								<td>
@@ -792,7 +792,7 @@ partial dictionary PublicationManifest {
 							</tr>
 						</tbody>
 					</table>
-			
+
 
 				</section>
 
@@ -816,9 +816,8 @@ partial dictionary PublicationManifest {
 					<section id="value-number">
 						<h5>Numbers</h5>
 
-						<p>
-							Some <a href="#manifest-properties">manifest</a> properties expect a number as their value. These values are expressed as [[!json]] numbers.
-						</p>
+						<p> Some <a href="#manifest-properties">manifest</a> properties expect a number as their value.
+							These values are expressed as [[!json]] numbers. </p>
 					</section>
 
 
@@ -1535,9 +1534,9 @@ dictionary CreatorInfo {
 					<section id="duration">
 						<h5>Duration</h5>
 
-						<p>
-							The <dfn>global duration</dfn> indicates the overall length of a <em>time-based</em> <a>digital publication</a> (e.g., an audiobook, a book consisting of a series of video clips, etc.). It is expressed as a "Duration" value as defined by&nbsp;[[!iso8601]].
-						</p>
+						<p> The <dfn>global duration</dfn> indicates the overall length of a <em>time-based</em>
+							<a>digital publication</a> (e.g., an audiobook, a book consisting of a series of video
+							clips, etc.). It is expressed as a "Duration" value as defined by&#160;[[!iso8601]]. </p>
 
 						<table class="zebra">
 							<thead>
@@ -1557,7 +1556,7 @@ dictionary CreatorInfo {
 										</code>
 									</td>
 									<td>Overall duration of a time-based publication.</td>
-									<td>Duration value as defined by&nbsp;[[!iso8601]]</td>
+									<td>Duration value as defined by&#160;[[!iso8601]]</td>
 									<td>
 										<a href="#value-literal">Literal</a>
 									</td>
@@ -1568,12 +1567,12 @@ dictionary CreatorInfo {
 							</tbody>
 						</table>
 
-<pre class="idl">
+						<pre class="idl">
 partial dictionary PublicationManifest {		
     DOMString duration;
 };</pre>
-			
-					<pre class="example" title="Global duration provided in the manifest (in seconds)">
+
+						<pre class="example" title="Global duration provided in the manifest (in seconds)">
 {
     "@context"       : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     "type"           : "Audiobook",
@@ -1586,9 +1585,8 @@ partial dictionary PublicationManifest {
 }
 	</pre>
 
-						<p class=note>
-							The <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">relevant Wikiepedia page</a> gives a concise description of the ISO duration syntax.
-						</p>
+						<p class="note"> The <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">relevant
+								Wikiepedia page</a> gives a concise description of the ISO duration syntax. </p>
 					</section>
 
 					<section id="language-and-dir">
@@ -3188,10 +3186,10 @@ partial dictionary PublicationManifest {
 						goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the
 						minimal requirements on the data, removing, if applicable, non-conformant data. </p>
 
-					<p>
-						As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>).
-					</p>
-		
+					<p> As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for
+						the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object
+						appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>). </p>
+
 					<ol>
 						<li>Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
 								>converting</a>
@@ -3220,8 +3218,9 @@ partial dictionary PublicationManifest {
 										<var>P["url"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. If yes, check whether
 										<var>P["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
-								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["length"]</var> is set,  check whether this value is a valid number. 
-									If the check fails, issue a warning.</li>
+								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of
+										<var>P["length"]</var> is set, check whether this value is a valid number. If
+									the check fails, issue a warning.</li>
 								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
 									generate a value (see the <a href="#generate_title">separate note for details</a>)
 									and issue a warning. </li>
@@ -3229,7 +3228,8 @@ partial dictionary PublicationManifest {
 									per&#160;[[!iso8601]]. If the check fails, issue a warning. </li>
 								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
 									per&#160;[[!iso8601]]. If the check fails, issue a warning. </li>
-								<li>Check whether <var>manifest["duration"]</var> is a valid  duration value, per&nbsp;[[!iso8601]].  If the check fails, issue a warning.</li>	
+								<li>Check whether <var>manifest["duration"]</var> is a valid duration value,
+									per&#160;[[!iso8601]]. If the check fails, issue a warning.</li>
 							</ol>
 						</li>
 						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
@@ -4192,10 +4192,9 @@ partial dictionary PublicationManifest {
 								<dfn>length</dfn>
 							</code>
 						</td>
-						<td>The total length of a time-based media resource in (possibly fractional) seconds. OPTIONAL</td>
-						<td>
-							Number
-						</td>
+						<td>The total length of a time-based media resource in (possibly fractional) seconds.
+							OPTIONAL</td>
+						<td> Number </td>
 						<td>
 							<a href="#value-number">Number</a>
 						</td>
