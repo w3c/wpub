@@ -558,6 +558,14 @@ partial dictionary PublicationManifest {
 								</td>
 							</tr>
 							<tr>
+									<td>
+										<code>accessibility-report</code>
+									</td>
+									<td>
+										<a href="#accessibility-report">Accessibility Report</a>
+									</td>
+							</tr>
+							<tr>
 								<td>
 									<code>accessibilitySummary</code>
 								</td>
@@ -599,6 +607,14 @@ partial dictionary PublicationManifest {
 							</tr>
 							<tr>
 								<td>
+									<code>cover</code>
+								</td>
+								<td>
+									<a href="#cover">Cover</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<code>creator</code>
 								</td>
 								<td>
@@ -623,34 +639,27 @@ partial dictionary PublicationManifest {
 							</tr>
 							<tr>
 								<td>
+									<code>datePublished</code>
+								</td>
+								<td>
+									<a href="#publication-date">Publication Date</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>duration</code>
+								</td>
+								<td>
+									<a href="#duration">Duration</a>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
 									<code>editor</code>
 								</td>
 								<td>
 									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>https://www.w3.org/ns/wp#accessibility-report</code>
-								</td>
-								<td>
-									<a href="#accessibility-report">Accessibility Report</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>https://www.w3.org/ns/wp#cover</code>
-								</td>
-								<td>
-									<a href="#cover">Cover</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>https://www.w3.org/ns/wp#pagelist</code>
-								</td>
-								<td>
-									<a href="#page-list">Pagelist</a>
 								</td>
 							</tr>
 							<tr>
@@ -707,6 +716,14 @@ partial dictionary PublicationManifest {
 								</td>
 								<td>
 									<a href="#pub-title">Title</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>pagelist</code>
+								</td>
+								<td>
+									<a href="#page-list">Pagelist</a>
 								</td>
 							</tr>
 							<tr>
@@ -775,6 +792,8 @@ partial dictionary PublicationManifest {
 							</tr>
 						</tbody>
 					</table>
+			
+
 				</section>
 
 				<section id="properties-value-categories">
@@ -793,6 +812,15 @@ partial dictionary PublicationManifest {
 						<p>Literal values are not changed <a href="#canonical-manifest">during canonicalization of the
 								manifest</a>, unlike other values which might be, for example, converted to objects.</p>
 					</section>
+
+					<section id="value-number">
+						<h5>Numbers</h5>
+
+						<p>
+							Some <a href="#manifest-properties">manifest</a> properties expect a number as their value. These values are expressed as [[!json]] numbers.
+						</p>
+					</section>
+
 
 					<section id="value-objects">
 						<h5>Explicit and Implied Objects</h5>
@@ -1502,6 +1530,65 @@ dictionary CreatorInfo {
     &#8230;
 }
 </pre>
+					</section>
+
+					<section id="duration">
+						<h5>Duration</h5>
+
+						<p>
+							The <dfn>global duration</dfn> indicates the overall length of a <em>time-based</em> <a>digital publication</a> (e.g., an audiobook, a book consisting of a series of video clips, etc.). It is expressed as a "Duration" value as defined by&nbsp;[[!iso8601]].
+						</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>Value Category</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="PublicationManifest">
+											<dfn>duration</dfn>
+										</code>
+									</td>
+									<td>Overall duration of a time-based publication.</td>
+									<td>Duration value as defined by&nbsp;[[!iso8601]]</td>
+									<td>
+										<a href="#value-literal">Literal</a>
+									</td>
+									<td>
+										<a href="https://schema.org/duration"><code>duration</code></a> (<a
+											href="https://schema.org/Property">Property</a>) </td>
+								</tr>
+							</tbody>
+						</table>
+
+<pre class="idl">
+partial dictionary PublicationManifest {		
+    DOMString duration;
+};</pre>
+			
+					<pre class="example" title="Global duration provided in the manifest (in seconds)">
+{
+    "@context"       : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+    "type"           : "Audiobook",
+    "id"             : "https://example.org/flatland-a-romance-of-many-dimensions/",
+    "url"            : "https://w3c.github.io/wpub/experiments/audiobook/",
+    "name"           : "Flatland: A Romance of Many Dimensions",
+    &#8230;		
+    "duration"       : "PT15153S",
+    &#8230;
+}
+	</pre>
+
+						<p class=note>
+							The <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">relevant Wikiepedia page</a> gives a concise description of the ISO duration syntax.
+						</p>
 					</section>
 
 					<section id="language-and-dir">
@@ -3101,6 +3188,10 @@ partial dictionary PublicationManifest {
 						goal of the algorithm is to ensure that the data represented in <var>json</var> abides to the
 						minimal requirements on the data, removing, if applicable, non-conformant data. </p>
 
+					<p>
+						As an abuse of notation, <var>P["term"]</var> refers to the value in the object <var>P</var> for the label <var>"term"</var>, where <var>P</var> is either <var>manifest</var>, or an object appearing within <var>manifest</var> (e.g., a <var>LinkedResource</var>).
+					</p>
+		
 					<ol>
 						<li>Let <var>manifest</var> be the result of <a data-cite="!webidl-1/#es-dictionary"
 								>converting</a>
@@ -3121,21 +3212,24 @@ partial dictionary PublicationManifest {
 										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
 										expected values</a>). Issue a warning for all unrecognized values. </li>
 								<li>For all <var>term</var> that expect <a href="#value-object-entity">entities</a>,
-									check whether the value object <var>Obj</var> in <var>manifest[term]</var> has
-										<var>Obj["name"]</var> set. If not, remove <var>Obj</var> from
+									check whether the value object <var>P</var> in <var>manifest[term]</var> has
+										<var>P["name"]</var> set. If not, remove <var>P</var> from
 										<var>manifest[term]</var> array and issue a warning. </li>
+								<li>For all <var>term</var> defined in <a href="#resource-categorization-properties"
+									></a>, check whether every object <var>P</var> in <var>manifest[term]</var> has
+										<var>P["url"]</var> set. If not, remove <var>P</var> from
+										<var>manifest[term]</var> array and issue a warning. If yes, check whether
+										<var>P["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
+								<li>For every object <var>P</var> of type <a>LinkedResource</a>, if the value of <var>P["length"]</var> is set,  check whether this value is a valid number. 
+									If the check fails, issue a warning.</li>
 								<li>Check whether the value of <var>manifest["name"]</var> is not empty. If it is,
 									generate a value (see the <a href="#generate_title">separate note for details</a>)
 									and issue a warning. </li>
-								<li>For all <var>term</var> defined in <a href="#resource-categorization-properties"
-									></a>, check whether every object <var>Obj</var> in <var>manifest[term]</var> has
-										<var>Obj["url"]</var> set. If not, remove <var>Obj</var> from
-										<var>manifest[term]</var> array and issue a warning. If yes, check whether
-										<var>Obj["url"]</var> is a valid URL&#160;[[!url]] and, if not, issue a warning. </li>
 								<li>Check whether <var>manifest["datePublished"]</var> is a valid date or date-time,
-									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+									per&#160;[[!iso8601]]. If the check fails, issue a warning. </li>
 								<li>Check whether <var>manifest["dateModified"]</var> is a valid date or date-time,
-									per&#160;[[iso8601]]. If the check fails, issue a warning. </li>
+									per&#160;[[!iso8601]]. If the check fails, issue a warning. </li>
+								<li>Check whether <var>manifest["duration"]</var> is a valid  duration value, per&nbsp;[[!iso8601]].  If the check fails, issue a warning.</li>	
 							</ol>
 						</li>
 						<li>Extension point: process any proprietary, <a>profile</a> specific, and/or other supported
@@ -4072,16 +4166,31 @@ partial dictionary PublicationManifest {
 						</td>
 						<td>(None)</td>
 					</tr>
+					<tr>
+						<td>
+							<code>
+								<dfn>length</dfn>
+							</code>
+						</td>
+						<td>The total length of a time-based media resource in (possibly fractional) seconds. OPTIONAL</td>
+						<td>
+							Number
+						</td>
+						<td>
+							<a href="#value-number">Number</a>
+						</td>
+						<td>(None)</td>
 				</tbody>
 			</table>
 
 			<pre class="idl">
 dictionary LinkedResource {
-    required DOMString           url;
-             DOMString           encodingFormat;
-             sequence&lt;LocalizableString>   name;
-             LocalizableString   description;
-             sequence&lt;DOMString> rel;
+    required DOMString                   url;
+             DOMString                   encodingFormat;
+             sequence&lt;LocalizableString> name;
+             LocalizableString           description;
+             sequence&lt;DOMString>         rel;
+             double                      length;
 };</pre>
 		</section>
 		<section id="app-toc-structure" class="appendix">
