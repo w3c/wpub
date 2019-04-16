@@ -4175,12 +4175,12 @@ partial dictionary PublicationManifest {
 
 			<pre class="idl">
 dictionary LinkedResource {
-    DOMString                   url;
-    DOMString                   encodingFormat;
-    sequence&lt;LocalizableString> name;
-    LocalizableString           description;
-    sequence&lt;DOMString>         rel;
-    DOMString                   totalDuration;
+    required DOMString                   url;
+             DOMString                   encodingFormat;
+             sequence&lt;LocalizableString> name;
+             LocalizableString           description;
+             sequence&lt;DOMString>         rel;
+             DOMString                   totalDuration;
 };</pre>
 
 		<p class=note>
