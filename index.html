@@ -4078,8 +4078,9 @@ partial dictionary PublicationManifest {
 						</td>
 						<td>A cryptographic hashing of the resource that allows its integrity to be verified.
 							OPTIONAL.</td>
-						<td><p>One or more sets of <a href="https://www.w3.org/TR/SRI/#dfn-integrity-metadata">integrity
-									metadata</a> [[!sri]]. The value MUST conform to the <a
+						<td><p>One or more whitespace-separated sets of <a
+									href="https://www.w3.org/TR/SRI/#dfn-integrity-metadata">integrity metadata</a>
+								[[!sri]]. The value MUST conform to the <a
 									href="https://www.w3.org/TR/SRI/#the-integrity-attribute">metadata defintion</a>
 								[[!sri]].</p>
 							<p>Refer to [[!sri]] for the <a
@@ -4104,6 +4105,7 @@ dictionary LinkedResource {
              sequence&lt;LocalizableString>   name;
              LocalizableString   description;
              sequence&lt;DOMString> rel;
+             DOMString           integrity;
 };</pre>
 		</section>
 		<section id="app-toc-structure" class="appendix">
