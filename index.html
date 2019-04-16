@@ -4168,6 +4168,26 @@ partial dictionary PublicationManifest {
 					</tr>
 					<tr>
 						<td>
+							<code><dfn>integrity</dfn></code>
+						</td>
+						<td>A cryptographic hashing of the resource that allows its integrity to be verified.
+							OPTIONAL.</td>
+						<td><p>One or more whitespace-separated sets of <a
+									href="https://www.w3.org/TR/SRI/#dfn-integrity-metadata">integrity metadata</a>
+								[[!sri]]. The value MUST conform to the <a
+									href="https://www.w3.org/TR/SRI/#the-integrity-attribute">metadata definition</a>
+								[[!sri]].</p>
+							<p>Refer to [[!sri]] for the <a
+									href="https://www.w3.org/TR/SRI/#cryptographic-hash-functions">list of cryptographic
+									hashing functions</a> that user agents are expected to support.</p>
+						</td>
+						<td>
+							<a href="#value-literal">Literal</a>
+						</td>
+						<td>(None)</td>
+					</tr>
+					<tr>
+						<td>
 							<code>
 								<dfn>length</dfn>
 							</code>
@@ -4180,17 +4200,32 @@ partial dictionary PublicationManifest {
 							<a href="#value-number">Number</a>
 						</td>
 						<td>(None)</td>
+					</tr>
 				</tbody>
 			</table>
 
+			<p>Although user agent support for the <code>integrity</code> property is OPTIONAL, user agents that support
+				cryptographic hashing comparisons using this property MUST do so in accordance with [[!sri]].</p>
+
+			<aside class="example" title="A resource with a SHA-256 hashing of its content">
+				<pre>{
+    "type":           "LinkedResource",
+    "url":            "chapter1.html",
+    "encodingFormat": "text/html",
+    "name":           "Chapter 1 - Loomings",
+    "integrity":      "sha256-13AE04E21177BABEDFDE721577615A638341F963731EA936BBB8C3862F57CDFC"
+}</pre>
+			</aside>
+
 			<pre class="idl">
 dictionary LinkedResource {
-    required DOMString                   url;
-             DOMString                   encodingFormat;
-             sequence&lt;LocalizableString> name;
-             LocalizableString           description;
-             sequence&lt;DOMString>         rel;
-             double                      length;
+    required DOMString           url;
+             DOMString           encodingFormat;
+             sequence&lt;LocalizableString>   name;
+             LocalizableString   description;
+             sequence&lt;DOMString> rel;
+             DOMString           integrity;
+             double              length;
 };</pre>
 		</section>
 		<section id="app-toc-structure" class="appendix">
