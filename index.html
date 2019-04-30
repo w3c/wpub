@@ -318,15 +318,15 @@
 				<section id="webidl-wpm">
 					<h4>The <dfn><code>PublicationManifest</code></dfn> Dictionary</h4>
 
-					<pre class="idl" id="wpm">
-dictionary PublicationManifest {
-
-};</pre>
-
 					<p>The <code>PublicationManifest</code> dictionary is the [[!webidl-1]] representation of the
 						collection of manifest properties. WebIDL definitions are also provided at the end of each
 						property that belongs to the dictionary — these represent the members of the
 							<code>PublicationManifest</code> dictionary.</p>
+
+					<pre class="idl" id="wpm">
+dictionary PublicationManifest {
+
+};</pre>
 
 					<p class="note">Refer to <a href="#idl-index"></a> for a complete listing of the
 							<code>PublicationManifest</code> dictionary.</p>
@@ -457,27 +457,11 @@ partial dictionary PublicationManifest {
 									>default reading order</a>. These properties refer to one or more resources, such as
 								HTML documents, images, script files, and separate metadata files.</p>
 						</dd>
-						<dt>
-							<a href="#informative-properties">informative properties</a>
-						</dt>
-						<dd>
-							<p>Informative properties identify resources that contain additional information about the
-								publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
-									href="#accessibility-report">accessibility report</a>.</p>
-						</dd>
-						<dt>
-							<a href="#structural-properties">structural properties</a>
-						</dt>
-						<dd>
-							<p>Structural properties identify key meta structures of the publication, such as the <a
-									href="#cover">cover image</a>, <a href="#table-of-contents">table of contents</a>,
-								and <a href="#page-list">page list</a>.</p>
-						</dd>
 					</dl>
 
-					<p class="note">The categorization of properties is done to simplify comprehension of their purpose;
-						the groupings have no relevance outside this specification (i.e., the groupings do not exist in
-						the manifest).</p>
+					<p class="note">The categorization of properties exists only to simplify comprehension of their
+						purpose; the groupings have no relevance outside this specification (i.e., the properties are
+						not actually grouped together in the manifest).</p>
 
 					<div class="note">
 						<p>Each manifest item drawn from schema.org identifies the property it maps to and includes its
@@ -492,308 +476,6 @@ partial dictionary PublicationManifest {
 
 					<p class="ednote">There are discussion on whether a best practices document would be created,
 						referring to more schema.org terms. If so, it should be linked from here.</p>
-				</section>
-
-				<section id="properties-mapping" class="informative">
-					<h4>Quick Reference</h4>
-
-					<p>The way that properties are expressed in the manifest often differs from how they are referred to
-						using natural language. The following table provides a mapping between property names and the
-						sections where they are explained to help clarify the differing nomenclature:</p>
-
-					<table class="zebra">
-						<thead>
-							<tr>
-								<th>Property Name</th>
-								<th>Defined In</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<code>accessMode</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessModeSufficient</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibilityAPI</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibilityControl</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibilityFeature</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibilityHazard</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibility-report</code>
-								</td>
-								<td>
-									<a href="#accessibility-report">Accessibility Report</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>accessibilitySummary</code>
-								</td>
-								<td>
-									<a href="#accessibility">Accessibility</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>artist</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>author</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>contents</code>
-								</td>
-								<td>
-									<a href="#table-of-contents">Table of Contents</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>contributor</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>cover</code>
-								</td>
-								<td>
-									<a href="#cover">Cover</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>creator</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>dateModified</code>
-								</td>
-								<td>
-									<a href="#last-modification-date">Last Modification Date</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>datePublished</code>
-								</td>
-								<td>
-									<a href="#publication-date">Publication Date</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>datePublished</code>
-								</td>
-								<td>
-									<a href="#publication-date">Publication Date</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>duration</code>
-								</td>
-								<td>
-									<a href="#duration">Duration</a>
-								</td>
-							</tr>
-
-							<tr>
-								<td>
-									<code>editor</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>illustrator</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>inDirection</code>
-								</td>
-								<td>
-									<a href="#language-and-dir">Direction</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>inker</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>inLanguage</code>
-								</td>
-								<td>
-									<a href="#language-and-dir">Language</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>letterer</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>link</code>
-								</td>
-								<td>
-									<a href="#links">Links</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>name</code>
-								</td>
-								<td>
-									<a href="#pub-title">Title</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>pagelist</code>
-								</td>
-								<td>
-									<a href="#page-list">Pagelist</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>penciler</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>privacy-policy</code>
-								</td>
-								<td>
-									<a href="#privacy-policy">Privacy Policy</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>publisher</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>readBy</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>readingOrder</code>
-								</td>
-								<td>
-									<a href="#default-reading-order">Default Reading Order</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>readingProgression</code>
-								</td>
-								<td>
-									<a href="#reading-progression-direction">Reading Progression Direction</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>resources</code>
-								</td>
-								<td>
-									<a href="#resource-list">Resource List</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>translator</code>
-								</td>
-								<td>
-									<a href="#creators">Creators</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-
 				</section>
 
 				<section id="properties-value-categories">
@@ -2074,9 +1756,9 @@ partial dictionary PublicationManifest {
 
 					<p>Publication resources are specified via the <a>default reading order</a>, the <a>resource
 							list</a>, and the <a>links</a>, as defined in this section. These lists contain references
-						to <a href="#informative-properties">informative properties</a> like the <a
-							href="#privacy-policy">privacy policy</a>, and <a href="#structural-properties">structural
-							properties</a> like the <a href="#table-of-contents">table of contents</a>.</p>
+						to <a href="#informative-rel">informative resources</a> like the <a href="#privacy-policy"
+							>privacy policy</a>, and <a href="#structural-rel">structural resources</a> like the <a
+							href="#table-of-contents">table of contents</a>.</p>
 
 					<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL
 						MUST NOT be repeated within a list.</p>
@@ -2352,285 +2034,6 @@ partial dictionary PublicationManifest {
 					</section>
 				</section>
 
-				<section id="informative-properties">
-					<h4>Informative Properties</h4>
-
-					<section id="accessibility-report">
-						<h5>Accessibility Report</h5>
-
-						<p>An accessibility report provides information about the suitability of a <a>digital
-								publication</a> for consumption by users with varying preferred reading modalities.
-							These reports typically identify the result of an evaluation against established
-							accessibility criteria, such as those provided in [[WCAG21]], and are an important source of
-							information in determining the usability of a publication.</p>
-
-						<p>An accessibility report is identified using the
-								<code>https://www.w3.org/ns/wp#accessibility-report</code> link relationship.</p>
-
-						<p>The manifest SHOULD include a link to an accessibility report when one is available for a
-							publication. It is RECOMMENDED that the report be included as a resource of the
-							publication.</p>
-
-						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
-							such as [[!html]]. Augmenting these reports with machine-processable metadata, such as
-							provided in Schema.org [[!schema.org]], is also RECOMMENDED.</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
-							term with IANA, to avoid using a URL.</p>
-
-						<pre class="example" title="Link to an accessibility report">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "links"  : [{
-        "type"        : "LinkedResource",
-        "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
-        "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-					</section>
-
-					<section id="privacy-policy">
-						<h5>Privacy Policy</h5>
-
-						<p>Users often have the legal right to know and control what information is collected about
-							them, how such information is stored and for how long, whether it is personally
-							identifiable, and how it can be expunged. Including a statement that addresses such privacy
-							concerns is consequently an important part of publishing <a>digital publications</a>. Even
-							if no information is collected, such a declaration increases the trust users have in the
-							content.</p>
-
-						<p>A link to a privacy policy can be included in the manifest for this purposes. It is
-							RECOMMENDED that the privacy policy be included as a resource of the publication.</p>
-
-						<p>The <span data-dfn-for="PublicationManifest"><dfn data-lt="privacyPolicy">privacy
-									policy</dfn></span> is identified using the <code>privacy-policy</code> link
-							relationship&#160;[[!iana-link-relations]].</p>
-
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
-
-						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in
-							publications.</p>
-
-						<pre class="example" title="Privacy policy expressed as an external link">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "TechArticle",
-    &#8230;
-    "id"         : "http://www.w3.org/TR/tabular-data-model/",
-    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    &#8230;
-    "links"  : [{
-        "type"           : "LinkedResource",
-        "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
-        "encodingFormat" : "text/html",
-        "rel"            : "privacy-policy"
-    },{
-            &#8230;
-    }],
-    &#8230;
-}
-</pre>
-					</section>
-				</section>
-
-				<section id="structural-properties">
-					<h4>Structural Properties</h4>
-
-					<section id="cover">
-						<h5>Cover</h5>
-
-						<p>The <dfn>cover</dfn> is a resource that user agents can use to present the <a>digital
-								publication</a> (e.g., in a library or bookshelf, or when initially loading the
-							publication).</p>
-
-						<p>The cover is identified by the <code>https://www.w3.org/ns/wp#cover</code> link relationship.
-							The <a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
-							fragment identifier.</p>
-
-						<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD
-							be provided. User agents can use these properties to provide alternative text and
-							descriptions when necessary for accessibility.</p>
-
-						<p>More than one cover MAY be referenced from the manifest (e.g., to provide alternative formats
-							and sizes for different device screens). If multiple covers are specified, each instance
-							MUST define at least one unique property to allow user agents to determine its usability
-							(e.g., a different format, height, width or relationship).</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
-							to avoid using a URL.</p>
-
-						<pre class="example" title="Cover HTML page">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/donquixote",
-    "name"       : "Don Quixote",
-    "resources"  : [{
-        "type"           : "LinkedResource",
-        "url"            : "cover.html",
-        "encodingFormat" : "text/html"
-        "rel"            : "https://www.w3.org/ns/wp#cover"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-
-						<pre class="example" title="Cover image with title and description">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "resources"  : [{
-        "type"           : "LinkedResource",
-        "url"            : "whale-image.jpg",
-        "encodingFormat" : "image/jpeg",
-        "rel"            : "https://www.w3.org/ns/wp#cover",
-        "name"           : "Moby Dick attacking hunters",
-        "description"    : "A white whale is seen surfacing from the water to attack a small whaling boat"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-
-						<pre class="example" title="Cover image in JPEG and SVG formats">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/donquixote",
-    "name"       : "Gulliver's Travels",
-    "resources"  : [{
-        "type"           : "LinkedResource",
-        "url"            : "lilliput.jpg",
-        "encodingFormat" : "image/jpeg",
-        "rel"            : "https://www.w3.org/ns/wp#cover"
-    },{
-        "type"           : "LinkedResource",
-        "url"            : "lilliput.svg",
-        "encodingFormat" : "image/svg+xml",
-        "rel"            : "https://www.w3.org/ns/wp#cover"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-					</section>
-
-					<section id="page-list">
-						<h5>Page List</h5>
-
-						<p>The page list property identifies the <a>digital publication's</a>
-							<a href="#pagelist">page list</a>. It MAY be used either to embed a page list within the
-							manifest or to identify a resource that contains the list. How the page list has to be
-							represented is determined by the digital publication format.</p>
-
-						<p>When the page list is contained in a separate resource, the resource MUST be identified by
-							the <code>https://www.w3.org/ns/wp#pagelist</code> link relationship. The <a
-								href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
-							fragment identifier.</p>
-
-						<p>The link to the page list MAY be specified in either the <a href="#default-reading-order"
-								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
-							be specified in both.</p>
-
-						<pre class="example" title="Pagelist identified in another resource of the publication">
-{
-"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-"type"       : "Book",
-&#8230;
-"url"        : "https://publisher.example.org/mobydick",
-"name"       : "Moby Dick",
-"resources"  : [{
-	"type"       : "LinkedResource",
-	"url"        : "toc_file.html",
-	"rel"        : "https://www.w3.org/ns/wp#pagelist"
-},{
-	&#8230;
-}],
-&#8230;
-}
-</pre>
-					</section>
-
-					<section id="pub-table-of-contents">
-						<h5>Table of Contents</h5>
-
-						<p>The table of contents property identifies the <a>digital publication's</a> table of contents.
-							It MAY be used either to embed a table of contents within the manifest or to identify a
-							resource that contains the table of contents. How the table of contents has to be
-							represented is determined by the digital publication format.</p>
-
-						<p>When the <span data-dfn-for="PublicationManifest"><dfn data-lt="toc">table of
-								contents</dfn></span> is contained in a separate resource, the resource MUST be
-							identified by the <code>contents</code> link relationship&#160;[[!iana-link-relations]]. The
-								<a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
-							fragment identifier.</p>
-
-						<p>The link to the table of contents MAY be specified in either the <a
-								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
-								>resource-list</a>, but MUST NOT be specified in both.</p>
-
-						<pre class="example" title="Table of content identified in another resource of the publication">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "resources"  : [{
-        "type"       : "LinkedResource",
-        "url"        : "toc_file.html",
-        "rel"        : "contents"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-
-						<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
-&lt;head&gt;
-    &#8230;
-    &lt;script type="application/ld+json"&gt;
-    {
-        "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        "type"            : "TechArticle",
-        &#8230;
-        "id"              : "http://www.w3.org/TR/tabular-data-model/",
-        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-        &#8230;
-    }
-    &lt;/script&gt;
-    &#8230;
-&lt;/head&gt;
-&lt;body&gt;
-    &#8230;
-    &lt;section role="doc-toc"&gt;
-        &#8230;
-    &lt;/section&gt;
-    &#8230;
-&lt;/body&gt;
-</pre>
-					</section>
-				</section>
-
 				<section id="extensibility">
 					<h4>Extensibility</h4>
 
@@ -2734,6 +2137,303 @@ partial dictionary PublicationManifest {
 							further details.</p>
 
 					</section>
+				</section>
+			</section>
+
+			<section id="manifest-rel">
+				<h3>Resource Relations</h3>
+
+				<section id="rel-intro" class="informative">
+					<h4>Introduction</h4>
+
+					<p>The <a>manifest</a> identifies key resources of a <a>digital publication</a> through the use of
+						link relations. These relations are applied to the <a href="#dom-linkedresource-rel"
+								><code>rel</code> property</a> of <a href="app-linkedResource"
+								><code>LinkedResource</code> objects</a> (e.g., the links found in the <a
+							href="#pub-table-of-contents">table of contents</a> and <a href="#resource-list">resource
+							list</a>).</p>
+
+					<p>The types of resources these relations identify are categorized as follows:</p>
+
+					<dl>
+						<dt>
+							<a href="#informative-rel">informative resources</a>
+						</dt>
+						<dd>
+							<p>Informative resources are resources that contain additional information about the
+								publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
+									href="#accessibility-report">accessibility report</a>.</p>
+						</dd>
+						<dt>
+							<a href="#structural-rel">structural resources</a>
+						</dt>
+						<dd>
+							<p>Structural resources are key meta structures of the publication, such as the <a
+									href="#cover">cover image</a>, <a href="#table-of-contents">table of contents</a>,
+								and <a href="#page-list">page list</a>.</p>
+						</dd>
+					</dl>
+				</section>
+
+				<section id="informative-rel">
+					<h4>Informative Resources</h4>
+
+					<section id="accessibility-report">
+						<h5>Accessibility Report</h5>
+
+						<p>An accessibility report provides information about the suitability of a <a>digital
+								publication</a> for consumption by users with varying preferred reading modalities.
+							These reports typically identify the result of an evaluation against established
+							accessibility criteria, such as those provided in [[WCAG21]], and are an important source of
+							information in determining the usability of a publication.</p>
+
+						<p>An accessibility report is identified using the
+								<code>https://www.w3.org/ns/wp#accessibility-report</code> link relation.</p>
+
+						<p>The manifest SHOULD include a link to an accessibility report when one is available for a
+							publication. It is RECOMMENDED that the report be included as a resource of the
+							publication.</p>
+
+						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
+							such as [[!html]]. Augmenting these reports with machine-processable metadata, such as
+							provided in Schema.org [[!schema.org]], is also RECOMMENDED.</p>
+
+						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
+							term with IANA, to avoid using a URL.</p>
+
+						<pre class="example" title="Link to an accessibility report">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "links"  : [{
+        "type"        : "LinkedResource",
+        "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
+        "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					</section>
+
+					<section id="privacy-policy">
+						<h5>Privacy Policy</h5>
+
+						<p>Users often have the legal right to know and control what information is collected about
+							them, how such information is stored and for how long, whether it is personally
+							identifiable, and how it can be expunged. Including a statement that addresses such privacy
+							concerns is consequently an important part of publishing <a>digital publications</a>. Even
+							if no information is collected, such a declaration increases the trust users have in the
+							content.</p>
+
+						<p>A link to a privacy policy can be included in the manifest for this purposes. It is
+							RECOMMENDED that the privacy policy be included as a resource of the publication.</p>
+
+						<p>The <span data-dfn-for="PublicationManifest"><dfn data-lt="privacyPolicy">privacy
+									policy</dfn></span> is identified using the <code>privacy-policy</code> link
+							relation&#160;[[!iana-link-relations]].</p>
+
+						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
+								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
+
+						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in
+							publications.</p>
+
+						<pre class="example" title="Privacy policy expressed as an external link">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "TechArticle",
+    &#8230;
+    "id"         : "http://www.w3.org/TR/tabular-data-model/",
+    "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    &#8230;
+    "links"  : [{
+        "type"           : "LinkedResource",
+        "url"            : "https://www.w3.org/Consortium/Legal/privacy-statement-20140324",
+        "encodingFormat" : "text/html",
+        "rel"            : "privacy-policy"
+    },{
+            &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					</section>
+				</section>
+
+				<section id="structural-rel">
+					<h4>Structural Resources</h4>
+
+					<section id="cover">
+						<h5>Cover</h5>
+
+						<p>The <dfn>cover</dfn> is a resource that user agents can use to present the <a>digital
+								publication</a> (e.g., in a library or bookshelf, or when initially loading the
+							publication).</p>
+
+						<p>The cover is identified by the <code>https://www.w3.org/ns/wp#cover</code> link relation. The
+								<a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
+							fragment identifier.</p>
+
+						<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD
+							be provided. User agents can use these properties to provide alternative text and
+							descriptions when necessary for accessibility.</p>
+
+						<p>More than one cover MAY be referenced from the manifest (e.g., to provide alternative formats
+							and sizes for different device screens). If multiple covers are specified, each instance
+							MUST define at least one unique property to allow user agents to determine its usability
+							(e.g., a different format, height, width or relation).</p>
+
+						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
+							to avoid using a URL.</p>
+
+						<pre class="example" title="Cover HTML page">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/donquixote",
+    "name"       : "Don Quixote",
+    "resources"  : [{
+        "type"           : "LinkedResource",
+        "url"            : "cover.html",
+        "encodingFormat" : "text/html"
+        "rel"            : "https://www.w3.org/ns/wp#cover"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+
+						<pre class="example" title="Cover image with title and description">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "type"           : "LinkedResource",
+        "url"            : "whale-image.jpg",
+        "encodingFormat" : "image/jpeg",
+        "rel"            : "https://www.w3.org/ns/wp#cover",
+        "name"           : "Moby Dick attacking hunters",
+        "description"    : "A white whale is seen surfacing from the water to attack a small whaling boat"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+
+						<pre class="example" title="Cover image in JPEG and SVG formats">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/donquixote",
+    "name"       : "Gulliver's Travels",
+    "resources"  : [{
+        "type"           : "LinkedResource",
+        "url"            : "lilliput.jpg",
+        "encodingFormat" : "image/jpeg",
+        "rel"            : "https://www.w3.org/ns/wp#cover"
+    },{
+        "type"           : "LinkedResource",
+        "url"            : "lilliput.svg",
+        "encodingFormat" : "image/svg+xml",
+        "rel"            : "https://www.w3.org/ns/wp#cover"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					</section>
+
+					<section id="page-list">
+						<h5>Page List</h5>
+
+						<p>The page list is a navigational aid that contains a list of static page demarcation points
+							within a <a>digital publication</a>.</p>
+
+						<p>The page list is identified by the <code>https://www.w3.org/ns/wp#pagelist</code> link
+							relation. The <a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT
+							include a fragment identifier.</p>
+
+						<p>The link to the page list MAY be specified in either the <a href="#default-reading-order"
+								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
+							be specified in both.</p>
+
+						<pre class="example" title="Page list identified in another resource of the publication">
+{
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+&#8230;
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"resources"  : [{
+	"type"       : "LinkedResource",
+	"url"        : "toc_file.html",
+	"rel"        : "https://www.w3.org/ns/wp#pagelist"
+},{
+	&#8230;
+}],
+&#8230;
+}
+</pre>
+					</section>
+
+					<section id="pub-table-of-contents">
+						<h5>Table of Contents</h5>
+
+						<p>The table of contents is a navigational aid that provides links to the majort structural
+							sections of a <a>digital publication</a>.</p>
+
+						<p>The <span data-dfn-for="PublicationManifest"><dfn data-lt="toc">table of
+								contents</dfn></span> is identified by the <code>contents</code> link
+							relation&#160;[[!iana-link-relations]]. The <a href="#value-url">URL</a> expressed in the
+								<code>url</code> term MUST NOT include a fragment identifier.</p>
+
+						<p>The link to the table of contents MAY be specified in either the <a
+								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
+								>resource-list</a>, but MUST NOT be specified in both.</p>
+
+						<pre class="example" title="Resource containing the table of contents identified by its rel attribute value">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "type"       : "LinkedResource",
+        "url"        : "toc_file.html",
+        "rel"        : "contents"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+					</section>
+				</section>
+
+				<section id="rel-extensions">
+					<h4>Extensions</h4>
+
+					<p>If additional relations beyond those defined in this specification need to be expressed, the <a
+							href="#dom-linkedresource-rel"><code>rel</code> property</a> can be extended through the use
+						of values defined in [[!iana-relations]].</p>
+
+
+					<p class="note">Authors are advised to register new relations in [[iana-relations]] rather than
+						create their own, as this standardizes both use and processing.</p>
 				</section>
 			</section>
 
@@ -3394,6 +3094,30 @@ partial dictionary PublicationManifest {
 							page</a>, the manifest SHOULD <a href="#table-of-contents">identify the resource</a> that
 						contains the structure.</p>
 
+					<pre class="example" title="If the primary entry page includes the table of contents, no reference to it in the manifest is necessary">
+&lt;head&gt;
+    &#8230;
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+        "type"            : "TechArticle",
+        &#8230;
+        "id"              : "http://www.w3.org/TR/tabular-data-model/",
+        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        &#8230;
+    }
+    &lt;/script&gt;
+    &#8230;
+&lt;/head&gt;
+&lt;body&gt;
+    &#8230;
+    &lt;section role="doc-toc"&gt;
+        &#8230;
+    &lt;/section&gt;
+    &#8230;
+&lt;/body&gt;
+</pre>
+
 					<p> When specified, the table of content MUST include a link to at least one <a href="#wp-resources"
 							>resource</a>, and all links SHOULD refer to <a href="#wp-resources">resources</a> within <a
 							href="#wp-bounds">publication bounds</a>. </p>
@@ -3421,12 +3145,12 @@ partial dictionary PublicationManifest {
 						order</a>&#160;[[!dom]] — with that <code>role</code> value.</p>
 
 					<p>If the page list is not located in the <a href="#primary-entry-page">primary entry page</a>, the
-						manifest SHOULD <a href="#page-list">identify the resource</a> that contains the structure.</p>
+						manifest SHOULD <a href="#pagelist">identify the resource</a> that contains the structure.</p>
 
 					<p>There are no requirements on the page list itself, except that, when specified, it MUST include a
 						link to at least one <a href="#wp-resources">resource</a>.</p>
 
-					<p>Refer to the <a href="#page-list"><code>pagelist</code> property definition</a> for more
+					<p>Refer to the <a href="#pagelist"><code>pagelist</code> property definition</a> for more
 						information on how to identify which resource contains the page list.</p>
 				</section>
 			</section>
@@ -3434,90 +3158,95 @@ partial dictionary PublicationManifest {
 			<section id="wp-manifest">
 				<h3>Manifest</h3>
 
+				<section id="wp-requirements">
+					<h5>Requirements</h5>
+
+					<p>The expression of properties in a Web Publication manifest includes a combination of those <a
+							href="#manifest-properties">defined generally for digital publications</a> as well as two
+						specific to Web Publications: the publication's <a href="#address">address</a> and <a
+							href="#canonical-identifier">canonical identifier</a>.</p>
+
+					<p>The requirements for the expression of these properties are as follows:</p>
+
+					<dl>
+						<dt>REQUIRED:</dt>
+						<dd>
+							<ul>
+								<li>
+									<a href="#address">address</a>
+								</li>
+								<li>
+									<a href="#wp-reading-order">default reading order</a>
+								</li>
+								<li>
+									<a href="#wp-title">title</a>
+								</li>
+							</ul>
+						</dd>
+						<dt>RECOMMENDED:</dt>
+						<dd>
+							<ul>
+								<li>
+									<a href="#accessibility">accessibility</a>
+								</li>
+								<li>
+									<a href="#language-and-dir">base direction</a>
+								</li>
+								<li>
+									<a href="#canonical-identifier">canonical identifier</a>
+								</li>
+								<li>
+									<a href="#creators">creators</a>
+								</li>
+								<li>
+									<a href="#language-and-dir">language and base direction</a>
+								</li>
+								<li>
+									<a href="#links">links</a>
+								</li>
+								<li>
+									<a href="#last-modification-date">last modification date</a>
+								</li>
+								<li>
+									<a href="#publication-date">publication date</a>
+								</li>
+								<li>
+									<a href="#reading-progression-direction">reading progression direction</a>
+								</li>
+								<li>
+									<a href="#resource-list">resource list</a>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+
+					<p class="note">These properties do not all have to be serialized in the <a>authored manifest</a>.
+						Refer to each property's definition to determine whether it is required in the manifest or can
+						be compiled into the <a>canonical manifest</a> from other information.</p>
+
+					<p>In addition, inclusion of the following resources is RECOMMENDED:</p>
+
+					<ul>
+						<li>
+							<a href="#accessibility-report">accessibility report</a>
+						</li>
+						<li>
+							<a href="#cover">cover</a>
+						</li>
+						<li>
+							<a href="#page-list">page list</a>
+						</li>
+						<li>
+							<a href="#privacy-policy">privacy policy</a>
+						</li>
+						<li>
+							<a href="#pub-table-of-contents">table of contents</a>
+						</li>
+					</ul>
+				</section>
+
 				<section id="wp-properties">
 					<h4>Properties</h4>
-
-					<section id="wp-requirements">
-						<h5>Requirements</h5>
-
-						<p>The expression of properties in a Web Publication manifest includes a combination of those <a
-								href="#manifest-properties">defined generally for digital publications</a> as well as
-							two specific to Web Publications: the publication's <a href="#address">address</a> and <a
-								href="#canonical-identifier">canonical identifier</a>.</p>
-
-						<p>The requirements for the expression of these properties are as follows:</p>
-
-						<dl>
-							<dt>REQUIRED:</dt>
-							<dd>
-								<ul>
-									<li>
-										<a href="#address">address</a>
-									</li>
-									<li>
-										<a href="#wp-reading-order">default reading order</a>
-									</li>
-									<li>
-										<a href="#wp-title">title</a>
-									</li>
-								</ul>
-							</dd>
-							<dt>RECOMMENDED:</dt>
-							<dd>
-								<ul>
-									<li>
-										<a href="#accessibility">accessibility</a>
-									</li>
-									<li>
-										<a href="#accessibility-report">accessibility report</a>
-									</li>
-									<li>
-										<a href="#language-and-dir">base direction</a>
-									</li>
-									<li>
-										<a href="#canonical-identifier">canonical identifier</a>
-									</li>
-									<li>
-										<a href="#cover">cover</a>
-									</li>
-									<li>
-										<a href="#creators">creators</a>
-									</li>
-									<li>
-										<a href="#language-and-dir">language and base direction</a>
-									</li>
-									<li>
-										<a href="#links">links</a>
-									</li>
-									<li>
-										<a href="#last-modification-date">last modification date</a>
-									</li>
-									<li>
-										<a href="#publication-date">publication date</a>
-									</li>
-									<li>
-										<a href="#privacy-policy">privacy policy</a>
-									</li>
-									<li>
-										<a href="#reading-progression-direction">reading progression direction</a>
-									</li>
-									<li>
-										<a href="#resource-list">resource list</a>
-									</li>
-									<li>
-										<a href="#table-of-contents">table of contents</a>
-									</li>
-									<li>
-										<a href="#page-list">page list</a>
-									</li>
-								</ul>
-							</dd>
-						</dl>
-
-						<p>These properties do not all have to be serialized in the <a>authored manifest</a>. Refer to
-							each property's definition to determine whether it is required in the manifest or can be
-							compiled into the <a>canonical manifest</a> from other information.</p>
-					</section>
 
 					<section id="address">
 						<h4>Address</h4>
@@ -3658,7 +3387,6 @@ partial dictionary PublicationManifest {
     &#8230;
 }
 </pre>
-
 					</section>
 
 					<section id="wp-reading-order">
@@ -3674,64 +3402,6 @@ partial dictionary PublicationManifest {
 								absent, user agents MUST include an entry for the primary entry page when compiling the
 								canonical manifest.</li>
 						</ul>
-					</section>
-
-					<section id="wp-page-list">
-						<h5>Page List</h5>
-
-						<p>The Web Publication <code>pagelist</code> property extends the <a href="#page-list"
-								>Publication Manifest <code>pagelist</code> property</a> as described in this
-							section.</p>
-
-						<p>The <code>pagelist</code> property MUST identify a resource that contains the page list for
-							the Web Publication. It MUST NOT be used to embed a page list in the manifest.</p>
-
-						<p>User agents MUST compute the <code>pagelist</code> as follows:</p>
-
-						<ol>
-							<li>Identify the page list resource: <ul>
-									<li>If a resource in either the <a href="#default-reading-order">default reading
-											order</a> or <a href="#resource-list">resource-list</a> is identified with a
-											<code>rel</code> value including
-											<code>https://www.w3.org/ns/wp#pagelist</code>, the corresponding
-											<code>url</code> value identifies the page list resource. If there are
-										several such resources, the first one MUST be used, with the <a
-											href="#default-reading-order">default reading order</a> taking precedence
-										over <a href="#resource-list">resource-list</a>. </li>
-									<li>Otherwise, the <a>primary entry page</a> is the page list resource. </li>
-								</ul>
-							</li>
-							<li>If the page list resource contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value
-								<code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that element
-								as the page list. If there are several such HTML elements the user agent MUST use the
-								first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
-									order</a>&#160;[[!dom]]. </li>
-						</ol>
-
-						<p>If this process does not result in a link to the page list, the publication does not have a
-							page list and this property MUST NOT be included in the canonical manifest.</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>pagelist</code> term by
-							IANA, to avoid using a URL.</p>
-
-						<pre class="example" title="Pagelist identified in another resource of the publication">
-{
-"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-"type"       : "Book",
-&#8230;
-"url"        : "https://publisher.example.org/mobydick",
-"name"       : "Moby Dick",
-"resources"  : [{
-	"type"       : "LinkedResource",
-	"url"        : "toc_file.html",
-	"rel"        : "https://www.w3.org/ns/wp#pagelist"
-},{
-	&#8230;
-}],
-&#8230;
-}
-</pre>
 					</section>
 
 					<section id="wp-title">
@@ -3754,90 +3424,6 @@ partial dictionary PublicationManifest {
 							as "metadata" for the enclosing HTML document, not for a collection of resources. Using this
 							element is, on the other hand, preferred in the case of a Web Publication consisting of a
 							single HTML document (e.g., a scholarly journal article).</p>
-					</section>
-
-					<section id="wp-table-of-contents">
-						<h5>Table of Contents</h5>
-
-						<p>The Web Publication <code>contents</code> property extends the <a
-								href="#pub-table-of-contents">Publication Manifest <code>contents</code> property</a> as
-							described in this section.</p>
-
-						<p>The <code>contents</code> property MUST identify a resource that contains the page list for
-							the Web Publication. It MUST NOT be used to embed a page list in the manifest.</p>
-
-						<p>User agents MUST compute the <code>toc</code> as follows:</p>
-
-						<ol>
-							<li>Identify the table of contents resource: <ul>
-									<li>If a resource in either the <a href="#default-reading-order">default reading
-											order</a> or <a href="#resource-list">resource-list</a> is identified with a
-											<code>rel</code> value including
-										<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
-											<code>url</code> value identifies the table of contents resource. If there
-										are several such resources, the first one MUST be used, with the <a
-											href="#default-reading-order">default reading order</a> taking precedence
-										over <a href="#resource-list">resource-list</a>. </li>
-									<li>Otherwise, the <a>primary entry page</a> is the table of contents resource.
-									</li>
-								</ul>
-							</li>
-							<li>If the table of contents resource contains an HTML element with the
-								<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
-								user agent MUST use that element as the table of contents. If there are several such
-								HTML elements the user agent MUST use the first in <a
-									href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
-								order</a>&#160;[[!dom]]. </li>
-						</ol>
-
-						<p>If this process does not result in a link to the table of contents, the publication does not
-							have a table of contents and this property MUST NOT be included in the canonical
-							manifest.</p>
-
-						<p>See the separate section <a href="#app-toc-structure"></a> for the HTML structure that the
-							table of content SHOULD adhere to.</p>
-
-						<pre class="example" title="Table of content identified in another resource of the publication">
-{
-    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"       : "Book",
-    &#8230;
-    "url"        : "https://publisher.example.org/mobydick",
-    "name"       : "Moby Dick",
-    "resources"  : [{
-        "type"       : "LinkedResource",
-        "url"        : "toc_file.html",
-        "rel"        : "contents"
-    },{
-        &#8230;
-    }],
-    &#8230;
-}
-</pre>
-
-						<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
-&lt;head&gt;
-    &#8230;
-    &lt;script type="application/ld+json"&gt;
-    {
-        "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-        "type"            : "TechArticle",
-        &#8230;
-        "id"              : "http://www.w3.org/TR/tabular-data-model/",
-        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-        &#8230;
-    }
-    &lt;/script&gt;
-    &#8230;
-&lt;/head&gt;
-&lt;body&gt;
-    &#8230;
-    &lt;section role="doc-toc"&gt;
-        &#8230;
-    &lt;/section&gt;
-    &#8230;
-&lt;/body&gt;
-</pre>
 					</section>
 				</section>
 
@@ -4005,6 +3591,133 @@ partial dictionary PublicationManifest {
 
 					</ol>
 				</section>
+
+				<section id="wp-toc-processing">
+					<h4>Extracting a Table of Contents</h4>
+
+					<p>If a user agent requires the table of contents, it MUST compute the table of contents as
+						follows:</p>
+
+					<ol>
+						<li>Identify the table of contents resource: <ul>
+								<li>If a resource in either the <a href="#default-reading-order">default reading
+										order</a> or <a href="#resource-list">resource-list</a> is identified with a
+										<code>rel</code> value including
+									<code>contents</code>&#160;[[!iana-link-relations]], the corresponding
+										<code>url</code> value identifies the table of contents resource. If there are
+									several such resources, the first one MUST be used, with the <a
+										href="#default-reading-order">default reading order</a> taking precedence over
+										<a href="#resource-list">resource-list</a>. </li>
+								<li>Otherwise, the <a>primary entry page</a> is the table of contents resource. </li>
+							</ul>
+						</li>
+						<li>If the table of contents resource contains an HTML element with the
+							<code>role</code>&#160;[[!html]] value <code>doc-toc</code>&#160;[[!dpub-aria-1.0]], the
+							user agent MUST use that element as the table of contents. If there are several such HTML
+							elements the user agent MUST use the first in <a
+								href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+							order</a>&#160;[[!dom]]. </li>
+					</ol>
+
+					<p>See the separate section <a href="#app-toc-structure"></a> for the HTML structure that the table
+						of content SHOULD adhere to.</p>
+
+					<p class="note">There is no fixed time in the manifest lifecycle when processing of the table of
+						contents has to occur, only that it cannot occur before <a href="#canonical-manifest">generating
+							the canonical manifest</a>.</p>
+
+					<pre class="example" title="Table of content identified in another resource of the publication">
+{
+    "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"       : "Book",
+    &#8230;
+    "url"        : "https://publisher.example.org/mobydick",
+    "name"       : "Moby Dick",
+    "resources"  : [{
+        "type"       : "LinkedResource",
+        "url"        : "toc_file.html",
+        "rel"        : "contents"
+    },{
+        &#8230;
+    }],
+    &#8230;
+}
+</pre>
+
+					<pre class="example" title="If the primary entry page includes the TOC, no reference in the manifest is necessary">
+&lt;head&gt;
+    &#8230;
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context"        : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+        "type"            : "TechArticle",
+        &#8230;
+        "id"              : "http://www.w3.org/TR/tabular-data-model/",
+        "url"             : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+        &#8230;
+    }
+    &lt;/script&gt;
+    &#8230;
+&lt;/head&gt;
+&lt;body&gt;
+    &#8230;
+    &lt;section role="doc-toc"&gt;
+        &#8230;
+    &lt;/section&gt;
+    &#8230;
+&lt;/body&gt;
+</pre>
+				</section>
+
+				<section id="wp-pagelist-processing">
+					<h4>Extracting a Page List</h4>
+
+					<p>User agents MUST compute the page list as follows:</p>
+
+					<ol>
+						<li>Identify the page list resource: <ul>
+								<li>If a resource in either the <a href="#default-reading-order">default reading
+										order</a> or <a href="#resource-list">resource-list</a> is identified with a
+										<code>rel</code> value including <code>https://www.w3.org/ns/wp#pagelist</code>,
+									the corresponding <code>url</code> value identifies the page list resource. If there
+									are several such resources, the first one MUST be used, with the <a
+										href="#default-reading-order">default reading order</a> taking precedence over
+										<a href="#resource-list">resource-list</a>. </li>
+								<li>Otherwise, the <a>primary entry page</a> is the page list resource. </li>
+							</ul>
+						</li>
+						<li>If the page list resource contains an HTML element with the <code>role</code>&#160;[[!html]]
+							value <code>doc-pagelist</code>&#160;[[!dpub-aria-1.0]], the user agent MUST use that
+							element as the page list. If there are several such HTML elements the user agent MUST use
+							the first in <a href="https://dom.spec.whatwg.org/#concept-tree-order">document tree
+								order</a>&#160;[[!dom]]. </li>
+					</ol>
+
+					<p class="ednote">The Working Group will attempt to define the <code>pagelist</code> term with IANA,
+						to avoid using a URL.</p>
+
+					<p class="note">There is no fixed time in the manifest lifecycle when processing of the page list
+						has to occur, only that it cannot occur before <a href="#canonical-manifest">generating the
+							canonical manifest</a>.</p>
+
+					<pre class="example" title="Page list identified in another resource of the publication">
+{
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+&#8230;
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"resources"  : [{
+	"type"       : "LinkedResource",
+	"url"        : "toc_file.html",
+	"rel"        : "https://www.w3.org/ns/wp#pagelist"
+},{
+	&#8230;
+}],
+&#8230;
+}
+</pre>
+				</section>
 			</section>
 
 			<section id="security">
@@ -4156,11 +3869,11 @@ partial dictionary PublicationManifest {
 								<dfn>rel</dfn>
 							</code>
 						</td>
-						<td>The relationship of the resource to the publication. OPTIONAL.</td>
+						<td>The relation of the resource to the publication. OPTIONAL.</td>
 						<td>
-							<p>One or more relations. The values are either the relevant relationship terms of the IANA
-								link registry&#160;[[!iana-link-relations]], or specially-defined URLs if no suitable
-								link registry item exists.</p>
+							<p>One or more <a href="#manifest-rel">relations</a>. The values are either the relevant
+								relation terms of the IANA link registry&#160;[[!iana-link-relations]], or
+								specially-defined URLs if no suitable link registry item exists.</p>
 						</td>
 						<td>
 							<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
@@ -4316,8 +4029,8 @@ dictionary LinkedResource {
 						<p>The link destination for the branch is obtained from the <code>a</code> element's
 								<code>href</code> attribute, when specified. This attribute can be omitted if a link is
 							not available (e.g., in a preview) or not relevant (e.g., a grouping header). When providing
-							a link into the content, it is also possible to specify the relationship of the linked
-							document (in a <code>rel</code> attribute) and the media type of the linked resource (in a
+							a link into the content, it is also possible to specify the relation of the linked document
+							(in a <code>rel</code> attribute) and the media type of the linked resource (in a
 								<code>type</code> attribute).</p>
 						<p>After finding the <code>a</code> element that labels the branch, user agents will continue to
 							inspect the markup for another list element (i.e., sub-branches). If a list is found, it is
@@ -4793,7 +4506,7 @@ dictionary LinkedResource {
 										the requirements of this specification. If not, the branch is retained but the
 										entry will not be linkable.</p>
 									<p>Additional information about the target of the link — the type of resource and
-										its relationship — is also retained.</p>
+										its relation — is also retained.</p>
 									<aside class="example" title="Visualization of a link to an SVG image">
 										<pre>{
    "name": "In the Beginning",
@@ -5052,6 +4765,365 @@ dictionary LinkedResource {
 						formats. </figcaption>
 				</figure>
 			</section>
+		</section>
+		<section id="properties-index" class="appendix informative">
+			<h4>Properties Index</h4>
+
+			<p>The following table identifies where the use of manifest properties is defined and extended.</p>
+
+			<table class="zebra">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Publication Manifest</th>
+						<th>Web Publication</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>accessMode</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessModeSufficient</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessibilityAPI</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessibilityControl</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessibilityFeature</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessibilityHazard</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>accessibilitySummary</code>
+						</td>
+						<td>
+							<a href="#accessibility"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>address</code>
+						</td>
+						<td></td>
+						<td><a href="#address"></a></td>
+					</tr>
+					<tr>
+						<td>
+							<code>artist</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>author</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>contributor</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>creator</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>dateModified</code>
+						</td>
+						<td>
+							<a href="#last-modification-date"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>datePublished</code>
+						</td>
+						<td>
+							<a href="#publication-date"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>datePublished</code>
+						</td>
+						<td>
+							<a href="#publication-date"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>duration</code>
+						</td>
+						<td>
+							<a href="#duration"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>editor</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>id</code>
+						</td>
+						<td></td>
+						<td><a href="#canonical-identifier"></a></td>
+					</tr>
+					<tr>
+						<td>
+							<code>illustrator</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>inDirection</code>
+						</td>
+						<td>
+							<a href="#language-and-dir"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>inker</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>inLanguage</code>
+						</td>
+						<td>
+							<a href="#language-and-dir"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>letterer</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>link</code>
+						</td>
+						<td>
+							<a href="#links"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>name</code>
+						</td>
+						<td>
+							<a href="#pub-title"></a>
+						</td>
+						<td> Extended in <a href="#wp-title"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>penciler</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>publisher</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>readBy</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>readingOrder</code>
+						</td>
+						<td>
+							<a href="#default-reading-order"></a>
+						</td>
+						<td> Extended in <a href="#wp-reading-order"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>readingProgression</code>
+						</td>
+						<td>
+							<a href="#reading-progression-direction"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>resources</code>
+						</td>
+						<td>
+							<a href="#resource-list"></a>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<code>translator</code>
+						</td>
+						<td>
+							<a href="#creators"></a>
+						</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section id="rel-index" class="appendix informative">
+			<h4>Resource Relations Index</h4>
+
+			<p>The following table identifies where the use of resource relations is defined.</p>
+
+			<table class="zebra">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Publication Manifest</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<code>accessibility-report</code>
+						</td>
+						<td>
+							<a href="#accessibility-report"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>contents</code>
+						</td>
+						<td>
+							<a href="#pub-table-of-contents"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>cover</code>
+						</td>
+						<td>
+							<a href="#cover"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>pagelist</code>
+						</td>
+						<td>
+							<a href="#page-list"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>privacy-policy</code>
+						</td>
+						<td>
+							<a href="#privacy-policy"></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<section id="idl-index" class="appendix"></section>
 		<section id="app-image-descriptions" class="appendix informative">
