@@ -66,7 +66,7 @@ Here's a simple example of a publication manifest, for a tiny version of *Moby-D
         "css/mobydick.css",
         {
             "type": "PublicationLink",
-            "rel": "https://www.w3.org/ns/wp#cover-page",
+            "rel": "https://www.w3.org/ns/wp#cover",
             "url": "images/cover.jpg",
             "encodingFormat": "image/jpeg"
         },{
