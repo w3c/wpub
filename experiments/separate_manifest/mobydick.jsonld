@@ -100,7 +100,7 @@
                 "LinkedResource"
             ],
             "rel": [
-                "https://www.w3.org/ns/wp#cover"
+                "cover"
             ],
             "url": "https://publisher.example.org/mobydick//images/cover.jpg",
             "encodingFormat": "image/jpeg"

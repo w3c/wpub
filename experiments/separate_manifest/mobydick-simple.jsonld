@@ -22,7 +22,7 @@
         "css/mobydick.css",
         {
             "type": "LinkedResource",
-            "rel": "https://www.w3.org/ns/wp#cover",
+            "rel": "cover",
             "url": "images/cover.jpg",
             "encodingFormat": "image/jpeg"
         },{
