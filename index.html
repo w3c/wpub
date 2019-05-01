@@ -2431,12 +2431,16 @@ partial dictionary PublicationManifest {
 					<h4>Extensions</h4>
 
 					<p>If additional relations beyond those defined in this specification need to be expressed, the <a
-							href="#dom-linkedresource-rel"><code>rel</code> property</a> can be extended through the use
-						of values defined in [[!iana-relations]].</p>
+							href="#dom-linkedresource-rel"><code>rel</code> property</a> can be extended in one of the
+						following ways:</p>
 
-
-					<p class="note">Authors are advised to register new relations in [[iana-relations]] rather than
-						create their own, as this standardizes both use and processing.</p>
+					<ul>
+						<li>through the use of relations defined in [[!iana-relations]]; or</li>
+						<li>through the use of <a href="https://tools.ietf.org/html/rfc5988#section-4.2">extension
+								relation types</a> [[!rfc5988]].</li>
+					</ul>
+					
+					<p>Use of relations from [[!iana-relations]] is RECOMMENDED.</p>
 				</section>
 			</section>
 
