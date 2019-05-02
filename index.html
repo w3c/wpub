@@ -2187,8 +2187,11 @@ partial dictionary PublicationManifest {
 							accessibility criteria, such as those provided in [[WCAG21]], and are an important source of
 							information in determining the usability of a publication.</p>
 
-						<p>An accessibility report is identified using the
-								<code>https://www.w3.org/ns/wp#accessibility-report</code> link relation.</p>
+						<p>An accessibility report is identified using the <code>accessibility-report</code> link
+							relation.</p>
+
+						<p class="ednote">The <code>accessibility-report</code> term is not currently registered in the
+							IANA link relations but the Working Group expects to add it.</p>
 
 						<p>The manifest SHOULD include a link to an accessibility report when one is available for a
 							publication. It is RECOMMENDED that the report be included as a resource of the
@@ -2197,9 +2200,6 @@ partial dictionary PublicationManifest {
 						<p>It is also RECOMMENDED that the accessibility report be provided in a human-readable format,
 							such as [[!html]]. Augmenting these reports with machine-processable metadata, such as
 							provided in Schema.org [[!schema.org]], is also RECOMMENDED.</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>accessibility-report</code>
-							term with IANA, to avoid using a URL.</p>
 
 						<pre class="example" title="Link to an accessibility report">
 {
@@ -2211,7 +2211,7 @@ partial dictionary PublicationManifest {
     "links"  : [{
         "type"        : "LinkedResource",
         "url"         : "https://www.publisher.example.org/mobydick-accessibility.html",
-        "rel"         : "https://www.w3.org/ns/wp#accessibility-report"
+        "rel"         : "accessibility-report"
     },{
         &#8230;
     }],
@@ -2275,9 +2275,12 @@ partial dictionary PublicationManifest {
 								publication</a> (e.g., in a library or bookshelf, or when initially loading the
 							publication).</p>
 
-						<p>The cover is identified by the <code>https://www.w3.org/ns/wp#cover</code> link relation. The
-								<a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
-							fragment identifier.</p>
+						<p>The cover is identified by the <code>cover</code> link relation. The <a href="#value-url"
+								>URL</a> expressed in the <code>url</code> term MUST NOT include a fragment
+							identifier.</p>
+
+						<p class="ednote">The <code>cover</code> term is not currently registered in the IANA link
+							relations but the Working Group expects to add it.</p>
 
 						<p>If the cover is in an image format, a <code>title</code> and <code>description</code> SHOULD
 							be provided. User agents can use these properties to provide alternative text and
@@ -2287,9 +2290,6 @@ partial dictionary PublicationManifest {
 							and sizes for different device screens). If multiple covers are specified, each instance
 							MUST define at least one unique property to allow user agents to determine its usability
 							(e.g., a different format, height, width or relation).</p>
-
-						<p class="ednote">The Working Group will attempt to define the <code>cover</code> term by IANA,
-							to avoid using a URL.</p>
 
 						<pre class="example" title="Cover HTML page">
 {
@@ -2302,7 +2302,7 @@ partial dictionary PublicationManifest {
         "type"           : "LinkedResource",
         "url"            : "cover.html",
         "encodingFormat" : "text/html"
-        "rel"            : "https://www.w3.org/ns/wp#cover"
+        "rel"            : "cover"
     },{
         &#8230;
     }],
@@ -2321,7 +2321,7 @@ partial dictionary PublicationManifest {
         "type"           : "LinkedResource",
         "url"            : "whale-image.jpg",
         "encodingFormat" : "image/jpeg",
-        "rel"            : "https://www.w3.org/ns/wp#cover",
+        "rel"            : "cover",
         "name"           : "Moby Dick attacking hunters",
         "description"    : "A white whale is seen surfacing from the water to attack a small whaling boat"
     },{
@@ -2342,12 +2342,12 @@ partial dictionary PublicationManifest {
         "type"           : "LinkedResource",
         "url"            : "lilliput.jpg",
         "encodingFormat" : "image/jpeg",
-        "rel"            : "https://www.w3.org/ns/wp#cover"
+        "rel"            : "cover"
     },{
         "type"           : "LinkedResource",
         "url"            : "lilliput.svg",
         "encodingFormat" : "image/svg+xml",
-        "rel"            : "https://www.w3.org/ns/wp#cover"
+        "rel"            : "cover"
     },{
         &#8230;
     }],
@@ -2362,9 +2362,12 @@ partial dictionary PublicationManifest {
 						<p>The page list is a navigational aid that contains a list of static page demarcation points
 							within a <a>digital publication</a>.</p>
 
-						<p>The page list is identified by the <code>https://www.w3.org/ns/wp#pagelist</code> link
-							relation. The <a href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT
-							include a fragment identifier.</p>
+						<p>The page list is identified by the <code>pagelist</code> link relation. The <a
+								href="#value-url">URL</a> expressed in the <code>url</code> term MUST NOT include a
+							fragment identifier.</p>
+
+						<p class="ednote">The <code>pagelist</code> term is not currently registered in the IANA link
+							relations but the Working Group expects to add it.</p>
 
 						<p>The link to the page list MAY be specified in either the <a href="#default-reading-order"
 								>default reading order</a> or <a href="#resource-list">resource-list</a>, but MUST NOT
@@ -2380,7 +2383,7 @@ partial dictionary PublicationManifest {
 "resources"  : [{
 	"type"       : "LinkedResource",
 	"url"        : "toc_file.html",
-	"rel"        : "https://www.w3.org/ns/wp#pagelist"
+	"rel"        : "pagelist"
 },{
 	&#8230;
 }],
@@ -2428,12 +2431,16 @@ partial dictionary PublicationManifest {
 					<h4>Extensions</h4>
 
 					<p>If additional relations beyond those defined in this specification need to be expressed, the <a
-							href="#dom-linkedresource-rel"><code>rel</code> property</a> can be extended through the use
-						of values defined in [[!iana-relations]].</p>
+							href="#dom-linkedresource-rel"><code>rel</code> property</a> can be extended in one of the
+						following ways:</p>
 
+					<ul>
+						<li>through the use of relations defined in [[!iana-relations]]; or</li>
+						<li>through the use of <a href="https://tools.ietf.org/html/rfc8288#section-2.1.2">extension
+								relation types</a> [[!rfc8288]].</li>
+					</ul>
 
-					<p class="note">Authors are advised to register new relations in [[iana-relations]] rather than
-						create their own, as this standardizes both use and processing.</p>
+					<p>Use of relations from [[!iana-relations]] is RECOMMENDED.</p>
 				</section>
 			</section>
 
@@ -2687,7 +2694,7 @@ partial dictionary PublicationManifest {
     "author"    : "Herman Melville",
     "resources" : [{
         "type"           : "LinkedResource",
-        "rel"            : "https://www.w3.org/ns/wp#cover",
+        "rel"            : "cover",
         "url"            : "images/cover.jpg"
         "encodingFormat" : "image/jpeg"
     },
@@ -2704,7 +2711,7 @@ partial dictionary PublicationManifest {
     "author"    : ["Herman Melville"],
     "resources" : [{
         "type"           : ["LinkedResource"],
-        "rel"            : ["https://www.w3.org/ns/wp#cover"],
+        "rel"            : ["cover"],
         "url"            : "images/cover.jpg"
         "encodingFormat" : "image/jpeg"
     },
@@ -3678,9 +3685,9 @@ partial dictionary PublicationManifest {
 						<li>Identify the page list resource: <ul>
 								<li>If a resource in either the <a href="#default-reading-order">default reading
 										order</a> or <a href="#resource-list">resource-list</a> is identified with a
-										<code>rel</code> value including <code>https://www.w3.org/ns/wp#pagelist</code>,
-									the corresponding <code>url</code> value identifies the page list resource. If there
-									are several such resources, the first one MUST be used, with the <a
+										<code>rel</code> value including <code>pagelist</code>, the corresponding
+										<code>url</code> value identifies the page list resource. If there are several
+									such resources, the first one MUST be used, with the <a
 										href="#default-reading-order">default reading order</a> taking precedence over
 										<a href="#resource-list">resource-list</a>. </li>
 								<li>Otherwise, the <a>primary entry page</a> is the page list resource. </li>
@@ -3710,7 +3717,7 @@ partial dictionary PublicationManifest {
 "resources"  : [{
 	"type"       : "LinkedResource",
 	"url"        : "toc_file.html",
-	"rel"        : "https://www.w3.org/ns/wp#pagelist"
+	"rel"        : "pagelist"
 },{
 	&#8230;
 }],
