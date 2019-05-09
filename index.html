@@ -1284,6 +1284,12 @@ partial dictionary PublicationManifest {
 							table of contents on the right hand side for publications whose natural base direction is
 							right-to-left).</p>
 
+						<p class="note">It is important to differentiate the language <em>of the publication</em>
+							from the language and the base direction of the individual resources that compose it. If
+							such resources are, for example, in HTML, the language and direction need to be set in
+							those resources, too. The language and base direction of the publication are not
+							inherited.</p>
+
 						<p>Similarly, each natural language property value in the manifest (e.g., <a href="#pub-title"
 								>title</a>, <a href="#creators">creators</a>) is a <a href="#value-localizable-string"
 								>localizable string</a>.</p>
@@ -1383,12 +1389,6 @@ partial dictionary PublicationManifest {
 							<p>When specified, these properties are also used as defaults for textual values in the
 								manifest.</p>
 
-							<p class="note">It is important to differentiate the language <em>of the publication</em>
-								from the language and the base direction of the individual resources that compose it. If
-								such resources are, for example, in HTML, the language and direction need to be set in
-								those resources, too. The language and base direction of the publication are not
-								inherited.</p>
-
 							<p>The global language information MAY be overridden by <a
 									href="#manifest-specific-language-and-dir">individual values</a>.</p>
 
@@ -1403,8 +1403,7 @@ partial dictionary PublicationManifest {
 									href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
 								attributes in&#160;[[!html]]).</p>
 
-							<p class="issue">It is to be discussed whether this last paragraph, i.e., inheriting values
-								from <code>script</code>, should be kept.</p>
+							<p class="issue" data-number=438></p>
 
 							<p class="note">If authors intend to use a manifest, or a manifest template, both as
 								embedded manifest and as a separate resource, they are strongly encouraged to set these
