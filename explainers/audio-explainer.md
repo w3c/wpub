@@ -3,7 +3,7 @@
 This sounds like an easy question, a “book with audio”! Audiobooks, for the purposes of the scope of our work right now, are publications that are primarily audio-based. Audiobooks can contain non-audio content like supplements or navigational documents, but their main content is in audio format. 
 
 Audiobooks have grown massively in popularity in the last few years despite being a segment of the industry for far longer. The main reason for this shift is due to several technologies:
-* Pervasiveness of Mobile devices (phones and tablets)
+* Pervasiveness of mobile devices (phones and tablets)
 * Improved mobile storage capacity
 * Improved mobile networks (3G, 4G, LTE)
 * Widespread use of wifi
@@ -12,45 +12,29 @@ When previously users would need several CDs to listen to one audiobook, they ca
 
 The main difference between ebooks and audiobooks is currently their level of specification. The EPUB format has existed as an open standard in one form or another for almost 20 years, but audiobooks still do not benefit from a standard format. A mature publishing industry has co-opted audiobooks to make them work within the same contexts, but the lack of standardization has made this process arduous for audiobook studios, distributors, retail platforms, user agents and by extension, users. 
 
-## Key use cases and current issues
+## Key Use cases and Current Issues
 
-### Business to business
+### The Business Problem
 
 Publishers usually team up with specialized studios to produce audiobook content. Once produced, each audiobook is sent to different distributors and retail platforms. Distributor are themselves hubs in the supply chain, which redirect the audiobooks to multiple retail (or public lending) platforms.
 
-Today, audio content is split into a number of mp3 files simply ordered by their file name. Each audiobook is then usually packaged in a zip file. The quality and size of these files is constrained by the target distributors. Because of these constraints, an audio track may not correspond to any logical section of the book. Metadata attached to the audio content is sparse, limited to what the mp3 format can handle; even then, numerous metadata interoperability issues down the line force studios to apply tight constraints, different for each distributor, like using only ascii capital letters on authors names. 
+Today, audio content is split into a number of mp3 files simply ordered by their file name. Each audiobook is then usually packaged in a zip file. The quality and size of these files is constrained by the target distributors. Embedded metadata is sparse due to file format restrictions, and different standards across distributors and retailers results in publishers sending different files to each. This results in duplicated effort, increases the chances of errors, and makes the supply chain less efficient.
 
-This results in duplicated effort, increases the chances of errors, and makes the supply chain less efficient.
+Different platforms offer users different ways to download audiobooks: some provide apps which totally hide the format, others offer a zip download or, if the book is huge (more than 800 Mb maybe), a series of zip downloads. Alternatively, many platforms offer a "streaming" service, or more properly speaking a progressive download mp3 service, open to authentified users. The audiobook platform displays useful metadata and allows navigating from track to track. Streaming requires being online, but it avoids downloading hundreds of megabytes of data before listening to audio content. 
 
-### Audiobooks for print disabled people
-
-Since 2001 (!) people with print disabilities benefit from from Daisy Digital Talking Books (DTB). In one of its profiles, a DTBook contains a set of audio tracks, a Table of Contents and a full set of metadata. DTBooks are often produced via the OBI Daisy tool. 
-
-Many specialized players support the Daisy DTBook format, but this is still a niche format, unused in the publishing industry. In the ebooks domain, the Daisy format tends to be replaced by the EPUB 3 format, with a full support from the Daisy Consortium; the same will certainly happen if a global standard emerges for audiobooks, with proper support for core accessibility features.   
-
-### Business to consumer
-
-Different platforms offer users different ways to download audiobooks: some provide apps which totally hide the format, others offer a zip download or, if the book is huge (more than 800 Mb maybe), a series of zip downloads. Such audiobooks can also be protected with some proprietary DRM, causing interoperability issues for the end-user.
-
-Alternatively, many platforms offer a "streaming" service, or more properly speaking a progressive download mp3 service, open to authentified users. The audiobook platform displays useful metadata and allows navigating from track to track. Streaming requires being online, but it avoids downloading hundreds of megabytes of data before listening to audio content. Modern streaming is based on dynamic http streaming technologies (HLS, HDS, DASH) but the mp3 format does not allow such dynamic adaptation to the available bandwith. 
-
-Even if a full set of "ONIX for Books" metadata is sent from publishers to distributors and booksellers, because mp3 metadata features are poor, end users will not benefit from useful information when they store and catalog the audiobooks they have acquired. 
-
-As there is no notion of table of contents in the audiobook structure, navigation is therefore limited to moves from one track to another. 
+By creating a format that allows for consistent, standardized embedded metadata, retailers and users will have access to essential metadata for the file, in addition to any retail metadata (i.e. ONIX) they may use. Creating a format with a clearly defined TOC format allows for clear navigation for both user and reading system. 
 
 
 ## Goals
 
-* Create a specification that is usable in a business to business use case.
-* Create a specification that is usable in an inclusive use case.
-* Create a specification that is usable in a business to consumer download use case.
-* Create a specification that is usable in a business to consumer streaming use case.
-* Create a format that is easy to author by audiovisual studios.
-* Create a format that provides a path of evolution to modern audio formats like Opus and streaming formats like Dash.
+* Create a specification for the audiobook format that is usable on both the web and in packaged contexts
+* Create a specification that supports all of the major use cases of audio
+* Create a specification that is accessible
+* Create a specification that meets the needs and requirements of publishers, user agents, and users
 
 ## Out of Scope
 
-* Synchronized media -- but it must be possible to add synchronized text in an extension of this format.
+* Synchronized media -- we will be referencing and supporting this as a companion specification
 * DRM -- as outlined by our charter.
 
 ## Key Features
@@ -80,11 +64,13 @@ The manifest format comes from the W3C's [Web Publication Manifest](https://w3c.
 
 ## Considered Alternatives
 
-There were several considered alternatives:
+There were several considered alternatives, we have outlined their use and the reasons why we are proceeding with a new standard:
 
 #### [DAISY Talking Books](http://www.daisy.org/daisypedia/daisy-digital-talking-book)
 
-*Editorial note: do we have input from DAISY on the current status of this?*
+Since 2001 (!) people with print disabilities benefit from from Daisy Digital Talking Books (DTB). In one of its profiles, a DTBook contains a set of audio tracks, a Table of Contents and a full set of metadata. DTBooks are often produced via the OBI Daisy tool. 
+
+Many specialized players support the Daisy DTBook format, but this is still a niche format, unused in the publishing industry. In the ebooks domain, the Daisy format tends to be replaced by the EPUB 3 format, with a full support from the Daisy Consortium; the same will certainly happen if a global standard emerges for audiobooks, with proper support for core accessibility features.   
 
 #### HTML Custom Elements
 
@@ -96,7 +82,15 @@ The existing EPUB 3 specification could be changed to allow audio core media typ
 
 #### M4B
 
-M4B is an audiobook format based on the [MPEG-4 Part 14](https://en.wikipedia.org/wiki/MPEG-4_Part_14) container specification. They can contain multiple audio files, a cover image, and metadata. Audio book providers such as Librevox often supply M4B to end users. They can be played in iTunes. 
+M4B is an audiobook format based on the [MPEG-4 Part 14](https://en.wikipedia.org/wiki/MPEG-4_Part_14) container specification. They can contain multiple audio files, a cover image, and metadata. Audiobook providers such as Librevox often supply M4B to end users. They can be played in iTunes. M4B was explored as an option but dismissed because of the complications to produce it, and the ill-fit of the metadata model. 
+
+#### Web Packaging
+
+The Working Group is very interested in Web Packaging as a future option for Audiobooks (and other web publications), but due to timing, we have decided to proceed with a temporary option in the Lightweight Packaging Format (https://w3c.github.io/pwpub/), until there is a viable web option. 
+
+#### HEIF (High Efficiency Image Format)
+
+We explored the possibility of HEIF after it was suggested the image format could be modified for audio, and had the flexibility of storage and metadata we would require. After exploring the format and having an expert present on it, it was decided that while promising, the format would be too complicated for workflows and users. 
 
 
 ## References and Acknowledgements
