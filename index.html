@@ -2444,29 +2444,8 @@ partial dictionary PublicationManifest {
 				</section>
 			</section>
 
-			<section id="manifest-discovery">
-				<h3>Discovery</h3>
-
-				<section id="manifest-embed">
-					<h4>Embedding</h4>
-
-					<p>When a manifest is embedded within an HTML document, it MUST be included in a <a
-							href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
-								><code>script</code> element</a>&#160;[[!html]] whose <code>type</code> attribute is set
-						to <code>application/ld+json</code>.</p>
-
-					<p>Additionally, the <code>script</code> element MUST include a unique identifier in an
-							<code>id</code> attribute&#160;[[!html]]. This identifier ensures that the manifest <a
-							href="#manifest-link">can be referenced</a>.</p>
-
-					<pre class="example" title="A Web Publication Manifest included in an HTML document">
-&lt;script id="example_manifest" type="application/ld+json"&gt;
-   {
-      &#8230;
-   }
-&lt;/script&gt;
-</pre>
-				</section>
+			<section id="manifest-association">
+				<h3>Association</h3>
 
 				<section id="manifest-link">
 					<h4>Linking</h4>
@@ -2513,6 +2492,27 @@ partial dictionary PublicationManifest {
 						explicitly listed as a parent (e.g., based upon information it calculates or acquires out of
 						band). In the absence of a preference by user agent implementers, selection of the first
 						manifest listed is suggested as a default.</p>
+				</section>
+
+				<section id="manifest-embed">
+					<h4>Embedding</h4>
+
+					<p>When a manifest is embedded within an HTML document, it MUST be included in a <a
+							href="https://www.w3.org/TR/html5/semantics-scripting.html#the-script-element"
+								><code>script</code> element</a>&#160;[[!html]] whose <code>type</code> attribute is set
+						to <code>application/ld+json</code>.</p>
+
+					<p>Additionally, the <code>script</code> element MUST include a unique identifier in an
+							<code>id</code> attribute&#160;[[!html]]. This identifier ensures that the manifest <a
+							href="#manifest-link">can be referenced</a>.</p>
+
+					<pre class="example" title="A Web Publication Manifest included in an HTML document">
+&lt;script id="example_manifest" type="application/ld+json"&gt;
+   {
+      &#8230;
+   }
+&lt;/script&gt;
+</pre>
 				</section>
 			</section>
 
@@ -2645,8 +2645,8 @@ partial dictionary PublicationManifest {
 
 						<li>
 							<p>(<a href="#pub-title"></a>) if <var>manifest["name"]</var> is <code>undefined</code>,
-								then locate the <a data-cite="!html#the-title-element"><code>title</code></a> HTML
-								element using <var>document</var> (when set). If that element exists and is non-empty,
+								locate the <a data-cite="!html#the-title-element"><code>title</code></a> element
+								[[!html]] using <var>document</var> (when set). If that element exists and is non-empty,
 								let <var>t</var> be its text content, and add to <var>manifest</var>:</p>
 							<ul>
 								<li>if the language of <code>title</code> is explicitly <a
@@ -2717,7 +2717,7 @@ partial dictionary PublicationManifest {
 							<details>
 								<summary>Explanation</summary>
 								<p> This step ensures that the base direction explicitly set in the embedding document
-									is valid for an embedded manifest content. For example, </p>
+									is valid. For example, </p>
 								<pre class="example">&lt;html&gt;
 &lt;head&gt;
     &#8230;
@@ -2747,7 +2747,7 @@ partial dictionary PublicationManifest {
 								to the <var>manifest</var></p>
 							<details>
 								<summary>Explanation</summary>
-								<p> If the Digital Publication consists only of the embedding document, the default
+								<p> If the Digital Publication consists only of the referencing document, the default
 									reading order can be omitted; it will consist, automatically, of that single
 									resource. </p>
 							</details>
@@ -2976,9 +2976,7 @@ partial dictionary PublicationManifest {
 						<li><p>Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well
 								as raising warnings.</p>
 							<ol>
-								<li>Check whether the value of <var>manifest["url"]</var> is a valid URL&#160;[[!url]].
-									If not, issue a warning. </li>
-								<li>For all the terms defined in <a href="#accessibility"></a>, except for
+								<!--<li>For all the terms defined in <a href="#accessibility"></a>, except for
 										<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
 									whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
 									vocabulary (see the <a
@@ -2988,7 +2986,7 @@ partial dictionary PublicationManifest {
 									token in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is
 									defined in the preferred vocabulary (see the <a
 										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-										expected values</a>). Issue a warning for all unrecognized values. </li>
+										expected values</a>). Issue a warning for all unrecognized values. </li> -->
 								<li>For all <var>term</var> that expect <a href="#value-object-entity">entities</a>,
 									check whether the value object <var>P</var> in <var>manifest[term]</var> has
 										<var>P["name"]</var> set. If not, remove <var>P</var> from
@@ -3484,8 +3482,8 @@ partial dictionary PublicationManifest {
 				</section>
 			</section>
 
-			<section id="wp-discovery">
-				<h3>Discovery</h3>
+			<section id="wp-association">
+				<h3>Association</h3>
 
 				<section id="wp-manifest-discovery">
 					<h4>Manifest</h4>
