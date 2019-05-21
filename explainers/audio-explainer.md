@@ -12,9 +12,7 @@ When previously users would need several CDs to listen to one audiobook, they ca
 
 The main difference between ebooks and audiobooks is currently their level of specification. The EPUB format has existed as an open standard in one form or another for almost 20 years, but audiobooks still do not benefit from a standard format. A mature publishing industry has co-opted audiobooks to make them work within the same contexts, but the lack of standardization has made this process arduous for audiobook studios, distributors, retail platforms, user agents and by extension, users. 
 
-## Key Use cases and Current Issues
-
-### The Business Problem
+## The Business Problem
 
 Publishers usually team up with specialized studios to produce audiobook content. Once produced, each audiobook is sent to different distributors and retail platforms. Distributor are themselves hubs in the supply chain, which redirect the audiobooks to multiple retail (or public lending) platforms.
 
