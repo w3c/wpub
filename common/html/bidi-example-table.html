@@ -3,7 +3,7 @@
 
 	<p>This section illustrates how Unicode formatting characters can be applied to bidirectional strings, where necessary, in order to help a consumer produce the expected display. If the string is created with a prepended formatting character, the first-strong heuristics produce the correct base direction for the string as a whole.</p>
 
-	<p>A right-to-left string that begins with a Latin character should have U+200F RIGHT-TO-LEFT MARK prepended.</p>
+	<p>A right-to-left string that begins with a Latin script character should have U+200F RIGHT-TO-LEFT MARK prepended.</p>
 
 	<table class=zebra>
 		<tbody>
@@ -16,7 +16,7 @@
 				<td dir="ltr">HTML היא שפת סימון.</td>
 			</tr>
 				<td>Source code with formatting character:</td>
-				<td><code><bdo dir="ltr">\u{200F}HTML היא שפת סימון.</bdo></code></td>
+				<td><code><bdo dir="ltr">\u200FHTML היא שפת סימון.</bdo></code></td>
 			</tr>
 			<tr>
 				<td>Gives expected display:</td>
@@ -25,7 +25,7 @@
 		</tbody>
 	</table>
 
-	<p>A left-to-right string that begins with a Latin character should have U+200E LEFT-TO-RIGHT MARK prepended.</p>
+	<p>A left-to-right string that begins with a Arabic script character should have U+200E LEFT-TO-RIGHT MARK prepended.</p>
 
 	<table class=zebra>
 		<tbody>
@@ -38,7 +38,7 @@
 				<td dir="rtl">'سلام' is hello in Persian.</td>
 			</tr>
 				<td>Source code with formatting character:</td>
-				<td><code><bdo dir="ltr">\u{200E}'سلام' is hello in Persian.</bdo></code></td>
+				<td><code><bdo dir="ltr">\u200E'سلام' is hello in Persian.</bdo></code></td>
 			</tr>
 			<tr>
 				<td>Gives expected display:</td>
