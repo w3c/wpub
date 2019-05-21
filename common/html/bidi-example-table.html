@@ -1,42 +1,49 @@
-	        <table class="zebra">
-	          <tbody>
-	            <tr>
-	              <th>Character order in memory</th>
-	              <th>Direction</th>
-	              <th>Method</th>
-	              <th>Expected display</th>
-	            </tr>
-	            
-	            
-	            <tr>
-	              <td><code><bdo>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdo></code></td>
-	              <td>rtl</td>
-	              <td>First strong directional character</td>
-	              <td style="width: 50%"><bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi></td>	              
-	            </tr>
-	            
-	            
-	            <tr>
-	              <td>
-	                <code><bdo>The document is titled, "&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr>&amp;#x2069;"</bdo></code>
-	              </td>
-	              <td>ltr</td>
-	              <td>First strong directional character</td>
-	              <td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA; &#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, <abbr title="World Wide Web Consortium">W3C</abbr></bdi>"</span></td>
-	            </tr>
-	            
-	            
-	            <tr>
-	              <td><code><bdo>&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo></code></td>
-	              <td>rtl</td>
-	              <td>Bidi Control Character</td>
-	              <td><code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA; &#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code></td>
-	            </tr>
-	            <tr>
-	              <td><code><bdo>&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo></code></td>
-	              <td>ltr</td>
-	              <td>Bidi Control Character</td>
-	              <td><code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code></td>
-	            </tr>
-	          </tbody>
-	        </table>
+<section id="app-bidi-examples" class="appendix informative">
+	<h2>Examples for bidirectional texts</h2>
+
+	<p>This section illustrates how Unicode formatting characters can be applied to bidirectional strings, where necessary, in order to help a consumer produce the expected display. If the string is created with a prepended formatting character, the first-strong heuristics produce the correct base direction for the string as a whole.</p>
+
+	<p>A right-to-left string that begins with a Latin character should have U+200F RIGHT-TO-LEFT MARK prepended.</p>
+
+	<table class=zebra>
+		<tbody>
+			<tr>
+				<td>Character order in memory:</td>
+				<td><code><bdo dir="ltr">HTML היא שפת סימון.</bdo></code></td>
+			</tr>
+			<tr>
+				<td>Gives incorrect display:</td>
+				<td dir="ltr">HTML היא שפת סימון.</td>
+			</tr>
+				<td>Source code with formatting character:</td>
+				<td><code><bdo dir="ltr">\u{200F}HTML היא שפת סימון.</bdo></code></td>
+			</tr>
+			<tr>
+				<td>Gives expected display:</td>
+				<td dir="rtl">HTML היא שפת סימון.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>A left-to-right string that begins with a Latin character should have U+200E LEFT-TO-RIGHT MARK prepended.</p>
+
+	<table class=zebra>
+		<tbody>
+			<tr>
+				<td>Character order in memory:</td>
+				<td><code><bdo dir="ltr">'سلام' is hello in Persian.</bdo></code></td>
+			</tr>
+			<tr>
+				<td>Gives incorrect display:</td>
+				<td dir="rtl">'سلام' is hello in Persian.</td>
+			</tr>
+				<td>Source code with formatting character:</td>
+				<td><code><bdo dir="ltr">\u{200E}'سلام' is hello in Persian.</bdo></code></td>
+			</tr>
+			<tr>
+				<td>Gives expected display:</td>
+				<td dir="ltr">'سلام' is hello in Persian.</td>
+			</tr>
+		</tbody>
+	</table>	
+</section>
