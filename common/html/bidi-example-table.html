@@ -5,45 +5,43 @@
 
 	<p>A right-to-left string that begins with a Latin script character should have U+200F RIGHT-TO-LEFT MARK prepended.</p>
 
-	<table class=zebra>
-		<tbody>
-			<tr>
-				<td>Character order in memory:</td>
-				<td><code><bdo dir="ltr">HTML היא שפת סימון.</bdo></code></td>
-			</tr>
-			<tr>
-				<td>Gives incorrect display:</td>
-				<td dir="ltr">HTML היא שפת סימון.</td>
-			</tr>
-				<td>Source code with formatting character:</td>
-				<td><code><bdo dir="ltr">\u200FHTML היא שפת סימון.</bdo></code></td>
-			</tr>
-			<tr>
-				<td>Gives expected display:</td>
-				<td dir="rtl">HTML היא שפת סימון.</td>
-			</tr>
-		</tbody>
+	<table>
+		<tr>
+			<td>Character order in memory:</td>
+			<td><code><bdo dir="ltr">HTML היא שפת סימון.</bdo></code></td>
+		</tr>
+		<tr>
+			<td>Gives incorrect display:</td>
+			<td dir="ltr">HTML היא שפת סימון.</td>
+		</tr>
+		<tr>
+			<td>Source code with formatting character:</td>
+			<td><code><bdo dir="ltr">\u200FHTML היא שפת סימון.</bdo></code></td>
+		</tr>
+		<tr>
+			<td>Gives expected display:</td>
+			<td dir="rtl">HTML היא שפת סימון.</td>
+		</tr>
 	</table>
 
 	<p>A left-to-right string that begins with a Arabic script character should have U+200E LEFT-TO-RIGHT MARK prepended.</p>
 
-	<table class=zebra>
-		<tbody>
-			<tr>
-				<td>Character order in memory:</td>
-				<td><code><bdo dir="ltr">'سلام' is hello in Persian.</bdo></code></td>
-			</tr>
-			<tr>
-				<td>Gives incorrect display:</td>
-				<td dir="rtl">'سلام' is hello in Persian.</td>
-			</tr>
-				<td>Source code with formatting character:</td>
-				<td><code><bdo dir="ltr">\u200E'سلام' is hello in Persian.</bdo></code></td>
-			</tr>
-			<tr>
-				<td>Gives expected display:</td>
-				<td dir="ltr">'سلام' is hello in Persian.</td>
-			</tr>
-		</tbody>
+	<table>
+		<tr>
+			<td>Character order in memory:</td>
+			<td><code><bdo dir="ltr">'سلام' is hello in Persian.</bdo></code></td>
+		</tr>
+		<tr>
+			<td>Gives incorrect display:</td>
+			<td dir="rtl">'سلام' is hello in Persian.</td>
+		</tr>
+		<tr>
+			<td>Source code with formatting character:</td>
+			<td><code><bdo dir="ltr">\u200E'سلام' is hello in Persian.</bdo></code></td>
+		</tr>
+		<tr>
+			<td>Gives expected display:</td>
+			<td dir="ltr">'سلام' is hello in Persian.</td>
+		</tr>
 	</table>	
 </section>
