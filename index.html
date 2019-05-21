@@ -1483,11 +1483,11 @@ enum TextDirection {
 							</p>
 
 							<p class=note>
-								In situations where the first-strong heuristics will produce the wrong result (eg. a string in the Arabic or Hebrew script that begins with a Latin acronym), content developers may want to prepend a Unicode formatting character to the string. This would then produce the necessary base direction when the heuristics are applied. They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK, or U+200F RIGHT-TO-LEFT MARK.
+								In situations where the first-strong heuristics will produce the wrong result (e.g., a string in the Arabic or Hebrew script that begins with a Latin acronym), content developers may want to prepend a Unicode formatting character to the string. This would then produce the necessary base direction when the heuristics are applied. They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK, or U+200F RIGHT-TO-LEFT MARK. (See <a href="#app-bidi-examples"></a>.)
 							</p>
 							
 							<p>
-								Once the base direction has been identified, user agents MUST determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm[[!bidi]]. This could require wrapping additional markup or control characters around the string prior to display, in order to apply the base direction. (See <a href="#app-bidi-examples"></a>.	
+								Once the base direction has been identified, user agents MUST determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp;[[!bidi]]. This could require wrapping additional markup or Unicode formatting characters around the string prior to display, in order to apply the base direction.	
 							</p>
 
 							<pre class="idl">
