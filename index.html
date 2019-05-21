@@ -7,17 +7,16 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<script src="common/js/wp.js" class="remove"></script>
 		<script src="common/js/parts.js" class="remove"></script>
-		<script src="common/js/clean_idl_index.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
-			  postProcess: [create_wp, denumber_parts, clean_idl_index],
+			  postProcess: [create_wp, denumber_parts],
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
               previousPublishDate: "2019-04-09",
-  			  previousMaturity: "WD",
+  			previousMaturity: "WD",
               edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
                   {
@@ -319,17 +318,68 @@
 					<h4>The <dfn><code>PublicationManifest</code></dfn> Dictionary</h4>
 
 					<p>The <code>PublicationManifest</code> dictionary is the [[!webidl-1]] representation of the
-						collection of manifest properties. WebIDL definitions are also provided at the end of each
-						property that belongs to the dictionary — these represent the members of the
-							<code>PublicationManifest</code> dictionary.</p>
+						collection of manifest properties.</p>
 
 					<pre class="idl" id="wpm">
 dictionary PublicationManifest {
+    required sequence&lt;DOMString>         type;
+             sequence&lt;DOMString>         accessMode;
+             sequence&lt;DOMString>         accessModeSufficient;
+             sequence&lt;DOMString>         accessibilityAPI;
+             sequence&lt;DOMString>         accessibilityControl;
+             sequence&lt;DOMString>         accessibilityFeature;
+             sequence&lt;DOMString>         accessibilityHazard;
+             LocalizableString           accessibilitySummary;
+             sequence&lt;CreatorInfo>       artist;
+             sequence&lt;CreatorInfo>       author;
+             sequence&lt;CreatorInfo>       colorist;
+             sequence&lt;CreatorInfo>       contributor;
+             sequence&lt;CreatorInfo>       creator;
+             sequence&lt;CreatorInfo>       editor;
+             sequence&lt;CreatorInfo>       illustrator;
+             sequence&lt;CreatorInfo>       inker;
+             sequence&lt;CreatorInfo>       letterer;
+             sequence&lt;CreatorInfo>       penciler;
+             sequence&lt;CreatorInfo>       publisher;
+             sequence&lt;CreatorInfo>       readBy;
+             sequence&lt;CreatorInfo>       translator;
+             DOMString                   duration;
+             DOMString                   inLanguage;
+             TextDirection               inDirection;
+             DOMString                   dateModified;
+             DOMString                   datePublished;
+             ProgressionDirection        readingProgression = "ltr";
+    required sequence&lt;LocalizableString> name;
+    required sequence&lt;LinkedResource>    readingOrder;
+             sequence&lt;LinkedResource>    resources = [];
+             sequence&lt;LinkedResource>    links = [];
+};
+					
 
-};</pre>
+dictionary CreatorInfo {
+             sequence&lt;DOMString>         type;
+    required sequence&lt;LocalizableString> name;
+             DOMString                   id;
+             DOMString                   url;
+};
 
-					<p class="note">Refer to <a href="#idl-index"></a> for a complete listing of the
-							<code>PublicationManifest</code> dictionary.</p>
+enum TextDirection {
+    "ltr",
+    "rtl",
+    "auto"
+};
+
+dictionary LocalizableString {
+    required DOMString                   value;
+             DOMString                   language;
+};
+
+enum ProgressionDirection {
+    "ltr",
+    "rtl"
+};
+</pre>
+
 				</section>
 			</section>
 
@@ -416,11 +466,6 @@ dictionary PublicationManifest {
 
 				<p class="note">Refer to the Schema.org site for the complete <a href="https://schema.org/CreativeWork"
 						>list of <code>CreativeWork</code> subtypes</a>.</p>
-
-				<pre class="idl">
-partial dictionary PublicationManifest {
-    required sequence&lt;DOMString&gt; type;
-};</pre>
 			</section>
 
 			<section id="manifest-properties">
@@ -833,17 +878,6 @@ partial dictionary PublicationManifest {
 								href="#accessibility-report">Accessibility Report</a> if more information is needed than
 							can be expressed by these properties.</p>
 
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    sequence&lt;DOMString> accessMode;
-    sequence&lt;DOMString> accessModeSufficient;
-    sequence&lt;DOMString> accessibilityAPI;
-    sequence&lt;DOMString> accessibilityControl;
-    sequence&lt;DOMString> accessibilityFeature;
-    sequence&lt;DOMString> accessibilityHazard;
-    LocalizableString   accessibilitySummary;
-};</pre>
-
 						<pre class="example" title="Example accessiblity metadata for a document with text and images. The publication provides alternative text and long descriptions appropriate for each image, so can also be read in purely textual form.">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1141,31 +1175,6 @@ partial dictionary PublicationManifest {
 
 						<p>The manifest MAY include more than one of each type of creator.</p>
 
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    sequence&lt;CreatorInfo> artist;
-    sequence&lt;CreatorInfo> author;
-    sequence&lt;CreatorInfo> colorist;
-    sequence&lt;CreatorInfo> contributor;
-    sequence&lt;CreatorInfo> creator;
-    sequence&lt;CreatorInfo> editor;
-    sequence&lt;CreatorInfo> illustrator;
-    sequence&lt;CreatorInfo> inker;
-    sequence&lt;CreatorInfo> letterer;
-    sequence&lt;CreatorInfo> penciler;
-    sequence&lt;CreatorInfo> publisher;
-    sequence&lt;CreatorInfo> readBy;
-    sequence&lt;CreatorInfo> translator;
-};
-
-
-dictionary CreatorInfo {
-             sequence&lt;DOMString>         type;
-    required sequence&lt;LocalizableString> name;
-             DOMString                   id;
-             DOMString                   url;
-};</pre>
-
 						<pre class="example" title="Author of a book">
 {
     "type"     : "Book",
@@ -1249,11 +1258,6 @@ dictionary CreatorInfo {
 							</tbody>
 						</table>
 
-						<pre class="idl">
-partial dictionary PublicationManifest {		
-    DOMString duration;
-};</pre>
-
 						<pre class="example" title="Global duration provided in the manifest (in seconds)">
 {
     "@context"       : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
@@ -1284,11 +1288,10 @@ partial dictionary PublicationManifest {
 							table of contents on the right hand side for publications whose natural base direction is
 							right-to-left).</p>
 
-						<p class="note">It is important to differentiate the language <em>of the publication</em>
-							from the language and the base direction of the individual resources that compose it. If
-							such resources are, for example, in HTML, the language and direction need to be set in
-							those resources, too. The language and base direction of the publication are not
-							inherited.</p>
+						<p class="note">It is important to differentiate the language <em>of the publication</em> from
+							the language and the base direction of the individual resources that compose it. If such
+							resources are, for example, in HTML, the language and direction need to be set in those
+							resources, too. The language and base direction of the publication are not inherited.</p>
 
 						<p>Similarly, each natural language property value in the manifest (e.g., <a href="#pub-title"
 								>title</a>, <a href="#creators">creators</a>) is a <a href="#value-localizable-string"
@@ -1403,24 +1406,12 @@ partial dictionary PublicationManifest {
 									href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
 								attributes in&#160;[[!html]]).</p>
 
-							<p class="issue" data-number=438></p>
+							<p class="issue" data-number="438"></p>
 
 							<p class="note">If authors intend to use a manifest, or a manifest template, both as
 								embedded manifest and as a separate resource, they are strongly encouraged to set these
 								properties explicitly to avoid interference of the containing <code>script</code>
 								element in case of embedding.</p>
-
-							<pre class="idl">
-partial dictionary PublicationManifest {
-    DOMString     inLanguage;
-    TextDirection inDirection;
-};
-
-enum TextDirection {
-    "ltr",
-    "rtl",
-    "auto"
-};</pre>
 
 						</section>
 
@@ -1477,23 +1468,22 @@ enum TextDirection {
 								the ability of manifests to include this.</p>
 
 
-							<p>
-								In order to correctly handle manifests entries containing right-to-left or bidirectional text, user agents SHOULD identify the base direction of any given natural language value by scanning the text for the first strong directional character.
-							</p>
+							<p> In order to correctly handle manifests entries containing right-to-left or bidirectional
+								text, user agents SHOULD identify the base direction of any given natural language value
+								by scanning the text for the first strong directional character. </p>
 
-							<p class=note>
-								In situations where the first-strong heuristics will produce the wrong result (eg. a string in the Arabic or Hebrew script that begins with a Latin acronym), content developers may want to prepend a Unicode formatting character to the string. This would then produce the necessary base direction when the heuristics are applied. They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK, or U+200F RIGHT-TO-LEFT MARK.
-							</p>
-							
-							<p>
-								Once the base direction has been identified, user agents MUST determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm[[!bidi]]. This could require wrapping additional markup or control characters around the string prior to display, in order to apply the base direction. (See <a href="#app-bidi-examples"></a>.	
-							</p>
+							<p class="note"> In situations where the first-strong heuristics will produce the wrong
+								result (eg. a string in the Arabic or Hebrew script that begins with a Latin acronym),
+								content developers may want to prepend a Unicode formatting character to the string.
+								This would then produce the necessary base direction when the heuristics are applied.
+								They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK,
+								or U+200F RIGHT-TO-LEFT MARK. </p>
 
-							<pre class="idl">
-dictionary LocalizableString {
-    required DOMString value;
-             DOMString language;
-};</pre>
+							<p> Once the base direction has been identified, user agents MUST determine the appropriate
+								rendering and display of natural language values according to the Unicode Bidirectional
+								Algorithm[[!bidi]]. This could require wrapping additional markup or control characters
+								around the string prior to display, in order to apply the base direction. (See <a
+									href="#app-bidi-examples"></a>. </p>
 						</section>
 					</section>
 
@@ -1539,10 +1529,6 @@ dictionary LocalizableString {
 							third-party content could change without the author being aware). User agents SHOULD check
 							the last modification date of individual resources to determine if they have changed and
 							need updating.</p>
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    DOMString dateModified;
-};</pre>
 
 						<pre class="example" title="Last modification date of the publication">
 {
@@ -1599,11 +1585,6 @@ partial dictionary PublicationManifest {
 						<p>The exact moment of publication is intentionally left open to interpretation: it could be
 							when the publication is first made available online or could be a point in time before
 							publication when the publication is considered final.</p>
-
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    DOMString datePublished;
-};</pre>
 
 						<pre class="example" title="Creation and modification date of the publication">
 {
@@ -1672,16 +1653,6 @@ partial dictionary PublicationManifest {
 						<p>If the <code>readingProgression</code> is not set, user agents MUST use the default value
 								<code>ltr</code> when generating the canonical manifest.</p>
 
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    ProgressionDirection readingProgression = "ltr";
-};
-
-enum ProgressionDirection {
-	"ltr",
-	"rtl"
-};</pre>
-
 						<pre class="example" title="Reading progression set explicitl to ltr">
 {
     "@context"           : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -1737,11 +1708,6 @@ enum ProgressionDirection {
 						<p class="note">A user agent is not expected to produce a <a
 								data-cite="WCAG20#navigation-mechanisms-title">meaningful title</a>&#160;[[wcag20]] for
 							a publication when one is not specified. </p>
-
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    required sequence&lt;LocalizableString> name;
-};</pre>
 
 						<pre class="example" title="Title of the book set explicitly">
 {
@@ -1818,11 +1784,6 @@ partial dictionary PublicationManifest {
 						</table>
 
 						<p>The default reading order MUST include at least one resource.</p>
-
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    required sequence&lt;LinkedResource> readingOrder;
-};</pre>
 
 						<pre class="example" title="Reading order expressed as a simple list of URLs">
 {
@@ -1918,11 +1879,6 @@ partial dictionary PublicationManifest {
 							third-party scripts that reference resources from deep within their source), but a user
 							agent SHOULD still be able to render a publication even if some of these resources are not
 							identified as belonging to the publication (e.g., if it is taken offline without them).</p>
-
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    sequence&lt;LinkedResource> resources = [];
-};</pre>
 
 						<pre class="example" title="Listing resources, some via a simple URL, some with more details">
 {
@@ -2029,11 +1985,6 @@ partial dictionary PublicationManifest {
 
 						<p>User agents MAY ignore linked resources, and are not required to take them offline with a
 							publication. These resources SHOULD NOT be included when packaging a publication.</p>
-
-						<pre class="idl">
-partial dictionary PublicationManifest {
-    sequence&lt;LinkedResource> links = [];
-};</pre>
 
 					</section>
 				</section>
@@ -5164,7 +5115,6 @@ dictionary LinkedResource {
 				</tbody>
 			</table>
 		</section>
-		<section id="idl-index" class="appendix"></section>
 		<section id="app-image-descriptions" class="appendix informative">
 			<h2>Image Descriptions</h2>
 
