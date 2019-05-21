@@ -296,29 +296,26 @@
 			<section id="webidl">
 				<h3>WebIDL</h3>
 
-				<section id="webidl-intro" class="informative">
-					<h4>Introduction</h4>
+				<p>Although a <a>digital publication</a>'s manifest is authored as [[json-ld]], a user agent processes
+					this information into an internal data structure, which can be in any language, in order to utilize
+					the properties. The exact manner in which this processing occurs, and how the data is used
+					internally, is user agent-dependent and not defined in this specification.</p>
 
-					<p>Although a <a>digital publication</a>'s manifest is authored as [[json-ld]], a user agent
-						processes this information into an internal data structure in order to utilize the properties.
-						The exact manner in which this processing occurs, and how the data is used internally, is user
-						agent-dependent.</p>
+				<p>To simplify understanding of the manifest format for developers, this specification defines an
+					abstract representation of the data structures employed by the manifest using the Web Interface
+					Definition Language (WebIDL) [[webidl-1]] — <a href="#webidl-wpm">the
+							<code>PublicationManifest</code> dictionary</a>.</p>
 
-					<p>To ensure interoperability when exposing the items, this specification defines an abstract
-						representation of the data structures using the Web Interface Definition Language (WebIDL)
-						[[webidl-1]]. The WebIDL definitions express the expected names, datatypes, and possible
-						restrictions for each member of the manifest. (A WebIDL representation can be mapped onto
-						ECMAScript, C, or other programming languages.)</p>
+				<p>This definition expresses the expected names, datatypes, and possible restrictions for each member of
+					the manifest. Unlike a traditional WebIDL definition, however, user agents are not expected to
+					expose the information in the manifest to Web documents. The WebIDL language is chosen solely to
+					provide an abstraction of the data.</p>
 
-					<p class="note">Authors of digital publications are encouraged to review these definitions, but they
-						are not necessary to understand.</p>
-				</section>
+				<p class="note">It is not necessary to understand the WebIDL definition in order to create digital
+					publications. Authoring requirements are defined in the following sections.</p>
 
 				<section id="webidl-wpm">
 					<h4>The <dfn><code>PublicationManifest</code></dfn> Dictionary</h4>
-
-					<p>The <code>PublicationManifest</code> dictionary is the [[!webidl-1]] representation of the
-						collection of manifest properties.</p>
 
 					<pre class="idl" id="wpm">
 dictionary PublicationManifest {
@@ -379,7 +376,6 @@ enum ProgressionDirection {
     "rtl"
 };
 </pre>
-
 				</section>
 			</section>
 
