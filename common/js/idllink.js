@@ -8,7 +8,6 @@ function convert_dfn_to_link() {
 			
 			if (dfns) {
 				dfns.forEach( function(dfn) {
-				alert(dfn.textContent.toLowerCase());
 					var link = document.createElement('a');
 						link.setAttribute('href', '#idl-def-publicationmanifest-' + dfn.textContent.toLowerCase());
 						link.appendChild(dfn.cloneNode(true));
