@@ -294,7 +294,7 @@
 			</section>
 
 			<section id="webidl">
-				<h3>WebIDL</h3>
+				<h3>Web IDL</h3>
 
 				<p>Although a <a>digital publication</a>'s manifest is authored as [[json-ld]], a user agent processes
 					this information into an internal data structure, which can be in any language, in order to utilize
@@ -303,15 +303,15 @@
 
 				<p>To simplify understanding of the manifest format for developers, this specification defines an
 					abstract representation of the data structures employed by the manifest using the Web Interface
-					Definition Language (WebIDL) [[webidl-1]] — <a href="#webidl-wpm">the
+					Definition Language (Web IDL) [[webidl-1]] — <a href="#webidl-wpm">the
 							<code>PublicationManifest</code> dictionary</a>.</p>
 
 				<p>This definition expresses the expected names, datatypes, and possible restrictions for each member of
-					the manifest. Unlike a traditional WebIDL definition, however, user agents are not expected to
-					expose the information in the manifest to Web documents. The WebIDL language is chosen solely to
-					provide an abstraction of the data.</p>
+					the manifest. Unlike a typical Web IDL definition, however, user agents are not expected to expose
+					the information in the manifest as an API. The Web IDL language is chosen solely to provide an
+					abstraction of the data model.</p>
 
-				<p class="note">It is not necessary to understand the WebIDL definition in order to create digital
+				<p class="note">It is not necessary to understand the Web IDL definition in order to create digital
 					publications. Authoring requirements are defined in the following sections.</p>
 
 				<section id="webidl-wpm">
@@ -4720,17 +4720,17 @@ dictionary LinkedResource {
 					<object data="images/convert_manifest.svg" type="image/svg+xml"
 						aria-describedby="convert-manifest-diagram-descr">
 						<p id="convert-manifest-diagram-descr">Third major block in the lifecyle algorithm: convert the
-							manifest into a programming language dependent data structure that implements the WebIDL
+							manifest into a programming language dependent data structure that implements the Web IDL
 							specification of the manifest.</p>
 					</object>
 					<figcaption> Third major block in the lifecyle algorithm: convert the manifest into a programming
-						language dependent data structure that implements the WebIDL specification of the
+						language dependent data structure that implements the Web IDL specification of the
 						manifest.<br />See the normative description of the algorithm in <a
 							href="#post-processed-manifest"></a>. Image available in <a
 							href="images/convert_manifest.svg"
-							title="SVG image of converting the manifest into a data structure implementing the WebIDL representation"
+							title="SVG image of converting the manifest into a data structure implementing the Web IDL representation"
 							>SVG</a> and <a
-							title="PNG image of converting the manifest into a data structure implementing the WebIDL representation"
+							title="PNG image of converting the manifest into a data structure implementing the Web IDL representation"
 							href="images/convert_manifest.png">PNG</a> formats. </figcaption>
 				</figure>
 			</section>
