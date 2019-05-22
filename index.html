@@ -7,11 +7,12 @@
 		<script src="common/js/biblio.js" class="remove"></script>
 		<script src="common/js/wp.js" class="remove"></script>
 		<script src="common/js/parts.js" class="remove"></script>
+		<script src="common/js/idllink.js" class="remove"></script>
 		<link href="common/css/common.css" rel="stylesheet" type="text/css" />
 		<script class="remove">
 		  // <![CDATA[
           var respecConfig = {
-			  postProcess: [create_wp, denumber_parts],
+			  postProcess: [create_wp, denumber_parts, convert_dfn_to_link],
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
@@ -2190,9 +2191,8 @@ enum ProgressionDirection {
 						<p>A link to a privacy policy can be included in the manifest for this purposes. It is
 							RECOMMENDED that the privacy policy be included as a resource of the publication.</p>
 
-						<p>The <span data-dfn-for="PublicationManifest"><dfn data-lt="privacyPolicy">privacy
-									policy</dfn></span> is identified using the <code>privacy-policy</code> link
-							relation&#160;[[!iana-link-relations]].</p>
+						<p>The <dfn data-lt="privacyPolicy">privacy policy</dfn> is identified using the
+								<code>privacy-policy</code> link relation&#160;[[!iana-link-relations]].</p>
 
 						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
 								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
@@ -2355,10 +2355,9 @@ enum ProgressionDirection {
 						<p>The table of contents is a navigational aid that provides links to the majort structural
 							sections of a <a>digital publication</a>.</p>
 
-						<p>The <span data-dfn-for="PublicationManifest"><dfn data-lt="toc">table of
-								contents</dfn></span> is identified by the <code>contents</code> link
-							relation&#160;[[!iana-link-relations]]. The <a href="#value-url">URL</a> expressed in the
-								<code>url</code> term MUST NOT include a fragment identifier.</p>
+						<p>The <dfn data-lt="toc">table of contents</dfn> is identified by the <code>contents</code>
+							link relation&#160;[[!iana-link-relations]]. The <a href="#value-url">URL</a> expressed in
+							the <code>url</code> term MUST NOT include a fragment identifier.</p>
 
 						<p>The link to the table of contents MAY be specified in either the <a
 								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
