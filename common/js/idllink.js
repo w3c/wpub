@@ -1,5 +1,6 @@
 
 function convert_dfn_to_link() {
+
 	var defs = document.querySelectorAll("*[data-dfn-for='PublicationManifest']");
 	
 	if (defs) {
