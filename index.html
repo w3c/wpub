@@ -1468,12 +1468,13 @@ enum ProgressionDirection {
 								text, user agents SHOULD identify the base direction of any given natural language value
 								by scanning the text for the first strong directional character. </p>
 
-							<p class="note"> In situations where the first-strong heuristics will produce the wrong
-								result (eg. a string in the Arabic or Hebrew script that begins with a Latin acronym),
-								content developers may want to prepend a Unicode formatting character to the string.
-								This would then produce the necessary base direction when the heuristics are applied.
-								They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK,
-								or U+200F RIGHT-TO-LEFT MARK. </p>
+							<p class=note>
+								In situations where the first-strong heuristics will produce the wrong result (e.g., a string in the Arabic or Hebrew script that begins with a Latin acronym), content developers may want to prepend a Unicode formatting character to the string. This would then produce the necessary base direction when the heuristics are applied. They should use one of the following formatting characters: U+200E LEFT-TO-RIGHT MARK, or U+200F RIGHT-TO-LEFT MARK. (See <a href="#app-bidi-examples"></a>.)
+							</p>
+							
+							<p>
+								Once the base direction has been identified, user agents MUST determine the appropriate rendering and display of natural language values according to the Unicode Bidirectional Algorithm&nbsp;[[!bidi]]. This could require wrapping additional markup or Unicode formatting characters around the string prior to display, in order to apply the base direction.	
+							</p>
 
 							<p> Once the base direction has been identified, user agents MUST determine the appropriate
 								rendering and display of natural language values according to the Unicode Bidirectional
@@ -4583,81 +4584,7 @@ dictionary LinkedResource {
 				<pre class="example" data-include="experiments/audiobook/flatland.json" data-include-format="text"></pre>
 			</section>
 		</section>
-		<section id="app-bidi-examples" class="appendix informative">
-			<h2>Examples for bidirectional texts</h2>
-
-			<p>(These examples were originally published in the Activity Streams
-				Recommendation&#160;[[activitystreams-core]].)</p>
-
-			<table class="zebra">
-				<tbody>
-					<tr>
-						<th>Character order in memory</th>
-						<th>Direction</th>
-						<th>Method</th>
-						<th>Expected display</th>
-					</tr>
-
-					<tr>
-						<td>
-							<code>
-								<bdo dir="ltr">&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdo>
-							</code>
-						</td>
-						<td>rtl</td>
-						<td>First strong directional character</td>
-						<td style="width: 50%">
-							<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi>
-						</td>
-					</tr>
-
-					<tr>
-						<td>
-							<code>
-								<bdo dir="ltr">The document is titled,
-									"&amp;#x2067;&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-									&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C&amp;#x2069;"</bdo>
-							</code>
-						</td>
-						<td>ltr</td>
-						<td>First strong directional character</td>
-						<td>The document is titled, "<bdi>&#x05E4;&#x05E2;&#x05D9;&#x05DC;&#x05D5;&#x05EA;
-								&#x05D4;&#x05D1;&#x05D9;&#x05E0;&#x05D0;&#x05D5;&#x05DD;, W3C</bdi>"</td>
-					</tr>
-
-
-					<tr>
-						<td>
-							<code>
-								<bdo dir="ltr">&amp;#x200F;HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-									&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</bdo>
-							</code>
-						</td>
-						<td>rtl</td>
-						<td>Bidi Control Character</td>
-						<td>
-							<code dir="rtl">HTML &#x05D4;&#x05D9;&#x05D0; &#x05E9;&#x05E4;&#x05EA;
-								&#x05E1;&#x05D9;&#x05DE;&#x05D5;&#x05DF;</code>
-						</td>
-					</tr>
-
-					<tr>
-						<td>
-							<code>
-								<bdo dir="ltr">&amp;#x200E;'&#x0633;&#x0644;&#x0627;&#x0645;' is hello in Persian</bdo>
-							</code>
-						</td>
-						<td>ltr</td>
-						<td>Bidi Control Character</td>
-						<td>
-							<code>'<bdi>&#x0633;&#x0644;&#x0627;&#x0645;</bdi>' is hello in Persian</code>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</section>
+		<section id="app-bidi-examples" data-include="common/html/bidi-example-table.html" data-include-replace="true"></section>
 		<section id="app-lifecycle-diagrams" class="appendix informative">
 			<h2>Lifecycle diagrams</h2>
 
@@ -4878,15 +4805,6 @@ dictionary LinkedResource {
 						</td>
 						<td>
 							<a href="#last-modification-date"></a>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>
-							<code>datePublished</code>
-						</td>
-						<td>
-							<a href="#publication-date"></a>
 						</td>
 						<td></td>
 					</tr>
