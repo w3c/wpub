@@ -735,9 +735,7 @@ enum ProgressionDirection {
 									</td>
 									<td> The human sensory perceptual system or cognitive faculty through which a person
 										may process or perceive information. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td>One or more text(s).</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -753,9 +751,7 @@ enum ProgressionDirection {
 									</td>
 									<td> A list of single or combined accessModes that are sufficient to understand all
 										the intellectual content of a resource. </td>
-									<td> One or more <a href="https://schema.org/ItemList">ItemList</a>. <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td> One or more <a href="https://schema.org/ItemList">ItemList</a>.</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -772,9 +768,7 @@ enum ProgressionDirection {
 									</td>
 									<td>Indicates that the resource is compatible with the referenced accessibility
 										APIs. </td>
-									<td>One or more text(s).<a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td>One or more text(s).</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -790,9 +784,7 @@ enum ProgressionDirection {
 									</td>
 									<td>Identifies input methods that are sufficient to fully control the described
 										resource. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td> One or more text(s).</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -809,9 +801,7 @@ enum ProgressionDirection {
 									</td>
 									<td> Content features of the resource, such as accessible media, alternatives and
 										supported enhancements for accessibility. </td>
-									<td> One or more text(s). <a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td> One or more text(s).</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -828,9 +818,7 @@ enum ProgressionDirection {
 									</td>
 									<td> A characteristic of the described resource that is physiologically dangerous to
 										some users. </td>
-									<td> One or more text(s).<a
-											href="https://www.w3.org/wiki/WebSchemas/Accessibility#accessibilityFeature_in_detail"
-											>Expected values</a>. </td>
+									<td> One or more text(s).</td>
 									<td>
 										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
 									</td>
@@ -862,8 +850,8 @@ enum ProgressionDirection {
 							</tbody>
 						</table>
 
-						<p>Detailed descriptions of these properties are available on the <a
-								href="http://www.w3.org/wiki/WebSchemas/Accessibility">WebSchemas Wiki site</a>.</p>
+						<p class="note">Detailed descriptions of these properties, including the expected values to use
+							with them, are available at [[webschemas-a11y]].</p>
 
 						<p>Values SHOULD be drawn from the <a
 								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">preferred
@@ -2932,17 +2920,6 @@ enum ProgressionDirection {
 						<li><p>Perform data cleanup operations on <var>manifest</var>, possibly removing data, as well
 								as raising warnings.</p>
 							<ol>
-								<!--<li>For all the terms defined in <a href="#accessibility"></a>, except for
-										<code>accessModeSufficient</code> and <code>accessibilitySummary</code>, check
-									whether all tokens listed in <var>manifest[term]</var> are defined in the preferred
-									vocabulary (see the <a
-										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-										expected values</a> for each). Issue a warning for each unrecognized value. </li>
-								<li>For all values in <var>manifest["accessModeSufficient"]</var>, check whether each
-									token in each <a href="https://schema.org/ItemList">ItemList</a> [[!schema.org]] is
-									defined in the preferred vocabulary (see the <a
-										href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">list of
-										expected values</a>). Issue a warning for all unrecognized values. </li> -->
 								<li>For all <var>term</var> that expect <a href="#value-object-entity">entities</a>,
 									check whether the value object <var>P</var> in <var>manifest[term]</var> has
 										<var>P["name"]</var> set. If not, remove <var>P</var> from
