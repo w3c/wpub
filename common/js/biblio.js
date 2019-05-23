@@ -128,5 +128,9 @@ var biblio = {
     "bibtex": {
          "title": "BibTeX Format Description",
          "href" : "http://www.bibtex.org/Format/"
+    },
+    "webschemas-a11y": {
+    	"title": "WebSchemas Accessibility",
+    	"href": "http://www.w3.org/wiki/WebSchemas/Accessibility"
     }
 }
