@@ -120,55 +120,43 @@
     "accessMode": {
       "type": ["string", "array"],
       "items": {
-        "type": "string",
-        "enum": ["auditory", "tactile", "textual", "visual", "colorDependent", "chartOnVisual", "chemOnVisual", "diagramOnVisual", "mathOnVisual", "musicOnVisual", "textOnVisual"]
+        "type": "string"
       },
-      "enum": ["auditory", "tactile", "textual", "visual", "colorDependent", "chartOnVisual", "chemOnVisual", "diagramOnVisual", "mathOnVisual", "musicOnVisual", "textOnVisual"],
       "uniqueItems": true
     },
     "accessModeSufficient": {
       "type": ["string", "array"],
       "items": {
-        "type": "string",
-        "enum": ["auditory", "tactile", "textual", "visual"]
+        "type": "string"
       },
-      "enum": ["auditory", "tactile", "textual", "visual"],
       "uniqueItems": true
     },
     "accessibilityAPI": {
       "type": ["string", "array"],
       "items": {
-        "type": "string",
-        "enum": ["AndroidAccessibility", "ARIA", "ATK", "AT-SPI", "BlackberryAccessibility", "iAccessible2", "iOSAccessibility", "JavaAccessibility", "MacOSXAccessibility", "MSAA", "UIAutomation"]
+        "type": "string"
       },
-      "uniqueItems": true,
-      "enum": ["AndroidAccessibility", "ARIA", "ATK", "AT-SPI", "BlackberryAccessibility", "iAccessible2", "iOSAccessibility", "JavaAccessibility", "MacOSXAccessibility", "MSAA", "UIAutomation"]
+      "uniqueItems": true
     },
     "accessibilityControl": {
       "type": ["string", "array"],
       "items": {
-        "type": "string",
-        "enum": ["fullKeyboardControl", "fullMouseControl", "fullSwitchControl", "fullTouchControl", "fullVideoControl", "fullVoiceControl"]
+        "type": "string"
       },
-      "enum": ["fullKeyboardControl", "fullMouseControl", "fullSwitchControl", "fullTouchControl", "fullVideoControl", "fullVoiceControl"],
       "uniqueItems": true
     },
     "accessibilityFeature": {
       "type": ["string", "array"],
       "items": {
-        "type": "string",
-        "enum": ["alternativeText", "annotations", "audioDescription", "bookmarks", "braille", "captions", "ChemML", "describedMath", "displayTransformability", "highContrastAudio", "highContrastDisplay", "index", "largePrint", "latex", "longDescription", "MathML", "none", "printPageNumbers", "readingOrder", "rubyAnnotations", "signLanguage", "structuralNavigation", "synchronizedAudioText", "tableOfContents", "taggedPDF", "tactileGraphic", "tactileObject", "timingControl", "transcript", "ttsMarkup", "unlocked"]
+        "type": "string"
       },
-      "enum": ["alternativeText", "annotations", "audioDescription", "bookmarks", "braille", "captions", "ChemML", "describedMath", "displayTransformability", "highContrastAudio", "highContrastDisplay", "index", "largePrint", "latex", "longDescription", "MathML", "none", "printPageNumbers", "readingOrder", "rubyAnnotations", "signLanguage", "structuralNavigation", "synchronizedAudioText", "tableOfContents", "taggedPDF", "tactileGraphic", "tactileObject", "timingControl", "transcript", "ttsMarkup", "unlocked"],
       "uniqueItems": true
     },
     "accessibilityHazard": {
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": ["flashing", "noFlashingHazard", "motionSimulation", "noMotionSimulationHazard", "sound", "noSoundHazard", "unknown", "none"]
+        "type": "string"
       },
-      "enum": ["flashing", "noFlashingHazard", "motionSimulation", "noMotionSimulationHazard", "sound", "noSoundHazard", "unknown", "none"],
       "uniqueItems": true
     },
     "accessibilitySummary": {
