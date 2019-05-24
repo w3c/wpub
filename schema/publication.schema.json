@@ -131,20 +131,6 @@
       },
       "uniqueItems": true
     },
-    "accessibilityAPI": {
-      "type": ["string", "array"],
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true
-    },
-    "accessibilityControl": {
-      "type": ["string", "array"],
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true
-    },
     "accessibilityFeature": {
       "type": ["string", "array"],
       "items": {

@@ -323,8 +323,6 @@ dictionary PublicationManifest {
     required sequence&lt;DOMString>         type;
              sequence&lt;DOMString>         accessMode;
              sequence&lt;DOMString>         accessModeSufficient;
-             sequence&lt;DOMString>         accessibilityAPI;
-             sequence&lt;DOMString>         accessibilityControl;
              sequence&lt;DOMString>         accessibilityFeature;
              sequence&lt;DOMString>         accessibilityHazard;
              LocalizableString           accessibilitySummary;
@@ -763,39 +761,6 @@ enum ProgressionDirection {
 								<tr>
 									<td>
 										<code data-dfn-for="PublicationManifest">
-											<dfn>accessibilityAPI</dfn>
-										</code>
-									</td>
-									<td>Indicates that the resource is compatible with the referenced accessibility
-										APIs. </td>
-									<td>One or more text(s).</td>
-									<td>
-										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
-									</td>
-									<td>
-										<a href="https://schema.org/accessibilityAPI"><code>accessibilityAPI</code></a>
-											(<a href="https://schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="PublicationManifest">
-											<dfn>accessibilityControl</dfn>
-										</code>
-									</td>
-									<td>Identifies input methods that are sufficient to fully control the described
-										resource. </td>
-									<td> One or more text(s).</td>
-									<td>
-										<a href="#value-array">Array</a> of <a href="#value-literal">Literals</a>
-									</td>
-									<td>
-										<a href="https://schema.org/accessibilityControl"
-												><code>accessibilityControl</code></a> (<a
-											href="https://schema.org/CreativeWork">CreativeWork</a>) </td>
-								</tr>
-								<tr>
-									<td>
-										<code data-dfn-for="PublicationManifest">
 											<dfn>accessibilityFeature</dfn>
 										</code>
 									</td>
@@ -853,12 +818,6 @@ enum ProgressionDirection {
 						<p class="note">Detailed descriptions of these properties, including the expected values to use
 							with them, are available at [[webschemas-a11y]].</p>
 
-						<p>Values SHOULD be drawn from the <a
-								href="https://www.w3.org/wiki/WebSchemas/Accessibility#property-table">preferred
-								vocabulary</a> for each accessibility property, but user agents MUST NOT omit values
-							from that are not included in the lists when <a href="#canonical-manifest">generating the
-								canonical manifest</a>.</p>
-
 						<p class="note">The author can also provide a reference to a detailed <a
 								href="#accessibility-report">Accessibility Report</a> if more information is needed than
 							can be expressed by these properties.</p>
@@ -868,7 +827,6 @@ enum ProgressionDirection {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "CreativeWork",
     &#8230;
-    "accessibilityAPI"      : "ARIA",
     "accessMode"            : ["textual", "visual"],
     "accessModeSufficient"  : [
         {
@@ -4683,24 +4641,6 @@ dictionary LinkedResource {
 					<tr>
 						<td>
 							<code>accessModeSufficient</code>
-						</td>
-						<td>
-							<a href="#accessibility"></a>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>
-							<code>accessibilityAPI</code>
-						</td>
-						<td>
-							<a href="#accessibility"></a>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>
-							<code>accessibilityControl</code>
 						</td>
 						<td>
 							<a href="#accessibility"></a>
