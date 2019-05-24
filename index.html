@@ -4221,14 +4221,22 @@ dictionary LinkedResource {
 								</p>
 								<p>Run these steps:</p>
 								<ol>
-									<li>If the stack is empty, and the <code>name</code> property of <em>toc</em> is an
-										empty string, calculate the <a
-											href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
-											>accessible name</a> [[!accname-1.1]] of the element. If the resulting value
-										is not an empty string after trimming all leading and trailing whitespace, set
-										the <code>name</code> property of <em>toc</em> to the value. Otherwise, set the
-											<code>name</code> property either to a placeholder value or to
-											<code>null</code>.</li>
+									<li>
+										<p>If the stack is empty, and the <code>name</code> property of <em>toc</em> is
+											an empty string, set the <code>name</code> property to one of the
+											following:</p>
+										<ul>
+											<li>the descendant content of the element (to preserve any HTML tags);</li>
+											<li>the text string obtained from the descendant content (e.g., by
+												calculating the <a
+													href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+													>accessible name</a> [[accname-1.1]] of the element).</li>
+										</ul>
+										<p>If the resulting value of <code>name</code> is an empty string (e.g., after
+											removing any presentational elements and trimming all leading and trailing
+											whitespace), set the <code>name</code> property either to a placeholder
+											value or to <code>null</code>.</p>
+									</li>
 									<li>Exit the element and continue processing with the next element.</li>
 								</ol>
 								<details>
@@ -4459,13 +4467,22 @@ dictionary LinkedResource {
 									<li>
 										<p>Otherwise:</p>
 										<ol>
-											<li>Calculate the <a
-													href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
-													>accessible name</a> [[!accname-1.1]] for the element. If the
-												resulting value is a non-empty string after trimming leading and
-												trailing white space, set the <code>name</code> property of <em>current
-													toc branch</em> to the resulting value. Otherwise, set the property
-												to <code>null</code>.</li>
+											<li>
+												<p>Set the <code>name</code> property of <em>current toc branch</em> to
+													one of the following:</p>
+												<ul>
+													<li>the descendant content of the anchor element (to preserve any
+														HTML tags);</li>
+													<li>the text string obtained from the descendant content (e.g., by
+														calculating the <a
+															href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+															>accessible name</a> [[accname-1.1]] of the element).</li>
+												</ul>
+												<p>If the resulting value of <code>name</code> is an empty string (e.g.,
+													after removing any presentational elements and trimming all leading
+													and trailing whitespace), set the <code>name</code> property to
+														<code>null</code>.</p>
+											</li>
 											<li>If the element has an <code>href</code> attribute and the URL in the
 												attribute resolves to a resource in the <a>default reading order</a> or
 													<a>resource list</a>, set the <code>url</code> property of
