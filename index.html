@@ -4245,6 +4245,10 @@ dictionary LinkedResource {
 										processed if the value of the <em>toc</em>
 										<code>name</code> property is an empty string (i.e., no headings have yet been
 										encountered).</p>
+									<p>Whether a user agent sets the <code>name</code> to the descendant content of the
+										heading element, or generates a text string from it, depends on whether it will
+										re-use any descendant tagging in the presentation (e.g., to retain images,
+										MathML, ruby and other content that does not translate to text easily).</p>
 									<aside class="example" title="Visualization of the toc object with a heading">
 										<pre>
 {
@@ -4509,6 +4513,11 @@ dictionary LinkedResource {
 									<p>If the name of the current branch is already defined, then processing of this
 										element is terminated (i.e., to avoid processing multiple links for a single
 										branch).</p>
+									<p>Whether a user agent sets the <code>name</code> of the entry to the descendant
+										content of the <code>a</code> element, or generates a text string from it,
+										depends on whether it will re-use any descendant tagging in the presentation
+										(e.g., to retain images, MathML, ruby and other content that does not translate
+										to text easily).</p>
 									<p>In addition to having an <code>href</code> attribute specified, it is necessary
 										that it resolve to a resource that belongs to the digital publication to meet
 										the requirements of this specification. If not, the branch is retained but the
