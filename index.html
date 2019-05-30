@@ -422,7 +422,7 @@ enum ProgressionDirection {
 				<pre class="example" title="Setting a publication's type to CreativeWork.">
 {
     "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "type"     : "CreativeWork"
+    "type"     : "CreativeWork",
     &#8230;
 }
 </pre>
@@ -436,7 +436,7 @@ enum ProgressionDirection {
 				<pre class="example" title="Setting a publication's type to Book.">
 {
     "@context" : ["https://schema.org", "https://www.w3.org/ns/wp-context"],
-    "type"     : "Book"
+    "type"     : "Book",
     &#8230;
 }
 </pre>
@@ -592,7 +592,7 @@ enum ProgressionDirection {
 								<pre>
 {
     "author" : {
-        "type" : "Person"
+        "type" : "Person",
         "name" : "Herman Melville"
     },
     &#8230;
@@ -1395,7 +1395,8 @@ enum ProgressionDirection {
     "type"       : "Book",
     "inLanguage" : "fr",
     &#8230;
-    "author"     : "Marcel Proust",
+	"author"     : "Marcel Proust",
+    &#8230;	
 }
 </pre>
 							<p>(See also <a href="#value-objects"></a>.)</p>
@@ -2027,7 +2028,7 @@ enum ProgressionDirection {
 &#8230;
 "id"         : "http://www.w3.org/TR/tabular-data-model/",
 "url"        : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-"dc:subject" : ["Web data description languages","Data integration","Data Exchange"]
+"dc:subject" : ["Web data description languages","Data integration","Data Exchange"],
 &#8230;
 }
 </pre>
@@ -2201,7 +2202,7 @@ enum ProgressionDirection {
     "resources"  : [{
         "type"           : "LinkedResource",
         "url"            : "cover.html",
-        "encodingFormat" : "text/html"
+        "encodingFormat" : "text/html",
         "rel"            : "cover"
     },{
         &#8230;
@@ -2669,7 +2670,7 @@ enum ProgressionDirection {
     "resources" : [{
         "type"           : "LinkedResource",
         "rel"            : "cover",
-        "url"            : "images/cover.jpg"
+        "url"            : "images/cover.jpg",
         "encodingFormat" : "image/jpeg"
     },
         &#8230;
@@ -2684,7 +2685,7 @@ enum ProgressionDirection {
     "resources" : [{
         "type"           : ["LinkedResource"],
         "rel"            : ["cover"],
-        "url"            : "images/cover.jpg"
+        "url"            : "images/cover.jpg",
         "encodingFormat" : "image/jpeg"
     },
         &#8230;
