@@ -4081,7 +4081,9 @@ dictionary LinkedResource {
 					It is defined in terms of a walk over the nodes of a DOM tree, in <a
 						href="https://www.w3.org/TR/html/infrastructure.html#tree-order">tree order</a>, with each node
 					being visited when it is <em>entered</em> and when it is <em>exited</em> during the walk. Each time
-					a node is visited, it can be seen as triggering an <em>enter</em> or <em>exit</em> event.</p>
+					a node is visited, it can be seen as triggering an <em>enter</em> or <em>exit</em> event. In some
+					steps, user agents are provided a choice in how to process the content to provide flexibility for
+					different presentation models.</p>
 
 				<p class="note">For illustrative purposes, the examples in this section show the structure of the table
 					of contents as JavaScript objects. User agents can process and internalize the resulting structure
@@ -4153,14 +4155,22 @@ dictionary LinkedResource {
 								</p>
 								<p>Run these steps:</p>
 								<ol>
-									<li>If the stack is empty, and the <code>name</code> property of <em>toc</em> is an
-										empty string, calculate the <a
-											href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
-											>accessible name</a> [[!accname-1.1]] of the element. If the resulting value
-										is not an empty string after trimming all leading and trailing whitespace, set
-										the <code>name</code> property of <em>toc</em> to the value. Otherwise, set the
-											<code>name</code> property either to a placeholder value or to
-											<code>null</code>.</li>
+									<li>
+										<p>If the stack is empty, and the <code>name</code> property of <em>toc</em> is
+											an empty string, set the <code>name</code> property to one of the
+											following:</p>
+										<ul>
+											<li>the descendant content of the element (to preserve any HTML tags);</li>
+											<li>the text string obtained from the descendant content (e.g., by
+												calculating the <a
+													href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+													>accessible name</a> [[accname-1.1]] of the element).</li>
+										</ul>
+										<p>If the resulting value of <code>name</code> is an empty string (e.g., after
+											removing any presentational elements and trimming all leading and trailing
+											whitespace), set the <code>name</code> property either to a placeholder
+											value or to <code>null</code>.</p>
+									</li>
 									<li>Exit the element and continue processing with the next element.</li>
 								</ol>
 								<details>
@@ -4169,6 +4179,10 @@ dictionary LinkedResource {
 										processed if the value of the <em>toc</em>
 										<code>name</code> property is an empty string (i.e., no headings have yet been
 										encountered).</p>
+									<p>Whether a user agent sets the <code>name</code> to the descendant content of the
+										heading element, or generates a text string from it, depends on whether it will
+										re-use any descendant tagging in the presentation (e.g., to retain images,
+										MathML, ruby and other content that does not translate to text easily).</p>
 									<aside class="example" title="Visualization of the toc object with a heading">
 										<pre>
 {
@@ -4391,13 +4405,22 @@ dictionary LinkedResource {
 									<li>
 										<p>Otherwise:</p>
 										<ol>
-											<li>Calculate the <a
-													href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
-													>accessible name</a> [[!accname-1.1]] for the element. If the
-												resulting value is a non-empty string after trimming leading and
-												trailing white space, set the <code>name</code> property of <em>current
-													toc branch</em> to the resulting value. Otherwise, set the property
-												to <code>null</code>.</li>
+											<li>
+												<p>Set the <code>name</code> property of <em>current toc branch</em> to
+													one of the following:</p>
+												<ul>
+													<li>the descendant content of the anchor element (to preserve any
+														HTML tags);</li>
+													<li>the text string obtained from the descendant content (e.g., by
+														calculating the <a
+															href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te"
+															>accessible name</a> [[accname-1.1]] of the element).</li>
+												</ul>
+												<p>If the resulting value of <code>name</code> is an empty string (e.g.,
+													after removing any presentational elements and trimming all leading
+													and trailing whitespace), set the <code>name</code> property to
+														<code>null</code>.</p>
+											</li>
 											<li>If the element has an <code>href</code> attribute and the URL in the
 												attribute resolves to a resource in the <a>default reading order</a> or
 													<a>resource list</a>, set the <code>url</code> property of
@@ -4424,6 +4447,11 @@ dictionary LinkedResource {
 									<p>If the name of the current branch is already defined, then processing of this
 										element is terminated (i.e., to avoid processing multiple links for a single
 										branch).</p>
+									<p>Whether a user agent sets the <code>name</code> of the entry to the descendant
+										content of the <code>a</code> element, or generates a text string from it,
+										depends on whether it will re-use any descendant tagging in the presentation
+										(e.g., to retain images, MathML, ruby and other content that does not translate
+										to text easily).</p>
 									<p>In addition to having an <code>href</code> attribute specified, it is necessary
 										that it resolve to a resource that belongs to the digital publication to meet
 										the requirements of this specification. If not, the branch is retained but the
