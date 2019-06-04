@@ -669,6 +669,8 @@ enum ProgressionDirection {
 							primary entry page <em>unless</em> the page declares a base URL (i.e., in a <a
 								data-cite="!html#the-base-element"><code>&lt;base&gt;</code> element</a> in its
 							header).</p>
+
+						<p>As a slight abuse of notation, this value categories may also be used to represent a URN&nbsp;[[!urn]], for example in the case of <a href="#canonical-identifier">canonical identifiers</a>.</p>
 					</section>
 
 					<section id="value-array">
@@ -3259,9 +3261,9 @@ enum ProgressionDirection {
 					<section id="canonical-identifier">
 						<h5>Canonical Identifier</h5>
 
-						<p>A Web Publication's <dfn>canonical identifier</dfn> is a unique identifier that resolves to
-							the preferred version of the Web Publication. It is expressed using the <code>id</code>
-							property.</p>
+						<p>
+							A Web Publication's <dfn>canonical identifier</dfn> is a unique identifier in the form of an <abbr title="Internationalized Resource Identifier" >IRI</abbr>&#160;[[!iri]]. The canonical identifier SHOULD be a <abbr title="Uniform Resource Locator" >URL</abbr>&#160;[[!url]] that resolves to the preferred version of the Web Publication but, in some cases, a <abbr title="Uniform Resource Name">URN</abbr>&#160;[[!urn]]) may be preferred. It is expressed using the <code>id</code> property.
+						</p>
 
 						<table class="zebra">
 							<thead>
@@ -3279,7 +3281,7 @@ enum ProgressionDirection {
 										<code>id</code>
 									</td>
 									<td>Preferred version of the publication.</td>
-									<td>A URL [[!url]].</td>
+									<td>A IRI [[!iri]].</td>
 									<td><a href="#value-url">URL</a></td>
 									<td>(None)</td>
 								</tr>
@@ -3299,7 +3301,7 @@ enum ProgressionDirection {
 							identifier). It is also intended to provide a means of identifying instances of the same Web
 							Publication hosted at different URLs.</p>
 
-						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
+						<p>If a URL is not provided in the manifest, or the value is an invalid IRI, the Web Publication
 							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
 							identifier from any other identifiers provided in the manifest for the canonical
 							manifest.</p>
@@ -3309,7 +3311,7 @@ enum ProgressionDirection {
 								href="https://schema.org/identifier"><code>identifier</code>
 							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
-						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
+						<pre class="example" title="Example for setting both the canonical identifier as a URL and the address of the same document">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "TechArticle",
@@ -3320,12 +3322,12 @@ enum ProgressionDirection {
 }
 </pre>
 
-						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
+						<pre class="example" title="Example for using a URN for the canonical identifier">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
     &#8230;
-    "isbn"     : "9780123456789",
+    "id"       : "urn:isbn:9780123456789",
     "url"      : "https://publisher.example.org/mobydick",
     &#8230;
 }
