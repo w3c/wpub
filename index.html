@@ -843,7 +843,7 @@ enum ProgressionDirection {
 					<section id="canonical-identifier">
 						<h5>Canonical Identifier</h5>
 
-						<p>A <a>digital publicaion</a>'s <dfn>canonical identifier</dfn> property provides a unique
+						<p>A <a>digital publication's</a> <dfn>canonical identifier</dfn> property provides a unique
 							identifier for the publication. It is expressed using the <code>id</code> property.</p>
 
 						<table class="zebra">
@@ -883,7 +883,7 @@ enum ProgressionDirection {
 								href="https://schema.org/identifier"><code>identifier</code>
 							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
-						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
+						<pre class="example" title="Example of setting the canonical identifier and the address as URLs">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "TechArticle",
@@ -894,12 +894,12 @@ enum ProgressionDirection {
 }
 </pre>
 
-						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
+						<pre class="example" title="Example of a URN for the canonical identifier">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
     &#8230;
-    "isbn"     : "9780123456789",
+    "id"       : "urn:isbn:9780123456789",
     "url"      : "https://publisher.example.org/mobydick",
     &#8230;
 }
