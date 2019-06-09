@@ -295,6 +295,7 @@
 					<pre class="idl" id="wpm">
 dictionary PublicationManifest {
     required sequence&lt;DOMString>         type;
+             sequence&lt;DOMString>         id;
              sequence&lt;DOMString>         accessMode;
              sequence&lt;DOMString>         accessModeSufficient;
              sequence&lt;DOMString>         accessibilityFeature;
@@ -860,7 +861,9 @@ enum ProgressionDirection {
 							<tbody>
 								<tr>
 									<td>
-										<code>id</code>
+										<code data-dfn-for="PublicationManifest">
+											<dfn>id</dfn>
+										</code>
 									</td>
 									<td>Preferred version of the publication.</td>
 									<td>A URL record [[!url]].</td>
