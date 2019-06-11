@@ -2064,8 +2064,8 @@ enum ProgressionDirection {
 						<dd>
 							<p>Informative resources are resources that contain additional information about the
 								publication, such as its <a href="#privacy-policy">privacy policy</a>, <a
-									href="#accessibility-report">accessibility report</a>, or  <a
-									href="#preview">preview</a>.</p>
+									href="#accessibility-report">accessibility report</a>, or <a href="#preview"
+									>preview</a>.</p>
 						</dd>
 						<dt>
 							<a href="#structural-rel">structural resources</a>
@@ -2136,11 +2136,8 @@ enum ProgressionDirection {
 						<p>A link to a privacy policy can be included in the manifest for this purposes. It is
 							RECOMMENDED that the privacy policy be included as a resource of the publication.</p>
 
-						<p>The <dfn data-lt="privacyPolicy">privacy policy</dfn> is identified using the
+						<p>A <dfn data-lt="privacyPolicy">privacy policy</dfn> is identified using the
 								<code>privacy-policy</code> link relation&#160;[[!iana-link-relations]].</p>
-
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
 
 						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in
 							publications.</p>
@@ -2165,22 +2162,20 @@ enum ProgressionDirection {
 }
 </pre>
 					</section>
-					
+
 					<section id="preview">
 						<h5>Preview</h5>
 
-						<p>A creator of a Web Publication my choose to make a preview of the publication available and
-							link it to the Web Publication. A link to a preview can be included in the manifest for
-							this purpose. The preview may be referenced externally or could be included as
-							a resource of the publication.</p>
+						<p>Not all <a>digital publications</a> will be available to all users (e.g., they might be
+							restricted to registered users of a site). In such cases, the publisher might wish to
+							provide a preview of the content in order to entice users to access the full version.</p>
 
-						<p>The <dfn data-lt="preview">preview</dfn> is identified using the
-								<code>preview</code> link relation&#160;[[!iana-link-relations]].</p>
+						<p>A <dfn data-lt="preview">preview</dfn> is identified using the <code>preview</code> link
+							relation&#160;[[!iana-link-relations]].</p>
 
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-consumable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]] or audio.</p>
+						<p>Previews MAY be located externally or included as resources of digital publications.</p>
 
-						<pre class="example" title="Preview expressed as an included audio resource">
+						<pre class="example" title="A preview is identified as an audio resource of a digital publication">
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
 …
@@ -2197,8 +2192,8 @@ enum ProgressionDirection {
 …
 }
 </pre>
-						
-						<pre class="example" title="Preview expressed as an external link">
+
+						<pre class="example" title="A preview is expressed as an external link">
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
 …
