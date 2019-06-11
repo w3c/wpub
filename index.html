@@ -2122,7 +2122,56 @@ enum ProgressionDirection {
 }
 </pre>
 					</section>
-
+					
+					<section id="preview">
+						<h5>Preview</h5>
+						
+						<p>Not all <a>digital publications</a> will be available to all users (e.g., they might be
+							restricted to registered users of a site). In such cases, the publisher might wish to
+							provide a preview of the content in order to entice users to access the full version.</p>
+						
+						<p>A <dfn data-lt="preview">preview</dfn> is identified using the <code>preview</code> link
+							relation&#160;[[!iana-link-relations]].</p>
+						
+						<p>Previews MAY be located externally or included as resources of digital publications.</p>
+						
+						<pre class="example" title="A preview is identified as an audio resource of a digital publication">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "preview.mp3",
+	"encodingFormat"  : "audio/mpeg",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
+}
+</pre>
+						
+						<pre class="example" title="A preview is expressed as an external link">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "https://publisher.example.org/mobydickpreview.html",
+	"encodingFormat"  : "text/html",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
+}
+</pre>
+					</section>
+					
 					<section id="privacy-policy">
 						<h5>Privacy Policy</h5>
 
@@ -2159,55 +2208,6 @@ enum ProgressionDirection {
             &#8230;
     }],
     &#8230;
-}
-</pre>
-					</section>
-
-					<section id="preview">
-						<h5>Preview</h5>
-
-						<p>Not all <a>digital publications</a> will be available to all users (e.g., they might be
-							restricted to registered users of a site). In such cases, the publisher might wish to
-							provide a preview of the content in order to entice users to access the full version.</p>
-
-						<p>A <dfn data-lt="preview">preview</dfn> is identified using the <code>preview</code> link
-							relation&#160;[[!iana-link-relations]].</p>
-
-						<p>Previews MAY be located externally or included as resources of digital publications.</p>
-
-						<pre class="example" title="A preview is identified as an audio resource of a digital publication">
-"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-"type"       : "Book",
-…
-"url"        : "https://publisher.example.org/mobydick",
-"name"       : "Moby Dick",
-"links"  : [{
-	"type"            : "LinkedResource",
-	"url"             : "preview.mp3",
-	"encodingFormat"  : "audio/mpeg",
-	"rel"             : "preview"
-},{
-	…
-}],
-…
-}
-</pre>
-
-						<pre class="example" title="A preview is expressed as an external link">
-"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-"type"       : "Book",
-…
-"url"        : "https://publisher.example.org/mobydick",
-"name"       : "Moby Dick",
-"links"  : [{
-	"type"            : "LinkedResource",
-	"url"             : "https://publisher.example.org/mobydickpreview.html",
-	"encodingFormat"  : "text/html",
-	"rel"             : "preview"
-},{
-	…
-}],
-…
 }
 </pre>
 					</section>
