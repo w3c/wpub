@@ -2063,8 +2063,9 @@ enum ProgressionDirection {
 						</dt>
 						<dd>
 							<p>Informative resources are resources that contain additional information about the
-								publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
-									href="#accessibility-report">accessibility report</a>.</p>
+								publication, such as its <a href="#privacy-policy">privacy policy</a>, <a
+									href="#accessibility-report">accessibility report</a>, or  <a
+									href="#preview">preview</a>.</p>
 						</dd>
 						<dt>
 							<a href="#structural-rel">structural resources</a>
@@ -2161,6 +2162,57 @@ enum ProgressionDirection {
             &#8230;
     }],
     &#8230;
+}
+</pre>
+					</section>
+					
+					<section id="preview">
+						<h5>Preview</h5>
+
+						<p>A creator of a Web Publication my choose to make a preview of the publication available and
+							link it to the Web Publication. A link to a preview can be included in the manifest for
+							this purpose. The preview may be referenced externally or could be included as
+							a resource of the publication.</p>
+
+						<p>The <dfn data-lt="preview">preview</dfn> is identified using the
+								<code>preview</code> link relation&#160;[[!iana-link-relations]].</p>
+
+						<p>It is RECOMMENDED that the privacy policy be provided in a human-consumable format, such as
+								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]] or audio.</p>
+
+						<pre class="example" title="Preview expressed as an included audio resource">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "preview.mp3",
+	"encodingFormat"  : "audio/mpeg",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
+}
+</pre>
+						
+						<pre class="example" title="Preview expressed as an external link">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "https://publisher.example.org/mobydickpreview.html",
+	"encodingFormat"  : "text/html",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
 }
 </pre>
 					</section>
@@ -4971,6 +5023,14 @@ dictionary LinkedResource {
 						</td>
 						<td>
 							<a href="#privacy-policy"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>preview</code>
+						</td>
+						<td>
+							<a href="#preview"></a>
 						</td>
 					</tr>
 				</tbody>
