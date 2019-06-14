@@ -3,6 +3,9 @@
 },{
     "name" : "Baldur Bjarnason"
 },{
+    "name" : "Garth Conboy",
+    "chair": true
+},{
     "name" : "Dave Cramer"
 },{
     "name" : "Timothy Cole"
@@ -11,10 +14,16 @@
 },{
     "name" : "Romain Deltour"
 },{
-    "name" : "Hadrien Gardeur"
+    "name" : "Hadrien Gardeur",
+    "affiliation" : "Feedbooks"
 },{
-    "name" : "Garth Conboy",
-    "chair": true
+    "name" : "Matt Garrish",
+    "editor" : true
+},{
+    "name" : "Ivan Herman",
+    "editor": true
+},{
+    "name" : "Geoff Jukes"
 },{
     "name" : "Deborah Kaplan"
 },{

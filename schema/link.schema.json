@@ -22,6 +22,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "integrity": {
+    	"type": "string"
     }
   },
   "required": ["url"]
