@@ -16,7 +16,7 @@
 			  wg: "Publishing Working Group",
               specStatus: "ED",
               shortName: "wpub",
-              previousPublishDate: "2019-04-09",
+              previousPublishDate: "2019-06-14",
   			previousMaturity: "WD",
               edDraftURI: "https://w3c.github.io/wpub/",
               editors: [
@@ -2176,7 +2176,7 @@ enum ProgressionDirection {
 
 					<p>The <a>manifest</a> identifies key resources of a <a>digital publication</a> through the use of
 						link relations. These relations are applied to the <a href="#dom-linkedresource-rel"
-								><code>rel</code> property</a> of <a href="app-linkedResource"
+								><code>rel</code> property</a> of <a href="#app-linkedResource"
 								><code>LinkedResource</code> objects</a> (e.g., the links found in the <a
 							href="#pub-table-of-contents">table of contents</a> and <a href="#resource-list">resource
 							list</a>).</p>
@@ -2189,8 +2189,9 @@ enum ProgressionDirection {
 						</dt>
 						<dd>
 							<p>Informative resources are resources that contain additional information about the
-								publication, such as its <a href="#privacy-policy">privacy policy</a> or <a
-									href="#accessibility-report">accessibility report</a>.</p>
+								publication, such as its <a href="#privacy-policy">privacy policy</a>, <a
+									href="#accessibility-report">accessibility report</a>, or <a href="#preview"
+									>preview</a>.</p>
 						</dd>
 						<dt>
 							<a href="#structural-rel">structural resources</a>
@@ -2248,6 +2249,55 @@ enum ProgressionDirection {
 </pre>
 					</section>
 
+					<section id="preview">
+						<h5>Preview</h5>
+						
+						<p>Not all <a>digital publications</a> will be available to all users (e.g., they might be
+							restricted to registered users of a site). In such cases, the publisher might wish to
+							provide a preview of the content in order to entice users to access the full version.</p>
+						
+						<p>A <dfn data-lt="preview">preview</dfn> is identified using the <code>preview</code> link
+							relation&#160;[[!iana-link-relations]].</p>
+						
+						<p>Previews MAY be located externally or included as resources of digital publications.</p>
+						
+						<pre class="example" title="A preview is identified as an audio resource of a digital publication">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "preview.mp3",
+	"encodingFormat"  : "audio/mpeg",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
+}
+</pre>
+						
+						<pre class="example" title="A preview is expressed as an external link">
+"@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+"type"       : "Book",
+…
+"url"        : "https://publisher.example.org/mobydick",
+"name"       : "Moby Dick",
+"links"  : [{
+	"type"            : "LinkedResource",
+	"url"             : "https://publisher.example.org/mobydickpreview.html",
+	"encodingFormat"  : "text/html",
+	"rel"             : "preview"
+},{
+	…
+}],
+…
+}
+</pre>
+					</section>
+					
 					<section id="privacy-policy">
 						<h5>Privacy Policy</h5>
 
@@ -2261,11 +2311,8 @@ enum ProgressionDirection {
 						<p>A link to a privacy policy can be included in the manifest for this purposes. It is
 							RECOMMENDED that the privacy policy be included as a resource of the publication.</p>
 
-						<p>The <dfn data-lt="privacyPolicy">privacy policy</dfn> is identified using the
+						<p>A <dfn data-lt="privacyPolicy">privacy policy</dfn> is identified using the
 								<code>privacy-policy</code> link relation&#160;[[!iana-link-relations]].</p>
-
-						<p>It is RECOMMENDED that the privacy policy be provided in a human-readable format, such as
-								<abbr title="Hypertext Markup Language">HTML</abbr>&#160;[[html]].</p>
 
 						<p>Refer to <a href="#privacy"></a> for more information about privacy considerations in
 							publications.</p>
@@ -3341,7 +3388,7 @@ enum ProgressionDirection {
 								property</a> in the following ways:</p>
 
 						<ul>
-							<li>The <a href="default-reading-order">default reading order</a> MAY be omitted when it
+							<li>The <a href="#default-reading-order">default reading order</a> MAY be omitted when it
 								only consists of the <a>primary entry page</a>. When the default reading order is
 								absent, user agents MUST include an entry for the primary entry page when compiling the
 								canonical manifest.</li>
@@ -4972,6 +5019,14 @@ dictionary LinkedResource {
 						</td>
 						<td>
 							<a href="#privacy-policy"></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<code>preview</code>
+						</td>
+						<td>
+							<a href="#preview"></a>
 						</td>
 					</tr>
 				</tbody>
