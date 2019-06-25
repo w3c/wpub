@@ -17,20 +17,6 @@
 */
 
 var biblio = {
-    "html": {
-        "title": "HTML 5.2",
-        "authors" : [
-            "Steve Faulkner",
-            "Arron Eicholz",
-            "Travis Leithead",
-            "Alex Danilo",
-            "Sangwhan Moon"
-        ],
-        "date": "2017-12-14",
-        "status": "W3C Recommendation",
-        "href": "https://www.w3.org/TR/html/",
-        "publisher": "W3C"
-    },
     "link-relation": {
        "title": "Identifier: A Link Relation to Convey a Preferred URI for Referencing",
        "authors": [
