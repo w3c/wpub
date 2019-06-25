@@ -314,6 +314,7 @@ dictionary PublicationManifest {
              sequence&lt;CreatorInfo>       publisher;
              sequence&lt;CreatorInfo>       readBy;
              sequence&lt;CreatorInfo>       translator;
+             sequence&lt;DOMString>         url;
              DOMString                   duration;
              DOMString                   inLanguage;
              TextDirection               inDirection;
@@ -841,6 +842,57 @@ enum ProgressionDirection {
 
 					</section>
 
+					<section id="address">
+						<h4>Address</h4>
+
+						<p>A <a>digital publication's</a>
+							<dfn>address</dfn> is a <a>URL</a> that identifies its primary entry page. It is expressed
+							using the <code>url</code> property.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>Value Type</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="PublicationManifest">
+											<dfn>url</dfn>
+										</code>
+									</td>
+									<td>URL of the primary entry page.</td>
+									<td>A valid URL string [[!url]].</td>
+									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
+									<td>
+										<a href="https://schema.org/url"><code>url</code></a> (<a
+											href="https://schema.org/Thing">Thing</a>) </td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>A digital publication MAY have more than one address, but all the addresses MUST resolve to
+							the same document.</p>
+
+						<div class="note">The publication's address can also be used as value for an identifier link
+							relation&#160;[[link-relation]].</div>
+
+						<pre class="example" title="Setting the address of the main entry page">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"     : "Book",
+    &#8230;
+    "url"      : "https://publisher.example.org/mobydick",
+    &#8230;
+}
+</pre>
+					</section>
+
 					<section id="canonical-identifier">
 						<h5>Canonical Identifier</h5>
 
@@ -873,19 +925,27 @@ enum ProgressionDirection {
 							</tbody>
 						</table>
 
+						<p>The canonical identifier SHOULD be a <a>URL</a> that resolves to the preferred version of the
+								<a>digital publication</a>. Using a URL provides a measure of permanence above and
+							beyond a digital publication's <a href="#address">address(es)</a>. If a digital publication
+							is permanently relocated to a new URL, for example, the canonical address provides a way of
+							discovering the new location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr>
+							registry could be updated with the new URL, or a redirect could be added to the URL of the
+							canonical identifier). It is also intended to provide a means of identifying instances of
+							the same digital publication hosted at different URLs.</p>
+
 						<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
 							specification. The actual achievable uniqueness depends on such factors as the conventions
 							of the identifier scheme used and the degree of control over assignment of identifiers.</p>
 
 						<p>If a canonical identifier is not provided in the manifest, or the value is an invalid URL,
-							the Web Publication does not have a canonical identifier. User agents MUST NOT attempt to
-							construct a canonical identifier from any other identifiers provided in the manifest for the
-							canonical manifest.</p>
+							the digital publication does not have a canonical identifier. User agents MUST NOT attempt
+							to construct a canonical identifier from any other identifiers provided in the manifest for
+							the canonical manifest.</p>
 
 						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
-							additional types of identifiers for the Web Publication using the <a
-								href="https://schema.org/identifier"><code>identifier</code>
-							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
+							additional types of identifiers using the <a href="https://schema.org/identifier"
+									><code>identifier</code> property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
 
 						<pre class="example" title="Example of setting the canonical identifier and the address as URLs">
 {
@@ -2188,22 +2248,6 @@ enum ProgressionDirection {
 </pre>
 					</section>
 
-					<section id="canonical-address">
-						<h5>Canonical Address</h5>
-
-						<p>The canonical address is a <a>URL</a> that resolves to the preferred version of the
-								<a>digital publication</a>. It is identified by the <code>canonical</code> relation
-							[[!iana-relations]].</p>
-
-						<p>The canonical address provides a measure of permanence above and beyond a digital
-							publication's <a href="#address">address(es)</a>. If a digital publication is permanently
-							relocated to a new URL, for example, the canonical address provides a way of discovering the
-							new location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could be
-							updated with the new URL, or a redirect could be added to the URL of the canonical
-							identifier). It is also intended to provide a means of identifying instances of the same
-							digital publication hosted at different URLs.</p>
-					</section>
-
 					<section id="privacy-policy">
 						<h5>Privacy Policy</h5>
 
@@ -3288,55 +3332,6 @@ enum ProgressionDirection {
 
 				<section id="wp-properties">
 					<h4>Properties</h4>
-
-					<section id="address">
-						<h4>Address</h4>
-
-						<p>A Web Publication's <dfn>address</dfn> is a <a>URL</a> that identifies the <a>primary entry
-								page</a> for the Web Publication. It is expressed using the <code>url</code>
-							property.</p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>Value Type</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>url</code>
-									</td>
-									<td>URL of the primary entry page.</td>
-									<td>A valid URL string [[!url]].</td>
-									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
-									<td>
-										<a href="https://schema.org/url"><code>url</code></a> (<a
-											href="https://schema.org/Thing">Thing</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p>A Web Publication MAY have more than one address, but all the addresses MUST resolve to the
-							same document.</p>
-
-						<div class="note">The publication's address can also be used as value for an identifier link
-							relation&#160;[[link-relation]].</div>
-
-						<pre class="example" title="Setting the address of the main entry page">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"     : "Book",
-    &#8230;
-    "url"      : "https://publisher.example.org/mobydick",
-    &#8230;
-}
-</pre>
-					</section>
 
 					<section id="wp-reading-order">
 						<h5>Default Reading Order</h5>
