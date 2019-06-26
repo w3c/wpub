@@ -180,19 +180,6 @@
 								href="#extensions">modular extension</a>. All such digital publications share the common
 								<a>manifest</a> format, but differ in their structural and content requirements.</p>
 					</dd>
-					<dt>
-						<dfn data-lt="identifiers">Identifier</dfn>
-					</dt>
-					<dd>
-						<p>An identifier is metadata that can be used to refer to <a class="externalDFN"
-								href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
-							persistent and unambiguous manner. <abbr title="Uniform Resource Locators">URLs</abbr>,
-								<abbr title="Uniform Resource Names">URNs</abbr>, <abbr
-								title="Digital Object Identifiers">DOIs</abbr>, <abbr
-								title="International Standard Book Numbers">ISBNs</abbr>, and <abbr
-								title="Persistent Uniform Resource Locators">PURLs</abbr> are all examples of persistent
-							identifiers frequently used in publishing.</p>
-					</dd>
 
 					<dt>
 						<dfn data-lt="Manifests">Manifest</dfn>
@@ -210,19 +197,6 @@
 						<p>For the purposes of this specification, non-empty is used to refer to an element, attribute
 							or property whose text content or value consists of one or more characters after whitespace
 							normalization, where whitespace normalization rules are defined per the host format.</p>
-					</dd>
-
-					<dt>
-						<dfn data-lt="URLs">URL</dfn>
-					</dt>
-					<dd>
-						<p>The general term <abbr title="Uniform Resource Locator">URL</abbr> is defined by the URL
-							Standard&#160;[[!url]]. It is used as in other <abbr title="World Wide Web Consortium"
-								>W3C</abbr> specifications, like <abbr title="Hypertext Markup Language"
-							>HTML</abbr>&#160;[[!html]]. In particular, a <abbr title="Uniform Resource Locator"
-								>URL</abbr> allows for the usage of characters from Unicode following&#160;[[!rfc3987]].
-							See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
-								specification</a> for further details.</p>
 					</dd>
 
 					<dt>
@@ -321,6 +295,7 @@
 					<pre class="idl" id="wpm">
 dictionary PublicationManifest {
     required sequence&lt;DOMString>         type;
+             sequence&lt;DOMString>         id;
              sequence&lt;DOMString>         accessMode;
              sequence&lt;DOMString>         accessModeSufficient;
              sequence&lt;DOMString>         accessibilityFeature;
@@ -339,6 +314,7 @@ dictionary PublicationManifest {
              sequence&lt;CreatorInfo>       publisher;
              sequence&lt;CreatorInfo>       readBy;
              sequence&lt;CreatorInfo>       translator;
+             sequence&lt;DOMString>         url;
              DOMString                   duration;
              DOMString                   inLanguage;
              TextDirection               inDirection;
@@ -542,7 +518,6 @@ enum ProgressionDirection {
 							These values are expressed as [[!json]] numbers. </p>
 					</section>
 
-
 					<section id="value-objects">
 						<h5>Explicit and Implied Objects</h5>
 
@@ -609,8 +584,7 @@ enum ProgressionDirection {
 								link value, the link MUST be expressed in one of the following two ways:</p>
 
 							<ol>
-								<li>as a string encoding the (absolute or relative) URL of the resources&#160;[[!url]];
-									or</li>
+								<li>as a string encoding the <a>URL</a> of the resources; or</li>
 								<li>as an instance of a <a href="#publication-link-def"><code>LinkedResource</code>
 										object</a> that can be used to express the URL, the media type, and other
 									characteristics of the target resource.</li>
@@ -647,15 +621,21 @@ enum ProgressionDirection {
 					<section id="value-url">
 						<h5>URLs</h5>
 
-						<p>Both <a href="https://url.spec.whatwg.org/#relative-url-string">relative</a> and <a
-								href="https://url.spec.whatwg.org/#absolute-url-string">absolute</a> URL strings MAY be
-							used in the manifest.</p>
+						<p><dfn data-lt="URL">URLs</dfn> are used to identify resources associated with a <a>digital
+								publication</a>. They MUST be <a href="https://url.spec.whatwg.org/#absolute-url-string"
+								>valid URL strings</a> [[!url]].</p>
 
-						<p>In the case of relative URL strings, these are resolved to <a
-								href="https://url.spec.whatwg.org/#absolute-url-string">absolute URL strings</a> using a
+						<p>Manifest URLs are restricted to only the <code>http</code> and <code>https</code>
+							<a href="https://url.spec.whatwg.org/#concept-url-scheme">schemes</a> [[!url]]. URLs MUST
+							dereference to a resource, although user agents are not required to dereference all URLs in
+							the manifest.</p>
+
+						<p>In the case of <a href="https://url.spec.whatwg.org/#relative-url-string">relative-URL
+								strings</a>, these are resolved to <a
+								href="https://url.spec.whatwg.org/#absolute-url-string">absolute-URL strings</a> using a
 								<a href="https://url.spec.whatwg.org/#concept-base-url">base URL</a>&#160;[[!url]].</p>
 
-						<p>The base URL for relative URLs is determined as follows:</p>
+						<p>The base URL for relative-URL strings is determined as follows:</p>
 
 						<ul>
 							<li>In the case of an <a href="#manifest-embed">embedded manifest</a>, the base URL is the
@@ -665,10 +645,28 @@ enum ProgressionDirection {
 								the manifest resource.</li>
 						</ul>
 
-						<p>By consequence, relative URLs in embedded manifests are resolved against the URL of the
-							primary entry page <em>unless</em> the page declares a base URL (i.e., in a <a
+						<p>By consequence, relative-URL strings in embedded manifests are resolved against the URL of
+							the primary entry page <em>unless</em> the page declares a base URL (i.e., in a <a
 								data-cite="!html#the-base-element"><code>&lt;base&gt;</code> element</a> in its
 							header).</p>
+
+						<p class="note">URLs allow for the usage of characters from Unicode following&#160;[[rfc3987]].
+							See <a href="https://www.w3.org/TR/html/references.html#biblio-url">the note in the HTML5
+								specification</a> for further details.</p>
+					</section>
+
+					<section id="value-id">
+						<h5>Identifiers</h5>
+
+						<p>Identifiers are <a href="https://url.spec.whatwg.org/#concept-url">URL records</a> [[!url]]
+							that can be used to refer to <a class="externalDFN"
+								href="https://www.w3.org/TR/publishing-linking/#dfn-web-content">Web Content</a> in a
+							persistent and unambiguous manner. <abbr title="Uniform Resource Locators">URLs</abbr>,
+								<abbr title="Uniform Resource Names">URNs</abbr>, <abbr
+								title="Digital Object Identifiers">DOIs</abbr>, <abbr
+								title="International Standard Book Numbers">ISBNs</abbr>, and <abbr
+								title="Persistent Uniform Resource Locators">PURLs</abbr> are all examples of persistent
+							identifiers frequently used in publishing.</p>
 					</section>
 
 					<section id="value-array">
@@ -842,6 +840,134 @@ enum ProgressionDirection {
 }
 </pre>
 
+					</section>
+
+					<section id="address">
+						<h4>Address</h4>
+
+						<p>A <a>digital publication's</a>
+							<dfn>address</dfn> is a <a>URL</a> that identifies its primary entry page. It is expressed
+							using the <code>url</code> property.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>Value Type</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="PublicationManifest">
+											<dfn>url</dfn>
+										</code>
+									</td>
+									<td>URL of the primary entry page.</td>
+									<td>A valid URL string [[!url]].</td>
+									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
+									<td>
+										<a href="https://schema.org/url"><code>url</code></a> (<a
+											href="https://schema.org/Thing">Thing</a>) </td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>A digital publication MAY have more than one address, but all the addresses MUST resolve to
+							the same document.</p>
+
+						<div class="note">The publication's address can also be used as value for an identifier link
+							relation&#160;[[link-relation]].</div>
+
+						<pre class="example" title="Setting the address of the main entry page">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"     : "Book",
+    &#8230;
+    "url"      : "https://publisher.example.org/mobydick",
+    &#8230;
+}
+</pre>
+					</section>
+
+					<section id="canonical-identifier">
+						<h5>Canonical Identifier</h5>
+
+						<p>A <a>digital publication's</a>
+							<dfn>canonical identifier</dfn> property provides a unique identifier for the publication.
+							It is expressed using the <code>id</code> property.</p>
+
+						<table class="zebra">
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+									<th>Required Value</th>
+									<th>Value Type</th>
+									<th>[[!schema.org]] Mapping</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<code data-dfn-for="PublicationManifest">
+											<dfn>id</dfn>
+										</code>
+									</td>
+									<td>Preferred version of the publication.</td>
+									<td>A URL record [[!url]].</td>
+									<td><a href="#value-id">Identifier</a></td>
+									<td>(None)</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<p>The canonical identifier SHOULD be a <a>URL</a> that resolves to the preferred version of the
+								<a>digital publication</a>. Using a URL provides a measure of permanence above and
+							beyond a digital publication's <a href="#address">address(es)</a>. If a digital publication
+							is permanently relocated to a new URL, for example, the canonical address provides a way of
+							discovering the new location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr>
+							registry could be updated with the new URL, or a redirect could be added to the URL of the
+							canonical identifier). It is also intended to provide a means of identifying instances of
+							the same digital publication hosted at different URLs.</p>
+
+						<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
+							specification. The actual achievable uniqueness depends on such factors as the conventions
+							of the identifier scheme used and the degree of control over assignment of identifiers.</p>
+
+						<p>If a canonical identifier is not provided in the manifest, or the value is an invalid URL,
+							the digital publication does not have a canonical identifier. User agents MUST NOT attempt
+							to construct a canonical identifier from any other identifiers provided in the manifest for
+							the canonical manifest.</p>
+
+						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
+							additional types of identifiers using the <a href="https://schema.org/identifier"
+									><code>identifier</code> property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
+
+						<pre class="example" title="Example of setting the canonical identifier and the address as URLs">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"     : "TechArticle",
+    &#8230;
+    "id"       : "http://www.w3.org/TR/tabular-data-model/",
+    "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
+    &#8230;
+}
+</pre>
+
+						<pre class="example" title="Example of a URN for the canonical identifier">
+{
+    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
+    "type"     : "Book",
+    &#8230;
+    "id"       : "urn:isbn:9780123456789",
+    "url"      : "https://publisher.example.org/mobydick",
+    &#8230;
+}
+</pre>
 					</section>
 
 					<section id="creators">
@@ -1105,12 +1231,12 @@ enum ProgressionDirection {
 							<dt>
 								<dfn>id</dfn>
 							</dt>
-							<dd>A canonical identifier of the creator as a URL.&#160;[[!url]]</dd>
+							<dd>A canonical identifier of the creator as an <a>Identifier</a>.</dd>
 
 							<dt>
 								<dfn>url</dfn>
 							</dt>
-							<dd>An address for the creator in the form of a URL.&#160;[[!url]]</dd>
+							<dd>An address for the creator in the form of a <a>URL</a>.</dd>
 						</dl>
 
 						<p>Note that user agents MAY interpret a wider range of creator properties defined by Schema.org
@@ -1677,8 +1803,8 @@ enum ProgressionDirection {
 							>privacy policy</a>, and <a href="#structural-rel">structural resources</a> like the <a
 							href="#table-of-contents">table of contents</a>.</p>
 
-					<p>Note that a particular resource's URL MUST NOT appear in more than one of these lists, and a URL
-						MUST NOT be repeated within a list.</p>
+					<p>Note that a particular resource's <a>URL</a> MUST NOT appear in more than one of these lists, and
+						a URL MUST NOT be repeated within a list.</p>
 
 					<p>The manifest MUST NOT include a reference to itself within any of these lists.</p>
 
@@ -1713,7 +1839,7 @@ enum ProgressionDirection {
 									<td>
 										<p>One or more of:</p>
 										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>a string, representing the <a>URL</a> of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>LinkedResource</code></a> object</li>
 										</ul>
@@ -1801,7 +1927,7 @@ enum ProgressionDirection {
 									<td>
 										<p>One or more of:</p>
 										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>a string, representing the <a>URL</a> of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>LinkedResource</code></a> object</li>
 										</ul>
@@ -1886,7 +2012,7 @@ enum ProgressionDirection {
 									<td>
 										<p>One or more of:</p>
 										<ul>
-											<li>a string, representing the URL&#160;[[url]] of the resource; or</li>
+											<li>a string, representing the <a>URL</a> of the resource; or</li>
 											<li>an instance of a <a href="#publication-link-def"
 														><code>LinkedResource</code></a> object</li>
 										</ul>
@@ -2122,7 +2248,7 @@ enum ProgressionDirection {
 }
 </pre>
 					</section>
-					
+
 					<section id="preview">
 						<h5>Preview</h5>
 						
@@ -3031,9 +3157,9 @@ enum ProgressionDirection {
 							>default reading order</a> and <a href="#resource-list">resource list</a>.</p>
 
 					<p>To determine whether a resource is within the bounds of a Web Publication, user agents MUST
-						compare the absolute URL of a resource to the absolute URLs of the resources obtained from the
-						union. If the resource is identified in the enumeration, it is within the bounds of the Web
-						Publication. All other resources are external to the Web Publication.</p>
+						compare the absolute <a>URL</a> of a resource to the absolute URLs of the resources obtained
+						from the union. If the resource is identified in the enumeration, it is within the bounds of the
+						Web Publication. All other resources are external to the Web Publication.</p>
 
 					<p>Resources within the bounds of a Web Publication do not have to share the same domain.</p>
 				</section>
@@ -3253,131 +3379,6 @@ enum ProgressionDirection {
 
 				<section id="wp-properties">
 					<h4>Properties</h4>
-
-					<section id="address">
-						<h4>Address</h4>
-
-						<p>A Web Publication's <dfn>address</dfn> is a <abbr title="Uniform Resource Locator"
-							>URL</abbr>&#160;[[!url]] that identifies the <a>primary entry page</a> for the Web
-							Publication. It is expressed using the <code>url</code> property.</p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>Value Type</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>url</code>
-									</td>
-									<td>URL of the primary entry page.</td>
-									<td>A URL [[!url]].</td>
-									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
-									<td>
-										<a href="https://schema.org/url"><code>url</code></a> (<a
-											href="https://schema.org/Thing">Thing</a>) </td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p>A Web Publication MAY have more than one address, but all the addresses MUST resolve to the
-							same document.</p>
-
-						<div class="note">The publication's address can also be used as value for an identifier link
-							relation&#160;[[link-relation]].</div>
-
-						<pre class="example" title="Setting the address of the main entry page">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"     : "Book",
-    &#8230;
-    "url"      : "https://publisher.example.org/mobydick",
-    &#8230;
-}
-</pre>
-					</section>
-
-					<section id="canonical-identifier">
-						<h5>Canonical Identifier</h5>
-
-						<p>A Web Publication's <dfn>canonical identifier</dfn> is a unique identifier that resolves to
-							the preferred version of the Web Publication. It is expressed using the <code>id</code>
-							property.</p>
-
-						<table class="zebra">
-							<thead>
-								<tr>
-									<th>Term</th>
-									<th>Description</th>
-									<th>Required Value</th>
-									<th>Value Type</th>
-									<th>[[!schema.org]] Mapping</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<code>id</code>
-									</td>
-									<td>Preferred version of the publication.</td>
-									<td>A URL [[!url]].</td>
-									<td><a href="#value-url">URL</a></td>
-									<td>(None)</td>
-								</tr>
-							</tbody>
-						</table>
-
-						<p class="note">Ensuring uniqueness of canonical identifiers is outside the scope of this
-							specification. The actual achievable uniqueness depends on such factors as the conventions
-							of the identifier scheme used and the degree of control over assignment of identifiers.</p>
-
-						<p>The canonical identifier is intended to provide a measure of permanence above and beyond the
-							Web Publication's <a href="#address">address(es)</a>. If a Web Publication is permanently
-							relocated to a new URL, for example, the canonical identifier provides a way of discovering
-							the new location (e.g., a <abbr title="Digital Object Identifier">DOI</abbr> registry could
-							be updated with the new <abbr title="Uniform Resource Locator">URL</abbr>, or a redirect
-							could be added to the <abbr title="Uniform Resource Locator">URL</abbr> of the canonical
-							identifier). It is also intended to provide a means of identifying instances of the same Web
-							Publication hosted at different URLs.</p>
-
-						<p>If a URL is not provided in the manifest, or the value is an invalid URL, the Web Publication
-							does not have a canonical identifier. User agents MUST NOT attempt to construct a canonical
-							identifier from any other identifiers provided in the manifest for the canonical
-							manifest.</p>
-
-						<p>The specification of the canonical identifier MAY be complemented by the inclusion of
-							additional types of identifiers for the Web Publication using the <a
-								href="https://schema.org/identifier"><code>identifier</code>
-							property</a>&#160;[[!schema.org]] and/or its subtypes.</p>
-
-						<pre class="example" title="Example for setting both the canonical identifier as URL and the address of the same document">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"     : "TechArticle",
-    &#8230;
-    "id"       : "http://www.w3.org/TR/tabular-data-model/",
-    "url"      : "http://www.w3.org/TR/2015/REC-tabular-data-model-20151217/",
-    &#8230;
-}
-</pre>
-
-						<pre class="example" title="Example for setting both the ISBN and the address of the same document">
-{
-    "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
-    "type"     : "Book",
-    &#8230;
-    "isbn"     : "9780123456789",
-    "url"      : "https://publisher.example.org/mobydick",
-    &#8230;
-}
-</pre>
-					</section>
 
 					<section id="wp-reading-order">
 						<h5>Default Reading Order</h5>
@@ -3771,8 +3772,8 @@ enum ProgressionDirection {
 							</code>
 						</td>
 						<td>Location of the resource. REQUIRED.</td>
-						<td>A URL&#160;[[!url]]. Refer to the property definitions that accept this type for additional
-							restrictions.</td>
+						<td>A valid URL string&#160;[[!url]]. Refer to the property definitions that accept this type
+							for additional restrictions.</td>
 						<td>
 							<a href="#value-url">URL</a>
 						</td>
