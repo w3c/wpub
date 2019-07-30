@@ -1,45 +1,19 @@
 [{
-    "name" : "Luc Audrain"
-},{
-    "name" : "Baldur Bjarnason"
-},{
-    "name" : "Garth Conboy",
-    "chair": true
-},{
-    "name" : "Dave Cramer"
-},{
-    "name" : "Timothy Cole"
-},{
-    "name" : "Rachel Comerford"
-},{
-    "name" : "Romain Deltour"
-},{
-    "name" : "Hadrien Gardeur",
-    "affiliation" : "Feedbooks"
-},{
     "name" : "Matt Garrish",
     "editor" : true
 },{
     "name" : "Ivan Herman",
     "editor": true
 },{
-    "name" : "Geoff Jukes"
-},{
-    "name" : "Deborah Kaplan"
-},{
-    "name" : "Laurent Le Meur"
-},{
-    "name" : "Joshua Pyle"
-},{
     "name" : "Wendy Reid",
-    "chair": true
+    "chair" : true,
+    "keep": true
 },{
     "name" : "Tzviya Siegman",
-    "chair": true
+    "chair" : true,
+    "keep": true
 },{
-    "name" : "Avneesh Singh"
-},{
-    "name" : "Benjamin Young"
-},{
-    "name" : "Jeff Xu"
+    "name" : "Garth Conboy",
+    "chair" : true,
+    "keep": true       
 }]
