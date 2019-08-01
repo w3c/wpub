@@ -62,10 +62,8 @@
 		<section id="abstract">
 			<p>This specification defines a general manifest format for expressing information about a digital
 				publication. It uses [[schema.org]] metadata augmented to include various structural properties about
-				publications, serialized in [[JSON-LD]]. This definition is designed to be the basis for all the
-				specific implementations of digital publications. It allows for interoperability between the formats
-				while accommodating variances in the information that needs to be expressed. The actual manifest
-				requirements for a digital publication format are defined by its respective specification.</p>
+				publications, serialized in [[JSON-LD]]. The publication manifest allows interoperability between
+				publishing formats while accommodating variances in the information that needs to be expressed.</p>
 		</section>
 		<section id="sotd"></section>
 		<section id="intro">
@@ -74,35 +72,19 @@
 			<section id="scope">
 				<h3>Scope</h3>
 
-				<p>This specification defines a general manifest format to describe publications.</p>
+				<p>This specification defines a general manifest format to describe publications, both on and off the
+					Web. It does not attempt to constrain the nature of the publications that use the manifest. It is
+					also designed to be adaptable to the needs of specific areas of publishing, such as audiobook
+					production, and encourages a modular approach for creating specializations.</p>
 
-				<p>This specification does not attempt to constrain the nature of the publications that can be
-					produced—any type of work that can be represented using Web technologies is in scope. It is also
-					designed to be adaptable to the needs of specific areas of publishing, such as audiobook production,
-					and encourages a modular approach for creating specializations.</p>
+				<p>This specification is also intended to facilitate different user agent architectures. While a primary
+					goal is that traditional Web user agents (browsers) will be able to consume a publication manifest,
+					this should not limit the capabilities of any other possible type of user agent (e.g., applications,
+					whether standalone or running within a user agent, or even publications that include their own user
+					interface).</p>
 
-				<p>As much as possible, this specification leverages existing Open Web Platform technologies to achieve
-					its goal—that being to allow for a measure of boundedness — on and off the Web — without changing
-					the way that the Web itself operates.</p>
-
-				<p>Moreover, this specification is designed to adapt automatically to updates to Open Web Platform
-					technologies in order to ensure that conforming publications continue to interoperate seamlessly as
-					the Web evolves (e.g., by referencing the latest published versions instead of specific dated
-					versions).</p>
-
-				<p>This specification is also intended to facilitate different user agent architectures for the
-					consumption of Web Publications, or any format derived therefrom. While a primary goal is that
-					traditional Web user agents (browsers) will be able to consume Web Publications, this should not
-					limit the capabilities of any other possible type of user agent (e.g., applications, whether
-					standalone or running within a user agent, or even Web Publications that include their own user
-					interface). As a result, the specification does not attempt to architect required solutions for
-					situations whose expected outcome will vary depending on the nature of the user agent and the
-					expectations of the user (e.g., how to prompt to initiate a Web Publication, or at what point or how
-					much of a Web Publication to cache for offline use).</p>
-
-				<p>This specification does not define how user agents are expected to render Web Publications. Details
-					about the types of afforances that user agents can provide to enhance the reading experience for
-					users are instead defined in [[PWP-UCR]].</p>
+				<p>This specification does not define how user agents are expected to render publications that use the
+					manifest format.</p>
 			</section>
 
 			<section id="terminology">
@@ -158,26 +140,26 @@
 		</section>
 		<section id="manifest">
 			<h2>Publication Manifest</h2>
-			
+
 			<section id="manifest-intro" class="informative">
 				<h3>Introduction</h3>
-				
+
 				<p>A <a>digital publication</a> is described by its <a>manifest</a>, which provides a set of properties
 					expressed using the JSON-LD&#160;[[json-ld]] format (a variant of JSON&#160;[[ecma-404]] for linked
 					data).</p>
-				
+
 				<p>The manifest includes both descriptive properties about the publication, such as its title and
 					author, as well as information about the nature and structure of the publication.</p>
-				
+
 				<p>This section describes the construction requirements for manifests, and outlines the general set of
 					properties for use with them.</p>
 			</section>
-			
+
 			<section id="manifest-authored-canonical" class="informative">
 				<h3>Authored and Canonical Manifests</h3>
-				
+
 				<p>Depending on the state of a <a>digital publication</a>, its manifest exists in one of two forms:</p>
-				
+
 				<dl>
 					<dt>
 						<dfn data-lt="authored publication manifest">Authored Manifest</dfn>
@@ -188,7 +170,7 @@
 							by a user agent). Note that the author does not have to be human; a machine could
 							automatically produce authored manifests for digital publications.</p>
 					</dd>
-					
+
 					<dt>
 						<dfn data-lt="canonical manifest|canonical publication manifest">Canonical Manifest</dfn>
 					</dt>
@@ -199,41 +181,41 @@
 							source.</p>
 					</dd>
 				</dl>
-				
+
 				<p>It is possible that an authored manifest is the equivalent of the canonical manifest if there are no
 					ambiguities or missing information, but a canonical manifest only exists after a user agent has
 					inspected the authored manifest as part of the process of obtaining it.</p>
-				
+
 				<p>This part of the specification describes the requirements for creating an authored manifest,
 					regardless of the format of the digital publication. Rules for constructing a canonical manifest
 					from the authored manifest are defined for each specific implementation.</p>
-				
+
 			</section>
-			
+
 			<section id="webidl">
 				<h3>Web IDL</h3>
-				
+
 				<p>Although a <a>digital publication</a>'s manifest is authored as [[json-ld]], a user agent processes
 					this information into an internal data structure, which can be in any language, in order to utilize
 					the properties. The exact manner in which this processing occurs, and how the data is used
 					internally, is user agent-dependent and not defined in this specification.</p>
-				
+
 				<p>To simplify the understanding of the manifest format for developers, this specification defines an
 					abstract representation of the data structures employed by the manifest using the Web Interface
 					Definition Language (Web IDL) [[webidl-1]] — <a href="#webidl-wpm">the
-						<code>PublicationManifest</code> dictionary</a>.</p>
-				
+							<code>PublicationManifest</code> dictionary</a>.</p>
+
 				<p>This definition expresses the expected names, datatypes, and possible restrictions for each member of
 					the manifest. Unlike a typical Web IDL definition, however, user agents are not expected to expose
 					the information in the manifest as an API. The Web IDL language is chosen solely to provide an
 					abstraction of the data model.</p>
-				
+
 				<p class="note">It is not necessary to understand the Web IDL definition in order to create digital
 					publications. Authoring requirements are defined in the following sections.</p>
-				
+
 				<section id="webidl-wpm">
 					<h4>The <dfn><code>PublicationManifest</code></dfn> Dictionary</h4>
-					
+
 					<pre class="idl" id="wpm">
 dictionary PublicationManifest {
     required sequence&lt;DOMString>         type;
@@ -295,7 +277,7 @@ enum ProgressionDirection {
 </pre>
 				</section>
 			</section>
-			
+
 			<section id="manifest-context">
 				<h3>Manifest Contexts</h3>
 
@@ -2494,16 +2476,6 @@ enum ProgressionDirection {
 
 					<p class="issue" data-number="132">The exact value of <code>rel</code> is still to be agreed upon
 						and should be registered by IANA.</p>
-
-					<p class="ednote">The following details might be moved to the lifecycle section in a future
-						draft.</p>
-
-					<p>When a resource links to multiple manifests, a user agent MAY choose to present one or more
-						alternatives to the end user, or choose a single alternative on its own. The user agent MAY
-						choose to present any manifest based upon information that it possesses, even one that is not
-						explicitly listed as a parent (e.g., based upon information it calculates or acquires out of
-						band). In the absence of a preference by user agent implementers, selection of the first
-						manifest listed is suggested as a default.</p>
 				</section>
 
 				<section id="manifest-embed">
