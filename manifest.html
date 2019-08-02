@@ -127,11 +127,11 @@
 					</dd>
 
 					<dt>
-						<dfn>Primary Entry Page</dfn>
+						<dfn>Publication Entry Page</dfn>
 					</dt>
 					<dd>
-						<p>The primary entry page represents the preferred starting resource for a <a>digital
-								publication</a> and enables discovery of its <a>manifest</a>.</p>
+						<p>The publication entry page is the resource in a <a>digital publication</a> from which the
+								<a>manifest</a> was reached.</p>
 					</dd>
 				</dl>
 			</section>
@@ -564,13 +564,13 @@ enum ProgressionDirection {
 						<ul>
 							<li>In the case of an <a href="#manifest-embed">embedded manifest</a>, the base URL is the
 									<a data-cite="!html#the-base-element">document base URL</a>&#160;[[!html]] of the
-									<a>primary entry page</a> of the publication;</li>
+									<a>publication entry page</a> of the publication;</li>
 							<li>In the case of a <a href="#manifest-link">linked manifest</a>, the base URL is URL of
 								the manifest resource.</li>
 						</ul>
 
 						<p>By consequence, relative-URL strings in embedded manifests are resolved against the URL of
-							the primary entry page <em>unless</em> the page declares a base URL (i.e., in a <a
+							the publication entry page <em>unless</em> the page declares a base URL (i.e., in a <a
 								data-cite="!html#the-base-element"><code>&lt;base&gt;</code> element</a> in its
 							header).</p>
 
@@ -770,8 +770,8 @@ enum ProgressionDirection {
 						<h4>Address</h4>
 
 						<p>A <a>digital publication's</a>
-							<dfn>address</dfn> is a <a>URL</a> that identifies its primary entry page. It is expressed
-							using the <code>url</code> property.</p>
+							<dfn>address</dfn> is a <a>URL</a> that identifies its source location on the Web. It is
+							expressed using the <code>url</code> property.</p>
 
 						<table class="zebra">
 							<thead>
@@ -790,7 +790,7 @@ enum ProgressionDirection {
 											<dfn>url</dfn>
 										</code>
 									</td>
-									<td>URL of the primary entry page.</td>
+									<td>URL of the publication.</td>
 									<td>A valid URL string [[!url]].</td>
 									<td><a href="#value-array">Array</a> of <a href="#value-url">URLs</a></td>
 									<td>
@@ -806,7 +806,7 @@ enum ProgressionDirection {
 						<div class="note">The publication's address can also be used as value for an identifier link
 							relation&#160;[[link-relation]].</div>
 
-						<pre class="example" title="Setting the address of the main entry page">
+						<pre class="example" title="Setting the address of the publication">
 {
     "@context" : ["https://schema.org","https://www.w3.org/ns/wp-context"],
     "type"     : "Book",
@@ -1385,12 +1385,12 @@ enum ProgressionDirection {
 							<p>The global language information MAY be overridden by <a
 									href="#manifest-specific-language-and-dir">individual values</a>.</p>
 
-							<p>If the manifest is <a href="#manifest-embed">embedded</a> in the primary entry page via a
-									<code>script</code> element, and the manifest does not set the global language
-								and/or the base direction (see <a href="#manifest-default-language-and-dir"></a>), the
-									<code>lang</code> and the <code>dir</code> attributes of the <code>script</code>
-								element are used as the global <a>language</a> and <a>base direction</a>, respectively
-								(see the details on handling the <a
+							<p>If the manifest is <a href="#manifest-embed">embedded</a> in the <a>publication entry
+									page</a> via a <code>script</code> element, and the manifest does not set the global
+								language and/or the base direction (see <a href="#manifest-default-language-and-dir"
+								></a>), the <code>lang</code> and the <code>dir</code> attributes of the
+									<code>script</code> element are used as the global <a>language</a> and <a>base
+									direction</a>, respectively (see the details on handling the <a
 									href="https://www.w3.org/TR/html/dom.html#the-lang-and-xmllang-attributes"
 										><code>lang</code></a> and <a
 									href="https://www.w3.org/TR/html/dom.html#the-dir-attribute"><code>dir</code></a>
@@ -3235,8 +3235,8 @@ dictionary LinkedResource {
 						href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]]
 					with that <code>role</code> value.</p>
 
-				<p>The manifest SHOULD <a href="#table-of-contents">identify the resource</a> that contains the
-					table of contents.</p>
+				<p>The manifest SHOULD <a href="#table-of-contents">identify the resource</a> that contains the table of
+					contents.</p>
 
 				<p>Although the content model of the <code>nav</code> element is not restricted, user agents will only
 					be able to extract a usable table of contents when the following markup guidelines are followed:</p>
