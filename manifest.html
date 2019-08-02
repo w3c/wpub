@@ -2401,6 +2401,9 @@ enum ProgressionDirection {
 								href="#default-reading-order">default reading order</a> or <a href="#resource-list"
 								>resource-list</a>, but MUST NOT be specified in both.</p>
 
+						<p>The RECOMMENDED structure and processing model for the table of contents is defined in <a
+								href="#app-toc-structure"></a>.</p>
+
 						<pre class="example" title="Resource containing the table of contents identified by its rel attribute value">
 {
     "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
@@ -2490,7 +2493,7 @@ enum ProgressionDirection {
 					attribute&#160;[[!html]]. This identifier ensures that the manifest <a href="#manifest-link">can be
 						referenced</a>.</p>
 
-				<pre class="example" title="A Web Publication Manifest included in an HTML document">
+				<pre class="example" title="A Publication Manifest included in an HTML document">
 &lt;script id="example_manifest" type="application/ld+json"&gt;
    {
       &#8230;
@@ -3201,8 +3204,7 @@ dictionary LinkedResource {
 						<code>nav</code> element can be more specifically identified by use of the <a
 						href="https://www.w3.org/TR/html/dom.html#aria-role-attribute"><code>role</code> attribute</a>
 					[[html]]. In particular, the <code>doc-toc</code> role from the [[dpub-aria-1.0]] vocabulary
-					identifies the <code>nav</code> element as the Web Publications's <a href="#table-of-contents">table
-						of contents</a>.</p>
+					identifies the <code>nav</code> element as the <a>digital publication's</a> table of contents.</p>
 
 				<p>Including an identifiable table of contents is an accessible way to produce any <a>digital
 						publication</a>, but due to the flexibility of HTML markup, it also presents challenges for user
@@ -3222,14 +3224,19 @@ dictionary LinkedResource {
 					preview).</p>
 			</section>
 
-			<section id="app-toc-html" class="informative">
+			<section id="app-toc-html">
 				<h3>HTML Structure</h3>
 
-				<p>The machine-readable table of contents is defined within an [[html]] <a
-						href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code> element</a>. As
-					described in <a href="#table-of-contents"></a>, this <code>nav</code> element has to be both the
-					first element in the document and identifiable by a <code>role</code> attribute with the value
-						<code>doc-toc</code>.</p>
+				<p>The table of contents is expressed via an [[!html]]&#160;element (typically a <a
+						href="https://www.w3.org/TR/html/sections.html#the-nav-element"><code>nav</code> element</a>) in
+					one of the <a href="#wp-resources">resources</a>. This element MUST be identified by the
+						<code>role</code> attribute&#160;[[!html]] value "<code>doc-toc</code>"&#160;[[!dpub-aria-1.0]],
+					and MUST be the first element in the document in <a
+						href="https://dom.spec.whatwg.org/#concept-tree-order">document tree order</a>&#160;[[!dom]]
+					with that <code>role</code> value.</p>
+
+				<p>The manifest SHOULD <a href="#table-of-contents">identify the resource</a> that contains the
+					table of contents.</p>
 
 				<p>Although the content model of the <code>nav</code> element is not restricted, user agents will only
 					be able to extract a usable table of contents when the following markup guidelines are followed:</p>
