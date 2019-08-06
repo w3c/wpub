@@ -67,17 +67,34 @@
 				the primary method of interchange or consumption.</p>
 		</section>
 		<section id="sotd">
-			<p>Many details of this draft are under active consideration within the Publishing Working Group and are
-				subject to change. The most prominent known issues have been identified in this document and links
-				provided to comment on them.</p>
-
-			<p>The most significant change to this draft is the splitting of the manifest from the requirements for Web
-				Publications so that it can serve as a model for packaged formats that desire a slimmer set of default
-				requirements.</p>
-
-			<p>The Publishing Working Group is actively producing proofs of concept of Web Publications and the
-				technologies required to process them. For a list of these activities, please refer to the <a
-					href="https://w3c.github.io/wpub/experiments/index.html">experiments page</a>.</p>
+			<p>Due to the lack of practical business cases for Web Publications, and the consequent lack of commitment
+				to implement the technology, the <a href="https://www.w3.org/publishing/groups/publ-wg/">Publishing
+					Working Group</a> has chosen to publish this document as a Note and focus on other areas of
+				interest, including developing the manifest format as a separate specification.</p>
+			<p>This document was still a work in progress at the time of its publication. As a result, anyone seeking to
+				create Web Publications, or implement a reader for them, should read the approach and proposals outlined
+				in this document with an abundance of caution. It is being published to archive the work and allow
+				incubation, should interest emerge in the future to resume its development.</p>
+			<p>The following aspects of the specification, in particular, were being actively discussed at the time of
+				publication and are considered incomplete or in need of more review:</p>
+			<ul>
+				<li>the nature of the canonical identifier;</li>
+				<li>whether or not the address should specify a specific resource or only refer to a directory (i.e.,
+					rely on a default document being served);</li>
+				<li>differences in linking from the primary entry page to the manifest and from a publication resource
+					to the primary entry page; and</li>
+				<li>the processing of the manifest, in particular the inheritance of information from the primary entry
+					page (e.g., title or language information).</li>
+			</ul>
+			<p>As well, reviews of the following areas were intended to be undertaken only when the specification
+				stabilized:</p>
+			<ul>
+				<li>security, such as issues around cross-origin resource sharing and the exact origin for Web
+					Publication resources;</li>
+				<li>privacy, both as it relates to the maintenance of stored content and user-identifiable information;
+					and</li>
+				<li>user agent implementation of features.</li>
+			</ul>
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
@@ -2251,16 +2268,16 @@ enum ProgressionDirection {
 
 					<section id="preview">
 						<h5>Preview</h5>
-						
+
 						<p>Not all <a>digital publications</a> will be available to all users (e.g., they might be
 							restricted to registered users of a site). In such cases, the publisher might wish to
 							provide a preview of the content in order to entice users to access the full version.</p>
-						
+
 						<p>A <dfn data-lt="preview">preview</dfn> is identified using the <code>preview</code> link
 							relation&#160;[[!iana-link-relations]].</p>
-						
+
 						<p>Previews MAY be located externally or included as resources of digital publications.</p>
-						
+
 						<pre class="example" title="A preview is identified as an audio resource of a digital publication">
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
@@ -2278,7 +2295,7 @@ enum ProgressionDirection {
 …
 }
 </pre>
-						
+
 						<pre class="example" title="A preview is expressed as an external link">
 "@context"   : ["https://schema.org","https://www.w3.org/ns/wp-context"],
 "type"       : "Book",
@@ -2297,7 +2314,7 @@ enum ProgressionDirection {
 }
 </pre>
 					</section>
-					
+
 					<section id="privacy-policy">
 						<h5>Privacy Policy</h5>
 
