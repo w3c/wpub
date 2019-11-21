@@ -16,7 +16,7 @@
    }
 */
 
-var biblio = {
+var localBiblio = {
     "link-relation": {
        "title": "Identifier: A Link Relation to Convey a Preferred URI for Referencing",
        "authors": [
